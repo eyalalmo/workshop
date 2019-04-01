@@ -10,7 +10,9 @@ namespace workshop192
     {
         static void Main(string[] args)
         {
+
             Console.WriteLine("etay");
+
 
 
             Console.WriteLine("etay1");
@@ -18,6 +20,10 @@ namespace workshop192
             Console.WriteLine("yael");
 
           Console.WriteLine("eilon");
+
+            Console.WriteLine("Bar1");
+            Console.WriteLine("Bar2");
+
 
         }
     }
