@@ -8,5 +8,13 @@ namespace workshop192.Domain
 {
     interface UserState
     {
+        String login(String username, String password, ref UserState susbscribedUser);
+        String register(String username, String password);
+        String logout();
+        String getPurchaseHistory();
+        String createStore();
+        String closeStore(int id);
+        String removeUser(String username);
+
     }
 }

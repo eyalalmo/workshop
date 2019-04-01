@@ -48,6 +48,7 @@
     <Compile Include="Domain\Guest.cs" />
     <Compile Include="Domain\InstantPurchase.cs" />
     <Compile Include="Domain\InvisibleDiscount.cs" />
+    <Compile Include="Domain\LoggedIn.cs" />
     <Compile Include="Domain\LotteryPurchase.cs" />
     <Compile Include="Domain\Product.cs" />
     <Compile Include="Domain\ProductInStore.cs" />
@@ -62,7 +63,7 @@
     <Compile Include="Domain\StoreRole.cs" />
     <Compile Include="Domain\SubscribedUser.cs" />
     <Compile Include="Domain\UserState.cs" />
-    <Compile Include="Domain\User.cs" />
+    <Compile Include="Domain\Session.cs" />
     <Compile Include="Domain\VisibleDiscount.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
