@@ -12,7 +12,7 @@ namespace workshop192
         {
 
             Console.WriteLine("etay");
-            Console.WriteLine("Bar");
+            Console.WriteLine("Bar1");
         }
     }
 }
