@@ -8,6 +8,6 @@ namespace workshop192.Domain
 {
     class InstantPurchase
     {
-        public InstantPurchase
+        
     }
 }
