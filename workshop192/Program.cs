@@ -11,6 +11,7 @@ namespace workshop192
         static void Main(string[] args)
         {
             Console.WriteLine("etay");
+            Console.WriteLine("eilon");
         }
     }
 }
