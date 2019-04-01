@@ -27,6 +27,20 @@ namespace workshop192.Domain
             nextStoreID = 0;
         }
 
+        public void removeStoreRole(StoreRole sr)
+        {
+            storeRole.Remove(sr);
+        }
+
+        public void removeStoreRole(Store store, SubscribedUser user)
+        {
+            StoreRole sr = getStoreRole(store, user);
+            if(sr ! = null)
+                storeRole.Remove(sr);
+        
+        }
+
+       
         public StoreRole getStoreRole(Store store, SubscribedUser user)
         {
            foreach(StoreRole st in storeRole)
@@ -74,6 +88,19 @@ namespace workshop192.Domain
             return "";
         }
 
+        public void closeStore(Store s)
+        {
+            if (stores.Contains(s))
+            {
+                s.changeStatus();
+                ////////////////////////////////notify all
+            }
+
+              
+
+
+        }
+
         public LinkedList<Store> getAllStores()
         {
             return stores;
@@ -86,6 +113,11 @@ namespace workshop192.Domain
             return id;
         }
 
-        
+        public void addStore(Store s)
+        {
+            stores.AddFirst(s);
+        }
+
+            getStore - id / null
     }
 }
