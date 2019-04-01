@@ -32,7 +32,7 @@ namespace workshop192.Domain
         }
         public String getPurchaseHistory()
         {
-            return userState.getPurchaseHistory();
+            return userState.getPurchaseHistory(subscribedUser);
         }
         public String createStore()
         {

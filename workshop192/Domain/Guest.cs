@@ -18,7 +18,7 @@ namespace workshop192.Domain
             return "ERROR: not an admin";
         }
 
-        public string getPurchaseHistory()
+        public string getPurchaseHistory(SubscribedUser sub)
         {
             return "ERROR: not an admin";
         }
@@ -44,7 +44,7 @@ namespace workshop192.Domain
             }
         }
 
-        public string logout()
+        public string logout(SubscribedUser sub)
         {
             return "ERROR: not logged in";
         }

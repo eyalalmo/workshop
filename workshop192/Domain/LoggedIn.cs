@@ -18,9 +18,9 @@ namespace workshop192.Domain
             return "ERROR: not an admin";
         }
 
-        public string getPurchaseHistory()
+        public string getPurchaseHistory(SubscribedUser sub)
         {
-            return DBSubscribedUser.getPurchaseHistory();
+            return DBSubscribedUser.getPurchaseHistory(sub);
         }
 
         public string login(string username, string password, ref SubscribedUser subscribedUser)
@@ -28,9 +28,9 @@ namespace workshop192.Domain
             return "ERROR: User already logged in";
         }
 
-        public string logout()
+        public string logout(SubscribedUser sub)
         {
-            return DBSubscribedUser.logout();
+            return DBSubscribedUser.logout(sub);
         }
 
         public string register(string username, string password)
