@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace workshop192.Domain
+namespace workshop192.ServiceLayer
 {
-    class InstantPurchase
+    class OrdersService
     {
-        public InstantPurchase
     }
 }
