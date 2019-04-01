@@ -6,24 +6,21 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    class DB
+    class DBSubscribedUser
     {
         //-idחנויות. מוצרים-id. -nameמשתמשים
 
-        Dictionary<string, User> users;
-        Dictionary<int, Store> stores;
-        Dictionary<int, Product> products;
-        Dictionary<string, User> loggedInUser;
+        Dictionary<string, SubscribedUser> users;
+        Dictionary<string, SubscribedUser> loggedInUser;
 
-        public DB()
+        public DBSubscribedUser()
         {
-            users = new Dictionary<string, User>();
-            stores = new Dictionary<int, Store>();
-            products = new Dictionary<int, Product>();
-
+            users = new Dictionary<string, SubscribedUser>();
+            loggedInUser = new Dictionary<string, SubscribedUser>();
+        
         }
 
-        public string register(User user)
+        public string register(SubscribedUser user)
         {
             if (users.ContainsKey(user.getId()))
             return "id already exist";
@@ -34,7 +31,7 @@ namespace workshop192.Domain
             return "";
         }
 
-        public string login(User user)
+        public string login(SubscribedUser user)
         {
             if (loggedInUser.ContainsKey(user.getId()))
             return "id already loggedIn";

@@ -6,7 +6,65 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    class Guest
+    class Guest : UserState
     {
+        public string closeStore(int id)
+        {
+            return "ERROR: not an admin";
+        }
+
+        public string createStore()
+        {
+            return "ERROR: not an admin";
+        }
+
+        public string getPurchaseHistory()
+        {
+            return "ERROR: not an admin";
+        }
+
+        public String login(String username, String password, ref SubscribedUser subscribedUser)
+        {
+            SubscribedUser sub = DBSubscribedUser.getSubscribedUser(username);
+            if (sub != null)
+            {
+                if (Equals(sub.getPassword(), password))
+                {
+                    subscribedUser = sub;
+                    return DBSubscribedUser.login(subscribedUser);
+                }
+                else
+                {
+                    return "ERROR: password incorrect";
+                }
+            }
+            else
+            {
+                return "ERROR: username does not exist";
+            }
+        }
+
+        public string logout()
+        {
+            return "ERROR: not logged in";
+        }
+
+        public string register(string username, string password, Session user)
+        {
+            if (user != null)
+            {
+                return "ERROR: username already exists";
+            }
+            else
+            {
+                SubscribedUser sub = new SubscribedUser(username, password);
+                return DBSubscribedUser.register(sub);
+            }
+        }
+
+        public string removeUser(string username)
+        {
+            return "ERROR: not an admin";
+        }
     }
 }

@@ -52,7 +52,7 @@ namespace workshop192.ServiceLayer
 
         public LinkedList<Product> getStoreProducts(int storeID) 
         {
-            Store s = DB.getInstance().getStore(storeID);
+            Store s = DBSubscribedUser.getInstance().getStore(storeID);
             if (s == null)
             {
                 return null;
@@ -62,7 +62,7 @@ namespace workshop192.ServiceLayer
 
         public LinkedList<Product> getAllProducts()
         {
-            return DB.getAllProducts();
+            return DBSubscribedUser.getAllProducts();
         }
 
 

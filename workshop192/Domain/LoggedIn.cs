@@ -6,41 +6,41 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    class Admin : UserState
+    class LoggedIn : UserState
     {
         public string closeStore(int id)
         {
-            throw new NotImplementedException();
+            return "ERROR: not an admin";
         }
 
         public string createStore()
         {
-            throw new NotImplementedException();
+            return "ERROR: not an admin";
         }
 
         public string getPurchaseHistory()
         {
-            throw new NotImplementedException();
+            return DBSubscribedUser.getPurchaseHistory();
         }
 
         public string login(string username, string password, ref SubscribedUser subscribedUser)
         {
-            throw new NotImplementedException();
+            return "ERROR: User already logged in";
         }
 
         public string logout()
         {
-            throw new NotImplementedException();
+            return DBSubscribedUser.logout();
         }
 
         public string register(string username, string password)
         {
-            throw new NotImplementedException();
+            return "ERROR: User already registered";
         }
 
         public string removeUser(string username)
         {
-            throw new NotImplementedException();
+            return "ERROR: not an admin";
         }
     }
 }
