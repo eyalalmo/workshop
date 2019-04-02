@@ -20,7 +20,7 @@ namespace workshop192.Domain
             return "ERROR: not an admin";
         }
 
-        public string createStore(String storeName, String description)
+        public string createStore(int id, String storeName, String description)
         {
             return "ERROR: not an admin";
         }
@@ -38,9 +38,6 @@ namespace workshop192.Domain
 
         public string logout(SubscribedUser sub, Session session)
         {
-
-            return DBSubscribedUser.getInstance().logout(sub);
-
             String logoutResponse = dbSubscribedUser.logout(sub);
             if (Equals(logoutResponse, ""))
             {

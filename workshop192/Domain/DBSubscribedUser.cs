@@ -9,7 +9,6 @@ namespace workshop192.Domain
 {
     class DBSubscribedUser
     {
-        //-idחנויות. מוצרים-id. -nameמשתמשים
 
         Dictionary<string, SubscribedUser> users;
         Dictionary<string, SubscribedUser> loggedInUser;

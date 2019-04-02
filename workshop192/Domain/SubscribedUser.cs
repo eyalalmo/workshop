@@ -37,9 +37,19 @@ namespace workshop192.Domain
             return this.purchaseHistory;
         }
 
+        public ShoppingBasket getShoppingBasket()
+        {
+            return this.shoppingBasket;
+        }
+
         public void addToPurchaseHistory(String purchaseDetails)
         {
             purchaseHistory = purchaseHistory + purchaseDetails;
+        }
+
+        public void setPassword(String pass)
+        {
+            this.password = pass;
         }
         
 

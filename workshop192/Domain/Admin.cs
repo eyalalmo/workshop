@@ -32,10 +32,11 @@ namespace workshop192.Domain
             }
         }
 
-        public String createStore(String storeName, String description)
+        public String createStore(int id, String storeName, String description)
         {
-            Store store = new Store(storeName, description);
-            return dbStore.add(store);
+            Store store = new Store(id, storeName, description);
+            dbStore.addStore(store);
+            return "";
         }
 
 
@@ -49,7 +50,7 @@ namespace workshop192.Domain
             return "ERROR: User already logged in";
         }
 
-        public string logout(SubscribedUser sub, Session session)
+        public String logout(SubscribedUser sub, Session session)
         {
             String logoutResponse = dbSubscribedUser.logout(sub);
             if (Equals(logoutResponse,""))
@@ -59,12 +60,12 @@ namespace workshop192.Domain
             return logoutResponse;
         }
 
-        public string register(string username, string password, Session session)
+        public String register(string username, string password, Session session)
         {
             return "ERROR: User already registered";
         }
 
-        public string removeUser(string username)
+        public String removeUser(string username)
         {
             SubscribedUser sub = dbSubscribedUser.getSubscribedUser(username);
             if (sub == null)

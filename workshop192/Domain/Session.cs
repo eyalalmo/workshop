@@ -44,6 +44,11 @@ namespace workshop192.Domain
             this.userState = state;
         }
 
+        public void setShoppingBasket(ShoppingBasket shoppingB)
+        {
+            this.shoppingBasket = shoppingB;
+        }
+
         public String login(String username, String password)
         {
             return userState.login(username, password, this);
@@ -51,7 +56,7 @@ namespace workshop192.Domain
   
         public String register(String username, String password)
         {
-            return userState.register(username, password);
+            return userState.register(username, password, this);
         }
 
         public String logout()

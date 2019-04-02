@@ -8,8 +8,7 @@ namespace workshop192.Domain
 {
     class Store
     {
-<<<<<<< HEAD
-=======
+
         public int storeID;
         public string storeName;
         public string description;
@@ -86,6 +85,6 @@ namespace workshop192.Domain
 
         // public ? getPurchaseHistory (){} ------------------
 
->>>>>>> origin/bar's_branch
+
     }
 }

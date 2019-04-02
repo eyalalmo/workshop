@@ -23,7 +23,7 @@ namespace workshop192.Domain
             return "ERROR: not an admin";
         }
 
-        public string createStore(String storeName, String description)
+        public String createStore(int id, String storeName, String description)
         {
             return "ERROR: not an admin";
         }
@@ -35,40 +35,25 @@ namespace workshop192.Domain
 
         public String login(String username, String password, Session session)
         {
-
             SubscribedUser sub = DBSubscribedUser.getInstance().getSubscribedUser(username);
-
-
-            if (sub != null)
+            if (sub == null)
+                return "ERROR: username does not exist";
+            if(!Equals(sub.getPassword(), password))
+                return "ERROR: password incorrect";
+            session.setSubscribedUser(sub);
+            if (Equals(username, "admin"))
             {
-                if (Equals(sub.getPassword(), password))
-                {
-
-                    session.setSubscribedUser(sub);
-                    if (Equals(username, "admin"))
-                    {
-                        session.setState(new Admin());
-                    }
-                    else
-                    {
-                        session.setState(new LoggedIn());
-                    }
-
-                    return DBSubscribedUser.getInstance().login(sub);
-
-                }
-                else
-                {
-                    return "ERROR: password incorrect";
-                }
+                session.setState(new Admin());
             }
             else
             {
-                return "ERROR: username does not exist";
+                session.setState(new LoggedIn());
             }
+            session.setShoppingBasket(sub.getShoppingBasket());
+            return DBSubscribedUser.getInstance().login(sub);
         }
 
-        public string logout(SubscribedUser sub)
+        public string logout(SubscribedUser sub, Session session)
         {
             return "ERROR: not logged in";
         }
@@ -77,17 +62,9 @@ namespace workshop192.Domain
         {
             SubscribedUser s = dbSubscribedUser.getSubscribedUser(username);
             if (s != null)
-            {
                 return "ERROR: username already exists";
-            }
-            else
-            {
-
-
-                SubscribedUser sub = new SubscribedUser(username, password, session.getShoppingBasket());
-                return DBSubscribedUser.getInstance().register(sub);
-
-            }
+            SubscribedUser sub = new SubscribedUser(username, password, session.getShoppingBasket());
+            return DBSubscribedUser.getInstance().register(sub);
         }
 
         public string removeUser(string username)
