@@ -10,7 +10,7 @@ namespace workshop192.Domain
     {
         public static DBProduct  instance;
         LinkedList<Product> productList;
-        int nextProductID;
+        public static int nextProductID;
 
         public static DBProduct getInstance()
         {
@@ -30,7 +30,7 @@ namespace workshop192.Domain
             productList.AddFirst(p);
         }
 
-        public int getNextProductID()
+        public static int getNextProductID()
         {
             int id = nextProductID;
             nextProductID++;
@@ -50,7 +50,6 @@ namespace workshop192.Domain
                 if (p.getProductID() == id)
                     return p;
             }
-
             return null;
         }
         public LinkedList<Product> getAllProducts()

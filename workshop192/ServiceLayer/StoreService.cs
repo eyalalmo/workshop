@@ -33,13 +33,13 @@ namespace workshop192.ServiceLayer
 
         public string addProduct(int storeID, string productName, string productCategory, int price, int rank, int quantityLeft, Discount discount)
         {
-            Store s = StoreDB.getStore(storeID);
+            Store s = DBStore.getInstance().getStore(storeID);
             if (s == null)
                 return "store not exist";
             string str = checkProduct(productName, productCategory, price, rank, quantityLeft);
             if (str != "")
                 return str;
-            int id = StoreDB.getNextProductId();
+            int id = DBStore.getNextStoreID();
 
             Product product = new Product(id, productName, productCategory, price, rank, quantityLeft);
             string res = s.addProduct(product);
@@ -47,7 +47,7 @@ namespace workshop192.ServiceLayer
         }
         public string removeProduct(int storeID,int productID ,string productName, string productCategory, int price, int rank, int quantityLeft, Discount discount)
         {
-            Store s = StoreDB.getStore(storeID);
+            Store s = DBStore.getInstance().getStore(storeID);
             if (s == null)
                 return "store not exist";
             string str = checkProduct(productName, productCategory, price, rank, quantityLeft);
@@ -61,7 +61,7 @@ namespace workshop192.ServiceLayer
         }
         public string editProduct(int storeID, int productID ,string productName, string productCategory, int price, int rank, int quantityLeft, Discount discount)
         {
-            Store s = StoreDB.getStore(storeID);
+            Store s = DBStore.getInstance().getStore(storeID);
             if (s == null)
                 return "store not exist";
             string str = checkProduct(productName, productCategory, price, rank, quantityLeft);
