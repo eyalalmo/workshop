@@ -20,7 +20,11 @@ namespace workshop192.Domain
 
         public string getPurchaseHistory(SubscribedUser sub)
         {
+<<<<<<< HEAD
             return DBSubscribedUser.getInstance().getPurchaseHistory(sub);
+=======
+            return DBSubscribedUser.getPurchaseHistory(sub);
+>>>>>>> origin/etay_v3
         }
 
         public string login(string username, string password, Session session)
@@ -30,7 +34,11 @@ namespace workshop192.Domain
 
         public string logout(SubscribedUser sub)
         {
+<<<<<<< HEAD
             return DBSubscribedUser.getInstance().logout(sub);
+=======
+            return DBSubscribedUser.logout(sub);
+>>>>>>> origin/etay_v3
         }
 
         public string register(string username, string password)
