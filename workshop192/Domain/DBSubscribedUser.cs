@@ -33,11 +33,11 @@ namespace workshop192.Domain
 
         public string register(SubscribedUser user)
         {
-            if (users.ContainsKey(user.getId()))
+            if (users.ContainsKey(user.getUsername()))
             return "id already exist";
 
             else{
-                users.Add(user.getId(), user);
+                users.Add(user.getUsername(), user);
             }
             return "";
         }
@@ -52,12 +52,12 @@ namespace workshop192.Domain
 
         public string login(SubscribedUser user)
         {
-            if (loggedInUser.ContainsKey(user.getId()))
+            if (loggedInUser.ContainsKey(user.getUsername()))
             return "id already loggedIn";
 
             else
             {
-                loggedInUser.Add(user.getId(), user);
+                loggedInUser.Add(user.getUsername (), user);
             }
             return "";
         }

@@ -33,10 +33,7 @@ namespace workshop192.Domain
             {
                 if (Equals(sub.getPassword(), password))
                 {
-<<<<<<< HEAD
-                    subscribedUser = sub;
-                    return DBSubscribedUser.getInstance().login(subscribedUser);
-=======
+
                     session.setSubscribedUser(sub);
                     if(Equals(username, "admin"))
                     {
@@ -47,8 +44,8 @@ namespace workshop192.Domain
                         session.setState(new LoggedIn());
                     }
                     
-                    return DBSubscribedUser.login(sub);
->>>>>>> origin/Yael'sBranch
+                    return DBSubscribedUser.getInstance().login(sub);
+
                 }
                 else
                 {
