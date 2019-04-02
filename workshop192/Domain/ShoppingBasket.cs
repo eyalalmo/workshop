@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    class ShoppingBasket
+    public class ShoppingBasket
     {
-<<<<<<< HEAD
-=======
         private Dictionary<int,ShoppingCart> shoppingCarts;
 
         public ShoppingBasket()
@@ -43,7 +41,5 @@ namespace workshop192.Domain
             {
                 sc.checkout();            }
         }
-
->>>>>>> origin/bar's_branch
     }
 }

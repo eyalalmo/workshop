@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    class LoggedIn : UserState
+    public class LoggedIn : UserState
     {
         private DBSubscribedUser dbSubscribedUser;
 

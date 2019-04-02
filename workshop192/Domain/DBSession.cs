@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    class DBSession
+    public class DBSession
     {
         private static DBSession instance;
         private LinkedList<Session> sessions;

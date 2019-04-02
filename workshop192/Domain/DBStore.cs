@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    class DBStore
+    public class DBStore
     {
         public static DBStore instance;
         private LinkedList<Store> stores;

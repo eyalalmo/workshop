@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-<<<<<<< HEAD
-    class StoreManager : StoreRole
+    public class StoreManager : StoreRole
     {
         private SubscribedUser appointedBy;
         private Store store;
@@ -132,9 +131,6 @@ namespace workshop192.Domain
         {
             return store;
         }
-=======
-    class StoreManager
-    {
->>>>>>> origin/bar's_branch
-    }
+
+
 }

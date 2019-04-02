@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    interface UserState
+    public interface UserState
     {
 
         String login(String username, String password, Session session);

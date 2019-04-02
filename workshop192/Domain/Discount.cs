@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    interface Discount
+    public interface Discount
     {
     }
 }

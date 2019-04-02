@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    class Session
+    public class Session
     {
         private SubscribedUser subscribedUser;
         private UserState userState;
@@ -61,7 +61,7 @@ namespace workshop192.Domain
 
         public String logout()
         {
-            return userState.logout(subscribedUser);
+            return userState.logout(subscribedUser,this);
         }
 
         public String getPurchaseHistory()
@@ -69,9 +69,9 @@ namespace workshop192.Domain
             return userState.getPurchaseHistory(subscribedUser);
         }
 
-        public String createStore()
+        public String createStore(int id, String storeName, String description)
         {
-            return userState.createStore();
+            return userState.createStore(id, storeName, description);
         }
 
         public String closeStore(int id)

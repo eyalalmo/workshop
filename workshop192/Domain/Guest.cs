@@ -9,7 +9,7 @@ using workshop192.Domain;
 
 namespace workshop192.Domain
 {
-    class Guest : UserState
+    public class Guest : UserState
     {
         private DBSubscribedUser dbSubscribedUser;
 

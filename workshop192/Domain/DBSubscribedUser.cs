@@ -7,7 +7,7 @@ using workshop192.Domain;
 
 namespace workshop192.Domain
 {
-    class DBSubscribedUser
+    public class DBSubscribedUser
     {
 
         Dictionary<string, SubscribedUser> users;

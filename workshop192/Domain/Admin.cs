@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace workshop192.Domain
 {
 
-    class Admin : UserState
+    public class Admin : UserState
     {
         private DBStore dbStore;
         private DBSubscribedUser dbSubscribedUser;
