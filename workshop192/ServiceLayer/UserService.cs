@@ -69,7 +69,7 @@ namespace workshop192.ServiceLayer
 
         public LinkedList<Product> searchProducts(String name, String keywords, String category, int[] price_range,int minimumRank)
         {
-            return ProductDB.searchProducts(name, keywords, category, price_range,minimumRank);
+            return DBProduct.searchProducts(name, keywords, category, price_range,minimumRank);
         }
 
 
