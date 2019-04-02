@@ -10,32 +10,41 @@ namespace workshop192.Domain
     {
         public string closeStore(int id)
         {
-            throw new NotImplementedException();
+            Store store = DBStore.getStore(id);
+            if (store == null)
+            {
+                return "ERROR: store does not exist";
+            }
+            else
+            {
+                return DB.removeStore(store);
+            }
         }
 
-        public string createStore()
+        public String createStore(String storeName, String description)
+        {
+            Store store = new Store(storeName, description);
+            return DBStore.add(store);
+        }
+
+        public String getPurchaseHistory(SubscribedUser sub)
         {
             throw new NotImplementedException();
         }
 
-        public string getPurchaseHistory(SubscribedUser sub)
+        public String login(string username, string password, Session session)
         {
-            throw new NotImplementedException();
-        }
-
-        public string login(string username, string password, ref SubscribedUser subscribedUser)
-        {
-            throw new NotImplementedException();
+            return "ERROR: User already logged in";
         }
 
         public string logout(SubscribedUser sub)
         {
-            throw new NotImplementedException();
+            return DBSubscribedUser.logout(sub);
         }
 
         public string register(string username, string password)
         {
-            throw new NotImplementedException();
+            return "ERROR: User already registered";
         }
 
         public string removeUser(string username)

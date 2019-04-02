@@ -17,9 +17,19 @@ namespace workshop192.Domain
             userState = new Guest();
         }
 
+        public void setSubscribedUser(SubscribedUser sub)
+        {
+            this.subscribedUser = sub;
+        }
+
+        public void setState(UserState state)
+        {
+            this.userState = state;
+        }
+
         public String login(String username, String password)
         {
-            return userState.login(username, password, out subscribedUser);
+            return userState.login(username, password, this);
         }
   
         public String register(String username, String password)
@@ -28,7 +38,7 @@ namespace workshop192.Domain
         }
         public String logout()
         {
-            return userState.logout();
+            return userState.logout(subscribedUser);
         }
         public String getPurchaseHistory()
         {

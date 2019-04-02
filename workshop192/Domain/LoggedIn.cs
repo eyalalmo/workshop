@@ -23,7 +23,7 @@ namespace workshop192.Domain
             return DBSubscribedUser.getPurchaseHistory(sub);
         }
 
-        public string login(string username, string password, ref SubscribedUser subscribedUser)
+        public string login(string username, string password, Session session)
         {
             return "ERROR: User already logged in";
         }

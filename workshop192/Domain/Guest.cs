@@ -23,15 +23,24 @@ namespace workshop192.Domain
             return "ERROR: not an admin";
         }
 
-        public String login(String username, String password, ref SubscribedUser subscribedUser)
+        public String login(String username, String password, Session session)
         {
             SubscribedUser sub = DBSubscribedUser.getSubscribedUser(username);
             if (sub != null)
             {
                 if (Equals(sub.getPassword(), password))
                 {
-                    subscribedUser = sub;
-                    return DBSubscribedUser.login(subscribedUser);
+                    session.setSubscribedUser(sub);
+                    if(Equals(username, "admin"))
+                    {
+                        session.setState(new Admin());
+                    }
+                    else
+                    {
+                        session.setState(new LoggedIn());
+                    }
+                    
+                    return DBSubscribedUser.login(sub);
                 }
                 else
                 {
