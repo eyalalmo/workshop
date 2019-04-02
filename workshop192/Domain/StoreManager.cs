@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-<<<<<<< HEAD
+
     class StoreManager : StoreRole
     {
         private SubscribedUser appointedBy;
@@ -15,7 +15,8 @@ namespace workshop192.Domain
         private Dictionary<string, bool> permissions;
 
         public StoreManager(SubscribedUser appointedBy, Store store,
-            SubscribedUser user, Dictionary<string, bool> permissions) {
+            SubscribedUser user, Dictionary<string, bool> permissions)
+        {
             this.appointedBy = appointedBy;
             this.store = store;
             this.user = user;
@@ -30,7 +31,7 @@ namespace workshop192.Domain
         public string addOwner(SubscribedUser owner)
         {
             return user.getName() + " you're not is not allowed to add owner to " + store.getName();
-        }       
+        }
 
         public String removeManager(SubscribedUser manager)
         {
@@ -132,9 +133,6 @@ namespace workshop192.Domain
         {
             return store;
         }
-=======
-    class StoreManager
-    {
->>>>>>> origin/bar's_branch
+
     }
 }
