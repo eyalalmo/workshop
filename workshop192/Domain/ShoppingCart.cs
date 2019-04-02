@@ -8,10 +8,7 @@ namespace workshop192.Domain
 {
     class ShoppingCart
     {
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/Stores_and_Products
         private Dictionary <Product, int> productList;
         private int storeID;
 
@@ -68,9 +65,6 @@ namespace workshop192.Domain
         }
 
         public void checkout() { } /////////////// TODO !!!
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/Stores_and_Products
     }
 }

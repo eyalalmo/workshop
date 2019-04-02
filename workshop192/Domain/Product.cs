@@ -118,7 +118,7 @@ namespace workshop192.Domain
         }
         public int getStoreID()
         {
-            return this.storeID;
+            return this.store.storeID;
         }
 
     }

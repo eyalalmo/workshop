@@ -8,21 +8,14 @@ namespace workshop192.Domain
 {
     class Store
     {
-<<<<<<< HEAD
 
-        public int storeID;
-        public string storeName;
-        public string description;
-        public LinkedList<Product> productList;
-        public bool status;
-=======
         private int storeID;
         private string storeName;
         private string description;
         private LinkedList<Product> productList;
         private bool status;
         
->>>>>>> origin/Stores_and_Products
+
 
         public Store (string storeName, string description)
         {
