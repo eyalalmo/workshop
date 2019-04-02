@@ -12,6 +12,7 @@ namespace workshop192.Domain
         public string storeName;
         public string description;
         public LinkedList<Product> productList;
+        public bool status;
 
         public Store (int id, string storeName, string description)
         {
@@ -19,6 +20,7 @@ namespace workshop192.Domain
             this.storeName = storeName;
             this.description = description;
             productList = new LinkedList<Product>();
+            status = true;
         }
 
         public void addProduct(Product p)
@@ -37,6 +39,10 @@ namespace workshop192.Domain
                     return true;
             }
             return false;
+        }
+        public void changeStatus()
+        {
+            status = !status;
         }
 
         public LinkedList<Product> getProductList()

@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    class ProductDatabase
+    class DBProduct
     {
-        public static ProductDatabase  instance;
+        public static DBProduct  instance;
         LinkedList<Product> productList;
         int nextProductID;
 
-        public static ProductDatabase getInstance()
+        public static DBProduct getInstance()
         {
             if (instance == null)
-                instance = new ProductDatabase();
+                instance = new DBProduct();
             return instance;
         }
 
-        public ProductDatabase()
+        public DBProduct()
         {
             productList = new LinkedList<Product>();
             nextProductID = 0;
@@ -52,6 +52,10 @@ namespace workshop192.Domain
             }
 
             return null;
+        }
+        public LinkedList<Product> getAllProducts()
+        {
+            return productList;
         }
 
         }

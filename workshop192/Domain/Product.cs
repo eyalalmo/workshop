@@ -13,24 +13,26 @@ namespace workshop192.Domain
         private string productName;
         private string productCategory;
         private int price;
+        private int storeID;
         private int rank;
         private int quantityLeft;
         private Discount discount;
 
        
-        public Product(int productId, string productName, string productCategory, int price, int rank, int quantityLeft)
+        public Product(string productName, string productCategory, int price, int rank, int quantityLeft, int storeID)
         {
-            this.productID = productId;
+            this.productID = DBProduct.nextProductID;
             this.productName = productName;
             this.productCategory = productCategory;
             this.price = price;
             this.rank = rank;
             this.quantityLeft = quantityLeft;
+            this.storeID = storeID;
             this.discount = null;
 
         }
           
-        private bool checkValidInfo(int price, int rank, int quantityLeft)
+        private bool checkValidInfo(int price, int rank, int quantityLeft) ////// מיותר
         {
             if (rank < 1 || rank > 5)
                 return false;
@@ -109,6 +111,9 @@ namespace workshop192.Domain
         {
             this.rank = rank;
         }
-
+        public int getStoreID()
+        {
+            return this.storeID;
+        }
     }
 }
