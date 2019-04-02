@@ -11,12 +11,12 @@ namespace workshop192.ServiceLayer
     {
         public UserService() { }
 
-        public String login(User user, String username, String password)
+        public String login(Session user, String username, String password)
         {
             
             return user.login(username, password);
         }
-        public String register(User user, String username, String password)
+        public String register(Session user, String username, String password)
         {
             if (username.Equals("") || password.Equals(""))
             {
@@ -32,17 +32,17 @@ namespace workshop192.ServiceLayer
 
         public String logout(User user)
         {
-            return user.getState().logout();
+            return user.logout();
         }
 
         public String closeStore(User user, int storeID)
         {
-            return user.getState().closeStore(storeID);
+            return user.closeStore(storeID);
         }
 
         public String getPurchaseHistory(User user)
         {
-            return user.getState().getPurchaseHistory();
+            return user.getPurchaseHistory();
         }
 
         public String removeUser(User admin,String username)
@@ -52,7 +52,9 @@ namespace workshop192.ServiceLayer
 
         public LinkedList<Product> getStoreProducts(int storeID) 
         {
-            Store s = DBSubscribedUser.getInstance().getStore(storeID);
+
+            Store s = SD.getInstance().getStore(storeID);
+
             if (s == null)
             {
                 return null;
@@ -64,6 +66,14 @@ namespace workshop192.ServiceLayer
         {
             return DBSubscribedUser.getAllProducts();
         }
+
+        public LinkedList<Product> searchProducts(String name, String keywords, String category, int[] price_range,int minimumRank)
+        {
+            return ProductDB.searchProducts(name, keywords, category, price_range,minimumRank);
+        }
+
+
+       
 
 
     }
