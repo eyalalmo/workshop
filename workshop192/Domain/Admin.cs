@@ -79,7 +79,7 @@ namespace workshop192.Domain
                     return logoutResponse;
                 
             }
-            return dbStore.removeStoreByUser(sub);
+            return DBStore.removeStoreByUser(sub);
         }
 
 

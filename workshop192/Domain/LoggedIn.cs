@@ -12,7 +12,7 @@ namespace workshop192.Domain
 
         public LoggedIn()
         {
-            dbSubscribedUser = dbSubscribedUser.getInstance();
+            dbSubscribedUser = DBSubscribedUser.getInstance();
         }
 
         public string closeStore(int id)
@@ -29,7 +29,7 @@ namespace workshop192.Domain
         {
 <<<<<<< HEAD
 <<<<<<< HEAD
-            return DBSubscribedUser.getInstance().getPurchaseHistory(sub);
+            return sub.getPurchaseHistory();
 =======
             return DBSubscribedUser.getPurchaseHistory(sub);
 >>>>>>> origin/etay_v3
@@ -58,7 +58,7 @@ namespace workshop192.Domain
                 session.setState(new Guest());
             }
             return logoutResponse;
->>>>>>> origin/Yael'sBranch
+
         }
 
         public string register(string username, string password, Session session)
