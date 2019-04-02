@@ -8,12 +8,19 @@ namespace workshop192.Domain
 {
     class LoggedIn : UserState
     {
+        private DBSubscribedUser dbSubscribedUser;
+
+        public LoggedIn()
+        {
+            dbSubscribedUser = dbSubscribedUser.getInstance();
+        }
+
         public string closeStore(int id)
         {
             return "ERROR: not an admin";
         }
 
-        public string createStore()
+        public string createStore(String storeName, String description)
         {
             return "ERROR: not an admin";
         }
@@ -21,10 +28,14 @@ namespace workshop192.Domain
         public string getPurchaseHistory(SubscribedUser sub)
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             return DBSubscribedUser.getInstance().getPurchaseHistory(sub);
 =======
             return DBSubscribedUser.getPurchaseHistory(sub);
 >>>>>>> origin/etay_v3
+=======
+            return dbSubscribedUser.getPurchaseHistory(sub);
+>>>>>>> origin/Yael'sBranch
         }
 
         public string login(string username, string password, Session session)
@@ -32,16 +43,25 @@ namespace workshop192.Domain
             return "ERROR: User already logged in";
         }
 
-        public string logout(SubscribedUser sub)
+        public string logout(SubscribedUser sub, Session session)
         {
+<<<<<<< HEAD
 <<<<<<< HEAD
             return DBSubscribedUser.getInstance().logout(sub);
 =======
             return DBSubscribedUser.logout(sub);
 >>>>>>> origin/etay_v3
+=======
+            String logoutResponse = dbSubscribedUser.logout(sub);
+            if (Equals(logoutResponse, ""))
+            {
+                session.setState(new Guest());
+            }
+            return logoutResponse;
+>>>>>>> origin/Yael'sBranch
         }
 
-        public string register(string username, string password)
+        public string register(string username, string password, Session session)
         {
             return "ERROR: User already registered";
         }

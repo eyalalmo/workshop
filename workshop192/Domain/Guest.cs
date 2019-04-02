@@ -11,12 +11,19 @@ namespace workshop192.Domain
 {
     class Guest : UserState
     {
+        private DBSubscribedUser dbSubscribedUser;
+
+        public Guest()
+        {
+            dbSubscribedUser = DBSubscribedUser.getInstance();
+        }
+
         public string closeStore(int id)
         {
             return "ERROR: not an admin";
         }
 
-        public string createStore()
+        public string createStore(String storeName, String description)
         {
             return "ERROR: not an admin";
         }
@@ -28,8 +35,12 @@ namespace workshop192.Domain
 
         public String login(String username, String password, Session session)
         {
+<<<<<<< HEAD
             SubscribedUser sub = DBSubscribedUser.getInstance().getSubscribedUser(username);
 
+=======
+            SubscribedUser sub = dbSubscribedUser.getSubscribedUser(username);
+>>>>>>> origin/Yael'sBranch
             if (sub != null)
             {
                 if (Equals(sub.getPassword(), password))
@@ -45,8 +56,12 @@ namespace workshop192.Domain
                         session.setState(new LoggedIn());
                     }
                     
+<<<<<<< HEAD
                     return DBSubscribedUser.getInstance().login(sub);
 
+=======
+                    return dbSubscribedUser.login(sub);
+>>>>>>> origin/Yael'sBranch
                 }
                 else
                 {
@@ -64,16 +79,22 @@ namespace workshop192.Domain
             return "ERROR: not logged in";
         }
 
-        public string register(string username, string password, Session user)
+        public string register(string username, string password, Session session)
         {
-            if (user != null)
+            SubscribedUser s = dbSubscribedUser.getSubscribedUser(username);
+            if (s != null)
             {
                 return "ERROR: username already exists";
             }
             else
             {
+<<<<<<< HEAD
                 SubscribedUser sub = new SubscribedUser(username, password);
                 return DBSubscribedUser.getInstance().register(sub);
+=======
+                SubscribedUser sub = new SubscribedUser(username, password, session.getShoppingBasket());
+                return dbSubscribedUser.register(sub);
+>>>>>>> origin/Yael'sBranch
             }
         }
 
