@@ -36,7 +36,7 @@ namespace workshop192.Domain
                 sc.addToCart(product, amount);
             }
         }
-        public void checkout (){    ////////// TODO
+        public void checkout (){    ////////// TODO ///////////
             foreach(ShoppingCart sc in shoppingCarts.Values)
             {
                 sc.checkout();            }
