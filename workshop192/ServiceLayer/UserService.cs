@@ -13,11 +13,18 @@ namespace workshop192.ServiceLayer
 
         public String login(Session user, String username, String password)
         {
-            
+            if (user == null)
+            {
+                return "ERROR: bad session";
+            }
             return user.login(username, password);
         }
         public String register(Session user, String username, String password)
         {
+            if (user == null)
+            {
+                return "ERROR: bad session";
+            }
             if (username.Equals("") || password.Equals(""))
             {
                 return "Illegal username or password";
@@ -25,51 +32,55 @@ namespace workshop192.ServiceLayer
             return user.register(username, password);
         }
 
-        public String deleteUser(User admin, String username)
+        public String removeUser(Session admin, String username)
         {
-           return admin.deleteUser(username);
+            if (admin == null)
+            {
+                return "ERROR: bad session";
+            }
+            return admin.removeUser(username);
         }
 
-        public String logout(User user)
+        public String logout(Session user)
         {
+            if (user == null)
+            {
+                return "ERROR: bad session";
+            }
             return user.logout();
         }
 
-        public String closeStore(User user, int storeID)
-        {
-            return user.closeStore(storeID);
-        }
 
-        public String getPurchaseHistory(User user)
+        public String getPurchaseHistory(Session user)
         {
+            if (user == null)
+            {
+                return "ERROR: bad session";
+            }
             return user.getPurchaseHistory();
         }
 
-        public String removeUser(User admin,String username)
-        {
-            return admin.removeUser(username);
-        }
 
         public LinkedList<Product> getStoreProducts(int storeID) 
         {
 
-            Store s = SD.getInstance().getStore(storeID);
+            Store s = DBStore.getInstance().getStore(storeID);
 
             if (s == null)
             {
                 return null;
             }
-            return s.showProducts();
+            return s.getProductList();
         }
 
         public LinkedList<Product> getAllProducts()
         {
-            return DBSubscribedUser.getAllProducts();
+            return DBProduct.getInstance().getAllProducts();
         }
 
         public LinkedList<Product> searchProducts(String name, String keywords, String category, int[] price_range,int minimumRank)
         {
-            return ProductDB.searchProducts(name, keywords, category, price_range,minimumRank);
+            return DBProduct.searchProducts(name, keywords, category, price_range,minimumRank);
         }
 
 
