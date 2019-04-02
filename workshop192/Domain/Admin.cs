@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
+
     class Admin : UserState
     {
         private DBStore dbStore;
@@ -80,5 +81,7 @@ namespace workshop192.Domain
             }
             return dbStore.removeStoreByUser(sub);
         }
+
+
     }
 }

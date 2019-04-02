@@ -8,6 +8,7 @@ namespace workshop192.Domain
 {
     interface UserState
     {
+<<<<<<< HEAD
         String login(String username, String password, Session session);
         String register(String username, String password, Session session);
         String logout(SubscribedUser sub, Session session);
@@ -16,5 +17,7 @@ namespace workshop192.Domain
         String closeStore(int id);
         String removeUser(String username);
 
+=======
+>>>>>>> origin/bar's_branch
     }
 }

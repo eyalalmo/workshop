@@ -8,5 +8,9 @@ namespace workshop192.Domain
 {
     class InstantPurchase
     {
+<<<<<<< HEAD
+        
+=======
+>>>>>>> origin/bar's_branch
     }
 }
