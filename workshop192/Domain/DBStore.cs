@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    class StoreDatabase
+    class DBStore
     {
-        public static StoreDatabase instance;
+        public static DBStore instance;
         private LinkedList<Store> stores;
         private LinkedList<StoreRole> storeRole;
-        private int nextStoreID;
+        private static int nextStoreID;
 
-        public static StoreDatabase getInstane()
+        public static DBStore getInstane()
         {
             if (instance == null)
-                instance = new StoreDatabase();
+                instance = new DBStore();
             return instance;
         }
 
-        public StoreDatabase()
+        private DBStore()
         {
             stores = new LinkedList<Store>();
             storeRole = new LinkedList<StoreRole>();
@@ -35,15 +35,14 @@ namespace workshop192.Domain
         public void removeStoreRole(Store store, SubscribedUser user)
         {
             StoreRole sr = getStoreRole(store, user);
-            if(sr ! = null)
+            if (sr != null)
                 storeRole.Remove(sr);
-        
+
         }
 
-       
         public StoreRole getStoreRole(Store store, SubscribedUser user)
         {
-           foreach(StoreRole st in storeRole)
+            foreach (StoreRole st in storeRole)
             {
                 Store s = st.getStore();
                 SubscribedUser u = st.getUser();
@@ -54,7 +53,7 @@ namespace workshop192.Domain
             return null;
         }
 
-    
+
         public void addStoreRole(StoreRole sr)
         {
             storeRole.AddFirst(sr);
@@ -62,11 +61,11 @@ namespace workshop192.Domain
         public void addStore(Store store)
         {
             stores.AddFirst(store);
-        } 
+        }
 
         public Store getStore(int storeID)
         {
-            foreach(Store s in stores)
+            foreach (Store s in stores)
             {
                 if (s.getStoreID() == storeID)
                     return s;
@@ -80,7 +79,7 @@ namespace workshop192.Domain
                 return " - no such store";
             }
             stores.Remove(store);
-            foreach(StoreRole st in storeRole)
+            foreach (StoreRole st in storeRole)
             {
                 if (st.getStore().getStoreID() == store.getStoreID())
                     storeRole.Remove(st);
@@ -93,12 +92,12 @@ namespace workshop192.Domain
             if (stores.Contains(s))
             {
                 s.changeStatus();
-                ////////////////////////////////notify all
+                foreach(StoreRole sr in storeRole)
+                {
+                    if (sr.getStore().getStoreID() == s.getStoreID())
+                        sr.getUser().notify();
+                }
             }
-
-              
-
-
         }
 
         public LinkedList<Store> getAllStores()
@@ -106,18 +105,11 @@ namespace workshop192.Domain
             return stores;
         }
 
-        public int getNextStoreID()
+        public static int getNextStoreID()
         {
             int id = nextStoreID;
             nextStoreID++;
             return id;
         }
-
-        public void addStore(Store s)
-        {
-            stores.AddFirst(s);
-        }
-
-            getStore - id / null
     }
 }
