@@ -44,16 +44,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Admin.cs" />
+    <Compile Include="Domain\DBSubscribedUser.cs" />
     <Compile Include="Domain\Discount.cs" />
     <Compile Include="Domain\Guest.cs" />
     <Compile Include="Domain\InstantPurchase.cs" />
     <Compile Include="Domain\InvisibleDiscount.cs" />
+    <Compile Include="Domain\LoggedIn.cs" />
     <Compile Include="Domain\LotteryPurchase.cs" />
     <Compile Include="Domain\Product.cs" />
     <Compile Include="Domain\ProductInStore.cs" />
     <Compile Include="Domain\PublicPurchase.cs" />
     <Compile Include="Domain\PurchasePolicy.cs" />
     <Compile Include="Domain\PurchaseType.cs" />
+    <Compile Include="Domain\Session.cs" />
     <Compile Include="Domain\ShoppingBasket.cs" />
     <Compile Include="Domain\ShoppingCart.cs" />
     <Compile Include="Domain\Store.cs" />
@@ -64,12 +67,36 @@
     <Compile Include="Domain\UserState.cs" />
     <Compile Include="Domain\User.cs" />
     <Compile Include="Domain\VisibleDiscount.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceLayer\CartService.cs" />
+    <Compile Include="ServiceLayer\OrdersService.cs" />
+    <Compile Include="ServiceLayer\StoreService.cs" />
+    <Compile Include="ServiceLayer\UserService.cs" />
+    <Compile Include="Store.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <Compile Include="Domain\ReliantDiscount.cs" />
+    <None Include="bin\Debug\workshop192.exe.config" />
+    <None Include="bin\Debug\workshop192.vshost.exe.config" />
+    <None Include="bin\Debug\workshop192.vshost.exe.manifest" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\workshop192.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\workshop192.csprojAssemblyReference.cache" />
+    <None Include="obj\Release\workshop192.csproj.CoreCompileInputs.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\workshop192.vshost.exe" />
+    <Content Include="obj\Debug\workshop192.csproj.FileListAbsolute.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
