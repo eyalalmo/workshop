@@ -10,11 +10,13 @@ namespace workshop192.Domain
     {
         private String username;
         private String password;
+        private String purchaseHistory;
 
         public SubscribedUser(String username, String password)
         {
             this.username = username;
             this.password = password;
+            purchaseHistory = "";
         }
 
         public String getPassword()
@@ -26,15 +28,16 @@ namespace workshop192.Domain
         {
             return this.username;
         }
-        String login(String username, String password);
-        String register(String username, String password);
-        String logout();
-        String getPurchaseHistory();
-        String createStore();
-        String closeStore(int id);
-        String removeUser(String username);
-        String getPassword() { return "" };
-        String setPassword(String password);
-        UserState getState();
+
+        public String getPurchaseHistory()
+        {
+            return this.purchaseHistory;
+        }
+
+        public void addToPurchaseHistory(String purchaseDetails)
+        {
+            purchaseHistory = purchaseHistory + purchaseDetails;
+        }
+        
     }
 }

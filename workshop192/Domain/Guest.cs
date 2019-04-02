@@ -25,7 +25,7 @@ namespace workshop192.Domain
             return "ERROR: not an admin";
         }
 
-        public String login(String username, String password, ref SubscribedUser subscribedUser)
+        public String login(String username, String password, Session session)
         {
             SubscribedUser sub = DBSubscribedUser.getInstance().getSubscribedUser(username);
 
@@ -33,8 +33,22 @@ namespace workshop192.Domain
             {
                 if (Equals(sub.getPassword(), password))
                 {
+<<<<<<< HEAD
                     subscribedUser = sub;
                     return DBSubscribedUser.getInstance().login(subscribedUser);
+=======
+                    session.setSubscribedUser(sub);
+                    if(Equals(username, "admin"))
+                    {
+                        session.setState(new Admin());
+                    }
+                    else
+                    {
+                        session.setState(new LoggedIn());
+                    }
+                    
+                    return DBSubscribedUser.login(sub);
+>>>>>>> origin/Yael'sBranch
                 }
                 else
                 {
