@@ -39,7 +39,6 @@ namespace workshop192.Domain
         public string logout(SubscribedUser sub, Session session)
         {
 
-            return DBSubscribedUser.getInstance().logout(sub);
 
             String logoutResponse = dbSubscribedUser.logout(sub);
             if (Equals(logoutResponse, ""))
