@@ -70,16 +70,16 @@ namespace workshop192.Domain
             if (sub == null)
                 return "ERROR: user does not exist";
             Session session = dbSession.getSessionOfSubscribedUser(sub);
-            if(session == null)
+            if (session == null)
                 return "ERROR: session does not exist";
-            if(session.getState() is LoggedIn)
+            if (session.getState() is LoggedIn)
             {
                 String logoutResponse = session.logout();
                 if (!Equals(logoutResponse, ""))
                     return logoutResponse;
-                
+
             }
-            return DBStore.removeStoreByUser(sub);
+            return dbStore.removeStoreByUser(sub);
         }
 
 
