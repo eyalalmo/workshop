@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-<<<<<<< HEAD
+
 using workshop192.Domain;
 
 
@@ -35,19 +35,17 @@ namespace workshop192.Domain
 
         public String login(String username, String password, Session session)
         {
-<<<<<<< HEAD
+
             SubscribedUser sub = DBSubscribedUser.getInstance().getSubscribedUser(username);
 
-=======
-            SubscribedUser sub = dbSubscribedUser.getSubscribedUser(username);
->>>>>>> origin/Yael'sBranch
+
             if (sub != null)
             {
                 if (Equals(sub.getPassword(), password))
                 {
 
                     session.setSubscribedUser(sub);
-                    if(Equals(username, "admin"))
+                    if (Equals(username, "admin"))
                     {
                         session.setState(new Admin());
                     }
@@ -55,13 +53,9 @@ namespace workshop192.Domain
                     {
                         session.setState(new LoggedIn());
                     }
-                    
-<<<<<<< HEAD
+
                     return DBSubscribedUser.getInstance().login(sub);
 
-=======
-                    return dbSubscribedUser.login(sub);
->>>>>>> origin/Yael'sBranch
                 }
                 else
                 {
@@ -88,13 +82,11 @@ namespace workshop192.Domain
             }
             else
             {
-<<<<<<< HEAD
-                SubscribedUser sub = new SubscribedUser(username, password);
-                return DBSubscribedUser.getInstance().register(sub);
-=======
+
+
                 SubscribedUser sub = new SubscribedUser(username, password, session.getShoppingBasket());
-                return dbSubscribedUser.register(sub);
->>>>>>> origin/Yael'sBranch
+                return DBSubscribedUser.getInstance().register(sub);
+
             }
         }
 
@@ -102,12 +94,7 @@ namespace workshop192.Domain
         {
             return "ERROR: not an admin";
         }
-=======
 
-namespace workshop192.Domain
-{
-    class Guest
-    {
->>>>>>> origin/bar's_branch
     }
 }
+
