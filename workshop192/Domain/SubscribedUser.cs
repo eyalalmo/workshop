@@ -10,12 +10,14 @@ namespace workshop192.Domain
     {
         private String username;
         private String password;
+        private ShoppingBasket shoppingBasket;
         private String purchaseHistory;
 
-        public SubscribedUser(String username, String password)
+        public SubscribedUser(String username, String password, ShoppingBasket shoppingBasket)
         {
             this.username = username;
             this.password = password;
+            this.shoppingBasket = shoppingBasket;
             purchaseHistory = "";
         }
 

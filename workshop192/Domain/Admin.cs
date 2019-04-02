@@ -8,28 +8,37 @@ namespace workshop192.Domain
 {
     class Admin : UserState
     {
+        private DBStore dbStore;
+        private DBSubscribedUser dbSubscribedUser;
+
+        public Admin()
+        {
+            dbStore = DBStore.getInstance();
+            dbSubscribedUser = DBSubscribedUser.getInstance();
+        }
         public string closeStore(int id)
         {
-            Store store = DBStore.getStore(id);
+            Store store = dbStore.getStore(id);
             if (store == null)
             {
                 return "ERROR: store does not exist";
             }
             else
             {
-                return DB.removeStore(store);
+                return dbStore.removeStore(store);
             }
         }
 
         public String createStore(String storeName, String description)
         {
             Store store = new Store(storeName, description);
-            return DBStore.add(store);
+            return dbStore.add(store);
         }
+
 
         public String getPurchaseHistory(SubscribedUser sub)
         {
-            throw new NotImplementedException();
+            return "ERROR: No purchase history in Admin";
         }
 
         public String login(string username, string password, Session session)
@@ -39,17 +48,26 @@ namespace workshop192.Domain
 
         public string logout(SubscribedUser sub)
         {
-            return DBSubscribedUser.logout(sub);
+            return dbSubscribedUser.logout(sub);
         }
 
-        public string register(string username, string password)
+        public string register(string username, string password, Session session)
         {
             return "ERROR: User already registered";
         }
 
         public string removeUser(string username)
         {
-            throw new NotImplementedException();
+            SubscribedUser sub = dbSubscribedUser.getSubscribedUser(username);
+            if (sub != null)
+            {
+                return dbSubscribedUser.remove(sub);
+            }
+            else
+            {
+                return "ERROR: user does not exist";
+            }
+            
         }
     }
 }

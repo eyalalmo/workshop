@@ -9,10 +9,10 @@ namespace workshop192.Domain
     interface UserState
     {
         String login(String username, String password, Session session);
-        String register(String username, String password);
+        String register(String username, String password, Session session);
         String logout(SubscribedUser sub);
         String getPurchaseHistory(SubscribedUser sub);
-        String createStore();
+        String createStore(String storeName, String description);
         String closeStore(int id);
         String removeUser(String username);
 

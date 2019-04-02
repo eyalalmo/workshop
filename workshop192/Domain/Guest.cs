@@ -8,12 +8,19 @@ namespace workshop192.Domain
 {
     class Guest : UserState
     {
+        private DBSubscribedUser dbSubscribedUser;
+
+        public Guest()
+        {
+            dbSubscribedUser = DBSubscribedUser.getInstance();
+        }
+
         public string closeStore(int id)
         {
             return "ERROR: not an admin";
         }
 
-        public string createStore()
+        public string createStore(String storeName, String description)
         {
             return "ERROR: not an admin";
         }
@@ -25,7 +32,7 @@ namespace workshop192.Domain
 
         public String login(String username, String password, Session session)
         {
-            SubscribedUser sub = DBSubscribedUser.getSubscribedUser(username);
+            SubscribedUser sub = dbSubscribedUser.getSubscribedUser(username);
             if (sub != null)
             {
                 if (Equals(sub.getPassword(), password))
@@ -40,7 +47,7 @@ namespace workshop192.Domain
                         session.setState(new LoggedIn());
                     }
                     
-                    return DBSubscribedUser.login(sub);
+                    return dbSubscribedUser.login(sub);
                 }
                 else
                 {
@@ -58,16 +65,17 @@ namespace workshop192.Domain
             return "ERROR: not logged in";
         }
 
-        public string register(string username, string password, Session user)
+        public string register(string username, string password, Session session)
         {
-            if (user != null)
+            SubscribedUser s = dbSubscribedUser.getSubscribedUser(username);
+            if (s != null)
             {
                 return "ERROR: username already exists";
             }
             else
             {
-                SubscribedUser sub = new SubscribedUser(username, password);
-                return DBSubscribedUser.register(sub);
+                SubscribedUser sub = new SubscribedUser(username, password, session.getShoppingBasket());
+                return dbSubscribedUser.register(sub);
             }
         }
 

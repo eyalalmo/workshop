@@ -8,19 +8,26 @@ namespace workshop192.Domain
 {
     class LoggedIn : UserState
     {
+        private DBSubscribedUser dbSubscribedUser;
+
+        public LoggedIn()
+        {
+            dbSubscribedUser = dbSubscribedUser.getInstance();
+        }
+
         public string closeStore(int id)
         {
             return "ERROR: not an admin";
         }
 
-        public string createStore()
+        public string createStore(String storeName, String description)
         {
             return "ERROR: not an admin";
         }
 
         public string getPurchaseHistory(SubscribedUser sub)
         {
-            return DBSubscribedUser.getPurchaseHistory(sub);
+            return dbSubscribedUser.getPurchaseHistory(sub);
         }
 
         public string login(string username, string password, Session session)
@@ -30,10 +37,10 @@ namespace workshop192.Domain
 
         public string logout(SubscribedUser sub)
         {
-            return DBSubscribedUser.logout(sub);
+            return dbSubscribedUser.logout(sub);
         }
 
-        public string register(string username, string password)
+        public string register(string username, string password, Session session)
         {
             return "ERROR: User already registered";
         }
