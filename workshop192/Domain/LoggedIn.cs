@@ -35,9 +35,14 @@ namespace workshop192.Domain
             return "ERROR: User already logged in";
         }
 
-        public string logout(SubscribedUser sub)
+        public string logout(SubscribedUser sub, Session session)
         {
-            return dbSubscribedUser.logout(sub);
+            String logoutResponse = dbSubscribedUser.logout(sub);
+            if (Equals(logoutResponse, ""))
+            {
+                session.setState(new Guest());
+            }
+            return logoutResponse;
         }
 
         public string register(string username, string password, Session session)

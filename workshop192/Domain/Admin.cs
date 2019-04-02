@@ -10,11 +10,13 @@ namespace workshop192.Domain
     {
         private DBStore dbStore;
         private DBSubscribedUser dbSubscribedUser;
+        private DBSession dbSession;
 
         public Admin()
         {
             dbStore = DBStore.getInstance();
             dbSubscribedUser = DBSubscribedUser.getInstance();
+            dbSession = DBSession.getInstance();
         }
         public string closeStore(int id)
         {
@@ -46,9 +48,14 @@ namespace workshop192.Domain
             return "ERROR: User already logged in";
         }
 
-        public string logout(SubscribedUser sub)
+        public string logout(SubscribedUser sub, Session session)
         {
-            return dbSubscribedUser.logout(sub);
+            String logoutResponse = dbSubscribedUser.logout(sub);
+            if (Equals(logoutResponse,""))
+            {
+                session.setState(new Guest());
+            }
+            return logoutResponse;
         }
 
         public string register(string username, string password, Session session)
@@ -61,7 +68,17 @@ namespace workshop192.Domain
             SubscribedUser sub = dbSubscribedUser.getSubscribedUser(username);
             if (sub != null)
             {
-                return dbSubscribedUser.remove(sub);
+                Session session = dbSession.getSessionOfSubscribedUser(sub);
+                if (session != null)
+                {
+                    if (session.getState().GetType() == typeof(LoggedIn))
+                        session.logout();
+                    return dbSubscribedUser.remove(sub);
+                }
+                else
+                {
+                    return "ERROR: session does not exist";
+                }
             }
             else
             {

@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Admin.cs" />
+    <Compile Include="Domain\DBSession.cs" />
     <Compile Include="Domain\Discount.cs" />
     <Compile Include="Domain\Guest.cs" />
     <Compile Include="Domain\InstantPurchase.cs" />
