@@ -42,9 +42,11 @@ namespace workshop192.ServiceLayer
             int id = StoreDB.getNextProductId();
 
             Product product = new Product(id, productName, productCategory, price, rank, quantityLeft);
+
             string res = s.addProduct(product);
             return res;
         }
+
         public string removeProduct(int storeID,int productID ,string productName, string productCategory, int price, int rank, int quantityLeft, Discount discount)
         {
             Store s = StoreDB.getStore(storeID);
