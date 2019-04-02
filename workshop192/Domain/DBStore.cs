@@ -13,7 +13,7 @@ namespace workshop192.Domain
         private LinkedList<StoreRole> storeRole;
         private static int nextStoreID;
 
-        public static DBStore getInstane()
+        public static DBStore getInstance()
         {
             if (instance == null)
                 instance = new DBStore();
