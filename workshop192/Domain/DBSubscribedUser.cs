@@ -21,6 +21,8 @@ namespace workshop192.Domain
             loggedInUser = new Dictionary<string, SubscribedUser>();
         
         }
+
+
         public static DBSubscribedUser getInstance()
         {
             if (instance == null)
@@ -30,6 +32,13 @@ namespace workshop192.Domain
             return instance;
         }
 
+        public string logout(SubscribedUser sub)
+        {
+            SubscribedUser user;
+            if (!loggedInUser.TryGetValue(sub.getUsername(), out user))
+                return "user isnt loggedin";
+            return "";
+        }
 
         public string register(SubscribedUser user)
         {
@@ -61,6 +70,14 @@ namespace workshop192.Domain
             }
             return "";
         }
+
+        public string remove(SubscribedUser user)
+        {
+           if(users.Remove(user.getUsername())==false)
+            {
+                return " user isnt subscribe";
+            }
+            return "";
 
 
 
