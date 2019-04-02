@@ -8,6 +8,7 @@ namespace workshop192.Domain
 {
     class Product
     {
+
         //represents product in store
         private int productID;
         private string productName;
@@ -115,5 +116,6 @@ namespace workshop192.Domain
         {
             return this.storeID;
         }
+
     }
 }
