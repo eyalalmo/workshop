@@ -41,6 +41,17 @@ namespace workshop192.Domain
             }
             return false;
         }
+
+        public bool productExists(Product product)
+        {
+            foreach (Product p in productList)
+            {
+                if (product.Equals(p))
+                    return true;
+            }
+            return false;
+        }
+
         public void changeStatus()
         {
             status = !status;
