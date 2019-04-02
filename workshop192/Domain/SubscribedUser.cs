@@ -8,6 +8,7 @@ namespace workshop192.Domain
 {
     class SubscribedUser
     {
+<<<<<<< HEAD
         private String username;
         private String password;
         private String purchaseHistory;
@@ -39,5 +40,7 @@ namespace workshop192.Domain
             purchaseHistory = purchaseHistory + purchaseDetails;
         }
         
+=======
+>>>>>>> origin/bar's_branch
     }
 }

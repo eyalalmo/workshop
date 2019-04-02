@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
+<<<<<<< HEAD
     class Admin : UserState
     {
         public string closeStore(int id)
@@ -51,5 +52,9 @@ namespace workshop192.Domain
         {
             throw new NotImplementedException();
         }
+=======
+    class Admin
+    {
+>>>>>>> origin/bar's_branch
     }
 }

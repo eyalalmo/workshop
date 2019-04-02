@@ -8,6 +8,7 @@ namespace workshop192.Domain
 {
     interface StoreRole
     {
+<<<<<<< HEAD
         SubscribedUser getUser();
         Store getStore();
         String addProduct(string name, string category,int price, int quantity);
@@ -22,5 +23,7 @@ namespace workshop192.Domain
         String addOwner(SubscribedUser owner);
         String removeOwner(SubscribedUser owner);
         String closeStore();
+=======
+>>>>>>> origin/bar's_branch
     }
 }

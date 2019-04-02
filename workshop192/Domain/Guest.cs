@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+<<<<<<< HEAD
 using workshop192.Domain;
 
 
@@ -80,5 +81,12 @@ namespace workshop192.Domain
         {
             return "ERROR: not an admin";
         }
+=======
+
+namespace workshop192.Domain
+{
+    class Guest
+    {
+>>>>>>> origin/bar's_branch
     }
 }
