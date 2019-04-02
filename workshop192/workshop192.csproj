@@ -46,8 +46,12 @@
     <Compile Include="Domain\Admin.cs" />
     <Compile Include="Domain\DBProduct.cs" />
     <Compile Include="Domain\DBStore.cs" />
-    <Compile Include="Domain\DBSubscribedUser.cs" />
+  
+
+
     <Compile Include="Domain\DBSession.cs" />
+    <Compile Include="Domain\DBSubscribedUser.cs" />
+
     <Compile Include="Domain\Discount.cs" />
     <Compile Include="Domain\Guest.cs" />
     <Compile Include="Domain\InstantPurchase.cs" />
@@ -55,6 +59,7 @@
     <Compile Include="Domain\LoggedIn.cs" />
     <Compile Include="Domain\LotteryPurchase.cs" />
     <Compile Include="Domain\Product.cs" />
+
     <Compile Include="Domain\PublicPurchase.cs" />
     <Compile Include="Domain\PurchasePolicy.cs" />
     <Compile Include="Domain\PurchaseType.cs" />
@@ -62,6 +67,7 @@
     <Compile Include="Domain\ShoppingBasket.cs" />
     <Compile Include="Domain\ShoppingCart.cs" />
     <Compile Include="Domain\Store.cs" />
+    <Compile Include="Domain\DBStore.cs" />
     <Compile Include="Domain\StoreManager.cs" />
     <Compile Include="Domain\StoreOwner.cs" />
     <Compile Include="Domain\StoreRole.cs" />
@@ -82,20 +88,18 @@
   <ItemGroup>
     <None Include="App.config" />
     <Compile Include="Domain\ReliantDiscount.cs" />
-    <None Include="bin\Debug\workshop192.exe.config" />
-    <None Include="bin\Debug\workshop192.vshost.exe.config" />
-    <None Include="bin\Debug\workshop192.vshost.exe.manifest" />
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="obj\Debug\workshop192.csproj.CoreCompileInputs.cache" />
     <None Include="obj\Debug\workshop192.csprojAssemblyReference.cache" />
+    <None Include="obj\Debug\workshop192.csprojResolveAssemblyReference.cache" />
     <None Include="obj\Release\workshop192.csproj.CoreCompileInputs.cache" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\workshop192.vshost.exe" />
     <Content Include="obj\Debug\workshop192.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\workshop192.exe" />
+    <Content Include="obj\Debug\workshop192.pdb" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="bin\Release\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

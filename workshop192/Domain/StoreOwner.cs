@@ -120,6 +120,12 @@ namespace workshop192.Domain
         {
             return store;
         }
+<<<<<<< HEAD
 
+=======
+        
+    class StoreOwner
+    {
+>>>>>>> origin/Stores_and_Products
     }
 }

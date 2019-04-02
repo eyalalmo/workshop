@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/Stores_and_Products
 using workshop192.Domain;
 
 
@@ -35,10 +38,16 @@ namespace workshop192.Domain
 
         public String login(String username, String password, Session session)
         {
+<<<<<<< HEAD
 
             SubscribedUser sub = DBSubscribedUser.getInstance().getSubscribedUser(username);
 
 
+=======
+            SubscribedUser sub = DBSubscribedUser.getInstance().getSubscribedUser(username);
+
+            SubscribedUser sub = dbSubscribedUser.getSubscribedUser(username);
+>>>>>>> origin/Stores_and_Products
             if (sub != null)
             {
                 if (Equals(sub.getPassword(), password))
@@ -53,9 +62,16 @@ namespace workshop192.Domain
                     {
                         session.setState(new LoggedIn());
                     }
+<<<<<<< HEAD
 
                     return DBSubscribedUser.getInstance().login(sub);
 
+=======
+                    
+                    return DBSubscribedUser.getInstance().login(sub);
+
+                    return dbSubscribedUser.login(sub);
+>>>>>>> origin/Stores_and_Products
                 }
                 else
                 {
@@ -82,11 +98,18 @@ namespace workshop192.Domain
             }
             else
             {
+<<<<<<< HEAD
 
 
                 SubscribedUser sub = new SubscribedUser(username, password, session.getShoppingBasket());
                 return DBSubscribedUser.getInstance().register(sub);
 
+=======
+                SubscribedUser sub = new SubscribedUser(username, password);
+                return DBSubscribedUser.getInstance().register(sub);
+                SubscribedUser sub = new SubscribedUser(username, password, session.getShoppingBasket());
+                return dbSubscribedUser.register(sub);
+>>>>>>> origin/Stores_and_Products
             }
         }
 
@@ -94,7 +117,16 @@ namespace workshop192.Domain
         {
             return "ERROR: not an admin";
         }
+<<<<<<< HEAD
 
+=======
+
+
+namespace workshop192.Domain
+{
+    class Guest
+    {
+>>>>>>> origin/Stores_and_Products
     }
 }
 

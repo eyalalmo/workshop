@@ -8,8 +8,13 @@ namespace workshop192.Domain
 {
     class DBProduct
     {
+<<<<<<< HEAD
         public static DBProduct  instance;
         LinkedList<Product> productList;
+=======
+        private static DBProduct  instance;
+        private LinkedList<Product> productList;
+>>>>>>> origin/Stores_and_Products
         public static int nextProductID;
 
         public static DBProduct getInstance()
@@ -19,7 +24,7 @@ namespace workshop192.Domain
             return instance;
         }
 
-        public DBProduct()
+        private DBProduct()
         {
             productList = new LinkedList<Product>();
             nextProductID = 0;

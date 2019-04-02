@@ -42,6 +42,9 @@ namespace workshop192.Domain
                 sc.checkout();            }
         }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/Stores_and_Products
     }
 }
