@@ -18,7 +18,7 @@ namespace workshop192.Domain
             throw new NotImplementedException();
         }
 
-        public string getPurchaseHistory()
+        public string getPurchaseHistory(SubscribedUser sub)
         {
             throw new NotImplementedException();
         }
@@ -28,7 +28,7 @@ namespace workshop192.Domain
             throw new NotImplementedException();
         }
 
-        public string logout()
+        public string logout(SubscribedUser sub)
         {
             throw new NotImplementedException();
         }

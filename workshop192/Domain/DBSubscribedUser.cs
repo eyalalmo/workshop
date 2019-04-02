@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using workshop192.Domain;
 
 namespace workshop192.Domain
 {
@@ -12,6 +13,7 @@ namespace workshop192.Domain
 
         Dictionary<string, SubscribedUser> users;
         Dictionary<string, SubscribedUser> loggedInUser;
+        private static DBSubscribedUser instance = null;
 
         public DBSubscribedUser()
         {
@@ -19,6 +21,15 @@ namespace workshop192.Domain
             loggedInUser = new Dictionary<string, SubscribedUser>();
         
         }
+        public static DBSubscribedUser getInstance()
+        {
+            if (instance == null)
+            {
+                instance = new DBSubscribedUser();
+            }
+            return instance;
+        }
+
 
         public string register(SubscribedUser user)
         {
@@ -29,6 +40,14 @@ namespace workshop192.Domain
                 users.Add(user.getId(), user);
             }
             return "";
+        }
+
+        public SubscribedUser getSubscribedUser(string username)
+        {
+            SubscribedUser user;
+            if (!users.TryGetValue(username,out user))
+                return null;
+            return user; 
         }
 
         public string login(SubscribedUser user)

@@ -10,8 +10,8 @@ namespace workshop192.Domain
     {
         String login(String username, String password, ref UserState susbscribedUser);
         String register(String username, String password);
-        String logout();
-        String getPurchaseHistory();
+        String logout(SubscribedUser sub);
+        String getPurchaseHistory(SubscribedUser sub);
         String createStore();
         String closeStore(int id);
         String removeUser(String username);

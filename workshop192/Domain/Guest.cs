@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using workshop192.Domain;
+
 
 namespace workshop192.Domain
 {
@@ -18,20 +20,21 @@ namespace workshop192.Domain
             return "ERROR: not an admin";
         }
 
-        public string getPurchaseHistory()
+        public string getPurchaseHistory(SubscribedUser sub)
         {
             return "ERROR: not an admin";
         }
 
         public String login(String username, String password, ref SubscribedUser subscribedUser)
         {
-            SubscribedUser sub = DBSubscribedUser.getSubscribedUser(username);
+            SubscribedUser sub = DBSubscribedUser.getInstance().getSubscribedUser(username);
+
             if (sub != null)
             {
                 if (Equals(sub.getPassword(), password))
                 {
                     subscribedUser = sub;
-                    return DBSubscribedUser.login(subscribedUser);
+                    return DBSubscribedUser.getInstance().login(subscribedUser);
                 }
                 else
                 {
@@ -44,7 +47,7 @@ namespace workshop192.Domain
             }
         }
 
-        public string logout()
+        public string logout(SubscribedUser sub)
         {
             return "ERROR: not logged in";
         }
@@ -58,7 +61,7 @@ namespace workshop192.Domain
             else
             {
                 SubscribedUser sub = new SubscribedUser(username, password);
-                return DBSubscribedUser.register(sub);
+                return DBSubscribedUser.getInstance().register(sub);
             }
         }
 

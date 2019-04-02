@@ -63,7 +63,6 @@
     <Compile Include="Domain\StoreRole.cs" />
     <Compile Include="Domain\SubscribedUser.cs" />
     <Compile Include="Domain\UserState.cs" />
-    <Compile Include="Domain\User.cs" />
     <Compile Include="Domain\VisibleDiscount.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
