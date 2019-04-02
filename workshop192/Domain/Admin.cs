@@ -66,25 +66,19 @@ namespace workshop192.Domain
         public string removeUser(string username)
         {
             SubscribedUser sub = dbSubscribedUser.getSubscribedUser(username);
-            if (sub != null)
-            {
-                Session session = dbSession.getSessionOfSubscribedUser(sub);
-                if (session != null)
-                {
-                    if (session.getState().GetType() == typeof(LoggedIn))
-                        session.logout();
-                    return dbSubscribedUser.remove(sub);
-                }
-                else
-                {
-                    return "ERROR: session does not exist";
-                }
-            }
-            else
-            {
+            if (sub == null)
                 return "ERROR: user does not exist";
+            Session session = dbSession.getSessionOfSubscribedUser(sub);
+            if(session == null)
+                return "ERROR: session does not exist";
+            if(session.getState() is LoggedIn)
+            {
+                String logoutResponse = session.logout();
+                if (!Equals(logoutResponse, ""))
+                    return logoutResponse;
+                
             }
-            
+            return dbStore.removeStoreByUser(sub);
         }
     }
 }
