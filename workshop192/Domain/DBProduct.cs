@@ -8,7 +8,7 @@ namespace workshop192.Domain
 {
     class DBProduct
     {
-        public static DBProduct  instance;
+        private static DBProduct  instance;
         private LinkedList<Product> productList;
         public static int nextProductID;
 

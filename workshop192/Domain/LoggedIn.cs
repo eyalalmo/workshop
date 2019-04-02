@@ -27,15 +27,9 @@ namespace workshop192.Domain
 
         public string getPurchaseHistory(SubscribedUser sub)
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
             return DBSubscribedUser.getInstance().getPurchaseHistory(sub);
-=======
             return DBSubscribedUser.getPurchaseHistory(sub);
->>>>>>> origin/etay_v3
-=======
             return dbSubscribedUser.getPurchaseHistory(sub);
->>>>>>> origin/Yael'sBranch
         }
 
         public string login(string username, string password, Session session)
@@ -45,20 +39,16 @@ namespace workshop192.Domain
 
         public string logout(SubscribedUser sub, Session session)
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
+
             return DBSubscribedUser.getInstance().logout(sub);
-=======
             return DBSubscribedUser.logout(sub);
->>>>>>> origin/etay_v3
-=======
+
             String logoutResponse = dbSubscribedUser.logout(sub);
             if (Equals(logoutResponse, ""))
             {
                 session.setState(new Guest());
             }
             return logoutResponse;
->>>>>>> origin/Yael'sBranch
         }
 
         public string register(string username, string password, Session session)
