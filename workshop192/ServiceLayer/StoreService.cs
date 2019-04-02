@@ -31,7 +31,7 @@ namespace workshop192.ServiceLayer
         private int quantityLeft;
         private Discount discount;
 
-        public string addProduct(int storeID, string productName, string productCategory, int price, int rank, int quantityLeft, Discount discount)
+        public string addProduct(Session user, int storeID, string productName, string productCategory, int price, int rank, int quantityLeft, Discount discount)
         {
             Store s = DBStore.getInstance().getStore(storeID);
             if (s == null)
@@ -39,10 +39,10 @@ namespace workshop192.ServiceLayer
             string str = checkProduct(productName, productCategory, price, rank, quantityLeft);
             if (str != "")
                 return str;
-            int id = DBStore.getNextStoreID();
+        
 
-            Product product = new Product(id, productName, productCategory, price, rank, quantityLeft);
-            string res = s.addProduct(product);
+            Product product = new Product(productName, productCategory, price, rank, quantityLeft,s);
+            string res = s.
             return res;
         }
         public string removeProduct(int storeID,int productID ,string productName, string productCategory, int price, int rank, int quantityLeft, Discount discount)

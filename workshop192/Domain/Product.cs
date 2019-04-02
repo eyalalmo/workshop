@@ -10,7 +10,7 @@ namespace workshop192.Domain
     {
 
         //represents product in store
-        private static int productID;
+        private int productID;
         private string productName;
         private string productCategory;
         private int price;
@@ -22,7 +22,7 @@ namespace workshop192.Domain
        
         public Product(string productName, string productCategory, int price, int rank, int quantityLeft, Store store)
         {
-            this.productID = DBProduct.nextProductID();
+            this.productID = DBProduct.getNextProductID();
             this.productName = productName;
             this.productCategory = productCategory;
             this.price = price;
@@ -118,7 +118,7 @@ namespace workshop192.Domain
         }
         public int getStoreID()
         {
-            return this.store.storeID;
+            return this.store.getStoreID();
         }
 
     }
