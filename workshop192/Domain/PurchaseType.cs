@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace workshop192
+namespace workshop192.Domain
 {
-    class Store
+    interface PurchaseType
     {
     }
 }
