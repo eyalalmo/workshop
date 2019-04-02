@@ -44,10 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Admin.cs" />
+
     <Compile Include="Domain\DBProduct.cs" />
     <Compile Include="Domain\DBStore.cs" />
     <Compile Include="Domain\DBSubscribedUser.cs" />
+
     <Compile Include="Domain\DBSession.cs" />
+
     <Compile Include="Domain\Discount.cs" />
     <Compile Include="Domain\Guest.cs" />
     <Compile Include="Domain\InstantPurchase.cs" />
@@ -62,8 +65,14 @@
     <Compile Include="Domain\Session.cs" />
     <Compile Include="Domain\ShoppingBasket.cs" />
     <Compile Include="Domain\ShoppingCart.cs" />
+    <Compile Include="Domain\Store.cs" />
+    <Compile Include="Domain\LotteryPurchase.cs" />
     <Compile Include="Domain\Product.cs" />
     <Compile Include="Domain\PublicPurchase.cs" />
+    <Compile Include="Domain\PurchasePolicy.cs" />
+    <Compile Include="Domain\PurchaseType.cs" />
+    <Compile Include="Domain\ShoppingBasket.cs" />
+    <Compile Include="Domain\ShoppingCart.cs" />
     <Compile Include="Domain\Store.cs" />
     <Compile Include="Domain\StoreManager.cs" />
     <Compile Include="Domain\StoreOwner.cs" />
