@@ -8,8 +8,7 @@ namespace workshop192.Domain
 {
     class Product
     {
-<<<<<<< HEAD
-=======
+
         //represents product in store
         private int productID;
         private string productName;
@@ -117,6 +116,6 @@ namespace workshop192.Domain
         {
             return this.storeID;
         }
->>>>>>> origin/bar's_branch
+
     }
 }

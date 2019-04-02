@@ -66,14 +66,14 @@
     <Compile Include="Domain\ShoppingBasket.cs" />
     <Compile Include="Domain\ShoppingCart.cs" />
     <Compile Include="Domain\Store.cs" />
-    <Compile Include="Domain\LotteryPurchase.cs" />
-    <Compile Include="Domain\Product.cs" />
-    <Compile Include="Domain\PublicPurchase.cs" />
-    <Compile Include="Domain\PurchasePolicy.cs" />
-    <Compile Include="Domain\PurchaseType.cs" />
-    <Compile Include="Domain\ShoppingBasket.cs" />
-    <Compile Include="Domain\ShoppingCart.cs" />
-    <Compile Include="Domain\Store.cs" />
+   
+  
+    
+
+
+
+
+   
     <Compile Include="Domain\StoreManager.cs" />
     <Compile Include="Domain\StoreOwner.cs" />
     <Compile Include="Domain\StoreRole.cs" />

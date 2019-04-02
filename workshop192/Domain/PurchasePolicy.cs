@@ -8,5 +8,6 @@ namespace workshop192.Domain
 {
     class PurchasePolicy
     {
+       
     }
 }
