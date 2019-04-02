@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-<<<<<<< HEAD
     class StoreOwner : StoreRole
     {
         private SubscribedUser appointedBy;
         private Store store;
         private SubscribedUser user;
 
-        public StoreOwner(SubscribedUser appointedBy, SubscribedUser user, Store store) {
+        public StoreOwner(SubscribedUser appointedBy, SubscribedUser user, Store store)
+        {
             this.appointedBy = appointedBy;
             this.user = user;
             this.store = store;
@@ -63,7 +63,8 @@ namespace workshop192.Domain
             product.setDiscount(discount);
         }
 
-        public string addManager(SubscribedUser manager, Dictionary<string, bool> permissions) {
+        public string addManager(SubscribedUser manager, Dictionary<string, bool> permissions)
+        {
             DBStore storeDB = storeDatabase.getInstance();
             if (storeDB.getStoreRole(store, manager) == null)
                 return "user " + manager.getUserName() + " already have a role in store " + store.getName();
@@ -119,10 +120,6 @@ namespace workshop192.Domain
         {
             return store;
         }
-        
-=======
-    class StoreOwner
-    {
->>>>>>> origin/bar's_branch
+
     }
 }
