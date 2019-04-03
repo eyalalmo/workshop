@@ -72,17 +72,35 @@ namespace workshop192.Domain
             {
                 if (entry.Key.getQuantityLeft() > entry.Value)
                 {
+                    
                     sum = entry.Key.getPrice() * entry.Value;
-                    Boolean isOk = PaymentService.getInstance().checkOut(sum);
+                    Boolean isOk = PaymentService.getInstance().checkOut("496531",sum);
                     if (isOk)
                     {
                         entry.Key.setQuantityLeft(entry.Key.getQuantityLeft() - entry.Value);
-                        res += " product: " + entry.Key.getProductID() + " complete payment";
+
+                        if (DeliveryService.getInstance().sendToUser("beer sheva", entry.Key) == false)
+                        {
+                            entry.Key.setQuantityLeft(entry.Key.getQuantityLeft() + entry.Value);
+                            res += " product: " + entry.Key.getProductID() + " can't deliver.\n ";
+                        }
+                        else
+                        {
+                            res += " product: " + entry.Key.getProductID() + " complete payment.\n ";
+                        }
+
                         //////////add eilon part
                     }
+                    else
+                    {
+                        res += " product: " + entry.Key.getProductID() + " cant submmit checkout.\n ";
+                    }
                 }
-            
-       
+                else
+                {
+                    res += " product: " + entry.Key.getProductID() + " have no this Quantity.\n ";
+                }
+
             }
             return res;
 

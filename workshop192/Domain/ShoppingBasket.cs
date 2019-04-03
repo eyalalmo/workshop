@@ -36,11 +36,14 @@ namespace workshop192.Domain
                 sc.addToCart(product, amount);
             }
         }
-        public void checkout (){    ////////// TODO ///////////
-            foreach(ShoppingCart sc in shoppingCarts.Values)
+        public String checkout (){
+            // return the result of the proccess by order of cart
+            String output = "";
+            foreach (ShoppingCart sc in shoppingCarts.Values)
             {
-                sc.checkout();
+                output += sc.checkout();
             }
+            return output;
         }
 
     }
