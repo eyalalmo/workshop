@@ -6,29 +6,23 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    class DeliveryService
+    class ConsistencySystem
     {
+        private static ConsistencySystem instance = null;
 
-        private static DeliveryService instance = null;
-
-        private DeliveryService()
+        private ConsistencySystem()
         {
 
 
         }
 
-        public static DeliveryService getInstance()
+        public static ConsistencySystem getInstance()
         {
             if (instance == null)
             {
-                instance = new DeliveryService();
+                instance = new ConsistencySystem();
             }
             return instance;
-        }
-
-        public Boolean sendToUser(String address, Product p)
-        {
-            return true;
         }
 
         public bool connectToSystem()

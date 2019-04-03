@@ -65,7 +65,7 @@ namespace workshop192.Domain
         }
 
 
-        public String checkout() {
+        public String checkout(String address,String creditCard) {
             String res = "";
             int sum = 0;
             foreach (KeyValuePair<Product, int> entry in productList)
@@ -74,12 +74,12 @@ namespace workshop192.Domain
                 {
                     
                     sum = entry.Key.getPrice() * entry.Value;
-                    Boolean isOk = PaymentService.getInstance().checkOut("496531",sum);
+                    Boolean isOk = PaymentService.getInstance().checkOut(creditCard,sum);
                     if (isOk)
                     {
                         entry.Key.setQuantityLeft(entry.Key.getQuantityLeft() - entry.Value);
 
-                        if (DeliveryService.getInstance().sendToUser("beer sheva", entry.Key) == false)
+                        if (DeliveryService.getInstance().sendToUser(address, entry.Key) == false)
                         {
                             entry.Key.setQuantityLeft(entry.Key.getQuantityLeft() + entry.Value);
                             res += " product: " + entry.Key.getProductID() + " can't deliver.\n ";

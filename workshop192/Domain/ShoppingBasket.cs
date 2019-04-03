@@ -36,12 +36,12 @@ namespace workshop192.Domain
                 sc.addToCart(product, amount);
             }
         }
-        public String checkout (){
+        public String checkout (String address,String creditCard){
             // return the result of the proccess by order of cart
             String output = "";
             foreach (ShoppingCart sc in shoppingCarts.Values)
             {
-                output += sc.checkout();
+                output += sc.checkout(address,creditCard);
             }
             return output;
         }
