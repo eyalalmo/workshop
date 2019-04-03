@@ -122,6 +122,7 @@ namespace workshop192.Domain
             return store;
         }
 
+<<<<<<< HEAD
         public SubscribedUser getAppointedBy()
         {
             return appointedBy;
@@ -132,5 +133,7 @@ namespace workshop192.Domain
             foreach (StoreRole sr in appointedByMe)
                 remove(sr.getUser());
         }
+=======
+>>>>>>> origin/ProductsAndPurchases
     }
 }

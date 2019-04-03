@@ -35,6 +35,10 @@ namespace workshop192.Domain
 
         public String login(String username, String password, Session session)
         {
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/ProductsAndPurchases
             SubscribedUser sub = DBSubscribedUser.getInstance().getSubscribedUser(username);
 
 
@@ -52,12 +56,18 @@ namespace workshop192.Domain
                     {
                         session.setState(new LoggedIn());
                     }
+<<<<<<< HEAD
 
 
                     return DBSubscribedUser.getInstance().login(sub);
 
 
 
+=======
+
+                    return DBSubscribedUser.getInstance().login(sub);
+
+>>>>>>> origin/ProductsAndPurchases
                 }
                 else
                 {
@@ -93,17 +103,32 @@ namespace workshop192.Domain
             SubscribedUser s = dbSubscribedUser.getSubscribedUser(username);
             if (s != null)
                 return "ERROR: username already exists";
+<<<<<<< HEAD
       
+=======
+            }
+            else
+            {
+
+>>>>>>> origin/ProductsAndPurchases
 
             SubscribedUser sub = new SubscribedUser(username, password, session.getShoppingBasket());
             return DBSubscribedUser.getInstance().register(sub);
 
+<<<<<<< HEAD
+=======
+            }
+>>>>>>> origin/ProductsAndPurchases
         }
 
         public string removeUser(string username)
         {
             return "ERROR: not an admin";
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/ProductsAndPurchases
     }
 }
 

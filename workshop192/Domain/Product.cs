@@ -16,6 +16,7 @@ namespace workshop192.Domain
         private int price;
         private Store store;
         private int rank;
+        private int numberOfRanking;
         private int quantityLeft;
         private Discount discount;
 
@@ -29,6 +30,7 @@ namespace workshop192.Domain
             this.rank = rank;
             this.quantityLeft = quantityLeft;
             this.store = store;
+            this.numberOfRanking = 0;
             this.discount = null;
 
         }
@@ -118,8 +120,15 @@ namespace workshop192.Domain
         }
         public int getStoreID()
         {
+<<<<<<< HEAD
             return this.store.getStoreID();
+=======
+            return store.getStoreID();
         }
-
+        public Store getStore()
+        {
+            return store;
+>>>>>>> origin/ProductsAndPurchases
+        }
     }
 }

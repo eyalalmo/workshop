@@ -8,12 +8,17 @@ namespace workshop192.Domain
 {
     public class Store
     {
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/ProductsAndPurchases
         private int storeID;
         private string storeName;
         private string description;
         private LinkedList<Product> productList;
         private bool status;
+        private List<StoreRole> roles;
+        private int numOfOwners;
         
 
 
@@ -26,7 +31,9 @@ namespace workshop192.Domain
             this.storeName = storeName;
             this.description = description;
             productList = new LinkedList<Product>();
+            roles = new List<StoreRole>();
             status = true;
+            numOfOwners = 0;
         }
 
         public void addProduct(Product p)
@@ -95,6 +102,41 @@ namespace workshop192.Domain
         {
             this.description = description;
         }
+<<<<<<< HEAD
+=======
+
+        public void addStoreRole(StoreRole toAdd){
+            if (toAdd is StoreOwner)
+            {
+                numOfOwners++;
+            }
+            roles.Add(toAdd);
+        }
+
+        public int getNumberOfOwners()
+        {
+            return numOfOwners;
+        }
+        
+        public List<StoreRole> getRoles()
+        {
+            return roles;
+        }
+
+        public StoreRole getStoreRole(SubscribedUser user)
+        {
+            foreach(StoreRole sr in roles)
+            {
+                if (sr.getUser() == user)
+                {
+                    return sr;
+                }
+
+            }
+            return null;
+        }
+        
+>>>>>>> origin/ProductsAndPurchases
 
 
     }

@@ -27,8 +27,12 @@ namespace workshop192.Domain
         String remove(SubscribedUser user);
         //////
         String closeStore();
+<<<<<<< HEAD
         SubscribedUser getAppointedBy();
         void removeAllAppointedBy();
+=======
+
+>>>>>>> origin/ProductsAndPurchases
     }
 }
 /.,m 

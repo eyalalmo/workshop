@@ -38,6 +38,11 @@ namespace workshop192.Domain
 
         public string logout(SubscribedUser sub, Session session)
         {
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/ProductsAndPurchases
             String logoutResponse = dbSubscribedUser.logout(sub);
             if (Equals(logoutResponse, ""))
             {

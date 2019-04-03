@@ -46,5 +46,18 @@ namespace workshop192.Domain
             return output;
         }
 
+<<<<<<< HEAD
+=======
+        public ShoppingCart getShoppingCartByID(int storeID)
+        {
+            foreach (int id in shoppingCarts.Keys)
+            {
+                if (id == storeID)
+                    return shoppingCarts[id];
+            }
+            return null;
+        }
+
+>>>>>>> origin/ProductsAndPurchases
     }
 }
