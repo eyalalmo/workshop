@@ -39,13 +39,10 @@ namespace workshop192.ServiceLayer
             if (res != "")
                 return res;
             
+            StoreRole sr = store.getStoreRole(session.getSubscribedUser());
             Product product = new Product(productName, productCategory, price, rank, quantityLeft, store);
-            
-            StoreRole sr = storeDB.getStoreRole(store, session.getSubscribedUser());
 
-            res = sr.addProduct(product);
-
-            return res;
+            return sr.addProduct(product);
         }
 
         public string removeProduct(Product product, Session session)
@@ -60,17 +57,7 @@ namespace workshop192.ServiceLayer
 
         public string editProduct(int storeID, int productID ,string productName, string productCategory, int price, int rank, int quantityLeft, Discount discount)
         {
-            Store s = StoreDB.getStore(storeID);
-            if (s == null)
-                return "store not exist";
-            string str = checkProduct(productName, productCategory, price, rank, quantityLeft);
-            if (str != "")
-                return str;
-           
-
-            Product product = new Product(productID, productName, productCategory, price, rank, quantityLeft);
-            string res = s.editProduct(product);
-            return res;
+            return "";
         }
     
         private string checkProduct(string productName, string productCategory, int price, int rank, int quantityLeft)
