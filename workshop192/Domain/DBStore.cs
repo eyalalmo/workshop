@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace workshop192.Domain
+
+
 {
-    class DBStore
+    public class DBStore
     {
-        public static DBStore instance;
+        private static DBStore instance;
         private LinkedList<Store> stores;
         private LinkedList<StoreRole> storeRole;
         private static int nextStoreID;
@@ -94,8 +96,8 @@ namespace workshop192.Domain
                 s.changeStatus();
                 foreach(StoreRole sr in storeRole)
                 {
-                    if (sr.getStore().getStoreID() == s.getStoreID())
-                        sr.getUser().notify();
+                    //if (sr.getStore().getStoreID() == s.getStoreID())
+                    //    sr.getUser().notify();
                 }
             }
         }
@@ -111,5 +113,33 @@ namespace workshop192.Domain
             nextStoreID++;
             return id;
         }
+
+        //if owner -> close store and remove store role, if manager only removes store role
+        public void removeStoreByUser(SubscribedUser user)
+        {
+            foreach (StoreRole sr in storeRole)
+                if ((sr.getUser()).getUsername() == user.getUsername())
+                {
+                    if(sr is StoreOwner)
+                    {
+                        closeStore(sr.getStore());
+                    }
+                    storeRole.Remove(sr);
+                }
+        }
+
+        public LinkedList<StoreRole> getAppointedByList(StoreRole sRole)
+        {
+            LinkedList<StoreRole> res = new LinkedList<StoreRole>();
+
+            foreach(StoreRole sr in storeRole)
+            {
+                if (sr.getAppointedBy().Equals(sRole))
+                    res.AddFirst(sr);
+            }
+            return res;
+        }
+
+
     }
 }

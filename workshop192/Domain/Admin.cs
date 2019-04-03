@@ -7,35 +7,51 @@ using System.Threading.Tasks;
 namespace workshop192.Domain
 {
 
-    class Admin : UserState
+    public class Admin : UserState
     {
         private DBStore dbStore;
         private DBSubscribedUser dbSubscribedUser;
         private DBSession dbSession;
+        private DBComplaint dbComplaint;
 
         public Admin()
         {
             dbStore = DBStore.getInstance();
             dbSubscribedUser = DBSubscribedUser.getInstance();
             dbSession = DBSession.getInstance();
+            dbComplaint = DBComplaint.getInstance();
         }
-        public string closeStore(int id)
+        public string closeStore(Store store)
         {
-            Store store = dbStore.getStore(id);
-            if (store == null)
+            List<StoreRole> roles = store.getRoles();
+            foreach(StoreRole role in roles)
             {
-                return "ERROR: store does not exist";
+                SubscribedUser sub = role.getUser();
+                sub.removeStoreRole(role);
             }
-            else
-            {
-                return dbStore.removeStore(store);
-            }
+            return dbStore.removeStore(store);
+            
         }
 
-        public String createStore(String storeName, String description)
+        public string complain(string description, SubscribedUser subscribedUser)
         {
-            Store store = new Store(storeName, description);
-            return dbStore.add(store);
+            return "ERROR: admin cannot complain";
+        }
+
+        public String createStore(String storeName, String description, SubscribedUser sub)
+        {
+            return "ERROR: admin cannot open a store";
+        }
+
+        public String getComplaints()
+        {
+            LinkedList<Complaint> complaints = dbComplaint.getComplaints();
+            String str = "";
+            foreach(Complaint c in complaints)
+            {
+                str = str + c.toString();
+            }
+            return str;
         }
 
 
@@ -49,7 +65,7 @@ namespace workshop192.Domain
             return "ERROR: User already logged in";
         }
 
-        public string logout(SubscribedUser sub, Session session)
+        public String logout(SubscribedUser sub, Session session)
         {
             String logoutResponse = dbSubscribedUser.logout(sub);
             if (Equals(logoutResponse,""))
@@ -59,27 +75,47 @@ namespace workshop192.Domain
             return logoutResponse;
         }
 
-        public string register(string username, string password, Session session)
+        public String register(string username, string password, Session session)
         {
             return "ERROR: User already registered";
         }
 
-        public string removeUser(string username)
+        public String removeUser(String user)
         {
-            SubscribedUser sub = dbSubscribedUser.getSubscribedUser(username);
-            if (sub == null)
-                return "ERROR: user does not exist";
-            Session session = dbSession.getSessionOfSubscribedUser(sub);
-            if (session == null)
-                return "ERROR: session does not exist";
-            if (session.getState() is LoggedIn)
+            SubscribedUser subscribedUser = DBSubscribedUser.getInstance().getSubscribedUser(user);
+            Session session = dbSession.getSessionOfSubscribedUser(subscribedUser);
+            if (session != null)
             {
-                String logoutResponse = session.logout();
-                if (!Equals(logoutResponse, ""))
-                    return logoutResponse;
+                if (session.getState() is LoggedIn)
+                {
+                    String logoutResponse = session.logout();
+                    if (!Equals(logoutResponse, ""))
+                        return logoutResponse;
 
+                }
             }
-            return dbStore.removeStoreByUser(sub);
+            foreach (StoreRole role in subscribedUser.getStoreRoles())
+            {
+                role.removeAllAppointedBy();
+                Store store = role.getStore();
+                SubscribedUser appointedBySubscribedUser = role.getAppointedBy();
+                if (appointedBySubscribedUser != null)
+                {
+                    StoreRole appointedByStoreRole = store.getStoreRole(role.getAppointedBy());
+                    appointedByStoreRole.remove(subscribedUser);
+                }
+                if (role is StoreOwner && role.getStore().getNumberOfOwners() == 1)
+                {
+                    closeStore(role.getStore());
+                }
+                else
+                {
+                    role.getStore().removeStoreRole(role);
+                }
+            }
+
+            return dbSubscribedUser.remove(subscribedUser);
+
         }
 
 

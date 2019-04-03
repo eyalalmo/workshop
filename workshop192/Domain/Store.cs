@@ -6,23 +6,25 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    class Store
+    public class Store
     {
-<<<<<<< HEAD
-=======
-        public int storeID;
-        public string storeName;
-        public string description;
-        public LinkedList<Product> productList;
-        public bool status;
-
-        public Store (int id, string storeName, string description)
+        private int storeID;
+        private string storeName;
+        private string description;
+        private LinkedList<Product> productList;
+        private bool status;
+        private List<StoreRole> roles;
+        private int numOfOwners;
+       
+        public Store (string storeName, string description)
         {
-            this.storeID = id;
+            this.storeID = DBStore.getNextStoreID();
             this.storeName = storeName;
             this.description = description;
             productList = new LinkedList<Product>();
+            roles = new List<StoreRole>();
             status = true;
+            numOfOwners = 0;
         }
 
         public void addProduct(Product p)
@@ -42,6 +44,17 @@ namespace workshop192.Domain
             }
             return false;
         }
+
+        public bool productExists(Product product)
+        {
+            foreach (Product p in productList)
+            {
+                if (product.Equals(p))
+                    return true;
+            }
+            return false;
+        }
+
         public void changeStatus()
         {
             status = !status;
@@ -80,12 +93,40 @@ namespace workshop192.Domain
         {
             this.description = description;
         }
+
+        public void addStoreRole(StoreRole toAdd){
+            if (toAdd is StoreOwner)
+            {
+                numOfOwners++;
+            }
+            roles.Add(toAdd);
+        }
+
+        public int getNumberOfOwners()
+        {
+            return numOfOwners;
+        }
         
+        public List<StoreRole> getRoles()
+        {
+            return roles;
+        }
 
-        
+        public StoreRole getStoreRole(SubscribedUser user)
+        {
+            foreach(StoreRole sr in roles)
+            {
+                if (sr.getUser() == user)
+                {
+                    return sr;
+                }
 
-        // public ? getPurchaseHistory (){} ------------------
-
->>>>>>> origin/bar's_branch
+            }
+            return null;
+        }
+        public void removeStoreRole(StoreRole toRemove)
+        {
+            roles.Remove(toRemove);
+        }
     }
 }

@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    class ShoppingBasket
+    public class ShoppingBasket
     {
-<<<<<<< HEAD
-=======
         private Dictionary<int,ShoppingCart> shoppingCarts;
 
         public ShoppingBasket()
@@ -23,7 +21,7 @@ namespace workshop192.Domain
         }
         public void addToCart(Product product, int amount)
         {
-            int storeID = product.getStoreID();
+            int storeID = product.getStore().getStoreID();
             bool found = false;
             foreach(ShoppingCart sc in shoppingCarts.Values)
                 if (sc.getStoreID() == storeID)
@@ -38,12 +36,26 @@ namespace workshop192.Domain
                 sc.addToCart(product, amount);
             }
         }
-        public void checkout (){    ////////// TODO ///////////
-            foreach(ShoppingCart sc in shoppingCarts.Values)
+        public String checkout (){
+            // return the result of the proccess by order of cart
+            String output = "";
+            foreach (ShoppingCart sc in shoppingCarts.Values)
             {
-                sc.checkout();            }
+                output += sc.checkout();
+            }
+            return output;
         }
 
->>>>>>> origin/bar's_branch
+
+        public ShoppingCart getShoppingCartByID(int storeID)
+        {
+            foreach (int id in shoppingCarts.Keys)
+            {
+                if (id == storeID)
+                    return shoppingCarts[id];
+            }
+            return null;
+        }
+
     }
 }
