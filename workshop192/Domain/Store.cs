@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    class Store
+    public class Store
     {
 
         private int storeID;
@@ -17,7 +17,10 @@ namespace workshop192.Domain
         
 
 
-        public Store (string storeName, string description)
+
+
+        public Store (int id, string storeName, string description)
+
         {
             this.storeID = DBStore.getNextStoreID();
             this.storeName = storeName;
@@ -92,11 +95,7 @@ namespace workshop192.Domain
         {
             this.description = description;
         }
-        
 
-        
-
-        // public ? getPurchaseHistory (){} ------------------
 
     }
 }

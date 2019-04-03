@@ -45,13 +45,8 @@
   <ItemGroup>
     <Compile Include="Domain\Admin.cs" />
     <Compile Include="Domain\DBProduct.cs" />
- 
-  
-
-
     <Compile Include="Domain\DBSession.cs" />
     <Compile Include="Domain\DBSubscribedUser.cs" />
-
     <Compile Include="Domain\Discount.cs" />
     <Compile Include="Domain\Guest.cs" />
     <Compile Include="Domain\InstantPurchase.cs" />
@@ -59,7 +54,6 @@
     <Compile Include="Domain\LoggedIn.cs" />
     <Compile Include="Domain\LotteryPurchase.cs" />
     <Compile Include="Domain\Product.cs" />
-
     <Compile Include="Domain\PublicPurchase.cs" />
     <Compile Include="Domain\PurchasePolicy.cs" />
     <Compile Include="Domain\PurchaseType.cs" />
@@ -73,7 +67,6 @@
     <Compile Include="Domain\StoreRole.cs" />
     <Compile Include="Domain\SubscribedUser.cs" />
     <Compile Include="Domain\UserState.cs" />
-    <Compile Include="Domain\User.cs" />
     <Compile Include="Domain\VisibleDiscount.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />

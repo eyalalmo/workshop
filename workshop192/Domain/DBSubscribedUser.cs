@@ -7,9 +7,8 @@ using workshop192.Domain;
 
 namespace workshop192.Domain
 {
-    class DBSubscribedUser
+    public class DBSubscribedUser
     {
-        //-idחנויות. מוצרים-id. -nameמשתמשים
 
         Dictionary<string, SubscribedUser> users;
         Dictionary<string, SubscribedUser> loggedInUser;
@@ -79,6 +78,13 @@ namespace workshop192.Domain
                 return " user isnt subscribe";
             }
             return "";
+        }
+        public SubscribedUser getloggedInUser(string name)
+        {
+            SubscribedUser user;
+            if (!users.TryGetValue(name, out user))
+                return null;
+            return user;
         }
     }
 }

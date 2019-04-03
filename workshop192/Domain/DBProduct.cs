@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    class DBProduct
+    public class DBProduct
     {
 
         private static DBProduct  instance;

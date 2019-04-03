@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    class ShoppingCart
+    public class ShoppingCart
     {
 
         private Dictionary <Product, int> productList;
@@ -64,7 +64,9 @@ namespace workshop192.Domain
 
         }
 
+
         public void checkout() { } /////////////// TODO !!!
+
 
     }
 }

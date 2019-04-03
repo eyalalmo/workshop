@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace workshop192.Domain
+
+
 {
-    class DBStore
+    public class DBStore
     {
         private static DBStore instance;
         private LinkedList<Store> stores;

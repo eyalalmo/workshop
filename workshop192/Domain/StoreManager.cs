@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 namespace workshop192.Domain
 {
 
-    class StoreManager : StoreRole
+
+    public class StoreManager : StoreRole
+
     {
         private SubscribedUser appointedBy;
         private Store store;

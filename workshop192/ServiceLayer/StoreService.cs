@@ -41,9 +41,7 @@ namespace workshop192.ServiceLayer
                 return str;
         
 
-            Product product = new Product(productName, productCategory, price, rank, quantityLeft,s);
-            string res = s.
-            return res;
+           
         }
         public string removeProduct(int storeID,int productID ,string productName, string productCategory, int price, int rank, int quantityLeft, Discount discount)
         {

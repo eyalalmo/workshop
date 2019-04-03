@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using workshop192.Domain;
 
 namespace workshop192.Domain
 {
-    class StoreOwner : StoreRole
+
+
+    public class StoreOwner : StoreRole
+
     {
         private SubscribedUser appointedBy;
         private Store store;

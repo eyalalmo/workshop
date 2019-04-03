@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    class ShoppingBasket
+    public class ShoppingBasket
     {
         private Dictionary<int,ShoppingCart> shoppingCarts;
 
@@ -39,7 +39,8 @@ namespace workshop192.Domain
         public void checkout (){    ////////// TODO ///////////
             foreach(ShoppingCart sc in shoppingCarts.Values)
             {
-                sc.checkout();            }
+                sc.checkout();
+            }
         }
 
     }
