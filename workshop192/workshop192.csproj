@@ -53,6 +53,7 @@
     <Compile Include="Domain\InvisibleDiscount.cs" />
     <Compile Include="Domain\LoggedIn.cs" />
     <Compile Include="Domain\LotteryPurchase.cs" />
+    <Compile Include="Domain\PaymentService.cs" />
     <Compile Include="Domain\Product.cs" />
     <Compile Include="Domain\PublicPurchase.cs" />
     <Compile Include="Domain\PurchasePolicy.cs" />

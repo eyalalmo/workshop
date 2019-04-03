@@ -21,18 +21,24 @@ namespace workshop192.Domain.Tests
         [TestMethod()]
         public void getStateTest()
         {
-            //return this.userState;
+            Session s = new Session();
+            Assert.AreEqual(s.getState() is Guest, true);
         }
 
         [TestMethod()]
         public void getSubscribedUserTest()
         {
-            //return this.subscribedUser;
+            Session s = new Session();
+            Assert.AreEqual(s.getSubscribedUser(), null);
         }
         [TestMethod()]
         public void getShoppingBasketTest()
         {
+            Session s = new Session();
+            s.register("user", "user");
+            s.login("user", "user");
             //return this.shoppingBasket;
+            ////TODOOOOO
         }
         [TestMethod()]
         public void setSubscribedUserTest()

@@ -31,7 +31,7 @@ namespace workshop192.Domain
             int quantityLeft = product.getQuantityLeft();
             if ( quantityLeft - amount> 0)
             {
-                product.setQuantityLeft(quantityLeft - amount);
+                //product.setQuantityLeft(quantityLeft - amount);
                 productList.Add(product, amount);
                 return "";
             }
@@ -57,7 +57,7 @@ namespace workshop192.Domain
             int quantity = p.getQuantityLeft();
             if (quantity + oldAmount - newAmount < 0)
                 return "- quantity below zero";
-            p.setQuantityLeft(quantity + oldAmount - newAmount);
+            //p.setQuantityLeft(quantity + oldAmount - newAmount);
             productList.Remove(p);
             productList.Add(p, newAmount);
             return "";
@@ -65,7 +65,29 @@ namespace workshop192.Domain
         }
 
 
-        public void checkout() { } /////////////// TODO !!!
+        public String checkout() {
+            String res = "";
+            int sum = 0;
+            foreach (KeyValuePair<Product, int> entry in productList)
+            {
+                if (entry.Key.getQuantityLeft() > entry.Value)
+                {
+                    sum = entry.Key.getPrice() * entry.Value;
+                    Boolean isOk = PaymentService.getInstance().checkOut(sum);
+                    if (isOk)
+                    {
+                        entry.Key.setQuantityLeft(entry.Key.getQuantityLeft() - entry.Value);
+                        res += " product: " + entry.Key.getProductID() + " complete payment";
+                        //////////add eilon part
+                    }
+                }
+            
+       
+            }
+            return res;
+
+
+        } 
 
 
     }
