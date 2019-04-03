@@ -38,9 +38,9 @@ namespace workshop192.Domain
             return "ERROR: admin cannot complain";
         }
 
-        public String createStore(String storeName, String description, SubscribedUser sub)
+        public Store createStore(String storeName, String description, SubscribedUser sub)
         {
-            return "ERROR: admin cannot open a store";
+            return null;
         }
 
         public String getComplaints()
