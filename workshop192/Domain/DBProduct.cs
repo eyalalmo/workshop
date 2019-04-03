@@ -9,7 +9,7 @@ namespace workshop192.Domain
     class DBProduct
     {
         private static DBProduct  instance;
-        private LinkedList<Product> productList;
+        private  LinkedList<Product> productList;
         public static int nextProductID;
 
         public static DBProduct getInstance()
@@ -58,7 +58,7 @@ namespace workshop192.Domain
             return productList;
         }
 
-        public static LinkedList<Product> searchProducts(string name, string keywords, string category, int[] price_range, int minimumRank)
+        public  LinkedList<Product> searchProducts(string name, string keywords, string category, int[] price_range, int minimumRank)
         {
             LinkedList<Product> res = new LinkedList<Product>();
             foreach(Product p in productList)

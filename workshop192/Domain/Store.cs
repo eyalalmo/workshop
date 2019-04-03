@@ -113,6 +113,18 @@ namespace workshop192.Domain
             return roles;
         }
 
+        public StoreRole getStoreRole(SubscribedUser user)
+        {
+            foreach(StoreRole sr in roles)
+            {
+                if (sr.getUser() == user)
+                {
+                    return sr;
+                }
+
+            }
+            return null;
+        }
         
 
         // public ? getPurchaseHistory (){} ------------------

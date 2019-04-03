@@ -70,7 +70,7 @@ namespace workshop192.ServiceLayer
             return user.logout();
         }
 
-
+        /*
         public String getPurchaseHistory(Session user)
         {
             if (user == null)
@@ -79,6 +79,7 @@ namespace workshop192.ServiceLayer
             }
             return user.getPurchaseHistory();
         }
+        
 
         //use case 2.4
         /*public LinkedList<Product> getStoreProducts(int storeID) 
@@ -100,7 +101,7 @@ namespace workshop192.ServiceLayer
         //use case 2.5
         public LinkedList<Product> searchProducts(String name, String keywords, String category, int[] price_range,int minimumRank)
         {
-            return DBProduct.searchProducts(name, keywords, category, price_range,minimumRank);
+            return DBProduct.getInstance().searchProducts(name, keywords, category, price_range,minimumRank);
         }
 
 
