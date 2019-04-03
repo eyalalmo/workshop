@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28307.168
+VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "workshop192", "workshop192\workshop192.csproj", "{BCCD87A3-FD64-45BF-A045-CBBB08B7D339}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "workshop192Tests", "workshop192Tests\workshop192Tests.csproj", "{90BFC332-73F7-418E-BDA2-9257075DEF7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "workshop192UnitTests", "workshop192Tests\workshop192UnitTests.csproj", "{90BFC332-73F7-418E-BDA2-9257075DEF7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "workshop192AcceptenceTest", "UnitTestProject1\workshop192AcceptenceTest.csproj", "{DB70287A-E8FD-48B6-901F-E7FDDB8D2C1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{90BFC332-73F7-418E-BDA2-9257075DEF7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90BFC332-73F7-418E-BDA2-9257075DEF7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90BFC332-73F7-418E-BDA2-9257075DEF7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB70287A-E8FD-48B6-901F-E7FDDB8D2C1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB70287A-E8FD-48B6-901F-E7FDDB8D2C1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB70287A-E8FD-48B6-901F-E7FDDB8D2C1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB70287A-E8FD-48B6-901F-E7FDDB8D2C1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
