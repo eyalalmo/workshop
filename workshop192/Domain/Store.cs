@@ -8,16 +8,16 @@ namespace workshop192.Domain
 {
     class Store
     {
+        private int storeID;
+        private string storeName;
+        private string description;
+        private LinkedList<Product> productList;
+        private bool status;
+        
 
-        public int storeID;
-        public string storeName;
-        public string description;
-        public LinkedList<Product> productList;
-        public bool status;
-
-        public Store (int id, string storeName, string description)
+        public Store (string storeName, string description)
         {
-            this.storeID = id;
+            this.storeID = DBStore.getNextStoreID();
             this.storeName = storeName;
             this.description = description;
             productList = new LinkedList<Product>();
@@ -41,6 +41,17 @@ namespace workshop192.Domain
             }
             return false;
         }
+
+        public bool productExists(Product product)
+        {
+            foreach (Product p in productList)
+            {
+                if (product.Equals(p))
+                    return true;
+            }
+            return false;
+        }
+
         public void changeStatus()
         {
             status = !status;

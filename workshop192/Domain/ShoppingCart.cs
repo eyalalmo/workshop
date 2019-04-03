@@ -8,17 +8,21 @@ namespace workshop192.Domain
 {
     class ShoppingCart
     {
-
         private Dictionary <Product, int> productList;
         private int storeID;
 
-        public ShoppingCart()
+        public ShoppingCart(int storeID)
         {
             productList = new Dictionary<Product, int>();
+            this.storeID = storeID;
         }
         public Dictionary<Product, int> getProductsInCarts()
         {
             return productList;
+        }
+        public int getStoreID()
+        {
+            return this.storeID;
         }
 
         public String addToCart(Product product, int amount)
@@ -60,6 +64,5 @@ namespace workshop192.Domain
         }
 
         public void checkout() { } /////////////// TODO !!!
-
     }
 }

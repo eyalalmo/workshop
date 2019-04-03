@@ -14,13 +14,14 @@ namespace workshop192.Domain
         private string productName;
         private string productCategory;
         private int price;
-        private int storeID;
+        private Store store;
         private int rank;
+        private int numberOfRanking;
         private int quantityLeft;
         private Discount discount;
 
        
-        public Product(string productName, string productCategory, int price, int rank, int quantityLeft, int storeID)
+        public Product(string productName, string productCategory, int price, int rank, int quantityLeft, Store store)
         {
             this.productID = DBProduct.nextProductID;
             this.productName = productName;
@@ -28,7 +29,8 @@ namespace workshop192.Domain
             this.price = price;
             this.rank = rank;
             this.quantityLeft = quantityLeft;
-            this.storeID = storeID;
+            this.store = store;
+            this.numberOfRanking = 0;
             this.discount = null;
 
         }
@@ -90,6 +92,10 @@ namespace workshop192.Domain
             return rank;
         }
 
+        public void setDiscount(Discount discount)
+        {
+            this.discount = discount;
+        }
 
         public void setProductID(int id)
         {
@@ -114,8 +120,11 @@ namespace workshop192.Domain
         }
         public int getStoreID()
         {
-            return this.storeID;
+            return store.getStoreID();
         }
-
+        public Store getStore()
+        {
+            return store;
+        }
     }
 }

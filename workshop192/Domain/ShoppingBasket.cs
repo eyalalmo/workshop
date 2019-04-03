@@ -42,6 +42,15 @@ namespace workshop192.Domain
                 sc.checkout();            }
         }
 
+        public ShoppingCart getShoppingCartByID(int storeID)
+        {
+            foreach (int id in shoppingCarts.Keys)
+            {
+                if (id == storeID)
+                    return shoppingCarts[id];
+            }
+            return null;
+        }
 
     }
 }
