@@ -19,6 +19,18 @@ namespace workshop192.Domain
         {
             return this.shoppingCarts;
         }
+
+
+        public int totalAmount()
+        {
+            int sum = 0;
+            foreach (ShoppingCart sc in shoppingCarts.Values)
+            {
+                sum += sc.totalAmount();
+            }
+            return sum;
+
+        }
         public void addToCart(Product product, int amount)
         {
             int storeID = product.getStore().getStoreID();

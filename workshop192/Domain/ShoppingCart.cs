@@ -63,8 +63,16 @@ namespace workshop192.Domain
             return "";
 
         }
+        public int totalAmount()
+        {
+            int sum = 0;
+            foreach (KeyValuePair<Product, int> entry in productList)
+            {
+                sum += (entry.Key.getPrice() * entry.Value);
+            }
+            return sum;
 
-
+        }
         public String checkout() {
             String res = "";
             int sum = 0;
