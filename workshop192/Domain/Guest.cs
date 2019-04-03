@@ -78,7 +78,7 @@ namespace workshop192.Domain
             return DBSubscribedUser.getInstance().register(sub);
             }
 
-        public string removeUser(SubscribedUser subscribedUser)
+        public string removeUser(String user)
         {
             return "ERROR: not an admin";
         }

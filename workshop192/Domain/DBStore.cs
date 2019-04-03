@@ -96,8 +96,8 @@ namespace workshop192.Domain
                 s.changeStatus();
                 foreach(StoreRole sr in storeRole)
                 {
-                    if (sr.getStore().getStoreID() == s.getStoreID())
-                        sr.getUser().notify();
+                    //if (sr.getStore().getStoreID() == s.getStoreID())
+                    //    sr.getUser().notify();
                 }
             }
         }

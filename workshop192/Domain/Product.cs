@@ -29,7 +29,7 @@ namespace workshop192.Domain
             this.rank = rank;
             this.quantityLeft = quantityLeft;
             this.store = store;
-            this.numberOfRanking = 0;
+            //this.numberOfRanking = 0;
             this.discount = null;
 
         }

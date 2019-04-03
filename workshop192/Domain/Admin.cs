@@ -80,8 +80,9 @@ namespace workshop192.Domain
             return "ERROR: User already registered";
         }
 
-        public String removeUser(SubscribedUser subscribedUser)
+        public String removeUser(String user)
         {
+            SubscribedUser subscribedUser = DBSubscribedUser.getInstance().getSubscribedUser(user);
             Session session = dbSession.getSessionOfSubscribedUser(subscribedUser);
             if (session != null)
             {

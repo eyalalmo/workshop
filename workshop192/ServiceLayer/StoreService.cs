@@ -30,17 +30,6 @@ namespace workshop192.ServiceLayer
         private int quantityLeft;
         private Discount discount;
 
-        public string addProduct(Session user, int storeID, string productName, string productCategory, int price, int rank, int quantityLeft, Discount discount)
-        {
-            Store s = DBStore.getInstance().getStore(storeID);
-            if (s == null)
-                return "store not exist";
-            string str = checkProduct(productName, productCategory, price, rank, quantityLeft);
-            if (str != "")
-                return str;
-
-
-        }
         public string addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, Store store, Session session)
         {
             DBStore storeDB = DBStore.getInstance();
@@ -49,29 +38,15 @@ namespace workshop192.ServiceLayer
             if (res != "")
                 return res;
             
+            StoreRole sr = store.getStoreRole(session.getSubscribedUser());
             Product product = new Product(productName, productCategory, price, rank, quantityLeft, store);
-            
-            StoreRole sr = storeDB.getStoreRole(store, session.getSubscribedUser());
 
-            res = sr.addProduct(product);
-
-            return res;
-
+            return sr.addProduct(product);
         }
 
-        public string removeProduct(Product product, Session session)
+        public string removeProduct(Product product, Store store, Session session)
         {
-
-            Store s = DBStore.getInstance().getStore(storeID);
-            if (s == null)
-                return "store not exist";
-            string str = checkProduct(productName, productCategory, price, rank, quantityLeft);
-            if (str != "")
-                return str;
-           
-
             SubscribedUser user = session.getSubscribedUser();
-
 
             DBStore storeDB = DBStore.getInstance();
             StoreRole sr = storeDB.getStoreRole(store, user);
@@ -81,17 +56,7 @@ namespace workshop192.ServiceLayer
 
         public string editProduct(int storeID, int productID ,string productName, string productCategory, int price, int rank, int quantityLeft, Discount discount)
         {
-            Store s = DBStore.getInstance().getStore(storeID);
-            if (s == null)
-                return "store not exist";
-            string str = checkProduct(productName, productCategory, price, rank, quantityLeft);
-            if (str != "")
-                return str;
-           
-
-            Product product = new Product(productID, productName, productCategory, price, rank, quantityLeft);
-            string res = s.editProduct(product);
-            return res;
+            return "";
         }
     
         private string checkProduct(string productName, string productCategory, int price, int rank, int quantityLeft)

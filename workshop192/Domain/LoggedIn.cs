@@ -70,7 +70,7 @@ namespace workshop192.Domain
             return "ERROR: User already registered";
         }
 
-        public string removeUser(SubscribedUser subscribedUser)
+        public string removeUser(String user)
         {
             return "ERROR: not an admin";
         }
