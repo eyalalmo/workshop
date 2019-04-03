@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    interface StoreRole
+    public interface StoreRole
     {
 
         SubscribedUser getUser();
@@ -27,12 +27,8 @@ namespace workshop192.Domain
         String remove(SubscribedUser user);
         //////
         String closeStore();
-<<<<<<< HEAD
         SubscribedUser getAppointedBy();
         void removeAllAppointedBy();
-=======
 
->>>>>>> origin/ProductsAndPurchases
     }
 }
-/.,m 

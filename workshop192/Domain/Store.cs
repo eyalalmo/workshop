@@ -8,10 +8,6 @@ namespace workshop192.Domain
 {
     public class Store
     {
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/ProductsAndPurchases
         private int storeID;
         private string storeName;
         private string description;
@@ -19,13 +15,8 @@ namespace workshop192.Domain
         private bool status;
         private List<StoreRole> roles;
         private int numOfOwners;
-        
-
-
-
-
-        public Store (int id, string storeName, string description)
-
+       
+        public Store (string storeName, string description)
         {
             this.storeID = DBStore.getNextStoreID();
             this.storeName = storeName;
@@ -102,8 +93,6 @@ namespace workshop192.Domain
         {
             this.description = description;
         }
-<<<<<<< HEAD
-=======
 
         public void addStoreRole(StoreRole toAdd){
             if (toAdd is StoreOwner)
@@ -135,9 +124,9 @@ namespace workshop192.Domain
             }
             return null;
         }
-        
->>>>>>> origin/ProductsAndPurchases
-
-
+        public void removeStoreRole(StoreRole toRemove)
+        {
+            roles.Remove(toRemove);
+        }
     }
 }

@@ -72,7 +72,7 @@ namespace workshop192.Domain
 
         public string addManager(SubscribedUser manager, Dictionary<string, bool> permissions)
         {
-            if (store.hasRole(manager))
+            if (store.getStoreRole(manager)!=null)
                 return "user " + manager.getUsername() + " already have a role in store " + store.getStoreName();
             StoreRole newManeger = new StoreManager(this.user, store, manager, permissions);
             store.addStoreRole(newManeger);
@@ -83,7 +83,7 @@ namespace workshop192.Domain
         
         public string addOwner(SubscribedUser owner)
         {
-            if (store.hasRole(owner))
+            if (store.getStoreRole(owner) != null)
                 return "user " + owner.getUsername() + " already have a role in store " + store.getStoreName();
             StoreRole newOwner = new StoreOwner(this.user, owner, store);
             store.addStoreRole(newOwner);
@@ -98,7 +98,7 @@ namespace workshop192.Domain
             //if (sr == null || sr is StoreManager)
             //    return "user " + owner.getUsername() + " is not an owner in store " + store.getStoreName();
             if (sr.getAppointedBy() != this.user)
-                return "user " + user.getUsername() + " didn't appointed " + owner.getUsername();
+                return "user " + user.getUsername() + " didn't appoint " + role.getUsername();
             sr.removeAllAppointedBy();
             role.removeStoreRole(sr);
             store.removeStoreRole(sr);
@@ -122,7 +122,6 @@ namespace workshop192.Domain
             return store;
         }
 
-<<<<<<< HEAD
         public SubscribedUser getAppointedBy()
         {
             return appointedBy;
@@ -133,7 +132,6 @@ namespace workshop192.Domain
             foreach (StoreRole sr in appointedByMe)
                 remove(sr.getUser());
         }
-=======
->>>>>>> origin/ProductsAndPurchases
+
     }
 }

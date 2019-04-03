@@ -18,63 +18,34 @@ namespace workshop192.Domain
             dbSubscribedUser = DBSubscribedUser.getInstance();
         }
 
-        public string closeStore(int id)
+        public string closeStore(Store store)
         {
             return "ERROR: not an admin";
         }
 
-        public String createStore(int id, String storeName, String description)
+        public string complain(string description, SubscribedUser subscribedUser)
         {
-            return "ERROR: not an admin";
+            return "ERROR: guest cannot complain";
+        }
+
+        public String createStore(String storeName, String description, SubscribedUser sub)
+        {
+            return "ERROR: not a subscribed user";
+        }
+
+        public String getComplaints()
+        {
+            return "ERROR: only an admin can getComplaints";
         }
 
         public string getPurchaseHistory(SubscribedUser sub)
         {
-            return "ERROR: not an admin";
+            return "ERROR: not a subscribed user";
         }
 
         public String login(String username, String password, Session session)
         {
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/ProductsAndPurchases
             SubscribedUser sub = DBSubscribedUser.getInstance().getSubscribedUser(username);
-
-
-            if (sub != null)
-            {
-                if (Equals(sub.getPassword(), password))
-                {
-
-                    session.setSubscribedUser(sub);
-                    if (Equals(username, "admin"))
-                    {
-                        session.setState(new Admin());
-                    }
-                    else
-                    {
-                        session.setState(new LoggedIn());
-                    }
-<<<<<<< HEAD
-
-
-                    return DBSubscribedUser.getInstance().login(sub);
-
-
-
-=======
-
-                    return DBSubscribedUser.getInstance().login(sub);
-
->>>>>>> origin/ProductsAndPurchases
-                }
-                else
-                {
-                    return "ERROR: password incorrect";
-                }
-            }
-
             if (sub == null)
                 return "ERROR: username does not exist";
             if(!Equals(sub.getPassword(), password))
@@ -103,32 +74,14 @@ namespace workshop192.Domain
             SubscribedUser s = dbSubscribedUser.getSubscribedUser(username);
             if (s != null)
                 return "ERROR: username already exists";
-<<<<<<< HEAD
-      
-=======
-            }
-            else
-            {
-
->>>>>>> origin/ProductsAndPurchases
-
             SubscribedUser sub = new SubscribedUser(username, password, session.getShoppingBasket());
             return DBSubscribedUser.getInstance().register(sub);
-
-<<<<<<< HEAD
-=======
             }
->>>>>>> origin/ProductsAndPurchases
-        }
 
-        public string removeUser(string username)
+        public string removeUser(SubscribedUser subscribedUser)
         {
             return "ERROR: not an admin";
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/ProductsAndPurchases
     }
 }
 

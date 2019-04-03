@@ -9,20 +9,38 @@ namespace workshop192.Domain
     public class LoggedIn : UserState
     {
         private DBSubscribedUser dbSubscribedUser;
+        private DBComplaint dbComplaint;
 
         public LoggedIn()
         {
             dbSubscribedUser = DBSubscribedUser.getInstance();
+            dbComplaint = DBComplaint.getInstance();
         }
 
-        public string closeStore(int id)
+        public string closeStore(Store store)
         {
             return "ERROR: not an admin";
         }
 
-        public string createStore(int id, String storeName, String description)
+        public string complain(string description, SubscribedUser subscribedUser)
         {
-            return "ERROR: not an admin";
+            Complaint complaint = new Complaint(subscribedUser.getUsername(), description);
+            return dbComplaint.addComplaint(complaint);
+        }
+
+        public string createStore(String storeName, String description, SubscribedUser sub)
+        {
+            Store store = new Store(storeName, description);
+            StoreOwner owner = new StoreOwner(null, sub, store);
+            store.addStoreRole(owner);
+            sub.addStoreRole(owner);
+            DBStore.getInstance().addStore(store);
+            return "";
+        }
+
+        public string getComplaints()
+        {
+            return "ERROR: only an admin can getComplaints";
         }
 
         public string getPurchaseHistory(SubscribedUser sub)
@@ -38,11 +56,6 @@ namespace workshop192.Domain
 
         public string logout(SubscribedUser sub, Session session)
         {
-<<<<<<< HEAD
-=======
-
-
->>>>>>> origin/ProductsAndPurchases
             String logoutResponse = dbSubscribedUser.logout(sub);
             if (Equals(logoutResponse, ""))
             {
@@ -57,7 +70,7 @@ namespace workshop192.Domain
             return "ERROR: User already registered";
         }
 
-        public string removeUser(string username)
+        public string removeUser(SubscribedUser subscribedUser)
         {
             return "ERROR: not an admin";
         }

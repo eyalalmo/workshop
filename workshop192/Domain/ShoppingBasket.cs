@@ -21,7 +21,7 @@ namespace workshop192.Domain
         }
         public void addToCart(Product product, int amount)
         {
-            int storeID = product.getStoreID();
+            int storeID = product.getStore().getStoreID();
             bool found = false;
             foreach(ShoppingCart sc in shoppingCarts.Values)
                 if (sc.getStoreID() == storeID)
@@ -46,8 +46,7 @@ namespace workshop192.Domain
             return output;
         }
 
-<<<<<<< HEAD
-=======
+
         public ShoppingCart getShoppingCartByID(int storeID)
         {
             foreach (int id in shoppingCarts.Keys)
@@ -58,6 +57,5 @@ namespace workshop192.Domain
             return null;
         }
 
->>>>>>> origin/ProductsAndPurchases
     }
 }

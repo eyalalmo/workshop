@@ -12,31 +12,46 @@ namespace workshop192.Domain
         private DBStore dbStore;
         private DBSubscribedUser dbSubscribedUser;
         private DBSession dbSession;
+        private DBComplaint dbComplaint;
 
         public Admin()
         {
             dbStore = DBStore.getInstance();
             dbSubscribedUser = DBSubscribedUser.getInstance();
             dbSession = DBSession.getInstance();
+            dbComplaint = DBComplaint.getInstance();
         }
-        public string closeStore(int id)
+        public string closeStore(Store store)
         {
-            Store store = dbStore.getStore(id);
-            if (store == null)
+            List<StoreRole> roles = store.getRoles();
+            foreach(StoreRole role in roles)
             {
-                return "ERROR: store does not exist";
+                SubscribedUser sub = role.getUser();
+                sub.removeStoreRole(role);
             }
-            else
-            {
-                return dbStore.removeStore(store);
-            }
+            return dbStore.removeStore(store);
+            
         }
 
-        public String createStore(int id, String storeName, String description)
+        public string complain(string description, SubscribedUser subscribedUser)
         {
-            Store store = new Store(id, storeName, description);
-            dbStore.addStore(store);
-            return "";
+            return "ERROR: admin cannot complain";
+        }
+
+        public String createStore(String storeName, String description, SubscribedUser sub)
+        {
+            return "ERROR: admin cannot open a store";
+        }
+
+        public String getComplaints()
+        {
+            LinkedList<Complaint> complaints = dbComplaint.getComplaints();
+            String str = "";
+            foreach(Complaint c in complaints)
+            {
+                str = str + c.toString();
+            }
+            return str;
         }
 
 
@@ -65,22 +80,41 @@ namespace workshop192.Domain
             return "ERROR: User already registered";
         }
 
-        public String removeUser(string username)
+        public String removeUser(SubscribedUser subscribedUser)
         {
-            SubscribedUser sub = dbSubscribedUser.getSubscribedUser(username);
-            if (sub == null)
-                return "ERROR: user does not exist";
-            Session session = dbSession.getSessionOfSubscribedUser(sub);
-            if (session == null)
-                return "ERROR: session does not exist";
-            if (session.getState() is LoggedIn)
+            Session session = dbSession.getSessionOfSubscribedUser(subscribedUser);
+            if (session != null)
             {
-                String logoutResponse = session.logout();
-                if (!Equals(logoutResponse, ""))
-                    return logoutResponse;
+                if (session.getState() is LoggedIn)
+                {
+                    String logoutResponse = session.logout();
+                    if (!Equals(logoutResponse, ""))
+                        return logoutResponse;
 
+                }
             }
-            return DBStore.removeStoreByUser(sub);
+            foreach (StoreRole role in subscribedUser.getStoreRoles())
+            {
+                role.removeAllAppointedBy();
+                Store store = role.getStore();
+                SubscribedUser appointedBySubscribedUser = role.getAppointedBy();
+                if (appointedBySubscribedUser != null)
+                {
+                    StoreRole appointedByStoreRole = store.getStoreRole(role.getAppointedBy());
+                    appointedByStoreRole.remove(subscribedUser);
+                }
+                if (role is StoreOwner && role.getStore().getNumberOfOwners() == 1)
+                {
+                    closeStore(role.getStore());
+                }
+                else
+                {
+                    role.getStore().removeStoreRole(role);
+                }
+            }
+
+            return dbSubscribedUser.remove(subscribedUser);
+
         }
 
 

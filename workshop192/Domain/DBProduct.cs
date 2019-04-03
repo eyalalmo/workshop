@@ -10,12 +10,8 @@ namespace workshop192.Domain
     {
 
         private static DBProduct  instance;
-<<<<<<< HEAD
-        private LinkedList<Product> productList;
 
-=======
         private  LinkedList<Product> productList;
->>>>>>> origin/ProductsAndPurchases
         public static int nextProductID;
 
         public static DBProduct getInstance()

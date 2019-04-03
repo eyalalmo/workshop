@@ -8,10 +8,7 @@ namespace workshop192.Domain
 {
     public class ShoppingCart
     {
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/ProductsAndPurchases
         private Dictionary <Product, int> productList;
         private int storeID;
 
@@ -67,7 +64,6 @@ namespace workshop192.Domain
 
         }
 
-<<<<<<< HEAD
 
         public String checkout() {
             String res = "";
@@ -110,10 +106,5 @@ namespace workshop192.Domain
 
 
         } 
-
-
-=======
-        public void checkout() { } /////////////// TODO !!!
->>>>>>> origin/ProductsAndPurchases
     }
 }

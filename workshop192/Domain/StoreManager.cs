@@ -3,14 +3,8 @@ using System.Collections.Generic;
 
 namespace workshop192.Domain
 {
-
-<<<<<<< HEAD
-
     public class StoreManager : StoreRole
 
-=======
-    class StoreManager : StoreRole
->>>>>>> origin/ProductsAndPurchases
     {
         private SubscribedUser appointedBy;
         private Store store;
@@ -119,7 +113,6 @@ namespace workshop192.Domain
             return store;
         }
 
-<<<<<<< HEAD
         public SubscribedUser getAppointedBy()
         {
             return appointedBy;
@@ -129,7 +122,6 @@ namespace workshop192.Domain
         {
             return;
         }
-=======
->>>>>>> origin/ProductsAndPurchases
+
     }
 }
