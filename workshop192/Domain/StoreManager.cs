@@ -32,35 +32,16 @@ namespace workshop192.Domain
             return user.getUsername() + " is not allowed to add owner to " + store.getStoreName();
         }
 
-        public String removeManager(SubscribedUser manager)
+        public string remove(SubscribedUser owner)
         {
-            DBStore storeDB = DBStore.getInstance();
-            StoreRole sr = storeDB.getStoreRole(store, manager);
-            if (sr == null)
-                return "user " + manager.getUsername() + " doesn't have a role in store " + store.getStoreName();
-            if (sr is StoreOwner)
-                return "user " + manager.getUsername() + " is an owner of " + store.getStoreName();
-            storeDB.removeStoreRole(store, manager);
-            return "";
+            return user.getUsername() + " is not allowed to remove roles from " + store.getStoreName();
         }
 
-        public string removeOwner(SubscribedUser owner)
-        {
-            DBStore storeDB = DBStore.getInstance();
-            StoreRole sr = storeDB.getStoreRole(store, owner);
-            if (sr == null)
-                return "user " + owner.getUsername() + " doesn't have a role in store " + store.getStoreName();
-            if (sr is StoreManager)
-                return "user " + owner.getUsername() + " is a manager of " + store.getStoreName();
-            storeDB.removeStoreRole(store, owner);
-            return "";
-        }
-
-        public string addProduct(string name, string category, int price, int quantity)
+        public string addProduct(Product product)
         {
             if (!permissions["addProduct"])
                 return user.getUsername() + " has no permission to add products in store " + store.getStoreName();
-            store.addProduct(new Product(name, category, price, 0, quantity, store));
+            store.addProduct(product);
             return "";
         }
 
@@ -68,8 +49,8 @@ namespace workshop192.Domain
         {
             if (!permissions["removeProduct"])
                 return user.getUsername() + " has no permission to remove products in store " + store.getStoreName();
-            if (!store.productExists(product))
-                return "product doesn't exsits";
+            //if (!store.productExists(product))
+            //    return "product doesn't exsits";
             store.removeProduct(product);
             return "";
         }
@@ -113,7 +94,7 @@ namespace workshop192.Domain
         {
             if (!permissions["setProductDiscount"])
                 return user.getUsername() + " has no permission to set product's discount in store " + store.getStoreName();
-            product.setDiscount(discount);
+            //product.setDiscount(discount);
             return "";
         }
 
@@ -137,6 +118,11 @@ namespace workshop192.Domain
         public SubscribedUser getAppointedBy()
         {
             return appointedBy;
+        }
+
+        public void removeAllAppointedBy()
+        {
+            return;
         }
     }
 }
