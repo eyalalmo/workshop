@@ -51,7 +51,7 @@ namespace workshop192.ServiceLayer
             }
             return user.register(username, password);
         }
-
+        //use case 6.2
         public String removeUser(Session admin, String username)
         {
             if (admin == null)
