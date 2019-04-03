@@ -9,7 +9,7 @@ namespace workshop192.ServiceLayer
 {
     class StoreService
     {
-        private static StoreService instance = null;
+        private static StoreService instance =null;
 
         public StoreService() { }
 
@@ -21,6 +21,14 @@ namespace workshop192.ServiceLayer
             }
             return instance;
         }
+
+       // private int productID;
+       // private string productName;
+       // private string productCategory;
+       // private int price;
+       // private int rank;
+       // private int quantityLeft;
+       // private Discount discount;
 
         public string addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, Store store, Session session)
         {
@@ -36,74 +44,21 @@ namespace workshop192.ServiceLayer
             return sr.addProduct(product);
         }
 
-        public string removeProduct(Product product, Session session)
+        public string removeProduct(Product product, Store store, Session session)
         {
             SubscribedUser user = session.getSubscribedUser();
 
             DBStore storeDB = DBStore.getInstance();
-            StoreRole sr = storeDB.getStoreRole(product.getStore(), user);
+            StoreRole sr = storeDB.getStoreRole(store, user);
 
             return sr.removeProduct(product);
         }
 
-        public string setProductPrice(Product product, int price, Session session)
+        public string editProduct(int storeID, int productID ,string productName, string productCategory, int price, int rank, int quantityLeft, Discount discount)
         {
-            SubscribedUser user = session.getSubscribedUser();
-
-            DBStore storeDB = DBStore.getInstance();
-            StoreRole sr = storeDB.getStoreRole(product.getStore(), user);
-
-            if (price <= 0)
-                return "illegal price";
-            return sr.setProductPrice(product, price);
+            return "";
         }
-
-        public string setProductName(Product product, String name, Session session)
-        {
-            SubscribedUser user = session.getSubscribedUser();
-
-            DBStore storeDB = DBStore.getInstance();
-            StoreRole sr = storeDB.getStoreRole(product.getStore(), user);
-
-            if (name.Length == 0)
-                return "illegal name";
-            return sr.setProductName(product, name);
-        }
-
-        public string addToProductQuantity(Product product, int amount, Session session)
-        {
-            SubscribedUser user = session.getSubscribedUser();
-
-            DBStore storeDB = DBStore.getInstance();
-            StoreRole sr = storeDB.getStoreRole(product.getStore(), user);
-
-            if (amount <= 0)
-                return "illegal amount";
-            return sr.addToProductQuantity(product, amount);
-        }
-
-        public string decFromProductQuantity(Product product, int amount, Session session)
-        {
-            SubscribedUser user = session.getSubscribedUser();
-
-            DBStore storeDB = DBStore.getInstance();
-            StoreRole sr = storeDB.getStoreRole(product.getStore(), user);
-
-            if (amount <= 0)
-                return "illegal amount";
-            return sr.decFromProductQuantity(product, amount);
-        }
-
-        public string setProductDiscount(Product product, Discount discount, Session session)
-        {
-            SubscribedUser user = session.getSubscribedUser();
-
-            DBStore storeDB = DBStore.getInstance();
-            StoreRole sr = storeDB.getStoreRole(product.getStore(), user);
-
-            return sr.setProductDiscount(product, discount);
-        }
-
+    
         private string checkProduct(string productName, string productCategory, int price, int rank, int quantityLeft)
         {
             if (productName == "")
