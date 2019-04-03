@@ -22,7 +22,6 @@ namespace workshop192.ServiceLayer
             return instance;
         }
 
-
         private int productID;
         private string productName;
         private string productCategory;

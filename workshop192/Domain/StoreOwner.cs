@@ -11,24 +11,24 @@ namespace workshop192.Domain
         private SubscribedUser appointedBy;
         private Store store;
         private SubscribedUser user;
+        private List<StoreRole> appointedByMe;
 
         public StoreOwner(SubscribedUser appointedBy, SubscribedUser user, Store store)
         {
             this.appointedBy = appointedBy;
             this.user = user;
             this.store = store;
+            appointedByMe = new List<StoreRole>();
         }
 
-        public string addProduct(string name, string category, int price, int quantity)
+        public string addProduct(Product product)
         {
-            store.addProduct(new Product(name, category, price, 0, quantity, store));
+            store.addProduct(product);
             return "";
         }
 
         public string removeProduct(Product product)
         {
-            if (!store.productExists(product))
-                return "product doesn't exsits";
             store.removeProduct(product);
             return "";
         }
@@ -62,56 +62,42 @@ namespace workshop192.Domain
 
         public string setProductDiscount(Product product, Discount discount)
         {
-            product.setDiscount(discount);
+            //product.setDiscount(discount);
             return "";
         }
 
         public string addManager(SubscribedUser manager, Dictionary<string, bool> permissions)
         {
-            DBStore storeDB = DBStore.getInstance();
-            if (storeDB.getStoreRole(store, manager) == null)
+            if (store.hasRole(manager))
                 return "user " + manager.getUsername() + " already have a role in store " + store.getStoreName();
-            storeDB.addStoreRole(new StoreManager(this.user, store, manager, permissions));
+            StoreRole newManeger = new StoreManager(this.user, store, manager, permissions);
+            store.addStoreRole(newManeger);
+            manager.addStoreRole(newManeger);
+            appointedByMe.Add(newManeger);
             return "";
         }
-
-        public String removeManager(SubscribedUser manager)
-        {
-            DBStore storeDB = DBStore.getInstance();
-            StoreRole sr = storeDB.getStoreRole(store, manager);
-            if (sr == null)
-                return "user " + manager.getUsername() + " doesn't have a role in store " + store.getStoreName();
-            if (sr is StoreOwner)
-                return "user " + manager.getUsername() + " is an owner of " + store.getStoreName();
-            if (sr.getAppointedBy() != this.user)
-                return "user " + user.getUsername() + " didn't appointed " + manager.getUsername();
-            storeDB.removeStoreRole(store, manager);
-            return "";
-        }
-
+        
         public string addOwner(SubscribedUser owner)
         {
-            DBStore storeDB = DBStore.getInstance();
-            if (storeDB.getStoreRole(store, owner) == null)
+            if (store.hasRole(owner))
                 return "user " + owner.getUsername() + " already have a role in store " + store.getStoreName();
-            storeDB.addStoreRole(new StoreOwner(this.user, owner, store));
+            StoreRole newOwner = new StoreOwner(this.user, owner, store);
+            store.addStoreRole(newOwner);
+            owner.addStoreRole(newOwner);
+            appointedByMe.Add(newOwner);
             return "";
         }
 
-        public string removeOwner(SubscribedUser owner)
+        public string remove(SubscribedUser role)
         {
-            DBStore storeDB = DBStore.getInstance();
-            StoreRole sr = storeDB.getStoreRole(store, owner);
-            if (sr == null)
-                return "user " + owner.getUsername() + " doesn't have a role in store " + store.getStoreName();
-            if (sr is StoreManager)
-                return "user " + owner.getUsername() + " is a manager of " + store.getStoreName();
+            StoreRole sr = role.getStoreRole(store);
+            //if (sr == null || sr is StoreManager)
+            //    return "user " + owner.getUsername() + " is not an owner in store " + store.getStoreName();
             if (sr.getAppointedBy() != this.user)
                 return "user " + user.getUsername() + " didn't appointed " + owner.getUsername();
-            List<SubscribedUser> appointedByOwner = storeDB.getAppointedByList(owner);
-            foreach (SubscribedUser cur in appointedByOwner)
-                sr.removeOwner(cur);
-            storeDB.removeStoreRole(store, owner);
+            sr.removeAllAppointedBy();
+            role.removeStoreRole(sr);
+            store.removeStoreRole(sr);
             return "";
         }
 
@@ -135,6 +121,12 @@ namespace workshop192.Domain
         public SubscribedUser getAppointedBy()
         {
             return appointedBy;
+        }
+
+        public void removeAllAppointedBy()
+        {
+            foreach (StoreRole sr in appointedByMe)
+                remove(sr.getUser());
         }
     }
 }
