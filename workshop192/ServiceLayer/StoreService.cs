@@ -70,7 +70,7 @@ namespace workshop192.ServiceLayer
             if (quantityLeft < 0)
                 return "illeagal quantity";
 
-            return "";
+            return ""l
         }
     }
 }
