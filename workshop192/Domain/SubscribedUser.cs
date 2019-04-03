@@ -78,7 +78,7 @@ namespace workshop192.Domain
 
         public List<StoreRole> getStoreRoles()
         {
-            return storeRoles;
+            return storeRoles; 
         }
     }
 }
