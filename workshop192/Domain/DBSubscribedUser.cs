@@ -14,13 +14,20 @@ namespace workshop192.Domain
         Dictionary<string, SubscribedUser> loggedInUser;
         private static DBSubscribedUser instance = null;
 
-        public DBSubscribedUser()
+
+        
+        private DBSubscribedUser()
         {
             users = new Dictionary<string, SubscribedUser>();
             loggedInUser = new Dictionary<string, SubscribedUser>();
 
         }
 
+        public void initDB()
+        {
+            users = new Dictionary<string, SubscribedUser>();
+            loggedInUser = new Dictionary<string, SubscribedUser>();
+        }
 
         public static DBSubscribedUser getInstance()
         {

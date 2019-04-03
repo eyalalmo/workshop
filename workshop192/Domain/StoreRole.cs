@@ -23,6 +23,6 @@ namespace workshop192.Domain
         String addOwner(SubscribedUser owner);
         String removeOwner(SubscribedUser owner);
         String closeStore();
-
+        SubscribedUser getAppointedBy();
     }
 }

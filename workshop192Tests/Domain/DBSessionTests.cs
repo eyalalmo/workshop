@@ -14,25 +14,40 @@ namespace workshop192.Domain.Tests
         [TestMethod()]
         public void getInstanceTest()
         {
-            Assert.Fail();
+            
         }
 
         [TestMethod()]
         public void addSessionTest()
         {
-            Assert.Fail();
+            DBSession db = DBSession.getInstance();
+            db.initSession();
+            Session s = new Session();
+            Assert.AreEqual(db.getSession(s), "");
+                 
         }
 
         [TestMethod()]
         public void removeSessionTest()
         {
-            Assert.Fail();
+            DBSession db = DBSession.getInstance();
+            db.initSession();
+            Session s = new Session();
+            db.removeSession(s);
+            Assert.AreNotEqual(db.getSession(s), "");
         }
 
         [TestMethod()]
         public void getSessionOfSubscribedUserTest()
         {
-            Assert.Fail();
+            DBSession db = DBSession.getInstance();
+            db.initSession();
+            Session s = new Session();
+            s.register("etay", "etay");
+
+            DBSubscribedUser dbSub = DBSubscribedUser.getInstance(); 
+            Assert.AreEqual(s, db.getSessionOfSubscribedUser(dbSub.getSubscribedUser("etay")));
+
         }
     }
 }

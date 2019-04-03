@@ -40,32 +40,57 @@ namespace workshop192.Domain.Tests
             if(db.getSubscribedUser("etay")==null)
                 Assert.Fail();
             s.logout();
-            Assert.AreEqual(null, db.getloggedInUser("etay"));
+            Assert.AreEqual("", db.getloggedInUser("etay"));
           
         }
 
         [TestMethod()]
         public void registerTest()
         {
-            Assert.Fail();
+            DBSubscribedUser db = DBSubscribedUser.getInstance();
+            db.initDB();
+            Session s = new Session();
+            s.register("etay", "etay");
+            Assert.AreNotEqual(db.getSubscribedUser("etay"), null);
+
         }
 
         [TestMethod()]
         public void getSubscribedUserTest()
         {
-            Assert.Fail();
+            DBSubscribedUser db = DBSubscribedUser.getInstance();
+            db.initDB();
+            Session s = new Session();
+            s.register("etay", "etay");
+            Assert.AreNotEqual(db.getSubscribedUser("etay"), null);
         }
 
         [TestMethod()]
         public void loginTest()
         {
-            Assert.Fail();
+            DBSubscribedUser db = DBSubscribedUser.getInstance();
+            db.initDB();
+            Session s = new Session();
+            s.register("etay", "etay");
+            s.login("etay", "etay");
+            Assert.AreEqual(db.getloggedInUser("etay"), "");
         }
 
         [TestMethod()]
         public void removeTest()
         {
-            Assert.Fail();
+            ////////////
+        }
+
+        [TestMethod()]
+        public void initTest()
+        {
+            DBSubscribedUser db = DBSubscribedUser.getInstance();
+            db.initDB();
+            Session s = new Session();
+            s.register("etay", "etay");
+            db.initDB();
+            Assert.AreEqual(db.getSubscribedUser("etay"), null);
         }
     }
 }
