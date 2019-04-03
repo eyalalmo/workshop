@@ -21,32 +21,39 @@ namespace workshop192.ServiceLayer
         {
 
         }
-
+        //use case 2.7
         public Dictionary<int, ShoppingCart> getShoppingCarts(Session user)
         {
             return user.getShoppingBasket().getShoppingCarts();
      
         }
 
-        public ShoppingCart getCart(Session user, String storeID)
+        public ShoppingCart getCart(Session user, Store store)
         {
-            return user.getShoppingBasket().getShoppingCart(storeID);
+            return user.getShoppingBasket().getShoppingCart(store.getStoreID);
+        }
+        //use case 2.6
+        public String addToCart(Session user, Store store,Product product,int amount)
+        {
+            return user.getShoppingBasket().getCart(store.getStoreID).addToCart(product, amount);
+        }
+        //use case 2.7
+        public String removeFromCart(Session user,Store store, Product product)
+        {
+             return user.getShoppingBasket().getCart(store.getStoreID).removeFromCart(product);
+        }
+        //use case 2.7
+        public String changeQuantity(Session user, Product product,Store store, int newAmount)
+        {
+            return user.getShoppingBasket().getCart(store.getStoreID).changeQuantityOfProduct(product,newAmount);
         }
 
-        public String addToCart(ShoppingCart cart,Product product,int amount)
-        {
-            return cart.addToCart(product, amount);
+        public String checkoutCart(Session user,Store store){
+            return user.getShoppingBasket().getCart(store.getStoreID).checkout();
         }
 
-        public String removeFromCart(ShoppingCart cart, Product product)
-        {
-            return cart.removeFromCart(product);
-        }
-
-        public String changeQuantity(ShoppingCart cart, Product product, int newAmount)
-        {
-            return cart.changeQuantityOfProduct(product,newAmount);
-        }
-
+        public String checkoutBasket(Session user){
+            return user.getShoppingBasket().checkout();
+        }                                               
     }
 }

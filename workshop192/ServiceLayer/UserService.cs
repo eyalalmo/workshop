@@ -9,8 +9,26 @@ namespace workshop192.ServiceLayer
 {
     class UserService
     {
-        public UserService() { }
+        private static userService instance;
 
+        public static userService getInstance() {
+            if (instance == null)
+                instance = new userService();
+            return instance;
+        }
+
+        private userService()
+        {
+
+        }
+
+        // use case 2.1 - the constructor defines guest as the default state
+        public Session startSession()
+        {
+            return new Session();
+        }
+
+        //use case 2.3
         public String login(Session user, String username, String password)
         {
             if (user == null)
@@ -19,6 +37,8 @@ namespace workshop192.ServiceLayer
             }
             return user.login(username, password);
         }
+
+        //use case 2.2
         public String register(Session user, String username, String password)
         {
             if (user == null)
@@ -60,8 +80,8 @@ namespace workshop192.ServiceLayer
             return user.getPurchaseHistory();
         }
 
-
-        public LinkedList<Product> getStoreProducts(int storeID) 
+        //use case 2.4
+        /*public LinkedList<Product> getStoreProducts(int storeID) 
         {
 
             Store s = DBStore.getInstance().getStore(storeID);
@@ -72,12 +92,12 @@ namespace workshop192.ServiceLayer
             }
             return s.getProductList();
         }
-
+        //use case 2.4
         public LinkedList<Product> getAllProducts()
         {
             return DBProduct.getInstance().getAllProducts();
-        }
-
+        }*/
+        //use case 2.5
         public LinkedList<Product> searchProducts(String name, String keywords, String category, int[] price_range,int minimumRank)
         {
             return DBProduct.searchProducts(name, keywords, category, price_range,minimumRank);
