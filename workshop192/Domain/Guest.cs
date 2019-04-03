@@ -23,14 +23,24 @@ namespace workshop192.Domain
             return "ERROR: not an admin";
         }
 
-        public String createStore(int id, String storeName, String description)
+        public string complain(string description, SubscribedUser subscribedUser)
         {
-            return "ERROR: not an admin";
+            return "ERROR: guest cannot complain";
+        }
+
+        public String createStore(String storeName, String description, SubscribedUser sub)
+        {
+            return "ERROR: not a subscribed user";
+        }
+
+        public String getComplaints()
+        {
+            return "ERROR: only an admin can getComplaints";
         }
 
         public string getPurchaseHistory(SubscribedUser sub)
         {
-            return "ERROR: not an admin";
+            return "ERROR: not a subscribed user";
         }
 
         public String login(String username, String password, Session session)

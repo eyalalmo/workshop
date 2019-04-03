@@ -15,9 +15,8 @@ namespace workshop192.Domain
         public LinkedList<Product> productList;
         public bool status;
 
-        public Store (int id, string storeName, string description)
+        public Store (string storeName, string description)
         {
-            this.storeID = id;
             this.storeName = storeName;
             this.description = description;
             productList = new LinkedList<Product>();

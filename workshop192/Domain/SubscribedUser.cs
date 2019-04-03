@@ -13,6 +13,7 @@ namespace workshop192.Domain
         private String password;
         private ShoppingBasket shoppingBasket;
         private String purchaseHistory;
+        private List<StoreRole> storeRoles;
 
         public SubscribedUser(String username, String password, ShoppingBasket shoppingBasket)
         {
@@ -20,6 +21,7 @@ namespace workshop192.Domain
             this.password = password;
             this.shoppingBasket = shoppingBasket;
             purchaseHistory = "";
+            storeRoles = new List<StoreRole>();
         }
 
         public String getPassword()
@@ -51,7 +53,48 @@ namespace workshop192.Domain
         {
             this.password = pass;
         }
+
+        public void addStoreRole(StoreRole role)
+        {
+            storeRoles.Add(role);
+        }
         
+        public void removeStoreRole(StoreRole role)
+        {
+            storeRoles.Remove(role);
+        }
+
+        public StoreRole getStoreRole(Store store)
+        {
+            foreach (StoreRole role in storeRoles)
+            {
+                if(role.getStore().Equals(store))
+                {
+                    return role;
+                }
+            }
+            return null;
+        }
+
+        public bool isOwnerIn(Store store)
+        {
+            foreach(StoreRole role in storeRoles)
+            {
+                if (role is StoreOwner)
+                    return true;
+            }
+            return false;
+        }
+
+        public bool isManagerIn(Store store)
+        {
+            foreach (StoreRole role in storeRoles)
+            {
+                if (role is StoreManager)
+                    return true;
+            }
+            return false;
+        }
 
     }
 }
