@@ -22,14 +22,6 @@ namespace workshop192.ServiceLayer
             return instance;
         }
 
-       // private int productID;
-       // private string productName;
-       // private string productCategory;
-       // private int price;
-       // private int rank;
-       // private int quantityLeft;
-       // private Discount discount;
-
         public string addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, Store store, Session session)
         {
             DBStore storeDB = DBStore.getInstance();
@@ -53,11 +45,6 @@ namespace workshop192.ServiceLayer
 
             return sr.removeProduct(product);
         }
-
-        public string editProduct(int storeID, int productID ,string productName, string productCategory, int price, int rank, int quantityLeft, Discount discount)
-        {
-            return "";
-        }
     
         private string checkProduct(string productName, string productCategory, int price, int rank, int quantityLeft)
         {
@@ -70,7 +57,7 @@ namespace workshop192.ServiceLayer
             if (quantityLeft < 0)
                 return "illeagal quantity";
 
-            return ""l
+            return "";
         }
     }
 }

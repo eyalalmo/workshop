@@ -28,14 +28,14 @@ namespace workshop192.Domain
             return dbComplaint.addComplaint(complaint);
         }
 
-        public string createStore(String storeName, String description, SubscribedUser sub)
+        public Store createStore(String storeName, String description, SubscribedUser sub)
         {
             Store store = new Store(storeName, description);
             StoreOwner owner = new StoreOwner(null, sub, store);
             store.addStoreRole(owner);
             sub.addStoreRole(owner);
             DBStore.getInstance().addStore(store);
-            return "";
+            return store;
         }
 
         public string getComplaints()
