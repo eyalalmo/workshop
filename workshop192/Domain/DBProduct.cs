@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    class DBProduct
+    public class DBProduct
     {
-        public static DBProduct  instance;
-        LinkedList<Product> productList;
-        int nextProductID;
+
+        private static DBProduct  instance;
+        private LinkedList<Product> productList;
+
+        public static int nextProductID;
 
         public static DBProduct getInstance()
         {
@@ -19,7 +21,7 @@ namespace workshop192.Domain
             return instance;
         }
 
-        public DBProduct()
+        private DBProduct()
         {
             productList = new LinkedList<Product>();
             nextProductID = 0;
@@ -30,7 +32,7 @@ namespace workshop192.Domain
             productList.AddFirst(p);
         }
 
-        public int getNextProductID()
+        public static int getNextProductID()
         {
             int id = nextProductID;
             nextProductID++;
@@ -50,7 +52,6 @@ namespace workshop192.Domain
                 if (p.getProductID() == id)
                     return p;
             }
-
             return null;
         }
         public LinkedList<Product> getAllProducts()

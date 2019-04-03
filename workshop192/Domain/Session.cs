@@ -1,4 +1,6 @@
 ﻿using System;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    class Session
+    public class Session
     {
         private SubscribedUser subscribedUser;
         private UserState userState;
@@ -17,6 +19,7 @@ namespace workshop192.Domain
             subscribedUser = null;
             userState = new Guest();
             shoppingBasket = new ShoppingBasket();
+            DBSession.getInstance().addSession(this);
         }
 
         public UserState getState()
@@ -44,6 +47,11 @@ namespace workshop192.Domain
             this.userState = state;
         }
 
+        public void setShoppingBasket(ShoppingBasket shoppingB)
+        {
+            this.shoppingBasket = shoppingB;
+        }
+
         public String login(String username, String password)
         {
             return userState.login(username, password, this);
@@ -51,12 +59,12 @@ namespace workshop192.Domain
   
         public String register(String username, String password)
         {
-            return userState.register(username, password);
+            return userState.register(username, password, this);
         }
 
         public String logout()
         {
-            return userState.logout(subscribedUser);
+            return userState.logout(subscribedUser,this);
         }
 
         public String getPurchaseHistory()
@@ -64,16 +72,16 @@ namespace workshop192.Domain
             return userState.getPurchaseHistory(subscribedUser);
         }
 
-        public String createStore()
+        public String createStore(int id, String storeName, String description)
         {
-            return userState.createStore();
+            return userState.createStore(id, storeName, description);
         }
 
         public String closeStore(int id)
         {
             return userState.closeStore(id);
         }
-
+        
         public String removeUser(String username)
         {
             return userState.removeUser(username);

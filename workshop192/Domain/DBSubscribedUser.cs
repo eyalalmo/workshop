@@ -7,21 +7,25 @@ using workshop192.Domain;
 
 namespace workshop192.Domain
 {
-    class DBSubscribedUser
+    public class DBSubscribedUser
     {
-        //-idחנויות. מוצרים-id. -nameמשתמשים
 
         Dictionary<string, SubscribedUser> users;
         Dictionary<string, SubscribedUser> loggedInUser;
         private static DBSubscribedUser instance = null;
 
-        public DBSubscribedUser()
+
+        
+        private DBSubscribedUser()
         {
             users = new Dictionary<string, SubscribedUser>();
             loggedInUser = new Dictionary<string, SubscribedUser>();
-
         }
 
+        public void initDB()
+        {
+            instance = new DBSubscribedUser();
+        }
 
         public static DBSubscribedUser getInstance()
         {
@@ -79,6 +83,13 @@ namespace workshop192.Domain
                 return " user isnt subscribe";
             }
             return "";
+        }
+        public SubscribedUser getloggedInUser(string name)
+        {
+            SubscribedUser user;
+            if (!users.TryGetValue(name, out user))
+                return null;
+            return user;
         }
     }
 }

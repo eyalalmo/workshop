@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    interface UserState
+    public interface UserState
     {
 
         String login(String username, String password, Session session);
         String register(String username, String password, Session session);
         String logout(SubscribedUser sub, Session session);
         String getPurchaseHistory(SubscribedUser sub);
-        String createStore(String storeName, String description);
+        String createStore(int id, String storeName, String description);
         String closeStore(int id);
         String removeUser(String username);
 

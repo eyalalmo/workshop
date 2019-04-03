@@ -31,23 +31,39 @@ namespace workshop192.ServiceLayer
         private int quantityLeft;
         private Discount discount;
 
-        public string addProduct(int storeID, string productName, string productCategory, int price, int rank, int quantityLeft, Discount discount)
+        public string addProduct(Session user, int storeID, string productName, string productCategory, int price, int rank, int quantityLeft, Discount discount)
         {
-            Store s = StoreDB.getStore(storeID);
+            Store s = DBStore.getInstance().getStore(storeID);
             if (s == null)
                 return "store not exist";
             string str = checkProduct(productName, productCategory, price, rank, quantityLeft);
             if (str != "")
                 return str;
-            int id = StoreDB.getNextProductId();
 
-            Product product = new Product(id, productName, productCategory, price, rank, quantityLeft);
-            string res = s.addProduct(product);
-            return res;
+
         }
-        public string removeProduct(int storeID,int productID ,string productName, string productCategory, int price, int rank, int quantityLeft, Discount discount)
+        public string addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, Store store, Session session)
         {
-            Store s = StoreDB.getStore(storeID);
+            DBStore storeDB = DBStore.getInstance();
+
+            string res = checkProduct(productName, productCategory, price, rank, quantityLeft);
+            if (res != "")
+                return res;
+            
+            Product product = new Product(productName, productCategory, price, rank, quantityLeft, store);
+            
+            StoreRole sr = storeDB.getStoreRole(store, session.getSubscribedUser());
+
+            res = sr.addProduct(product);
+
+            return res;
+
+        }
+
+        public string removeProduct(Product product, Session session)
+        {
+
+            Store s = DBStore.getInstance().getStore(storeID);
             if (s == null)
                 return "store not exist";
             string str = checkProduct(productName, productCategory, price, rank, quantityLeft);
@@ -55,13 +71,18 @@ namespace workshop192.ServiceLayer
                 return str;
            
 
-            Product product = new Product(productID, productName, productCategory, price, rank, quantityLeft);
-            string res = s.removeProduct(product);
-            return res;
+            SubscribedUser user = session.getSubscribedUser();
+
+
+            DBStore storeDB = DBStore.getInstance();
+            StoreRole sr = storeDB.getStoreRole(store, user);
+
+            return sr.removeProduct(product);
         }
+
         public string editProduct(int storeID, int productID ,string productName, string productCategory, int price, int rank, int quantityLeft, Discount discount)
         {
-            Store s = StoreDB.getStore(storeID);
+            Store s = DBStore.getInstance().getStore(storeID);
             if (s == null)
                 return "store not exist";
             string str = checkProduct(productName, productCategory, price, rank, quantityLeft);

@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace workshop192.Domain
+
+
 {
-    class DBStore
+    public class DBStore
     {
-        public static DBStore instance;
+        private static DBStore instance;
         private LinkedList<Store> stores;
         private LinkedList<StoreRole> storeRole;
         private static int nextStoreID;
@@ -110,6 +112,16 @@ namespace workshop192.Domain
             int id = nextStoreID;
             nextStoreID++;
             return id;
+        }
+
+        //if owner close store, if manager removes store role
+        public String removeStoreByUser(SubscribedUser user)
+        {
+            foreach (StoreRole sr in storeRole)
+                if ((sr.getUser()).getUsername() == user.getUsername())
+                {
+                    storeRole.Remove(sr);
+                }
         }
     }
 }

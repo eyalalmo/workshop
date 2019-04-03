@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    class LotteryPurchase
+    public class LotteryPurchase
     {
     }
 }
