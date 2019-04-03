@@ -69,19 +69,19 @@ namespace workshop192.Domain
             return userState.getPurchaseHistory(subscribedUser);
         }
 
-        public String createStore(int id, String storeName, String description, SubscribedUser sub)
+        public String createStore(String storeName, String description, SubscribedUser sub)
         {
-            return userState.createStore(id, storeName, description, sub);
+            return userState.createStore(storeName, description, sub);
         }
 
-        public String closeStore(int id)
+        public String closeStore(Store store)
         {
-            return userState.closeStore(id);
+            return userState.closeStore(store);
         }
 
-        public String removeUser(String username)
+        public String removeUser(SubscribedUser subscribedUser)
         {
-            return userState.removeUser(username);
+            return userState.removeUser(subscribedUser);
         }
 
         public String complain(String description, SubscribedUser subscribedUser)

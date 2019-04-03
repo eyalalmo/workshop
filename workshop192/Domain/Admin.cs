@@ -96,6 +96,13 @@ namespace workshop192.Domain
             foreach (StoreRole role in subscribedUser.getStoreRoles())
             {
                 role.removeAllAppointedBy();
+                Store store = role.getStore();
+                SubscribedUser appointedBySubscribedUser = role.getAppointedBy();
+                if (appointedBySubscribedUser != null)
+                {
+                    StoreRole appointedByStoreRole = store.getStoreRole(role.getAppointedBy());
+                    appointedByStoreRole.remove(subscribedUser);
+                }
                 if (role is StoreOwner && role.getStore().getNumberOfOwners() == 1)
                 {
                     closeStore(role.getStore());
@@ -105,6 +112,7 @@ namespace workshop192.Domain
                     role.getStore().removeStoreRole(role);
                 }
             }
+            return dbSubscribedUser.remove(subscribedUser);
         }
 
 

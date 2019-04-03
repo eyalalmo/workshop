@@ -75,26 +75,5 @@ namespace workshop192.Domain
             }
             return null;
         }
-
-        public bool isOwnerIn(Store store)
-        {
-            foreach(StoreRole role in storeRoles)
-            {
-                if (role is StoreOwner)
-                    return true;
-            }
-            return false;
-        }
-
-        public bool isManagerIn(Store store)
-        {
-            foreach (StoreRole role in storeRoles)
-            {
-                if (role is StoreManager)
-                    return true;
-            }
-            return false;
-        }
-
     }
 }

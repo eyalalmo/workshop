@@ -18,7 +18,7 @@ namespace workshop192.Domain
             dbSubscribedUser = DBSubscribedUser.getInstance();
         }
 
-        public string closeStore(int id)
+        public string closeStore(Store store)
         {
             return "ERROR: not an admin";
         }
@@ -77,7 +77,7 @@ namespace workshop192.Domain
             return DBSubscribedUser.getInstance().register(sub);
         }
 
-        public string removeUser(string username)
+        public string removeUser(SubscribedUser subscribedUser)
         {
             return "ERROR: not an admin";
         }

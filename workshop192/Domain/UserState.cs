@@ -14,8 +14,8 @@ namespace workshop192.Domain
         String logout(SubscribedUser sub, Session session);
         String getPurchaseHistory(SubscribedUser sub);
         String createStore(String storeName, String description, SubscribedUser sub);
-        String closeStore(int id);
-        String removeUser(String username);
+        String closeStore(Store store);
+        String removeUser(SubscribedUser subscribedUser);
         String complain(String description, SubscribedUser subscribedUser);
         String getComplaints();
 
