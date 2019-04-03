@@ -58,7 +58,7 @@ namespace workshop192.Domain
             return productList;
         }
 
-        public LinkedList<Product> searchProducts(string name, string keywords, string category, int[] price_range, int minimumRank)
+        public static LinkedList<Product> searchProducts(string name, string keywords, string category, int[] price_range, int minimumRank)
         {
             LinkedList<Product> res = new LinkedList<Product>();
             foreach(Product p in productList)

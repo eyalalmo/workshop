@@ -30,26 +30,26 @@ namespace workshop192.ServiceLayer
 
         public ShoppingCart getCart(Session user, Store store)
         {
-            return user.getShoppingBasket().getShoppingCart(store.getStoreID);
+            return user.getShoppingBasket().getShoppingCartByID(store.getStoreID());
         }
         //use case 2.6
         public String addToCart(Session user, Store store,Product product,int amount)
         {
-            return user.getShoppingBasket().getCart(store.getStoreID).addToCart(product, amount);
+            return user.getShoppingBasket().getShoppingCartByID(store.getStoreID()).addToCart(product, amount);
         }
         //use case 2.7
         public String removeFromCart(Session user,Store store, Product product)
         {
-             return user.getShoppingBasket().getCart(store.getStoreID).removeFromCart(product);
+             return user.getShoppingBasket().getShoppingCartByID(store.getStoreID()).removeFromCart(product);
         }
         //use case 2.7
         public String changeQuantity(Session user, Product product,Store store, int newAmount)
         {
-            return user.getShoppingBasket().getCart(store.getStoreID).changeQuantityOfProduct(product,newAmount);
+            return user.getShoppingBasket().getShoppingCartByID(store.getStoreID()).changeQuantityOfProduct(product,newAmount);
         }
 
         public String checkoutCart(Session user,Store store){
-            return user.getShoppingBasket().getCart(store.getStoreID).checkout();
+            return user.getShoppingBasket().getShoppingCartByID(store.getStoreID()).checkout();
         }
 
         public String checkoutBasket(Session user){

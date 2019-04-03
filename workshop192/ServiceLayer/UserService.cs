@@ -9,15 +9,15 @@ namespace workshop192.ServiceLayer
 {
     class UserService
     {
-        private static userService instance;
+        private static UserService instance;
 
-        public static userService getInstance() {
+        public static UserService getInstance() {
             if (instance == null)
-                instance = new userService();
+                instance = new UserService();
             return instance;
         }
 
-        private userService()
+        private UserService()
         {
 
         }

@@ -13,6 +13,8 @@ namespace workshop192.Domain
         private string description;
         private LinkedList<Product> productList;
         private bool status;
+        private List<StoreRole> roles;
+        private int numOfOwners;
         
 
         public Store (string storeName, string description)
@@ -21,7 +23,9 @@ namespace workshop192.Domain
             this.storeName = storeName;
             this.description = description;
             productList = new LinkedList<Product>();
+            roles = new List<StoreRole>();
             status = true;
+            numOfOwners = 0;
         }
 
         public void addProduct(Product p)
@@ -90,7 +94,24 @@ namespace workshop192.Domain
         {
             this.description = description;
         }
+
+        public void addStoreRole(StoreRole toAdd){
+            if (toAdd is StoreOwner)
+            {
+                numOfOwners++;
+            }
+            roles.Add(toAdd);
+        }
+
+        public int getNumberOfOwners()
+        {
+            return numOfOwners;
+        }
         
+        public List<StoreRole> getRoles()
+        {
+            return roles;
+        }
 
         
 

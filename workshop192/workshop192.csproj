@@ -56,6 +56,7 @@
     <Compile Include="Domain\LotteryPurchase.cs" />
     <Compile Include="Domain\Product.cs" />
     <Compile Include="Domain\PublicPurchase.cs" />
+    <Compile Include="Domain\Purchase.cs" />
     <Compile Include="Domain\PurchasePolicy.cs" />
     <Compile Include="Domain\PurchaseType.cs" />
     <Compile Include="Domain\Session.cs" />
