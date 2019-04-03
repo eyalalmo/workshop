@@ -23,12 +23,12 @@ namespace workshop192.Domain
         }
         public string closeStore(Store store)
         {
-           // List<StoreRole> roles = store.getRoles();
-           /* foreach(StoreRole role in roles)
+            List<StoreRole> roles = store.getRoles();
+            foreach(StoreRole role in roles)
             {
                 SubscribedUser sub = role.getUser();
                 sub.removeStoreRole(role);
-            }*/
+            }
             return dbStore.removeStore(store);
             
         }
@@ -80,8 +80,9 @@ namespace workshop192.Domain
             return "ERROR: User already registered";
         }
 
-        public String removeUser(SubscribedUser subscribedUser)
+        public String removeUser(String user)
         {
+            SubscribedUser subscribedUser = DBSubscribedUser.getInstance().getSubscribedUser(user);
             Session session = dbSession.getSessionOfSubscribedUser(subscribedUser);
             if (session != null)
             {
@@ -93,7 +94,7 @@ namespace workshop192.Domain
 
                 }
             }
-           /* foreach (StoreRole role in subscribedUser.getStoreRoles())
+            foreach (StoreRole role in subscribedUser.getStoreRoles())
             {
                 role.removeAllAppointedBy();
                 Store store = role.getStore();
@@ -111,8 +112,10 @@ namespace workshop192.Domain
                 {
                     role.getStore().removeStoreRole(role);
                 }
-            }*/
+            }
+
             return dbSubscribedUser.remove(subscribedUser);
+
         }
 
 

@@ -54,6 +54,7 @@ namespace workshop192.Domain
             if (Equals(username, "admin"))
             {
                 session.setState(new Admin());
+
             }
             else
             {
@@ -75,13 +76,14 @@ namespace workshop192.Domain
                 return "ERROR: username already exists";
             SubscribedUser sub = new SubscribedUser(username, password, session.getShoppingBasket());
             return DBSubscribedUser.getInstance().register(sub);
-        }
+            }
 
-        public string removeUser(SubscribedUser subscribedUser)
+        public string removeUser(String user)
         {
             return "ERROR: not an admin";
         }
-
     }
 }
+
+
 

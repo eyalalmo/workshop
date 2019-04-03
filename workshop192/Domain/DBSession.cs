@@ -48,5 +48,15 @@ namespace workshop192.Domain
             }
             return null;
         }
+        public String getSession(Session s)
+        {
+            if (sessions.Contains(s))
+                return "";
+            return "error: session isnt added";
+        }
+        public void initSession()
+        {
+            sessions = new LinkedList<Session>();
+        }
     }
 }

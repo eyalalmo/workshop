@@ -14,49 +14,52 @@ namespace workshop192.Domain.Tests
         [TestMethod()]
         public void AdminTest()
         {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void closeStoreTest()
-        {
-            Assert.Fail();
+            
         }
 
         [TestMethod()]
         public void createStoreTest()
         {
-            Assert.Fail();
+         /////////////////////////////// dont need
+
         }
+
+        [TestMethod()]
+        public void closeStoreTest()
+        {
+           ///////////////////////////////// dont need
+        }
+
+        
 
         [TestMethod()]
         public void getPurchaseHistoryTest()
         {
-            Assert.Fail();
+            /////////////
         }
 
         [TestMethod()]
         public void loginTest()
         {
-            Assert.Fail();
+            /////////////////
         }
 
         [TestMethod()]
         public void logoutTest()
         {
-            Assert.Fail();
+            /////////////////
         }
 
         [TestMethod()]
         public void registerTest()
         {
-            Assert.Fail();
+            ///////////////////////////
         }
 
         [TestMethod()]
         public void removeUserTest()
         {
-            Assert.Fail();
+            ///////////////
         }
     }
 }

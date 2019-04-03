@@ -17,6 +17,7 @@ namespace workshop192.Domain
             subscribedUser = null;
             userState = new Guest();
             shoppingBasket = new ShoppingBasket();
+            DBSession.getInstance().addSession(this);
         }
 
         public UserState getState()
@@ -79,9 +80,9 @@ namespace workshop192.Domain
             return userState.closeStore(store);
         }
 
-        public String removeUser(SubscribedUser subscribedUser)
+        public String removeUser(String user)
         {
-            return userState.removeUser(subscribedUser);
+            return userState.removeUser(user);
         }
 
         public String complain(String description, SubscribedUser subscribedUser)

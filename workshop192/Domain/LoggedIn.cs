@@ -34,7 +34,7 @@ namespace workshop192.Domain
             StoreOwner owner = new StoreOwner(null, sub, store);
             store.addStoreRole(owner);
             sub.addStoreRole(owner);
-            dbStore.addStore(store);
+            DBStore.getInstance().addStore(store);
             return "";
         }
 
@@ -70,7 +70,7 @@ namespace workshop192.Domain
             return "ERROR: User already registered";
         }
 
-        public string removeUser(SubscribedUser subscribedUser)
+        public string removeUser(String user)
         {
             return "ERROR: not an admin";
         }

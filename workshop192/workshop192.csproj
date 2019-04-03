@@ -47,15 +47,19 @@
     <Compile Include="Domain\Complaint.cs" />
     <Compile Include="Domain\DBComplaint.cs" />
     <Compile Include="Domain\DBProduct.cs" />
-    <Compile Include="Domain\DBStore.cs" />
-    <Compile Include="Domain\DBSubscribedUser.cs" />
+
     <Compile Include="Domain\DBSession.cs" />
+    <Compile Include="Domain\DBSubscribedUser.cs" />
+    <Compile Include="Domain\DeliveryService.cs" />
+
+
     <Compile Include="Domain\Discount.cs" />
     <Compile Include="Domain\Guest.cs" />
     <Compile Include="Domain\InstantPurchase.cs" />
     <Compile Include="Domain\InvisibleDiscount.cs" />
     <Compile Include="Domain\LoggedIn.cs" />
     <Compile Include="Domain\LotteryPurchase.cs" />
+    <Compile Include="Domain\PaymentService.cs" />
     <Compile Include="Domain\Product.cs" />
     <Compile Include="Domain\PublicPurchase.cs" />
     <Compile Include="Domain\PurchasePolicy.cs" />
@@ -64,6 +68,10 @@
     <Compile Include="Domain\ShoppingBasket.cs" />
     <Compile Include="Domain\ShoppingCart.cs" />
     <Compile Include="Domain\Store.cs" />
+
+    <Compile Include="Domain\DBStore.cs" />
+
+
     <Compile Include="Domain\StoreManager.cs" />
     <Compile Include="Domain\StoreOwner.cs" />
     <Compile Include="Domain\StoreRole.cs" />
@@ -75,8 +83,7 @@
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceLayer\CartService.cs" />
-    <Compile Include="ServiceLayer\OrdersService.cs" />
+    <Compile Include="ServiceLayer\BasketService.cs" />
     <Compile Include="ServiceLayer\StoreService.cs" />
     <Compile Include="ServiceLayer\UserService.cs" />
   </ItemGroup>
