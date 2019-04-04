@@ -63,7 +63,6 @@
     <Compile Include="Domain\DBSubscribedUserTests.cs" />
     <Compile Include="Domain\GuestTests.cs" />
     <Compile Include="Domain\LoggedInTests.cs" />
-    <Compile Include="Domain\ProductTests.cs" />
     <Compile Include="Domain\SessionTests.cs" />
     <Compile Include="Domain\StoreManagerTests.cs" />
     <Compile Include="Domain\StoreOwnerTests.cs" />
