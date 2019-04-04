@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace workshop192.ServiceLayer
 {
-    class BasketService
+    public class BasketService
     {
         private static BasketService instance;
 
@@ -35,6 +35,11 @@ namespace workshop192.ServiceLayer
         //use case 2.6
         public String addToCart(Session user, Store store,Product product,int amount)
         {
+            if (amount <= 0)
+            {
+                return "ERROR: quantity should be a positive number";
+            }
+
             return user.getShoppingBasket().getShoppingCartByID(store.getStoreID()).addToCart(product, amount);
         }
         //use case 2.7
@@ -45,15 +50,21 @@ namespace workshop192.ServiceLayer
         //use case 2.7
         public String changeQuantity(Session user, Product product,Store store, int newAmount)
         {
+            if (newAmount <= 0)
+            {
+                return "ERROR: quantity should be a positive number";
+            }
+
             return user.getShoppingBasket().getShoppingCartByID(store.getStoreID()).changeQuantityOfProduct(product,newAmount);
         }
 
-        public String checkoutCart(Session user,Store store){
-            return user.getShoppingBasket().getShoppingCartByID(store.getStoreID()).checkout();
+        public String checkoutCart(Session user,Store store,String address,String creditCard){
+            return user.getShoppingBasket().getShoppingCartByID(store.getStoreID()).checkout(address,creditCard);
         }
 
-        public String checkoutBasket(Session user){
-            return user.getShoppingBasket().checkout();
+        public String checkoutBasket(Session user, String address, String creditCard)
+        {
+            return user.getShoppingBasket().checkout(address, creditCard);
         }                                               
     }
 }

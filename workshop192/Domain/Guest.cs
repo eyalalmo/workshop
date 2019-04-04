@@ -45,10 +45,11 @@ namespace workshop192.Domain
 
         public String login(String username, String password, Session session)
         {
+            String encrypted = DBSubscribedUser.getInstance().encryptPassword(password);
             SubscribedUser sub = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (sub == null)
                 return "ERROR: username does not exist";
-            if(!Equals(sub.getPassword(), password))
+            if(!Equals(sub.getPassword(), encrypted))
                 return "ERROR: password incorrect";
             session.setSubscribedUser(sub);
             if (Equals(username, "admin"))
@@ -71,10 +72,11 @@ namespace workshop192.Domain
 
         public string register(string username, string password, Session session)
         {
+            String encrypted = DBSubscribedUser.getInstance().encryptPassword(password);
             SubscribedUser s = dbSubscribedUser.getSubscribedUser(username);
             if (s != null)
                 return "ERROR: username already exists";
-            SubscribedUser sub = new SubscribedUser(username, password, session.getShoppingBasket());
+            SubscribedUser sub = new SubscribedUser(username, encrypted, session.getShoppingBasket());
             return DBSubscribedUser.getInstance().register(sub);
             }
 

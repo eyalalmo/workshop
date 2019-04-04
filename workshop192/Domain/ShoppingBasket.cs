@@ -19,6 +19,18 @@ namespace workshop192.Domain
         {
             return this.shoppingCarts;
         }
+
+
+        public int totalAmount()
+        {
+            int sum = 0;
+            foreach (ShoppingCart sc in shoppingCarts.Values)
+            {
+                sum += sc.totalAmount();
+            }
+            return sum;
+
+        }
         public void addToCart(Product product, int amount)
         {
             int storeID = product.getStore().getStoreID();
@@ -36,12 +48,12 @@ namespace workshop192.Domain
                 sc.addToCart(product, amount);
             }
         }
-        public String checkout (){
+        public String checkout (String address,String creditCard){
             // return the result of the proccess by order of cart
             String output = "";
             foreach (ShoppingCart sc in shoppingCarts.Values)
             {
-                output += sc.checkout();
+                output += sc.checkout(address,creditCard);
             }
             return output;
         }

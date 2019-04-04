@@ -7,7 +7,7 @@ using workshop192.Domain;
 
 namespace workshop192.ServiceLayer
 {
-    class UserService
+   public  class UserService
     {
         private static UserService instance;
 
