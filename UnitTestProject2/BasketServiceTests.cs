@@ -12,23 +12,35 @@ namespace workshop192.ServiceLayer.Tests
     [TestClass()]
     public class BasketServiceTests
     {
+        BasketService basketService;
+        UserService userService;
+        StoreService storeService;
+        Session session2;
+        Store store1;
+        Store store2;
+       
+        Product p1;
+        Product p2;
+        Product p3;
+        Product p4;
+        Product p5;
+
+        [TestInitialize()]
+        public void initial()
+        {
+            basketService = BasketService.getInstance();
+
+            userService = UserService.getInstance();
+            storeService = StoreService.getInstance();
+            
+            
+        }
 
         //2.6
         [TestMethod()]
         public void addToCartTest()
         {
-            UserService userService = UserService.getInstance();
-            StoreService storeService = StoreService.getInstance();
-            Session session = userService.startSession();
-            Store store1 = storeService.addStore("zebra", "Clothes", session);
-            Store store2 = storeService.addStore("iFix", "Technology", session);
-           
-            storeService.addProduct("dress", "clothing", 20, 5, 3, store1, session);
-            storeService.addProduct("coat", "clothing", 100, 2, 4, store1, session);
-            storeService.addProduct("hat", "clothing", 200, 3, 2, store1, session);
-            storeService.addProduct("iPhone XS", "Technology", 120, 1, 2, store2, session);
-            storeService.addProduct("galaxy X", "Technology", 110, 4, 0, store2, session);
-
+            /*
             LinkedList<Product> products1 = store1.getProductList();
             Product p1 = products1.ElementAt(0);
             Product p2 = products1.ElementAt(1);
@@ -38,21 +50,33 @@ namespace workshop192.ServiceLayer.Tests
             Product p4 = products2.ElementAt(0);
             Product p5 = products2.ElementAt(1);
 
-
-            BasketService basketService = BasketService.getInstance();
-
             p1.setQuantityLeft(2);
             p2.setQuantityLeft(0);
             p3.setQuantityLeft(10);
 
             p4.setQuantityLeft(2);
             p5.setQuantityLeft(1);
-            string s1= basketService.addToCart(session, store1, p1, 1); //ok
-            string s2 = basketService.addToCart(session, store1, p2, 2); // should not succesed 
-            string s3 = basketService.addToCart(session, store1, p3, 5); //ok
 
-            string s4 = basketService.addToCart(session, store2, p4, 3); // should not succesed 
-            string s5 = basketService.addToCart(session, store2, p5, 5); //ok
+            */
+            UserService user = UserService.getInstance();
+            Session session1 = userService.startSession();
+            user.register(session1, "user", "user");
+            user.login(session1, "user", "user");
+
+            store1 = storeService.addStore("zebra", "Clothes", session1);
+            store2 = storeService.addStore("iFix", "Technology", session1);
+            p1 = new Product("dress", "clothing", 20, 5, 2, store1);
+            p2 = new Product("coat", "clothing", 100, 2, 0, store1);
+            p3 = new Product("hat", "clothing", 200, 3, 10, store1);
+            p4 = new Product("iPhone XS", "Technology", 120, 1, 2, store2);
+            p5 = new Product("galaxy X", "Technology", 110, 4, 1, store2);
+
+            string s1 = basketService.addToCart(session1, store1, p1, 1); //ok
+            string s2 = basketService.addToCart(session1, store1, p2, 2); // should not succesed 
+            string s3 = basketService.addToCart(session1, store1, p3, 5); //ok
+
+            string s4 = basketService.addToCart(session1, store2, p4, 3); // should not succesed 
+            string s5 = basketService.addToCart(session1, store2, p5, 5); //ok
 
             Assert.Equals("", s1);
             Assert.AreNotEqual("", s2);
@@ -60,20 +84,20 @@ namespace workshop192.ServiceLayer.Tests
 
             Assert.AreNotEqual("", s4);
             Assert.Equals("", s5);
-            
-          /*  ShoppingCart shoppingCart1 = session.getShoppingBasket().getShoppingCartByID(store1.getStoreID());
-            ShoppingCart shoppingCart2 = session.getShoppingBasket().getShoppingCartByID(store2.getStoreID());
 
-            Dictionary<Product, int> productsInSC1 = shoppingCart1.getProductsInCarts();
-            Dictionary<Product, int> productsInSC2 = shoppingCart2.getProductsInCarts();
+            /*  ShoppingCart shoppingCart1 =
+              ShoppingCart shoppingCart2 = session.getShoppingBasket().getShoppingCartByID(store2.getStoreID());
 
-            Assert.AreEqual(true, productsInSC1.ContainsKey(p1));
-            Assert.AreEqual(false, productsInSC1.ContainsKey(p2));
-            Assert.AreEqual(true, productsInSC1.ContainsKey(p3));
+              Dictionary<Product, int> productsInSC1 = shoppingCart1.getProductsInCarts();
+              Dictionary<Product, int> productsInSC2 = shoppingCart2.getProductsInCarts();
 
-            Assert.AreEqual(false, productsInSC2.ContainsKey(p4));
-            Assert.AreEqual(true, productsInSC2.ContainsKey(p5));
-            */
+              Assert.AreEqual(true, productsInSC1.ContainsKey(p1));
+              Assert.AreEqual(false, productsInSC1.ContainsKey(p2));
+              Assert.AreEqual(true, productsInSC1.ContainsKey(p3));
+
+              Assert.AreEqual(false, productsInSC2.ContainsKey(p4));
+              Assert.AreEqual(true, productsInSC2.ContainsKey(p5));
+              */
 
 
 
@@ -82,25 +106,50 @@ namespace workshop192.ServiceLayer.Tests
         [TestMethod()]
         public void watchShoppingBasket()
         {
-            UserService userService = UserService.getInstance();
-            StoreService storeService = StoreService.getInstance();
-            Session session = userService.startSession();
-            Store store1 = storeService.addStore("zara", "Clothes", session);
-            Store store2 = storeService.addStore("bikeMe", "BikeStore", session);
+            UserService user = UserService.getInstance();
+            session2 = userService.startSession();
+            user.register(session2, "user2", "user2");
+            user.login(session2, "user2", "user2");
 
-            storeService.addProduct("dress", "clothing", 20, 5, 3, store1, session);
-            storeService.addProduct("coat", "clothing", 100, 2, 4, store1, session);
-            storeService.addProduct("hat", "clothing", 200, 3, 2, store1, session);
-            storeService.addProduct("scooter", "vehicle", 120, 1, 2, store2, session);
-            storeService.addProduct("Bicycle", "vehicle", 110, 4, 0, store2, session);
 
-            BasketService basketService = BasketService.getInstance();
+            Store store3 = storeService.addStore("zara", "Clothes", session2);
+            Store store4 = storeService.addStore("bikeMe", "BikeStore", session2);
 
-            ShoppingCart shoppingCart1 = basketService.getCart(session, store1);
+            Product p6 = new Product("dress", "clothing", 20, 5, 1, store3);
+            Product p7 = new Product("coat", "clothing", 100, 2, 2, store3);
+            Product p8 = new Product("hat", "clothing", 200, 3, 3, store3);
+            Product p9 = new Product("scooter", "vehicle", 120, 1, 7, store4);
+            Product p10 = new Product("Bicycle", "vehicle", 110, 4, 9, store4);
+            string s1 = basketService.addToCart(session2, store3, p6, 1);
+            string s2 = basketService.addToCart(session2, store3, p7, 2);
+            string s3 = basketService.addToCart(session2, store3, p8, 2);
+            string s4 = basketService.addToCart(session2, store4, p9, 3);
+            string s5 = basketService.addToCart(session2, store4, p10, 5);
+
+            string s7 = basketService.removeFromCart(session2, store3, p6);
+            Assert.AreEqual("", s7);
+
+            string s8 = basketService.changeQuantity(session2, p7, store3, 1);
+            Assert.AreEqual("", s7);
+
+            string s9 = basketService.changeQuantity(session2, p8, store3, 9);
+            Assert.AreNotEqual("", s9);
+
+
+
+            string s10 = basketService.changeQuantity(session2, p9, store4, 3);
+            Assert.AreEqual("", s10);
+
+            string s11 = basketService.changeQuantity(session2, p10, store4, 20);
+            Assert.AreNotEqual("", s11);
+
+            string s12 = basketService.removeFromCart(session2, store4, p9);
+            Assert.AreEqual("", s12);
+
 
 
 
         }
 
     }
-    }
+}
