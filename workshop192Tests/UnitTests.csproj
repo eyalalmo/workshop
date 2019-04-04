@@ -67,6 +67,7 @@
     <Compile Include="Domain\SessionTests.cs" />
     <Compile Include="Domain\ShoppingBasketTests.cs" />
     <Compile Include="Domain\ShoppingCartTests.cs" />
+    <Compile Include="Domain\StoreManagerTests.cs" />
     <Compile Include="Domain\StoreOwnerTests.cs" />
     <Compile Include="Domain\StoreTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
