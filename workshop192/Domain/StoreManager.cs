@@ -9,10 +9,10 @@ namespace workshop192.Domain
         private SubscribedUser appointedBy;
         private Store store;
         private SubscribedUser user;
-        private Dictionary<string, bool> permissions;
+        private Permissions permissions;
 
         public StoreManager(SubscribedUser appointedBy, Store store,
-            SubscribedUser user, Dictionary<string, bool> permissions)
+            SubscribedUser user, Permissions permissions)
         {
             this.appointedBy = appointedBy;
             this.store = store;
@@ -20,7 +20,7 @@ namespace workshop192.Domain
             this.permissions = permissions;
         }
 
-        public string addManager(SubscribedUser manager, Dictionary<string, bool> permissions)
+        public string addManager(SubscribedUser manager, Permissions permissions)
         {
             return user.getUsername() + " is not allowed to add manager to " + store.getStoreName();
         }
@@ -37,7 +37,7 @@ namespace workshop192.Domain
 
         public string addProduct(Product product)
         {
-            if (!permissions["addProduct"])
+            if (!permissions.editProduct())
                 return user.getUsername() + " has no permission to add products in store " + store.getStoreName();
             store.addProduct(product);
             return "";
@@ -45,7 +45,7 @@ namespace workshop192.Domain
 
         public string removeProduct(Product product)
         {
-            if (!permissions["removeProduct"])
+            if (!permissions.editProduct())
                 return user.getUsername() + " has no permission to remove products in store " + store.getStoreName();
             //if (!store.productExists(product))
             //    return "product doesn't exsits";
@@ -55,7 +55,7 @@ namespace workshop192.Domain
 
         public string setProductPrice(Product product, int price)
         {
-            if (!permissions["setProductPrice"])
+            if (!permissions.editProduct())
                 return user.getUsername() + " has no permission to set product's price in store " + store.getStoreName();
             product.setPrice(price);
             return "";
@@ -63,7 +63,7 @@ namespace workshop192.Domain
 
         public string setProductName(Product product, string name)
         {
-            if (!permissions["setProductName"])
+            if (!permissions.editProduct())
                 return user.getUsername() + " has no permission to set product's name in store " + store.getStoreName();
             product.setProductName(name);
             return "";
@@ -71,7 +71,7 @@ namespace workshop192.Domain
 
         public string addToProductQuantity(Product product, int amount)
         {
-            if (!permissions["addToProductQuantity"])
+            if (!permissions.editProduct())
                 return user.getUsername() + " has no permission to add to product's quantity in store " + store.getStoreName();
             product.addQuantityLeft(amount);
             return "";
@@ -79,7 +79,7 @@ namespace workshop192.Domain
 
         public string decFromProductQuantity(Product product, int amount)
         {
-            if (!permissions["decFromProductQuantity"])
+            if (!permissions.editProduct())
                 return user.getUsername() + " has no permission to decrease from product's quantity in store " + store.getStoreName();
             int curQuan = product.getQuantityLeft();
             if (curQuan < amount)
@@ -90,7 +90,7 @@ namespace workshop192.Domain
 
         public string setProductDiscount(Product product, Discount discount)
         {
-            if (!permissions["setProductDiscount"])
+            if (!permissions.editDiscount())
                 return user.getUsername() + " has no permission to set product's discount in store " + store.getStoreName();
             //product.setDiscount(discount);
             return "";
