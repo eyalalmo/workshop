@@ -117,6 +117,8 @@ namespace workshop192.ServiceLayer.Tests
             //user does not exist anymore, login fails
             Assert.AreNotEqual(user.login(session2, "admin", "1234"), "");
 
+            ////////////////////////////////////////
+
         }
     }
 }
