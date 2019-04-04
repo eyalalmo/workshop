@@ -65,11 +65,11 @@ namespace workshop192.ServiceLayer.Tests
 
             store1 = storeService.addStore("zebra", "Clothes", session1);
             store2 = storeService.addStore("iFix", "Technology", session1);
-            p1 = new Product("dress", "clothing", 20, 5, 2, store1);
-            p2 = new Product("coat", "clothing", 100, 2, 0, store1);
-            p3 = new Product("hat", "clothing", 200, 3, 10, store1);
-            p4 = new Product("iPhone XS", "Technology", 120, 1, 2, store2);
-            p5 = new Product("galaxy X", "Technology", 110, 4, 1, store2);
+            p1 = storeService.addProduct("dress", "clothing", 20, 5, 2, store1);
+            p2 = storeService.addProduct("coat", "clothing", 100, 2, 0, store1);
+            p3 = storeService.addProduct("hat", "clothing", 200, 3, 10, store1);
+            p4 = storeService.addProduct("iPhone XS", "Technology", 120, 1, 2, store2);
+            p5 = storeService.addProduct("galaxy X", "Technology", 110, 4, 1, store2);
 
             string s1 = basketService.addToCart(session1, store1, p1, 1); //ok
             string s2 = basketService.addToCart(session1, store1, p2, 2); // should not succesed 
