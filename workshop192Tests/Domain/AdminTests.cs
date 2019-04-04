@@ -20,14 +20,14 @@ namespace workshop192.Domain.Tests
         [TestMethod()]
         public void createStoreTest()
         {
-         /////////////////////////////// dont need
-
+            UserState state = new Admin();
+            Assert.IsNull(state.createStore("ToyRUs", "lots of toys", null));
         }
 
         [TestMethod()]
         public void closeStoreTest()
         {
-           ///////////////////////////////// dont need
+            Assert.Fail();
         }
 
         
@@ -35,31 +35,35 @@ namespace workshop192.Domain.Tests
         [TestMethod()]
         public void getPurchaseHistoryTest()
         {
-            /////////////
+            UserState state = new Admin();
+            Assert.IsTrue(Equals(state.getPurchaseHistory(null), "ERROR: No purchase history in Admin"));
+            
         }
 
         [TestMethod()]
         public void loginTest()
         {
-            /////////////////
+            UserState state = new Admin();
+            Assert.IsTrue(Equals(state.login("shalom", "1111", null), "ERROR: User already logged in"));
         }
 
         [TestMethod()]
         public void logoutTest()
         {
-            /////////////////
+            
         }
 
         [TestMethod()]
         public void registerTest()
         {
-            ///////////////////////////
+            UserState state = new Admin();
+            Assert.IsTrue(Equals(state.register("shalom", "1111", null), "ERROR: User already registered"));
         }
 
         [TestMethod()]
         public void removeUserTest()
         {
-            ///////////////
+            Assert.Fail();
         }
     }
 }

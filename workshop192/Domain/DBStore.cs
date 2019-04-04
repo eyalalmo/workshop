@@ -29,6 +29,13 @@ namespace workshop192.Domain
             nextStoreID = 0;
         }
 
+        public void cleanDB()
+        {
+            stores = new LinkedList<Store>();
+            storeRole = new LinkedList<StoreRole>();
+            nextStoreID = 0;
+        }
+
         public void removeStoreRole(StoreRole sr)
         {
             storeRole.Remove(sr);

@@ -22,9 +22,10 @@ namespace workshop192.Domain
             loggedInUser = new Dictionary<string, SubscribedUser>();
         }
 
-        public void initDB()
+        public void cleanDB()
         {
-            instance = new DBSubscribedUser();
+            users = new Dictionary<string, SubscribedUser>();
+            loggedInUser = new Dictionary<string, SubscribedUser>();
         }
 
         public static DBSubscribedUser getInstance()
@@ -39,7 +40,7 @@ namespace workshop192.Domain
         public string logout(SubscribedUser sub)
         {
             SubscribedUser user;
-            if (!loggedInUser.TryGetValue(sub.getUsername(), out user))
+            if (!loggedInUser.Remove(sub.getUsername()))
                 return "user isnt loggedin";
             return "";
         }
@@ -87,7 +88,7 @@ namespace workshop192.Domain
         public SubscribedUser getloggedInUser(string name)
         {
             SubscribedUser user;
-            if (!users.TryGetValue(name, out user))
+            if (!loggedInUser.TryGetValue(name, out user))
                 return null;
             return user;
         }
