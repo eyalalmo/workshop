@@ -1,16 +1,13 @@
 C:\Users\etay2\Desktop\C#WorksVS\workshop192\workshop192\bin\Debug\workshop192.exe.config
-C:\bar\school\thirdYear\F\workshop\project\workshop192\bin\Debug\workshop192.exe.config
-C:\bar\school\thirdYear\F\workshop\project\workshop192\bin\Debug\workshop192.exe
-C:\bar\school\thirdYear\F\workshop\project\workshop192\bin\Debug\workshop192.pdb
-C:\bar\school\thirdYear\F\workshop\project\workshop192\obj\Debug\workshop192.csprojResolveAssemblyReference.cache
-C:\bar\school\thirdYear\F\workshop\project\workshop192\obj\Debug\workshop192.csproj.CoreCompileInputs.cache
-C:\bar\school\thirdYear\F\workshop\project\workshop192\obj\Debug\workshop192.exe
-C:\bar\school\thirdYear\F\workshop\project\workshop192\obj\Debug\workshop192.pdb
-<<<<<<< HEAD
 C:\Users\etay2\Desktop\C#WorksVS\workshop192\workshop192\bin\Debug\workshop192.exe
 C:\Users\etay2\Desktop\C#WorksVS\workshop192\workshop192\bin\Debug\workshop192.pdb
 C:\Users\etay2\Desktop\C#WorksVS\workshop192\workshop192\obj\Debug\workshop192.exe
 C:\Users\etay2\Desktop\C#WorksVS\workshop192\workshop192\obj\Debug\workshop192.pdb
-=======
-C:\Users\etay2\Desktop\C#WorksVS\workshop192\workshop192\obj\Debug\workshop192.csprojResolveAssemblyReference.cache
->>>>>>> origin/for_commit_with_bar
+C:\Users\etay2\Desktop\C#WorksVS\workshop192\workshop192\obj\Debug\workshop192.csproj.CoreCompileInputs.cache
+C:\Users\etay2\Desktop\C#WorksVS\workshop192\workshop192\obj\Debug\workshop192.csprojAssemblyReference.cache
+C:\bar\school\thirdYear\F\workshop\project\workshop192\bin\Debug\workshop192.exe.config
+C:\bar\school\thirdYear\F\workshop\project\workshop192\bin\Debug\workshop192.exe
+C:\bar\school\thirdYear\F\workshop\project\workshop192\bin\Debug\workshop192.pdb
+C:\bar\school\thirdYear\F\workshop\project\workshop192\obj\Debug\workshop192.csproj.CoreCompileInputs.cache
+C:\bar\school\thirdYear\F\workshop\project\workshop192\obj\Debug\workshop192.exe
+C:\bar\school\thirdYear\F\workshop\project\workshop192\obj\Debug\workshop192.pdb

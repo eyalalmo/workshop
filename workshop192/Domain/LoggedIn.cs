@@ -6,30 +6,47 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    class LoggedIn : UserState
+    public class LoggedIn : UserState
     {
         private DBSubscribedUser dbSubscribedUser;
+        private DBComplaint dbComplaint;
 
         public LoggedIn()
         {
-            dbSubscribedUser = dbSubscribedUser.getInstance();
+            dbSubscribedUser = DBSubscribedUser.getInstance();
+            dbComplaint = DBComplaint.getInstance();
         }
 
-        public string closeStore(int id)
+        public string closeStore(Store store)
         {
             return "ERROR: not an admin";
         }
 
-        public string createStore(String storeName, String description)
+        public string complain(string description, SubscribedUser subscribedUser)
         {
-            return "ERROR: not an admin";
+            Complaint complaint = new Complaint(subscribedUser.getUsername(), description);
+            return dbComplaint.addComplaint(complaint);
+        }
+
+        public Store createStore(String storeName, String description, SubscribedUser sub)
+        {
+            Store store = new Store(storeName, description);
+            StoreOwner owner = new StoreOwner(null, sub, store);
+            store.addStoreRole(owner);
+            sub.addStoreRole(owner);
+            DBStore.getInstance().addStore(store);
+            return store;
+        }
+
+        public string getComplaints()
+        {
+            return "ERROR: only an admin can getComplaints";
         }
 
         public string getPurchaseHistory(SubscribedUser sub)
         {
-            return DBSubscribedUser.getInstance().getPurchaseHistory(sub);
-            return DBSubscribedUser.getPurchaseHistory(sub);
-            return dbSubscribedUser.getPurchaseHistory(sub);
+
+            return sub.getPurchaseHistory();
         }
 
         public string login(string username, string password, Session session)
@@ -39,16 +56,13 @@ namespace workshop192.Domain
 
         public string logout(SubscribedUser sub, Session session)
         {
-
-            return DBSubscribedUser.getInstance().logout(sub);
-            return DBSubscribedUser.logout(sub);
-
             String logoutResponse = dbSubscribedUser.logout(sub);
             if (Equals(logoutResponse, ""))
             {
                 session.setState(new Guest());
             }
             return logoutResponse;
+
         }
 
         public string register(string username, string password, Session session)
@@ -56,7 +70,7 @@ namespace workshop192.Domain
             return "ERROR: User already registered";
         }
 
-        public string removeUser(string username)
+        public string removeUser(String user)
         {
             return "ERROR: not an admin";
         }

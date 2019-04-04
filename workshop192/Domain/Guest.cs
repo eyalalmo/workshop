@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using workshop192.Domain;
 
 
 namespace workshop192.Domain
 {
-    class Guest : UserState
+    public class Guest : UserState
     {
         private DBSubscribedUser dbSubscribedUser;
 
@@ -17,86 +18,74 @@ namespace workshop192.Domain
             dbSubscribedUser = DBSubscribedUser.getInstance();
         }
 
-        public string closeStore(int id)
+        public string closeStore(Store store)
         {
             return "ERROR: not an admin";
         }
 
-        public string createStore(String storeName, String description)
+        public string complain(string description, SubscribedUser subscribedUser)
         {
-            return "ERROR: not an admin";
+            return "ERROR: guest cannot complain";
+        }
+
+        public Store createStore(String storeName, String description, SubscribedUser sub)
+        {
+            return null;
+        }
+
+        public String getComplaints()
+        {
+            return "ERROR: only an admin can getComplaints";
         }
 
         public string getPurchaseHistory(SubscribedUser sub)
         {
-            return "ERROR: not an admin";
+            return "ERROR: not a subscribed user";
         }
 
         public String login(String username, String password, Session session)
         {
+            String encrypted = DBSubscribedUser.getInstance().encryptPassword(password);
             SubscribedUser sub = DBSubscribedUser.getInstance().getSubscribedUser(username);
-
-            SubscribedUser sub = dbSubscribedUser.getSubscribedUser(username);
-            if (sub != null)
+            if (sub == null)
+                return "ERROR: username does not exist";
+            if(!Equals(sub.getPassword(), encrypted))
+                return "ERROR: password incorrect";
+            session.setSubscribedUser(sub);
+            if (Equals(username, "admin"))
             {
-                if (Equals(sub.getPassword(), password))
-                {
+                session.setState(new Admin());
 
-                    session.setSubscribedUser(sub);
-                    if(Equals(username, "admin"))
-                    {
-                        session.setState(new Admin());
-                    }
-                    else
-                    {
-                        session.setState(new LoggedIn());
-                    }
-                    
-                    return DBSubscribedUser.getInstance().login(sub);
-
-                    return dbSubscribedUser.login(sub);
-                }
-                else
-                {
-                    return "ERROR: password incorrect";
-                }
             }
             else
             {
-                return "ERROR: username does not exist";
+                session.setState(new LoggedIn());
             }
+            session.setShoppingBasket(sub.getShoppingBasket());
+            return DBSubscribedUser.getInstance().login(sub);
         }
 
-        public string logout(SubscribedUser sub)
+        public string logout(SubscribedUser sub, Session session)
         {
             return "ERROR: not logged in";
         }
 
         public string register(string username, string password, Session session)
         {
+            String encrypted = DBSubscribedUser.getInstance().encryptPassword(password);
             SubscribedUser s = dbSubscribedUser.getSubscribedUser(username);
             if (s != null)
-            {
                 return "ERROR: username already exists";
+            SubscribedUser sub = new SubscribedUser(username, encrypted, session.getShoppingBasket());
+            return DBSubscribedUser.getInstance().register(sub);
             }
-            else
-            {
-                SubscribedUser sub = new SubscribedUser(username, password);
-                return DBSubscribedUser.getInstance().register(sub);
-                SubscribedUser sub = new SubscribedUser(username, password, session.getShoppingBasket());
-                return dbSubscribedUser.register(sub);
-            }
-        }
 
-        public string removeUser(string username)
+        public string removeUser(String user)
         {
             return "ERROR: not an admin";
         }
-
-
-namespace workshop192.Domain
-{
-    class Guest
-    {
     }
 }
+
+
+

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    interface PurchaseType
+    public interface PurchaseType
     {
     }
 }

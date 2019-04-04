@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    class Product
+    public class Product
     {
 
         //represents product in store
@@ -16,35 +16,24 @@ namespace workshop192.Domain
         private int price;
         private Store store;
         private int rank;
-        private int numberOfRanking;
         private int quantityLeft;
         private Discount discount;
 
        
         public Product(string productName, string productCategory, int price, int rank, int quantityLeft, Store store)
         {
-            this.productID = DBProduct.nextProductID;
+            this.productID = DBProduct.getNextProductID();
             this.productName = productName;
             this.productCategory = productCategory;
             this.price = price;
             this.rank = rank;
             this.quantityLeft = quantityLeft;
             this.store = store;
-            this.numberOfRanking = 0;
+            //this.numberOfRanking = 0;
             this.discount = null;
 
         }
           
-        private bool checkValidInfo(int price, int rank, int quantityLeft) ////// מיותר
-        {
-            if (rank < 1 || rank > 5)
-                return false;
-            if (price <= 0)
-                return false;
-            if (quantityLeft < 0)
-                return false;
-            return true;
-        }
 
         public int getActualPrice()
         {
@@ -53,7 +42,7 @@ namespace workshop192.Domain
 
         public int getQuantityLeft()
         {
-            throw new NotImplementedException();
+            return this.quantityLeft;
         }
 
 
@@ -118,10 +107,7 @@ namespace workshop192.Domain
         {
             this.rank = rank;
         }
-        public int getStoreID()
-        {
-            return store.getStoreID();
-        }
+
         public Store getStore()
         {
             return store;

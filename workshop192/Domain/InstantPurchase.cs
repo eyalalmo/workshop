@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    class InstantPurchase
+    public class InstantPurchase
     {
-<<<<<<< HEAD
-        
-=======
->>>>>>> origin/bar's_branch
+
     }
 }

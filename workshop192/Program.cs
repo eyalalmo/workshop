@@ -28,6 +28,7 @@ namespace workshop192
 
 
             Console.WriteLine("eyal's merge");
+            Console.ReadLine();
 
         }
     }

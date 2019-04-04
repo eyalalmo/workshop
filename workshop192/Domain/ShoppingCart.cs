@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    class ShoppingCart
+    public class ShoppingCart
     {
+
         private Dictionary <Product, int> productList;
         private int storeID;
 
@@ -30,7 +31,9 @@ namespace workshop192.Domain
             int quantityLeft = product.getQuantityLeft();
             if ( quantityLeft - amount> 0)
             {
-                product.setQuantityLeft(quantityLeft - amount);
+                //product.setQuantityLeft(quantityLeft - amount);
+                if (productList.ContainsKey(product))
+                    return "error: product exist";
                 productList.Add(product, amount);
                 return "";
             }
@@ -52,17 +55,67 @@ namespace workshop192.Domain
         {
             if (!productList.ContainsKey(p))
                 return "- product does not exist";
+            if (p.getQuantityLeft() < newAmount)
+                return "there is no such amount of the product";
             int oldAmount = productList[p];
             int quantity = p.getQuantityLeft();
             if (quantity + oldAmount - newAmount < 0)
                 return "- quantity below zero";
-            p.setQuantityLeft(quantity + oldAmount - newAmount);
+            //p.setQuantityLeft(quantity + oldAmount - newAmount);
             productList.Remove(p);
             productList.Add(p, newAmount);
             return "";
 
         }
+        public int totalAmount()
+        {
+            int sum = 0;
+            foreach (KeyValuePair<Product, int> entry in productList)
+            {
+                sum += (entry.Key.getPrice() * entry.Value);
+            }
+            return sum;
+        }
+        public String checkout(String address,String creditCard) {
+            String res = "";
+            int sum = 0;
+            foreach (KeyValuePair<Product, int> entry in productList)
+            {
+                if (entry.Key.getQuantityLeft() > entry.Value)
+                {
+                    
+                    sum = entry.Key.getPrice() * entry.Value;
+                    Boolean isOk = PaymentService.getInstance().checkOut(creditCard,sum);
+                    if (isOk)
+                    {
+                        entry.Key.setQuantityLeft(entry.Key.getQuantityLeft() - entry.Value);
 
-        public void checkout() { } /////////////// TODO !!!
+                        if (DeliveryService.getInstance().sendToUser(address, entry.Key) == false)
+                        {
+                            entry.Key.setQuantityLeft(entry.Key.getQuantityLeft() + entry.Value);
+                            res += " product: " + entry.Key.getProductID() + " can't deliver.\n ";
+                        }
+                        else
+                        {
+                            res += " product: " + entry.Key.getProductID() + " complete payment. ";
+                        }
+
+                        //////////add eilon part
+                    }
+                    else
+                    {
+                        res += " product: " + entry.Key.getProductID() + " cant submmit checkout.\n ";
+                    }
+                }
+                else
+                {
+                    res += " product: " + entry.Key.getProductID() + " have no this Quantity.\n ";
+                }
+
+            }
+            return res;
+
+
+        } 
     }
 }

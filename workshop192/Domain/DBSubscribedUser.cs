@@ -1,27 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using workshop192.Domain;
 
 namespace workshop192.Domain
 {
-    class DBSubscribedUser
+    public class DBSubscribedUser
     {
-        //-idחנויות. מוצרים-id. -nameמשתמשים
 
         Dictionary<string, SubscribedUser> users;
         Dictionary<string, SubscribedUser> loggedInUser;
         private static DBSubscribedUser instance = null;
 
-        public DBSubscribedUser()
+
+        
+        private DBSubscribedUser()
         {
             users = new Dictionary<string, SubscribedUser>();
             loggedInUser = new Dictionary<string, SubscribedUser>();
-
         }
 
+        public void initDB()
+        {
+            instance = new DBSubscribedUser();
+        }
 
         public static DBSubscribedUser getInstance()
         {
@@ -80,5 +85,27 @@ namespace workshop192.Domain
             }
             return "";
         }
+        public SubscribedUser getloggedInUser(string name)
+        {
+            SubscribedUser user;
+            if (!users.TryGetValue(name, out user))
+                return null;
+            return user;
+        }
+
+        public string encryptPassword(string password)
+        {
+            MD5 md5 = MD5.Create();
+            byte[] inputBytes = Encoding.ASCII.GetBytes(password);
+            byte[] hash = md5.ComputeHash(inputBytes);
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("X2"));
+            }
+            return sb.ToString();
+        }
+
     }
 }
