@@ -12,6 +12,14 @@ namespace workshop192.ServiceLayer.Tests
     [TestClass()]
     public class StoreServiceTests
     {
+        [TestInitialize()]
+        public void TestInitialize()
+        {
+            DBStore.getInstance().init();
+            DBStore.getInstance().init();
+            DBSubscribedUser.getInstance().cleanDB();
+        }
+
         //3.2
         [TestMethod()]
         public void TestMethod1()
@@ -33,15 +41,29 @@ namespace workshop192.ServiceLayer.Tests
             UserService userService = UserService.getInstance();
             Session session1 = new Session();
             Session session2 = new Session();
+            Session session3 = new Session();
 
             userService.register(session1, "anna", "banana");
             userService.login(session1, "anna", "banana");
 
             userService.register(session2, "dani", "123");
-            
+            userService.login(session2, "dani", "123");
+
+            userService.register(session3, "yaniv", "123");
+            userService.login(session3, "yaniv", "123");
+
             Store store = storeService.addStore("myStore", "the best store ever", session1);
             Assert.AreEqual(storeService.addManager(store, "dani", true, true, true, session1), "");
-            Assert.AreEqual(storeService.addProduct("myProduct", "some category", 10, 0, 10, store, session2), "");
+            Product product = storeService.addProduct("myProduct", "some category", 10, 0, 10, store, session1);
+            Assert.AreNotEqual(product, null);
+            Assert.AreEqual(storeService.addToProductQuantity(product, 10, session2), "");
+            Assert.AreEqual(storeService.decFromProductQuantity(product, 10, session2), "");
+            Assert.AreEqual(storeService.setProductDiscount(product, null, session2), "");
+
+            Assert.AreEqual(storeService.addManager(store, "yaniv", false, false, false, session1), "");
+            Assert.AreNotEqual(storeService.addToProductQuantity(product, 10, session3), "");
+            Assert.AreNotEqual(storeService.decFromProductQuantity(product, 10, session3), "");
+            Assert.AreNotEqual(storeService.setProductDiscount(product, null, session3), "");
         }
 
         //4.3
