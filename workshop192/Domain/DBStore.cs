@@ -66,9 +66,11 @@ namespace workshop192.Domain
         {
             storeRole.AddFirst(sr);
         }
-        public void addStore(Store store)
+        public int addStore(Store store)
         {
+
             stores.AddFirst(store);
+            return store.getStoreID();
         }
 
         public Store getStore(int storeID)
