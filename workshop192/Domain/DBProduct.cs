@@ -59,7 +59,7 @@ namespace workshop192.Domain
             return productList;
         }
 
-        public  LinkedList<Product> searchProducts(string name, string keywords, string category, int[] price_range, int minimumRank)
+        public  LinkedList<Product> searchProducts(string name, string keywords, string category )
         {
             LinkedList<Product> res = new LinkedList<Product>();
             foreach(Product p in productList)
@@ -91,13 +91,13 @@ namespace workshop192.Domain
             }
 
 
-            res = filterBy(res,price_range, minimumRank);
+           // res = filterBy(res,price_range, minimumRank);
             return res;
 
 
         }
 
-        private LinkedList<Product> filterBy(LinkedList<Product> list, int[] price_range, int minimumRank)
+        public LinkedList<Product> filterBy(LinkedList<Product> list, int[] price_range, int minimumRank)
         {
             foreach(Product p in list)
             {

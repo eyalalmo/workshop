@@ -13,7 +13,7 @@ namespace workshop192.ServiceLayer
 
         public StoreService() { }
 
-        public static StoreService getStoreService()
+        public static StoreService getInstance()
         {
             if (instance == null)
             {
