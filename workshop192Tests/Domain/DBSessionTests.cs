@@ -33,17 +33,5 @@ namespace workshop192.Domain.Tests
             Assert.AreNotEqual(db.getSession(s), "");
         }
 
-        [TestMethod()]
-        public void getSessionOfSubscribedUserTest()
-        {
-            DBSession db = DBSession.getInstance();
-            db.initSession();
-            Session s = new Session();
-            s.register("etay", "etay");
-
-            DBSubscribedUser dbSub = DBSubscribedUser.getInstance(); 
-            Assert.AreEqual(s, db.getSessionOfSubscribedUser(dbSub.getSubscribedUser("etay")));
-
-        }
     }
 }
