@@ -50,7 +50,7 @@ namespace workshop192.Domain.Tests
         [TestMethod()]
         public void logoutTest()
         {
-
+            UserState state = new Admin();
         }
 
         [TestMethod()]
