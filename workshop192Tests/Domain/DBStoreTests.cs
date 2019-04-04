@@ -38,6 +38,7 @@ namespace workshop192.Domain.Tests
         {
             DBStore.getInstance().addStoreRole(sr);
             Assert.AreEqual(DBStore.getInstance().getStoreRole(s, su),sr);
+
         }
 
         [TestMethod()]
