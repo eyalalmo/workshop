@@ -104,6 +104,21 @@ namespace workshop192.ServiceLayer
             return sr.setProductDiscount(product, discount);
         }
 
+        public Store addStore(string storeName, string storeDescription, Session session)
+        {
+            SubscribedUser user = session.getSubscribedUser();
+
+            if (storeName.Length == 0)
+                return null;
+
+            return session.createStore(storeName, storeDescription, user);
+        }
+
+        public string closeStore(Store store, Session session)
+        {
+            return session.closeStore(store);
+        }
+
         private string checkProduct(string productName, string productCategory, int price, int rank, int quantityLeft)
         {
             if (productName == "")
