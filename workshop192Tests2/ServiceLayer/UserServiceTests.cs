@@ -121,7 +121,11 @@ namespace workshop192.ServiceLayer.Tests
 
             userService.register(session, "anna", "banana");
             userService.login(session, "anna", "banana");
-            Store store = 
+            Store store = userService.createStore(session, "Apple", "apples");
+            List<StoreRole> roles = store.getRoles();
+            Assert.IsTrue(roles.Count == 1);
+            StoreRole role = roles[0];
+
         }
 
         //6.2
