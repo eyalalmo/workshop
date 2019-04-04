@@ -24,12 +24,6 @@ namespace workshop192.Domain.Tests
             Assert.IsNull(state.createStore("ToyRUs", "lots of toys", null));
         }
 
-        [TestMethod()]
-        public void closeStoreTest()
-        {
-            Assert.Fail();
-        }
-
 
 
         [TestMethod()]
@@ -50,7 +44,19 @@ namespace workshop192.Domain.Tests
         [TestMethod()]
         public void logoutTest()
         {
-            UserState state = new Admin();
+            DBSubscribedUser dbsubscribedUser = DBSubscribedUser.getInstance();
+            SubscribedUser sub2 = new SubscribedUser("Gal", "Gadot", new ShoppingBasket());
+            dbsubscribedUser.register(sub2);
+
+            Session session = new Session();
+            session.setState(new Admin());
+            UserState state = session.getState();
+            state.login("Gal", "Gadot", session);
+            SubscribedUser user = session.getSubscribedUser();
+            session.getState().logout(user, session);
+            Assert.IsTrue(session.getState() is Admin);
+            Assert.IsNull(dbsubscribedUser.getloggedInUser("Gal"));
+            dbsubscribedUser.cleanDB();
         }
 
         [TestMethod()]
