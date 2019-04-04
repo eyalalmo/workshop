@@ -24,5 +24,25 @@ namespace workshop192.ServiceLayer.Tests
             userService.login(session, "anna", "banana");
            // Store store = 
         }
+
+        //4.4
+        [TestMethod()]
+        public void addMannagerByAnOwner3()
+        {
+            StoreService storeService = StoreService.getInstance();
+            UserService userService = UserService.getInstance();
+            Session session1 = new Session();
+            Session session2 = new Session();
+
+            userService.register(session1, "anna", "banana");
+            userService.login(session1, "anna", "banana");
+
+            userService.register(session2, "dani", "123");
+
+            Store store = storeService.addStore("myStore", "the best store ever", session1);
+            storeService.addManager(store, "dani", true, true, true, session1);
+            Assert.AreNotEqual(storeService.addManager(store, "dani", true, true, true, session1), "");
+        }
+
     }
 }
