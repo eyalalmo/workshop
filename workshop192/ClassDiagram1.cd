@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="workshop192.Domain.DBSession" Collapsed="true">
+    <Position X="8.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAEIIAAAAAgAAAABAABAAAYAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\DBSession.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="workshop192.ServiceLayer.BasketService" Collapsed="true">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAACIAgAAAAAAAAAQAAAAAAAAABAAAQAAAAAAAkAAAA=</HashCode>
+      <FileName>ServiceLayer\BasketService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="workshop192.Domain.Admin" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAEBEAAAgACAAAAgAIACAQACAQAAAAAAEAA=</HashCode>
+      <FileName>Domain\Admin.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="workshop192.Domain.Complaint" Collapsed="true">
+    <Position X="11.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAgAAAAIAAABAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\Complaint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="workshop192.Domain.ConsistencySystem" Collapsed="true">
+    <Position X="13.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAARAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\ConsistencySystem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="workshop192.Domain.DBComplaint" Collapsed="true">
+    <Position X="15.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAEAAAAAAAAAAAAAAAAABAAgQAAAAABAAAAAA=</HashCode>
+      <FileName>Domain\DBComplaint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="workshop192.Domain.DBProduct" Collapsed="true">
+    <Position X="17" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KAAAAAACAAAAAgAAIAAAAAACAEBAAAYBAAAJAAAAAAA=</HashCode>
+      <FileName>Domain\DBProduct.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="workshop192.Domain.DBStore" Collapsed="true">
+    <Position X="10" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAEgAAQAAAEAAAAAAgAEIAAgCCBAAAYBAAAAAAAASAg=</HashCode>
+      <FileName>Domain\DBStore.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="workshop192.Domain.DBSubscribedUser" Collapsed="true">
+    <Position X="11.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAEAAAAEAAAAAAAAAABCAIQAAQGAAQAAEAA=</HashCode>
+      <FileName>Domain\DBSubscribedUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="workshop192.Domain.DeliveryService" Collapsed="true">
+    <Position X="13.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAAAAAAAAAABAAARAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\DeliveryService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="workshop192.Domain.Guest" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAABAAAAAACAAAAgAIACAQACAQAAAAAAEAA=</HashCode>
+      <FileName>Domain\Guest.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="workshop192.Domain.InstantPurchase" Collapsed="true">
+    <Position X="17" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\InstantPurchase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="workshop192.Domain.InvisibleDiscount" Collapsed="true">
+    <Position X="8.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\InvisibleDiscount.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="workshop192.Domain.LoggedIn" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAABAAAAgACAAAAgAIACAQACAQAAAAAAEAA=</HashCode>
+      <FileName>Domain\LoggedIn.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="workshop192.Domain.LotteryPurchase" Collapsed="true">
+    <Position X="11.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\LotteryPurchase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="workshop192.Domain.PaymentService" Collapsed="true">
+    <Position X="13.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAABgAARAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\PaymentService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="workshop192.Domain.Permissions" Collapsed="true">
+    <Position X="15.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAgAAACAAAAAAAgAAAAAAAAAAAAADAAAAAIAAAA=</HashCode>
+      <FileName>Domain\Permissions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="workshop192.Domain.Product" Collapsed="true">
+    <Position X="17" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAERAxAAEQABEAABJEAAARAAAAAAAAQBIAiEAAIAAAA=</HashCode>
+      <FileName>Domain\Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="workshop192.Domain.PublicPurchase" Collapsed="true">
+    <Position X="8.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\PublicPurchase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="workshop192.Domain.PurchasePolicy" Collapsed="true">
+    <Position X="10" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\PurchasePolicy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="workshop192.Domain.ReliantDiscount" Collapsed="true">
+    <Position X="11.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\ReliantDiscount.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="workshop192.Domain.Session" Collapsed="true">
+    <Position X="13.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAIAAAAAEhAAAAAAAAAAgiAIACAQAiAQCAAAAAEAQ=</HashCode>
+      <FileName>Domain\Session.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="workshop192.Domain.ShoppingBasket" Collapsed="true">
+    <Position X="15.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAIAAEAEAAAAAAEAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Domain\ShoppingBasket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="workshop192.Domain.ShoppingCart" Collapsed="true">
+    <Position X="17" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAMAAEAAAAAAAAEAAAEAAgAAAAAAAhAAAAAAEAAAA=</HashCode>
+      <FileName>Domain\ShoppingCart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="workshop192.Domain.Store" Collapsed="true">
+    <Position X="8.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AFQAEAAAAEAgAQKgIAACMAAAAEAEBQAFAAAICAAASAA=</HashCode>
+      <FileName>Domain\Store.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="workshop192.Domain.StoreManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQEAAAAAAAAMAAgEAABAYBAgAEAIAAABAACIABAAAQA=</HashCode>
+      <FileName>Domain\StoreManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="workshop192.Domain.StoreOwner" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQEAAAAAAAAMAAgEAABAYBAgAEAIAAABAAGIABAAAQA=</HashCode>
+      <FileName>Domain\StoreOwner.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="workshop192.Domain.SubscribedUser" Collapsed="true">
+    <Position X="13.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAEAAAAAAACAAAAIIAkAAYAAAAAAAAAAAgCASIA=</HashCode>
+      <FileName>Domain\SubscribedUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="workshop192.Domain.System" Collapsed="true">
+    <Position X="15.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\System.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="workshop192.Domain.VisibleDiscount" Collapsed="true">
+    <Position X="17" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\VisibleDiscount.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="workshop192.Domain.Discount" Collapsed="true">
+    <Position X="8.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\Discount.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="workshop192.Domain.PurchaseType" Collapsed="true">
+    <Position X="10" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\PurchaseType.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="workshop192.Domain.StoreRole" Collapsed="true">
+    <Position X="11.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQEAAAAAAAAMAAgEAABAQBAgAEAIAAAAAACIABAAAAA=</HashCode>
+      <FileName>Domain\StoreRole.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="workshop192.Domain.UserState" Collapsed="true">
+    <Position X="13.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAABAAAAAAAAAAAgAIACAQACAQAAAAAAEAA=</HashCode>
+      <FileName>Domain\UserState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
