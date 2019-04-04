@@ -16,7 +16,7 @@ namespace workshop192.Domain
         private static DBSubscribedUser instance = null;
 
 
-        
+
         private DBSubscribedUser()
         {
             users = new Dictionary<string, SubscribedUser>();

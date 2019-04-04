@@ -16,17 +16,17 @@ namespace workshop192.Domain.Tests
         [TestMethod()]
         public void DBSubscribedUserTest()
         {
-            
-        
+
+
         }
 
         [TestMethod()]
         public void getInstanceTest()
         {
-            
 
 
-       
+
+
         }
 
         [TestMethod()]
@@ -34,14 +34,14 @@ namespace workshop192.Domain.Tests
         {
             DBSubscribedUser db = DBSubscribedUser.getInstance();
             Session s = new Session();
-          
+
             s.register("etay", "etay");
             s.login("etay", "etay");
-            if(db.getSubscribedUser("etay")==null)
+            if (db.getSubscribedUser("etay") == null)
                 Assert.Fail();
             s.logout();
             Assert.AreEqual("", db.getloggedInUser("etay"));
-          
+
         }
 
         [TestMethod()]

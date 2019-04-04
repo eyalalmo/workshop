@@ -54,7 +54,7 @@ namespace workshop192.Domain
         {
             return userState.login(username, password, this);
         }
-  
+
         public String register(String username, String password)
         {
             return userState.register(username, password, this);
@@ -62,7 +62,7 @@ namespace workshop192.Domain
 
         public String logout()
         {
-            return userState.logout(subscribedUser,this);
+            return userState.logout(subscribedUser, this);
         }
 
         public String getPurchaseHistory()
@@ -70,9 +70,9 @@ namespace workshop192.Domain
             return userState.getPurchaseHistory(subscribedUser);
         }
 
-        public Store createStore(String storeName, String description, SubscribedUser sub)
+        public Store createStore(String storeName, String description)
         {
-            return userState.createStore(storeName, description, sub);
+            return userState.createStore(storeName, description, subscribedUser);
         }
 
         public String closeStore(Store store)

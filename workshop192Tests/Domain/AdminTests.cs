@@ -14,7 +14,7 @@ namespace workshop192.Domain.Tests
         [TestMethod()]
         public void AdminTest()
         {
-            
+
         }
 
         [TestMethod()]
@@ -30,14 +30,14 @@ namespace workshop192.Domain.Tests
             Assert.Fail();
         }
 
-        
+
 
         [TestMethod()]
         public void getPurchaseHistoryTest()
         {
             UserState state = new Admin();
             Assert.IsTrue(Equals(state.getPurchaseHistory(null), "ERROR: No purchase history in Admin"));
-            
+
         }
 
         [TestMethod()]
@@ -50,7 +50,7 @@ namespace workshop192.Domain.Tests
         [TestMethod()]
         public void logoutTest()
         {
-            
+
         }
 
         [TestMethod()]

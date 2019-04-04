@@ -111,7 +111,7 @@ namespace workshop192.ServiceLayer
             if (storeName.Length == 0)
                 return null;
 
-            return session.createStore(storeName, storeDescription, user);
+            return session.createStore(storeName, storeDescription);
         }
 
         public string closeStore(Store store, Session session)

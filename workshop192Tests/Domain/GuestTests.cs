@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using workshop192.Domain;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace workshop192.Domain.Tests
     [TestClass()]
     public class GuestTests
     {
-        
+
         public void GuestTest()
         {
         }
@@ -65,7 +66,7 @@ namespace workshop192.Domain.Tests
         {
             UserState state = new Guest();
             Assert.IsTrue(Equals(state.logout(null, null), "ERROR: not logged in"));
-           
+
         }
 
         [TestMethod()]
@@ -89,7 +90,7 @@ namespace workshop192.Domain.Tests
             Session session = new Session();
             UserState state = session.getState();
             Assert.IsTrue(Equals(state.removeUser("abcd"), "ERROR: not an admin"));
-            
+
         }
     }
 }

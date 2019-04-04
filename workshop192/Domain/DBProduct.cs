@@ -68,7 +68,8 @@ namespace workshop192.Domain
             return productList;
         }
 
-        public  List<Product> searchProducts(string name, string keywords, string category, int[] price_range, int minimumRank)
+
+        public  List<Product> searchProducts(string name, string keywords, string category)
         {
             List<Product> res = new List<Product>();
             foreach(Product p in productList)
@@ -99,14 +100,14 @@ namespace workshop192.Domain
 
             }
 
-
-            res = filterBy(res,price_range, minimumRank);
+           
             return res;
 
 
         }
 
-        private List<Product> filterBy(List<Product> list, int[] price_range, int minimumRank)
+
+        public List<Product> filterBy(List<Product> list, int[] price_range, int minimumRank)
         {
             List<Product> toRemove = new List<Product>();
             foreach(Product p in list)

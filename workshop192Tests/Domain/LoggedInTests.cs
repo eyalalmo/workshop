@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using workshop192.Domain;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace workshop192.Domain.Tests
     public class LoggedInTests
     {
         public void LoggedInTest()
-        { 
+        {
         }
 
         [TestMethod()]
@@ -45,7 +46,7 @@ namespace workshop192.Domain.Tests
         {
             Session session = new Session();
             UserState state = new LoggedIn();
-            Assert.IsTrue(Equals("ERROR: User already logged in", state.login("david","david",session)));
+            Assert.IsTrue(Equals("ERROR: User already logged in", state.login("david", "david", session)));
         }
 
         [TestMethod()]
@@ -78,7 +79,7 @@ namespace workshop192.Domain.Tests
         {
             UserState state = new LoggedIn();
             Assert.IsTrue(Equals("ERROR: not an admin", state.removeUser("benny")));
-            
+
         }
     }
 }
