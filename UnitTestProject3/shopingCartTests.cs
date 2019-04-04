@@ -12,7 +12,7 @@ namespace UnitTestProject3
         public ShoppingCart cart;
 
         [TestInitialize]
-        public void initial()
+        public void initial()//
         {
             DBProduct.getInstance().init();
             DBProduct.getInstance().init();
