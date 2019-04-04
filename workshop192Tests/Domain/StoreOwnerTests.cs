@@ -34,7 +34,7 @@ namespace workshop192.Domain.Tests
             session3.register("etay", "123");
 
             session1.login("eyal", "123");
-            store = session1.createStore("mystore", "a store", session1.getSubscribedUser());
+            store = session1.createStore("mystore", "a store");
             sr = session1.getSubscribedUser().getStoreRole(store);
             p = new Product("product", "cat", 10, 0, 10, store);
             p1 = new Product("product1", "cat", 10, 0, 10, store);

@@ -63,6 +63,7 @@ namespace workshop192.Domain.Tests
             int ID = DBStore.getInstance().addStore(s);
             DBStore.getInstance().closeStore(s);
             Assert.IsFalse(s.isActive());
+
         }
 
 

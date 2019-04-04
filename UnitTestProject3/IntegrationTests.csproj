@@ -51,7 +51,11 @@
   <ItemGroup>
     <Compile Include="shopingCartTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< HEAD
     <Compile Include="StoreTests.cs" />
+=======
+    <Compile Include="shopingbasketTest.cs" />
+>>>>>>> origin/master
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -52,7 +52,7 @@ namespace workshop192.Domain.Tests
             DBProduct.getInstance().addProduct(p2);
             DBProduct.getInstance().addProduct(p3);
             DBProduct.getInstance().addProduct(p4);
-            List<Product> result1 = DBProduct.getInstance().searchProducts("pizza", null, null, null, 0);
+            List<Product> result1 = DBProduct.getInstance().searchProducts("pizza", null, null);
             Assert.IsTrue(result1.Contains(p));
             Assert.IsFalse(result1.Contains(p1));
         }
@@ -64,7 +64,7 @@ namespace workshop192.Domain.Tests
             DBProduct.getInstance().addProduct(p2);
             DBProduct.getInstance().addProduct(p3);
             DBProduct.getInstance().addProduct(p4);
-            List<Product> result1 = DBProduct.getInstance().searchProducts(null, null, "food", null, 0);
+            List<Product> result1 = DBProduct.getInstance().searchProducts(null, null, "food");
             Assert.IsTrue(result1.Contains(p));
             Assert.IsTrue(result1.Contains(p1));
         }
@@ -77,9 +77,10 @@ namespace workshop192.Domain.Tests
             DBProduct.getInstance().addProduct(p3);
             DBProduct.getInstance().addProduct(p4);
             int[] range = { 30, 50 };
-            List<Product> result1 = DBProduct.getInstance().searchProducts(null, null, "food", range, 0);
-            Assert.IsTrue(result1.Contains(p));
-            Assert.IsFalse(result1.Contains(p1));
+            List<Product> result1 = DBProduct.getInstance().searchProducts(null, null, "food");
+            List<Product> result2 = DBProduct.getInstance().filterBy(result1, range, 0);
+            Assert.IsTrue(result2.Contains(p));
+            Assert.IsFalse(result2.Contains(p1));
         }
         [TestMethod()]
         public void searchProductsByKeywordsTest()
@@ -89,7 +90,7 @@ namespace workshop192.Domain.Tests
             DBProduct.getInstance().addProduct(p2);
             DBProduct.getInstance().addProduct(p3);
             DBProduct.getInstance().addProduct(p4);
-            List<Product> result1 = DBProduct.getInstance().searchProducts(null, "coca",null, null, 0);
+            List<Product> result1 = DBProduct.getInstance().searchProducts(null, "coca",null);
             Assert.IsTrue(result1.Contains(p2));
             Assert.IsTrue(result1.Contains(p4));
         }
@@ -101,7 +102,7 @@ namespace workshop192.Domain.Tests
             DBProduct.getInstance().addProduct(p2);
             DBProduct.getInstance().addProduct(p3);
             DBProduct.getInstance().addProduct(p4);
-            List<Product> result1 = DBProduct.getInstance().searchProducts(null, "coca", null, null, 3);
+            List<Product> result1 = DBProduct.getInstance().searchProducts(null, "coca", null);
             Assert.IsFalse(result1.Contains(p2));
             Assert.IsTrue(result1.Contains(p4));
         }
