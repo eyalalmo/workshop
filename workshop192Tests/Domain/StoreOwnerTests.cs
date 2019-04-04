@@ -12,8 +12,8 @@ namespace workshop192.Domain.Tests
     public class StoreOwnerTests
     {
         Session session1, session2, session3;
-        DBStore storeDB;
-        DBProduct productDB;
+        DBStore storeDB = DBStore.getInstance();
+        DBProduct productDB = DBProduct.getInstance();
         Product p, p1;
         Store store;
         StoreRole sr, sr1, sr2;
@@ -22,8 +22,8 @@ namespace workshop192.Domain.Tests
         [TestInitialize()]
         public void init()
         {
-            DBStore.init();
-            DBProduct.init();
+            storeDB.init();
+            productDB.init();
             session1 = new Session();
             session1.register("eyal", "123");
 
