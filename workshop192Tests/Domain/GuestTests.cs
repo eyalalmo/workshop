@@ -93,4 +93,3 @@ namespace workshop192.Domain.Tests
         }
     }
 }
-

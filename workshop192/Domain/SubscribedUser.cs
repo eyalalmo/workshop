@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -58,7 +59,7 @@ namespace workshop192.Domain
         {
             storeRoles.Add(role);
         }
-        
+
         public void removeStoreRole(StoreRole role)
         {
             storeRoles.Remove(role);
@@ -68,7 +69,7 @@ namespace workshop192.Domain
         {
             foreach (StoreRole role in storeRoles)
             {
-                if(role.getStore().Equals(store))
+                if (role.getStore().Equals(store))
                 {
                     return role;
                 }
@@ -78,7 +79,14 @@ namespace workshop192.Domain
 
         public List<StoreRole> getStoreRoles()
         {
-            return storeRoles; 
+            return storeRoles;
         }
     }
 }
+
+
+
+
+
+
+
