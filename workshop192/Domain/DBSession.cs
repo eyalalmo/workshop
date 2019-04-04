@@ -10,7 +10,7 @@ namespace workshop192.Domain
     {
         private static DBSession instance;
         private LinkedList<Session> sessions;
-    
+
         public static DBSession getInstance()
         {
             if (instance == null)
@@ -39,7 +39,7 @@ namespace workshop192.Domain
         }
         public Session getSessionOfSubscribedUser(SubscribedUser sub)
         {
-            foreach(Session s in sessions)
+            foreach (Session s in sessions)
             {
                 if (s.getSubscribedUser().Equals(sub))
                 {
@@ -60,3 +60,4 @@ namespace workshop192.Domain
         }
     }
 }
+

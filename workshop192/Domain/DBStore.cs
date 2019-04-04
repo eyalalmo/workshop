@@ -22,14 +22,14 @@ namespace workshop192.Domain
             return instance;
         }
 
-        public void cleanDB()
+        private DBStore()
         {
             stores = new LinkedList<Store>();
             storeRole = new LinkedList<StoreRole>();
             nextStoreID = 0;
         }
 
-        private DBStore()
+        public void cleanDB()
         {
             stores = new LinkedList<Store>();
             storeRole = new LinkedList<StoreRole>();
@@ -101,7 +101,7 @@ namespace workshop192.Domain
             if (stores.Contains(s))
             {
                 s.changeStatus();
-                foreach(StoreRole sr in storeRole)
+                foreach (StoreRole sr in storeRole)
                 {
                     //if (sr.getStore().getStoreID() == s.getStoreID())
                     //    sr.getUser().notify();
@@ -127,7 +127,7 @@ namespace workshop192.Domain
             foreach (StoreRole sr in storeRole)
                 if ((sr.getUser()).getUsername() == user.getUsername())
                 {
-                    if(sr is StoreOwner)
+                    if (sr is StoreOwner)
                     {
                         closeStore(sr.getStore());
                     }
@@ -139,7 +139,7 @@ namespace workshop192.Domain
         {
             LinkedList<StoreRole> res = new LinkedList<StoreRole>();
 
-            foreach(StoreRole sr in storeRole)
+            foreach (StoreRole sr in storeRole)
             {
                 if (sr.getAppointedBy().Equals(sRole))
                     res.AddFirst(sr);
