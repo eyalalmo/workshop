@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="shopingCartTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="shopingbasketTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

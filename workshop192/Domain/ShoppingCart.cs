@@ -32,6 +32,8 @@ namespace workshop192.Domain
             if ( quantityLeft - amount> 0)
             {
                 //product.setQuantityLeft(quantityLeft - amount);
+                if (productList.ContainsKey(product))
+                    return "error: product exist";
                 productList.Add(product, amount);
                 return "";
             }
@@ -53,6 +55,8 @@ namespace workshop192.Domain
         {
             if (!productList.ContainsKey(p))
                 return "- product does not exist";
+            if (p.getQuantityLeft() < newAmount)
+                return "there is no such amount of the product";
             int oldAmount = productList[p];
             int quantity = p.getQuantityLeft();
             if (quantity + oldAmount - newAmount < 0)
@@ -93,7 +97,7 @@ namespace workshop192.Domain
                         }
                         else
                         {
-                            res += " product: " + entry.Key.getProductID() + " complete payment.\n ";
+                            res += " product: " + entry.Key.getProductID() + " complete payment. ";
                         }
 
                         //////////add eilon part
