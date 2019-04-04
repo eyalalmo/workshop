@@ -48,7 +48,7 @@ namespace workshop192.Domain
             SubscribedUser sub = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (sub == null)
                 return "ERROR: username does not exist";
-            if(!Equals(sub.getPassword(), password))
+            if (!Equals(sub.getPassword(), password))
                 return "ERROR: password incorrect";
             session.setSubscribedUser(sub);
             if (Equals(username, "admin"))
@@ -76,7 +76,7 @@ namespace workshop192.Domain
                 return "ERROR: username already exists";
             SubscribedUser sub = new SubscribedUser(username, password, session.getShoppingBasket());
             return DBSubscribedUser.getInstance().register(sub);
-            }
+        }
 
         public string removeUser(String user)
         {
@@ -84,6 +84,3 @@ namespace workshop192.Domain
         }
     }
 }
-
-
-

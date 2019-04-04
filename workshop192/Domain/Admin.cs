@@ -24,13 +24,13 @@ namespace workshop192.Domain
         public string closeStore(Store store)
         {
             List<StoreRole> roles = store.getRoles();
-            foreach(StoreRole role in roles)
+            foreach (StoreRole role in roles)
             {
                 SubscribedUser sub = role.getUser();
                 sub.removeStoreRole(role);
             }
             return dbStore.removeStore(store);
-            
+
         }
 
         public string complain(string description, SubscribedUser subscribedUser)
@@ -47,7 +47,7 @@ namespace workshop192.Domain
         {
             LinkedList<Complaint> complaints = dbComplaint.getComplaints();
             String str = "";
-            foreach(Complaint c in complaints)
+            foreach (Complaint c in complaints)
             {
                 str = str + c.toString();
             }
@@ -68,7 +68,7 @@ namespace workshop192.Domain
         public String logout(SubscribedUser sub, Session session)
         {
             String logoutResponse = dbSubscribedUser.logout(sub);
-            if (Equals(logoutResponse,""))
+            if (Equals(logoutResponse, ""))
             {
                 session.setState(new Guest());
             }
@@ -121,3 +121,7 @@ namespace workshop192.Domain
 
     }
 }
+
+
+
+
