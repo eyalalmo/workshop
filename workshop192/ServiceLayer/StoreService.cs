@@ -119,6 +119,41 @@ namespace workshop192.ServiceLayer
             return session.closeStore(store);
         }
 
+        public string addManager(Store store, string username, 
+            bool editProduct, bool editDiscount, bool editPolicy, Session session)
+        {
+            SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
+            if (toAdd == null)
+                return "no such user";
+            StoreRole sr = store.getStoreRole(session.getSubscribedUser());
+            if (sr.getStore() != store)
+                return "this user can't appoint to this store";
+            Permissions permissions = new Permissions(editProduct, editDiscount, editPolicy);
+            return sr.addManager(toAdd, permissions);
+        }
+
+        public string addOwner(Store store, string username, Session session)
+        {
+            SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
+            if (toAdd == null)
+                return "no such user";
+            StoreRole sr = store.getStoreRole(session.getSubscribedUser());
+            if (sr.getStore() != store)
+                return "this user can't appoint to this store";
+            return sr.addOwner(toAdd);
+        }
+
+        public string removeRole(Store store, string username, Session session)
+        {
+            SubscribedUser toRemove = DBSubscribedUser.getInstance().getSubscribedUser(username);
+            if (toRemove == null)
+                return "no such user";
+            StoreRole sr = store.getStoreRole(session.getSubscribedUser());
+            if (sr.getStore() != store)
+                return "this user can't remove roles from this store";
+            return sr.remove(toRemove);
+        }
+        
         private string checkProduct(string productName, string productCategory, int price, int rank, int quantityLeft)
         {
             if (productName == "")
