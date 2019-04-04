@@ -40,6 +40,7 @@ namespace workshop192.Domain
             if (!permissions.editProduct())
                 return user.getUsername() + " has no permission to add products in store " + store.getStoreName();
             store.addProduct(product);
+            DBProduct.getInstance().addProduct(product);
             return "";
         }
 
@@ -47,9 +48,10 @@ namespace workshop192.Domain
         {
             if (!permissions.editProduct())
                 return user.getUsername() + " has no permission to remove products in store " + store.getStoreName();
-            //if (!store.productExists(product))
-            //    return "product doesn't exsits";
+            if (product.getStore() != store || !store.getProductList().Contains(product))
+                return "product doesn't belong to this store";
             store.removeProduct(product);
+            DBProduct.getInstance().removeProduct(product);
             return "";
         }
 
