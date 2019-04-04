@@ -12,11 +12,6 @@ namespace workshop192.Domain.Tests
     [TestClass()]
     public class DBSessionTests
     {
-        [TestMethod()]
-        public void getInstanceTest()
-        {
-            
-        }
 
         [TestMethod()]
         public void addSessionTest()
