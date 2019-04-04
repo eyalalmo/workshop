@@ -25,7 +25,6 @@ namespace workshop192.ServiceLayer
         public Dictionary<int, ShoppingCart> getShoppingCarts(Session user)
         {
             return user.getShoppingBasket().getShoppingCarts();
-     
         }
 
         public ShoppingCart getCart(Session user, Store store)
