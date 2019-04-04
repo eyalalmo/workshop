@@ -1,96 +1,97 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using workshop192.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using workshop192.Domain;
 
-
-
-namespace workshop192.Domain.Tests
+namespace workshop192.Domain
 {
-    [TestClass()]
-    public class DBSubscribedUserTests
+    public class DBSubscribedUser
     {
-        [TestMethod()]
-        public void DBSubscribedUserTest()
+
+        Dictionary<string, SubscribedUser> users;
+        Dictionary<string, SubscribedUser> loggedInUser;
+        private static DBSubscribedUser instance = null;
+
+
+
+        private DBSubscribedUser()
         {
-            
-        
+            users = new Dictionary<string, SubscribedUser>();
+            loggedInUser = new Dictionary<string, SubscribedUser>();
         }
 
-        [TestMethod()]
-        public void getInstanceTest()
+        public void cleanDB()
         {
-            
-
-
-       
+            users = new Dictionary<string, SubscribedUser>();
+            loggedInUser = new Dictionary<string, SubscribedUser>();
         }
 
-        [TestMethod()]
-        public void logoutTest()
+        public static DBSubscribedUser getInstance()
         {
-            DBSubscribedUser db = DBSubscribedUser.getInstance();
-            Session s = new Session();
-          
-            s.register("etay", "etay");
-            s.login("etay", "etay");
-            if(db.getSubscribedUser("etay")==null)
-                Assert.Fail();
-            s.logout();
-            Assert.AreEqual("", db.getloggedInUser("etay"));
-          
+            if (instance == null)
+            {
+                instance = new DBSubscribedUser();
+            }
+            return instance;
         }
 
-        [TestMethod()]
-        public void registerTest()
+        public string logout(SubscribedUser sub)
         {
-            DBSubscribedUser db = DBSubscribedUser.getInstance();
-            db.initDB();
-            Session s = new Session();
-            s.register("etay", "etay");
-            Assert.AreNotEqual(db.getSubscribedUser("etay"), null);
-
+            SubscribedUser user;
+            if (!loggedInUser.Remove(sub.getUsername()))
+                return "user isnt loggedin";
+            return "";
         }
 
-        [TestMethod()]
-        public void getSubscribedUserTest()
+        public string register(SubscribedUser user)
         {
-            DBSubscribedUser db = DBSubscribedUser.getInstance();
-            db.initDB();
-            Session s = new Session();
-            s.register("etay", "etay");
-            Assert.AreNotEqual(db.getSubscribedUser("etay"), null);
+            if (users.ContainsKey(user.getUsername()))
+                return "id already exist";
+
+            else
+            {
+                users.Add(user.getUsername(), user);
+            }
+            return "";
         }
 
-        [TestMethod()]
-        public void loginTest()
+        public SubscribedUser getSubscribedUser(string username)
         {
-            DBSubscribedUser db = DBSubscribedUser.getInstance();
-            db.initDB();
-            Session s = new Session();
-            s.register("etay", "etay");
-            s.login("etay", "etay");
-            Assert.AreEqual(db.getloggedInUser("etay"), "");
+            SubscribedUser user;
+            if (!users.TryGetValue(username, out user))
+                return null;
+            return user;
         }
 
-        [TestMethod()]
-        public void removeTest()
+        public string login(SubscribedUser user)
         {
-            ////////////
+            if (loggedInUser.ContainsKey(user.getUsername()))
+                return "id already loggedIn";
+
+            else
+            {
+                loggedInUser.Add(user.getUsername(), user);
+            }
+            return "";
         }
 
-        [TestMethod()]
-        public void initTest()
+        public string remove(SubscribedUser user)
         {
-            DBSubscribedUser db = DBSubscribedUser.getInstance();
-            db.initDB();
-            Session s = new Session();
-            s.register("etay", "etay");
-            db.initDB();
-            Assert.AreEqual(db.getSubscribedUser("etay"), null);
+            if (users.Remove(user.getUsername()) == false)
+            {
+                return " user isnt subscribe";
+            }
+            return "";
+        }
+        public SubscribedUser getloggedInUser(string name)
+        {
+            SubscribedUser user;
+            if (!loggedInUser.TryGetValue(name, out user))
+                return null;
+            return user;
         }
     }
 }
+
