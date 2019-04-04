@@ -46,6 +46,7 @@ namespace workshop192.Domain
             {
                 ShoppingCart sc = new ShoppingCart(storeID);
                 sc.addToCart(product, amount);
+                shoppingCarts.Add(storeID, sc);
             }
         }
         public String checkout (String address,String creditCard){
@@ -68,6 +69,8 @@ namespace workshop192.Domain
             }
             return null;
         }
+
+
 
     }
 }
