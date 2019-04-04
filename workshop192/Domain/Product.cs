@@ -52,7 +52,7 @@ namespace workshop192.Domain
 
         public int getQuantityLeft()
         {
-            throw new NotImplementedException();
+            return this.quantityLeft;
         }
 
 
