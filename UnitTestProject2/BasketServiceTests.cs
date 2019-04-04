@@ -40,24 +40,7 @@ namespace workshop192.ServiceLayer.Tests
         [TestMethod()]
         public void addToCartTest()
         {
-            /*
-            LinkedList<Product> products1 = store1.getProductList();
-            Product p1 = products1.ElementAt(0);
-            Product p2 = products1.ElementAt(1);
-            Product p3 = products1.ElementAt(2);
-
-            LinkedList<Product> products2 = store2.getProductList();
-            Product p4 = products2.ElementAt(0);
-            Product p5 = products2.ElementAt(1);
-
-            p1.setQuantityLeft(2);
-            p2.setQuantityLeft(0);
-            p3.setQuantityLeft(10);
-
-            p4.setQuantityLeft(2);
-            p5.setQuantityLeft(1);
-
-            */
+            
             UserService user = UserService.getInstance();
             Session session1 = userService.startSession();
             user.register(session1, "user", "user");
@@ -65,11 +48,11 @@ namespace workshop192.ServiceLayer.Tests
 
             store1 = storeService.addStore("zebra", "Clothes", session1);
             store2 = storeService.addStore("iFix", "Technology", session1);
-            p1 = new Product("dress", "clothing", 20, 5, 2, store1);
-            p2 = new Product("coat", "clothing", 100, 2, 0, store1);
-            p3 = new Product("hat", "clothing", 200, 3, 10, store1);
-            p4 = new Product("iPhone XS", "Technology", 120, 1, 2, store2);
-            p5 = new Product("galaxy X", "Technology", 110, 4, 1, store2);
+            p1 = storeService.addProduct("dress", "clothing", 20, 5, 2, store1,session1);
+            p2 = storeService.addProduct("coat", "clothing", 100, 2, 1, store1, session1);
+            p3 = storeService.addProduct("hat", "clothing", 200, 3, 10, store1, session1);
+            p4 = storeService.addProduct("iPhone XS", "Technology", 120, 1, 2, store2, session1);
+            p5 = storeService.addProduct("galaxy X", "Technology", 110, 4, 7, store2, session1);
 
             string s1 = basketService.addToCart(session1, store1, p1, 1); //ok
             string s2 = basketService.addToCart(session1, store1, p2, 2); // should not succesed 
@@ -78,27 +61,13 @@ namespace workshop192.ServiceLayer.Tests
             string s4 = basketService.addToCart(session1, store2, p4, 3); // should not succesed 
             string s5 = basketService.addToCart(session1, store2, p5, 5); //ok
 
-            Assert.Equals("", s1);
+            Assert.AreEqual("", s1);
             Assert.AreNotEqual("", s2);
-            Assert.Equals("", s3);
+            Assert.AreEqual("", s3);
 
             Assert.AreNotEqual("", s4);
-            Assert.Equals("", s5);
-
-            /*  ShoppingCart shoppingCart1 =
-              ShoppingCart shoppingCart2 = session.getShoppingBasket().getShoppingCartByID(store2.getStoreID());
-
-              Dictionary<Product, int> productsInSC1 = shoppingCart1.getProductsInCarts();
-              Dictionary<Product, int> productsInSC2 = shoppingCart2.getProductsInCarts();
-
-              Assert.AreEqual(true, productsInSC1.ContainsKey(p1));
-              Assert.AreEqual(false, productsInSC1.ContainsKey(p2));
-              Assert.AreEqual(true, productsInSC1.ContainsKey(p3));
-
-              Assert.AreEqual(false, productsInSC2.ContainsKey(p4));
-              Assert.AreEqual(true, productsInSC2.ContainsKey(p5));
-              */
-
+            Assert.AreEqual("", s5);
+            
 
 
         }
@@ -116,11 +85,11 @@ namespace workshop192.ServiceLayer.Tests
             Store store4 = storeService.addStore("bikeMe", "BikeStore", session2);
             
             
-            Product p6 = storeService.addProduct("dress", "clothing", 20, 5, 1, store3);
-            Product p7 = storeService.addProduct("coat", "clothing", 100, 2, 2, store3);
-            Product p8 = storeService.addProduct("hat", "clothing", 200, 3, 3, store3);
-            Product p9 = storeService.addProduct("scooter", "vehicle", 120, 1, 7, store4);
-            Product p10 = storeService.addProduct("Bicycle", "vehicle", 110, 4, 9, store4);
+            Product p6 = storeService.addProduct("dress", "clothing", 20, 5, 1, store3, session2);
+            Product p7 = storeService.addProduct("coat", "clothing", 100, 2, 2, store3, session2);
+            Product p8 = storeService.addProduct("hat", "clothing", 200, 3, 3, store3, session2);
+            Product p9 = storeService.addProduct("scooter", "vehicle", 120, 1, 7, store4, session2);
+            Product p10 = storeService.addProduct("Bicycle", "vehicle", 110, 4, 9, store4, session2);
 
             string s1 = basketService.addToCart(session2, store3, p6, 1);
             string s2 = basketService.addToCart(session2, store3, p7, 2);

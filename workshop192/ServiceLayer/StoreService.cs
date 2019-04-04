@@ -22,18 +22,20 @@ namespace workshop192.ServiceLayer
             return instance;
         }
 
-        public string addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, Store store, Session session)
+        public Product addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, Store store, Session session)
         {
             DBStore storeDB = DBStore.getInstance();
 
             string res = checkProduct(productName, productCategory, price, rank, quantityLeft);
             if (res != "")
-                return res;
+                return null;
 
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
             Product product = new Product(productName, productCategory, price, rank, quantityLeft, store);
 
-            return sr.addProduct(product);
+            if (!sr.addProduct(product).Equals(""))
+                return null;
+            return product;
         }
 
         public string removeProduct(Product product, Session session)
