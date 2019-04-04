@@ -68,7 +68,18 @@ namespace workshop192.ServiceLayer
             {
                 return "ERROR: bad session";
             }
-            return user.logout();
+            return user.
+                
+               logout();
+        }
+
+        public Store createStore(Session session, String storeName, String description)
+        {
+            if (session == null)
+            {
+                return null;
+            }
+            return session.createStore(storeName, description);
         }
 
         /*

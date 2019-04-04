@@ -55,7 +55,6 @@ namespace workshop192.ServiceLayer.Tests
             Assert.IsTrue(searchResult1.Count == 2);
             Assert.IsTrue(productExists("pan", searchResult1));
             Assert.IsTrue(productExists("stove", searchResult1));
-            Assert.IsTrue(contains);
 
 
             List<Product> searchResult2 = userService.searchProducts("shirt", null, null);
@@ -108,15 +107,17 @@ namespace workshop192.ServiceLayer.Tests
             Session session1 = user.startSession();
             user.register(session1, "bob", "theBuilder");
             user.login(session1, "bob", "theBuilder");
-
+            Store store = user.createStore(session1, "Zara", "clothing");
+            user.logout(session1);
 
             Session session2 = user.startSession();
-            Assert.AreEqual(user.login(session, "admin", "1234"), "");
-            user.register(session, "bob", "bob");
+            Assert.AreEqual(user.login(session2, "admin", "1234"), "");
+            user.removeUser(session2, "bob");
 
-
-
+            //user does not exist anymore, login fails
+            Assert.AreNotEqual(user.login(session2, "admin", "1234"), "");
 
         }
     }
+}
 
