@@ -22,6 +22,12 @@ namespace workshop192.Domain
             return instance;
         }
 
+        public void DBinit()
+        {
+            stores = new LinkedList<Store>();
+            storeRole = new LinkedList<StoreRole>();
+            nextStoreID = 0;
+        }
         private DBStore()
         {
             stores = new LinkedList<Store>();

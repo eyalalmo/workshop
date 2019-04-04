@@ -69,7 +69,6 @@
     <Compile Include="Domain\ShoppingCartTests.cs" />
     <Compile Include="Domain\StoreOwnerTests.cs" />
     <Compile Include="Domain\StoreTests.cs" />
-    <Compile Include="Domain\SubscribedUserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

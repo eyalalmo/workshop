@@ -4,3 +4,10 @@ C:\Users\etay2\Desktop\C#WorksVS\workshop192\workshop192\bin\Debug\workshop192.p
 C:\Users\etay2\Desktop\C#WorksVS\workshop192\workshop192\obj\Debug\workshop192.exe
 C:\Users\etay2\Desktop\C#WorksVS\workshop192\workshop192\obj\Debug\workshop192.pdb
 C:\Users\etay2\Desktop\C#WorksVS\workshop192\workshop192\obj\Debug\workshop192.csproj.CoreCompileInputs.cache
+C:\Users\eilonben\Source\Repos\workshop\workshop192\obj\Debug\workshop192.csprojAssemblyReference.cache
+C:\Users\eilonben\Source\Repos\workshop\workshop192\obj\Debug\workshop192.csproj.CoreCompileInputs.cache
+C:\Users\eilonben\Source\Repos\workshop\workshop192\obj\Debug\workshop192.exe
+C:\Users\eilonben\Source\Repos\workshop\workshop192\obj\Debug\workshop192.pdb
+C:\Users\eilonben\Source\Repos\workshop\workshop192\bin\Debug\workshop192.exe.config
+C:\Users\eilonben\Source\Repos\workshop\workshop192\bin\Debug\workshop192.exe
+C:\Users\eilonben\Source\Repos\workshop\workshop192\bin\Debug\workshop192.pdb

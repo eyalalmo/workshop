@@ -23,11 +23,6 @@ namespace workshop192.Domain.Tests
             Assert.Fail();
         }
 
-        [TestMethod()]
-        public void removeStoreRoleTest1()
-        {
-            Assert.Fail();
-        }
 
         [TestMethod()]
         public void getStoreRoleTest()

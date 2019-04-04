@@ -99,7 +99,7 @@ namespace workshop192.ServiceLayer
             return DBProduct.getInstance().getAllProducts();
         }*/
         //use case 2.5
-        public LinkedList<Product> searchProducts(String name, String keywords, String category, int[] price_range,int minimumRank)
+        public List<Product> searchProducts(String name, String keywords, String category, int[] price_range,int minimumRank)
         {
             return DBProduct.getInstance().searchProducts(name, keywords, category, price_range,minimumRank);
         }

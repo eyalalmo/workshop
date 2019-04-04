@@ -28,9 +28,9 @@ namespace workshop192.Domain
             return "ERROR: guest cannot complain";
         }
 
-        public String createStore(String storeName, String description, SubscribedUser sub)
+        public Store createStore(String storeName, String description, SubscribedUser sub)
         {
-            return "ERROR: not a subscribed user";
+            return null;
         }
 
         public String getComplaints()
