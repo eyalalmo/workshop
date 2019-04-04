@@ -12,9 +12,9 @@ namespace workshop192.Domain
         private string storeName;
         private string description;
         private LinkedList<Product> productList;
-        private bool status;
         private List<StoreRole> roles;
         private int numOfOwners;
+        private bool active;
        
         public Store (string storeName, string description)
         {
@@ -23,13 +23,25 @@ namespace workshop192.Domain
             this.description = description;
             productList = new LinkedList<Product>();
             roles = new List<StoreRole>();
-            status = true;
             numOfOwners = 0;
+            active = true;
         }
 
         public void addProduct(Product p)
         {
             productList.AddFirst(p);
+        }
+        public bool isActive()
+        {
+            return this.active;
+        }
+        public void closeStore()
+        {
+            active = false;
+        }
+        public void openStore()
+        {
+            active = true;
         }
         public void removeProduct(Product p)
         {
@@ -53,16 +65,6 @@ namespace workshop192.Domain
                     return true;
             }
             return false;
-        }
-
-        public void changeStatus()
-        {
-            status = !status;
-        }
-
-        public bool getStatus()
-        {
-            return status;
         }
         public LinkedList<Product> getProductList()
         {
