@@ -28,6 +28,12 @@ namespace workshop192.Domain
             storeRole = new LinkedList<StoreRole>();
             nextStoreID = 0;
         }
+        public void init()
+        {
+            stores = new LinkedList<Store>();
+            storeRole = new LinkedList<StoreRole>();
+            nextStoreID = 0;
+        }
 
         public void removeStoreRole(StoreRole sr)
         {

@@ -20,7 +20,11 @@ namespace workshop192.Domain
                 instance = new DBProduct();
             return instance;
         }
-
+        public void init()
+        {
+            productList = new LinkedList<Product>();
+            nextProductID = 0;
+        }
         private DBProduct()
         {
             productList = new LinkedList<Product>();
