@@ -98,10 +98,35 @@ namespace workshop192.ServiceLayer.Tests
             return false;
         }
 
+        //3.1
+        [TestMethod]
+        public void TestMethod3()
+        {
+            UserService user = UserService.getInstance();
+            Session session = new Session();
+            user.register(session, "bar", "bur");
+            user.login(session, "bar", "bur");
+            Assert.IsTrue(session.getState() is LoggedIn);
+            user.logout(session);
+            Assert.IsTrue(session.getState() is Guest);
+        }
+
+        //3.2
+        [TestMethod()]
+        public void TestMethod4()
+        {
+         
+            UserService userService = UserService.getInstance();
+            Session session = new Session();
+
+            userService.register(session, "anna", "banana");
+            userService.login(session, "anna", "banana");
+            Store store = 
+        }
 
         //6.2
         [TestMethod]
-        public void TestMethod3()
+        public void TestMethod5()
         {
             UserService user = UserService.getInstance();
             Session session1 = user.startSession();
@@ -115,7 +140,8 @@ namespace workshop192.ServiceLayer.Tests
             user.removeUser(session2, "bob");
 
             //user does not exist anymore, login fails
-            Assert.AreNotEqual(user.login(session2, "admin", "1234"), "");
+            Assert.AreNotEqual(user.login(session1, "bob", "theBuilder"), "");
+            Assert.IsFalse(store.isActive());
 
             ////////////////////////////////////////
 
