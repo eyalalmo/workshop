@@ -78,7 +78,7 @@ namespace workshop192.Domain
                 return "ERROR: username already exists";
             SubscribedUser sub = new SubscribedUser(username, encrypted, session.getShoppingBasket());
             return DBSubscribedUser.getInstance().register(sub);
-            }
+        }
 
         public string removeUser(String user)
         {
@@ -86,6 +86,3 @@ namespace workshop192.Domain
         }
     }
 }
-
-
-

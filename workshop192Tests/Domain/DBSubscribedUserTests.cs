@@ -16,17 +16,17 @@ namespace workshop192.Domain.Tests
         [TestMethod()]
         public void DBSubscribedUserTest()
         {
-            
-        
+
+
         }
 
         [TestMethod()]
         public void getInstanceTest()
         {
-            
 
 
-       
+
+
         }
 
         [TestMethod()]
@@ -34,46 +34,45 @@ namespace workshop192.Domain.Tests
         {
             DBSubscribedUser db = DBSubscribedUser.getInstance();
             Session s = new Session();
-          
+
             s.register("etay", "etay");
             s.login("etay", "etay");
-            if(db.getSubscribedUser("etay")==null)
+            if (db.getSubscribedUser("etay") == null)
                 Assert.Fail();
             s.logout();
             Assert.AreEqual("", db.getloggedInUser("etay"));
-          
+
         }
 
         [TestMethod()]
         public void registerTest()
         {
             DBSubscribedUser db = DBSubscribedUser.getInstance();
-            db.initDB();
             Session s = new Session();
             s.register("etay", "etay");
             Assert.AreNotEqual(db.getSubscribedUser("etay"), null);
-
+            db.cleanDB();
         }
 
         [TestMethod()]
         public void getSubscribedUserTest()
         {
             DBSubscribedUser db = DBSubscribedUser.getInstance();
-            db.initDB();
             Session s = new Session();
             s.register("etay", "etay");
             Assert.AreNotEqual(db.getSubscribedUser("etay"), null);
+            db.cleanDB();
         }
 
         [TestMethod()]
         public void loginTest()
         {
             DBSubscribedUser db = DBSubscribedUser.getInstance();
-            db.initDB();
             Session s = new Session();
             s.register("etay", "etay");
             s.login("etay", "etay");
             Assert.AreEqual(db.getloggedInUser("etay"), "");
+            db.cleanDB();
         }
 
         [TestMethod()]
@@ -86,11 +85,11 @@ namespace workshop192.Domain.Tests
         public void initTest()
         {
             DBSubscribedUser db = DBSubscribedUser.getInstance();
-            db.initDB();
             Session s = new Session();
             s.register("etay", "etay");
-            db.initDB();
+            db.cleanDB();
             Assert.AreEqual(db.getSubscribedUser("etay"), null);
+            db.cleanDB();
         }
     }
 }

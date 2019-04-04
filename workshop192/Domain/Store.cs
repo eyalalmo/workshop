@@ -15,8 +15,8 @@ namespace workshop192.Domain
         private bool status;
         private List<StoreRole> roles;
         private int numOfOwners;
-       
-        public Store (string storeName, string description)
+
+        public Store(string storeName, string description)
         {
             this.storeID = DBStore.getNextStoreID();
             this.storeName = storeName;
@@ -37,7 +37,7 @@ namespace workshop192.Domain
         }
         public bool productExists(int productID)
         {
-           foreach (Product p  in productList)
+            foreach (Product p in productList)
             {
                 if (p.getProductID() == productID)
                     return true;
@@ -98,7 +98,8 @@ namespace workshop192.Domain
             this.description = description;
         }
 
-        public void addStoreRole(StoreRole toAdd){
+        public void addStoreRole(StoreRole toAdd)
+        {
             if (toAdd is StoreOwner)
             {
                 numOfOwners++;
@@ -110,7 +111,7 @@ namespace workshop192.Domain
         {
             return numOfOwners;
         }
-        
+
         public List<StoreRole> getRoles()
         {
             return roles;
@@ -118,7 +119,7 @@ namespace workshop192.Domain
 
         public StoreRole getStoreRole(SubscribedUser user)
         {
-            foreach(StoreRole sr in roles)
+            foreach (StoreRole sr in roles)
             {
                 if (sr.getUser() == user)
                 {
