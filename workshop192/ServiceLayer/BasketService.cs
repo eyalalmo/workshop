@@ -39,7 +39,8 @@ namespace workshop192.ServiceLayer
                 return "ERROR: quantity should be a positive number";
             }
 
-            return user.getShoppingBasket().getShoppingCartByID(store.getStoreID()).addToCart(product, amount);
+             user.getShoppingBasket().addToCart(product, amount);
+            return "";
         }
         //use case 2.7
         public String removeFromCart(Session user,Store store, Product product)

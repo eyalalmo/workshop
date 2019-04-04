@@ -19,3 +19,10 @@ C:\Users\eilonben\Source\Repos\workshop\workshop192\obj\Debug\workshop192.csproj
 C:\Users\eilonben\Source\Repos\workshop\workshop192\obj\Debug\workshop192.csproj.CoreCompileInputs.cache
 C:\Users\eilonben\Source\Repos\workshop\workshop192\obj\Debug\workshop192.exe
 C:\Users\eilonben\Source\Repos\workshop\workshop192\obj\Debug\workshop192.pdb
+C:\bar\school\thirdYear\F\workshop\project\workshop192\bin\Debug\workshop192.exe.config
+C:\bar\school\thirdYear\F\workshop\project\workshop192\bin\Debug\workshop192.exe
+C:\bar\school\thirdYear\F\workshop\project\workshop192\bin\Debug\workshop192.pdb
+C:\bar\school\thirdYear\F\workshop\project\workshop192\obj\Debug\workshop192.csprojResolveAssemblyReference.cache
+C:\bar\school\thirdYear\F\workshop\project\workshop192\obj\Debug\workshop192.csproj.CoreCompileInputs.cache
+C:\bar\school\thirdYear\F\workshop\project\workshop192\obj\Debug\workshop192.exe
+C:\bar\school\thirdYear\F\workshop\project\workshop192\obj\Debug\workshop192.pdb
