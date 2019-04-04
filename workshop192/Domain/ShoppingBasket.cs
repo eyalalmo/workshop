@@ -31,17 +31,13 @@ namespace workshop192.Domain
             return sum;
 
         }
-        public String addToCart(Product product, int amount)
+        public void addToCart(Product product, int amount)
         {
             int storeID = product.getStore().getStoreID();
             bool found = false;
             foreach(ShoppingCart sc in shoppingCarts.Values)
                 if (sc.getStoreID() == storeID)
                 {
-                     if(sc.getProductsInCarts().ContainsKey(product))
-                    {
-                        return " product already exist";
-                            }
                     sc.addToCart(product,amount);
                     found = true;
                     break;
@@ -52,7 +48,6 @@ namespace workshop192.Domain
                 sc.addToCart(product, amount);
                 shoppingCarts.Add(storeID, sc);
             }
-            return "";
         }
         public String checkout (String address,String creditCard){
             // return the result of the proccess by order of cart
