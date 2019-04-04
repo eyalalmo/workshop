@@ -71,7 +71,7 @@ namespace workshop192.Domain
                 sum += (entry.Key.getPrice() * entry.Value);
             }
             return sum;
-
+        }
         public String checkout(String address,String creditCard) {
             String res = "";
             int sum = 0;

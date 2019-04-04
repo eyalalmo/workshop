@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace workshop192.ServiceLayer
 {
-    class BasketService
+    public class BasketService
     {
         private static BasketService instance;
 

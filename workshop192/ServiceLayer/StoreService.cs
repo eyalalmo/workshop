@@ -7,7 +7,7 @@ using workshop192.Domain;
 
 namespace workshop192.ServiceLayer
 {
-    class StoreService
+    public class StoreService
     {
         private static StoreService instance = null;
 
