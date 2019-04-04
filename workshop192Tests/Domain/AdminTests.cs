@@ -12,32 +12,17 @@ namespace workshop192.Domain.Tests
     public class AdminTests
     {
         [TestMethod()]
-        public void AdminTest()
-        {
-
-        }
-
-        [TestMethod()]
         public void createStoreTest()
         {
             UserState state = new Admin();
             Assert.IsNull(state.createStore("ToyRUs", "lots of toys", null));
         }
-
-        [TestMethod()]
-        public void closeStoreTest()
-        {
-            Assert.Fail();
-        }
-
-
-
+        
         [TestMethod()]
         public void getPurchaseHistoryTest()
         {
             UserState state = new Admin();
             Assert.IsTrue(Equals(state.getPurchaseHistory(null), "ERROR: No purchase history in Admin"));
-
         }
 
         [TestMethod()]
@@ -58,12 +43,6 @@ namespace workshop192.Domain.Tests
         {
             UserState state = new Admin();
             Assert.IsTrue(Equals(state.register("shalom", "1111", null), "ERROR: User already registered"));
-        }
-
-        [TestMethod()]
-        public void removeUserTest()
-        {
-            Assert.Fail();
         }
     }
 }
