@@ -134,6 +134,10 @@ namespace workshop192.Domain
         }
         public void removeStoreRole(StoreRole toRemove)
         {
+            if (toRemove is StoreOwner)
+            {
+                numOfOwners--;
+            }
             roles.Remove(toRemove);
         }
     }

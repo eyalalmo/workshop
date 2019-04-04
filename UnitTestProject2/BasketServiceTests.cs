@@ -26,8 +26,8 @@ namespace workshop192.ServiceLayer.Tests
             storeService.addProduct("dress", "clothing", 20, 5, 3, store1, session);
             storeService.addProduct("coat", "clothing", 100, 2, 4, store1, session);
             storeService.addProduct("hat", "clothing", 200, 3, 2, store1, session);
-            storeService.addProduct("iPhone XS", "clothing", 120, 1, 2, store2, session);
-            storeService.addProduct("galaxy X", "clothing", 110, 4, 0, store2, session);
+            storeService.addProduct("iPhone XS", "Technology", 120, 1, 2, store2, session);
+            storeService.addProduct("galaxy X", "Technology", 110, 4, 0, store2, session);
 
             LinkedList<Product> products1 = store1.getProductList();
             Product p1 = products1.ElementAt(0);
@@ -91,8 +91,13 @@ namespace workshop192.ServiceLayer.Tests
             storeService.addProduct("dress", "clothing", 20, 5, 3, store1, session);
             storeService.addProduct("coat", "clothing", 100, 2, 4, store1, session);
             storeService.addProduct("hat", "clothing", 200, 3, 2, store1, session);
-            storeService.addProduct("scooter", "clothing", 120, 1, 2, store2, session);
-            storeService.addProduct("galaxy X", "clothing", 110, 4, 0, store2, session);
+            storeService.addProduct("scooter", "vehicle", 120, 1, 2, store2, session);
+            storeService.addProduct("Bicycle", "vehicle", 110, 4, 0, store2, session);
+
+            BasketService basketService = BasketService.getInstance();
+
+            ShoppingCart shoppingCart1 = basketService.getCart(session, store1);
+
 
 
         }

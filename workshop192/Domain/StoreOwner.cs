@@ -28,12 +28,16 @@ namespace workshop192.Domain
         public string addProduct(Product product)
         {
             store.addProduct(product);
+            DBProduct.getInstance().addProduct(product);
             return "";
         }
 
         public string removeProduct(Product product)
         {
+            if (product.getStore() != store || !store.getProductList().Contains(product))
+                return "product doesn't belong to this store";
             store.removeProduct(product);
+            DBProduct.getInstance().removeProduct(product);
             return "";
         }
 
@@ -72,8 +76,10 @@ namespace workshop192.Domain
 
         public string addManager(SubscribedUser manager, Permissions permissions)
         {
-            if (store.getStoreRole(manager)!=null)
+            if (store.getStoreRole(manager) != null)
                 return "user " + manager.getUsername() + " already have a role in store " + store.getStoreName();
+            if (permissions == null)
+                return "wrong permissions";
             StoreRole newManeger = new StoreManager(this.user, store, manager, permissions);
             store.addStoreRole(newManeger);
             manager.addStoreRole(newManeger);
@@ -95,8 +101,8 @@ namespace workshop192.Domain
         public string remove(SubscribedUser role)
         {
             StoreRole sr = role.getStoreRole(store);
-            //if (sr == null || sr is StoreManager)
-            //    return "user " + owner.getUsername() + " is not an owner in store " + store.getStoreName();
+            if (sr == null)
+                return "user " + role.getUsername() + " doesn't have a role in store " + store.getStoreName();
             if (sr.getAppointedBy() != this.user)
                 return "user " + user.getUsername() + " didn't appoint " + role.getUsername();
             sr.removeAllAppointedBy();
