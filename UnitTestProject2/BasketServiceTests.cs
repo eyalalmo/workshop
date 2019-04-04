@@ -114,12 +114,14 @@ namespace workshop192.ServiceLayer.Tests
 
             Store store3 = storeService.addStore("zara", "Clothes", session2);
             Store store4 = storeService.addStore("bikeMe", "BikeStore", session2);
+            
+            
+            Product p6 = storeService.addProduct("dress", "clothing", 20, 5, 1, store3);
+            Product p7 = storeService.addProduct("coat", "clothing", 100, 2, 2, store3);
+            Product p8 = storeService.addProduct("hat", "clothing", 200, 3, 3, store3);
+            Product p9 = storeService.addProduct("scooter", "vehicle", 120, 1, 7, store4);
+            Product p10 = storeService.addProduct("Bicycle", "vehicle", 110, 4, 9, store4);
 
-            Product p6 = new Product("dress", "clothing", 20, 5, 1, store3);
-            Product p7 = new Product("coat", "clothing", 100, 2, 2, store3);
-            Product p8 = new Product("hat", "clothing", 200, 3, 3, store3);
-            Product p9 = new Product("scooter", "vehicle", 120, 1, 7, store4);
-            Product p10 = new Product("Bicycle", "vehicle", 110, 4, 9, store4);
             string s1 = basketService.addToCart(session2, store3, p6, 1);
             string s2 = basketService.addToCart(session2, store3, p7, 2);
             string s3 = basketService.addToCart(session2, store3, p8, 2);
