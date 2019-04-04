@@ -113,7 +113,7 @@ namespace workshop192.Domain.Tests
             sr.addProduct(p);
 
             Assert.AreEqual("", sr.setProductName(p, "other name"));
-            Assert.AreEqual(-5, p.getProductName());
+            Assert.AreEqual("other name", p.getProductName());
         }
 
         [TestMethod()]
@@ -249,7 +249,7 @@ namespace workshop192.Domain.Tests
         }
 
         [TestMethod()]
-        public void closeStoreTest()
+        public void closeStoreSuccTest()
         {
             Assert.Fail();
         }
