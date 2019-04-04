@@ -70,7 +70,7 @@ namespace workshop192.Domain
             return "";
         }
 
-        public string addManager(SubscribedUser manager, Dictionary<string, bool> permissions)
+        public string addManager(SubscribedUser manager, Permissions permissions)
         {
             if (store.getStoreRole(manager)!=null)
                 return "user " + manager.getUsername() + " already have a role in store " + store.getStoreName();
