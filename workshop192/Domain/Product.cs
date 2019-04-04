@@ -20,7 +20,7 @@ namespace workshop192.Domain
         private Discount discount;
 
        
-        public Product(string productName, string productCategory, int price, int rank, int quantityLeft, Store store)
+        public Product(string productName, string productCategory, int price, int rank, int quantityLeft, Store store, Session session)
         {
             this.productID = DBProduct.getNextProductID();
             this.productName = productName;
