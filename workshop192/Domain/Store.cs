@@ -60,6 +60,10 @@ namespace workshop192.Domain
             status = !status;
         }
 
+        public bool getStatus()
+        {
+            return status;
+        }
         public LinkedList<Product> getProductList()
         {
             return this.productList;

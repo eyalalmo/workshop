@@ -22,7 +22,19 @@ namespace workshop192.Domain
             return instance;
         }
 
+        public void DBinit()
+        {
+            stores = new LinkedList<Store>();
+            storeRole = new LinkedList<StoreRole>();
+            nextStoreID = 0;
+        }
         private DBStore()
+        {
+            stores = new LinkedList<Store>();
+            storeRole = new LinkedList<StoreRole>();
+            nextStoreID = 0;
+        }
+        public void init()
         {
             stores = new LinkedList<Store>();
             storeRole = new LinkedList<StoreRole>();
@@ -67,9 +79,11 @@ namespace workshop192.Domain
         {
             storeRole.AddFirst(sr);
         }
-        public void addStore(Store store)
+        public int addStore(Store store)
         {
+
             stores.AddFirst(store);
+            return store.getStoreID();
         }
 
         public Store getStore(int storeID)

@@ -8,7 +8,6 @@ namespace workshop192.Domain
 {
     public interface StoreRole
     {
-
         SubscribedUser getUser();
         Store getStore();
         String addProduct(Product product);
@@ -18,17 +17,11 @@ namespace workshop192.Domain
         String addToProductQuantity(Product product, int amount);
         String decFromProductQuantity(Product product, int amount);
         String setProductDiscount(Product product, Discount discount);
-        String addManager(SubscribedUser manager, Dictionary<string, bool> permissions);
+        String addManager(SubscribedUser manager, Permissions permissions);
         String addOwner(SubscribedUser owner);
-        //////
-        //String removeManager(SubscribedUser manager);
-        //String removeOwner(SubscribedUser owner);
-        //////
         String remove(SubscribedUser user);
-        //////
         String closeStore();
         SubscribedUser getAppointedBy();
         void removeAllAppointedBy();
-
     }
 }

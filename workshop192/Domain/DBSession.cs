@@ -23,6 +23,10 @@ namespace workshop192.Domain
             sessions = new LinkedList<Session>();
         }
 
+        public void init()
+        {
+            sessions = new LinkedList<Session>();
+        }
         public String addSession(Session s)
         {
             if (sessions.Contains(s))

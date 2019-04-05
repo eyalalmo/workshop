@@ -8,7 +8,11 @@ namespace workshop192.Domain
 {
     public class DBProduct
     {
-
+        public void initDB()
+        {
+            productList = new LinkedList<Product>();
+            nextProductID = 0;
+        }
         private static DBProduct  instance;
 
         private  LinkedList<Product> productList;
@@ -20,16 +24,21 @@ namespace workshop192.Domain
                 instance = new DBProduct();
             return instance;
         }
-
+        public void init()
+        {
+            productList = new LinkedList<Product>();
+            nextProductID = 0;
+        }
         private DBProduct()
         {
             productList = new LinkedList<Product>();
             nextProductID = 0;
         }
 
-        public void addProduct(Product p)
+        public int addProduct(Product p)
         {
             productList.AddFirst(p);
+            return p.getProductID();
         }
 
         public static int getNextProductID()
@@ -59,32 +68,33 @@ namespace workshop192.Domain
             return productList;
         }
 
-        public  LinkedList<Product> searchProducts(string name, string keywords, string category)
+
+        public  List<Product> searchProducts(string name, string keywords, string category)
         {
-            LinkedList<Product> res = new LinkedList<Product>();
+            List<Product> res = new List<Product>();
             foreach(Product p in productList)
             {
                 if(name!= null && p.getProductName()!=null && p.getProductName() == name)
                 {
-                    res.AddFirst(p);
+                    res.Add(p);
                 }
                 string pName = p.getProductName();
                 if (keywords != null && pName != null && pName.Contains(keywords))
                 {
                     if (!res.Contains(p))
-                        res.Contains(p);
+                        res.Add(p);
                 }
                 string categ = p.getProductCategory();
                 if (keywords != null && categ != null && categ.Contains(keywords))
                 {
                     if (!res.Contains(p))
-                        res.Contains(p);
+                        res.Add(p);
                 }
 
                 if(category!=null && categ!=null & categ.Contains(category))
                 {
                     if (!res.Contains(p))
-                        res.Contains(p);
+                        res.Add(p);
                 }
 
 
@@ -96,19 +106,21 @@ namespace workshop192.Domain
 
         }
 
-        public LinkedList<Product> filterBy(LinkedList<Product> list, int[] price_range, int minimumRank)
+
+        public List<Product> filterBy(List<Product> list, int[] price_range, int minimumRank)
         {
+            List<Product> toRemove = new List<Product>();
             foreach(Product p in list)
             {
                 int price = p.getActualPrice();
-                if (price < price_range[0] || price > price_range[1])
-                    list.Remove(p);
+                if (price_range!=null && (price < price_range[0] || price > price_range[1]))
+                    toRemove.Add(p);
                 else if (minimumRank != 0 && p.getRank() < minimumRank)
                     if (list.Contains(p))
-                        list.Remove(p);
+                        toRemove.Add(p);
             }
 
-            return list;
+            return list.Except(toRemove).ToList();
 
         }
     }

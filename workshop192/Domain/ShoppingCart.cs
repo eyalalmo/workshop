@@ -32,6 +32,8 @@ namespace workshop192.Domain
             if ( quantityLeft - amount> 0)
             {
                 //product.setQuantityLeft(quantityLeft - amount);
+                if (productList.ContainsKey(product))
+                    return "error: product exist";
                 productList.Add(product, amount);
                 return "";
             }
@@ -53,6 +55,8 @@ namespace workshop192.Domain
         {
             if (!productList.ContainsKey(p))
                 return "- product does not exist";
+            if (p.getQuantityLeft() < newAmount)
+                return "there is no such amount of the product";
             int oldAmount = productList[p];
             int quantity = p.getQuantityLeft();
             if (quantity + oldAmount - newAmount < 0)
@@ -63,9 +67,16 @@ namespace workshop192.Domain
             return "";
 
         }
-
-
-        public String checkout() {
+        public int totalAmount()
+        {
+            int sum = 0;
+            foreach (KeyValuePair<Product, int> entry in productList)
+            {
+                sum += (entry.Key.getPrice() * entry.Value);
+            }
+            return sum;
+        }
+        public String checkout(String address,String creditCard) {
             String res = "";
             int sum = 0;
             foreach (KeyValuePair<Product, int> entry in productList)
@@ -74,19 +85,19 @@ namespace workshop192.Domain
                 {
                     
                     sum = entry.Key.getPrice() * entry.Value;
-                    Boolean isOk = PaymentService.getInstance().checkOut("496531",sum);
+                    Boolean isOk = PaymentService.getInstance().checkOut(creditCard,sum);
                     if (isOk)
                     {
                         entry.Key.setQuantityLeft(entry.Key.getQuantityLeft() - entry.Value);
 
-                        if (DeliveryService.getInstance().sendToUser("beer sheva", entry.Key) == false)
+                        if (DeliveryService.getInstance().sendToUser(address, entry.Key) == false)
                         {
                             entry.Key.setQuantityLeft(entry.Key.getQuantityLeft() + entry.Value);
                             res += " product: " + entry.Key.getProductID() + " can't deliver.\n ";
                         }
                         else
                         {
-                            res += " product: " + entry.Key.getProductID() + " complete payment.\n ";
+                            res += " product: " + entry.Key.getProductID() + " complete payment. ";
                         }
 
                         //////////add eilon part

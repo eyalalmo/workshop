@@ -7,7 +7,9 @@ using workshop192.Domain;
 
 namespace workshop192.ServiceLayer
 {
-    public class UserService
+
+   public  class UserService
+
     {
         private static UserService instance;
 
@@ -111,12 +113,13 @@ namespace workshop192.ServiceLayer
             return DBProduct.getInstance().getAllProducts();
         }*/
         //use case 2.5
-        public LinkedList<Product> searchProducts(String name, String keywords, String category)
+
+        public List<Product> searchProducts(String name, String keywords, String category)
         {
             return DBProduct.getInstance().searchProducts(name, keywords, category);
         }
 
-        public LinkedList<Product> filterProducts(LinkedList<Product> list, int[] price_range, int minimumRank)
+        public List<Product> filterProducts(List<Product> list, int[] price_range, int minimumRank)
         {
             return DBProduct.getInstance().filterBy(list, price_range, minimumRank);
 

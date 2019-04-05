@@ -35,5 +35,10 @@ namespace workshop192.Domain
             return true;
         }
 
+        public bool connectToSystem()
+        {
+            return true;
+        }
+
     }
 }

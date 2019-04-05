@@ -34,16 +34,6 @@ namespace workshop192.Domain
 
         }
           
-        private bool checkValidInfo(int price, int rank, int quantityLeft) ////// מיותר
-        {
-            if (rank < 1 || rank > 5)
-                return false;
-            if (price <= 0)
-                return false;
-            if (quantityLeft < 0)
-                return false;
-            return true;
-        }
 
         public int getActualPrice()
         {
@@ -52,7 +42,7 @@ namespace workshop192.Domain
 
         public int getQuantityLeft()
         {
-            throw new NotImplementedException();
+            return this.quantityLeft;
         }
 
 

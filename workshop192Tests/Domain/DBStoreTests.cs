@@ -11,70 +11,60 @@ namespace workshop192.Domain.Tests
     [TestClass()]
     public class DBStoreTests
     {
-        [TestMethod()]
-        public void getInstanceTest()
+        Store s;
+        SubscribedUser su;
+        StoreRole sr;
+       [TestInitialize()]
+        public void TestInitialize()
         {
-            Assert.Fail();
+            DBStore.getInstance().DBinit();
+            s = new Store("store", "store");
+            su = new SubscribedUser("u", "u", new ShoppingBasket());
+            sr = new StoreOwner(null, su, s);
+
         }
 
         [TestMethod()]
         public void removeStoreRoleTest()
         {
-            Assert.Fail();
+            DBStore.getInstance().addStoreRole(sr);
+            DBStore.getInstance().removeStoreRole(sr);
+            Assert.AreEqual(DBStore.getInstance().getStoreRole(s,su), null);
         }
 
-        [TestMethod()]
-        public void removeStoreRoleTest1()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void getStoreRoleTest()
-        {
-            Assert.Fail();
-        }
 
         [TestMethod()]
         public void addStoreRoleTest()
         {
-            Assert.Fail();
+            DBStore.getInstance().addStoreRole(sr);
+            Assert.AreEqual(DBStore.getInstance().getStoreRole(s, su),sr);
+
         }
 
         [TestMethod()]
         public void addStoreTest()
         {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void getStoreTest()
-        {
-            Assert.Fail();
+            int ID = DBStore.getInstance().addStore(s);
+            Assert.AreNotEqual(DBStore.getInstance().getStore(ID), null);
         }
 
         [TestMethod()]
         public void removeStoreTest()
         {
-            Assert.Fail();
+            int ID = DBStore.getInstance().addStore(s);
+            Assert.AreEqual(DBStore.getInstance().removeStore(s),"");
+            Assert.AreEqual(DBStore.getInstance().getStore(ID), null);
+            Assert.AreNotEqual(DBStore.getInstance().removeStore(s), "");
         }
 
         [TestMethod()]
         public void closeStoreTest()
         {
-            Assert.Fail();
+            int ID = DBStore.getInstance().addStore(s);
+            DBStore.getInstance().closeStore(s);
+            Assert.IsFalse(s.getStatus());//
         }
 
-        [TestMethod()]
-        public void getAllStoresTest()
-        {
-            Assert.Fail();
-        }
 
-        [TestMethod()]
-        public void getNextStoreIDTest()
-        {
-            Assert.Fail();
-        }
     }
 }
