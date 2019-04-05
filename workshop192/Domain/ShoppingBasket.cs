@@ -21,12 +21,12 @@ namespace workshop192.Domain
         }
 
 
-        public int totalAmount()
+        public int getTotalAmount()
         {
             int sum = 0;
             foreach (ShoppingCart sc in shoppingCarts.Values)
             {
-                sum += sc.totalAmount();
+                sum += sc.getTotalAmount();
             }
             return sum;
 

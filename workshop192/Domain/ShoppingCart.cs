@@ -67,7 +67,7 @@ namespace workshop192.Domain
             return "";
 
         }
-        public int totalAmount()
+        public int getTotalAmount()
         {
             int sum = 0;
             foreach (KeyValuePair<Product, int> entry in productList)

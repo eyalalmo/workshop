@@ -109,7 +109,7 @@ namespace UnitTestProject3
             cart.addToCart(p1, 2);
             cart.addToCart(p2, 1);
             cart.addToCart(p3, 3);
-            Assert.AreEqual(cart.totalAmount(), 40);
+            Assert.AreEqual(cart.getTotalAmount(), 40);
         }
         
         [TestMethod]
