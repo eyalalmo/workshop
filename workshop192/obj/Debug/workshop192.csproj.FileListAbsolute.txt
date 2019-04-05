@@ -25,3 +25,10 @@ C:\bar\school\thirdYear\F\workshop\project\workshop192\obj\Debug\workshop192.csp
 C:\bar\school\thirdYear\F\workshop\project\workshop192\obj\Debug\workshop192.csproj.CoreCompileInputs.cache
 C:\bar\school\thirdYear\F\workshop\project\workshop192\obj\Debug\workshop192.exe
 C:\bar\school\thirdYear\F\workshop\project\workshop192\obj\Debug\workshop192.pdb
+C:\Users\asus\source\repos\eyalalmo\workshop\workshop192\bin\Debug\workshop192.exe.config
+C:\Users\asus\source\repos\eyalalmo\workshop\workshop192\bin\Debug\workshop192.exe
+C:\Users\asus\source\repos\eyalalmo\workshop\workshop192\bin\Debug\workshop192.pdb
+C:\Users\asus\source\repos\eyalalmo\workshop\workshop192\obj\Debug\workshop192.csprojAssemblyReference.cache
+C:\Users\asus\source\repos\eyalalmo\workshop\workshop192\obj\Debug\workshop192.csproj.CoreCompileInputs.cache
+C:\Users\asus\source\repos\eyalalmo\workshop\workshop192\obj\Debug\workshop192.exe
+C:\Users\asus\source\repos\eyalalmo\workshop\workshop192\obj\Debug\workshop192.pdb
