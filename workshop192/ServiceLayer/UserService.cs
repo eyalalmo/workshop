@@ -84,34 +84,6 @@ namespace workshop192.ServiceLayer
             return session.createStore(storeName, description);
         }
 
-        /*
-        public String getPurchaseHistory(Session user)
-        {
-            if (user == null)
-            {
-                return "ERROR: bad session";
-            }
-            return user.getPurchaseHistory();
-        }
-        
-
-        //use case 2.4
-        /*public LinkedList<Product> getStoreProducts(int storeID) 
-        {
-
-            Store s = DBStore.getInstance().getStore(storeID);
-
-            if (s == null)
-            {
-                return null;
-            }
-            return s.getProductList();
-        }
-        //use case 2.4
-        public LinkedList<Product> getAllProducts()
-        {
-            return DBProduct.getInstance().getAllProducts();
-        }*/
         //use case 2.5
 
         public List<Product> searchProducts(String name, String keywords, String category)
@@ -124,6 +96,21 @@ namespace workshop192.ServiceLayer
             return DBProduct.getInstance().filterBy(list, price_range, minimumRank);
 
         }
+
+        public String addToShoppingBasket(Product product, int amount, Session session)
+        {
+            if (session == null)
+            {
+                return "ERROR: session is null";
+            }
+            return session.addToShoppingBasket(product, amount);
+        }
+
+        public String purchaseBasket(Session session)
+        {
+            return session.purchaseBasket();
+        }
+
 
 
 

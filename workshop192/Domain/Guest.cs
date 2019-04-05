@@ -18,6 +18,11 @@ namespace workshop192.Domain
             dbSubscribedUser = DBSubscribedUser.getInstance();
         }
 
+        public string addToShoppingBasket(Product product, int amount, ShoppingBasket basket)
+        {
+            return basket.addToCart(product, amount);
+        }
+
         public string closeStore(Store store)
         {
             return "ERROR: not an admin";
@@ -68,6 +73,11 @@ namespace workshop192.Domain
         public string logout(SubscribedUser sub, Session session)
         {
             return "ERROR: not logged in";
+        }
+
+        public String purchaseBasket(ShoppingBasket basket)
+        {
+            return basket.purchaseBasket();
         }
 
         public string register(string username, string password, Session session)

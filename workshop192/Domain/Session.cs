@@ -90,6 +90,20 @@ namespace workshop192.Domain
             return userState.complain(description, subscribedUser);
         }
 
+        public String addToShoppingBasket(Product product, int amount)
+        {
+            if (amount < 0)
+            {
+                return "ERROR: amount cannot not be a negative number";
+            }
+            return userState.addToShoppingBasket(product, amount, shoppingBasket);
+        }
+
+        public String purchaseBasket()
+        {
+            return userState.purchaseBasket(shoppingBasket);
+        }
+
 
     }
 }

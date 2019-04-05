@@ -46,7 +46,7 @@ namespace workshop192.Domain.Tests
         public void loginTest()
         {
             DBSubscribedUser dbsubscribedUser = DBSubscribedUser.getInstance();
-            SubscribedUser sub1 = new SubscribedUser("Danny", "Shovevani", new ShoppingBasket());
+            SubscribedUser sub1 = new SubscribedUser("Danny", dbsubscribedUser.encryptPassword("Shovevani"), new ShoppingBasket());
             dbsubscribedUser.register(sub1);
 
             Session session = new Session();

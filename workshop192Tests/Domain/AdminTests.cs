@@ -11,6 +11,8 @@ namespace workshop192.Domain.Tests
     [TestClass()]
     public class AdminTests
     {
+        private Session session = new Session();
+
         [TestMethod()]
         public void createStoreTest()
         {
@@ -28,26 +30,19 @@ namespace workshop192.Domain.Tests
         [TestMethod()]
         public void loginTest()
         {
-            UserState state = new Admin();
-            Assert.IsTrue(Equals(state.login("shalom", "1111", null), "ERROR: User already logged in"));
+            Admin admin = new Admin();
+            Assert.IsTrue(Equals(admin.login("admin", "1234", session), "ERROR: User already logged in"));
         }
 
         [TestMethod()]
         public void logoutTest()
         {
             DBSubscribedUser dbsubscribedUser = DBSubscribedUser.getInstance();
-            SubscribedUser sub2 = new SubscribedUser("Gal", "Gadot", new ShoppingBasket());
-            dbsubscribedUser.register(sub2);
-
-            Session session = new Session();
-            session.setState(new Admin());
+            session.login("admin", "1234");
             UserState state = session.getState();
-            state.login("Gal", "Gadot", session);
-            SubscribedUser user = session.getSubscribedUser();
-            session.getState().logout(user, session);
-            Assert.IsTrue(session.getState() is Admin);
-            Assert.IsNull(dbsubscribedUser.getloggedInUser("Gal"));
-            dbsubscribedUser.cleanDB();
+            Assert.IsTrue(state is Admin);
+            Assert.IsTrue(Equals(state.logout(session.getSubscribedUser(), session), ""));
+            Assert.IsTrue(session.getState() is Guest);
         }
 
         [TestMethod()]

@@ -21,7 +21,7 @@ namespace workshop192.Domain
         {
             users = new Dictionary<string, SubscribedUser>();
             loggedInUser = new Dictionary<string, SubscribedUser>();
-            SubscribedUser admin = new SubscribedUser("admin", "1234", new ShoppingBasket());
+            SubscribedUser admin = new SubscribedUser("admin", encryptPassword("1234"), new ShoppingBasket());
             register(admin);
         }
 

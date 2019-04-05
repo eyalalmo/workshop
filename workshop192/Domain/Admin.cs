@@ -21,6 +21,12 @@ namespace workshop192.Domain
             dbSession = DBSession.getInstance();
             dbComplaint = DBComplaint.getInstance();
         }
+
+        public string addToShoppingBasket(Product product, int amount, ShoppingBasket basket)
+        {
+            return "ERROR: admin cannot add to shopping basket";
+        }
+
         public string closeStore(Store store)
         {
             List<StoreRole> roles = store.getRoles();
@@ -75,6 +81,11 @@ namespace workshop192.Domain
             return logoutResponse;
         }
 
+        public string purchaseBasket(ShoppingBasket basket)
+        {
+            return "ERROR: admin cannot make a purchase";
+        }
+
         public String register(string username, string password, Session session)
         {
             return "ERROR: User already registered";
@@ -113,10 +124,8 @@ namespace workshop192.Domain
                 {
                     closeStore(role.getStore());
                 }
-                /*else
-                {
-                    role.getStore().removeStoreRole(role);
-                }*/
+                DBStore.getInstance().removeStoreRole(role);
+
             }
             session.setSubscribedUser(null);
             return dbSubscribedUser.remove(subscribedUser);

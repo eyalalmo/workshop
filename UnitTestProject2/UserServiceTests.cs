@@ -17,11 +17,14 @@ namespace workshop192.ServiceLayer.Tests
     public class UserServiceTests
     {
         private UserService userService;
+        private StoreService storeService;
         private Session session;
+
         [TestInitialize()]
         public void Initialize()
         {
-            userService = UserService.getInstance(); 
+            userService = UserService.getInstance();
+            storeService = StoreService.getInstance();
             session = userService.startSession();
             DBStore.getInstance().init();
             DBSubscribedUser.getInstance().cleanDB();
@@ -47,6 +50,7 @@ namespace workshop192.ServiceLayer.Tests
         [TestMethod]
         public void initSearchAndFilterTests()
         {
+            DBProduct.getInstance().initDB();
             userService = UserService.getInstance();
             StoreService storeService = StoreService.getInstance();
             session = userService.startSession();
@@ -56,11 +60,11 @@ namespace workshop192.ServiceLayer.Tests
 
             Store store1 = userService.createStore(session, "Golf", "Clothes");
             Store store2 = userService.createStore(session, "Shiomi", "Technology");
-            storeService.addProduct("shirt", "clothing", 20, 5, 2, store1, session);
+            storeService.addProduct("shirt", "clothes", 20, 5, 2, store1, session);
             storeService.addProduct("pan", "kitchen", 100, 2, 4, store1, session);
             storeService.addProduct("stove", "kitchen", 200, 3, 2, store1, session);
-            storeService.addProduct("pants", "clothing", 120, 1, 2, store2, session);
-            storeService.addProduct("socks", "clothing", 110, 4, 2, store2, session);
+            storeService.addProduct("pants", "clothes", 120, 1, 2, store2, session);
+            storeService.addProduct("socks", "clothes", 110, 4, 2, store2, session);
 
         }
         [TestMethod]
@@ -73,7 +77,7 @@ namespace workshop192.ServiceLayer.Tests
             Assert.IsTrue(productExists("stove", searchResult1));
 
 
-            List<Product> searchResult2 = userService.searchProducts(null, null, "clothing");
+            List<Product> searchResult2 = userService.searchProducts(null, null, "clothes");
             Assert.IsTrue(searchResult2.Count == 3);
             Assert.IsTrue(productExists("shirt", searchResult2));
             Assert.IsTrue(productExists("pants", searchResult2));
@@ -103,7 +107,7 @@ namespace workshop192.ServiceLayer.Tests
         {
             
             List<Product> searchResult1 = userService.searchProducts(null, null, "kitchen");
-            List<Product> searchResult2 = userService.searchProducts(null, null, "clothing");
+            List<Product> searchResult2 = userService.searchProducts(null, null, "clothes");
             Assert.IsTrue(searchResult2.Count == 3);
             Assert.IsTrue(productExists("shirt", searchResult2));
             Assert.IsTrue(productExists("pants", searchResult2));
@@ -134,6 +138,51 @@ namespace workshop192.ServiceLayer.Tests
                     return true;
             }
             return false;
+        }
+
+        //2.8
+        [TestMethod]
+        public void purchaseTest()
+        {
+            userService = UserService.getInstance();
+            session = userService.startSession();
+
+            userService.register(session, "christina", "2222");
+            userService.login(session, "christina", "2222");
+            SubscribedUser user = session.getSubscribedUser();
+            Store store1 = userService.createStore(session, "Zoo Land", "pets");
+            Product product1 = storeService.addProduct("dogs", "big dogs", 80, 2, 4, store1, session);
+            Product product2 = storeService.addProduct("cats", "grey cats", 110, 5, 10, store1, session);
+
+            Store store2 = userService.createStore(session, "Shufersal", "food");
+            Product product3 = storeService.addProduct("milk", "3%", 65, 2, 1, store2, session);
+            Product product4 = storeService.addProduct("water", "blue water", 70, 4, 4, store2, session);
+
+            userService.addToShoppingBasket(product1, 2, session);
+            userService.addToShoppingBasket(product2, 3, session);
+            userService.addToShoppingBasket(product3, 1, session);
+            userService.addToShoppingBasket(product4, 3, session);
+
+            Assert.IsTrue(Equals(userService.purchaseBasket(session),""));
+            Assert.IsTrue(product1.getQuantityLeft() == 2);
+            Assert.IsTrue(product2.getQuantityLeft() == 7);
+            Assert.IsTrue(product3.getQuantityLeft() == 0);
+            Assert.IsTrue(product4.getQuantityLeft() == 1);
+
+
+            session = userService.startSession();
+            userService.addToShoppingBasket(product1, 2, session);
+            Assert.IsTrue(Equals(userService.purchaseBasket(session), ""));
+            Assert.IsTrue(product1.getQuantityLeft() == 0);
+
+            Assert.IsFalse(Equals(userService.addToShoppingBasket(product2, -1, session), ""));
+            userService.addToShoppingBasket(product1, 2, session);
+            userService.addToShoppingBasket(product2, 4, session);
+            Assert.IsFalse(Equals(userService.purchaseBasket(session), ""));
+            
+
+
+
         }
 
         //3.1
@@ -186,8 +235,8 @@ namespace workshop192.ServiceLayer.Tests
             userService.register(sessionOwner, "bob", "theOwner");
             userService.register(sessionManager, "rob", "theManager");
             userService.login(sessionOwner, "bob", "theOwner");
-            Store store1 = userService.createStore(sessionOwner, "Zara", "clothing");
-            Store store2 = userService.createStore(sessionOwner, "Urban", "clothing");
+            Store store1 = userService.createStore(sessionOwner, "Zara", "clothes");
+            Store store2 = userService.createStore(sessionOwner, "Urban", "clothes");
             StoreRole owner1 = sessionOwner.getSubscribedUser().getStoreRole(store1);
             owner1.addManager(sessionManager.getSubscribedUser(), new Permissions(true, true, true));
             StoreRole owner2 = sessionOwner.getSubscribedUser().getStoreRole(store2);
