@@ -12,10 +12,14 @@ namespace workshop192.ServiceLayer.Tests
     [TestClass()]
     public class StoreServiceTests
     {
+        private StoreService storeService;
+        private UserService userService;
 
         [TestInitialize()]
         public void TestInitialize()
         {
+            storeService = StoreService.getInstance();
+            userService = UserService.getInstance();
             DBStore.getInstance().init();
             DBSubscribedUser.getInstance().cleanDB();
         }
@@ -24,8 +28,7 @@ namespace workshop192.ServiceLayer.Tests
             public void addRemoveEditProductTest()
             {
                 //add product
-                StoreService storeService = StoreService.getInstance();
-                UserService userService = UserService.getInstance();
+                
                 Session session = new Session();
 
                 userService.register(session, "bananaMan", "bbbb");
