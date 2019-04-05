@@ -29,7 +29,7 @@ namespace workshop192.Domain
         public String addToCart(Product product, int amount)
         {
             int quantityLeft = product.getQuantityLeft();
-            if ( quantityLeft - amount> 0)
+            if ( quantityLeft - amount>= 0)
             {
                 //product.setQuantityLeft(quantityLeft - amount);
                 if (productList.ContainsKey(product))

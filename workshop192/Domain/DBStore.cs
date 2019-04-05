@@ -114,7 +114,8 @@ namespace workshop192.Domain
         {
             if (stores.Contains(s))
             {
-                s.changeStatus();
+             
+                s.closeStore();
                 foreach (StoreRole sr in storeRole)
                 {
                     //if (sr.getStore().getStoreID() == s.getStoreID())

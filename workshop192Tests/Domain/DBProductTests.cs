@@ -103,8 +103,9 @@ namespace workshop192.Domain.Tests
             DBProduct.getInstance().addProduct(p3);
             DBProduct.getInstance().addProduct(p4);
             List<Product> result1 = DBProduct.getInstance().searchProducts(null, "coca", null);
-            Assert.IsFalse(result1.Contains(p2));
-            Assert.IsTrue(result1.Contains(p4));
+            List<Product> result2 = DBProduct.getInstance().filterBy(result1, null, 3);
+            Assert.IsFalse(result2.Contains(p2));
+            Assert.IsTrue(result2.Contains(p4));
         }
 
 

@@ -25,7 +25,6 @@ namespace workshop192.ServiceLayer
         public Dictionary<int, ShoppingCart> getShoppingCarts(Session user)
         {
             return user.getShoppingBasket().getShoppingCarts();
-     
         }
 
         public ShoppingCart getCart(Session user, Store store)
@@ -40,7 +39,8 @@ namespace workshop192.ServiceLayer
                 return "ERROR: quantity should be a positive number";
             }
 
-            return user.getShoppingBasket().getShoppingCartByID(store.getStoreID()).addToCart(product, amount);
+            return user.getShoppingBasket().addToCart(product, amount);
+            
         }
         //use case 2.7
         public String removeFromCart(Session user,Store store, Product product)

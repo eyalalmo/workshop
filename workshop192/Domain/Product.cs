@@ -18,8 +18,7 @@ namespace workshop192.Domain
         private int rank;
         private int quantityLeft;
         private Discount discount;
-
-       
+        
         public Product(string productName, string productCategory, int price, int rank, int quantityLeft, Store store)
         {
             this.productID = DBProduct.getNextProductID();
@@ -33,7 +32,7 @@ namespace workshop192.Domain
             this.discount = null;
 
         }
-          
+
 
         public int getActualPrice()
         {

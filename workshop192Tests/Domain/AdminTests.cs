@@ -12,12 +12,6 @@ namespace workshop192.Domain.Tests
     public class AdminTests
     {
         [TestMethod()]
-        public void AdminTest()
-        {
-
-        }
-
-        [TestMethod()]
         public void createStoreTest()
         {
             UserState state = new Admin();
@@ -25,19 +19,10 @@ namespace workshop192.Domain.Tests
         }
 
         [TestMethod()]
-        public void closeStoreTest()
-        {
-            Assert.Fail();
-        }
-
-
-
-        [TestMethod()]
         public void getPurchaseHistoryTest()
         {
             UserState state = new Admin();
             Assert.IsTrue(Equals(state.getPurchaseHistory(null), "ERROR: No purchase history in Admin"));
-
         }
 
         [TestMethod()]
@@ -50,7 +35,19 @@ namespace workshop192.Domain.Tests
         [TestMethod()]
         public void logoutTest()
         {
+            DBSubscribedUser dbsubscribedUser = DBSubscribedUser.getInstance();
+            SubscribedUser sub2 = new SubscribedUser("Gal", "Gadot", new ShoppingBasket());
+            dbsubscribedUser.register(sub2);
 
+            Session session = new Session();
+            session.setState(new Admin());
+            UserState state = session.getState();
+            state.login("Gal", "Gadot", session);
+            SubscribedUser user = session.getSubscribedUser();
+            session.getState().logout(user, session);
+            Assert.IsTrue(session.getState() is Admin);
+            Assert.IsNull(dbsubscribedUser.getloggedInUser("Gal"));
+            dbsubscribedUser.cleanDB();
         }
 
         [TestMethod()]
@@ -58,12 +55,6 @@ namespace workshop192.Domain.Tests
         {
             UserState state = new Admin();
             Assert.IsTrue(Equals(state.register("shalom", "1111", null), "ERROR: User already registered"));
-        }
-
-        [TestMethod()]
-        public void removeUserTest()
-        {
-            Assert.Fail();
         }
     }
 }
