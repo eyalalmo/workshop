@@ -59,6 +59,7 @@ namespace workshop192.ServiceLayer.Tests
 
             string s4 = basketService.addToCart(session1, store2, p4, 3); // should not succesed 
             string s5 = basketService.addToCart(session1, store2, p5, 5); //ok
+            string s6 = basketService.addToCart(session1, store2, p4, 0); // should not succesed
 
             Assert.AreEqual("", s1);
             Assert.AreNotEqual("", s2);
@@ -66,6 +67,7 @@ namespace workshop192.ServiceLayer.Tests
 
             Assert.AreNotEqual("", s4);
             Assert.AreEqual("", s5);
+            Assert.AreNotEqual("", s6);
         }
 
         [TestMethod()]
