@@ -31,23 +31,36 @@ namespace workshop192.Domain
             return sum;
 
         }
-        public void addToCart(Product product, int amount)
+        public string addToCart(Product product, int amount)
         {
             int storeID = product.getStore().getStoreID();
             bool found = false;
             foreach(ShoppingCart sc in shoppingCarts.Values)
                 if (sc.getStoreID() == storeID)
                 {
-                    sc.addToCart(product,amount);
-                    found = true;
-                    break;
+                    string s = sc.addToCart(product,amount);
+                    if (s.Equals(""))
+                    {
+                        found = true;
+                        break;
+                    }
+                    else
+                        return s;
                 }
             if(!found)
             {
                 ShoppingCart sc = new ShoppingCart(storeID);
-                sc.addToCart(product, amount);
-                shoppingCarts.Add(storeID, sc);
+                string s = sc.addToCart(product, amount);
+                if (s.Equals(""))
+                {
+                    shoppingCarts.Add(storeID, sc);
+                }
+                else
+                {
+                    return s;
+                }
             }
+            return "";
         }
         public String checkout (String address,String creditCard){
             // return the result of the proccess by order of cart

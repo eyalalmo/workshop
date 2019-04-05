@@ -13,21 +13,6 @@ namespace workshop192.Domain.Tests
     [TestClass()]
     public class DBSubscribedUserTests
     {
-        [TestMethod()]
-        public void DBSubscribedUserTest()
-        {
-
-
-        }
-
-        [TestMethod()]
-        public void getInstanceTest()
-        {
-
-
-
-
-        }
 
         [TestMethod()]
         public void logoutTest()
@@ -40,7 +25,7 @@ namespace workshop192.Domain.Tests
             if (db.getSubscribedUser("etay") == null)
                 Assert.Fail();
             s.logout();
-            Assert.AreEqual("", db.getloggedInUser("etay"));
+            Assert.AreEqual(null, db.getloggedInUser("etay"));
 
         }
 
@@ -71,25 +56,9 @@ namespace workshop192.Domain.Tests
             Session s = new Session();
             s.register("etay", "etay");
             s.login("etay", "etay");
-            Assert.AreEqual(db.getloggedInUser("etay"), "");
+            Assert.AreEqual(db.getloggedInUser("etay"), s.getSubscribedUser());
             db.cleanDB();
         }
 
-        [TestMethod()]
-        public void removeTest()
-        {
-            ////////////
-        }
-
-        [TestMethod()]
-        public void initTest()
-        {
-            DBSubscribedUser db = DBSubscribedUser.getInstance();
-            Session s = new Session();
-            s.register("etay", "etay");
-            db.cleanDB();
-            Assert.AreEqual(db.getSubscribedUser("etay"), null);
-            db.cleanDB();
-        }
     }
 }

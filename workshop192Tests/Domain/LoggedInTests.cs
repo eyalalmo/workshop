@@ -36,12 +36,6 @@ namespace workshop192.Domain.Tests
         }
 
         [TestMethod()]
-        public void getPurchaseHistoryTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
         public void loginTest()
         {
             Session session = new Session();

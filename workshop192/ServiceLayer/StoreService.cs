@@ -22,18 +22,20 @@ namespace workshop192.ServiceLayer
             return instance;
         }
 
-        public string addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, Store store, Session session)
+        public Product addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, Store store, Session session)
         {
             DBStore storeDB = DBStore.getInstance();
 
             string res = checkProduct(productName, productCategory, price, rank, quantityLeft);
             if (res != "")
-                return res;
+                return null;
 
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
             Product product = new Product(productName, productCategory, price, rank, quantityLeft, store);
 
-            return sr.addProduct(product);
+            if (!sr.addProduct(product).Equals(""))
+                return null;
+            return product;
         }
 
         public string removeProduct(Product product, Session session)
@@ -119,6 +121,41 @@ namespace workshop192.ServiceLayer
             return session.closeStore(store);
         }
 
+        public string addManager(Store store, string username, 
+            bool editProduct, bool editDiscount, bool editPolicy, Session session)
+        {
+            SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
+            if (toAdd == null)
+                return "no such user";
+            StoreRole sr = store.getStoreRole(session.getSubscribedUser());
+            if (sr.getStore() != store)
+                return "this user can't appoint to this store";
+            Permissions permissions = new Permissions(editProduct, editDiscount, editPolicy);
+            return sr.addManager(toAdd, permissions);
+        }
+
+        public string addOwner(Store store, string username, Session session)
+        {
+            SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
+            if (toAdd == null)
+                return "no such user";
+            StoreRole sr = store.getStoreRole(session.getSubscribedUser());
+            if (sr.getStore() != store)
+                return "this user can't appoint to this store";
+            return sr.addOwner(toAdd);
+        }
+
+        public string removeRole(Store store, string username, Session session)
+        {
+            SubscribedUser toRemove = DBSubscribedUser.getInstance().getSubscribedUser(username);
+            if (toRemove == null)
+                return "no such user";
+            StoreRole sr = store.getStoreRole(session.getSubscribedUser());
+            if (sr.getStore() != store)
+                return "this user can't remove roles from this store";
+            return sr.remove(toRemove);
+        }
+        
         private string checkProduct(string productName, string productCategory, int price, int rank, int quantityLeft)
         {
             if (productName == "")
