@@ -40,7 +40,6 @@ namespace workshop192.ServiceLayer.Tests
         [TestMethod()]
         public void addToCartTest()
         {
-            
             UserService user = UserService.getInstance();
             Session session1 = userService.startSession();
             user.register(session1, "user", "user");
@@ -67,9 +66,6 @@ namespace workshop192.ServiceLayer.Tests
 
             Assert.AreNotEqual("", s4);
             Assert.AreEqual("", s5);
-            
-
-
         }
 
         [TestMethod()]
@@ -116,10 +112,6 @@ namespace workshop192.ServiceLayer.Tests
 
             string s12 = basketService.removeFromCart(session2, store4, p9);
             Assert.AreEqual("", s12);
-
-
-
-
         }
 
     }

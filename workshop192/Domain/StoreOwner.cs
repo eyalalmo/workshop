@@ -70,10 +70,13 @@ namespace workshop192.Domain
 
         public string setProductDiscount(Product product, Discount discount)
         {
-            //product.setDiscount(discount);
+            //product.se tDiscount(discount);
             return "";
         }
-
+        public void removeRoleAppointedByMe(StoreRole role)
+        {
+            appointedByMe.Remove(role);
+        }
         public string addManager(SubscribedUser manager, Permissions permissions)
         {
             if (store.getStoreRole(manager) != null)

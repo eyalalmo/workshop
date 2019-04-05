@@ -21,6 +21,7 @@ namespace workshop192.Domain
         String addOwner(SubscribedUser owner);
         String remove(SubscribedUser user);
         String closeStore();
+        void removeRoleAppointedByMe(StoreRole role);
         SubscribedUser getAppointedBy();
         void removeAllAppointedBy();
     }

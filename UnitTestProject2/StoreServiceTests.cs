@@ -17,25 +17,48 @@ namespace workshop192.ServiceLayer.Tests
         public void TestInitialize()
         {
             DBStore.getInstance().init();
-            DBStore.getInstance().init();
             DBSubscribedUser.getInstance().cleanDB();
         }
+        //4.1.1+4.1.2+4.1.3
+            [TestMethod()]
+            public void addRemoveEditProductTest()
+            {
+                //add product
+                StoreService storeService = StoreService.getInstance();
+                UserService userService = UserService.getInstance();
+                Session session = new Session();
 
+                userService.register(session, "bananaMan", "bbbb");
+                userService.login(session, "bananaMan", "bbbb");
+                Store store = userService.createStore(session, "Bananas", "all types of bananas");
 
-        [TestMethod()]
-        public void TestMethod1()
-        {
-            StoreService storeService = StoreService.getInstance();
-            UserService userService = UserService.getInstance();
-            Session session = new Session();
+                Product product1 = storeService.addProduct("banana1", "green bananas", 100, 2, 6, store, session);
+                Product product2 = storeService.addProduct("banana2", "pink bananas", 90, 5, 10, store, session);            
 
-            userService.register(session, "anna", "banana");
-            userService.login(session, "anna", "banana");
-            // Store store = 
-        }
+                LinkedList<Product> products = store.getProductList();
+                Assert.IsTrue(products.Count == 2);
+                Assert.IsTrue(store.productExists(product1.getProductID()));
+                Assert.IsTrue(store.productExists(product2.getProductID()));
 
-        //4.3
-        [TestMethod()]
+                Assert.AreNotEqual(storeService.addProduct("banana2", "pink bananas", 90, 10, -1, store, session), "");
+                Assert.AreNotEqual(storeService.addProduct("", "", 90, 10, 2, store, session), "");
+
+                //edit product
+                Assert.IsTrue(Equals(storeService.addToProductQuantity(product1, 3, session), ""));
+                Assert.IsTrue(Equals(storeService.decFromProductQuantity(product1, 5, session), ""));
+                Assert.IsFalse(Equals(storeService.addToProductQuantity(product1, -2, session), ""));
+
+                //remove product
+                Assert.IsTrue(Equals(storeService.removeProduct(product1, session), ""));
+                Assert.IsTrue(Equals(storeService.removeProduct(product2, session), ""));
+                Assert.IsTrue(store.getProductList().Count == 0);
+
+                Assert.IsFalse(Equals(storeService.removeProduct(null, session), ""));
+
+            }
+
+            //4.3
+            [TestMethod()]
         public void addMannagerByAnOwner1()
         {
             StoreService storeService = StoreService.getInstance();
@@ -253,9 +276,5 @@ namespace workshop192.ServiceLayer.Tests
             Store store = storeService.addStore("myStore", "the best store ever", session1);
             Assert.AreNotEqual(storeService.removeRole(store, "dani1", session1), "");
         }
-
-
-
-
     }
 }

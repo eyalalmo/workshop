@@ -51,7 +51,6 @@
   <ItemGroup>
     <Compile Include="BasketServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AT2.1.cs" />
     <Compile Include="StoreServiceTests.cs" />
     <Compile Include="UserServiceTests.cs" />
   </ItemGroup>
