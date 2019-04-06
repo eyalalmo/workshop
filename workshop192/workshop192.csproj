@@ -90,6 +90,7 @@
     <None Include="bin\Debug\workshop192.exe.config" />
     <None Include="bin\Debug\workshop192.vshost.exe.config" />
     <None Include="bin\Debug\workshop192.vshost.exe.manifest" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="obj\Debug\workshop192.csproj.CoreCompileInputs.cache" />
     <None Include="obj\Debug\workshop192.csprojAssemblyReference.cache" />
