@@ -7,8 +7,8 @@
     <ProjectGuid>{90BFC332-73F7-418E-BDA2-9257075DEF7E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UnitTests</RootNamespace>
-    <AssemblyName>UnitTests</AssemblyName>
+    <RootNamespace>workshop192Tests</RootNamespace>
+    <AssemblyName>workshop192Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -63,8 +63,13 @@
     <Compile Include="Domain\DBSubscribedUserTests.cs" />
     <Compile Include="Domain\GuestTests.cs" />
     <Compile Include="Domain\LoggedInTests.cs" />
-    <Compile Include="Domain\StoreManagerTests.cs" />
+    <Compile Include="Domain\ProductTests.cs" />
+    <Compile Include="Domain\SessionTests.cs" />
+    <Compile Include="Domain\ShoppingBasketTests.cs" />
+    <Compile Include="Domain\ShoppingCartTests.cs" />
     <Compile Include="Domain\StoreOwnerTests.cs" />
+    <Compile Include="Domain\StoreTests.cs" />
+    <Compile Include="Domain\SubscribedUserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
