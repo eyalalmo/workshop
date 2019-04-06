@@ -32,3 +32,10 @@ C:\Users\asus\source\repos\eyalalmo\workshop\workshop192\obj\Debug\workshop192.c
 C:\Users\asus\source\repos\eyalalmo\workshop\workshop192\obj\Debug\workshop192.csproj.CoreCompileInputs.cache
 C:\Users\asus\source\repos\eyalalmo\workshop\workshop192\obj\Debug\workshop192.exe
 C:\Users\asus\source\repos\eyalalmo\workshop\workshop192\obj\Debug\workshop192.pdb
+C:\Users\user1\Desktop\לימודים\סמסטר ו'\סדנא\wsep192\workshop192\bin\Debug\workshop192.exe.config
+C:\Users\user1\Desktop\לימודים\סמסטר ו'\סדנא\wsep192\workshop192\bin\Debug\workshop192.exe
+C:\Users\user1\Desktop\לימודים\סמסטר ו'\סדנא\wsep192\workshop192\bin\Debug\workshop192.pdb
+C:\Users\user1\Desktop\לימודים\סמסטר ו'\סדנא\wsep192\workshop192\obj\Debug\workshop192.csprojResolveAssemblyReference.cache
+C:\Users\user1\Desktop\לימודים\סמסטר ו'\סדנא\wsep192\workshop192\obj\Debug\workshop192.csproj.CoreCompileInputs.cache
+C:\Users\user1\Desktop\לימודים\סמסטר ו'\סדנא\wsep192\workshop192\obj\Debug\workshop192.exe
+C:\Users\user1\Desktop\לימודים\סמסטר ו'\סדנא\wsep192\workshop192\obj\Debug\workshop192.pdb
