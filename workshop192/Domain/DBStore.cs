@@ -13,12 +13,13 @@ namespace workshop192.Domain
         private static DBStore instance;
         private LinkedList<Store> stores;
         private LinkedList<StoreRole> storeRole;
-        private static int nextStoreID;
+        private static int nextStoreID=0;
 
         public static DBStore getInstance()
         {
-            if (instance == null)
+            if (instance == null) 
                 instance = new DBStore();
+
             return instance;
         }
 
@@ -32,7 +33,7 @@ namespace workshop192.Domain
         {
             stores = new LinkedList<Store>();
             storeRole = new LinkedList<StoreRole>();
-            nextStoreID = 0;
+           // nextStoreID = 0;
         }
         public void init()
         {
