@@ -15,21 +15,12 @@ namespace workshop192.ServiceLayer.Tests
         BasketService basketService;
         UserService userService;
         StoreService storeService;
-        Session session2;
-        Store store1;
-        Store store2;
-       
-        Product p1;
-        Product p2;
-        Product p3;
-        Product p4;
-        Product p5;
 
         [TestInitialize()]
         public void initial()
         {
             basketService = BasketService.getInstance();
-
+ 
             userService = UserService.getInstance();
             storeService = StoreService.getInstance();
             
@@ -41,18 +32,17 @@ namespace workshop192.ServiceLayer.Tests
         public void addToCartTest()
         {
             
-            UserService user = UserService.getInstance();
             Session session1 = userService.startSession();
-            user.register(session1, "user", "user");
-            user.login(session1, "user", "user");
+            userService.register(session1, "user", "user");
+            userService.login(session1, "user", "user");
 
-            store1 = storeService.addStore("zebra", "Clothes", session1);
-            store2 = storeService.addStore("iFix", "Technology", session1);
-            p1 = storeService.addProduct("dress", "clothing", 20, 5, 2, store1,session1);
-            p2 = storeService.addProduct("coat", "clothing", 100, 2, 1, store1, session1);
-            p3 = storeService.addProduct("hat", "clothing", 200, 3, 10, store1, session1);
-            p4 = storeService.addProduct("iPhone XS", "Technology", 120, 1, 2, store2, session1);
-            p5 = storeService.addProduct("galaxy X", "Technology", 110, 4, 7, store2, session1);
+            Store store1 = storeService.addStore("zebra", "Clothes", session1);
+            Store store2 = storeService.addStore("iFix", "Technology", session1);
+            Product p1 = storeService.addProduct("dress", "clothing", 20, 5, 2, store1,session1);
+            Product p2 = storeService.addProduct("coat", "clothing", 100, 2, 1, store1, session1);
+            Product p3 = storeService.addProduct("hat", "clothing", 200, 3, 10, store1, session1);
+            Product p4 = storeService.addProduct("iPhone XS", "Technology", 120, 1, 2, store2, session1);
+            Product p5 = storeService.addProduct("galaxy X", "Technology", 110, 4, 7, store2, session1);
 
             string s1 = basketService.addToCart(session1, store1, p1, 1); //ok
             string s2 = basketService.addToCart(session1, store1, p2, 2); // should not succesed 
@@ -75,10 +65,9 @@ namespace workshop192.ServiceLayer.Tests
         [TestMethod()]
         public void watchShoppingBasket()
         {
-            UserService user = UserService.getInstance();
-            session2 = userService.startSession();
-            user.register(session2, "user2", "user2");
-            user.login(session2, "user2", "user2");
+            Session session2 = userService.startSession();
+            userService.register(session2, "user2", "user2");
+            userService.login(session2, "user2", "user2");
 
 
             Store store3 = storeService.addStore("zara", "Clothes", session2);
@@ -116,7 +105,53 @@ namespace workshop192.ServiceLayer.Tests
 
             string s12 = basketService.removeFromCart(session2, store4, p9);
             Assert.AreEqual("", s12);
+            
+        }
 
+
+
+        [TestMethod()]
+        public void removeFromShoppingCart()
+        {
+            Session session = userService.startSession();
+            userService.register(session, "user3", "user3");
+            userService.login(session, "user3", "user3");
+
+
+            Store store5 = storeService.addStore("TopTen", "Accesorize", session);
+            Store store6 = storeService.addStore("H&M", "clothing", session);
+
+
+            Product p1 = storeService.addProduct("Earings", "Accesorize", 76, 5, 7, store5, session);
+            Product p2 = storeService.addProduct("necklace", "Accesorize", 100, 2, 4, store5, session);
+            Product p3 = storeService.addProduct("ring", "Accesorize", 200, 3, 39, store5, session);
+            Product p4 = storeService.addProduct("jeans", "clothing", 120, 1, 15, store6, session);
+            Product p5 = storeService.addProduct("top", "clothing", 199, 4, 90, store6, session);
+
+            string s1 = basketService.addToCart(session, store5, p1, 1);
+            string s2 = basketService.addToCart(session, store5, p2, 3);
+            string s3 = basketService.addToCart(session, store5, p3, 10);
+            string s4 = basketService.addToCart(session, store6, p4, 7);
+            string s5 = basketService.addToCart(session, store6, p5, 2);
+
+            ShoppingCart sc1 = basketService.getCart(session, store5);
+            int amount = sc1.getTotalAmount();
+
+            string s6 = basketService.removeFromCart(session, store5, p1);
+            Assert.AreEqual("", s6);
+
+            Assert.AreNotEqual(amount, sc1.getTotalAmount());
+
+            int newAmount = amount - p1.getActualPrice();
+
+            string s7 = basketService.removeFromCart(session, store6, p4);
+            Assert.AreEqual("", s7);
+
+            Assert.AreNotEqual(newAmount, sc1.getTotalAmount());
+
+            newAmount = newAmount - 7 * p4.getActualPrice();
+
+            Assert.AreEqual(newAmount, sc1.getTotalAmount());
 
 
 
