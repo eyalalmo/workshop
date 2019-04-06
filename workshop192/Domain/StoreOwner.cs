@@ -79,12 +79,12 @@ namespace workshop192.Domain
         }
         public string addManager(SubscribedUser manager, Permissions permissions)
         {
+            StoreRole newManager = new StoreManager(this.user, store, manager, permissions);
+            DBStore.getInstance().addStoreRole(newManager);
             if (store.getStoreRole(manager) != null)
                 return "user " + manager.getUsername() + " already have a role in store " + store.getStoreName();
             if (permissions == null)
                 return "wrong permissions";
-            StoreRole newManager = new StoreManager(this.user, store, manager, permissions);
-            DBStore.getInstance().addStoreRole(newManager);
             store.addStoreRole(newManager);
             manager.addStoreRole(newManager);
             appointedByMe.Add(newManager);
@@ -93,12 +93,13 @@ namespace workshop192.Domain
         
         public string addOwner(SubscribedUser owner)
         {
+            StoreRole newOwner = new StoreOwner(this.user, owner, store);
             if (store.getStoreRole(owner) != null)
                 return "user " + owner.getUsername() + " already have a role in store " + store.getStoreName();
-            StoreRole newOwner = new StoreOwner(this.user, owner, store);
             store.addStoreRole(newOwner);
             owner.addStoreRole(newOwner);
             appointedByMe.Add(newOwner);
+            DBStore.getInstance().addStoreRole(newOwner);
             return "";
         }
 
