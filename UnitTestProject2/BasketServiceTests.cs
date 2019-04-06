@@ -144,14 +144,17 @@ namespace workshop192.ServiceLayer.Tests
 
             int newAmount = amount - p1.getActualPrice();
 
+            Assert.AreEqual(newAmount, sc1.getTotalAmount());
+
+            ShoppingCart sc2 = basketService.getCart(session, store6);
+            int amount2 = sc2.getTotalAmount();
+
             string s7 = basketService.removeFromCart(session, store6, p4);
             Assert.AreEqual("", s7);
 
-            Assert.AreNotEqual(newAmount, sc1.getTotalAmount());
+            amount2 = amount2 - 7 * p4.getActualPrice();
 
-            newAmount = newAmount - 7 * p4.getActualPrice();
-
-            Assert.AreEqual(newAmount, sc1.getTotalAmount());
+            Assert.AreEqual(amount2, sc2.getTotalAmount());
 
 
 

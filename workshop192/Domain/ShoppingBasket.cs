@@ -42,7 +42,7 @@ namespace workshop192.Domain
                     if (s.Equals(""))
                     {
                         found = true;
-                        break;
+                        return s;
                     }
                     else
                         return s;
