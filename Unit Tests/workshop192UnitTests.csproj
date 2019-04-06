@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C41B1726-5462-479C-89AE-3A7F0A3C1A39}</ProjectGuid>
+    <ProjectGuid>{2080ADB7-2E8E-4BB8-967B-827614E3EB31}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>workshop192Tests1</RootNamespace>
-    <AssemblyName>workshop192Tests1</AssemblyName>
+    <RootNamespace>workshop192Tests</RootNamespace>
+    <AssemblyName>workshop192Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -56,8 +56,21 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Domain\AdminTests.cs" />
+    <Compile Include="Domain\DBProductTests.cs" />
+    <Compile Include="Domain\DBSessionTests.cs" />
+    <Compile Include="Domain\DBStoreTests.cs" />
+    <Compile Include="Domain\DBSubscribedUserTests.cs" />
+    <Compile Include="Domain\GuestTests.cs" />
+    <Compile Include="Domain\LoggedInTests.cs" />
+    <Compile Include="Domain\ProductTests.cs" />
+    <Compile Include="Domain\SessionTests.cs" />
+    <Compile Include="Domain\ShoppingBasketTests.cs" />
+    <Compile Include="Domain\ShoppingCartTests.cs" />
+    <Compile Include="Domain\StoreOwnerTests.cs" />
+    <Compile Include="Domain\StoreTests.cs" />
+    <Compile Include="Domain\SubscribedUserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceLayer\UserServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
