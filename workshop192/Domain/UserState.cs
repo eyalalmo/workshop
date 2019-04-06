@@ -18,6 +18,8 @@ namespace workshop192.Domain
         String removeUser(String subscribedUser);
         String complain(String description, SubscribedUser subscribedUser);
         String getComplaints();
+        String addToShoppingBasket(Product product, int amount, ShoppingBasket basket);
+        String purchaseBasket(ShoppingBasket basket);
 
     }
 }

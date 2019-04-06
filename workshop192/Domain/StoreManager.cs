@@ -124,6 +124,10 @@ namespace workshop192.Domain
         {
             return;
         }
+        public void removeRoleAppointedByMe(StoreRole role)
+        {
+            return;
+        }
 
     }
 }

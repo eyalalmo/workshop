@@ -17,7 +17,9 @@ namespace workshop192.Domain.Tests
         [TestMethod()]
         public void logoutTest()
         {
+            
             DBSubscribedUser db = DBSubscribedUser.getInstance();
+            db.cleanDB();
             Session s = new Session();
 
             s.register("etay", "etay");
@@ -53,6 +55,7 @@ namespace workshop192.Domain.Tests
         public void loginTest()
         {
             DBSubscribedUser db = DBSubscribedUser.getInstance();
+            db.cleanDB();
             Session s = new Session();
             s.register("etay", "etay");
             s.login("etay", "etay");

@@ -18,6 +18,11 @@ namespace workshop192.Domain
             dbSubscribedUser = DBSubscribedUser.getInstance();
         }
 
+        public string addToShoppingBasket(Product product, int amount, ShoppingBasket basket)
+        {
+            return basket.addToCart(product, amount);
+        }
+
         public string closeStore(Store store)
         {
             return "ERROR: not an admin";
@@ -70,6 +75,11 @@ namespace workshop192.Domain
             return "ERROR: not logged in";
         }
 
+        public String purchaseBasket(ShoppingBasket basket)
+        {
+            return basket.purchaseBasket();
+        }
+
         public string register(string username, string password, Session session)
         {
             String encrypted = DBSubscribedUser.getInstance().encryptPassword(password);
@@ -77,6 +87,7 @@ namespace workshop192.Domain
             if (s != null)
                 return "ERROR: username already exists";
             SubscribedUser sub = new SubscribedUser(username, encrypted, session.getShoppingBasket());
+            session.setSubscribedUser(sub);
             return DBSubscribedUser.getInstance().register(sub);
         }
 

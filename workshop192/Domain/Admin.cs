@@ -21,6 +21,12 @@ namespace workshop192.Domain
             dbSession = DBSession.getInstance();
             dbComplaint = DBComplaint.getInstance();
         }
+
+        public string addToShoppingBasket(Product product, int amount, ShoppingBasket basket)
+        {
+            return "ERROR: admin cannot add to shopping basket";
+        }
+
         public string closeStore(Store store)
         {
             List<StoreRole> roles = store.getRoles();
@@ -75,6 +81,11 @@ namespace workshop192.Domain
             return logoutResponse;
         }
 
+        public string purchaseBasket(ShoppingBasket basket)
+        {
+            return "ERROR: admin cannot make a purchase";
+        }
+
         public String register(string username, string password, Session session)
         {
             return "ERROR: User already registered";
@@ -82,7 +93,11 @@ namespace workshop192.Domain
 
         public String removeUser(String user)
         {
+            if (Equals(user, "admin"))
+                return "ERROR: admin cannot be removed";
             SubscribedUser subscribedUser = DBSubscribedUser.getInstance().getSubscribedUser(user);
+            if (subscribedUser == null)
+                return "ERROR: user to be removed does not exist";
             Session session = dbSession.getSessionOfSubscribedUser(subscribedUser);
             if (session != null)
             {
@@ -102,18 +117,17 @@ namespace workshop192.Domain
                 if (appointedBySubscribedUser != null)
                 {
                     StoreRole appointedByStoreRole = store.getStoreRole(role.getAppointedBy());
-                    appointedByStoreRole.remove(subscribedUser);
+                    store.removeStoreRole(appointedByStoreRole);
+                    appointedByStoreRole.removeRoleAppointedByMe(role);
                 }
-                if (role is StoreOwner && role.getStore().getNumberOfOwners() == 1)
+                if (role is StoreOwner && role.getStore().getNumberOfOwners() == 0)
                 {
                     closeStore(role.getStore());
                 }
-                else
-                {
-                    role.getStore().removeStoreRole(role);
-                }
-            }
+                DBStore.getInstance().removeStoreRole(role);
 
+            }
+            session.setSubscribedUser(null);
             return dbSubscribedUser.remove(subscribedUser);
 
         }

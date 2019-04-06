@@ -8,7 +8,6 @@ namespace workshop192.Domain
 {
     public class Product
     {
-
         //represents product in store
         private int productID;
         private string productName;

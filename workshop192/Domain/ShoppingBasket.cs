@@ -83,6 +83,27 @@ namespace workshop192.Domain
             return null;
         }
 
+        public String purchaseBasket()
+        {
+            foreach (KeyValuePair<int, ShoppingCart> pair1 in shoppingCarts)
+            {
+                ShoppingCart cart = pair1.Value;
+                Dictionary<Product, int> productsInCart = cart.getProductsInCarts();
+                foreach(KeyValuePair<Product,int> pair2 in productsInCart)
+                {
+                    Product product = pair2.Key;
+                    int amount = pair2.Value;
+                    if (product.getQuantityLeft() < amount)
+                    {
+                        return "ERROR: cannot make purchase- " + "product " + product.getProductName() + " does not have enough quantity left";
+                    }
+                    product.decQuantityLeft(amount);
+                }
+
+            }
+            return "";
+        }
+
 
 
     }

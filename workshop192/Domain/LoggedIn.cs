@@ -17,6 +17,11 @@ namespace workshop192.Domain
             dbComplaint = DBComplaint.getInstance();
         }
 
+        public string addToShoppingBasket(Product product, int amount, ShoppingBasket basket)
+        {
+            return basket.addToCart(product, amount);
+        }
+
         public string closeStore(Store store)
         {
             return "ERROR: not an admin";
@@ -35,6 +40,7 @@ namespace workshop192.Domain
             store.addStoreRole(owner);
             sub.addStoreRole(owner);
             DBStore.getInstance().addStore(store);
+            DBStore.getInstance().addStoreRole(owner);
             return store;
         }
 
@@ -63,6 +69,11 @@ namespace workshop192.Domain
             }
             return logoutResponse;
 
+        }
+
+        public string purchaseBasket(ShoppingBasket basket)
+        {
+            return basket.purchaseBasket();
         }
 
         public string register(string username, string password, Session session)

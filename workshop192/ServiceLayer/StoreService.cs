@@ -40,6 +40,10 @@ namespace workshop192.ServiceLayer
 
         public string removeProduct(Product product, Session session)
         {
+            if (product == null)
+                return "ERROR: cannot remove null product";
+            if(session == null)
+                return "ERROR: null session";
             SubscribedUser user = session.getSubscribedUser();
 
             DBStore storeDB = DBStore.getInstance();
