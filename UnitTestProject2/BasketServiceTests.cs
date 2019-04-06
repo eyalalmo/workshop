@@ -27,7 +27,7 @@ namespace workshop192.ServiceLayer.Tests
             
         }
 
-        //2.6 /
+        //2.6 
         [TestMethod()]
         public void addToCartTest()
         {
