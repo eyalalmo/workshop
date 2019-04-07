@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.2">
+<diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
@@ -37,17 +37,6 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1060</x>
-      <y>90</y>
-      <w>100</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>Product</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
       <x>600</x>
       <y>90</y>
       <w>110</w>
@@ -64,7 +53,7 @@
       <w>100</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>ProductInStore</panel_attributes>
+    <panel_attributes>Product</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -72,25 +61,12 @@
     <coordinates>
       <x>850</x>
       <y>80</y>
-      <w>230</w>
-      <h>50</h>
+      <w>110</w>
+      <h>160</h>
     </coordinates>
-    <panel_attributes>lt=-
-m1=0..n
-m2=0..1
+    <panel_attributes>
 </panel_attributes>
-    <additional_attributes>10.0;20.0;210.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>930</x>
-      <y>90</y>
-      <w>30</w>
-      <h>150</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;20.0;90.0;20.0;90.0;140.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -98,12 +74,9 @@ m2=0..1
       <x>690</x>
       <y>210</y>
       <w>220</w>
-      <h>50</h>
+      <h>40</h>
     </coordinates>
-    <panel_attributes>lt=-
-m1=1
-m2=0-n
-</panel_attributes>
+    <panel_attributes/>
     <additional_attributes>10.0;20.0;200.0;20.0</additional_attributes>
   </element>
   <element>
@@ -122,13 +95,10 @@ m2=0-n
     <coordinates>
       <x>760</x>
       <y>110</y>
-      <w>50</w>
+      <w>30</w>
       <h>260</h>
     </coordinates>
-    <panel_attributes>lt=-
-m1=
-m2=0-n
-</panel_attributes>
+    <panel_attributes/>
     <additional_attributes>10.0;240.0;10.0;10.0</additional_attributes>
   </element>
   <element>
