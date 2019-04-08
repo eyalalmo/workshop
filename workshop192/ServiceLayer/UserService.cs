@@ -32,47 +32,45 @@ namespace workshop192.ServiceLayer
         }
 
         //use case 2.3
-        public String login(Session user, String username, String password)
+        public void login(Session user, String username, String password)
         {
             if (user == null)
             {
-                return "ERROR: bad session";
+                throw new NullReferenceException("error - no such user ID");
             }
-            return user.login(username, password);
+             user.login(username, password);
         }
 
         //use case 2.2
-        public String register(Session user, String username, String password)
+        public void register(Session user, String username, String password)
         {
             if (user == null)
             {
-                return "ERROR: bad session";
+                throw new NullReferenceException("error - bad session");
             }
             if (username.Equals("") || password.Equals(""))
             {
-                return "Illegal username or password";
+                throw new ArgumentException( "Illegal username or password");
             }
-            return user.register(username, password);
+            user.register(username, password);
         }
         //use case 6.2
-        public String removeUser(Session admin, String username)
+        public void removeUser(Session admin, String username)
         {
             if (admin == null)
             {
-                return "ERROR: bad session";
+                throw new NullReferenceException("error - bad session");
             }
-            return admin.removeUser(username);
+            admin.removeUser(username);
         }
 
-        public String logout(Session user)
+        public void logout(Session user)
         {
             if (user == null)
             {
-                return "ERROR: bad session";
+                throw new NullReferenceException("error - bad session");
             }
-            return user.
-                
-               logout();
+            user.logout();
         }
 
         public Store createStore(Session session, String storeName, String description)
@@ -97,18 +95,18 @@ namespace workshop192.ServiceLayer
 
         }
 
-        public String addToShoppingBasket(Product product, int amount, Session session)
+        public void addToShoppingBasket(Product product, int amount, Session session)
         {
             if (session == null)
             {
-                return "ERROR: session is null";
+                throw new NullReferenceException("error - bad session");
             }
-            return session.addToShoppingBasket(product, amount);
+            session.addToShoppingBasket(product, amount);
         }
 
-        public String purchaseBasket(Session session)
+        public void purchaseBasket(Session session)
         {
-            return session.purchaseBasket();
+             session.purchaseBasket();
         }
 
 
