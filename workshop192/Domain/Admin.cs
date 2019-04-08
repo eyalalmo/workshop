@@ -23,12 +23,7 @@ namespace workshop192.Domain
             dbComplaint = DBComplaint.getInstance();
         }
 
-        public string addToShoppingBasket(Product product, int amount, ShoppingBasket basket)
-        {
-            return "ERROR: admin cannot add to shopping basket";
-        }
-
-        public string closeStore(Store store)
+        public void closeStore(Store store)
         {
             List<StoreRole> roles = store.getRoles();
             foreach (StoreRole role in roles)
@@ -36,18 +31,25 @@ namespace workshop192.Domain
                 SubscribedUser sub = role.getUser();
                 sub.removeStoreRole(role);
             }
-            return dbStore.removeStore(store);
+            dbStore.removeStore(store);
 
         }
 
-        public string complain(string description, SubscribedUser subscribedUser)
+        public void complain(string description, SubscribedUser subscribedUser)
         {
-            return "ERROR: admin cannot complain";
+            Complaint complaint = new Complaint(subscribedUser.getUsername(), description);
+            dbComplaint.addComplaint(complaint);
         }
 
         public Store createStore(String storeName, String description, SubscribedUser sub)
         {
-            return null;
+            Store store = new Store(storeName, description);
+            StoreOwner owner = new StoreOwner(null, sub, store);
+            store.addStoreRole(owner);
+            sub.addStoreRole(owner);
+            DBStore.getInstance().addStore(store);
+            DBStore.getInstance().addStoreRole(owner);
+            return store;
         }
 
         public String getComplaints()
@@ -78,12 +80,7 @@ namespace workshop192.Domain
             session.setState(new Guest());
         }
 
-        public string purchaseBasket(ShoppingBasket basket)
-        {
-            return "ERROR: admin cannot make a purchase";
-        }
-
-        public String register(string username, string password, Session session)
+        public void register(string username, string password, Session session)
         {
             throw new RegisterException("Admin is already logged in, cannot register");
         }

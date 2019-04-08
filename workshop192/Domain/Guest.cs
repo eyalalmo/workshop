@@ -18,17 +18,13 @@ namespace workshop192.Domain
             dbSubscribedUser = DBSubscribedUser.getInstance();
         }
 
-        public string addToShoppingBasket(Product product, int amount, ShoppingBasket basket)
-        {
-            return basket.addToCart(product, amount);
-        }
 
         public void closeStore(Store store)
         {
             throw new UserStateException("Guest cannot close a store");
         }
 
-        public string complain(string description, SubscribedUser subscribedUser)
+        public void complain(string description, SubscribedUser subscribedUser)
         {
             throw new UserStateException("Guest cannot complain");
         }
@@ -72,14 +68,9 @@ namespace workshop192.Domain
             DBSubscribedUser.getInstance().login(sub);
         }
 
-        public string logout(SubscribedUser sub, Session session)
+        public void logout(SubscribedUser sub, Session session)
         {
             throw new UserStateException("Guest cannot logout");
-        }
-
-        public String purchaseBasket(ShoppingBasket basket)
-        {
-            return basket.purchaseBasket();
         }
 
         public void register(string username, string password, Session session)

@@ -96,12 +96,12 @@ namespace workshop192.Domain
             {
                 throw new IllegalAmountException("ERROR: amount cannot not be a negative number");
             }
-            userState.addToShoppingBasket(product, amount, shoppingBasket);
+            shoppingBasket.addToCart(product, amount);
         }
 
-        public String purchaseBasket()
+        public void purchaseBasket()
         {
-            return userState.purchaseBasket(shoppingBasket);
+            shoppingBasket.purchaseBasket();
         }
 
 

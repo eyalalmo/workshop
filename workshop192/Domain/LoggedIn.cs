@@ -17,11 +17,6 @@ namespace workshop192.Domain
             dbComplaint = DBComplaint.getInstance();
         }
 
-        public string addToShoppingBasket(Product product, int amount, ShoppingBasket basket)
-        {
-            return basket.addToCart(product, amount);
-        }
-
         public void closeStore(Store store)
         {
             throw new UserStateException("Logged In user cannot close a store");
@@ -54,7 +49,7 @@ namespace workshop192.Domain
             return sub.getPurchaseHistory();
         }
 
-        public string login(string username, string password, Session session)
+        public void login(string username, string password, Session session)
         {
             throw new LoginException("User already logged in");
         }
@@ -63,11 +58,6 @@ namespace workshop192.Domain
         {
             dbSubscribedUser.logout(sub);
             session.setState(new Guest());
-        }
-
-        public string purchaseBasket(ShoppingBasket basket)
-        {
-            return basket.purchaseBasket();
         }
 
         public void register(string username, string password, Session session)

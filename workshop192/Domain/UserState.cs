@@ -8,7 +8,6 @@ namespace workshop192.Domain
 {
     public interface UserState
     {
-
         void login(String username, String password, Session session);
         void register(String username, String password, Session session);
         void logout(SubscribedUser sub, Session session);
@@ -18,9 +17,6 @@ namespace workshop192.Domain
         void removeUser(String subscribedUser);
         void complain(String description, SubscribedUser subscribedUser);
         String getComplaints();
-        void addToShoppingBasket(Product product, int amount, ShoppingBasket basket);
-        String purchaseBasket(ShoppingBasket basket);
-
     }
 }
 
