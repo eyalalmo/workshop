@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Admin.cs" />
+    <Compile Include="Exceptions\CartException.cs" />
     <Compile Include="Domain\Complaint.cs" />
     <Compile Include="Domain\ConsistencySystem.cs" />
     <Compile Include="Domain\DBComplaint.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Domain\DeliveryService.cs" />
     <Compile Include="Domain\Discount.cs" />
     <Compile Include="Domain\Guest.cs" />
+    <Compile Include="Exceptions\IllegalAmountException.cs" />
     <Compile Include="Domain\InstantPurchase.cs" />
     <Compile Include="Domain\InvisibleDiscount.cs" />
     <Compile Include="Domain\LoggedIn.cs" />
