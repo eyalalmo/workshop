@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+
+
 namespace workshop192.Domain
 {
     public class ShoppingCart
@@ -26,45 +29,40 @@ namespace workshop192.Domain
             return this.storeID;
         }
 
-        public String addToCart(Product product, int amount)
+        public void addToCart(Product product, int amount)
         {
             int quantityLeft = product.getQuantityLeft();
             if ( quantityLeft - amount>= 0)
             {
-                //product.setQuantityLeft(quantityLeft - amount);
                 if (productList.ContainsKey(product))
-                    return "error: product exist";
+                    throw new CartException( "error: product exist");
                 productList.Add(product, amount);
-                return "";
             }
 
-            return "- product quantity";
+            throw new IllegalAmountException("The amount asked is larger than the quantity left");
 
         }
 
-        public String removeFromCart(Product p)
+        public void removeFromCart(Product p)
         {
             if (!productList.ContainsKey(p))
-               return "- product does not exist";
+                throw new CartException("error- product does not exist");
             productList.Remove(p);
-            return "";
-            
+          
         }
 
-        public String changeQuantityOfProduct(Product p, int newAmount)
+        public void changeQuantityOfProduct(Product p, int newAmount)
         {
             if (!productList.ContainsKey(p))
-                return "- product does not exist";
-            if (p.getQuantityLeft() < newAmount)
-                return "there is no such amount of the product";
+                throw new CartException("error - cart does not contains product");
             int oldAmount = productList[p];
             int quantity = p.getQuantityLeft();
             if (quantity + oldAmount - newAmount < 0)
-                return "- quantity below zero";
-            //p.setQuantityLeft(quantity + oldAmount - newAmount);
+            {
+                throw new IllegalAmountException("error - The amount asked is larger than the quantity left");
+            }
             productList.Remove(p);
             productList.Add(p, newAmount);
-            return "";
 
         }
         public int getTotalAmount()

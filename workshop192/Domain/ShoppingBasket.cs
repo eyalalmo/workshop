@@ -31,36 +31,26 @@ namespace workshop192.Domain
             return sum;
 
         }
-        public string addToCart(Product product, int amount)
+        public void addToCart(Product product, int amount)
         {
             int storeID = product.getStore().getStoreID();
             bool found = false;
-            foreach(ShoppingCart sc in shoppingCarts.Values)
+            foreach (ShoppingCart sc in shoppingCarts.Values)
+            {
                 if (sc.getStoreID() == storeID)
                 {
-                    string s = sc.addToCart(product,amount);
-                    if (s.Equals(""))
-                    {
-                        found = true;
-                        return s;
-                    }
-                    else
-                        return s;
+                    sc.addToCart(product, amount);
+                    return;
                 }
-            if(!found)
+            }
+            if (!found)
             {
                 ShoppingCart sc = new ShoppingCart(storeID);
-                string s = sc.addToCart(product, amount);
-                if (s.Equals(""))
+                sc.addToCart(product, amount);
                 {
                     shoppingCarts.Add(storeID, sc);
                 }
-                else
-                {
-                    return s;
-                }
             }
-            return "";
         }
         public String checkout (String address,String creditCard){
             // return the result of the proccess by order of cart
@@ -83,7 +73,7 @@ namespace workshop192.Domain
             return null;
         }
 
-        public String purchaseBasket()
+        public void purchaseBasket()
         {
             foreach (KeyValuePair<int, ShoppingCart> pair1 in shoppingCarts)
             {
@@ -95,13 +85,12 @@ namespace workshop192.Domain
                     int amount = pair2.Value;
                     if (product.getQuantityLeft() < amount)
                     {
-                        return "ERROR: cannot make purchase- " + "product " + product.getProductName() + " does not have enough quantity left";
+                        throw new IllegalAmountException("ERROR: cannot make purchase- " + product.getProductName() + " does not have enough quantity left");
                     }
                     product.decQuantityLeft(amount);
                 }
 
             }
-            return "";
         }
 
 
