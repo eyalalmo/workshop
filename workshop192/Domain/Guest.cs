@@ -23,56 +23,58 @@ namespace workshop192.Domain
             return basket.addToCart(product, amount);
         }
 
-        public string closeStore(Store store)
+        public void closeStore(Store store)
         {
-            return "ERROR: not an admin";
+            throw new UserStateException("Guest cannot close a store");
         }
 
         public string complain(string description, SubscribedUser subscribedUser)
         {
-            return "ERROR: guest cannot complain";
+            throw new UserStateException("Guest cannot complain");
         }
 
         public Store createStore(String storeName, String description, SubscribedUser sub)
         {
-            return null;
+            throw new UserStateException("Guest cannot create a store");
         }
 
         public String getComplaints()
         {
-            return "ERROR: only an admin can getComplaints";
+            throw new UserStateException("Guest cannot get complaints");
         }
 
         public string getPurchaseHistory(SubscribedUser sub)
         {
-            return "ERROR: not a subscribed user";
+            throw new UserStateException("Guest does not have a purchase history");
         }
 
-        public String login(String username, String password, Session session)
+        public void login(String username, String password, Session session)
         {
             String encrypted = DBSubscribedUser.getInstance().encryptPassword(password);
             SubscribedUser sub = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (sub == null)
-                return "ERROR: username does not exist";
-            if(!Equals(sub.getPassword(), encrypted))
-                return "ERROR: password incorrect";
+                throw new LoginException("Username does not exist");
+            SubscribedUser loggedIn = DBSubscribedUser.getInstance().getloggedInUser(username);
+            if( loggedIn != null)
+                throw new LoginException("Username already logged in");
+            if (!Equals(sub.getPassword(), encrypted))
+                throw new LoginException("Incorrect password");
             session.setSubscribedUser(sub);
             if (Equals(username, "admin"))
             {
                 session.setState(new Admin());
-
             }
             else
             {
                 session.setState(new LoggedIn());
             }
             session.setShoppingBasket(sub.getShoppingBasket());
-            return DBSubscribedUser.getInstance().login(sub);
+            DBSubscribedUser.getInstance().login(sub);
         }
 
         public string logout(SubscribedUser sub, Session session)
         {
-            return "ERROR: not logged in";
+            throw new UserStateException("Guest cannot logout");
         }
 
         public String purchaseBasket(ShoppingBasket basket)
@@ -80,20 +82,20 @@ namespace workshop192.Domain
             return basket.purchaseBasket();
         }
 
-        public string register(string username, string password, Session session)
+        public void register(string username, string password, Session session)
         {
             String encrypted = DBSubscribedUser.getInstance().encryptPassword(password);
             SubscribedUser s = dbSubscribedUser.getSubscribedUser(username);
             if (s != null)
-                return "ERROR: username already exists";
+               throw new RegisterException("username already exists");
             SubscribedUser sub = new SubscribedUser(username, encrypted, session.getShoppingBasket());
             session.setSubscribedUser(sub);
-            return DBSubscribedUser.getInstance().register(sub);
+            DBSubscribedUser.getInstance().register(sub);
         }
 
-        public string removeUser(String user)
+        public void removeUser(String user)
         {
-            return "ERROR: not an admin";
+            throw new UserStateException("ERROR: not an admin");
         }
     }
 }

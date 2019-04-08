@@ -22,15 +22,15 @@ namespace workshop192.Domain
             return basket.addToCart(product, amount);
         }
 
-        public string closeStore(Store store)
+        public void closeStore(Store store)
         {
-            return "ERROR: not an admin";
+            throw new UserStateException("Logged In user cannot close a store");
         }
 
-        public string complain(string description, SubscribedUser subscribedUser)
+        public void complain(string description, SubscribedUser subscribedUser)
         {
             Complaint complaint = new Complaint(subscribedUser.getUsername(), description);
-            return dbComplaint.addComplaint(complaint);
+            dbComplaint.addComplaint(complaint);
         }
 
         public Store createStore(String storeName, String description, SubscribedUser sub)
@@ -44,31 +44,25 @@ namespace workshop192.Domain
             return store;
         }
 
-        public string getComplaints()
+        public String getComplaints()
         {
-            return "ERROR: only an admin can getComplaints";
+            throw new UserStateException("Logged in user cannot get complaints");
         }
 
         public string getPurchaseHistory(SubscribedUser sub)
         {
-
             return sub.getPurchaseHistory();
         }
 
         public string login(string username, string password, Session session)
         {
-            return "ERROR: User already logged in";
+            throw new LoginException("User already logged in");
         }
 
-        public string logout(SubscribedUser sub, Session session)
+        public void logout(SubscribedUser sub, Session session)
         {
-            String logoutResponse = dbSubscribedUser.logout(sub);
-            if (Equals(logoutResponse, ""))
-            {
-                session.setState(new Guest());
-            }
-            return logoutResponse;
-
+            dbSubscribedUser.logout(sub);
+            session.setState(new Guest());
         }
 
         public string purchaseBasket(ShoppingBasket basket)
@@ -76,14 +70,14 @@ namespace workshop192.Domain
             return basket.purchaseBasket();
         }
 
-        public string register(string username, string password, Session session)
+        public void register(string username, string password, Session session)
         {
-            return "ERROR: User already registered";
+            throw new UserStateException("ERROR: User already registered");
         }
 
-        public string removeUser(String user)
+        public void removeUser(String user)
         {
-            return "ERROR: not an admin";
+            throw new UserStateException("ERROR: not an admin");
         }
     }
 }

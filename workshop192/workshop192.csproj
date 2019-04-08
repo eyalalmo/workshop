@@ -56,6 +56,10 @@
     <Compile Include="Domain\InstantPurchase.cs" />
     <Compile Include="Domain\InvisibleDiscount.cs" />
     <Compile Include="Domain\LoggedIn.cs" />
+    <Compile Include="Exceptions\UserException.cs" />
+    <Compile Include="Exceptions\UserStateException.cs" />
+    <Compile Include="Exceptions\RegisterException.cs" />
+    <Compile Include="Exceptions\LoginException.cs" />
     <Compile Include="Domain\LotteryPurchase.cs" />
     <Compile Include="Domain\PaymentService.cs" />
     <Compile Include="Domain\Permissions.cs" />
