@@ -31,8 +31,7 @@ namespace workshop192.ServiceLayer
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
             Product product = new Product(productName, productCategory, price, rank, quantityLeft, store);
 
-            if (!sr.addProduct(product).Equals(""))
-                return null;
+            sr.addProduct(product);
             return product;
         }
 
@@ -156,7 +155,7 @@ namespace workshop192.ServiceLayer
         {
             SubscribedUser toRemove = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (toRemove == null)
-                throw new NullReferenceException("error -no such user ID)";
+                throw new NullReferenceException("error -no such user ID)");
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
             if (sr.getStore() != store)
                 throw new RoleException( "this user can't remove roles from this store");

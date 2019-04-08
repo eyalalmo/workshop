@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Admin.cs" />
+    <Compile Include="Exceptions\CartException.cs" />
     <Compile Include="Exceptions\AlreadyExistException.cs" />
     <Compile Include="Domain\Complaint.cs" />
     <Compile Include="Domain\ConsistencySystem.cs" />
