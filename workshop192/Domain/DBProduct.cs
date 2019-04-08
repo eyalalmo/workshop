@@ -47,12 +47,11 @@ namespace workshop192.Domain
             nextProductID++;
             return id;
         }
-        public String removeProduct(Product p)
+        public void removeProduct(Product p)
         {
             if (!productList.Contains(p))
-                return "- product does not exist";
+                throw new DoesntExistException("product " + p.getProductName() + " doesn't exist");
             productList.Remove(p);
-            return "";
         }
 
         public Product getProductByID(int id)
@@ -67,9 +66,8 @@ namespace workshop192.Domain
         {
             return productList;
         }
-
-
-        public  List<Product> searchProducts(string name, string keywords, string category)
+        
+        public List<Product> searchProducts(string name, string keywords, string category)
         {
             List<Product> res = new List<Product>();
             foreach(Product p in productList)
@@ -96,14 +94,8 @@ namespace workshop192.Domain
                     if (!res.Contains(p))
                         res.Add(p);
                 }
-
-
             }
-
-           
             return res;
-
-
         }
 
 
@@ -121,7 +113,6 @@ namespace workshop192.Domain
             }
 
             return list.Except(toRemove).ToList();
-
         }
     }
 }

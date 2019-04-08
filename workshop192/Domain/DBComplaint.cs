@@ -23,17 +23,15 @@ namespace workshop192.Domain
             complaints = new LinkedList<Complaint>();
         }
 
-        public String addComplaint(Complaint c)
+        public void addComplaint(Complaint c)
         {
             complaints.AddFirst(c);
-            return "";
         }
-        public String removeComplaint(Complaint c)
+        public void removeComplaint(Complaint c)
         {
             if (!complaints.Contains(c))
-                return "ERROR: Complaint does not exist, cannot remove it";
+                throw new DoesntExistException("complaint doesn't exist");
             complaints.Remove(c);
-            return "";
         }
 
         public LinkedList<Complaint> getComplaints()

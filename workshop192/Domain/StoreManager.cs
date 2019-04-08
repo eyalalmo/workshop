@@ -20,89 +20,97 @@ namespace workshop192.Domain
             this.permissions = permissions;
         }
 
-        public string addManager(SubscribedUser manager, Permissions permissions)
+        public void addManager(SubscribedUser manager, Permissions permissions)
         {
-            return user.getUsername() + " is not allowed to add manager to " + store.getStoreName();
+            throw new RoleException("manager can't appoint a manager");
         }
 
-        public string addOwner(SubscribedUser owner)
+        public void addOwner(SubscribedUser owner)
         {
-            return user.getUsername() + " is not allowed to add owner to " + store.getStoreName();
+            throw new RoleException("manager can't appoint an owner");
         }
 
-        public string remove(SubscribedUser owner)
+        public void remove(SubscribedUser owner)
         {
-            return user.getUsername() + " is not allowed to remove roles from " + store.getStoreName();
+            throw new RoleException("manager can't remove a role from the store");
         }
 
-        public string addProduct(Product product)
+        public void addProduct(Product product)
         {
             if (!permissions.editProduct())
-                return user.getUsername() + " has no permission to add products in store " + store.getStoreName();
+                throw new PermissionsException(user.getUsername() + 
+                    " have no permissions to edit products in store " +
+                    store.getStoreName());
             store.addProduct(product);
             DBProduct.getInstance().addProduct(product);
-            return "";
         }
 
-        public string removeProduct(Product product)
+        public void removeProduct(Product product)
         {
             if (!permissions.editProduct())
-                return user.getUsername() + " has no permission to remove products in store " + store.getStoreName();
+                throw new PermissionsException(user.getUsername() +
+                     " have no permissions to edit products in store " +
+                     store.getStoreName());
             if (product.getStore() != store || !store.getProductList().Contains(product))
-                return "product doesn't belong to this store";
+                throw new StoreException("product " + product.getProductName() +
+                    " doesn't belong to store " + store.getStoreName());
             store.removeProduct(product);
             DBProduct.getInstance().removeProduct(product);
-            return "";
         }
 
-        public string setProductPrice(Product product, int price)
+        public void setProductPrice(Product product, int price)
         {
             if (!permissions.editProduct())
-                return user.getUsername() + " has no permission to set product's price in store " + store.getStoreName();
+                throw new PermissionsException(user.getUsername() + 
+                    " has no permission to set product's price in store " 
+                    + store.getStoreName());
             product.setPrice(price);
-            return "";
         }
 
-        public string setProductName(Product product, string name)
+        public void setProductName(Product product, string name)
         {
             if (!permissions.editProduct())
-                return user.getUsername() + " has no permission to set product's name in store " + store.getStoreName();
+                throw new PermissionsException(user.getUsername() + 
+                    " has no permission to set product's name in store " + 
+                    store.getStoreName());
             product.setProductName(name);
-            return "";
         }
 
-        public string addToProductQuantity(Product product, int amount)
+        public void addToProductQuantity(Product product, int amount)
         {
             if (!permissions.editProduct())
-                return user.getUsername() + " has no permission to add to product's quantity in store " + store.getStoreName();
+                throw new PermissionsException(user.getUsername() + 
+                    " has no permission to add to product's quantity in store " + 
+                    store.getStoreName());
             product.addQuantityLeft(amount);
-            return "";
         }
 
-        public string decFromProductQuantity(Product product, int amount)
+        public void decFromProductQuantity(Product product, int amount)
         {
             if (!permissions.editProduct())
-                return user.getUsername() + " has no permission to decrease from product's quantity in store " + store.getStoreName();
+                throw new PermissionsException(user.getUsername() + 
+                    " has no permission to decrease from product's quantity in store " 
+                    + store.getStoreName());
             int curQuan = product.getQuantityLeft();
             if (curQuan < amount)
-                return "current quantity is " + curQuan + " and it can't be decreased by " + amount;
+                throw new IllegalAmountException("current quantity is " + 
+                    curQuan + " and it can't be decreased by " + amount);
             product.decQuantityLeft(amount);
-            return "";
         }
 
-        public string setProductDiscount(Product product, Discount discount)
+        public void setProductDiscount(Product product, Discount discount)
         {
             if (!permissions.editDiscount())
-                return user.getUsername() + " has no permission to set product's discount in store " + store.getStoreName();
+                throw new PermissionsException(user.getUsername() + 
+                    " has no permission to set product's discount in store " + 
+                    store.getStoreName());
             //product.setDiscount(discount);
-            return "";
         }
 
-        public string closeStore()
+        public void closeStore()
         {
             DBStore storeDB = DBStore.getInstance();
             storeDB.closeStore(store);
-            return "";
         }
 
         public SubscribedUser getUser()
