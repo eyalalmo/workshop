@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace workshop192.Domain
 {
     public class Store
-    {
+    {       
         private int storeID;
         private string storeName;
         private string description;

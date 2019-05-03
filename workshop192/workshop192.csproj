@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bridge\DomainBridge.cs" />
     <Compile Include="Domain\Admin.cs" />
     <Compile Include="Exceptions\CartException.cs" />
     <Compile Include="Exceptions\AlreadyExistException.cs" />
