@@ -22,7 +22,7 @@ namespace workshop192.ServiceLayer
             return instance;
         }
 
-        public Product addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, Store store, Session session)
+        public int addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, Store store, Session session)
         {
             DBStore storeDB = DBStore.getInstance();
 
@@ -32,7 +32,7 @@ namespace workshop192.ServiceLayer
             Product product = new Product(productName, productCategory, price, rank, quantityLeft, store);
 
             sr.addProduct(product);
-            return product;
+            return product.getProductID();
         }
 
         public void removeProduct(Product product, Session session)
