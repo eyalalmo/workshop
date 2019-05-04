@@ -8,11 +8,22 @@ namespace workshop192.Domain
 {
     public class VisibleDiscount : Discount
     {
-        public VisibleDiscount(int percentage, string duration): base (percentage, duration) { }
+        public VisibleDiscount(int percentage, string duration, int id): base (percentage, duration, id) { }
 
-        public override bool checkCondition()
+        public override Dictionary<Product, double> updatePrice(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
         {
-            throw new NotImplementedException();
+            // this func only for store visible discount
+            foreach (KeyValuePair<Product, int> entry in productList)
+            {
+                productsActualPrice[entry.Key] = productsActualPrice[entry.Key] * (1 -getPercentage());
+            }
+            return productsActualPrice;
+        
+        }
+
+        public override bool checkCondition(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
+        {
+            return true;
         }
     }
 }

@@ -11,13 +11,14 @@ namespace workshop192.Domain
     {
         private double percentage;
         private string duration;
+        private int id;
 
-        public Discount(double percentage, string duration)
+        public Discount(double percentage, string duration, int id): base(id)
         {
             this.percentage = percentage;
             this.duration = duration;
         }
-        abstract public bool checkCondition();
+
         public double getPercentage()
         {
             return percentage;
@@ -26,11 +27,7 @@ namespace workshop192.Domain
         {
             return duration;
         }
-        public int getID()
-        {
-            return id;
-        }
+       
 
-        
     }
 }

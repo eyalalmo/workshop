@@ -16,7 +16,7 @@ namespace workshop192.Domain
         private Store store;
         private int rank;
         private int quantityLeft;
-        private DiscountComponent discount;
+        private Discount discount;
         
         public Product(string productName, string productCategory, int price, int rank, int quantityLeft, Store store)
         {
@@ -33,9 +33,16 @@ namespace workshop192.Domain
         }
 
 
-        public int getActualPrice()
+        public double getActualPrice()
         {
-            return this.price;
+            if (discount != null)
+            {
+                if (discount.checkCondition())
+                {
+                    return price * (1 - discount.getPercentage());
+                }
+            }
+            return price;
         }
 
         public int getQuantityLeft()

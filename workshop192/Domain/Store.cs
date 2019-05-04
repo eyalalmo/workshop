@@ -111,6 +111,12 @@ namespace workshop192.Domain
             roles.Add(toAdd);
         }
 
+        public  Dictionary<Product, double> calcPrice(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
+        {
+           return discount.calcPrice(productList, productsActualPrice);
+            
+        }
+
         public int getNumberOfOwners()
         {
             return numOfOwners;
@@ -151,5 +157,42 @@ namespace workshop192.Domain
         {
             discount = new VisibleDiscount(percentage, duration);
         }
+        public DiscountComponent getDiscount()
+        {
+            return this.discount;
+        }
+        public void addReliantDiscount(double percentage, String condition, String duration)
+        {
+            discount = new ReliantDiscount(percentage, condition, duration);
+        }
+
+        public void addVisibleDiscount(double percentage, String duration)
+        {
+            discount = new VisibleDiscount(percentage, duration);
+        }
+
+        public void removeDiscount()
+        {
+            discount = null;
+            /* if(discount is Discount)
+             {
+                 if(discount.getId()==discountid)
+                     discount = null;
+             }
+             else
+             {
+                 if (discount.getId() == discountid)
+                     discount = null;
+                 else
+                 {
+                     DiscountComposite dis = (DiscountComposite)discount;
+                     dis.remove(discountid);
+                 }
+
+             }
+         }*/
+        }
+       // public Dictionary
     }
+
 }
