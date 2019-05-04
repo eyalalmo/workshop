@@ -143,7 +143,7 @@ namespace workshop192.ServiceLayer
         {
             SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (toAdd == null)
-                throw new NullReferenceException("error - no such user ID");
+                throw new UserException("no such username");
 
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
             if (sr.getStore() != store)
@@ -155,7 +155,7 @@ namespace workshop192.ServiceLayer
         {
             SubscribedUser toRemove = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (toRemove == null)
-                throw new NullReferenceException("error -no such user ID)");
+                throw new UserException("no such username");
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
             if (sr.getStore() != store)
                 throw new RoleException( "this user can't remove roles from this store");
