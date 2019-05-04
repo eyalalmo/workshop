@@ -30,6 +30,10 @@ namespace workshop192.Domain
 
         public Store createStore(String storeName, String description, SubscribedUser sub)
         {
+            if (storeName == "")
+            {
+                throw new IllegalNameException();
+            }
             Store store = new Store(storeName, description);
             StoreOwner owner = new StoreOwner(null, sub, store);
             store.addStoreRole(owner);

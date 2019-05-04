@@ -15,6 +15,7 @@ namespace workshop192.Domain
         private List<StoreRole> roles;
         private int numOfOwners;
         private bool active;
+        private Discount discount;
        
 
         public Store(string storeName, string description)
@@ -139,6 +140,16 @@ namespace workshop192.Domain
                 numOfOwners--;
             }
             roles.Remove(toRemove);
+        }
+        
+        public void addReliantDiscount(double percentage, String condition, String duration)
+        {
+            discount = new ReliantDiscount(percentage, condition, duration);
+        }
+
+        public void addVisibleDiscount(double percentage, String duration)
+        {
+            discount = new VisibleDiscount(percentage, duration);
         }
     }
 }

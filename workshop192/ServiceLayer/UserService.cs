@@ -77,7 +77,7 @@ namespace workshop192.ServiceLayer
         {
             if (session == null)
             {
-                return null;
+                throw new NullReferenceException("error - bad session");
             }
             return session.createStore(storeName, description);
         }
@@ -95,14 +95,14 @@ namespace workshop192.ServiceLayer
 
         }
 
-        public void addToShoppingBasket(Product product, int amount, Session session)
+        /*public void addToShoppingBasket(Product product, int amount, Session session)
         {
             if (session == null)
             {
                 throw new NullReferenceException("error - bad session");
             }
             session.addToShoppingBasket(product, amount);
-        }
+        }*/
 
         public void purchaseBasket(Session session)
         {
