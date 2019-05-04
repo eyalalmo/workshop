@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    public class DiscountComposite : Discount
+    public class DiscountComposite : DiscountComponent
     {
         enum Type {or, and, xor};
-        private List<Discount> children;
+        private List<DiscountComponent> children;
         private Type type;
 
-        public DiscountComposite(List<Discount> children, Type type)
+        public DiscountComposite(List<DiscountComponent> children, Type type)
         {
             if (children == null)
             {

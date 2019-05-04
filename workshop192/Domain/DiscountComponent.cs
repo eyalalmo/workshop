@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    public class DiscountLeaf : Discount
+    public interface DiscountComponent
     {
+        bool checkCondition();
     }
 }

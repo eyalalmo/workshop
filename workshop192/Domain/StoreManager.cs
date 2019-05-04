@@ -98,7 +98,7 @@ namespace workshop192.Domain
             product.decQuantityLeft(amount);
         }
 
-        public void setProductDiscount(Product product, Discount discount)
+        public void setProductDiscount(Product product, DiscountComponent discount)
         {
             if (!permissions.editDiscount())
                 throw new PermissionsException(user.getUsername() + 

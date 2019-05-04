@@ -15,7 +15,7 @@ namespace workshop192.Domain
         private List<StoreRole> roles;
         private int numOfOwners;
         private bool active;
-        private Discount discount;
+        private DiscountComponent discount;
        
 
         public Store(string storeName, string description)
@@ -144,7 +144,7 @@ namespace workshop192.Domain
         
         public void addReliantDiscount(double percentage, String condition, String duration)
         {
-            discount = new ReliantDiscount(percentage, condition, duration);
+            discount = new ReliantDiscount(condition, duration, percentage: percentage);
         }
 
         public void addVisibleDiscount(double percentage, String duration)

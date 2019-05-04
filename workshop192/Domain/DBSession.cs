@@ -9,23 +9,29 @@ namespace workshop192.Domain
     public class DBSession
     {
         private static DBSession instance;
-        private LinkedList<Session> sessions;
+        private Dictionary<int, Session> sessions;
+        private static int nextID;
 
         public static DBSession getInstance()
         {
             if (instance == null)
+            {
                 instance = new DBSession();
+            }
             return instance;
         }
 
         private DBSession()
         {
-            sessions = new LinkedList<Session>();
+            sessions = new Dictionary<int, Session>();
+            nextID = 1;
         }
+
 
         public void init()
         {
-            sessions = new LinkedList<Session>();
+            sessions = new Dictionary<int, Session>();
+            nextID = 1;
         }
         public void addSession(Session s)
         {
@@ -57,6 +63,11 @@ namespace workshop192.Domain
         public void initSession()
         {
             sessions = new LinkedList<Session>();
+        }
+
+        public Session getSessionByID(int sessionID)
+        {
+
         }
     }
 }

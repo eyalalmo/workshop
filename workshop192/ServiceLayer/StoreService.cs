@@ -98,7 +98,7 @@ namespace workshop192.ServiceLayer
              sr.decFromProductQuantity(product, amount);
         }
 
-        public void setProductDiscount(Product product, Discount discount, Session session)
+        public void setProductDiscount(Product product, DiscountComponent discount, Session session)
         {
             SubscribedUser user = session.getSubscribedUser();
 

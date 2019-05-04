@@ -16,7 +16,7 @@ namespace workshop192.Domain
         private Store store;
         private int rank;
         private int quantityLeft;
-        private Discount discount;
+        private DiscountComponent discount;
         
         public Product(string productName, string productCategory, int price, int rank, int quantityLeft, Store store)
         {
@@ -79,7 +79,7 @@ namespace workshop192.Domain
             return rank;
         }
 
-        public void setDiscount(Discount discount)
+        public void setDiscount(DiscountComponent discount)
         {
             this.discount = discount;
         }

@@ -64,7 +64,7 @@ namespace workshop192.Domain
             product.decQuantityLeft(amount);
         }
 
-        public void setProductDiscount(Product product, Discount discount)
+        public void setProductDiscount(Product product, DiscountComponent discount)
         {
             //product.setDiscount(discount);
         }

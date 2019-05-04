@@ -8,19 +8,40 @@ namespace workshop192.Domain
 {
     public class ReliantDiscount : Discount
     {
+        public enum reliantType {singleProduct, multiProducts,totalAmount}
         private double percentage;
-        private String condition;
         private String duration;
-        public ReliantDiscount(double percentage, String condition, String duration)
+        private reliantType type;
+        int amount;
+        int totalAmount;
+        Dictionary<Product, int> products;
+
+        public ReliantDiscount(double percentage, String duration, int amount, string type) : base(percentage, duration)
         {
-            this.percentage = percentage;
-            this.condition = condition;
-            this.duration = duration;
+            if(type == "singleProduct")
+            {
+                this.amount = amount;
+                this.type = reliantType.singleProduct;
+            }
+            else if( type == "totalAmount")
+            {
+                this.totalAmount = amount;
+                this.type = reliantType.totalAmount;
+            }
+
         }
 
-        public bool meetsCondition(String condition)
+        public ReliantDiscount(double percentage, String duration, Dictionary<Product, int> products) : base(percentage, duration)
         {
+            this.type = reliantType.multiProducts;
+            this.products = products;
+        }
 
+
+
+        public override bool checkCondition()
+        {
+            throw new NotImplementedException();
         }
     }
 }
