@@ -15,9 +15,9 @@ namespace workshop192.Domain
         public abstract bool checkCondition(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice);
         public abstract  Dictionary<Product, double> updatePrice(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice);
 
-        public DiscountComponent(int id)
+        public DiscountComponent()
         {
-            this.id = id;
+            this.id = DBDiscount.getNextDiscountID();
         }
         public int getId()
         {

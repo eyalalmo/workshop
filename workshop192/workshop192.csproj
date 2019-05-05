@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Bridge\DomainBridge.cs" />
     <Compile Include="Domain\Admin.cs" />
+    <Compile Include="Domain\DBDiscount.cs" />
     <Compile Include="Domain\DiscountComposite.cs" />
     <Compile Include="Domain\Discount.cs" />
     <Compile Include="Exceptions\CartException.cs" />

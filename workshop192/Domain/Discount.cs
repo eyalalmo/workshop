@@ -13,7 +13,7 @@ namespace workshop192.Domain
         private string duration;
         private int id;
 
-        public Discount(double percentage, string duration, int id): base(id)
+        public Discount(double percentage, string duration): base()
         {
             this.percentage = percentage;
             this.duration = duration;

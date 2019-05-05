@@ -8,7 +8,8 @@ namespace workshop192.Domain
 {
     public class VisibleDiscount : Discount
     {
-        public VisibleDiscount(int percentage, string duration, int id): base (percentage, duration, id) { }
+
+        public VisibleDiscount(int percentage, string duration): base (percentage, duration) { }
 
         public override Dictionary<Product, double> updatePrice(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
         {
