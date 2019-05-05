@@ -12,6 +12,7 @@ namespace workshop192.ServiceLayer
 
     {
         private static UserService instance;
+        private static 
 
         public static UserService getInstance()
         {
@@ -34,11 +35,7 @@ namespace workshop192.ServiceLayer
         //use case 2.3
         public void login(Session user, String username, String password)
         {
-            if (user == null)
-            {
-                throw new NullReferenceException("error - no such user ID");
-            }
-             user.login(username, password);
+            DB.login(username, password);
         }
 
         //use case 2.2
