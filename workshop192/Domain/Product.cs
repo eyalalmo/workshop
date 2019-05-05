@@ -16,7 +16,7 @@ namespace workshop192.Domain
         private Store store;
         private int rank;
         private int quantityLeft;
-        private Discount discount;
+        private VisibleDiscount discount;
         
         public Product(string productName, string productCategory, int price, int rank, int quantityLeft, Store store)
         {
@@ -37,10 +37,7 @@ namespace workshop192.Domain
         {
             if (discount != null)
             {
-                if (discount.checkCondition())
-                {
-                    return price * (1 - discount.getPercentage());
-                }
+                return price * (1 - discount.getPercentage());
             }
             return price;
         }
@@ -86,9 +83,17 @@ namespace workshop192.Domain
             return rank;
         }
 
-        public void setDiscount(DiscountComponent discount)
+        public void setDiscount(VisibleDiscount discount)
         {
             this.discount = discount;
+        }
+
+        public void removeDiscount()
+        {
+            if (discount == null)
+                throw new DoesntExistException("Discount does not exist so it cannot be removed");
+            else
+                discount = null;
         }
 
         public void setProductID(int id)

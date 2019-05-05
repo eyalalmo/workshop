@@ -12,7 +12,7 @@ namespace workshop192.Domain
         private List<DiscountComponent> children;
         private Type type;
 
-        public DiscountComposite(int id, List<DiscountComponent> children, string type) : base(id)
+        public DiscountComposite(List<DiscountComponent> children, string type) : base()
         {
             if (children == null)
             {

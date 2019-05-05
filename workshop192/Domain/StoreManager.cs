@@ -137,5 +137,34 @@ namespace workshop192.Domain
             return;
         }
 
+        public void addStoreVisibleDiscount(int percentage, string duration)
+        {
+            VisibleDiscount v = new VisibleDiscount(percentage, duration);
+            store.addDiscount(v);
+        }
+
+        public void addReliantDiscountSameProduct(double percentage, String duration, int numOfProducts, Product product)
+        {
+            ReliantDiscount r = new ReliantDiscount(percentage, duration, numOfProducts, product);
+            store.addDiscount(r);
+        }
+
+        public void addReliantDiscountTotalAmount(double percentage, String duration, int amount)
+        {
+            ReliantDiscount r = new ReliantDiscount(percentage, duration, amount);
+            store.addDiscount(r);
+        }
+
+        public void removeStoreDiscount(Store store)
+        {
+            store.removeDiscount();
+        }
+
+        public void addComplexDiscount(List<DiscountComponent> list, string type)
+        {
+            DiscountComposite composite = new DiscountComposite(list, type);
+            store.addDiscount(composite);
+        }
+
     }
 }

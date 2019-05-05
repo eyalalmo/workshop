@@ -111,9 +111,10 @@ namespace workshop192.Domain
             roles.Add(toAdd);
         }
 
-        public  Dictionary<Product, double> calcPrice(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
+
+        public Dictionary<Product, double> updatePrice(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
         {
-           return discount.calcPrice(productList, productsActualPrice);
+           return discount.updatePrice(productList, productsActualPrice);
             
         }
 
@@ -148,7 +149,7 @@ namespace workshop192.Domain
             roles.Remove(toRemove);
         }
         
-        public void addReliantDiscount(double percentage, String condition, String duration)
+       /* public void addReliantDiscount(double percentage, String condition, String duration)
         {
             discount = new ReliantDiscount(condition, duration, percentage: percentage);
         }
@@ -169,10 +170,27 @@ namespace workshop192.Domain
         public void addVisibleDiscount(double percentage, String duration)
         {
             discount = new VisibleDiscount(percentage, duration);
+        }*/
+        public void addDiscount(DiscountComponent d)
+        {
+            if(discount == null)
+                this.discount = d;
+            else
+            {
+                List<DiscountComponent> list = new List<DiscountComponent>();
+                list.Add(this.discount);
+                list.Add(d);
+                DiscountComposite composite = new DiscountComposite(list, "or");
+                this.discount = composite;
+            }
         }
 
         public void removeDiscount()
         {
+            if(discount == null)
+            {
+                throw new DoesntExistException("Discount does not exist so it cannot be removed");
+            }
             discount = null;
             /* if(discount is Discount)
              {
