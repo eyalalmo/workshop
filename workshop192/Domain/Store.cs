@@ -29,7 +29,6 @@ namespace workshop192.Domain
             active = true;
         }
 
-        
         public void addProduct(Product p)
         {
             productList.AddFirst(p);
@@ -112,6 +111,12 @@ namespace workshop192.Domain
             roles.Add(toAdd);
         }
 
+        public  Dictionary<Product, double> calcPrice(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
+        {
+           return discount.calcPrice(productList, productsActualPrice);
+            
+        }
+
         public int getNumberOfOwners()
         {
             return numOfOwners;
@@ -143,57 +148,51 @@ namespace workshop192.Domain
             roles.Remove(toRemove);
         }
         
+        public void addReliantDiscount(double percentage, String condition, String duration)
+        {
+            discount = new ReliantDiscount(condition, duration, percentage: percentage);
+        }
+
+        public void addVisibleDiscount(double percentage, String duration)
+        {
+            discount = new VisibleDiscount(percentage, duration);
+        }
         public DiscountComponent getDiscount()
         {
             return this.discount;
         }
-      /*  public void addComplexReliantDiscount()
-        {
-
-        }
-       /* public void addReliantDiscountSameProduct(double percentage, String condition, String duration)
+        public void addReliantDiscount(double percentage, String condition, String duration)
         {
             discount = new ReliantDiscount(percentage, condition, duration);
         }
-        public void addReliantDiscountTotalAmount(double percentage, String condition, String duration)
-        {
-            discount = new ReliantDiscount(percentage, condition, duration);
-        }*/
 
-        public void addDiscount(DiscountComponent discount)
+        public void addVisibleDiscount(double percentage, String duration)
         {
-            //VisibleDiscount dis = new VisibleDiscount(percentage, duration);
-            if (this.discount == null)
-                this.discount = discount;
-            else
-            {
-                List<DiscountComponent> discountList = new List<DiscountComponent>();
-                discountList.Add(discount);
-                discountList.Add(discount);
-                DiscountComposite newDiscount = new DiscountComposite(discountList, "or");
-                discount = newDiscount;
-            }
+            discount = new VisibleDiscount(percentage, duration);
         }
-        
+
         public void removeDiscount()
         {
             discount = null;
-           /* if(discount is Discount)
-            {
-                if(discount.getId()==discountid)
-                    discount = null;
-            }
-            else
-            {
-                if (discount.getId() == discountid)
-                    discount = null;
-                else
-                {
-                    DiscountComposite dis = (DiscountComposite)discount;
-                    dis.remove(discountid);
-                }
-               
-            }
-        }*/
+            /* if(discount is Discount)
+             {
+                 if(discount.getId()==discountid)
+                     discount = null;
+             }
+             else
+             {
+                 if (discount.getId() == discountid)
+                     discount = null;
+                 else
+                 {
+                     DiscountComposite dis = (DiscountComposite)discount;
+                     dis.remove(discountid);
+                 }
+
+             }
+         }*/
+        }
+       // public Dictionary
     }
+
 }

@@ -32,25 +32,25 @@ namespace workshop192.Domain
 
         }
 
-       
-        public int getActualPrice()
+
+        public double getActualPrice()
         {
-            return this.price;
+            if (discount != null)
+            {
+                if (discount.checkCondition())
+                {
+                    return price * (1 - discount.getPercentage());
+                }
+            }
+            return price;
         }
 
         public int getQuantityLeft()
         {
             return this.quantityLeft;
         }
-        public Discount getDiscount()
-        {
-            return this.discount;
-        }
 
-        public void removeDiscount()
-        {
-            discount = null;
-        }
+
         public void setQuantityLeft(int quantity)
         {
             this.quantityLeft = quantity;
@@ -86,7 +86,7 @@ namespace workshop192.Domain
             return rank;
         }
 
-        public void setDiscount(Discount discount)
+        public void setDiscount(DiscountComponent discount)
         {
             this.discount = discount;
         }

@@ -13,12 +13,16 @@ namespace workshop192.Domain
     {
 
         private Dictionary <Product, int> productList;
+        private Dictionary<Product, double> productsActualPrice;
         private int storeID;
+        private Store store;
+
 
         public ShoppingCart(int storeID)
         {
             productList = new Dictionary<Product, int>();
             this.storeID = storeID;
+            store = DBStore.getInstance().getStore(storeID);
         }
         public Dictionary<Product, int> getProductsInCarts()
         {
@@ -67,13 +71,35 @@ namespace workshop192.Domain
         }
         public int getTotalAmount()
         {
-            int sum = 0;
+           // updateActualProductPrice();
+            updateStoreDiscount();
+            double sum = 0;
             foreach (KeyValuePair<Product, int> entry in productList)
             {
-                sum += (entry.Key.getPrice() * entry.Value);
+                Product p = entry.Key;
+                double actualPrice = productsActualPrice[p];
+                sum += (entry.Key.getPrice() * actualPrice);
             }
+
             return sum;
         }
+
+        private void updateStoreDiscount()
+        {
+            productsActualPrice = store.calcPrice(productList, productsActualPrice);
+
+        }
+
+        private void updateActualProductPrice()
+        {
+            productsActualPrice = new Dictionary<Product, double>();
+            foreach (KeyValuePair<Product, int> entry in productList)
+            {
+                Product p = entry.Key;
+                productsActualPrice.Add(p, p.getActualPrice());
+            }
+        }
+
         public String checkout(String address,String creditCard) {
             String res = "";
             int sum = 0;

@@ -4,16 +4,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using workshop192.Bridge;
 
 namespace workshop192.ServiceLayer
 {
     public class BasketService
     {
         private static BasketService instance;
+        private static DomainBridge domainBridge;
 
         public static BasketService getInstance() {
             if (instance == null)
+            {
                 instance = new BasketService();
+                domainBridge = DomainBridge.getInstance();
+            }
             return instance;
         }
 

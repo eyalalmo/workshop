@@ -6,9 +6,15 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
+
     public abstract class DiscountComponent
     {
         int id;
+        
+        
+        public abstract bool checkCondition(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice);
+        public abstract  Dictionary<Product, double> updatePrice(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice);
+
         public DiscountComponent(int id)
         {
             this.id = id;
@@ -17,7 +23,6 @@ namespace workshop192.Domain
         {
             return this.id;
         }
-     
-        bool checkCondition();
+
     }
 }
