@@ -92,8 +92,17 @@ namespace workshop192.ServiceLayer
         }
         public static string getStateName(string hash)
         {
-           return  DBCookies.getInstance().getUserByHash(hash).getState().getStateName();
-        }
+            try
+            {
+                string str = DBCookies.getInstance().getUserByHash(hash).getState().getStateName();
+            
+            return str;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }       
 
         public void addToShoppingBasket(int product, int amount, Session session)
         {
