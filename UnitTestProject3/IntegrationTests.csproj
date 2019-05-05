@@ -51,20 +51,11 @@
   <ItemGroup>
     <Compile Include="shopingCartTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-
     <Compile Include="StoreTests.cs" />
-
     <Compile Include="shopingbasketTest.cs" />
-
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\workshop192\workshop192.csproj">
-      <Project>{BCCD87A3-FD64-45BF-A045-CBBB08B7D339}</Project>
-      <Name>workshop192</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

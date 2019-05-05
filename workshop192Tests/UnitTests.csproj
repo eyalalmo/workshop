@@ -70,12 +70,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\workshop192\workshop192.csproj">
-      <Project>{BCCD87A3-FD64-45BF-A045-CBBB08B7D339}</Project>
-      <Name>workshop192</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

@@ -54,11 +54,11 @@
                 <div >
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/About">About</a></li>
-                        <li><a runat="server" href="~/Contact">Contact</a></li>
-                        <li><a runat="server" href="~/login">Login</a></li>
-                         <li><a runat="server" href="~/register">register</a></li>
-                         <li><a runat="server" id="etay" name="etay" visible="false">logut</a></li>
+                        <li><a runat="server" href="~/Pages/About">About</a></li>
+                        <li><a runat="server" href="~/Pages/Contact">Contact</a></li>
+                        <li><a runat="server" id="login" name="login" href="~/Pages/login" visible="true">Login</a></li>
+                         <li><a runat="server" id="register" name="register" href="~/Pages/register" visible="true">register</a></li>
+                         <li><a runat="server" id="logout" name="logout" visible="false">logout</a></li>
                        
                       
                             
