@@ -18,7 +18,7 @@ namespace workshop192.ServiceLayer.Tests
     {
         private UserService userService;
         private StoreService storeService;
-        private int session;
+        private Session session;
 
         [TestInitialize()]
         public void Initialize()
@@ -129,7 +129,7 @@ namespace workshop192.ServiceLayer.Tests
         {
             registerSuccessTest();
             loginSuccessTest();
-            List<int> searchResult1 = userService.searchProducts(null, null, "kitchen");
+            List<Product> searchResult1 = userService.searchProducts(null, null, "kitchen");
             Assert.IsTrue(searchResult1.Count == 2);
             //Assert.IsTrue(productExists("pan", searchResult1));
             //Assert.IsTrue(productExists("stove", searchResult1));
@@ -140,7 +140,7 @@ namespace workshop192.ServiceLayer.Tests
         {
             registerSuccessTest();
             loginSuccessTest();
-            List<int> searchResult2 = userService.searchProducts(null, null, "clothes");
+            List<Product> searchResult2 = userService.searchProducts(null, null, "clothes");
             Assert.IsTrue(searchResult2.Count == 3);
             //Assert.IsTrue(productExists("shirt", searchResult2));
             //Assert.IsTrue(productExists("pants", searchResult2));
@@ -152,14 +152,14 @@ namespace workshop192.ServiceLayer.Tests
         {
             registerSuccessTest();
             loginSuccessTest();
-            List<int> searchResult3 = userService.searchProducts(null, null, "pets");
+            List<Product> searchResult3 = userService.searchProducts(null, null, "pets");
             Assert.IsTrue(searchResult3.Count == 0);
         }
 
         [TestMethod]
         public void searchByNameSucc()
         {
-            List<int> searchResult1 = userService.searchProducts("stove", null, null);
+            List<Product> searchResult1 = userService.searchProducts("stove", null, null);
             Assert.IsTrue(searchResult1.Count == 1);
             //Assert.IsTrue(productExists("stove", searchResult1));
 
@@ -168,14 +168,14 @@ namespace workshop192.ServiceLayer.Tests
         [TestMethod]
         public void searchByNameFail()
         {
-            List<int> searchResult2 = userService.searchProducts("toaster", null, null);
+            List<Product> searchResult2 = userService.searchProducts("toaster", null, null);
             Assert.IsTrue(searchResult2.Count == 0);
         }
         [TestMethod]
         public void filterTest1()
         {
             
-            List<int> searchResult2 = userService.searchProducts(null, null, "clothes");
+            List<Product> searchResult2 = userService.searchProducts(null, null, "clothes");
             Assert.IsTrue(searchResult2.Count == 3);
             //Assert.IsTrue(productExists("shirt", searchResult2));
             //Assert.IsTrue(productExists("pants", searchResult2));
@@ -183,24 +183,24 @@ namespace workshop192.ServiceLayer.Tests
         }
         public void filterTest2()
         {
-            List<int> searchResult1 = userService.searchProducts(null, null, "kitchen");
+            List<Product> searchResult1 = userService.searchProducts(null, null, "kitchen");
             int[] arr1 = { 60, 120 };
-            List<int> filterResult1 = userService.filterProducts(searchResult1, arr1, 0);
+            List<Product> filterResult1 = userService.filterProducts(searchResult1, arr1, 0);
             Assert.IsTrue(filterResult1.Count == 1);
             //Assert.IsTrue(productExists("pan", filterResult1));
         }
         public void filterTest3()
         {
-            List<int> searchResult2 = userService.searchProducts(null, null, "clothes");
+            List<Product> searchResult2 = userService.searchProducts(null, null, "clothes");
             int[] arr3 = { 10, 40 };
-            List<int> filterResult3 = userService.filterProducts(searchResult2, arr3, 5);
+            List<Product> filterResult3 = userService.filterProducts(searchResult2, arr3, 5);
             Assert.IsTrue(filterResult3.Count == 1);
         }
         public void filterTestFail()
         {
-            List<int> searchResult2 = userService.searchProducts(null, null, "clothes");
+            List<Product> searchResult2 = userService.searchProducts(null, null, "clothes");
             int[] arr2 = { -40, -20 };
-            List<int> filterResult2 = userService.filterProducts(searchResult2, arr2, 0);
+            List<Product> filterResult2 = userService.filterProducts(searchResult2, arr2, 0);
             Assert.IsTrue(filterResult2.Count == 0);
 
 
@@ -223,8 +223,8 @@ namespace workshop192.ServiceLayer.Tests
         {
             try
             {
-                registerSuccess();
-                loginSuccess();
+                registerSuccessTest();
+                loginSuccessTest();
                 int store1 = userService.createStore(session, "Zoo Land", "pets");
                 int product1 = storeService.addProduct("dogs", "big dogs", 80, 2, 4, store1, session);
                 int product2 = storeService.addProduct("cats", "grey cats", 110, 5, 10, store1, session);
@@ -259,8 +259,8 @@ namespace workshop192.ServiceLayer.Tests
         {
             try
             {
-                registerSuccess();
-                loginSuccess();
+                registerSuccessTest();
+                loginSuccessTest();
 
                 int store1 = userService.createStore(session, "Zoo Land", "pets");
                 int product1 = storeService.addProduct("dogs", "big dogs", 80, 2, 4, store1, session);
@@ -285,8 +285,8 @@ namespace workshop192.ServiceLayer.Tests
         {
             try
             {
-                registerSuccess();
-                loginSuccess();
+                registerSuccessTest();
+                loginSuccessTest();
 
                 userService.logout(session);
                 //???do we need to check
@@ -324,8 +324,8 @@ namespace workshop192.ServiceLayer.Tests
         {
             try
             {
-                registerSuccess();
-                loginSuccess();
+                registerSuccessTest();
+                loginSuccessTest();
                 //userService.register(session, "anna", "banana");
                 //userService.login(session, "anna", "banana");
                 //SubscribedUser user = session.getSubscribedUser();
@@ -354,8 +354,8 @@ namespace workshop192.ServiceLayer.Tests
         {
             try
             {
-                registerSuccess();
-                loginSuccess();
+                registerSuccessTest();
+                loginSuccessTest();
                 //userService.register(session, "anna", "banana");
                 //userService.login(session, "anna", "banana");
                 //SubscribedUser user = session.getSubscribedUser();

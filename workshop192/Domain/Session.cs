@@ -70,7 +70,7 @@ namespace workshop192.Domain
             return userState.getPurchaseHistory(subscribedUser);
         }
 
-        public Store createStore(String storeName, String description)
+        public int createStore(String storeName, String description)
         {
             return userState.createStore(storeName, description, subscribedUser);
         }

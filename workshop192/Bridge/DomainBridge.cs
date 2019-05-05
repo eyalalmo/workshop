@@ -30,51 +30,28 @@ namespace workshop192.Bridge
         //use case 2.3
         public void login(Session user, String username, String password)
         {
-            if (user == null)
-            {
-                throw new NullReferenceException("error - no such user ID");
-            }
             user.login(username, password);
         }
 
         //use case 2.2
         public void register(Session user, String username, String password)
         {
-            if (user == null)
-            {
-                throw new NullReferenceException("error - bad session");
-            }
-            if (username.Equals("") || password.Equals(""))
-            {
-                throw new ArgumentException("Illegal username or password");
-            }
             user.register(username, password);
         }
         //use case 6.2
         public void removeUser(Session admin, String username)
         {
-            if (admin == null)
-            {
-                throw new NullReferenceException("error - bad session");
-            }
             admin.removeUser(username);
         }
 
         public void logout(Session user)
         {
-            if (user == null)
-            {
-                throw new NullReferenceException("error - bad session");
-            }
+
             user.logout();
         }
 
         public int createStore(Session session, String storeName, String description)
         {
-            if (session == null)
-            {
-                return null;
-            }
             return session.createStore(storeName, description);
         }
 
@@ -85,19 +62,16 @@ namespace workshop192.Bridge
             return DBProduct.getInstance().searchProducts(name, keywords, category);
         }
 
-        public List<Product> filterProducts(List<int> list, int[] price_range, int minimumRank)
+        public List<Product> filterProducts(List<Product> list, int[] price_range, int minimumRank)
         {
             return DBProduct.getInstance().filterBy(list, price_range, minimumRank);
 
         }
 
-        public void addToShoppingBasket(Product product, int amount, Session session)
+        public void addToShoppingBasket(int product, int amount, Session session)
         {
-            if (session == null)
-            {
-                throw new NullReferenceException("error - bad session");
-            }
-            session.addToShoppingBasket(product, amount);
+            Product toAdd = DBProduct.getInstance().getProductByID(product);
+            session.addToShoppingBasket(toAdd, amount);
         }
 
         public void purchaseBasket(Session session)
@@ -108,7 +82,7 @@ namespace workshop192.Bridge
         public int addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, int store, Session session)
         {
             DBStore storeDB = DBStore.getInstance();
-            
+            Store store = storeDB.getStore(storeID);
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
             Product product = new Product(productName, productCategory, price, rank, quantityLeft, store);
 
@@ -268,34 +242,46 @@ namespace workshop192.Bridge
             return user.getShoppingBasket().getShoppingCarts();
         }
 
-        public ShoppingCart getCart(Session user, Store store)
+        public ShoppingCart getCart(Session user, int store)
         {
-            return user.getShoppingBasket().getShoppingCartByID(store.getStoreID());
+            return user.getShoppingBasket().getShoppingCartByID(store);
         }
         //use case 2.6
-        public void addToCart(Session user, Store store, Product product, int amount)
+        public void addToCart(Session user, int product, int amount)
         {
-            user.getShoppingBasket().addToCart(product, amount);
+            if (amount <= 0)
+            {
+                throw new IllegalAmountException("error : amount should be a positive number");
+            }
+            Product p = DBProduct.getInstance().getProductByID(product);
+            user.getShoppingBasket().addToCart(p, amount);
+
         }
         //use case 2.7
-        public void removeFromCart(Session user, Store store, Product product)
+        public void removeFromCart(Session user, int store, int product)
         {
-            user.getShoppingBasket().getShoppingCartByID(store.getStoreID()).removeFromCart(product);
+            Product p = DBProduct.getInstance().getProductByID(product);
+            user.getShoppingBasket().getShoppingCartByID(store).removeFromCart(p);
         }
         //use case 2.7
-        public void changeQuantity(Session user, Product product, Store store, int newAmount)
+        public void changeQuantity(Session user, int product, int store, int newAmount)
         {
-            user.getShoppingBasket().getShoppingCartByID(store.getStoreID()).changeQuantityOfProduct(product, newAmount);
+            if (newAmount <= 0)
+            {
+                throw new IllegalAmountException("ERROR: quantity should be a positive number");
+            }
+            Product p = DBProduct.getInstance().getProductByID(product);
+            user.getShoppingBasket().getShoppingCartByID(store).changeQuantityOfProduct(p, newAmount);
         }
 
-        public string checkoutCart(Session user, Store store, String address, String creditCard)
+        public void checkoutCart(Session user, int store, String address, String creditCard)
         {
-            return user.getShoppingBasket().getShoppingCartByID(store.getStoreID()).checkout(address, creditCard);
+            user.getShoppingBasket().getShoppingCartByID(store).checkout(address, creditCard);
         }
 
-        public String checkoutBasket(Session user, String address, String creditCard)
+        public void checkoutBasket(Session user, String address, String creditCard)
         {
-            return user.getShoppingBasket().checkout(address, creditCard);
+            user.getShoppingBasket().purchaseBasket();
         }
     }
 }

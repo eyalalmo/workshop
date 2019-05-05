@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace workshop192.Domain
 {
     [Serializable]
-    internal class UserStateException : Exception
+    public class UserStateException : Exception
     {
         public UserStateException()
         {

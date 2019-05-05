@@ -14,16 +14,30 @@ namespace workshop192.Domain.Tests
     public class GuestTests
     {
 
+
         public void GuestTest()
         {
         }
-
+        [TestInitialize()]
+        public void init()
+        {
+            DBSubscribedUser dbsubscribedUser = DBSubscribedUser.getInstance();
+            dbsubscribedUser.cleanDB();
+        }
         [TestMethod()]
         public void closeStoreTest()
         {
-            UserState state = new Guest();
-            String res = state.closeStore(null);
-            Assert.IsTrue(Equals("ERROR: not an admin", res));
+            UserState state = new LoggedIn();
+            try
+            {
+                state.closeStore(null);
+                Assert.Fail();
+            }
+            catch (UserStateException e)
+            {
+                Assert.IsTrue(true);
+            }
+            
         }
 
         [TestMethod()]
@@ -43,7 +57,7 @@ namespace workshop192.Domain.Tests
         }
 
         [TestMethod()]
-        public void loginTest()
+        public void loginTest1()
         {
             DBSubscribedUser dbsubscribedUser = DBSubscribedUser.getInstance();
             SubscribedUser sub1 = new SubscribedUser("Danny", dbsubscribedUser.encryptPassword("Shovevani"), new ShoppingBasket());
@@ -51,26 +65,81 @@ namespace workshop192.Domain.Tests
 
             Session session = new Session();
             UserState state = session.getState();
-            Assert.IsTrue(Equals(state.login("bob", "dilan", session), "ERROR: username does not exist"));
-            Assert.IsTrue(Equals(state.login("Danny", "Shovevani", session), ""));
-            Assert.IsTrue(session.getState() is LoggedIn);
+            try
+            {
+                state.login("bob", "dilan", session);
+                Assert.Fail();
+            } catch (LoginException e)
+            {
+                Assert.IsTrue(true);
+            }
+            
+        }
+        [TestMethod()]
+        public void loginTest2()
+        {
+            DBSubscribedUser dbsubscribedUser = DBSubscribedUser.getInstance();
+            SubscribedUser sub1 = new SubscribedUser("Danny", dbsubscribedUser.encryptPassword("Shovevani"), new ShoppingBasket());
+            dbsubscribedUser.register(sub1);
 
+            Session session = new Session();
+            UserState state = session.getState();
+            try
+            {
+
+                state.login("Danny", "Shovevani", session);
+                Assert.IsTrue(session.getState() is LoggedIn);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
+            }
+
+        }
+        [TestMethod()]
+        public void loginTest3()
+        {
+            DBSubscribedUser dbsubscribedUser = DBSubscribedUser.getInstance();
+            SubscribedUser sub1 = new SubscribedUser("Danny", dbsubscribedUser.encryptPassword("Shovevani"), new ShoppingBasket());
+            dbsubscribedUser.register(sub1);
+
+            Session session = new Session();
+            UserState state = session.getState();
             Session session2 = new Session();
             UserState state2 = session2.getState();
-            Assert.IsTrue(Equals(state.login("Danny", "aaaa", session2), "ERROR: password incorrect"));
-            dbsubscribedUser.cleanDB();
+            try
+            {
+                state.login("Danny", "aaaa", session2);
+                Assert.Fail();
+            }
+            catch(LoginException e)
+            {
+                Assert.IsTrue(true);
+                
+            }
+            
+            
         }
 
         [TestMethod()]
         public void logoutTest()
         {
             UserState state = new Guest();
-            Assert.IsTrue(Equals(state.logout(null, null), "ERROR: not logged in"));
+            try
+            {
+                state.logout(null, null);
+                Assert.Fail();
+            }
+            catch (UserStateException)
+            {
+                Assert.IsTrue(true);
+            }
+
 
         }
 
         [TestMethod()]
-        public void registerTest()
+        public void registerTest1()
         {
             DBSubscribedUser dbsubscribedUser = DBSubscribedUser.getInstance();
             SubscribedUser sub3 = new SubscribedUser("Benny", "aaaa", new ShoppingBasket());
@@ -78,19 +147,31 @@ namespace workshop192.Domain.Tests
 
             Session session = new Session();
             UserState state = session.getState();
-            Assert.IsTrue(Equals(state.register("Benny", "aaaa", session), "ERROR: username already exists"));
-            Assert.IsTrue(Equals(state.register("Viva", "Diva", session), ""));
-            Assert.IsTrue(state is Guest);
-            dbsubscribedUser.cleanDB();
+            try
+            {
+                state.register("Benny", "aaaa", session);
+                Assert.Fail();
+            }
+            catch (RegisterException)
+            {
+                Assert.IsTrue(state is Guest);
+            }
         }
 
         [TestMethod()]
         public void removeUserTest()
         {
-            Session session = new Session();
-            UserState state = session.getState();
-            Assert.IsTrue(Equals(state.removeUser("abcd"), "ERROR: not an admin"));
-
+            UserState state = new LoggedIn();
+            try
+            {
+                state.removeUser("ben");
+                Assert.Fail();
+            }
+            catch (UserStateException e)
+            {
+                Assert.IsTrue(true);
+            }
+            
         }
     }
 }
