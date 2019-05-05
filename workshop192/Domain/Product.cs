@@ -32,7 +32,7 @@ namespace workshop192.Domain
 
         }
 
-
+       
         public int getActualPrice()
         {
             return this.price;
@@ -42,8 +42,15 @@ namespace workshop192.Domain
         {
             return this.quantityLeft;
         }
+        public Discount getDiscount()
+        {
+            return this.discount;
+        }
 
-
+        public void removeDiscount()
+        {
+            discount = null;
+        }
         public void setQuantityLeft(int quantity)
         {
             this.quantityLeft = quantity;

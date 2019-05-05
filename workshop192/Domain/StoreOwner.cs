@@ -64,7 +64,7 @@ namespace workshop192.Domain
             product.decQuantityLeft(amount);
         }
 
-        public void setProductDiscount(Product product, Discount discount)
+        public void setProductDiscount(Product product, DiscountComponent discount)
         {
             //product.setDiscount(discount);
         }
@@ -143,6 +143,50 @@ namespace workshop192.Domain
             foreach (StoreRole sr in appointedByMe)
                 remove(sr.getUser());
         }
+
+        public void addProductVisibleDiscount(Product product, int percentage, string duration)
+        {
+            VisibleDiscount discount = new VisibleDiscount(percentage, duration);
+            product.setDiscount(discount);
+        }
+        public void removeProductDiscount(Product product)
+        {
+            product.removeDiscount();
+        }
+        public void addStoreVisibleDiscount(int percentage, string duration)
+        {
+            VisibleDiscount v = new VisibleDiscount(percentage, duration);
+            store.addDiscount(v);
+        }
+
+        public void addReliantDiscountSameProduct(double percentage, String duration, int amount, Product product)
+        {
+            ReliantDiscount r = new ReliantDiscount(percentage, duration, amount, "sameProduct", product);
+            store.addDiscount(r);
+        }
+
+        public void addReliantDiscountTotalAmount(double percentage, String duration, int price)
+        {
+            ReliantDiscount r = new ReliantDiscount(percentage, duration, price, "totalAmount");
+            store.addDiscount(r);
+        }
+        public void removeStoreDiscount(Store store)
+        {
+            store.removeDiscount();
+        }
+
+        /*  public void addComplexReliantDiscount()
+     {
+
+     }
+    /* public void addReliantDiscountSameProduct(double percentage, String condition, String duration)
+     {
+         discount = new ReliantDiscount(percentage, condition, duration);
+     }
+     public void addReliantDiscountTotalAmount(double percentage, String condition, String duration)
+     {
+         discount = new ReliantDiscount(percentage, condition, duration);
+     }*/
 
     }
 }

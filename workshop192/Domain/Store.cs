@@ -15,7 +15,7 @@ namespace workshop192.Domain
         private List<StoreRole> roles;
         private int numOfOwners;
         private bool active;
-        private Discount discount;
+        private DiscountComponent discount;
        
 
         public Store(string storeName, string description)
@@ -29,6 +29,7 @@ namespace workshop192.Domain
             active = true;
         }
 
+        
         public void addProduct(Product p)
         {
             productList.AddFirst(p);
@@ -142,14 +143,57 @@ namespace workshop192.Domain
             roles.Remove(toRemove);
         }
         
-        public void addReliantDiscount(double percentage, String condition, String duration)
+        public DiscountComponent getDiscount()
+        {
+            return this.discount;
+        }
+      /*  public void addComplexReliantDiscount()
+        {
+
+        }
+       /* public void addReliantDiscountSameProduct(double percentage, String condition, String duration)
         {
             discount = new ReliantDiscount(percentage, condition, duration);
         }
-
-        public void addVisibleDiscount(double percentage, String duration)
+        public void addReliantDiscountTotalAmount(double percentage, String condition, String duration)
         {
-            discount = new VisibleDiscount(percentage, duration);
+            discount = new ReliantDiscount(percentage, condition, duration);
+        }*/
+
+        public void addDiscount(DiscountComponent discount)
+        {
+            //VisibleDiscount dis = new VisibleDiscount(percentage, duration);
+            if (this.discount == null)
+                this.discount = discount;
+            else
+            {
+                List<DiscountComponent> discountList = new List<DiscountComponent>();
+                discountList.Add(discount);
+                discountList.Add(discount);
+                DiscountComposite newDiscount = new DiscountComposite(discountList, "or");
+                discount = newDiscount;
+            }
         }
+        
+        public void removeDiscount()
+        {
+            discount = null;
+           /* if(discount is Discount)
+            {
+                if(discount.getId()==discountid)
+                    discount = null;
+            }
+            else
+            {
+                if (discount.getId() == discountid)
+                    discount = null;
+                else
+                {
+                    DiscountComposite dis = (DiscountComposite)discount;
+                    dis.remove(discountid);
+                }
+               
+            }
+        }*/
     }
 }

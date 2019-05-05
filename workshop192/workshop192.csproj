@@ -46,7 +46,7 @@
     <Compile Include="Bridge\DomainBridge.cs" />
     <Compile Include="Domain\Admin.cs" />
     <Compile Include="Domain\DiscountComposite.cs" />
-    <Compile Include="Domain\DiscountLeaf.cs" />
+    <Compile Include="Domain\Discount.cs" />
     <Compile Include="Exceptions\CartException.cs" />
     <Compile Include="Exceptions\AlreadyExistException.cs" />
     <Compile Include="Domain\Complaint.cs" />
@@ -56,7 +56,7 @@
     <Compile Include="Domain\DBSession.cs" />
     <Compile Include="Domain\DBSubscribedUser.cs" />
     <Compile Include="Domain\DeliveryService.cs" />
-    <Compile Include="Domain\Discount.cs" />
+    <Compile Include="Domain\DiscountComponent.cs" />
     <Compile Include="Exceptions\DoesntExistException.cs" />
     <Compile Include="Domain\Guest.cs" />
     <Compile Include="Exceptions\IllegalName.cs" />

@@ -16,7 +16,7 @@ namespace workshop192.Domain
         void setProductName(Product product, String name);
         void addToProductQuantity(Product product, int amount);
         void decFromProductQuantity(Product product, int amount);
-        void setProductDiscount(Product product, Discount discount);
+        void setProductDiscount(Product product, DiscountComponent discount);
         void addManager(SubscribedUser manager, Permissions permissions);
         void addOwner(SubscribedUser owner);
         void remove(SubscribedUser user);
@@ -24,5 +24,10 @@ namespace workshop192.Domain
         void removeRoleAppointedByMe(StoreRole role);
         SubscribedUser getAppointedBy();
         void removeAllAppointedBy();
+        void addStoreDiscount();
+        void removeStoreDiscount();
+        void addProductDiscount();
+        void removeProductDiscount();
+        
     }
 }

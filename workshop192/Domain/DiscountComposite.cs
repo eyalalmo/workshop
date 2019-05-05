@@ -6,25 +6,25 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    public class DiscountComposite : Discount
+    public class DiscountComposite : DiscountComponent
     {
-        enum Type {or, and, xor};
-        private List<Discount> children;
-        private Type type;
+       // public enum Type {or, and, xor};
+        private List<DiscountComponent> children;
+        private String type;
 
-        public DiscountComposite(List<Discount> children, Type type)
+        public DiscountComposite(List<DiscountComponent> children, String type)
         {
-            if (children == null)
-            {
-                throw new IllegalAmountException();
-            }
-            this.children = children;
             this.type = type;
+            this.children = children ?? throw new IllegalAmountException();
+            this.type = type;
+          
         }
         public bool checkCondition()
         {
             throw new NotImplementedException();
         }
+
+        
 
     }
 }
