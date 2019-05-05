@@ -9,37 +9,41 @@ namespace workshop192.Domain
     public class DBSession
     {
         private static DBSession instance;
-        private LinkedList<Session> sessions;
+        private Dictionary<int, Session> sessions;
+        private static int nextID;
 
         public static DBSession getInstance()
         {
             if (instance == null)
+            {
                 instance = new DBSession();
+            }
             return instance;
         }
 
         private DBSession()
         {
-            sessions = new LinkedList<Session>();
+            sessions = new Dictionary<int, Session>();
+            nextID = 1;
         }
+
 
         public void init()
         {
-            sessions = new LinkedList<Session>();
+            sessions = new Dictionary<int, Session>();
+            nextID = 1;
         }
-        public String addSession(Session s)
+        public void addSession(Session s)
         {
             if (sessions.Contains(s))
-                return "ERROR: Session already exists";
+                throw new AlreadyExistException("session already exists");
             sessions.AddFirst(s);
-            return "";
         }
-        public String removeSession(Session s)
+        public void removeSession(Session s)
         {
             if (!sessions.Contains(s))
-                return "ERROR: Session does not exist, cannot remove it";
+                throw new DoesntExistException("session does not exist, can't remove it");
             sessions.Remove(s);
-            return "";
         }
         public Session getSessionOfSubscribedUser(SubscribedUser sub)
         {
@@ -52,20 +56,18 @@ namespace workshop192.Domain
             }
             return null;
         }
-        public String getSession(Session s)
+        public bool sessionExists(Session s)
         {
-            if (sessions.Contains(s))
-                return "";
-            return "error: session isnt added";
+            return sessions.Contains(s);
         }
         public void initSession()
         {
             sessions = new LinkedList<Session>();
         }
 
-        internal string generate()
+        public Session getSessionByID(int sessionID)
         {
-            throw new NotImplementedException();
+
         }
     }
 }
