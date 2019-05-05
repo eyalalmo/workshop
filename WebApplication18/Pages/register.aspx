@@ -48,19 +48,15 @@
                     dataType: "json",
                     success: function (response) {
                         console.log(response); 
-                        //console.log(response[1]);
                         if (response == "ok") {
-                            //document.cookie = "HashCode=" + response[1]; //saves the hash code as a cookie
-                            window.location.href = baseUrl+"/";
+                         window.location.href = baseUrl+"/";
                         }
                         else {
                              console.log(response);
-                            $("#registerAlert").html('Failure - ' + response);
                         }
                     },
                     error: function (response) {
                         console.log(response);
-                        window.location.href = baseUrl+"/error";
                     }
                 });
             });
