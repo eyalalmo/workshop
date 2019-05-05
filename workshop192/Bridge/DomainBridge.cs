@@ -52,7 +52,8 @@ namespace workshop192.Bridge
 
         public int createStore(Session session, String storeName, String description)
         {
-            return session.createStore(storeName, description);
+            Store s = session.createStore(storeName, description);
+            return s.getStoreID();
         }
 
         //use case 2.5
@@ -79,7 +80,7 @@ namespace workshop192.Bridge
             session.purchaseBasket();
         }
 
-        public int addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, int store, Session session)
+        public int addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, int storeID, Session session)
         {
             DBStore storeDB = DBStore.getInstance();
             Store store = storeDB.getStore(storeID);
@@ -260,8 +261,7 @@ namespace workshop192.Bridge
         //use case 2.7
         public void removeFromCart(Session user, int store, int product)
         {
-            Product p = DBProduct.getInstance().getProductByID(product);
-            user.getShoppingBasket().getShoppingCartByID(store).removeFromCart(p);
+            user.getShoppingBasket().getShoppingCartByID(store).removeFromCart(DBProduct.getInstance().getProductByID(product));
         }
         //use case 2.7
         public void changeQuantity(Session user, int product, int store, int newAmount)

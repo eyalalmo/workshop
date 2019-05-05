@@ -45,8 +45,8 @@ namespace workshop192.Domain.Tests
             Session session = new Session();
             session.register("yael", "yael");
             session.login("yael", "yael");
-            int store = session.getState().createStore("Wallmart", "sells everything", session.getSubscribedUser());
-            Assert.AreNotEqual(store,-1);
+            Store store = session.getState().createStore("Wallmart", "sells everything", session.getSubscribedUser());
+            Assert.AreNotEqual(store,null);
         }
 
         [TestMethod()]

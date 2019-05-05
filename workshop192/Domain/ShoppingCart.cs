@@ -43,11 +43,11 @@ namespace workshop192.Domain
 
         }
 
-        public void removeFromCart(int p)
+        public void removeFromCart(Product p)
         {
-            if (!productList.ContainsValue(p))
+            if (!productList.ContainsKey(p))
                 throw new CartException("error- product does not exist");
-            productList.Remove(DBProduct.getInstance().getProductByID(p));
+            productList.Remove(p);
           
         }
 

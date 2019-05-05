@@ -28,7 +28,7 @@ namespace workshop192.Domain
             dbComplaint.addComplaint(complaint);
         }
 
-        public int createStore(String storeName, String description, SubscribedUser sub)
+        public Store createStore(String storeName, String description, SubscribedUser sub)
         {
             Store store = new Store(storeName, description);
             StoreOwner owner = new StoreOwner(null, sub, store);
@@ -36,7 +36,7 @@ namespace workshop192.Domain
             sub.addStoreRole(owner);
             DBStore.getInstance().addStore(store);
             DBStore.getInstance().addStoreRole(owner);
-            return store.getStoreID();
+            return store;
         }
 
         public String getComplaints()
