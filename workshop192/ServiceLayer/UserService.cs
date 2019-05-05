@@ -73,7 +73,7 @@ namespace workshop192.ServiceLayer
             user.logout();
         }
 
-        public Store createStore(Session session, String storeName, String description)
+        public int createStore(Session session, String storeName, String description)
         {
             if (session == null)
             {
@@ -84,12 +84,12 @@ namespace workshop192.ServiceLayer
 
         //use case 2.5
 
-        public List<Product> searchProducts(String name, String keywords, String category)
+        public List<int> searchProducts(String name, String keywords, String category)
         {
             return DBProduct.getInstance().searchProducts(name, keywords, category);
         }
 
-        public List<Product> filterProducts(List<Product> list, int[] price_range, int minimumRank)
+        public List<int> filterProducts(List<int> list, int[] price_range, int minimumRank)
         {
             return DBProduct.getInstance().filterBy(list, price_range, minimumRank);
 
