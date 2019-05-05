@@ -11,15 +11,11 @@ namespace workshop192.ServiceLayer
     public class BasketService
     {
         private static BasketService instance;
-        private static DomainBridge domainBridge;
+        private DomainBridge db = DomainBridge.getInstance();
 
-        public static BasketService getInstance()
-        {
+        public static BasketService getInstance() {
             if (instance == null)
-            {
                 instance = new BasketService();
-                domainBridge = DomainBridge.getInstance();
-            }
             return instance;
         }
 
@@ -30,47 +26,80 @@ namespace workshop192.ServiceLayer
         //use case 2.7
         public Dictionary<int, ShoppingCart> getShoppingCarts(Session user)
         {
-            return user.getShoppingBasket().getShoppingCarts();
+            return db.getShoppingCarts(user);
         }
 
-        public ShoppingCart getCart(Session user, Store store)
+        public ShoppingCart getCart(Session user, int store)
         {
-            return user.getShoppingBasket().getShoppingCartByID(store.getStoreID());
+            if (store < 0)
+            {
+                throw new ArgumentException("invalid store id");
+            }
+
+            return db.getCart(user,store);
         }
         //use case 2.6
-        public void addToCart(Session user, Store store, Product product, int amount)
+        public void addToCart(Session user,int product,int amount)
         {
+            if (product < 0)
+            {
+                throw new ArgumentException("invalid product id");
+            }
+
             if (amount <= 0)
             {
                 throw new IllegalAmountException("error : amount should be a positive number");
             }
-            user.getShoppingBasket().addToCart(product, amount);
-
+            db.addToCart(user, product, amount);
+            
         }
         //use case 2.7
-        public void removeFromCart(Session user, Store store, Product product)
+        public void removeFromCart(Session user,int store, int product)
         {
-            user.getShoppingBasket().getShoppingCartByID(store.getStoreID()).removeFromCart(product);
-        }
-        //use case 2.7
-        public void changeQuantity(Session user, Product product, Store store, int newAmount)
-        {
-            if (newAmount <= 0)
+            if (product < 0)
             {
-                throw new IllegalAmountException("ERROR: quantity should be a positive number");
+                throw new ArgumentException("invalid product id");
             }
 
-            user.getShoppingBasket().getShoppingCartByID(store.getStoreID()).changeQuantityOfProduct(product, newAmount);
+            if (store < 0)
+            {
+                throw new ArgumentException("invalid store id");
+            }
+            db.removeFromCart(user, store, product);
+        }
+        //use case 2.7
+        public void changeQuantity(Session user, int product,int store, int newAmount)
+        {
+            if (product < 0)
+            {
+                throw new ArgumentException("invalid product id");
+            }
+
+            if (store < 0)
+            {
+                throw new ArgumentException("invalid store id");
+            }
+
+            if (newAmount <= 0)
+            {
+                throw new IllegalAmountException( "ERROR: quantity should be a positive number");
+            }
+
+            db.changeQuantity(user, product, store, newAmount);
         }
 
-        public string checkoutCart(Session user, Store store, String address, String creditCard)
-        {
-            return user.getShoppingBasket().getShoppingCartByID(store.getStoreID()).checkout(address, creditCard);
+        public void checkoutCart(Session user,int store,String address,String creditCard){
+            if (store < 0)
+            {
+                throw new ArgumentException("invalid store id");
+            }
+
+             db.checkoutCart(user, store, address, creditCard);
         }
 
-        public String checkoutBasket(Session user, String address, String creditCard)
+        public void checkoutBasket(Session user, String address, String creditCard)
         {
-            return user.getShoppingBasket().checkout(address, creditCard);
-        }
+            db.checkoutBasket(user, address, creditCard);
+        }                                               
     }
 }

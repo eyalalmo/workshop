@@ -30,26 +30,41 @@ namespace workshop192.Domain.Tests
         [TestMethod()]
         public void loginTest()
         {
-            Admin admin = new Admin();
-            Assert.IsTrue(Equals(admin.login("admin", "1234", session), "ERROR: User already logged in"));
-        }
+            try
+            {
+                Admin admin = new Admin();
+                admin.login("admin", "1234", session);
+                Assert.Fail();
+            }
+            catch (LoginException le)
+            {
+                Assert.IsTrue(true);
+            }
 
-        [TestMethod()]
-        public void logoutTest()
-        {
-            DBSubscribedUser dbsubscribedUser = DBSubscribedUser.getInstance();
-            session.login("admin", "1234");
-            UserState state = session.getState();
-            Assert.IsTrue(state is Admin);
-            Assert.IsTrue(Equals(state.logout(session.getSubscribedUser(), session), ""));
-            Assert.IsTrue(session.getState() is Guest);
-        }
+            try
+            {
+                DBSubscribedUser dbsubscribedUser = DBSubscribedUser.getInstance();
+                session.login("admin", "1234");
+                UserState state = session.getState();
+                Assert.IsTrue(state is Admin);
+                state.logout(session.getSubscribedUser(), session);
+                Assert.IsTrue(session.getState() is Guest);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
+            }
 
-        [TestMethod()]
-        public void registerTest()
-        {
-            UserState state = new Admin();
-            Assert.IsTrue(Equals(state.register("shalom", "1111", null), "ERROR: User already registered"));
+            try
+            {
+                UserState state = new Admin();
+                state.register("shalom", "1111", null);
+                Assert.IsTrue(true);
+            }
+            catch (LoginException le)
+            {
+                Assert.Fail();
+            }
         }
     }
 }

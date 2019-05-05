@@ -15,13 +15,28 @@ namespace workshop192.Domain.Tests
         public void LoggedInTest()
         {
         }
+        [TestInitialize()]
+        public void init()
+        {
+            DBSubscribedUser dbsubscribedUser = DBSubscribedUser.getInstance();
+            dbsubscribedUser.cleanDB();
+            DBStore.getInstance().cleanDB();
+        }
 
         [TestMethod()]
         public void closeStoreTest()
         {
             UserState state = new LoggedIn();
-            String res = state.closeStore(null);
-            Assert.IsTrue(Equals("ERROR: not an admin", res));
+            try
+            {
+                state.closeStore(null);
+                Assert.Fail();
+            }
+            catch (UserStateException e)
+            {
+                Assert.IsTrue(true);
+            }
+            
         }
 
         [TestMethod()]
@@ -31,8 +46,7 @@ namespace workshop192.Domain.Tests
             session.register("yael", "yael");
             session.login("yael", "yael");
             Store store = session.getState().createStore("Wallmart", "sells everything", session.getSubscribedUser());
-            Assert.IsTrue(store != null);
-            DBStore.getInstance().cleanDB();
+            Assert.AreNotEqual(store,null);
         }
 
         [TestMethod()]
@@ -40,7 +54,16 @@ namespace workshop192.Domain.Tests
         {
             Session session = new Session();
             UserState state = new LoggedIn();
-            Assert.IsTrue(Equals("ERROR: User already logged in", state.login("david", "david", session)));
+            try
+            {
+                state.login("david", "david", session);
+                Assert.Fail();
+            }
+            catch(LoginException e)
+            {
+                Assert.IsTrue(true);
+            }
+            
         }
 
         [TestMethod()]
@@ -57,7 +80,6 @@ namespace workshop192.Domain.Tests
             session.getState().logout(user, session);
             Assert.IsTrue(session.getState() is Guest);
             Assert.IsNull(dbsubscribedUser.getloggedInUser("Gal"));
-            dbsubscribedUser.cleanDB();
         }
 
         [TestMethod()]
@@ -65,15 +87,32 @@ namespace workshop192.Domain.Tests
         {
             Session session = new Session();
             UserState state = new LoggedIn();
-            Assert.IsTrue(Equals("ERROR: User already registered", state.register("ben", "bat", session)));
+            try
+            {
+                state.register("ben", "bat", session);
+                Assert.Fail();
+            }
+            catch(RegisterException e)
+            {
+                Assert.IsTrue(true);
+            }
+            
         }
 
         [TestMethod()]
         public void removeUserTest()
         {
             UserState state = new LoggedIn();
-            Assert.IsTrue(Equals("ERROR: not an admin", state.removeUser("benny")));
-
+            try
+            {
+                state.removeUser("ben");
+                Assert.Fail();
+            }
+            catch (UserStateException e)
+            {
+                Assert.IsTrue(true);
+            }
+            
         }
     }
 }

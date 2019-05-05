@@ -117,29 +117,20 @@ namespace workshop192.Domain
                         if (DeliveryService.getInstance().sendToUser(address, entry.Key) == false)
                         {
                             entry.Key.setQuantityLeft(entry.Key.getQuantityLeft() + entry.Value);
-                            res += " product: " + entry.Key.getProductID() + " can't deliver.\n ";
+                            throw new CartException("Cannot deliver " + entry.Key.getProductName());
                         }
-                        else
-                        {
-                            res += " product: " + entry.Key.getProductID() + " complete payment. ";
-                        }
-
-                        //////////add eilon part
                     }
                     else
                     {
-                        res += " product: " + entry.Key.getProductID() + " cant submmit checkout.\n ";
+                        throw new CartException("Payment for " + entry.Key.getProductName());
                     }
                 }
                 else
                 {
-                    res += " product: " + entry.Key.getProductID() + " have no this Quantity.\n ";
+                    throw new CartException("Not enough quantity of " + entry.Key.getProductName() );
                 }
 
             }
-            return res;
-
-
         } 
     }
 }

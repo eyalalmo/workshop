@@ -32,6 +32,7 @@ namespace workshop192.Domain
         public Store createStore(String storeName, String description, SubscribedUser sub)
         {
             throw new UserStateException("Guest cannot create a store");
+            return null;
         }
 
         public String getComplaints()
@@ -70,7 +71,7 @@ namespace workshop192.Domain
 
         public void logout(SubscribedUser sub, Session session)
         {
-            throw new UserStateException("Guest cannot logout");
+            throw new UserStateException("You're not logged in");
         }
 
         public void register(string username, string password, Session session)

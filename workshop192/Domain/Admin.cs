@@ -126,8 +126,5 @@ namespace workshop192.Domain
             dbSubscribedUser.remove(subscribedUser);
 
         }
-
-
     }
-
 }

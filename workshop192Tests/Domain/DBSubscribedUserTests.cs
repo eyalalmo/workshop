@@ -62,6 +62,5 @@ namespace workshop192.Domain.Tests
             Assert.AreEqual(db.getloggedInUser("etay"), s.getSubscribedUser());
             db.cleanDB();
         }
-
     }
 }

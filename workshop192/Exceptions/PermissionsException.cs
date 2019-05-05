@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace workshop192.Domain
 {
     [Serializable]
-    internal class PermissionsException : Exception
+    public class PermissionsException : Exception
     {
         public PermissionsException()
         {

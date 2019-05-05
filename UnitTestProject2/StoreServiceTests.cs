@@ -12,317 +12,363 @@ namespace workshop192.ServiceLayer.Tests
     [TestClass()]
     public class StoreServiceTests
     {
-        private StoreService storeService;
-        private UserService userService;
+        private StoreService storeService = StoreService.getInstance();
+        private UserService userService = UserService.getInstance();
+        Session session1, session2, session3;
+        Store store;
+        int storeid;
+        Product product;
+        int productid;
 
         [TestInitialize()]
         public void TestInitialize()
         {
-            storeService = StoreService.getInstance();
-            userService = UserService.getInstance();
-            DBStore.getInstance().init();
-            DBSubscribedUser.getInstance().cleanDB();
-        }
-        //4.1.1+4.1.2+4.1.3
-        [TestMethod()]
-        public void addRemoveEditProductTest()
-        {
-            //add product
-
-            Session session = new Session();
-
-            userService.register(session, "bananaMan", "bbbb");
-            userService.login(session, "bananaMan", "bbbb");
-            Store store = userService.createStore(session, "Bananas", "all types of bananas");
-
-            Product product1 = storeService.addProduct("banana1", "green bananas", 100, 2, 6, store, session);
-            Product product2 = storeService.addProduct("banana2", "pink bananas", 90, 5, 10, store, session);
-
-            LinkedList<Product> products = store.getProductList();
-            Assert.IsTrue(products.Count == 2);
-            Assert.IsTrue(store.productExists(product1.getProductID()));
-            Assert.IsTrue(store.productExists(product2.getProductID()));
-
-            Assert.AreNotEqual(storeService.addProduct("banana2", "pink bananas", 90, 10, -1, store, session), "");
-            Assert.AreNotEqual(storeService.addProduct("", "", 90, 10, 2, store, session), "");
-
-            //edit product
-            Assert.IsTrue(Equals(storeService.addToProductQuantity(product1, 3, session), ""));
-            Assert.IsTrue(Equals(storeService.decFromProductQuantity(product1, 5, session), ""));
-            Assert.IsFalse(Equals(storeService.addToProductQuantity(product1, -2, session), ""));
-
-            //remove product
-            Assert.IsTrue(Equals(storeService.removeProduct(product1, session), ""));
-            Assert.IsTrue(Equals(storeService.removeProduct(product2, session), ""));
-            Assert.IsTrue(store.getProductList().Count == 0);
-
-            Assert.IsFalse(Equals(storeService.removeProduct(null, session), ""));
-
-        }
-
-        //4.3
-        [TestMethod()]
-        public void addOwnerByAnOwnerSuccTest()
-        {
-            StoreService storeService = StoreService.getInstance();
-            UserService userService = UserService.getInstance();
-            Session session1 = new Session();
-            Session session2 = new Session();
-            Session session3 = new Session();
-
-            userService.register(session1, "anna", "banana");
-            userService.login(session1, "anna", "banana");
-
-            userService.register(session2, "dani", "123");
-            userService.login(session2, "dani", "123");
-
-            userService.register(session3, "bar", "123");
-            userService.login(session3, "bar", "123");
-
-            Store store = storeService.addStore("myStore", "the best store ever", session1);
-            Assert.AreEqual(storeService.addOwner(store, "dani", session1), "");
-            Product product = storeService.addProduct("myProduct", "some category", 10, 0, 10, store, session2);
-            Assert.AreNotEqual(product, null);
-            Assert.AreEqual(storeService.addToProductQuantity(product, 10, session2), "");
-            Assert.AreEqual(storeService.decFromProductQuantity(product, 10, session2), "");
-            Assert.AreEqual(storeService.setProductDiscount(product, null, session2), "");
-            Assert.AreEqual(storeService.removeProduct(product, session2), "");
-
-            Assert.AreEqual(storeService.addOwner(store, "bar", session2), "");
-            product = storeService.addProduct("myProduct2", "some category", 10, 0, 10, store, session3);
-            Assert.AreNotEqual(product, null);
-            Assert.AreEqual(storeService.addToProductQuantity(product, 10, session3), "");
-            Assert.AreEqual(storeService.decFromProductQuantity(product, 10, session3), "");
-            Assert.AreEqual(storeService.setProductDiscount(product, null, session3), "");
-            Assert.AreEqual(storeService.removeProduct(product, session3), "");
-        }
-
-        //4.3
-        [TestMethod()]
-        public void addOwnerByAnOwnerFailTest()
-        {
-            StoreService storeService = StoreService.getInstance();
-            UserService userService = UserService.getInstance();
-            Session session1 = new Session();
-            Session session2 = new Session();
-
-            userService.register(session1, "anna", "banana");
-            userService.login(session1, "anna", "banana");
-
-            Store store = storeService.addStore("myStore", "the best store ever", session1);
-            Assert.AreNotEqual(storeService.addOwner(store, "dani", session1), "");
-        }
-
-        //4.5
-        [TestMethod()]
-        public void addOwnerByAnOwnerFailTest2()
-        {
-            StoreService storeService = StoreService.getInstance();
-            UserService userService = UserService.getInstance();
-            Session session1 = new Session();
-            Session session2 = new Session();
-
-            userService.register(session1, "anna", "banana");
-            userService.login(session1, "anna", "banana");
-
-            userService.register(session2, "dani", "123");
-
-            Store store = storeService.addStore("myStore", "the best store ever", session1);
-            storeService.addOwner(store, "dani", session1);
-            Assert.AreNotEqual(storeService.addOwner(store, "dani", session1), "");
-        }
-
-        // 4.4
-        [TestMethod()]
-        public void removeOwnerTest()
-        {
-            StoreService storeService = StoreService.getInstance();
-            UserService userService = UserService.getInstance();
-            Session session1 = new Session();
-            Session session2 = new Session();
-            Session session3 = new Session();
-            Session session4 = new Session();
-
+            session1 = userService.startSession();
             userService.register(session1, "anna", "banana"); //first owner
             userService.login(session1, "anna", "banana");
 
+            session2 = userService.startSession();
             userService.register(session2, "dani1", "123");
             userService.login(session2, "dani1", "123");
 
-            userService.register(session3, "dani2", "123");
-            userService.register(session4, "dani3", "123");
+            session3 = userService.startSession();
+            userService.register(session3, "eva2", "123");
+            userService.login(session3, "eva2", "123");
 
-            Store store = storeService.addStore("myStore", "the best store ever", session1);
-            Assert.AreEqual("", storeService.addOwner(store, "dani1", session1));
-            Assert.AreEqual("", storeService.addOwner(store, "dani2", session2));
-            Assert.AreEqual("", storeService.addOwner(store, "dani3", session2));
-            Assert.AreEqual(storeService.removeRole(store, "dani1", session1), "");
-            foreach (StoreRole role in store.getRoles())
+            store = storeService.addStore("myStore", "the best store ever", session1);
+        }
+
+        //4.1.1
+        [TestMethod()]
+        public void addProductTest()
+        {
+            storeid = userService.createStore(session1, "Bananas", "all types of bananas");
+            try
             {
-                if (role.getAppointedBy() == session1.getSubscribedUser())
-                {
-                    Assert.Fail();
-                }
+                productid = storeService.addProduct("banana1", "green bananas", 100, 2, 6, storeid, session1);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
             }
 
+            /*************
+            * checked if product exist
+            ***/
         }
 
-        // 4.4
+        //4.1.2
         [TestMethod()]
-        public void removeOwnerTestFaild2()
+        public void RemoveProductTest()
         {
-            StoreService storeService = StoreService.getInstance();
-            UserService userService = UserService.getInstance();
-            Session session1 = new Session();
-            Session session2 = new Session();
-            Session session3 = new Session();
-            Session session4 = new Session();
+            addProductTest();
 
-            userService.register(session1, "anna", "banana"); //first owner
-            userService.login(session1, "anna", "banana");
+            try
+            {
+                storeService.removeProduct(productid, session1);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
+            }
+            //Assert.IsFalse(storeService.isProductExist(store, product));
+            Assert.IsTrue(true);
 
-            userService.register(session2, "dani1", "123");
-            userService.login(session2, "dani1", "123");
-
-            userService.register(session3, "dani2", "123");
-            userService.register(session4, "dani3", "123");
-
-            Store store = storeService.addStore("myStore", "the best store ever", session1);
-            Assert.AreEqual("", storeService.addOwner(store, "dani1", session1));
-            Assert.AreEqual("", storeService.addOwner(store, "dani2", session2));
-            Assert.AreNotEqual(storeService.removeRole(store, "dani3", session2), "");
         }
+
+
+
+
+
+
+        //4.1.2
+        [TestMethod()]
+        public void RemoveProductTest1()
+        {
+            addProductTest();
+
+            try
+            {
+                storeService.addToProductQuantity(productid, 3, session1);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
+            }
+            Assert.IsTrue(true);
+        }
+
 
         //4.5
         [TestMethod()]
         public void addMannagerByAnOwner1()
         {
-            StoreService storeService = StoreService.getInstance();
-            UserService userService = UserService.getInstance();
-            Session session1 = new Session();
-            Session session2 = new Session();
-            Session session3 = new Session();
+            storeid = storeService.addStore("myStore", "the best store ever", session1);
+            storeService.addManager(store, "dani", true, true, true, session1);
+            productid = storeService.addProduct("myProduct", "some category", 10, 0, 10, storeid, session2);
 
-            userService.register(session1, "anna", "banana");
-            userService.login(session1, "anna", "banana");
+            try
+            {
+                storeService.addToProductQuantity(productid, 10, session2);
+                storeService.decFromProductQuantity(productid, 10, session2);
+                storeService.setProductDiscount(productid, null, session2);
+                try
+                {
+                    storeService.addManager(storeid, "yaniv", false, false, false, session1);
+                    Assert.Fail();
+                }
+                catch (StoreException e0)
+                {
+                    try
+                    {
+                        storeService.addToProductQuantity(productid, 10, session3);
+                        Assert.Fail();
 
-            userService.register(session2, "dani", "123");
-            userService.login(session2, "dani", "123");
+                    }
+                    catch (StoreException e1)
+                    {
+                        try
+                        {
+                            storeService.decFromProductQuantity(productid, 10, session3);
+                            Assert.Fail();
+                        }
+                        catch (StoreException e2)
+                        {
+                            try
+                            {
+                                storeService.setProductDiscount(productid, null, session3);
+                                Assert.Fail();
+                            }
+                            catch (StoreException e3)
+                            {
+                                Assert.IsTrue(true);
+                            }
+                        }
+                    }
 
-            userService.register(session3, "yaniv", "123");
-            userService.login(session3, "yaniv", "123");
+                }
 
-            Store store = storeService.addStore("myStore", "the best store ever", session1);
-            Assert.AreEqual(storeService.addManager(store, "dani", true, true, true, session1), "");
-            Product product = storeService.addProduct("myProduct", "some category", 10, 0, 10, store, session2);
-            Assert.AreNotEqual(product, null);
-            Assert.AreEqual(storeService.addToProductQuantity(product, 10, session2), "");
-            Assert.AreEqual(storeService.decFromProductQuantity(product, 10, session2), "");
-            Assert.AreEqual(storeService.setProductDiscount(product, null, session2), "");
-
-            Assert.AreEqual(storeService.addManager(store, "yaniv", false, false, false, session1), "");
-            Assert.AreNotEqual(storeService.addToProductQuantity(product, 10, session3), "");
-            Assert.AreNotEqual(storeService.decFromProductQuantity(product, 10, session3), "");
-            Assert.AreNotEqual(storeService.setProductDiscount(product, null, session3), "");
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
+            }
         }
 
         //4.5
         [TestMethod()]
         public void addMannagerByAnOwner2()
         {
-            StoreService storeService = StoreService.getInstance();
-            UserService userService = UserService.getInstance();
-            Session session1 = new Session();
-            Session session2 = new Session();
-
-            userService.register(session1, "anna", "banana");
-            userService.login(session1, "anna", "banana");
-
-            Store store = storeService.addStore("myStore", "the best store ever", session1);
-            Assert.AreNotEqual(storeService.addManager(store, "dani", true, true, true, session1), "");
+            storeid = storeService.addStore("myStore", "the best store ever", session1);
+            try
+            {
+                storeService.addManager(storeid, "dani", true, true, true, session1);
+            }
+            catch (StoreException e)
+            {
+                Assert.Fail();
+            }
+            Assert.IsTrue(true);
         }
 
         //4.5
         [TestMethod()]
         public void addMannagerByAnOwner3()
         {
-            StoreService storeService = StoreService.getInstance();
-            UserService userService = UserService.getInstance();
-            Session session1 = new Session();
-            Session session2 = new Session();
-
-            userService.register(session1, "anna", "banana");
-            userService.login(session1, "anna", "banana");
-
-            userService.register(session2, "dani", "123");
-
-            Store store = storeService.addStore("myStore", "the best store ever", session1);
-            storeService.addManager(store, "dani", true, true, true, session1);
-            Assert.AreNotEqual(storeService.addManager(store, "dani", true, true, true, session1), "");
+            addMannagerByAnOwner2();
+            try
+            {
+                storeService.addManager(storeid, "dani", true, true, true, session1);
+                Assert.Fail();
+            }
+            catch (StoreException e)
+            {
+                Assert.IsTrue(true);
+            }
 
         }
-        
+
         // 4.6
         [TestMethod()]
         public void removeManagerTest()
         {
-            StoreService storeService = StoreService.getInstance();
-            UserService userService = UserService.getInstance();
-            Session session1 = new Session();
-            Session session2 = new Session();
 
-            userService.register(session1, "anna", "banana"); //first owner
-            userService.login(session1, "anna", "banana");
+            store = storeService.addStore("myStore", "the best store ever", session1);
+            try
+            {
+                storeService.addManager(storeid, "dani1", true, true, true, session1);
+                storeService.removeRole(storeid, "dani1", session1);
 
-            userService.register(session2, "dani1", "123");
-            userService.login(session2, "dani1", "123");
+            }
+            catch (StoreException e)
+            {
+                Assert.Fail();
+            }
 
-            Store store = storeService.addStore("myStore", "the best store ever", session1);
-            Assert.AreEqual("", storeService.addManager(store, "dani1", true, true, true, session1));
-            Assert.AreEqual(storeService.removeRole(store, "dani1", session1), "");
         }
 
         // 4.6
         [TestMethod()]
         public void removeManagerTestFaild1()
         {
-            StoreService storeService = StoreService.getInstance();
-            UserService userService = UserService.getInstance();
-            Session session1 = new Session();
-            Session session2 = new Session();
-            Session session3 = new Session();
-            userService.register(session1, "anna", "banana"); //first owner
-            userService.login(session1, "anna", "banana");
 
-            userService.register(session2, "dani1", "123");
-            userService.login(session2, "dani1", "123");
-
-            userService.register(session3, "dani2", "123");
-            userService.login(session3, "dani2", "123");
-
-            Store store = storeService.addStore("myStore", "the best store ever", session1);
-
-            Assert.AreEqual("", storeService.addOwner(store, "dani2", session1));
-
-            Assert.AreEqual("", storeService.addManager(store, "dani1", true, true, true, session1));
-            Assert.AreNotEqual(storeService.removeRole(store, "dani1", session3), "");
+            store = storeService.addStore("myStore", "the best store ever", session1);
+            try
+            {
+                storeService.addOwner(storeid, "dani2", session1);
+                storeService.addManager(storeid, "dani1", true, true, true, session1);
+                try
+                {
+                    storeService.removeRole(storeid, "dani1", session3);
+                    Assert.Fail();
+                }
+                catch (StoreException e2)
+                {
+                    Assert.IsTrue(true);
+                }
+            }
+            catch (StoreException e1)
+            {
+                Assert.Fail();
+            }
         }
+
+
         // 4.6
         [TestMethod()]
         public void removeManagerTestFaild2()
         {
-            StoreService storeService = StoreService.getInstance();
-            UserService userService = UserService.getInstance();
-            Session session1 = new Session();
-            Session session2 = new Session();
-            Session session3 = new Session();
-            userService.register(session1, "anna", "banana"); //first owner
-            userService.login(session1, "anna", "banana");
+            store = storeService.addStore("myStore", "the best store ever", session1);
+            try
+            {
+                storeService.removeRole(storeid, "dani1", session1);
+                Assert.Fail();
+            }
+            catch (StoreException e)
+            {
+                Assert.IsTrue(true);
+            }
+        }
 
-            userService.register(session2, "dani1", "123");
-            userService.login(session2, "dani1", "123");
-            Store store = storeService.addStore("myStore", "the best store ever", session1);
-            Assert.AreNotEqual(storeService.removeRole(store, "dani1", session1), "");
+
+
+
+
+
+
+
+        //4.3
+        [TestMethod()]
+        public void addOwnerByAnOwnerSuccTest()
+        {
+            try
+            {
+                storeService.addOwner(storeid, "dani1", session1);
+                /********************************/
+                //  need to check if he is an owner now
+                Assert.IsTrue(true);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
+            }
+        }
+
+        //4.3
+        [TestMethod()]
+        public void addOwnerByAnOwnerFailTest()
+        {
+            try
+            {
+                storeService.addOwner(storeid, "nouser", session1);
+                Assert.Fail();
+            }
+            catch (UserException re)
+            {
+                Assert.IsTrue(true);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
+            }
+        }
+
+        //4.3
+        [TestMethod()]
+        public void addOwnerByAnOwnerFailTest2()
+        {
+            try
+            {
+                addOwnerByAnOwnerSuccTest();
+                addOwnerByAnOwnerSuccTest();
+                Assert.Fail();
+            }
+            catch (RoleException re)
+            {
+                Assert.IsTrue(true);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
+            }
+        }
+
+        // 4.4
+        [TestMethod()]
+        public void removeOwnerSuccTest()
+        {
+            try
+            {
+                addOwnerByAnOwnerSuccTest();
+                storeService.removeRole(storeid, "dani1", session1);
+                /***********************************/
+                // check that is totaly removed
+                Assert.IsTrue(true);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
+            }
+        }
+
+        // 4.4
+        [TestMethod()]
+        public void removeOwnerFailTest()
+        {
+            try
+            {
+                removeOwnerSuccTest();
+                Assert.Fail();
+            }
+            catch (RoleException re)
+            {
+                Assert.IsTrue(true);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
+            }
+        }
+
+        // 4.4
+        [TestMethod()]
+        public void removeOwnerFailTest2()
+        {
+            try
+            {
+                addOwnerByAnOwnerSuccTest();
+                storeService.addOwner(storeid, "eva2", session2);
+                storeService.removeRole(storeid, "eva2", session1);
+                Assert.Fail();
+            }
+            catch (RoleException re)
+            {
+                Assert.IsTrue(true);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
+            }
         }
     }
 }
