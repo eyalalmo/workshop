@@ -109,10 +109,9 @@ namespace workshop192.ServiceLayer
              session.purchaseBasket();
         }
 
-
-
-
-
-
+        public int createSession()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
