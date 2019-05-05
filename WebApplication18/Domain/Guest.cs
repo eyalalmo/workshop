@@ -32,6 +32,7 @@ namespace workshop192.Domain
         public Store createStore(String storeName, String description, SubscribedUser sub)
         {
             throw new UserStateException("Guest cannot create a store");
+            return null;
         }
 
         public String getComplaints()
@@ -42,6 +43,11 @@ namespace workshop192.Domain
         public string getPurchaseHistory(SubscribedUser sub)
         {
             throw new UserStateException("Guest does not have a purchase history");
+        }
+
+        public string getStateName(string hash)
+        {
+            throw new NotImplementedException();
         }
 
         public void login(String username, String password, Session session)
@@ -70,7 +76,7 @@ namespace workshop192.Domain
 
         public void logout(SubscribedUser sub, Session session)
         {
-            throw new UserStateException("Guest cannot logout");
+            throw new UserStateException("You're not logged in");
         }
 
         public void register(string username, string password, Session session)
@@ -84,9 +90,9 @@ namespace workshop192.Domain
             DBSubscribedUser.getInstance().register(sub);
         }
 
-        public void removeUser(String user)
+        public String removeUser(String user)
         {
-            throw new UserStateException("ERROR: not an admin");
+            return "Guest";
         }
     }
 }

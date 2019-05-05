@@ -73,6 +73,11 @@ namespace workshop192.Domain
             return sub.getPurchaseHistory();
         }
 
+        public string getStateName()
+        {
+            return "Admin";
+        }
+
         public void login(string username, string password, Session session)
         {
             throw new LoginException("Admin already logged in");
@@ -126,8 +131,5 @@ namespace workshop192.Domain
             dbSubscribedUser.remove(subscribedUser);
 
         }
-
-
     }
-
 }

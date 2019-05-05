@@ -17,6 +17,7 @@ namespace workshop192.Domain
         void removeUser(String subscribedUser);
         void complain(String description, SubscribedUser subscribedUser);
         String getComplaints();
+        String getStateName();
     }
 }
 

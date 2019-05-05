@@ -21,9 +21,9 @@ namespace workshop192.Domain
         }
 
 
-        public int getTotalAmount()
+        public double getTotalAmount()
         {
-            int sum = 0;
+            double sum = 0;
             foreach (ShoppingCart sc in shoppingCarts.Values)
             {
                 sum += sc.getTotalAmount();
@@ -52,15 +52,15 @@ namespace workshop192.Domain
                 }
             }
         }
-        public String checkout (String address,String creditCard){
-            // return the result of the proccess by order of cart
-            String output = "";
-            foreach (ShoppingCart sc in shoppingCarts.Values)
-            {
-                output += sc.checkout(address,creditCard);
-            }
-            return output;
-        }
+        //public String checkout (String address,String creditCard){
+        //    // return the result of the proccess by order of cart
+        //    String output = "";
+        //    foreach (ShoppingCart sc in shoppingCarts.Values)
+        //    {
+        //        output += sc.checkout(address,creditCard);
+        //    }
+        //    return output;
+        //}
 
 
         public ShoppingCart getShoppingCartByID(int storeID)

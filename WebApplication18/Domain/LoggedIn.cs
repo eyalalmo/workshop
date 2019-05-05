@@ -53,6 +53,11 @@ namespace workshop192.Domain
             return sub.getPurchaseHistory();
         }
 
+        public string getStateName()
+        {
+            return "LoggedIn";
+        }
+
         public void login(string username, string password, Session session)
         {
             throw new LoginException("User already logged in");

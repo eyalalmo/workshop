@@ -104,7 +104,7 @@ namespace workshop192.Domain
             List<Product> toRemove = new List<Product>();
             foreach(Product p in list)
             {
-                int price = p.getActualPrice();
+                double price = p.getActualPrice();
                 if (price_range!=null && (price < price_range[0] || price > price_range[1]))
                     toRemove.Add(p);
                 else if (minimumRank != 0 && p.getRank() < minimumRank)

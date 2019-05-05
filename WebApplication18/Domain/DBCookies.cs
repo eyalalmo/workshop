@@ -18,10 +18,10 @@ namespace workshop192.Domain
         {
             cookies = new Dictionary<string, Session>();
         }
-        public static DBCoockies getInstance()
+        public static DBCookies getInstance()
         {
             if (instance == null)
-                instance = new DBCoockies();
+                instance = new DBCookies();
             return instance;
         }
 
@@ -71,7 +71,7 @@ namespace workshop192.Domain
         }
         public static void initDB()
         {
-            instance = new DBCoockies();
+            instance = new DBCookies();
         }
     }
 }

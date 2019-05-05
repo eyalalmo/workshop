@@ -20,7 +20,7 @@ namespace WebApplication18.Controllers
         {
 
             Session session = UserService.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-            String ans = UserService.getInstance().register(session, Username, Password);
+            UserService.getInstance().register(session, Username, Password);
  
            return "ok";
     
@@ -33,7 +33,7 @@ namespace WebApplication18.Controllers
         {
             //Session session = UserService.getInstance().startSession();
             Session session = UserService.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-            String ans = UserService.getInstance().login(session, Username, Password);
+            UserService.getInstance().login(session, Username, Password);
            //String hash = System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value;
            // UserService.addUser(hash, session);
             return "ok";

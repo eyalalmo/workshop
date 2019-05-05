@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using workshop192.Domain;
+using workshop192.Bridge;
 
 namespace workshop192.ServiceLayer.Tests
 {
@@ -89,7 +89,7 @@ namespace workshop192.ServiceLayer.Tests
             }
             catch(Exception e)
             {
-                Assert.isTrue(true);
+                Assert.IsTrue(true);
             }
                        
         }
@@ -103,7 +103,7 @@ namespace workshop192.ServiceLayer.Tests
             }
             catch(Exception e)
             {
-                Assert.isTrue(true);
+                Assert.IsTrue(true);
             }
         
         }
@@ -119,7 +119,7 @@ namespace workshop192.ServiceLayer.Tests
             }
             catch(Exception e)
             {
-                Assert.isTrue(true);
+                Assert.IsTrue(true);
             }    
         }
 
@@ -133,7 +133,7 @@ namespace workshop192.ServiceLayer.Tests
         }
         catch (Exception e)
         {
-            Assert.isTrue(true);
+            Assert.IsTrue(true);
 
         }
     }

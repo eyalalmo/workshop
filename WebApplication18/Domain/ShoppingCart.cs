@@ -69,7 +69,7 @@ namespace workshop192.Domain
             productList.Add(p, newAmount);
 
         }
-        public int getTotalAmount()
+        public double getTotalAmount()
         {
            // updateActualProductPrice();
             updateStoreDiscount();
@@ -86,7 +86,7 @@ namespace workshop192.Domain
 
         private void updateStoreDiscount()
         {
-            productsActualPrice = store.calcPrice(productList, productsActualPrice);
+            productsActualPrice = store.updatePrice(productList, productsActualPrice);
 
         }
 
@@ -100,8 +100,8 @@ namespace workshop192.Domain
             }
         }
 
-        public String checkout(String address,String creditCard) {
-            String res = "";
+        public void checkout(String address,String creditCard) {
+           // String res = "";
             int sum = 0;
             foreach (KeyValuePair<Product, int> entry in productList)
             {
@@ -117,29 +117,20 @@ namespace workshop192.Domain
                         if (DeliveryService.getInstance().sendToUser(address, entry.Key) == false)
                         {
                             entry.Key.setQuantityLeft(entry.Key.getQuantityLeft() + entry.Value);
-                            res += " product: " + entry.Key.getProductID() + " can't deliver.\n ";
+                            throw new CartException("Cannot deliver " + entry.Key.getProductName());
                         }
-                        else
-                        {
-                            res += " product: " + entry.Key.getProductID() + " complete payment. ";
-                        }
-
-                        //////////add eilon part
                     }
                     else
                     {
-                        res += " product: " + entry.Key.getProductID() + " cant submmit checkout.\n ";
+                        throw new CartException("Payment for " + entry.Key.getProductName());
                     }
                 }
                 else
                 {
-                    res += " product: " + entry.Key.getProductID() + " have no this Quantity.\n ";
+                    throw new CartException("Not enough quantity of " + entry.Key.getProductName() );
                 }
 
             }
-            return res;
-
-
         } 
     }
 }

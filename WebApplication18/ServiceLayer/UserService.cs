@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using workshop192.Domain;
-
+using workshop192.Bridge;
 namespace workshop192.ServiceLayer
 {
 
@@ -12,7 +12,7 @@ namespace workshop192.ServiceLayer
 
     {
         private static UserService instance;
-
+        private DomainBridge db= DomainBridge.getInstance();
         public static UserService getInstance()
         {
             if (instance == null)
@@ -34,11 +34,7 @@ namespace workshop192.ServiceLayer
         //use case 2.3
         public void login(Session user, String username, String password)
         {
-            if (user == null)
-            {
-                throw new NullReferenceException("error - no such user ID");
-            }
-             user.login(username, password);
+            db.login(user,username, password);
         }
 
         //use case 2.2
@@ -52,7 +48,7 @@ namespace workshop192.ServiceLayer
             {
                 throw new ArgumentException( "Illegal username or password");
             }
-            user.register(username, password);
+            db.register(user,username, password);
         }
         //use case 6.2
         public void removeUser(Session admin, String username)
@@ -61,7 +57,7 @@ namespace workshop192.ServiceLayer
             {
                 throw new NullReferenceException("error - bad session");
             }
-            admin.removeUser(username);
+            db.removeUser(admin,username);
         }
 
         public void logout(Session user)
@@ -70,73 +66,81 @@ namespace workshop192.ServiceLayer
             {
                 throw new NullReferenceException("error - bad session");
             }
-            user.logout();
+            db.logout(user);
         }
 
-        public Store createStore(Session session, String storeName, String description)
+        public int createStore(Session session, String storeName, String description)
         {
             if (session == null)
             {
                 throw new NullReferenceException("error - bad session");
             }
-            return session.createStore(storeName, description);
+            return db.createStore(session,storeName, description);
         }
 
         //use case 2.5
 
         public List<Product> searchProducts(String name, String keywords, String category)
         {
-            return DBProduct.getInstance().searchProducts(name, keywords, category);
+            return db.searchProducts(name, keywords, category);
         }
 
         public List<Product> filterProducts(List<Product> list, int[] price_range, int minimumRank)
         {
-            return DBProduct.getInstance().filterBy(list, price_range, minimumRank);
+            return db.filterProducts(list, price_range, minimumRank);
 
         }
-
-        /*public void addToShoppingBasket(Product product, int amount, Session session)
+        public string getStateName(string hash)
         {
+           return  DBCookies.getInstance().getUserByHash(hash).getState().getStateName();
+        }
+
+        public void addToShoppingBasket(int product, int amount, Session session)
+        {
+            if (product < 0)
+            {
+                throw new ArgumentException("invalid product id");
+            }
+
             if (session == null)
             {
                 throw new NullReferenceException("error - bad session");
             }
-            session.addToShoppingBasket(product, amount);
-        }*/
+            db.addToShoppingBasket(product, amount,session);
+        }
 
         public void purchaseBasket(Session session)
         {
-             session.purchaseBasket();
+             db.purchaseBasket(session);
         }
 
         /////////////////////////////////////////////////////////////////////////////////////
         public static String addUser(string hash, Session session)
         {
-            return DBCoockies.getInstance().addSession(hash, session);
+            return DBCookies.getInstance().addSession(hash, session);
         }
 
         public static string generate()
         {
-            return DBCoockies.getInstance().generate();
+            return DBCookies.getInstance().generate();
 
         }
 
 
         public static Session getUserByHash(string hash)
         {
-            return DBCoockies.getInstance().getUserByHash(hash);
+            return DBCookies.getInstance().getUserByHash(hash);
         }
 
         public static Session getHashByName(String name)
         {
-            return DBCoockies.getInstance().getUserByName(name);
+            return DBCookies.getInstance().getUserByName(name);
         }
 
         ////////////////////////
 
 
-
-
+    
 
 
     }
