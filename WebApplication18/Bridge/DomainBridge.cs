@@ -7,7 +7,7 @@ using workshop192.Domain;
 
 namespace workshop192.Bridge
 {
-    class DomainBridge
+    public class DomainBridge
     {
         private static DomainBridge instance;
 
@@ -103,6 +103,16 @@ namespace workshop192.Bridge
             StoreRole sr = DBStore.getInstance().getStoreRole(product.getStore(), user);
 
             sr.removeProduct(product);
+        }
+
+        internal double getProductPrice(int productid)
+        {
+            Product product = DBProduct.getInstance().getProductByID(productid);
+
+            if (product == null)
+                throw new DoesntExistException("no such username");
+
+            return product.getPrice();
         }
 
         public void setProductPrice(int productid, int price, Session session)

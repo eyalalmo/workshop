@@ -18,6 +18,7 @@ namespace workshop192.ServiceLayer.Tests
     {
         private UserService userService;
         private StoreService storeService;
+        private BasketService basketService;
         private Session session;
 
         [TestInitialize()]
@@ -25,6 +26,7 @@ namespace workshop192.ServiceLayer.Tests
         {
             userService = UserService.getInstance();
             storeService = StoreService.getInstance();
+            basketService = BasketService.getInstance();
             session = userService.startSession();
             DBStore.getInstance().init();
             DBSubscribedUser.getInstance().cleanDB();
@@ -45,7 +47,7 @@ namespace workshop192.ServiceLayer.Tests
             try
             {
                 userService.register(session, "user", "user");
-            }catch(Exception e)
+            }catch(Exception)
             {
                 Assert.Fail();
             }
@@ -62,7 +64,7 @@ namespace workshop192.ServiceLayer.Tests
                 userService.register(session, "user", "user");
                 Assert.Fail();
             }
-            catch (RegisterException e)
+            catch (RegisterException)
             {
                 Assert.IsTrue(true);
             }
@@ -75,7 +77,7 @@ namespace workshop192.ServiceLayer.Tests
                 registerSuccessTest();
                 userService.login(session, "user", "user");
             }
-            catch (RegisterException e)
+            catch (RegisterException)
             {
                 Assert.Fail();
             }
@@ -90,7 +92,7 @@ namespace workshop192.ServiceLayer.Tests
                 userService.login(session, "user", "user33");
                 Assert.Fail();
             }
-            catch (RegisterException e)
+            catch (RegisterException)
             {
                 Assert.IsTrue(true);
                 
@@ -105,7 +107,7 @@ namespace workshop192.ServiceLayer.Tests
                 userService.login(session, "user", "user");
                 Assert.Fail();
             }
-            catch (RegisterException e)
+            catch (RegisterException)
             {
                 Assert.IsTrue(true);
 
@@ -233,10 +235,10 @@ namespace workshop192.ServiceLayer.Tests
                 int product3 = storeService.addProduct("milk", "3%", 65, 2, 1, store2, session);
                 int product4 = storeService.addProduct("water", "blue water", 70, 4, 4, store2, session);
 
-                basketService.addToCart(session, store1, product1, 2);
-                basketService.addToCart(session, store1, product2, 3);
-                basketService.addToCart(session, store2, product3, 1);
-                basketService.addToCart(session, store2, product4, 3);
+                basketService.addToCart(session, product1, 2);
+                basketService.addToCart(session, product2, 3);
+                basketService.addToCart(session, product3, 1);
+                basketService.addToCart(session, product4, 3);
 
                 userService.purchaseBasket(session);
                 Assert.IsTrue(true);
@@ -247,7 +249,7 @@ namespace workshop192.ServiceLayer.Tests
                  Assert.IsTrue(product3.getQuantityLeft() == 0);
                  Assert.IsTrue(product4.getQuantityLeft() == 1);*/
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -265,15 +267,15 @@ namespace workshop192.ServiceLayer.Tests
                 int store1 = userService.createStore(session, "Zoo Land", "pets");
                 int product1 = storeService.addProduct("dogs", "big dogs", 80, 2, 4, store1, session);
 
-                basketService.addToCart(session, store1, product1, 6);
+                basketService.addToCart(session, product1, 6);
                 userService.purchaseBasket(session);
                 Assert.Fail();
             }
-            catch (IllegalAmountException e)
+            catch (IllegalAmountException)
             {
                 Assert.IsTrue(true);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Assert.Fail();
             }

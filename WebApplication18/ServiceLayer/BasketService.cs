@@ -100,6 +100,13 @@ namespace workshop192.ServiceLayer
         public void checkoutBasket(Session user, String address, String creditCard)
         {
             db.checkoutBasket(user, address, creditCard);
-        }                                               
+        }
+
+        public double getProductPrice(int productid)
+        {
+            if (productid < 0)
+                throw new ArgumentException("invalid product id");
+            return db.getProductPrice(productid);
+        }
     }
 }

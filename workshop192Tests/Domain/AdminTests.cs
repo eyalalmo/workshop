@@ -36,7 +36,7 @@ namespace workshop192.Domain.Tests
                 admin.login("admin", "1234", session);
                 Assert.Fail();
             }
-            catch (LoginException le)
+            catch (LoginException)
             {
                 Assert.IsTrue(true);
             }
@@ -50,7 +50,7 @@ namespace workshop192.Domain.Tests
                 state.logout(session.getSubscribedUser(), session);
                 Assert.IsTrue(session.getState() is Guest);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -61,7 +61,7 @@ namespace workshop192.Domain.Tests
                 state.register("shalom", "1111", null);
                 Assert.IsTrue(true);
             }
-            catch (LoginException le)
+            catch (LoginException)
             {
                 Assert.Fail();
             }

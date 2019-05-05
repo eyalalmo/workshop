@@ -40,7 +40,7 @@ namespace workshop192.Domain.Tests
                 DBProduct.getInstance().removeProduct(p);
                 Assert.IsTrue(true);
             }
-            catch (Exception e) {
+            catch (Exception) {
                 Assert.Fail();
             }
         }
@@ -51,7 +51,7 @@ namespace workshop192.Domain.Tests
             {
                 DBProduct.getInstance().removeProduct(p);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Assert.Fail();
             }

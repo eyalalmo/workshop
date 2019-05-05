@@ -98,7 +98,7 @@ namespace workshop192.ServiceLayer
             
             return str;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }

@@ -32,7 +32,6 @@ namespace workshop192.Domain
         public Store createStore(String storeName, String description, SubscribedUser sub)
         {
             throw new UserStateException("Guest cannot create a store");
-            return null;
         }
 
         public String getComplaints()
