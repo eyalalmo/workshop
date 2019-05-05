@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using workshop192.Domain;
 
 namespace workshop192.Bridge
 {
@@ -79,12 +80,12 @@ namespace workshop192.Bridge
 
         //use case 2.5
 
-        public List<int> searchProducts(String name, String keywords, String category)
+        public List<Product> searchProducts(String name, String keywords, String category)
         {
             return DBProduct.getInstance().searchProducts(name, keywords, category);
         }
 
-        public List<int> filterProducts(List<int> list, int[] price_range, int minimumRank)
+        public List<Product> filterProducts(List<int> list, int[] price_range, int minimumRank)
         {
             return DBProduct.getInstance().filterBy(list, price_range, minimumRank);
 
@@ -104,17 +105,10 @@ namespace workshop192.Bridge
             session.purchaseBasket();
         }
 
-        public int createSession()
-        {
-            throw new NotImplementedException();
-        }
-
         public int addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, int store, Session session)
         {
             DBStore storeDB = DBStore.getInstance();
-
-            checkProduct(productName, productCategory, price, rank, quantityLeft);
-
+            
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
             Product product = new Product(productName, productCategory, price, rank, quantityLeft, store);
 
@@ -122,102 +116,112 @@ namespace workshop192.Bridge
             return product.getProductID();
         }
 
-        public void removeProduct(Product product, Session session)
+        public void removeProduct(int productid, Session session)
         {
+            Product product = DBProduct.getInstance().getProductByID(productid);
+
             if (product == null)
-                throw new NullReferenceException("product is a null reference");
-            if (session == null)
-                throw new NullReferenceException("session is a null reference");
+                throw new DoesntExistException("no such username");
 
             SubscribedUser user = session.getSubscribedUser();
-
-            DBStore storeDB = DBStore.getInstance();
-            StoreRole sr = storeDB.getStoreRole(product.getStore(), user);
+            
+            StoreRole sr = DBStore.getInstance().getStoreRole(product.getStore(), user);
 
             sr.removeProduct(product);
         }
 
-        public void setProductPrice(Product product, int price, Session session)
+        public void setProductPrice(int productid, int price, Session session)
         {
+            Product product = DBProduct.getInstance().getProductByID(productid);
+
+            if (product == null)
+                throw new DoesntExistException("no such username");
+
             SubscribedUser user = session.getSubscribedUser();
+            
+            StoreRole sr = DBStore.getInstance().getStoreRole(product.getStore(), user);
 
-            DBStore storeDB = DBStore.getInstance();
-            StoreRole sr = storeDB.getStoreRole(product.getStore(), user);
-
-            if (price <= 0)
-                throw new IllegalAmountException("error - price must be a positive number");
             sr.setProductPrice(product, price);
         }
 
-        public void setProductName(Product product, String name, Session session)
+        public void setProductName(int productid, String name, Session session)
         {
+            Product product = DBProduct.getInstance().getProductByID(productid);
+
+            if (product == null)
+                throw new DoesntExistException("no such username");
+
             SubscribedUser user = session.getSubscribedUser();
+            
+            StoreRole sr = DBStore.getInstance().getStoreRole(product.getStore(), user);
 
-            DBStore storeDB = DBStore.getInstance();
-            StoreRole sr = storeDB.getStoreRole(product.getStore(), user);
-
-            if (name.Length == 0)
-                throw new ArgumentException("error -product must have a name");
             sr.setProductName(product, name);
         }
 
-        public void addToProductQuantity(Product product, int amount, Session session)
+        public void addToProductQuantity(int productid, int amount, Session session)
         {
+            Product product = DBProduct.getInstance().getProductByID(productid);
+
+            if (product == null)
+                throw new DoesntExistException("no such username");
+
             SubscribedUser user = session.getSubscribedUser();
 
-            DBStore storeDB = DBStore.getInstance();
-            StoreRole sr = storeDB.getStoreRole(product.getStore(), user);
+            StoreRole sr = DBStore.getInstance().getStoreRole(product.getStore(), user);
 
-            if (amount <= 0)
-                throw new IllegalAmountException("error - amount must be a positive number");
             sr.addToProductQuantity(product, amount);
         }
 
-        public void decFromProductQuantity(Product product, int amount, Session session)
+        public void decFromProductQuantity(int productid, int amount, Session session)
         {
+            Product product = DBProduct.getInstance().getProductByID(productid);
+
+            if (product == null)
+                throw new DoesntExistException("no such username");
+
             SubscribedUser user = session.getSubscribedUser();
+            
+            StoreRole sr = DBStore.getInstance().getStoreRole(product.getStore(), user);
 
-            DBStore storeDB = DBStore.getInstance();
-            StoreRole sr = storeDB.getStoreRole(product.getStore(), user);
-
-            if (amount <= 0)
-                throw new IllegalAmountException("error - amount must be a positive number");
             sr.decFromProductQuantity(product, amount);
         }
 
-        public void setProductDiscount(Product product, Discount discount, Session session)
+        public void setProductDiscount(int productid, int discount, Session session)
         {
+            Product product = DBProduct.getInstance().getProductByID(productid);
+
+            if (product == null)
+                throw new DoesntExistException("no such username");
+
             SubscribedUser user = session.getSubscribedUser();
 
             DBStore storeDB = DBStore.getInstance();
             StoreRole sr = storeDB.getStoreRole(product.getStore(), user);
 
-            sr.setProductDiscount(product, discount);
+            //??????????????????????????????/
+            //sr.setProductDiscount(product, discount);
         }
 
-        public Store addStore(string storeName, string storeDescription, Session session)
+        public void closeStore(int storeid, Session session)
         {
-            SubscribedUser user = session.getSubscribedUser();
-
-            if (storeName.Length == 0)
-            {
-                throw new ArgumentException("error - store must have a name");
-            }
-            return session.createStore(storeName, storeDescription);
-        }
-
-        public void closeStore(Store store, Session session)
-        {
+            Store store = DBStore.getInstance().getStore(storeid);
+            if (store == null)
+                throw new DoesntExistException("no such store");
             session.closeStore(store);
         }
 
-        public void addManager(Store store, string username,
+        public void addManager(int storeid, string username,
             bool editProduct, bool editDiscount, bool editPolicy, Session session)
         {
             SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (toAdd == null)
             {
-                throw new NullReferenceException("error - no such user ID");
+                throw new DoesntExistException("no such username");
+            }
+            Store store = DBStore.getInstance().getStore(storeid);
+            if (store == null)
+            {
+                throw new DoesntExistException("no such store");
             }
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
             if (sr.getStore() != store)
@@ -226,40 +230,36 @@ namespace workshop192.Bridge
             sr.addManager(toAdd, permissions);
         }
 
-        public void addOwner(Store store, string username, Session session)
+        public void addOwner(int storeid, string username, Session session)
         {
             SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (toAdd == null)
-                throw new UserException("no such username");
-
+                throw new DoesntExistException("no such username");
+            Store store = DBStore.getInstance().getStore(storeid);
+            if (store == null)
+            {
+                throw new DoesntExistException("no such store");
+            }
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
             if (sr.getStore() != store)
                 throw new RoleException("this user can't appoint to this store");
             sr.addOwner(toAdd);
         }
 
-        public void removeRole(Store store, string username, Session session)
+        public void removeRole(int storeid, string username, Session session)
         {
             SubscribedUser toRemove = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (toRemove == null)
-                throw new UserException("no such username");
+                throw new DoesntExistException("no such username");
+            Store store = DBStore.getInstance().getStore(storeid);
+            if (store == null)
+            {
+                throw new DoesntExistException("no such store");
+            }
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
             if (sr.getStore() != store)
                 throw new RoleException("this user can't remove roles from this store");
             sr.remove(toRemove);
-        }
-
-        private void checkProduct(string productName, string productCategory, int price, int rank, int quantityLeft)
-        {
-            if (productName == "")
-                throw new ArgumentException("illeagal name");
-            if (price < 0)
-                throw new IllegalAmountException("error - price must be a positive number");
-            if (rank < 0 | rank > 5)
-                throw new IllegalAmountException("error - rank must be a number between 1 to 5");
-            if (quantityLeft < 0)
-                throw new IllegalAmountException("error - quantity must be a positive number");
-
         }
 
         //use case 2.7
@@ -275,12 +275,7 @@ namespace workshop192.Bridge
         //use case 2.6
         public void addToCart(Session user, Store store, Product product, int amount)
         {
-            if (amount <= 0)
-            {
-                throw new IllegalAmountException("error : amount should be a positive number");
-            }
             user.getShoppingBasket().addToCart(product, amount);
-
         }
         //use case 2.7
         public void removeFromCart(Session user, Store store, Product product)
@@ -290,11 +285,6 @@ namespace workshop192.Bridge
         //use case 2.7
         public void changeQuantity(Session user, Product product, Store store, int newAmount)
         {
-            if (newAmount <= 0)
-            {
-                throw new IllegalAmountException("ERROR: quantity should be a positive number");
-            }
-
             user.getShoppingBasket().getShoppingCartByID(store.getStoreID()).changeQuantityOfProduct(product, newAmount);
         }
 

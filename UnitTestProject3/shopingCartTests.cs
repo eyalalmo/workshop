@@ -20,12 +20,10 @@ namespace UnitTestProject3
             cart = new ShoppingCart(store.getStoreID());
           
         }
-
-
+        
         [TestMethod]
         public void TestAddProduct1()
         {
-
             Product p1 = new Product("p1", "ff", 56, 2, 10, store);
             Product p2 = new Product("p2", "ff", 56, 2, 10, store);
             Product p3 = new Product("p3", "ff", 56, 2, 10, store);
@@ -86,19 +84,20 @@ namespace UnitTestProject3
         [TestMethod]
         public void changeQuantityOfProductTest2()
         {
-            Product p1 = new Product("p1", "ff", 56, 2, 10, store);
-            cart.addToCart(p1, 5);
+            try
+            {
+                Product p1 = new Product("p1", "ff", 56, 2, 10, store);
+                cart.addToCart(p1, 5);
 
-            Assert.AreEqual(cart.changeQuantityOfProduct(p1, 12), "there is no such amount of the product");
+                cart.changeQuantityOfProduct(p1, 12);
+                Assert.Fail();
+            }
+            catch (IllegalAmountException e)
+            {
+                Assert.IsTrue(true);
+            }
         }
-        [TestMethod]
-        public void changeQuantityOfProductTest3()
-        {
-            Product p1 = new Product("p1", "ff", 56, 2, 10, store);
-
-            Assert.AreEqual(cart.changeQuantityOfProduct(p1, 12), "- product does not exist");
-        }
-
+        
         [TestMethod]
         public void totalAmountTest1()
         {
@@ -129,10 +128,7 @@ namespace UnitTestProject3
             cart.addToCart(p1, 2);
             cart.addToCart(p2, 2);
             Assert.AreEqual(cart.checkout("hamarganit", "20432232"), " product: 0 complete payment.  product: 1 complete payment. ");
-      
         }
-
-
     }
 }
 

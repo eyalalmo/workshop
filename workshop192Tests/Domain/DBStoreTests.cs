@@ -51,10 +51,17 @@ namespace workshop192.Domain.Tests
         [TestMethod()]
         public void removeStoreTest()
         {
-            int ID = DBStore.getInstance().addStore(s);
-            Assert.AreEqual(DBStore.getInstance().removeStore(s),"");
-            Assert.AreEqual(DBStore.getInstance().getStore(ID), null);
-            Assert.AreNotEqual(DBStore.getInstance().removeStore(s), "");
+            try
+            {
+                int ID = DBStore.getInstance().addStore(s);
+                DBStore.getInstance().removeStore(s);
+                Assert.AreEqual(DBStore.getInstance().getStore(ID), null);
+                DBStore.getInstance().removeStore(s);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
+            }
         }
 
         [TestMethod()]
@@ -63,9 +70,6 @@ namespace workshop192.Domain.Tests
             int ID = DBStore.getInstance().addStore(s);
             DBStore.getInstance().closeStore(s);
             Assert.IsFalse(s.isActive());
-
         }
-
-
     }
 }

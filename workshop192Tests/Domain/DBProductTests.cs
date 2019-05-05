@@ -34,13 +34,27 @@ namespace workshop192.Domain.Tests
         [TestMethod()]
         public void removeProductTest()
         {
-            DBProduct.getInstance().addProduct(p);
-            Assert.AreEqual(DBProduct.getInstance().removeProduct(p), "");
+            try
+            {
+                addProductTest();
+                DBProduct.getInstance().removeProduct(p);
+                Assert.IsTrue(true);
+            }
+            catch (Exception e) {
+                Assert.Fail();
+            }
         }
         [TestMethod()]
         public void removeNonExistingProductTest()
         {
-            Assert.AreNotEqual(DBProduct.getInstance().removeProduct(p), "");
+            try
+            {
+                DBProduct.getInstance().removeProduct(p);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
+            }
         }
 
 

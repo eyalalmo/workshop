@@ -48,154 +48,274 @@ namespace workshop192.Domain.Tests
 
         [TestMethod()]
         public void addProductSuccTest()
-        {         
-            Assert.AreEqual("", sr.addProduct(p));
+        {
+            try
+            {
+                sr.addProduct(p);
 
-            Product returnP = DBProduct.getInstance().getProductByID(p.getProductID());
+                Product returnP = DBProduct.getInstance().getProductByID(p.getProductID());
 
-            Assert.AreEqual(returnP, p);
-            Assert.AreEqual(store.getProductList().Contains(p), true);
+                Assert.AreEqual(returnP, p);
+                Assert.AreEqual(store.getProductList().Contains(p), true);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
+            }
         }
         
         [TestMethod()]
         public void removeProductSuccTest()
         {
-            sr.addProduct(p);
-            Assert.AreEqual("", sr.removeProduct(p));
+            try
+            {
+                addProductSuccTest();
 
-            Product returnP = DBProduct.getInstance().getProductByID(p.getProductID());
-            Assert.AreEqual(returnP, null);
-            Assert.AreEqual(store.getProductList().Contains(p), false);
-        }
+                sr.removeProduct(p);
+
+                Product returnP = DBProduct.getInstance().getProductByID(p.getProductID());
+                Assert.AreEqual(returnP, null);
+                Assert.AreEqual(store.getProductList().Contains(p), false);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
+            }
+}
 
         [TestMethod()]
         public void removeProductFailTest()
         {
-            sr.addProduct(p);
+            try
+            {
+                addProductSuccTest();
+                sr.removeProduct(p1);
 
-            Assert.AreNotEqual("", sr.removeProduct(p1));
-            Assert.AreEqual(store.getProductList().Contains(p1), false);
+                Assert.Fail();
+            }
+            catch (StoreException se) {
+                Assert.IsTrue(true);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
+            }
         }
 
         [TestMethod()]
         public void setProductPriceSuccTest()
         {
-            sr.addProduct(p);
+            try
+            {
+                addProductSuccTest();
 
-            Assert.AreEqual("", sr.setProductPrice(p, 5));
-            Assert.AreEqual(5, p.getPrice());
+                sr.setProductPrice(p, 5);
+                Assert.AreEqual(5, p.getPrice());
+            }
+            catch (Exception e) {
+                Assert.Fail();
+            }
         }
 
         [TestMethod()]
         public void setProductNameSuccTest()
         {
-            sr.addProduct(p);
+            try
+            {
+                addProductSuccTest();
+                sr.setProductName(p, "other name");
 
-            Assert.AreEqual("", sr.setProductName(p, "other name"));
-            Assert.AreEqual("other name", p.getProductName());
+                Assert.AreEqual("other name", p.getProductName());
+            }
+            catch (Exception e) {
+                Assert.Fail();
+            }
         }
 
         [TestMethod()]
         public void addToProductQuantitySuccTest()
         {
-            sr.addProduct(p);
+            try
+            {
+                addProductSuccTest();
+                sr.addToProductQuantity(p, 5);
 
-            Assert.AreEqual("", sr.addToProductQuantity(p, 5));
-            Assert.AreEqual(15, p.getQuantityLeft());
+                Assert.AreEqual(15, p.getQuantityLeft());
+            }
+            catch (Exception e){
+                Assert.Fail();
+            }
         }
 
         [TestMethod()]
         public void decFromProductQuantitySuccTest()
         {
-            sr.addProduct(p);
+            try
+            {
+                addProductSuccTest();
+                sr.decFromProductQuantity(p, 10);
 
-            Assert.AreEqual("", sr.decFromProductQuantity(p, 10));
-            Assert.AreEqual(0, p.getQuantityLeft());
-        }
+                Assert.AreEqual(0, p.getQuantityLeft());
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
+            }
+}
 
         [TestMethod()]
         public void addManagerSuccTest()
-        {          
-            Assert.AreEqual("", sr.addManager(session2.getSubscribedUser(), per));
-            Assert.AreEqual(store.getStoreRole(session2.getSubscribedUser()) is StoreManager, true);
-            Assert.AreEqual(store.getStoreRole(session2.getSubscribedUser()).getAppointedBy(), 
-                session1.getSubscribedUser());
-            Assert.AreEqual(store.getStoreRole(session2.getSubscribedUser()), 
-                session2.getSubscribedUser().getStoreRole(store));
+        {
+            try
+            {
+                sr.addManager(session2.getSubscribedUser(), per);
+                Assert.AreEqual(store.getStoreRole(session2.getSubscribedUser()) is StoreManager, true);
+                Assert.AreEqual(store.getStoreRole(session2.getSubscribedUser()).getAppointedBy(),
+                    session1.getSubscribedUser());
+                Assert.AreEqual(store.getStoreRole(session2.getSubscribedUser()),
+                    session2.getSubscribedUser().getStoreRole(store));
+            }
+            catch (Exception e)
+            {
+                Assert.Fail();
+            }
         }
 
         [TestMethod()]
         public void addManagerFailTest()
         {
-            Assert.AreNotEqual("", sr.addManager(session1.getSubscribedUser(), per));
-            Assert.AreEqual(0, session2.getSubscribedUser().getStoreRoles().Count);
-            Assert.AreEqual(true, store.getStoreRole(session1.getSubscribedUser()) is StoreOwner);
+            try
+            {
+                sr.addManager(session1.getSubscribedUser(), per);
+                Assert.AreEqual(0, session2.getSubscribedUser().getStoreRoles().Count);
+                Assert.AreEqual(true, store.getStoreRole(session1.getSubscribedUser()) is StoreOwner);
+            }
+            catch (RoleException re)
+            {
+                Assert.IsTrue(true);
+            }
+        }
 
-            Assert.AreNotEqual("", sr.addManager(session2.getSubscribedUser(), null));
-            Assert.AreEqual(0, session2.getSubscribedUser().getStoreRoles().Count);
-            Assert.AreEqual(null, store.getStoreRole(session2.getSubscribedUser()));
+        [TestMethod()]
+        public void addManagerFailTest2()
+        {
+            try
+            {
+                sr.addManager(session2.getSubscribedUser(), null);
+                Assert.AreEqual(0, session2.getSubscribedUser().getStoreRoles().Count);
+                Assert.AreEqual(null, store.getStoreRole(session2.getSubscribedUser()));
+            }
+            catch (RoleException re)
+            {
+                Assert.IsTrue(true);
+            }
         }
 
         [TestMethod()]
         public void removeManagerSuccTest()
         {
-            sr.addManager(session2.getSubscribedUser(), per);
-            Assert.AreEqual(sr.remove(session2.getSubscribedUser()), "");
-            Assert.AreEqual(store.getStoreRole(session2.getSubscribedUser()), null);
-            Assert.AreEqual(session2.getSubscribedUser().getStoreRoles().Count, 0);
+            try
+            {
+                sr.addManager(session2.getSubscribedUser(), per);
+                sr.remove(session2.getSubscribedUser());
+                Assert.AreEqual(store.getStoreRole(session2.getSubscribedUser()), null);
+                Assert.AreEqual(session2.getSubscribedUser().getStoreRoles().Count, 0);
+            }
+            catch (RoleException re)
+            {
+                Assert.IsTrue(true);
+            }
         }
 
         [TestMethod()]
         public void removeManagerFailTest()
         {
-            Assert.AreNotEqual(sr.remove(session1.getSubscribedUser()), "");
-
-            sr.addManager(session2.getSubscribedUser(), per);
-
-            Assert.AreNotEqual(sr.remove(session3.getSubscribedUser()), "");
+            try
+            {
+                sr.remove(session1.getSubscribedUser());
+                sr.addManager(session2.getSubscribedUser(), per);
+                sr.remove(session3.getSubscribedUser());
+            }
+            catch (RoleException re)
+            {
+                Assert.IsTrue(true);
+            }
         }
 
         [TestMethod()]
         public void addOwnerSuccTest()
         {
-            Assert.AreEqual("", sr.addOwner(session2.getSubscribedUser()));
-            Assert.AreEqual(store.getStoreRole(session2.getSubscribedUser()) is StoreOwner, true);
-            Assert.AreEqual(store.getNumberOfOwners(), 2);
-            Assert.AreEqual(store.getStoreRole(session2.getSubscribedUser()).getAppointedBy(),
-                session1.getSubscribedUser());
-            Assert.AreEqual(store.getStoreRole(session2.getSubscribedUser()),
-                session2.getSubscribedUser().getStoreRole(store));
+            try
+            {
+                sr.addOwner(session2.getSubscribedUser());
+                Assert.AreEqual(store.getStoreRole(session2.getSubscribedUser()) is StoreOwner, true);
+                Assert.AreEqual(store.getNumberOfOwners(), 2);
+                Assert.AreEqual(store.getStoreRole(session2.getSubscribedUser()).getAppointedBy(),
+                    session1.getSubscribedUser());
+                Assert.AreEqual(store.getStoreRole(session2.getSubscribedUser()),
+                    session2.getSubscribedUser().getStoreRole(store));
+            }
+            catch (Exception re)
+            {
+                Assert.Fail();
+            }
         }
 
         [TestMethod()]
         public void addOwnerFailTest()
         {
-            Assert.AreNotEqual("", sr.addOwner(session1.getSubscribedUser()));
-            Assert.AreEqual(0, session2.getSubscribedUser().getStoreRoles().Count);
+            try
+            {
+                sr.addOwner(session1.getSubscribedUser());
+                Assert.AreEqual(0, session2.getSubscribedUser().getStoreRoles().Count);
 
-            sr.addOwner(session2.getSubscribedUser());
-            Assert.AreNotEqual("", sr.addOwner(session2.getSubscribedUser()));
+                sr.addOwner(session2.getSubscribedUser());
+                sr.addOwner(session2.getSubscribedUser());
 
-            sr.addManager(session3.getSubscribedUser(), per);
-            Assert.AreNotEqual("", sr.addOwner(session3.getSubscribedUser()));
+                sr.addManager(session3.getSubscribedUser(), per);
+                sr.addOwner(session3.getSubscribedUser());
+                Assert.Fail();
+            }
+            catch (RoleException re)
+            {
+                Assert.IsTrue(true);
+            }
         }
 
         [TestMethod()]
         public void removeOwnerSuccTest()
         {
-            sr.addOwner(session2.getSubscribedUser());
-
-            Assert.AreEqual(sr.remove(session2.getSubscribedUser()), "");
-            Assert.AreEqual(session2.getSubscribedUser().getStoreRoles().Count, 0);
-            Assert.AreEqual(store.getNumberOfOwners(), 1);
+            try
+            {
+                sr.addOwner(session2.getSubscribedUser());
+                sr.remove(session2.getSubscribedUser());
+                Assert.AreEqual(session2.getSubscribedUser().getStoreRoles().Count, 0);
+                Assert.AreEqual(store.getNumberOfOwners(), 1);
+            }
+            catch (Exception re)
+            {
+                Assert.Fail();
+            }
         }
 
         [TestMethod()]
         public void removeOwnerFailTest()
         {
-            sr.addOwner(session2.getSubscribedUser());
-            Assert.AreNotEqual(sr.remove(session3.getSubscribedUser()), "");
-            Assert.AreNotEqual(sr.remove(session1.getSubscribedUser()), "");
+            try
+            {
+                sr.addOwner(session2.getSubscribedUser());
+                sr.remove(session3.getSubscribedUser());
+                sr.remove(session1.getSubscribedUser());
+                Assert.Fail();
+            }
+            catch (RoleException re)
+            {
+                Assert.IsTrue(true);
+            }
+            catch (Exception re)
+            {
+                Assert.Fail();
+            }
         }
 
         [TestMethod()]
