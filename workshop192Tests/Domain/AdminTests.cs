@@ -36,14 +36,11 @@ namespace workshop192.Domain.Tests
                 admin.login("admin", "1234", session);
                 Assert.Fail();
             }
-            catch (LoginException le) {
+            catch (LoginException le)
+            {
                 Assert.IsTrue(true);
             }
-        }
 
-        [TestMethod()]
-        public void logoutTest()
-        {
             try
             {
                 DBSubscribedUser dbsubscribedUser = DBSubscribedUser.getInstance();
@@ -53,14 +50,11 @@ namespace workshop192.Domain.Tests
                 state.logout(session.getSubscribedUser(), session);
                 Assert.IsTrue(session.getState() is Guest);
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 Assert.Fail();
             }
-        }
 
-        [TestMethod()]
-        public void registerTest()
-        {
             try
             {
                 UserState state = new Admin();
