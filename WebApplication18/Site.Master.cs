@@ -16,12 +16,13 @@ namespace WebApplication18
         {
             if (System.Web.HttpContext.Current.Request.Cookies["HashCode"] != null)
             {
-  
-                String u = UserService.getStateName(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                  String u = UserService.getStateName(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
 
                 if (u != null && u== "LoggedIn")
                 {
-                    etay.Visible = true;
+                    logout.Visible = true;
+                    login.Visible = false;
+                    register.Visible = false;
                 }
                 
             }

@@ -2,30 +2,44 @@
 
 <asp:Content ID="BodyContent1"  ContentPlaceHolderID="MainContent" runat="server">
     <h2><%: Title %>
-        <asp:TextBox ID="TextBox1" name="TextBox1" runat="server"></asp:TextBox>
-        <asp:TextBox ID="TextBox2" name="TextBox2" runat="server"></asp:TextBox>
     </h2>
-    <asp:Button ID="Button3" name="Button3" runat="server" Text="Button" OnClientClick="javascript:register()"/>
-    <div >
-      <input  type="password" name="name" id="name" placeholder="name">    
-      </div>
-    <div >
-      <input  type="password" name="pass" id="pass" placeholder="123456">    
-      </div>
-    <div>
-    <input type="button"  name="btnregister" id="btnregister" value="register" />
-     </div>
+    
+ <div class="form-group">
+  <label for="usr">Name:</label>
+  <input type="text" class="form-control" id="name" name="name">
+</div>
+  <div class="form-group">
+    <label for="pwd">Password:</label>
+    <input type="password" class="form-control" id="pass" name="pass">
+  </div>
+    <div class="form-group">
+    <label for="pwd">Reapet Password:</label>
+    <input type="password" class="form-control" id="pass2" name="pass2">
+  </div>
+  
+  <button type="submit" name="btnregister" id="btnregister" class="btn btn-default">Submit</button>
+
   
      <script type="text/javascript">
 
         $(document).ready(function () {
             
             $("#btnregister").click(function () {
-                 var getUrl = window.location;
+                event.preventDefault();
+               var getUrl = window.location;
                var baseUrl = getUrl.protocol + "//" + getUrl.host
                 console.log(baseUrl);
+                console.log(getUrl);
                 username = $("#name").val();
                 pass = $("#pass").val();
+                pass2 = $("#pass2").val();
+               
+                console.log(pass);
+                console.log(pass2);
+                if (pass !== pass2) {
+                    window.alert("pass isnt the same")
+                    return;
+                }
 
                 jQuery.ajax({
                     type: "GET",
@@ -37,10 +51,10 @@
                         //console.log(response[1]);
                         if (response == "ok") {
                             //document.cookie = "HashCode=" + response[1]; //saves the hash code as a cookie
-                              
                             window.location.href = baseUrl+"/";
                         }
                         else {
+                             console.log(response);
                             $("#registerAlert").html('Failure - ' + response);
                         }
                     },

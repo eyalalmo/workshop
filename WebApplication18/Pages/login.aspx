@@ -1,26 +1,28 @@
 ﻿<%@ Page Title="Login" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="login.aspx.cs" Inherits="WebApplication18.WebForm1" %>
 
-<asp:Content ID="BodyContent1"  ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="BodyContent"  ContentPlaceHolderID="MainContent" runat="server">
     <h2><%: Title %>
-        <asp:TextBox ID="TextBox1" name="TextBox1" runat="server"></asp:TextBox>
-        <asp:TextBox ID="TextBox2" name="TextBox2" runat="server"></asp:TextBox>
     </h2>
-    <asp:Button ID="Button3" name="Button3" runat="server" Text="Button" OnClientClick="javascript:login()"/>
-    <div >
-      <input  type="password" name="name" id="name" placeholder="name">    
-      </div>
-    <div >
-      <input  type="password" name="pass" id="pass" placeholder="123456">    
-      </div>
-    <div>
-    <input type="button"  name="btnLogin" id="btnLogin" value="login" />
-     </div>
-  
-     <script type="text/javascript">
+
+ <div class="form-group">
+  <label for="usr">Name:</label>
+  <input type="text" class="form-control" id="name" name="name">
+</div>
+  <div class="form-group">
+    <label for="pwd">Password:</label>
+    <input type="password" class="form-control" id="pass" name="pass">
+  </div>
+  <div class="checkbox">
+    <label><input type="checkbox"> Remember me</label>
+  </div>
+  <button type="submit" name="btnLogin" id="btnLogin" class="btn btn-default">Submit</button>
+
+   <script type="text/javascript">
 
         $(document).ready(function () {
             
             $("#btnLogin").click(function () {
+                event.preventDefault();
                var getUrl = window.location;
                var baseUrl = getUrl.protocol + "//" + getUrl.host
                 console.log(baseUrl);
@@ -41,6 +43,7 @@
                             window.location.href = baseUrl+"/";
                         }
                         else {
+                            console.log(response);
                             $("#loginAlert").html('Failure - ' + response);
                         }
                     },

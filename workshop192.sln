@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "workshop192", "workshop192\workshop192.csproj", "{BCCD87A3-FD64-45BF-A045-CBBB08B7D339}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "workshop192Tests\UnitTests.csproj", "{90BFC332-73F7-418E-BDA2-9257075DEF7E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcceptenceTests", "UnitTestProject2\AcceptenceTests.csproj", "{7A7A05F4-A426-478A-A99A-B0EB77C42BDC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "UnitTestProject3\IntegrationTests.csproj", "{41B931B9-A16A-46C1-8145-244F8BAC78C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication18", "WebApplication18\WebApplication18.csproj", "{D2570AE7-74FB-4ABF-B63E-EA48AD079600}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webService", "WebApplication18\webService.csproj", "{D2570AE7-74FB-4ABF-B63E-EA48AD079600}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BCCD87A3-FD64-45BF-A045-CBBB08B7D339}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BCCD87A3-FD64-45BF-A045-CBBB08B7D339}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BCCD87A3-FD64-45BF-A045-CBBB08B7D339}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BCCD87A3-FD64-45BF-A045-CBBB08B7D339}.Release|Any CPU.Build.0 = Release|Any CPU
 		{90BFC332-73F7-418E-BDA2-9257075DEF7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{90BFC332-73F7-418E-BDA2-9257075DEF7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90BFC332-73F7-418E-BDA2-9257075DEF7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
