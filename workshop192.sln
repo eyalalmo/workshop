@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcceptenceTests", "UnitTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "UnitTestProject3\IntegrationTests.csproj", "{41B931B9-A16A-46C1-8145-244F8BAC78C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webService", "WebApplication18\webService.csproj", "{D2570AE7-74FB-4ABF-B63E-EA48AD079600}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication18", "WebApplication18\WebApplication18.csproj", "{D2570AE7-74FB-4ABF-B63E-EA48AD079600}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
