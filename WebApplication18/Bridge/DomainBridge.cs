@@ -21,12 +21,17 @@ namespace workshop192.Bridge
         private DomainBridge()
         { }
 
+        
         // use case 2.1 - the constructor defines guest as the default state
         public Session startSession()
         {
             return new Session();
         }
-        
+
+        public void setup()
+        {
+
+        }
         //use case 2.3
         public void login(Session user, String username, String password)
         {

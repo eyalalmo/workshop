@@ -8,7 +8,7 @@ using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.Http;
-using workshop192.Domain;
+using workshop192.Bridge;
 using workshop192.ServiceLayer;
 
 namespace WebApplication18
@@ -17,6 +17,7 @@ namespace WebApplication18
     {
         void Application_Start(object sender, EventArgs e)
         {
+            DomainBridge.getInstance().setup();
             // Code that runs on application startup
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
