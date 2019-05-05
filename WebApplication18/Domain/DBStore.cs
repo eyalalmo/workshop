@@ -5,8 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace workshop192.Domain
-
-
 {
     public class DBStore
     {
@@ -96,11 +94,11 @@ namespace workshop192.Domain
             }
             return null;
         }
-        public String removeStore(Store store)
+        public void removeStore(Store store)
         {
             if (!stores.Contains(store))
             {
-                return " - no such store";
+                throw new DoesntExistException("store " + store.getStoreName() + " doesn't exist");
             }
             stores.Remove(store);
             foreach (StoreRole st in storeRole)
@@ -108,7 +106,6 @@ namespace workshop192.Domain
                 if (st.getStore().getStoreID() == store.getStoreID())
                     storeRole.Remove(st);
             }
-            return "";
         }
 
         public void closeStore(Store s)
@@ -162,7 +159,5 @@ namespace workshop192.Domain
             }
             return res;
         }
-
-
     }
 }

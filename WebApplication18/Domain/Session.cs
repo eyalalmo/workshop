@@ -50,19 +50,19 @@ namespace workshop192.Domain
             this.shoppingBasket = shoppingB;
         }
 
-        public String login(String username, String password)
+        public void login(String username, String password)
         {
-            return userState.login(username, password, this);
+            userState.login(username, password, this);
         }
 
-        public String register(String username, String password)
+        public void register(String username, String password)
         {
-            return userState.register(username, password, this);
+            userState.register(username, password, this);
         }
 
-        public String logout()
+        public void logout()
         {
-            return userState.logout(subscribedUser, this);
+            userState.logout(subscribedUser, this);
         }
 
         public String getPurchaseHistory()
@@ -75,33 +75,33 @@ namespace workshop192.Domain
             return userState.createStore(storeName, description, subscribedUser);
         }
 
-        public String closeStore(Store store)
+        public void closeStore(Store store)
         {
-            return userState.closeStore(store);
+            userState.closeStore(store);
         }
 
-        public String removeUser(String user)
+        public void removeUser(String user)
         {
-            return userState.removeUser(user);
+            userState.removeUser(user);
         }
 
-        public String complain(String description, SubscribedUser subscribedUser)
+        public void complain(String description, SubscribedUser subscribedUser)
         {
-            return userState.complain(description, subscribedUser);
+            userState.complain(description, subscribedUser);
         }
 
-        public String addToShoppingBasket(Product product, int amount)
+        public void addToShoppingBasket(Product product, int amount)
         {
             if (amount < 0)
             {
-                return "ERROR: amount cannot not be a negative number";
+                throw new IllegalAmountException("ERROR: amount cannot not be a negative number");
             }
-            return userState.addToShoppingBasket(product, amount, shoppingBasket);
+            shoppingBasket.addToCart(product, amount);
         }
 
-        public String purchaseBasket()
+        public void purchaseBasket()
         {
-            return userState.purchaseBasket(shoppingBasket);
+            shoppingBasket.purchaseBasket();
         }
 
 

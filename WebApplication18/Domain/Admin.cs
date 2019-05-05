@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,12 +23,7 @@ namespace workshop192.Domain
             dbComplaint = DBComplaint.getInstance();
         }
 
-        public string addToShoppingBasket(Product product, int amount, ShoppingBasket basket)
-        {
-            return "ERROR: admin cannot add to shopping basket";
-        }
-
-        public string closeStore(Store store)
+        public void closeStore(Store store)
         {
             List<StoreRole> roles = store.getRoles();
             foreach (StoreRole role in roles)
@@ -35,18 +31,29 @@ namespace workshop192.Domain
                 SubscribedUser sub = role.getUser();
                 sub.removeStoreRole(role);
             }
-            return dbStore.removeStore(store);
+            dbStore.removeStore(store);
 
         }
 
-        public string complain(string description, SubscribedUser subscribedUser)
+        public void complain(string description, SubscribedUser subscribedUser)
         {
-            return "ERROR: admin cannot complain";
+            Complaint complaint = new Complaint(subscribedUser.getUsername(), description);
+            dbComplaint.addComplaint(complaint);
         }
 
         public Store createStore(String storeName, String description, SubscribedUser sub)
         {
-            return null;
+            if (storeName == "")
+            {
+                throw new IllegalNameException();
+            }
+            Store store = new Store(storeName, description);
+            StoreOwner owner = new StoreOwner(null, sub, store);
+            store.addStoreRole(owner);
+            sub.addStoreRole(owner);
+            DBStore.getInstance().addStore(store);
+            DBStore.getInstance().addStoreRole(owner);
+            return store;
         }
 
         public String getComplaints()
@@ -63,50 +70,38 @@ namespace workshop192.Domain
 
         public String getPurchaseHistory(SubscribedUser sub)
         {
-            return "ERROR: No purchase history in Admin";
+            return sub.getPurchaseHistory();
         }
 
-        public String login(string username, string password, Session session)
+        public void login(string username, string password, Session session)
         {
-            return "ERROR: User already logged in";
+            throw new LoginException("Admin already logged in");
         }
 
-        public String logout(SubscribedUser sub, Session session)
+        public void logout(SubscribedUser sub, Session session)
         {
-            String logoutResponse = dbSubscribedUser.logout(sub);
-            if (Equals(logoutResponse, ""))
-            {
-                session.setState(new Guest());
-            }
-            return logoutResponse;
+            dbSubscribedUser.logout(sub);
+            session.setState(new Guest());
         }
 
-        public string purchaseBasket(ShoppingBasket basket)
+        public void register(string username, string password, Session session)
         {
-            return "ERROR: admin cannot make a purchase";
+            throw new RegisterException("Admin is already logged in, cannot register");
         }
 
-        public String register(string username, string password, Session session)
-        {
-            return "ERROR: User already registered";
-        }
-
-        public String removeUser(String user)
+        public void removeUser(String user)
         {
             if (Equals(user, "admin"))
-                return "ERROR: admin cannot be removed";
+                throw new UserException("admin cannot be removed");
             SubscribedUser subscribedUser = DBSubscribedUser.getInstance().getSubscribedUser(user);
             if (subscribedUser == null)
-                return "ERROR: user to be removed does not exist";
+                throw new UserException("user to be removed does not exist");
             Session session = dbSession.getSessionOfSubscribedUser(subscribedUser);
             if (session != null)
             {
                 if (session.getState() is LoggedIn)
                 {
-                    String logoutResponse = session.logout();
-                    if (!Equals(logoutResponse, ""))
-                        return logoutResponse;
-
+                    session.logout();
                 }
             }
             foreach (StoreRole role in subscribedUser.getStoreRoles())
@@ -128,14 +123,11 @@ namespace workshop192.Domain
 
             }
             session.setSubscribedUser(null);
-            return dbSubscribedUser.remove(subscribedUser);
+            dbSubscribedUser.remove(subscribedUser);
 
-        }
-        public string getStateName()
-        {
-            return "Admin";
         }
 
 
     }
+
 }

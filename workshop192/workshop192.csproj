@@ -44,53 +44,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bridge\DomainBridge.cs" />
-    <Compile Include="Domain\Admin.cs" />
-    <Compile Include="Domain\DBDiscount.cs" />
-    <Compile Include="Domain\DiscountComposite.cs" />
-    <Compile Include="Domain\Discount.cs" />
     <Compile Include="Exceptions\CartException.cs" />
     <Compile Include="Exceptions\AlreadyExistException.cs" />
-    <Compile Include="Domain\Complaint.cs" />
-    <Compile Include="Domain\ConsistencySystem.cs" />
-    <Compile Include="Domain\DBComplaint.cs" />
-    <Compile Include="Domain\DBProduct.cs" />
-    <Compile Include="Domain\DBSession.cs" />
-    <Compile Include="Domain\DBSubscribedUser.cs" />
-    <Compile Include="Domain\DeliveryService.cs" />
-    <Compile Include="Domain\DiscountComponent.cs" />
     <Compile Include="Exceptions\DoesntExistException.cs" />
-    <Compile Include="Domain\Guest.cs" />
     <Compile Include="Exceptions\IllegalName.cs" />
     <Compile Include="Exceptions\PermissionsException.cs" />
     <Compile Include="Exceptions\StoreException.cs" />
     <Compile Include="Exceptions\RoleException.cs" />
     <Compile Include="Exceptions\IllegalAmountException.cs" />
-    <Compile Include="Domain\InstantPurchase.cs" />
-    <Compile Include="Domain\InvisibleDiscount.cs" />
-    <Compile Include="Domain\LoggedIn.cs" />
     <Compile Include="Exceptions\UserException.cs" />
     <Compile Include="Exceptions\UserStateException.cs" />
     <Compile Include="Exceptions\RegisterException.cs" />
     <Compile Include="Exceptions\LoginException.cs" />
-    <Compile Include="Domain\LotteryPurchase.cs" />
-    <Compile Include="Domain\PaymentService.cs" />
-    <Compile Include="Domain\Permissions.cs" />
-    <Compile Include="Domain\Product.cs" />
-    <Compile Include="Domain\PublicPurchase.cs" />
-    <Compile Include="Domain\PurchasePolicy.cs" />
-    <Compile Include="Domain\PurchaseType.cs" />
-    <Compile Include="Domain\Session.cs" />
-    <Compile Include="Domain\ShoppingBasket.cs" />
-    <Compile Include="Domain\ShoppingCart.cs" />
-    <Compile Include="Domain\Store.cs" />
-    <Compile Include="Domain\DBStore.cs" />
-    <Compile Include="Domain\StoreManager.cs" />
-    <Compile Include="Domain\StoreOwner.cs" />
-    <Compile Include="Domain\StoreRole.cs" />
-    <Compile Include="Domain\SubscribedUser.cs" />
-    <Compile Include="Domain\System.cs" />
-    <Compile Include="Domain\UserState.cs" />
-    <Compile Include="Domain\VisibleDiscount.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
@@ -102,7 +67,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <Compile Include="Domain\ReliantDiscount.cs" />
     <None Include="bin\Debug\workshop192.exe.config" />
     <None Include="bin\Debug\workshop192.vshost.exe.config" />
     <None Include="bin\Debug\workshop192.vshost.exe.manifest" />

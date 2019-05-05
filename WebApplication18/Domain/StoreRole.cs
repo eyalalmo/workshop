@@ -10,19 +10,24 @@ namespace workshop192.Domain
     {
         SubscribedUser getUser();
         Store getStore();
-        String addProduct(Product product);
-        String removeProduct(Product product);
-        String setProductPrice(Product product, int price);
-        String setProductName(Product product, String name);
-        String addToProductQuantity(Product product, int amount);
-        String decFromProductQuantity(Product product, int amount);
-        String setProductDiscount(Product product, Discount discount);
-        String addManager(SubscribedUser manager, Permissions permissions);
-        String addOwner(SubscribedUser owner);
-        String remove(SubscribedUser user);
-        String closeStore();
+        void addProduct(Product product);
+        void removeProduct(Product product);
+        void setProductPrice(Product product, int price);
+        void setProductName(Product product, String name);
+        void addToProductQuantity(Product product, int amount);
+        void decFromProductQuantity(Product product, int amount);
+        void setProductDiscount(Product product, DiscountComponent discount);
+        void addManager(SubscribedUser manager, Permissions permissions);
+        void addOwner(SubscribedUser owner);
+        void remove(SubscribedUser user);
+        void closeStore();
         void removeRoleAppointedByMe(StoreRole role);
         SubscribedUser getAppointedBy();
         void removeAllAppointedBy();
+        void addStoreVisibleDiscount(int percentage, string duration);
+        void addReliantDiscountSameProduct(double percentage, String duration, int numOfProducts, Product product);
+        void addReliantDiscountTotalAmount(double percentage, String duration, int amount);
+        void removeStoreDiscount(Store store);
+        void addComplexDiscount(List<DiscountComponent> list, string type);
     }
 }

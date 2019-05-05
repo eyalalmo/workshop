@@ -26,33 +26,31 @@ namespace workshop192.ServiceLayer
         {
             DBStore storeDB = DBStore.getInstance();
 
-            string res = checkProduct(productName, productCategory, price, rank, quantityLeft);
-            if (res != "")
-                return null;
+            checkProduct(productName, productCategory, price, rank, quantityLeft);
 
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
             Product product = new Product(productName, productCategory, price, rank, quantityLeft, store);
 
-            if (!sr.addProduct(product).Equals(""))
-                return null;
+            sr.addProduct(product);
             return product;
         }
 
-        public string removeProduct(Product product, Session session)
+        public void removeProduct(Product product, Session session)
         {
             if (product == null)
-                return "ERROR: cannot remove null product";
-            if(session == null)
-                return "ERROR: null session";
+                throw new NullReferenceException("product is a null reference");
+            if (session == null)
+                throw new NullReferenceException("session is a null reference");
+
             SubscribedUser user = session.getSubscribedUser();
 
             DBStore storeDB = DBStore.getInstance();
             StoreRole sr = storeDB.getStoreRole(product.getStore(), user);
 
-            return sr.removeProduct(product);
+            sr.removeProduct(product);
         }
 
-        public string setProductPrice(Product product, int price, Session session)
+        public void setProductPrice(Product product, int price, Session session)
         {
             SubscribedUser user = session.getSubscribedUser();
 
@@ -60,11 +58,11 @@ namespace workshop192.ServiceLayer
             StoreRole sr = storeDB.getStoreRole(product.getStore(), user);
 
             if (price <= 0)
-                return "illegal price";
-            return sr.setProductPrice(product, price);
+                throw new IllegalAmountException("error - price must be a positive number");
+            sr.setProductPrice(product, price);
         }
 
-        public string setProductName(Product product, String name, Session session)
+        public void setProductName(Product product, String name, Session session)
         {
             SubscribedUser user = session.getSubscribedUser();
 
@@ -72,11 +70,11 @@ namespace workshop192.ServiceLayer
             StoreRole sr = storeDB.getStoreRole(product.getStore(), user);
 
             if (name.Length == 0)
-                return "illegal name";
-            return sr.setProductName(product, name);
+                throw new ArgumentException("error -product must have a name");
+            sr.setProductName(product, name);
         }
 
-        public string addToProductQuantity(Product product, int amount, Session session)
+        public void addToProductQuantity(Product product, int amount, Session session)
         {
             SubscribedUser user = session.getSubscribedUser();
 
@@ -84,11 +82,11 @@ namespace workshop192.ServiceLayer
             StoreRole sr = storeDB.getStoreRole(product.getStore(), user);
 
             if (amount <= 0)
-                return "illegal amount";
-            return sr.addToProductQuantity(product, amount);
+                throw new IllegalAmountException("error - amount must be a positive number");
+            sr.addToProductQuantity(product, amount);
         }
 
-        public string decFromProductQuantity(Product product, int amount, Session session)
+        public void decFromProductQuantity(Product product, int amount, Session session)
         {
             SubscribedUser user = session.getSubscribedUser();
 
@@ -96,18 +94,18 @@ namespace workshop192.ServiceLayer
             StoreRole sr = storeDB.getStoreRole(product.getStore(), user);
 
             if (amount <= 0)
-                return "illegal amount";
-            return sr.decFromProductQuantity(product, amount);
+                throw new IllegalAmountException("error - amount must be a positive number");
+            sr.decFromProductQuantity(product, amount);
         }
 
-        public string setProductDiscount(Product product, Discount discount, Session session)
+        public void setProductDiscount(Product product, DiscountComponent discount, Session session)
         {
             SubscribedUser user = session.getSubscribedUser();
 
             DBStore storeDB = DBStore.getInstance();
             StoreRole sr = storeDB.getStoreRole(product.getStore(), user);
 
-            return sr.setProductDiscount(product, discount);
+            sr.setProductDiscount(product, discount);
         }
 
         public Store addStore(string storeName, string storeDescription, Session session)
@@ -115,63 +113,66 @@ namespace workshop192.ServiceLayer
             SubscribedUser user = session.getSubscribedUser();
 
             if (storeName.Length == 0)
-                return null;
-
+            {
+                throw new ArgumentException("error - store must have a name");
+            }
             return session.createStore(storeName, storeDescription);
         }
 
-        public string closeStore(Store store, Session session)
+        public void closeStore(Store store, Session session)
         {
-            return session.closeStore(store);
+            session.closeStore(store);
         }
 
-        public string addManager(Store store, string username, 
+        public void addManager(Store store, string username,
             bool editProduct, bool editDiscount, bool editPolicy, Session session)
         {
             SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (toAdd == null)
-                return "no such user";
+            {
+                throw new NullReferenceException("error - no such user ID");
+            }
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
             if (sr.getStore() != store)
-                return "this user can't appoint to this store";
+                throw new RoleException("this user can't appoint to this store");
             Permissions permissions = new Permissions(editProduct, editDiscount, editPolicy);
-            return sr.addManager(toAdd, permissions);
+            sr.addManager(toAdd, permissions);
         }
 
-        public string addOwner(Store store, string username, Session session)
+        public void addOwner(Store store, string username, Session session)
         {
             SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (toAdd == null)
-                return "no such user";
+                throw new NullReferenceException("error - no such user ID");
+
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
             if (sr.getStore() != store)
-                return "this user can't appoint to this store";
-            return sr.addOwner(toAdd);
+                throw new RoleException("this user can't appoint to this store");
+            sr.addOwner(toAdd);
         }
 
-        public string removeRole(Store store, string username, Session session)
+        public void removeRole(Store store, string username, Session session)
         {
             SubscribedUser toRemove = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (toRemove == null)
-                return "no such user";
+                throw new NullReferenceException("error -no such user ID)");
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
             if (sr.getStore() != store)
-                return "this user can't remove roles from this store";
-            return sr.remove(toRemove);
+                throw new RoleException("this user can't remove roles from this store");
+            sr.remove(toRemove);
         }
-        
-        private string checkProduct(string productName, string productCategory, int price, int rank, int quantityLeft)
+
+        private void checkProduct(string productName, string productCategory, int price, int rank, int quantityLeft)
         {
             if (productName == "")
-                return "illeagal name";
+                throw new ArgumentException("illeagal name");
             if (price < 0)
-                return "illeagal price";
+                throw new IllegalAmountException("error - price must be a positive number");
             if (rank < 0 | rank > 5)
-                return "illeagal rank";
+                throw new IllegalAmountException("error - rank must be a number between 1 to 5");
             if (quantityLeft < 0)
-                return "illeagal quantity";
+                throw new IllegalAmountException("error - quantity must be a positive number");
 
-            return "";
         }
     }
 }

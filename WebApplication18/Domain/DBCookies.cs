@@ -7,14 +7,14 @@ using workshop192.ServiceLayer;
 
 namespace workshop192.Domain
 {
-    public class DBCoockies
+    public class DBCookies
     {
 
 
-        private static DBCoockies instance;
+        private static DBCookies instance;
         private Dictionary<string, Session> cookies;
 
-        private DBCoockies()
+        private DBCookies()
         {
             cookies = new Dictionary<string, Session>();
         }

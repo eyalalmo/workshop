@@ -109,6 +109,31 @@ namespace workshop192.ServiceLayer
              session.purchaseBasket();
         }
 
+        /////////////////////////////////////////////////////////////////////////////////////
+        public static String addUser(string hash, Session session)
+        {
+            return DBCoockies.getInstance().addSession(hash, session);
+        }
+
+        public static string generate()
+        {
+            return DBCoockies.getInstance().generate();
+
+        }
+
+
+        public static Session getUserByHash(string hash)
+        {
+            return DBCoockies.getInstance().getUserByHash(hash);
+        }
+
+        public static Session getHashByName(String name)
+        {
+            return DBCoockies.getInstance().getUserByName(name);
+        }
+
+        ////////////////////////
+
 
 
 

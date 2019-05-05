@@ -207,6 +207,7 @@
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Bridge\DomainBridge.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -226,13 +227,16 @@
     <Compile Include="Domain\Complaint.cs" />
     <Compile Include="Domain\ConsistencySystem.cs" />
     <Compile Include="Domain\DBComplaint.cs" />
-    <Compile Include="Domain\DBCoockies.cs" />
+    <Compile Include="Domain\DBCookies.cs" />
+    <Compile Include="Domain\DBDiscount.cs" />
     <Compile Include="Domain\DBProduct.cs" />
     <Compile Include="Domain\DBSession.cs" />
     <Compile Include="Domain\DBStore.cs" />
     <Compile Include="Domain\DBSubscribedUser.cs" />
     <Compile Include="Domain\DeliveryService.cs" />
     <Compile Include="Domain\Discount.cs" />
+    <Compile Include="Domain\DiscountComponent.cs" />
+    <Compile Include="Domain\DiscountComposite.cs" />
     <Compile Include="Domain\Guest.cs" />
     <Compile Include="Domain\InstantPurchase.cs" />
     <Compile Include="Domain\InvisibleDiscount.cs" />
@@ -256,6 +260,18 @@
     <Compile Include="Domain\System.cs" />
     <Compile Include="Domain\UserState.cs" />
     <Compile Include="Domain\VisibleDiscount.cs" />
+    <Compile Include="Exceptions\AlreadyExistException.cs" />
+    <Compile Include="Exceptions\CartException.cs" />
+    <Compile Include="Exceptions\DoesntExistException.cs" />
+    <Compile Include="Exceptions\IllegalAmountException.cs" />
+    <Compile Include="Exceptions\IllegalName.cs" />
+    <Compile Include="Exceptions\LoginException.cs" />
+    <Compile Include="Exceptions\PermissionsException.cs" />
+    <Compile Include="Exceptions\RegisterException.cs" />
+    <Compile Include="Exceptions\RoleException.cs" />
+    <Compile Include="Exceptions\StoreException.cs" />
+    <Compile Include="Exceptions\UserException.cs" />
+    <Compile Include="Exceptions\UserStateException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

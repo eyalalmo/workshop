@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace workshop192.Domain
 {
     public class Store
-    {
+    {       
         private int storeID;
         private string storeName;
         private string description;
@@ -15,6 +15,7 @@ namespace workshop192.Domain
         private List<StoreRole> roles;
         private int numOfOwners;
         private bool active;
+        private DiscountComponent discount;
        
 
         public Store(string storeName, string description)
@@ -110,6 +111,13 @@ namespace workshop192.Domain
             roles.Add(toAdd);
         }
 
+
+        public Dictionary<Product, double> updatePrice(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
+        {
+           return discount.updatePrice(productList, productsActualPrice);
+            
+        }
+
         public int getNumberOfOwners()
         {
             return numOfOwners;
@@ -140,5 +148,69 @@ namespace workshop192.Domain
             }
             roles.Remove(toRemove);
         }
+        
+       /* public void addReliantDiscount(double percentage, String condition, String duration)
+        {
+            discount = new ReliantDiscount(condition, duration, percentage: percentage);
+        }
+
+        public void addVisibleDiscount(double percentage, String duration)
+        {
+            discount = new VisibleDiscount(percentage, duration);
+        }
+        public DiscountComponent getDiscount()
+        {
+            return this.discount;
+        }
+        public void addReliantDiscount(double percentage, String condition, String duration)
+        {
+            discount = new ReliantDiscount(percentage, condition, duration);
+        }
+
+        public void addVisibleDiscount(double percentage, String duration)
+        {
+            discount = new VisibleDiscount(percentage, duration);
+        }*/
+        public void addDiscount(DiscountComponent d)
+        {
+            if(discount == null)
+                this.discount = d;
+            else
+            {
+                List<DiscountComponent> list = new List<DiscountComponent>();
+                list.Add(this.discount);
+                list.Add(d);
+                DiscountComposite composite = new DiscountComposite(list, "or");
+                this.discount = composite;
+            }
+        }
+
+        public void removeDiscount()
+        {
+            if(discount == null)
+            {
+                throw new DoesntExistException("Discount does not exist so it cannot be removed");
+            }
+            discount = null;
+            /* if(discount is Discount)
+             {
+                 if(discount.getId()==discountid)
+                     discount = null;
+             }
+             else
+             {
+                 if (discount.getId() == discountid)
+                     discount = null;
+                 else
+                 {
+                     DiscountComposite dis = (DiscountComposite)discount;
+                     dis.remove(discountid);
+                 }
+
+             }
+         }*/
+        }
+       // public Dictionary
     }
+
 }

@@ -42,24 +42,14 @@ namespace workshop192.Domain
             return instance;
         }
 
-        public string logout(SubscribedUser sub)
+        public void logout(SubscribedUser sub)
         {
-            SubscribedUser user;
-            if (!loggedInUser.Remove(sub.getUsername()))
-                return "user isnt loggedin";
-            return "";
+            loggedInUser.Remove(sub.getUsername());
         }
 
-        public string register(SubscribedUser user)
+        public void register(SubscribedUser user)
         {
-            if (users.ContainsKey(user.getUsername()))
-                return "id already exist";
-
-            else
-            {
-                users.Add(user.getUsername(), user);
-            }
-            return "";
+           users.Add(user.getUsername(), user);
         }
 
         public SubscribedUser getSubscribedUser(string username)
@@ -70,25 +60,15 @@ namespace workshop192.Domain
             return user;
         }
 
-        public string login(SubscribedUser user)
+        public void login(SubscribedUser user)
         {
-            if (loggedInUser.ContainsKey(user.getUsername()))
-                return "id already loggedIn";
-
-            else
-            {
-                loggedInUser.Add(user.getUsername(), user);
-            }
-            return "";
+             loggedInUser.Add(user.getUsername(), user);
         }
 
-        public string remove(SubscribedUser user)
+        public void remove(SubscribedUser user)
         {
-            if (users.Remove(user.getUsername()) == false)
-            {
-                return " user isnt subscribe";
-            }
-            return "";
+            users.Remove(user.getUsername());
+
         }
         public SubscribedUser getloggedInUser(string name)
         {
