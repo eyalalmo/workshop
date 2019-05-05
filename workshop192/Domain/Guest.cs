@@ -70,7 +70,7 @@ namespace workshop192.Domain
 
         public void logout(SubscribedUser sub, Session session)
         {
-            throw new UserStateException("Guest cannot logout");
+            throw new UserStateException("You're not logged in");
         }
 
         public void register(string username, string password, Session session)

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using workshop192.Domain;
-
+using workshop192.Bridge;
 namespace workshop192.ServiceLayer
 {
 
@@ -12,8 +12,7 @@ namespace workshop192.ServiceLayer
 
     {
         private static UserService instance;
-        private static 
-
+        private DomainBridge db= DomainBridge.getInstance();
         public static UserService getInstance()
         {
             if (instance == null)
@@ -35,7 +34,7 @@ namespace workshop192.ServiceLayer
         //use case 2.3
         public void login(Session user, String username, String password)
         {
-            DB.login(username, password);
+            db.login(user,username, password);
         }
 
         //use case 2.2
@@ -49,7 +48,7 @@ namespace workshop192.ServiceLayer
             {
                 throw new ArgumentException( "Illegal username or password");
             }
-            user.register(username, password);
+            db.register(user,username, password);
         }
         //use case 6.2
         public void removeUser(Session admin, String username)
@@ -58,7 +57,7 @@ namespace workshop192.ServiceLayer
             {
                 throw new NullReferenceException("error - bad session");
             }
-            admin.removeUser(username);
+            db.removeUser(admin,username);
         }
 
         public void logout(Session user)
@@ -67,43 +66,48 @@ namespace workshop192.ServiceLayer
             {
                 throw new NullReferenceException("error - bad session");
             }
-            user.logout();
+            db.logout(user);
         }
 
         public int createStore(Session session, String storeName, String description)
         {
             if (session == null)
             {
-                return null;
+                return -1;
             }
-            return session.createStore(storeName, description);
+            return db.createStore(session,storeName, description);
         }
 
         //use case 2.5
 
-        public List<int> searchProducts(String name, String keywords, String category)
+        public List<Product> searchProducts(String name, String keywords, String category)
         {
-            return DBProduct.getInstance().searchProducts(name, keywords, category);
+            return db.searchProducts(name, keywords, category);
         }
 
-        public List<int> filterProducts(List<int> list, int[] price_range, int minimumRank)
+        public List<Product> filterProducts(List<Product> list, int[] price_range, int minimumRank)
         {
-            return DBProduct.getInstance().filterBy(list, price_range, minimumRank);
+            return db.filterProducts(list, price_range, minimumRank);
 
         }
 
-        public void addToShoppingBasket(Product product, int amount, Session session)
+        public void addToShoppingBasket(int product, int amount, Session session)
         {
+            if (product < 0)
+            {
+                throw new ArgumentException("invalid product id");
+            }
+
             if (session == null)
             {
                 throw new NullReferenceException("error - bad session");
             }
-            session.addToShoppingBasket(product, amount);
+            db.addToShoppingBasket(product, amount,session);
         }
 
         public void purchaseBasket(Session session)
         {
-             session.purchaseBasket();
+             db.purchaseBasket(session);
         }
 
         public int createSession()

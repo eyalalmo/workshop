@@ -30,8 +30,17 @@ namespace workshop192.Domain.Tests
         [TestMethod()]
         public void loginTest()
         {
-            Admin admin = new Admin();
-            Assert.IsTrue(Equals(admin.login("admin", "1234", session), "ERROR: User already logged in"));
+            Session session = new Session();
+            UserState state = new LoggedIn();
+            try
+            {
+                state.login("david", "david", session);
+            }
+            catch (LoginException e)
+            {
+                Assert.IsTrue(true);
+            }
+            Assert.Fail();
         }
 
         [TestMethod()]
@@ -41,15 +50,23 @@ namespace workshop192.Domain.Tests
             session.login("admin", "1234");
             UserState state = session.getState();
             Assert.IsTrue(state is Admin);
-            Assert.IsTrue(Equals(state.logout(session.getSubscribedUser(), session), ""));
+            state.logout(session.getSubscribedUser(), session);
             Assert.IsTrue(session.getState() is Guest);
         }
 
         [TestMethod()]
         public void registerTest()
         {
-            UserState state = new Admin();
-            Assert.IsTrue(Equals(state.register("shalom", "1111", null), "ERROR: User already registered"));
+            Session session = new Session();
+            UserState state = new LoggedIn();
+            try
+            {
+                state.register("ben", "bat", session);
+            }
+            catch (RegisterException e)
+            {
+                Assert.IsTrue(true);
+            }
+            Assert.Fail();
         }
     }
-}

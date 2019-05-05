@@ -43,11 +43,11 @@ namespace workshop192.Domain
 
         }
 
-        public void removeFromCart(Product p)
+        public void removeFromCart(int p)
         {
-            if (!productList.ContainsKey(p))
+            if (!productList.ContainsValue(p))
                 throw new CartException("error- product does not exist");
-            productList.Remove(p);
+            productList.Remove(DBProduct.getInstance().getProductByID(p));
           
         }
 
@@ -74,8 +74,7 @@ namespace workshop192.Domain
             }
             return sum;
         }
-        public String checkout(String address,String creditCard) {
-            String res = "";
+        public void checkout(String address,String creditCard) {
             int sum = 0;
             foreach (KeyValuePair<Product, int> entry in productList)
             {
@@ -91,29 +90,20 @@ namespace workshop192.Domain
                         if (DeliveryService.getInstance().sendToUser(address, entry.Key) == false)
                         {
                             entry.Key.setQuantityLeft(entry.Key.getQuantityLeft() + entry.Value);
-                            res += " product: " + entry.Key.getProductID() + " can't deliver.\n ";
+                            throw new CartException("Cannot deliver " + entry.Key.getProductName());
                         }
-                        else
-                        {
-                            res += " product: " + entry.Key.getProductID() + " complete payment. ";
-                        }
-
-                        //////////add eilon part
                     }
                     else
                     {
-                        res += " product: " + entry.Key.getProductID() + " cant submmit checkout.\n ";
+                        throw new CartException("Payment for " + entry.Key.getProductName());
                     }
                 }
                 else
                 {
-                    res += " product: " + entry.Key.getProductID() + " have no this Quantity.\n ";
+                    throw new CartException("Not enough quantity of " + entry.Key.getProductName() );
                 }
 
             }
-            return res;
-
-
         } 
     }
 }
