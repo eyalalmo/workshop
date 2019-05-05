@@ -90,7 +90,7 @@ namespace workshop192.ServiceLayer
             return db.filterProducts(list, price_range, minimumRank);
 
         }
-        public string getStateName(string hash)
+        public static string getStateName(string hash)
         {
            return  DBCookies.getInstance().getUserByHash(hash).getState().getStateName();
         }

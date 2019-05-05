@@ -16,7 +16,7 @@ namespace WebApplication18
         {
             if (System.Web.HttpContext.Current.Request.Cookies["HashCode"] != null)
             {
-                  String u = UserService.getStateName(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                  string u = UserService.getStateName(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
 
                 if (u != null && u== "LoggedIn")
                 {

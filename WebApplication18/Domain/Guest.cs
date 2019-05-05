@@ -50,6 +50,11 @@ namespace workshop192.Domain
             throw new NotImplementedException();
         }
 
+        public string getStateName()
+        {
+            throw new NotImplementedException();
+        }
+
         public void login(String username, String password, Session session)
         {
             String encrypted = DBSubscribedUser.getInstance().encryptPassword(password);
@@ -90,9 +95,14 @@ namespace workshop192.Domain
             DBSubscribedUser.getInstance().register(sub);
         }
 
-        public String removeUser(String user)
+        public string removeUser()
         {
             return "Guest";
+        }
+
+        public void removeUser(string subscribedUser)
+        {
+            throw new NotImplementedException();
         }
     }
 }
