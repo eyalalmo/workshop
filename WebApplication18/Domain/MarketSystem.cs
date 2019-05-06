@@ -26,7 +26,7 @@ namespace workshop192.Domain
 
         private void init()
         {
-            Session s = new Session();
+           /* Session s = new Session();
             s.register("Admin", "1234");
             s.register("storeOwner", "123");
             s.login("storeOwner", "123");
@@ -41,7 +41,7 @@ namespace workshop192.Domain
             //DBProduct.getInstance().addProduct(p);
             PaymentService.getInstance().connectToSystem();
             DeliveryService.getInstance().connectToSystem();
-            ConsistencySystem.getInstance().connectToSystem();
+            ConsistencySystem.getInstance().connectToSystem();*/
         }
     }
 }

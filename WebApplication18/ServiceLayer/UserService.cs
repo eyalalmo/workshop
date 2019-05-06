@@ -130,16 +130,12 @@ namespace workshop192.ServiceLayer
             db.addToShoppingBasket(product, amount, session);
         }
 
-        public ShoppingBasket getShoppingBasket(Session session)
+        public ShoppingBasket getShoppingBasket(int session)
         {
-            if (session == null)
-            {
-                throw new NullReferenceException("error - bad session");
-            }
-            return session.getShoppingBasket();
+            return db.getShoppingBasket(session);
         }
 
-        public void purchaseBasket(Session session)
+        public void purchaseBasket(int session)
         {
             db.purchaseBasket(session);
         }

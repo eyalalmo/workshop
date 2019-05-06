@@ -55,7 +55,7 @@ namespace WebApplication18.Controllers
         public string getShoppingBasket()
         {
             //Session session = UserService.getInstance().startSession();
-            Session session = UserService.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+            int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             ShoppingBasket basket = UserService.getInstance().getShoppingBasket(session);
             //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, basket);
             //String hash = System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value;

@@ -62,9 +62,9 @@ namespace workshop192.Bridge
         {
             return DBProduct.getInstance().AllproductsToJson();
         }
-        public int createStore(Session session, String storeName, String description)
+        public int createStore(int sessionId, String storeName, String description)
         {
-            Session session = DBSession.getInstance().getSession(sessionid);
+            Session session = DBSession.getInstance().getSession(sessionId);
             Store s = session.createStore(storeName, description);
             return s.getStoreID();
         }
@@ -93,6 +93,12 @@ namespace workshop192.Bridge
         {
             Session session = DBSession.getInstance().getSession(sessionid);
             session.purchaseBasket();
+        }
+
+        public ShoppingBasket getShoppingBasket(int sessionid)
+        {
+            Session session = DBSession.getInstance().getSession(sessionid);
+            return session.getShoppingBasket();
         }
 
         public int addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, int storeID, int sessionid)
