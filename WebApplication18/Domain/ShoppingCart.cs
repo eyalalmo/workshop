@@ -32,7 +32,15 @@ namespace workshop192.Domain
         {
             return this.storeID;
         }
-
+        public Product cartContainsProduct(int productId)
+        {
+            foreach (KeyValuePair<Product, int> p in productList)
+            {
+                if (p.Key.getProductID() == productId)
+                    return p.Key;
+            }
+            return null;
+        }
         public void addToCart(Product product, int amount)
         {
             int quantityLeft = product.getQuantityLeft();
@@ -56,6 +64,8 @@ namespace workshop192.Domain
             productList.Remove(p);
           
         }
+
+       
 
         public void changeQuantityOfProduct(Product p, int newAmount)
         {

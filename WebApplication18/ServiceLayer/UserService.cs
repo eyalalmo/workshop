@@ -130,7 +130,18 @@ namespace workshop192.ServiceLayer
             db.addToShoppingBasket(product, amount, session);
         }
 
-        public ShoppingBasket getShoppingBasket(int session)
+        public void removeFromShoppingBasket(int session, int productId)
+        {
+            if (productId < 0)
+            {
+                throw new ArgumentException("invalid product id");
+            }
+
+
+            db.removeFromCart(session, productId);
+        }
+
+        public string getShoppingBasket(int session)
         {
             return db.getShoppingBasket(session);
         }

@@ -54,18 +54,13 @@ namespace workshop192.ServiceLayer
             
         }
         //use case 2.7
-        public void removeFromCart(int user,int store, int product)
+        public void removeFromCart(int user,int product)
         {
             if (product < 0)
             {
                 throw new ArgumentException("invalid product id");
             }
-
-            if (store < 0)
-            {
-                throw new ArgumentException("invalid store id");
-            }
-            db.removeFromCart(user, store, product);
+            db.removeFromCart(user, product);
         }
         //use case 2.7
         public void changeQuantity(int user, int product,int store, int newAmount)

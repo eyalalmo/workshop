@@ -52,6 +52,19 @@ namespace workshop192.Domain
                 }
             }
         }
+        public void removeFromCart(int productId)
+        {
+            foreach (KeyValuePair<int, ShoppingCart> cart in shoppingCarts)
+            {
+                Product p = cart.Value.cartContainsProduct(productId);
+                if (p != null)
+                {
+                    cart.Value.removeFromCart(p);
+                    return;
+                }
+            }
+            throw new DoesntExistException("Product cannot be removed, it does not exist in cart");
+        }
         //public String checkout (String address,String creditCard){
         //    // return the result of the proccess by order of cart
         //    String output = "";

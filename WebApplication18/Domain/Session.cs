@@ -102,6 +102,10 @@ namespace workshop192.Domain
             }
             shoppingBasket.addToCart(product, amount);
         }
+        public void removeFromCart(int productId)
+        {
+            shoppingBasket.removeFromCart(productId);
+        }
 
         public void purchaseBasket()
         {
