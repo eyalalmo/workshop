@@ -22,36 +22,40 @@ namespace workshop192.Bridge
         { }
 
         // use case 2.1 - the constructor defines guest as the default state
-        public Session startSession()
+        public int startSession()
         {
-            return new Session();
+            return DBSession.getInstance().generate();
         }
         
         //use case 2.3
-        public void login(Session user, String username, String password)
+        public void login(int sessionid, String username, String password)
         {
-            user.login(username, password);
+            Session s = DBSession.getInstance().getSession(sessionid);
+            s.login(username, password);
         }
 
         //use case 2.2
-        public void register(Session user, String username, String password)
+        public void register(int sessionid, String username, String password)
         {
+            Session user = DBSession.getInstance().getSession(sessionid);
             user.register(username, password);
         }
         //use case 6.2
-        public void removeUser(Session admin, String username)
+        public void removeUser(int sessionid, String username)
         {
+            Session admin = DBSession.getInstance().getSession(sessionid);
             admin.removeUser(username);
         }
 
-        public void logout(Session user)
+        public void logout(int sessionid)
         {
-
+            Session user = DBSession.getInstance().getSession(sessionid);
             user.logout();
         }
 
-        public int createStore(Session session, String storeName, String description)
+        public int createStore(int sessionid, String storeName, String description)
         {
+            Session session = DBSession.getInstance().getSession(sessionid);
             Store s = session.createStore(storeName, description);
             return s.getStoreID();
         }
@@ -69,21 +73,24 @@ namespace workshop192.Bridge
 
         }
 
-        public void addToShoppingBasket(int product, int amount, Session session)
+        public void addToShoppingBasket(int product, int amount, int sessionid)
         {
             Product toAdd = DBProduct.getInstance().getProductByID(product);
+            Session session = DBSession.getInstance().getSession(sessionid);
             session.addToShoppingBasket(toAdd, amount);
         }
 
-        public void purchaseBasket(Session session)
+        public void purchaseBasket(int sessionid)
         {
+            Session session = DBSession.getInstance().getSession(sessionid);
             session.purchaseBasket();
         }
 
-        public int addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, int storeID, Session session)
+        public int addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, int storeID, int sessionid)
         {
             DBStore storeDB = DBStore.getInstance();
             Store store = storeDB.getStore(storeID);
+            Session session = DBSession.getInstance().getSession(sessionid);
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
             Product product = new Product(productName, productCategory, price, rank, quantityLeft, store);
 
@@ -94,12 +101,20 @@ namespace workshop192.Bridge
             return product.getProductID();
         }
 
-        public void removeProduct(int productid, Session session)
+        internal string getState(string hash)
+        {
+            int sessionid = DBCookies.getInstance().getUserByHash(hash);
+            return DBSession.getInstance().getSession(sessionid).getState().getStateName();
+        }
+
+        public void removeProduct(int productid, int sessionid)
         {
             Product product = DBProduct.getInstance().getProductByID(productid);
 
             if (product == null)
                 throw new DoesntExistException("no such username");
+
+            Session session = DBSession.getInstance().getSession(sessionid);
 
             SubscribedUser user = session.getSubscribedUser();
             
@@ -121,12 +136,14 @@ namespace workshop192.Bridge
             return product.getPrice();
         }
 
-        public void setProductPrice(int productid, int price, Session session)
+        public void setProductPrice(int productid, int price, int sessionid)
         {
             Product product = DBProduct.getInstance().getProductByID(productid);
 
             if (product == null)
                 throw new DoesntExistException("no such username");
+
+            Session session = DBSession.getInstance().getSession(sessionid);
 
             SubscribedUser user = session.getSubscribedUser();
             
@@ -138,12 +155,14 @@ namespace workshop192.Bridge
             sr.setProductPrice(product, price);
         }
 
-        public void setProductName(int productid, String name, Session session)
+        public void setProductName(int productid, String name, int sessionid)
         {
             Product product = DBProduct.getInstance().getProductByID(productid);
 
             if (product == null)
                 throw new DoesntExistException("no such username");
+
+            Session session = DBSession.getInstance().getSession(sessionid);
 
             SubscribedUser user = session.getSubscribedUser();
             
@@ -155,12 +174,14 @@ namespace workshop192.Bridge
             sr.setProductName(product, name);
         }
 
-        public void addToProductQuantity(int productid, int amount, Session session)
+        public void addToProductQuantity(int productid, int amount, int sessionid)
         {
             Product product = DBProduct.getInstance().getProductByID(productid);
 
             if (product == null)
                 throw new DoesntExistException("no such username");
+
+            Session session = DBSession.getInstance().getSession(sessionid);
 
             SubscribedUser user = session.getSubscribedUser();
 
@@ -172,13 +193,15 @@ namespace workshop192.Bridge
             sr.addToProductQuantity(product, amount);
         }
 
-        public void decFromProductQuantity(int productid, int amount, Session session)
+        public void decFromProductQuantity(int productid, int amount, int sessionid)
         {
             Product product = DBProduct.getInstance().getProductByID(productid);
 
             if (product == null)
                 throw new DoesntExistException("no such username");
 
+            Session session = DBSession.getInstance().getSession(sessionid);
+            
             SubscribedUser user = session.getSubscribedUser();
             
             StoreRole sr = DBStore.getInstance().getStoreRole(product.getStore(), user);
@@ -189,12 +212,14 @@ namespace workshop192.Bridge
             sr.decFromProductQuantity(product, amount);
         }
 
-        public void setProductDiscount(int productid, int discount, Session session)
+        public void setProductDiscount(int productid, int discount, int sessionid)
         {
             Product product = DBProduct.getInstance().getProductByID(productid);
 
             if (product == null)
                 throw new DoesntExistException("no such username");
+
+            Session session = DBSession.getInstance().getSession(sessionid);
 
             SubscribedUser user = session.getSubscribedUser();
 
@@ -208,16 +233,19 @@ namespace workshop192.Bridge
             //sr.setProductDiscount(product, discount);
         }
 
-        public void closeStore(int storeid, Session session)
+        public void closeStore(int storeid, int sessionid)
         {
             Store store = DBStore.getInstance().getStore(storeid);
             if (store == null)
                 throw new DoesntExistException("no such store");
+
+            Session session = DBSession.getInstance().getSession(sessionid);
+
             session.closeStore(store);
         }
 
         public void addManager(int storeid, string username,
-            bool editProduct, bool editDiscount, bool editPolicy, Session session)
+            bool editProduct, bool editDiscount, bool editPolicy, int sessionid)
         {
             SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (toAdd == null)
@@ -229,6 +257,9 @@ namespace workshop192.Bridge
             {
                 throw new DoesntExistException("no such store");
             }
+
+            Session session = DBSession.getInstance().getSession(sessionid);
+
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
 
             if (sr == null)
@@ -240,7 +271,7 @@ namespace workshop192.Bridge
             sr.addManager(toAdd, permissions);
         }
 
-        public void addOwner(int storeid, string username, Session session)
+        public void addOwner(int storeid, string username, int sessionid)
         {
             SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (toAdd == null)
@@ -250,6 +281,9 @@ namespace workshop192.Bridge
             {
                 throw new DoesntExistException("no such store");
             }
+
+            Session session = DBSession.getInstance().getSession(sessionid);
+
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
 
             if (sr == null)
@@ -260,7 +294,7 @@ namespace workshop192.Bridge
             sr.addOwner(toAdd);
         }
 
-        public void removeRole(int storeid, string username, Session session)
+        public void removeRole(int storeid, string username, int sessionid)
         {
             SubscribedUser toRemove = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (toRemove == null)
@@ -270,6 +304,9 @@ namespace workshop192.Bridge
             {
                 throw new DoesntExistException("no such store");
             }
+
+            Session session = DBSession.getInstance().getSession(sessionid);
+
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
 
             if (sr == null)
@@ -281,49 +318,65 @@ namespace workshop192.Bridge
         }
 
         //use case 2.7
-        public Dictionary<int, ShoppingCart> getShoppingCarts(Session user)
+        public Dictionary<int, ShoppingCart> getShoppingCarts(int sessionid)
         {
+            Session user = DBSession.getInstance().getSession(sessionid);
+
             return user.getShoppingBasket().getShoppingCarts();
         }
 
-        public ShoppingCart getCart(Session user, int store)
+        public ShoppingCart getCart(int sessionid, int store)
         {
+            Session user = DBSession.getInstance().getSession(sessionid);
+
             return user.getShoppingBasket().getShoppingCartByID(store);
         }
         //use case 2.6
-        public void addToCart(Session user, int product, int amount)
+        public void addToCart(int sessionid, int product, int amount)
         {
             if (amount <= 0)
             {
                 throw new IllegalAmountException("error : amount should be a positive number");
             }
             Product p = DBProduct.getInstance().getProductByID(product);
+
+            Session user = DBSession.getInstance().getSession(sessionid);
+
             user.getShoppingBasket().addToCart(p, amount);
 
         }
         //use case 2.7
-        public void removeFromCart(Session user, int store, int product)
+        public void removeFromCart(int sessionid, int store, int product)
         {
+            Session user = DBSession.getInstance().getSession(sessionid);
+
             user.getShoppingBasket().getShoppingCartByID(store).removeFromCart(DBProduct.getInstance().getProductByID(product));
         }
         //use case 2.7
-        public void changeQuantity(Session user, int product, int store, int newAmount)
+        public void changeQuantity(int sessionid, int product, int store, int newAmount)
         {
             if (newAmount <= 0)
             {
                 throw new IllegalAmountException("ERROR: quantity should be a positive number");
             }
             Product p = DBProduct.getInstance().getProductByID(product);
+
+            Session user = DBSession.getInstance().getSession(sessionid);
+
             user.getShoppingBasket().getShoppingCartByID(store).changeQuantityOfProduct(p, newAmount);
         }
 
-        public void checkoutCart(Session user, int store, String address, String creditCard)
+        public void checkoutCart(int sessionid, int store, String address, String creditCard)
         {
+            Session user = DBSession.getInstance().getSession(sessionid);
+
             user.getShoppingBasket().getShoppingCartByID(store).checkout(address, creditCard);
         }
 
-        public void checkoutBasket(Session user, String address, String creditCard)
+        public void checkoutBasket(int sessionid, String address, String creditCard)
         {
+            Session user = DBSession.getInstance().getSession(sessionid);
+
             user.getShoppingBasket().purchaseBasket();
         }
     }

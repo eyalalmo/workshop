@@ -14,7 +14,7 @@ namespace workshop192.ServiceLayer.Tests
     {
         private StoreService storeService = StoreService.getInstance();
         private UserService userService = UserService.getInstance();
-        Session session1, session2, session3;
+        int session1, session2, session3;
         int storeid;
         int productid;
 

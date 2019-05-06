@@ -16,9 +16,9 @@ namespace workshop192.ServiceLayer.Tests
         UserService userService;
         StoreService storeService;
 
-        Session session1;
-        Session session2;
-        Session session3;
+        int session1;
+        int session2;
+        int session3;
 
         int store1;
         int store3;

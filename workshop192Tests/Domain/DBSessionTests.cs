@@ -18,9 +18,8 @@ namespace workshop192.Domain.Tests
         {
             DBSession db = DBSession.getInstance();
             db.initSession();
-            Session s = new Session();
+            db.generate();
             //Assert.AreEqual(db.getSession(s), "");
-                 
         }
 
         [TestMethod()]
@@ -28,8 +27,7 @@ namespace workshop192.Domain.Tests
         {
             DBSession db = DBSession.getInstance();
             db.initSession();
-            Session s = new Session();
-            db.removeSession(s);
+            db.removeSession(db.generate());
             //Assert.AreNotEqual(db.getSession(s), "");
         }
 

@@ -19,7 +19,7 @@ namespace workshop192.ServiceLayer.Tests
         private UserService userService;
         private StoreService storeService;
         private BasketService basketService;
-        private Session session;
+        private int session;
 
         [TestInitialize()]
         public void Initialize()
