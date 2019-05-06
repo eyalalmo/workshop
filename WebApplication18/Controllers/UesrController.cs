@@ -18,6 +18,7 @@ namespace WebApplication18.Controllers
         [HttpGet]
         public string register(String Username, String Password)
         {
+            
             try
             {
                 Session session = UserService.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
@@ -64,7 +65,29 @@ namespace WebApplication18.Controllers
                 return "fail";
             }
         }
+        [Route("api/user/getAllStores")]
+        [HttpGet]
+        public string getAllStores()
+        {
+            try
+            {
+                string res = "";
+                Session session = UserService.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                LinkedList<Store> s= UserService.getInstance().getAllStores(session);
+               foreach (Store s1 in s)
+                {
+                    res += s1.getStoreID() + "," + s1.getStoreName() + ";";
+                }
+                return res;
 
+            }
+            catch (Exception e)
+            {
+                string s = "fail";
+              
+                return s;
+            }
+        }
 
 
     }

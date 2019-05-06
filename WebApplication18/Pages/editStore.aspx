@@ -1,50 +1,59 @@
-﻿<%@ Page  Title="Edit Store" Language="C#" AutoEventWireup="true" CodeBehind="editStore.aspx.cs" Inherits="WebApplication18.editStore" %>
-
-
+﻿<%@ Page  Title="Edit Stores" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="editStore.aspx.cs" Inherits="WebApplication18.editStore" %>
 
 <asp:Content ID="BodyContent"  ContentPlaceHolderID="MainContent" runat="server">
     <h2><%: Title %>
     </h2>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">options
-  <span class="caret"></span></button>
-  <ul class="dropdown-menu">
-    <li><a href="#" id="AddStore" name="AddStore">Add Store</a></li>
-    <li><a href="#" id="editStore" name="editStore" >edit Store </a></li>
-    <li><a href="#" id="AddProuduct" name="AddProuduct" >Add Prouduct</a></li>
-      <li><a href="#" id="ShowProuduct" name="ShowProuduct">Show Prouduct</a></li>
-  </ul>
-</div>
+     <%--<div class="bg0 m-t-23 p-b-140" style="margin-left: auto; margin-right: auto; margin-top: 45px; max-width: 100%;">
+        <div class="container">
+            <div id="allStores" class="row isotope-grid" style="position: relative;">
+            </div>
+        </div>
+    </div>--%>
+
+    <div class="container">
+	<div id="allStores" class="row">
+        </div>
+		</div>
+
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#AddStore").click(function () {
-               event.preventDefault();
-               var getUrl = window.location;
+           
+             var doc = document.getElementById('allStores');
+         var getUrl = window.location;
                var baseUrl = getUrl.protocol + "//" + getUrl.host
-               window.location.href = baseUrl+"/Pages/login";
-            });
-            $("#editStore").click(function () {
-               event.preventDefault();
-               var getUrl = window.location;
-               var baseUrl = getUrl.protocol + "//" + getUrl.host
-               window.location.href = baseUrl+"/Pages/login";
-            });
-             $("#AddProuduct").click(function () {
-               event.preventDefault();
-               var getUrl = window.location;
-               var baseUrl = getUrl.protocol + "//" + getUrl.host
-               window.location.href = baseUrl+"/Pages/login";
-            });
-             $("#ShowProuduct").click(function () {
-               event.preventDefault();
-               var getUrl = window.location;
-               var baseUrl = getUrl.protocol + "//" + getUrl.host
-               window.location.href = baseUrl+"/Pages/login";
-            });
+            jQuery.ajax({
+                type: "GET",
+                url: baseUrl+"/api/user/getAllStores",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
 
+                    console.log(response);
+                    if (response !== "fail") {
+                        var responseSplit = response.split(';');
+                        var HTML = "";
+                        for (i = 0; i < responseSplit.length - 1; i++) {
+                            split2 = responseSplit[i].split(',');
+                            var storeId = split2[0];
+                            var storeName = split2[1];
 
+                            HTML += "<div> <a href=\"" + baseUrl + "/StoreId?storeId=" + storeId + "\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >View Store</a></div>";
+                           
+
+                        }
+                        doc.innerHTML += HTML;;
+                        
+                    }
+                    else {
+                        alert("problem");
+                    }
+                },
+                error: function (response) {
+                    //alert("Lost DB connection");
+                    window.location.href = baseUrl+"/index";
+                }
+            });
         });
-
     </script>
  </asp:Content>
 

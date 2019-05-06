@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace WebApplication18.Pages
+namespace WebApplication18
 {
     public partial class editStore : System.Web.UI.Page
     {

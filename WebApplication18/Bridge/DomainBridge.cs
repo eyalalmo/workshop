@@ -43,6 +43,12 @@ namespace workshop192.Bridge
         {
             user.register(username, password);
         }
+
+        public LinkedList<Product> getProducts(int id)
+        {
+           return DBStore.getInstance().getStore(id).getProductList();
+        }
+
         //use case 6.2
         public void removeUser(Session admin, String username)
         {
@@ -87,6 +93,17 @@ namespace workshop192.Bridge
         public void purchaseBasket(Session session)
         {
             session.purchaseBasket();
+        }
+
+        public LinkedList<Store> getAllStores(Session session)
+        {
+          List<StoreRole> lst=  session.getSubscribedUser().getStoreRoles();
+            LinkedList<Store> stores = new LinkedList<Store>();
+            foreach (StoreRole element in lst)
+            {
+                stores.AddLast(element.getStore());
+            }
+            return stores;
         }
 
         public int addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, int storeID, Session session)

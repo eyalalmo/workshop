@@ -22,6 +22,8 @@
    
     <script type="text/javascript">
         $(document).ready(function () {
+            var getUrl = window.location;
+               var baseUrl = getUrl.protocol + "//" + getUrl.host
             $("#AddStore").click(function () {
                event.preventDefault();
                var getUrl = window.location;
