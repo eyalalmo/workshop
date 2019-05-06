@@ -10,23 +10,16 @@ namespace workshop192.Domain
 {
     public class MarketSystem
     {
-
-        private static MarketSystem instance;
-
-        public static MarketSystem getInstance()
+        public static void init()
         {
-            if (instance == null)
-                instance = new MarketSystem();
-            return instance;
-        }
+            DBProduct.getInstance().init();
+            DBSession.getInstance().init();
+            DBStore.getInstance().init();
+         //   DBComplaint.getInstance().init();
+            DBDiscount.getInstance().init();
+            DBSubscribedUser.getInstance().init();
+            //    DBCookies.getInstance().init();
 
-        private MarketSystem()
-        {
-            init();
-        }
-
-        private void init()
-        {
             int sessionid = DBSession.getInstance().generate();
             Session s = DBSession.getInstance().getSession(sessionid);
             s.register("Admin", "1234");
@@ -44,6 +37,7 @@ namespace workshop192.Domain
             PaymentService.getInstance().connectToSystem();
             DeliveryService.getInstance().connectToSystem();
             ConsistencySystem.getInstance().connectToSystem();
+
         }
     }
 }

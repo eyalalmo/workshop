@@ -16,29 +16,41 @@ namespace workshop192.ServiceLayer.Tests
     [TestClass()]
     public class UserServiceTests
     {
-        private UserService userService;
-        private StoreService storeService;
-        private BasketService basketService;
-        private int session;
-
+        private UserService userService = UserService.getInstance();
+        private StoreService storeService = StoreService.getInstance();
+        private BasketService basketService = BasketService.getInstance();
+        private int session1, session2; // session3;
+        
+        
         [TestInitialize()]
         public void Initialize()
         {
-            userService = UserService.getInstance();
-            storeService = StoreService.getInstance();
-            basketService = BasketService.getInstance();
-            session = userService.startSession();
-            DBStore.getInstance().init();
-            DBSubscribedUser.getInstance().init();
-            DBProduct.getInstance().initDB();
-            int store1 = userService.createStore(session, "Golf", "Clothes");
-            int store2 = userService.createStore(session, "Shiomi", "Technology");
-            storeService.addProduct("shirt", "clothes", 20, 5, 2, store1, session);
-            storeService.addProduct("pan", "kitchen", 100, 2, 4, store1, session);
-            storeService.addProduct("stove", "kitchen", 200, 3, 2, store1, session);
-            storeService.addProduct("pants", "clothes", 120, 1, 2, store2, session);
-            storeService.addProduct("socks", "clothes", 110, 4, 2, store2, session);
+            try
+            {
+                userService.setup();
 
+                session1 = userService.startSession();
+                session2 = userService.startSession();
+                // session3 = userService.startSession();
+
+                userService.register(session1, "zubu", "mafu");
+                userService.login(session1, "zubu", "mafu");
+
+                int store1 = userService.createStore(session1, "Golf", "Clothes");
+                int store2 = userService.createStore(session1, "Shiomi", "Technology");
+
+                //storeService.addManager(store1, "dani1", true, true, true, session);
+
+                storeService.addProduct("shirt", "clothes", 20, 5, 2, store1, session1);
+                storeService.addProduct("pan", "kitchen", 100, 2, 4, store1, session1);
+                storeService.addProduct("stove", "kitchen", 200, 3, 2, store1, session1);
+                storeService.addProduct("pants", "clothes", 120, 1, 2, store2, session1);
+                storeService.addProduct("socks", "clothes", 110, 4, 2, store2, session1);
+            }
+            catch (Exception)
+            {
+                throw new ExecutionEngineException();
+            }
         }
         //2.2+2.3
         [TestMethod]
@@ -46,7 +58,7 @@ namespace workshop192.ServiceLayer.Tests
         {
             try
             {
-                userService.register(session, "user", "user");
+                userService.register(session2, "user", "user");
             }catch(Exception)
             {
                 Assert.Fail();
@@ -61,7 +73,7 @@ namespace workshop192.ServiceLayer.Tests
             try
             {
                 registerSuccessTest();
-                userService.register(session, "user", "user");
+                userService.register(session2, "user", "user");
                 Assert.Fail();
             }
             catch (RegisterException)
@@ -75,7 +87,7 @@ namespace workshop192.ServiceLayer.Tests
             try
             {
                 registerSuccessTest();
-                userService.login(session, "user", "user");
+                userService.login(session2, "user", "user");
             }
             catch (RegisterException)
             {
@@ -89,7 +101,7 @@ namespace workshop192.ServiceLayer.Tests
             try
             {
                 registerSuccessTest();
-                userService.login(session, "user", "user33");
+                userService.login(session2, "user", "user33");
                 Assert.Fail();
             }
             catch (RegisterException)
@@ -104,7 +116,7 @@ namespace workshop192.ServiceLayer.Tests
         {
             try
             {
-                userService.login(session, "user", "user");
+                userService.login(session2, "user", "user");
                 Assert.Fail();
             }
             catch (RegisterException)
@@ -129,7 +141,7 @@ namespace workshop192.ServiceLayer.Tests
         [TestMethod]
         public void searchByCategoryTest1()
         {
-            registerSuccessTest();
+            //registerSuccessTest();
             loginSuccessTest();
             List<Product> searchResult1 = userService.searchProducts(null, null, "kitchen");
             Assert.IsTrue(searchResult1.Count == 2);
@@ -140,7 +152,7 @@ namespace workshop192.ServiceLayer.Tests
         [TestMethod]
         public void searchByCategoryTest2()
         {
-            registerSuccessTest();
+            //registerSuccessTest();
             loginSuccessTest();
             List<Product> searchResult2 = userService.searchProducts(null, null, "clothes");
             Assert.IsTrue(searchResult2.Count == 3);
@@ -152,7 +164,7 @@ namespace workshop192.ServiceLayer.Tests
         [TestMethod]
         public void searchByCategoryFail()
         {
-            registerSuccessTest();
+         //   registerSuccessTest();
             loginSuccessTest();
             List<Product> searchResult3 = userService.searchProducts(null, null, "pets");
             Assert.IsTrue(searchResult3.Count == 0);
@@ -225,22 +237,22 @@ namespace workshop192.ServiceLayer.Tests
         {
             try
             {
-                registerSuccessTest();
+                //registerSuccessTest();
                 loginSuccessTest();
-                int store1 = userService.createStore(session, "Zoo Land", "pets");
-                int product1 = storeService.addProduct("dogs", "big dogs", 80, 2, 4, store1, session);
-                int product2 = storeService.addProduct("cats", "grey cats", 110, 5, 10, store1, session);
+                int store1 = userService.createStore(session2, "Zoo Land", "pets");
+                int product1 = storeService.addProduct("dogs", "big dogs", 80, 2, 4, store1, session2);
+                int product2 = storeService.addProduct("cats", "grey cats", 110, 5, 10, store1, session2);
 
-                int store2 = userService.createStore(session, "Shufersal", "food");
-                int product3 = storeService.addProduct("milk", "3%", 65, 2, 1, store2, session);
-                int product4 = storeService.addProduct("water", "blue water", 70, 4, 4, store2, session);
+                int store2 = userService.createStore(session2, "Shufersal", "food");
+                int product3 = storeService.addProduct("milk", "3%", 65, 2, 1, store2, session2);
+                int product4 = storeService.addProduct("water", "blue water", 70, 4, 4, store2, session2);
 
-                basketService.addToCart(session, product1, 2);
-                basketService.addToCart(session, product2, 3);
-                basketService.addToCart(session, product3, 1);
-                basketService.addToCart(session, product4, 3);
+                basketService.addToCart(session2, product1, 2);
+                basketService.addToCart(session2, product2, 3);
+                basketService.addToCart(session2, product3, 1);
+                basketService.addToCart(session2, product4, 3);
 
-                userService.purchaseBasket(session);
+                userService.purchaseBasket(session2);
                 Assert.IsTrue(true);
 
                 //???????????????do we need to check state
@@ -261,14 +273,14 @@ namespace workshop192.ServiceLayer.Tests
         {
             try
             {
-                registerSuccessTest();
+                //registerSuccessTest();
                 loginSuccessTest();
 
-                int store1 = userService.createStore(session, "Zoo Land", "pets");
-                int product1 = storeService.addProduct("dogs", "big dogs", 80, 2, 4, store1, session);
+                int store1 = userService.createStore(session2, "Zoo Land", "pets");
+                int product1 = storeService.addProduct("dogs", "big dogs", 80, 2, 4, store1, session2);
 
-                basketService.addToCart(session, product1, 6);
-                userService.purchaseBasket(session);
+                basketService.addToCart(session2, product1, 6);
+                userService.purchaseBasket(session2);
                 Assert.Fail();
             }
             catch (IllegalAmountException)
@@ -287,10 +299,10 @@ namespace workshop192.ServiceLayer.Tests
         {
             try
             {
-                registerSuccessTest();
+               // registerSuccessTest();
                 loginSuccessTest();
 
-                userService.logout(session);
+                userService.logout(session2);
                 //???do we need to check
                 // Assert.IsTrue(session.getState() is Guest);
                 Assert.IsTrue(true);
@@ -307,7 +319,7 @@ namespace workshop192.ServiceLayer.Tests
         {
             try
             {
-                userService.logout(session);
+                userService.logout(session2);
                 Assert.Fail();
             }
             catch (UserStateException)
@@ -326,12 +338,11 @@ namespace workshop192.ServiceLayer.Tests
         {
             try
             {
-                registerSuccessTest();
                 loginSuccessTest();
                 //userService.register(session, "anna", "banana");
                 //userService.login(session, "anna", "banana");
                 //SubscribedUser user = session.getSubscribedUser();
-                int store = userService.createStore(session, "Apple", "apples");
+                int store = userService.createStore(session2, "Apple", "apples");
                 Assert.IsTrue(true);
                 /*List<StoreRole> roles = store.getRoles();
                 Assert.IsTrue(roles.Count == 1);
@@ -356,12 +367,12 @@ namespace workshop192.ServiceLayer.Tests
         {
             try
             {
-                registerSuccessTest();
+              //  registerSuccessTest();
                 loginSuccessTest();
                 //userService.register(session, "anna", "banana");
                 //userService.login(session, "anna", "banana");
                 //SubscribedUser user = session.getSubscribedUser();
-                int store = userService.createStore(session, "", "apples");
+                int store = userService.createStore(session2, "", "apples");
                 Assert.Fail();
                 /*List<StoreRole> roles = store.getRoles();
                 Assert.IsTrue(roles.Count == 1);

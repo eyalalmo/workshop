@@ -14,28 +14,35 @@ namespace workshop192.ServiceLayer.Tests
     {
         private StoreService storeService = StoreService.getInstance();
         private UserService userService = UserService.getInstance();
-        int session1, session2, session3;
+        int session1, session2 ,session3;
         int storeid;
         int productid;
 
         [TestInitialize()]
         public void TestInitialize()
         {
-            UserService.getInstance().setup();
+            try
+            {
+                UserService.getInstance().setup();
 
-            session1 = userService.startSession();
-            userService.register(session1, "anna", "banana"); //first owner
-            userService.login(session1, "anna", "banana");
+                session1 = userService.startSession();
+                userService.register(session1, "anna", "banana"); //first owner
+                userService.login(session1, "anna", "banana");
 
-            session2 = userService.startSession();
-            userService.register(session2, "dani1", "123");
-            userService.login(session2, "dani1", "123");
+                session2 = userService.startSession();
+                userService.register(session2, "dani1", "123");
+                userService.login(session2, "dani1", "123");
 
-            session3 = userService.startSession();
-            userService.register(session3, "eva2", "123");
-            userService.login(session3, "eva2", "123");
+                session3 = userService.startSession();
+                userService.register(session3, "eva2", "123");
+                userService.login(session3, "eva2", "123");
 
-            storeid = storeService.addStore("myStore", "the best store ever", session1);
+                storeid = storeService.addStore("myStore", "the best store ever", session1);
+            }
+            catch (Exception)
+            {
+                throw new ExecutionEngineException();
+            }
         }
 
         //4.1.1
@@ -168,10 +175,10 @@ namespace workshop192.ServiceLayer.Tests
             addMannagerByAnOwner2();
             try
             {
-                storeService.addManager(storeid, "dani", true, true, true, session1);
+                storeService.addManager(storeid, "dani1", true, true, true, session1);
                 Assert.Fail();
             }
-            catch (DoesntExistException)
+            catch (Exception)
             {
                 Assert.IsTrue(true);
             }

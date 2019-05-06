@@ -30,7 +30,7 @@ namespace workshop192.Bridge
 
         public void setup()
         {
-            MarketSystem.getInstance();
+            MarketSystem.init();
         }
 
         //use case 2.3
