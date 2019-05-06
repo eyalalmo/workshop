@@ -13,7 +13,7 @@ namespace WebApplication18.Controllers
     public class StoreController : ApiController
     {
 
-        
+
         [Route("api/store/getStoreProducts")]
         [HttpGet]
         public string getStoreProducts(int storeId)
@@ -37,6 +37,28 @@ namespace WebApplication18.Controllers
                 return s;
             }
         }
+
+
+        [Route("api/store/addStore")]
+        [HttpGet]
+        public int addStore(string name, string description)
+        {
+            try
+            {
+                Session session = UserService.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+               return  StoreService.getInstance().addStore(name, description, session);
+              
+
+            }
+            catch (Exception e)
+            {
+                return -1;
+            }
+        }
+    
+
+
+
     }
 }
 
