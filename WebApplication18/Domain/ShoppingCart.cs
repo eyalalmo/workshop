@@ -42,9 +42,8 @@ namespace workshop192.Domain
                     throw new CartException( "error: product exist");
                 productList.Add(product, amount);
             }
-
-            throw new IllegalAmountException("The amount asked is larger than the quantity left");
-
+            else
+                throw new IllegalAmountException("The amount asked is larger than the quantity left");
         }
 
         public void removeFromCart(Product p)
@@ -87,7 +86,6 @@ namespace workshop192.Domain
         private void updateStoreDiscount()
         {
             productsActualPrice = store.updatePrice(productList, productsActualPrice);
-
         }
 
         private void updateActualProductPrice()

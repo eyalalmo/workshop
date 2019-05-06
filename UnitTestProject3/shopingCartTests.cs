@@ -88,8 +88,7 @@ namespace UnitTestProject3
             {
                 Product p1 = new Product("p1", "ff", 56, 2, 10, store);
                 cart.addToCart(p1, 5);
-
-                cart.changeQuantityOfProduct(p1, 12);
+                cart.changeQuantityOfProduct(p1, 20);
                 Assert.Fail();
             }
             catch (IllegalAmountException)
@@ -104,11 +103,11 @@ namespace UnitTestProject3
             Product p1 = new Product("p1", "ff", 10, 2, 10, store);
             Product p2 = new Product("p2", "ff", 5, 2, 10, store);
             Product p3 = new Product("p3", "ff", 5, 2, 10, store);
-
             cart.addToCart(p1, 2);
             cart.addToCart(p2, 1);
             cart.addToCart(p3, 3);
-            Assert.AreEqual(cart.getTotalAmount(), 40);
+            double fdsfds = cart.getTotalAmount();
+            Assert.AreEqual(fdsfds, 30);
         }
         
         [TestMethod]
