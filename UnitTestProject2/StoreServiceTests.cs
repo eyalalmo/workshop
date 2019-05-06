@@ -21,7 +21,7 @@ namespace workshop192.ServiceLayer.Tests
         [TestInitialize()]
         public void TestInitialize()
         {
-            UserService.init();
+            UserService.getInstance().setup();
 
             session1 = userService.startSession();
             userService.register(session1, "anna", "banana"); //first owner
@@ -36,7 +36,6 @@ namespace workshop192.ServiceLayer.Tests
             userService.login(session3, "eva2", "123");
 
             storeid = storeService.addStore("myStore", "the best store ever", session1);
-
         }
 
         //4.1.1

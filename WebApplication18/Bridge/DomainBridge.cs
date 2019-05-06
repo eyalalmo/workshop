@@ -32,6 +32,7 @@ namespace workshop192.Bridge
         {
             MarketSystem.getInstance();
         }
+
         //use case 2.3
         public void login(int sessionid, String username, String password)
         {
