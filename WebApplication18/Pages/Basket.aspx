@@ -40,32 +40,8 @@
             <div class ="col-md-12">
                 <h2 style ="margin-bottom: 30px">My Shopping Basket</h2>
             </div>
-            <div class ="col-md-12">
-                <table class ="table table-bordered text-center">
-                    
-                    <thead>
-                        <!--table row!-->
-                        <tr>
-                            <!--table col!-->
-                            <td style="width:80px">Image</td>
-                            <td>Name </td>
-                            <td>Price</td>
-                            <td style="width:80px">Quantity</td>
-                        </tr>
-
-                    </thead>
-                    <tbody>
-                        <!--table row!-->
-                        <tr>
-                            <!--table col!-->
-                            <td ><img src="../Images/NoImageAvailabe.jpg" height="60" /></td>
-                            <td style="vertical-align:middle">DVD </td>
-                            <td style="vertical-align:middle">$20</td>
-                            <td style="vertical-align:middle">13</td>
-                        </tr>
-
-                    </tbody>
-                </table>
+            <div id="AllproductsInBasket" class ="col-md-12">
+                
             </div>
             <div class ="col-md-12">
                 <div class="pull-right">
@@ -78,6 +54,67 @@
 
     </div>
 
- 
+      <script type="text/javascript">
+
+        $(document).ready(function () {
+            
+               var mainDiv = document.getElementById('AllProductsInBasket');
+               event.preventDefault();
+               var getUrl = window.location;
+               var baseUrl = getUrl.protocol + "//" + getUrl.host
+               console.log(baseUrl);
+               
+                console.log("before jquery");
+                jQuery.ajax({
+                    type: "GET",
+                    url: baseUrl+"/api/user/Basket",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success:
+                        function (response) {
+                            console.log(response);
+                        if (response != "") {
+                           
+                            var str = "<table class =\"table table-bordered text-center\">"
+                                + " <thead>"
+                                + "<tr>"
+                                + "< td style = \"width:80px\" > Image</td>"
+                                + "<td>Name </td>"
+                                + "<td>Price</td>"
+                                + "<td>Rank</td>"
+                                + "<td style=\"width:80px\">Quantity</td>"
+                                + "</tr>"
+                                + "</thead>"
+                                + "<tbody>";
+                            for (i = 0; i < products.length; i++){
+                                conosle.log("in for");
+                                    var products = response.split(";");
+                                    var productfields = products[i].split(",");
+                                    var productName = productfields[0];
+                                    var price = productfields[1];
+                                    var quantity = productfields[2];
+                                    str += "<tr>" +
+                                    "<td ><img src=\"../Images/NoImageAvailabe.jpg\"" + "height=\"60\" /></td>" +
+                                    + "<td style=\"vertical-align:middle\">DVD </td>" +
+                                    + "<td style=\"vertical-align :middle\">" + productName + "</td>" +
+                                    + "<td style=\"vertical-align:middle\">" + price + "</td>" +
+                                    + "<td style=\"vertical-align:middle\">" + quantity + "</td>" +
+                                    + "</tr>";
+                            }
+                            str += " </tbody>" + "</table>";
+                            mainDiv.innerHTML = str;
+                            window.location.href = baseUrl+"/";
+                        }
+                        else {
+                            console.log(response);   
+                        }
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    }
+                });
+        });
+
+    </script>
     
 </asp:Content>

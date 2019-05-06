@@ -18,6 +18,8 @@ namespace workshop192.Domain
             userState = new Guest();
             //////////////////////////////////////////////erase!!
             shoppingBasket = new ShoppingBasket();
+            Product product = new Product("Pan", "Home", 3, 2,1,new Store("a", "a"));
+            shoppingBasket.addToCart(product, 1);
             DBSession.getInstance().addSession(this);
         }
 
