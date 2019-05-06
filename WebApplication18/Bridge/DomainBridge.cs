@@ -21,12 +21,17 @@ namespace workshop192.Bridge
         private DomainBridge()
         { }
 
+        
         // use case 2.1 - the constructor defines guest as the default state
         public int startSession()
         {
             return DBSession.getInstance().generate();
         }
-        
+
+        public void setup()
+        {
+            MarketSystem.getInstance();
+        }
         //use case 2.3
         public void login(int sessionid, String username, String password)
         {
@@ -53,7 +58,11 @@ namespace workshop192.Bridge
             user.logout();
         }
 
-        public int createStore(int sessionid, String storeName, String description)
+        public string getAllProducts()
+        {
+            return DBProduct.getInstance().AllproductsToJson();
+        }
+        public int createStore(Session session, String storeName, String description)
         {
             Session session = DBSession.getInstance().getSession(sessionid);
             Store s = session.createStore(storeName, description);

@@ -45,6 +45,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -80,9 +83,6 @@
     </Reference>
     <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -122,9 +122,6 @@
     <Reference Include="System.Web.Mvc">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Formatting">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -162,6 +159,9 @@
     <Content Include="Pages\Products.aspx" />
     <Content Include="Pages\register.aspx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Pages\ShoppingBasket.aspx" />
+    <Content Include="Pages\AllProducts.aspx" />
+    <Content Include="Pages\Basket.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -199,6 +199,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Pages\About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -254,7 +256,7 @@
     <Compile Include="Domain\StoreOwner.cs" />
     <Compile Include="Domain\StoreRole.cs" />
     <Compile Include="Domain\SubscribedUser.cs" />
-    <Compile Include="Domain\System.cs" />
+    <Compile Include="Domain\MarketSystem.cs" />
     <Compile Include="Domain\UserState.cs" />
     <Compile Include="Domain\VisibleDiscount.cs" />
     <Compile Include="Exceptions\AlreadyExistException.cs" />
@@ -272,12 +274,26 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Products.aspx.cs">
-      <DependentUpon>Products.aspx</DependentUpon>
+    <Compile Include="Pages\ShoppingBasket.aspx.cs">
+      <DependentUpon>ShoppingBasket.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Products.aspx.designer.cs">
-      <DependentUpon>Products.aspx</DependentUpon>
+    <Compile Include="Pages\ShoppingBasket.aspx.designer.cs">
+      <DependentUpon>ShoppingBasket.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AllProducts.aspx.cs">
+      <DependentUpon>AllProducts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\AllProducts.aspx.designer.cs">
+      <DependentUpon>AllProducts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Basket.aspx.cs">
+      <DependentUpon>Basket.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Basket.aspx.designer.cs">
+      <DependentUpon>Basket.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceLayer\BasketService.cs" />
@@ -322,6 +338,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Cart\" />
+    <Folder Include="Views\Products\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

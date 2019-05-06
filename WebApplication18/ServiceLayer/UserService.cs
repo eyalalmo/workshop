@@ -86,6 +86,12 @@ namespace workshop192.ServiceLayer
             return db.createStore(session, storeName, description);
         }
 
+
+        public string getAllProducts()
+        {
+            return db.getAllProducts();
+        }
+
         //use case 2.5
 
         public List<Product> searchProducts(String name, String keywords, String category)
@@ -124,7 +130,16 @@ namespace workshop192.ServiceLayer
             db.addToShoppingBasket(product, amount, session);
         }
 
-        public void purchaseBasket(int session)
+        public ShoppingBasket getShoppingBasket(Session session)
+        {
+            if (session == null)
+            {
+                throw new NullReferenceException("error - bad session");
+            }
+            return session.getShoppingBasket();
+        }
+
+        public void purchaseBasket(Session session)
         {
             db.purchaseBasket(session);
         }
