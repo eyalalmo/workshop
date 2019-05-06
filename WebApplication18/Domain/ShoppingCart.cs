@@ -88,7 +88,6 @@ namespace workshop192.Domain
         private void updateStoreDiscount()
         {
             productsActualPrice = store.updatePrice(productList, productsActualPrice);
-
         }
 
         private void updateActualProductPrice()

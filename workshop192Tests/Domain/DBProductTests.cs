@@ -50,10 +50,11 @@ namespace workshop192.Domain.Tests
             try
             {
                 DBProduct.getInstance().removeProduct(p);
+                Assert.Fail();
             }
             catch (Exception)
             {
-                Assert.Fail();
+                Assert.IsTrue(true);
             }
         }
 

@@ -12,6 +12,9 @@ namespace workshop192.Domain.Tests
     [TestClass()]
     public class LoggedInTests
     {
+        private Session session;
+        private UserState state;
+
         public void LoggedInTest()
         {
         }
@@ -52,16 +55,15 @@ namespace workshop192.Domain.Tests
         [TestMethod()]
         public void loginTest()
         {
-            Session session = new Session();
-            UserState state = new LoggedIn();
+            UserState state = new Guest();
             try
             {
-                state.login("david", "david", session);
-                Assert.Fail();
+                registerTest();
+                state.login("ben", "bat", session);
             }
             catch(LoginException)
             {
-                Assert.IsTrue(true);
+                Assert.Fail();
             }
             
         }
@@ -69,32 +71,30 @@ namespace workshop192.Domain.Tests
         [TestMethod()]
         public void logoutTest()
         {
-            DBSubscribedUser dbsubscribedUser = DBSubscribedUser.getInstance();
-            SubscribedUser sub2 = new SubscribedUser("Gal", "Gadot", new ShoppingBasket());
-            dbsubscribedUser.register(sub2);
+            try
+            {
+                loginTest();
+                session.getState().logout(session.getSubscribedUser(), session);
+            }
+            catch (LoginException)
+            {
+                Assert.Fail();
+            }
 
-            Session session = new Session();
-            UserState state = session.getState();
-            state.login("Gal", "Gadot", session);
-            SubscribedUser user = session.getSubscribedUser();
-            session.getState().logout(user, session);
-            Assert.IsTrue(session.getState() is Guest);
-            Assert.IsNull(dbsubscribedUser.getloggedInUser("Gal"));
         }
 
         [TestMethod()]
         public void registerTest()
         {
-            Session session = new Session();
-            UserState state = new LoggedIn();
+            session = new Session();
+            state = new Guest();
             try
             {
                 state.register("ben", "bat", session);
-                Assert.Fail();
             }
             catch(RegisterException)
             {
-                Assert.IsTrue(true);
+                Assert.Fail();
             }
             
         }
@@ -102,7 +102,7 @@ namespace workshop192.Domain.Tests
         [TestMethod()]
         public void removeUserTest()
         {
-            UserState state = new LoggedIn();
+            state = new LoggedIn();
             try
             {
                 state.removeUser("ben");
