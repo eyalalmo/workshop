@@ -25,7 +25,7 @@ namespace workshop192.Domain
             register(admin);
         }
 
-        public void cleanDB()
+        public void init()
         {
             users = new Dictionary<string, SubscribedUser>();
             loggedInUser = new Dictionary<string, SubscribedUser>();

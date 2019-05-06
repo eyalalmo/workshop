@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using workshop192.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +15,7 @@ namespace workshop192.Domain.Tests
         DBProduct productDB = DBProduct.getInstance();
         Product p, p1;
         Store store;
-        StoreRole sr, sr1, sr2;
+        StoreRole sr;
         Permissions per;
 
         [TestInitialize()]
@@ -24,7 +23,7 @@ namespace workshop192.Domain.Tests
         {
             storeDB.init();
             productDB.init();
-            DBSubscribedUser.getInstance().cleanDB();
+            DBSubscribedUser.getInstance().init();
             session1 = new Session();
             session1.register("eyal", "123");
 
@@ -58,7 +57,7 @@ namespace workshop192.Domain.Tests
                 Assert.AreEqual(returnP, p);
                 Assert.AreEqual(store.getProductList().Contains(p), true);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -77,7 +76,7 @@ namespace workshop192.Domain.Tests
                 Assert.AreEqual(returnP, null);
                 Assert.AreEqual(store.getProductList().Contains(p), false);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -93,10 +92,10 @@ namespace workshop192.Domain.Tests
 
                 Assert.Fail();
             }
-            catch (StoreException se) {
+            catch (StoreException) {
                 Assert.IsTrue(true);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -112,7 +111,7 @@ namespace workshop192.Domain.Tests
                 sr.setProductPrice(p, 5);
                 Assert.AreEqual(5, p.getPrice());
             }
-            catch (Exception e) {
+            catch (Exception) {
                 Assert.Fail();
             }
         }
@@ -127,7 +126,7 @@ namespace workshop192.Domain.Tests
 
                 Assert.AreEqual("other name", p.getProductName());
             }
-            catch (Exception e) {
+            catch (Exception) {
                 Assert.Fail();
             }
         }
@@ -142,7 +141,7 @@ namespace workshop192.Domain.Tests
 
                 Assert.AreEqual(15, p.getQuantityLeft());
             }
-            catch (Exception e){
+            catch (Exception){
                 Assert.Fail();
             }
         }
@@ -157,7 +156,7 @@ namespace workshop192.Domain.Tests
 
                 Assert.AreEqual(0, p.getQuantityLeft());
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -175,7 +174,7 @@ namespace workshop192.Domain.Tests
                 Assert.AreEqual(store.getStoreRole(session2.getSubscribedUser()),
                     session2.getSubscribedUser().getStoreRole(store));
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -190,22 +189,7 @@ namespace workshop192.Domain.Tests
                 Assert.AreEqual(0, session2.getSubscribedUser().getStoreRoles().Count);
                 Assert.AreEqual(true, store.getStoreRole(session1.getSubscribedUser()) is StoreOwner);
             }
-            catch (RoleException re)
-            {
-                Assert.IsTrue(true);
-            }
-        }
-
-        [TestMethod()]
-        public void addManagerFailTest2()
-        {
-            try
-            {
-                sr.addManager(session2.getSubscribedUser(), null);
-                Assert.AreEqual(0, session2.getSubscribedUser().getStoreRoles().Count);
-                Assert.AreEqual(null, store.getStoreRole(session2.getSubscribedUser()));
-            }
-            catch (RoleException re)
+            catch (RoleException)
             {
                 Assert.IsTrue(true);
             }
@@ -221,7 +205,7 @@ namespace workshop192.Domain.Tests
                 Assert.AreEqual(store.getStoreRole(session2.getSubscribedUser()), null);
                 Assert.AreEqual(session2.getSubscribedUser().getStoreRoles().Count, 0);
             }
-            catch (RoleException re)
+            catch (RoleException)
             {
                 Assert.IsTrue(true);
             }
@@ -236,7 +220,7 @@ namespace workshop192.Domain.Tests
                 sr.addManager(session2.getSubscribedUser(), per);
                 sr.remove(session3.getSubscribedUser());
             }
-            catch (RoleException re)
+            catch (RoleException)
             {
                 Assert.IsTrue(true);
             }
@@ -255,7 +239,7 @@ namespace workshop192.Domain.Tests
                 Assert.AreEqual(store.getStoreRole(session2.getSubscribedUser()),
                     session2.getSubscribedUser().getStoreRole(store));
             }
-            catch (Exception re)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -276,7 +260,7 @@ namespace workshop192.Domain.Tests
                 sr.addOwner(session3.getSubscribedUser());
                 Assert.Fail();
             }
-            catch (RoleException re)
+            catch (RoleException)
             {
                 Assert.IsTrue(true);
             }
@@ -292,7 +276,7 @@ namespace workshop192.Domain.Tests
                 Assert.AreEqual(session2.getSubscribedUser().getStoreRoles().Count, 0);
                 Assert.AreEqual(store.getNumberOfOwners(), 1);
             }
-            catch (Exception re)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -308,11 +292,11 @@ namespace workshop192.Domain.Tests
                 sr.remove(session1.getSubscribedUser());
                 Assert.Fail();
             }
-            catch (RoleException re)
+            catch (RoleException)
             {
                 Assert.IsTrue(true);
             }
-            catch (Exception re)
+            catch (Exception)
             {
                 Assert.Fail();
             }

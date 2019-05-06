@@ -19,7 +19,7 @@ namespace workshop192.Domain.Tests
         public void init()
         {
             DBSubscribedUser dbsubscribedUser = DBSubscribedUser.getInstance();
-            dbsubscribedUser.cleanDB();
+            dbsubscribedUser.init();
             DBStore.getInstance().cleanDB();
         }
 
@@ -32,7 +32,7 @@ namespace workshop192.Domain.Tests
                 state.closeStore(null);
                 Assert.Fail();
             }
-            catch (UserStateException e)
+            catch (UserStateException)
             {
                 Assert.IsTrue(true);
             }
@@ -59,7 +59,7 @@ namespace workshop192.Domain.Tests
                 state.login("david", "david", session);
                 Assert.Fail();
             }
-            catch(LoginException e)
+            catch(LoginException)
             {
                 Assert.IsTrue(true);
             }
@@ -92,7 +92,7 @@ namespace workshop192.Domain.Tests
                 state.register("ben", "bat", session);
                 Assert.Fail();
             }
-            catch(RegisterException e)
+            catch(RegisterException)
             {
                 Assert.IsTrue(true);
             }
@@ -108,7 +108,7 @@ namespace workshop192.Domain.Tests
                 state.removeUser("ben");
                 Assert.Fail();
             }
-            catch (UserStateException e)
+            catch (UserStateException)
             {
                 Assert.IsTrue(true);
             }

@@ -10,64 +10,60 @@ namespace workshop192.Domain
     {
         private static DBSession instance;
         private Dictionary<int, Session> sessions;
-        private static int nextID;
+        private static int sessionNum = 0;
 
         public static DBSession getInstance()
         {
             if (instance == null)
-            {
                 instance = new DBSession();
-            }
             return instance;
         }
 
         private DBSession()
         {
             sessions = new Dictionary<int, Session>();
-            nextID = 1;
         }
-
 
         public void init()
         {
             sessions = new Dictionary<int, Session>();
-            nextID = 1;
         }
-        public void addSession(Session s)
+
+        public int generate()
         {
-            if (sessions.Contains(s))
-                throw new AlreadyExistException("session already exists");
-            sessions.AddFirst(s);
+            sessions.Add(sessionNum, new Session());
+            return sessionNum++;
         }
-        public void removeSession(Session s)
+
+        internal Session getSession(int sessionid)
         {
-            if (!sessions.Contains(s))
-                throw new DoesntExistException("session does not exist, can't remove it");
+            if (!sessions.ContainsKey(sessionid))
+                throw new DoesntExistException("session doesnt exist");
+            return sessions[sessionid];
+        }
+
+        public void removeSession(int s)
+        {
+            if (!sessions.ContainsKey(s))
+                throw new DoesntExistException("session doesnt exist");
             sessions.Remove(s);
         }
+
         public Session getSessionOfSubscribedUser(SubscribedUser sub)
         {
-            foreach (Session s in sessions)
+            foreach (KeyValuePair<int, Session> s in sessions)
             {
-                if (s.getSubscribedUser().Equals(sub))
+                if (s.Value.getSubscribedUser().Equals(sub))
                 {
-                    return s;
+                    return s.Value;
                 }
             }
-            return null;
+            throw new DoesntExistException("session doesnt exist");
         }
-        public bool sessionExists(Session s)
-        {
-            return sessions.Contains(s);
-        }
+        
         public void initSession()
         {
-            sessions = new LinkedList<Session>();
-        }
-
-        public Session getSessionByID(int sessionID)
-        {
-
+            sessions = new Dictionary<int, Session>();
         }
     }
 }

@@ -92,7 +92,7 @@ namespace UnitTestProject3
                 cart.changeQuantityOfProduct(p1, 12);
                 Assert.Fail();
             }
-            catch (IllegalAmountException e)
+            catch (IllegalAmountException)
             {
                 Assert.IsTrue(true);
             }
@@ -114,20 +114,35 @@ namespace UnitTestProject3
         [TestMethod]
         public void checkout1()
         {
-            Product p1 = new Product("p1", "ff", 10, 2, 10, store);
-            cart.addToCart(p1, 2);
+            try
+            {
+                Product p1 = new Product("p1", "ff", 10, 2, 10, store);
+                cart.addToCart(p1, 2);
 
-            Assert.AreEqual(cart.checkout("hamarganit", "20432232"), " product: 0 complete payment. ");
-
+                cart.checkout("hamarganit", "20432232");
+                Assert.IsTrue(true);
+            }
+            catch (CartException)
+            {
+                Assert.Fail();
+            }
         }
         [TestMethod]
         public void checkout2()
         {
-            Product p1 = new Product("p1", "ff", 2, 2, 10, store);
-            Product p2 = new Product("p2", "ff", 10, 2, 10, store);
-            cart.addToCart(p1, 2);
-            cart.addToCart(p2, 2);
-            Assert.AreEqual(cart.checkout("hamarganit", "20432232"), " product: 0 complete payment.  product: 1 complete payment. ");
+            try
+            {
+                Product p1 = new Product("p1", "ff", 2, 2, 10, store);
+                Product p2 = new Product("p2", "ff", 10, 2, 10, store);
+                cart.addToCart(p1, 2);
+                cart.addToCart(p2, 2);
+                cart.checkout("hamarganit", "20432232");
+                Assert.IsTrue(true);
+            }
+            catch (CartException)
+            {
+                Assert.Fail();
+            }
         }
     }
 }

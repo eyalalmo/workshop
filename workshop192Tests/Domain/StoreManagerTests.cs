@@ -24,7 +24,7 @@ namespace workshop192.Domain.Tests
         {
             storeDB.init();
             productDB.init();
-            DBSubscribedUser.getInstance().cleanDB();
+            DBSubscribedUser.getInstance().init();
             session1 = new Session();
             session1.register("eyal", "123");
 
@@ -67,7 +67,7 @@ namespace workshop192.Domain.Tests
                 Assert.AreEqual(returnP, p);
                 Assert.AreEqual(store.getProductList().Contains(p), true);
             }
-            catch (Exception re)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -85,7 +85,7 @@ namespace workshop192.Domain.Tests
                 Assert.AreEqual(returnP, null);
                 Assert.AreEqual(store.getProductList().Contains(p), false);
             }
-            catch (Exception re)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -100,11 +100,11 @@ namespace workshop192.Domain.Tests
                 Assert.AreEqual(store.getProductList().Contains(p1), false);
                 Assert.Fail();
             }
-            catch (PermissionsException pe)
+            catch (PermissionsException)
             {
                 Assert.IsTrue(true);
             }
-            catch (StoreException pe)
+            catch (StoreException)
             {
                 Assert.IsTrue(true);
             }
@@ -120,7 +120,7 @@ namespace workshop192.Domain.Tests
                 sr1.setProductPrice(p, 5);
                 Assert.AreEqual(5, p.getPrice());
             }
-            catch (Exception pe)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -135,7 +135,7 @@ namespace workshop192.Domain.Tests
                 sr1.setProductName(p, "other name");
                 Assert.AreEqual("other name", p.getProductName());
             }
-            catch (Exception pe)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -150,7 +150,7 @@ namespace workshop192.Domain.Tests
                 sr1.addToProductQuantity(p, 5);
                 Assert.AreEqual(15, p.getQuantityLeft());
             }
-            catch (Exception pe)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -165,7 +165,7 @@ namespace workshop192.Domain.Tests
                 sr2.addToProductQuantity(p, 10);
                 Assert.Fail();
             }
-            catch (PermissionsException pe)
+            catch (PermissionsException)
             {
                 Assert.IsTrue(true);
             }
@@ -180,7 +180,7 @@ namespace workshop192.Domain.Tests
                 sr1.decFromProductQuantity(p, 10);
                 Assert.AreEqual(0, p.getQuantityLeft());
             }
-            catch (Exception pe)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -195,7 +195,7 @@ namespace workshop192.Domain.Tests
                 sr2.decFromProductQuantity(p, 8);
                 Assert.Fail();
             }
-            catch (PermissionsException pe)
+            catch (PermissionsException)
             {
                 Assert.IsTrue(true);
             }
@@ -210,7 +210,7 @@ namespace workshop192.Domain.Tests
                 sr1.addManager(session2.getSubscribedUser(), per);
                 Assert.Fail();
             }
-            catch (RoleException pe)
+            catch (RoleException)
             {
                 Assert.IsTrue(true);
             }
@@ -225,7 +225,7 @@ namespace workshop192.Domain.Tests
                 sr1.remove(session2.getSubscribedUser());
                 Assert.Fail();
             }
-            catch (RoleException pe)
+            catch (RoleException)
             {
                 Assert.IsTrue(true);
             }
@@ -238,7 +238,7 @@ namespace workshop192.Domain.Tests
             {
                 sr1.addOwner(session1.getSubscribedUser());
             }
-            catch (RoleException pe)
+            catch (RoleException)
             {
                 Assert.IsTrue(true);
             }
@@ -253,7 +253,7 @@ namespace workshop192.Domain.Tests
                 sr1.remove(session2.getSubscribedUser());
                 Assert.IsTrue(true);
             }
-            catch (RoleException pe)
+            catch (RoleException)
             {
                 Assert.IsTrue(true);
             }

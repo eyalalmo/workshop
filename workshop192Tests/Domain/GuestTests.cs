@@ -22,7 +22,7 @@ namespace workshop192.Domain.Tests
         public void init()
         {
             DBSubscribedUser dbsubscribedUser = DBSubscribedUser.getInstance();
-            dbsubscribedUser.cleanDB();
+            dbsubscribedUser.init();
         }
         [TestMethod()]
         public void closeStoreTest()
@@ -33,7 +33,7 @@ namespace workshop192.Domain.Tests
                 state.closeStore(null);
                 Assert.Fail();
             }
-            catch (UserStateException e)
+            catch (UserStateException)
             {
                 Assert.IsTrue(true);
             }
@@ -69,7 +69,7 @@ namespace workshop192.Domain.Tests
             {
                 state.login("bob", "dilan", session);
                 Assert.Fail();
-            } catch (LoginException e)
+            } catch (LoginException)
             {
                 Assert.IsTrue(true);
             }
@@ -90,7 +90,7 @@ namespace workshop192.Domain.Tests
                 state.login("Danny", "Shovevani", session);
                 Assert.IsTrue(session.getState() is LoggedIn);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -112,7 +112,7 @@ namespace workshop192.Domain.Tests
                 state.login("Danny", "aaaa", session2);
                 Assert.Fail();
             }
-            catch(LoginException e)
+            catch(LoginException)
             {
                 Assert.IsTrue(true);
                 
@@ -167,7 +167,7 @@ namespace workshop192.Domain.Tests
                 state.removeUser("ben");
                 Assert.Fail();
             }
-            catch (UserStateException e)
+            catch (UserStateException)
             {
                 Assert.IsTrue(true);
             }

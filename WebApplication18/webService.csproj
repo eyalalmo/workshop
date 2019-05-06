@@ -261,7 +261,7 @@
     <Compile Include="Exceptions\CartException.cs" />
     <Compile Include="Exceptions\DoesntExistException.cs" />
     <Compile Include="Exceptions\IllegalAmountException.cs" />
-    <Compile Include="Exceptions\IllegalName.cs" />
+    <Compile Include="Exceptions\IllegalNameException.cs" />
     <Compile Include="Exceptions\LoginException.cs" />
     <Compile Include="Exceptions\PermissionsException.cs" />
     <Compile Include="Exceptions\RegisterException.cs" />

@@ -9,9 +9,9 @@ namespace workshop192.Domain
     public abstract class Discount : DiscountComponent
 
     {
-        private double percentage;
-        private string duration;
-        private int id;
+        protected double percentage;
+        protected string duration;
+        //private int id;
 
         public Discount(double percentage, string duration): base()
         {
