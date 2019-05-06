@@ -16,6 +16,7 @@ namespace workshop192.Domain
         {
             subscribedUser = null;
             userState = new Guest();
+            //////////////////////////////////////////////erase!!
             shoppingBasket = new ShoppingBasket();
             DBSession.getInstance().addSession(this);
         }
