@@ -15,7 +15,7 @@ namespace workshop192.Domain.Tests
         DBProduct productDB = DBProduct.getInstance();
         Product p, p1;
         Store store;
-        StoreRole sr, sr1, sr2;
+        StoreRole sr;
         Permissions per;
 
         [TestInitialize()]
@@ -23,7 +23,7 @@ namespace workshop192.Domain.Tests
         {
             storeDB.init();
             productDB.init();
-            DBSubscribedUser.getInstance().cleanDB();
+            DBSubscribedUser.getInstance().init();
             session1 = new Session();
             session1.register("eyal", "123");
 

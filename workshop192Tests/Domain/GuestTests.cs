@@ -22,7 +22,7 @@ namespace workshop192.Domain.Tests
         public void init()
         {
             DBSubscribedUser dbsubscribedUser = DBSubscribedUser.getInstance();
-            dbsubscribedUser.cleanDB();
+            dbsubscribedUser.init();
         }
         [TestMethod()]
         public void closeStoreTest()

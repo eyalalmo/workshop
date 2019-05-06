@@ -8,11 +8,11 @@ using workshop192.Bridge;
 namespace workshop192.ServiceLayer
 {
 
-   public  class UserService
+    public class UserService
 
     {
         private static UserService instance;
-        private DomainBridge db= DomainBridge.getInstance();
+        private DomainBridge db = DomainBridge.getInstance();
         public static UserService getInstance()
         {
             if (instance == null)
@@ -25,6 +25,14 @@ namespace workshop192.ServiceLayer
 
         }
 
+        public static void init()
+        {
+            DBProduct.getInstance().init();
+            DBSession.getInstance().init();
+            DBStore.getInstance().init();
+            DBSubscribedUser.getInstance().init();
+        }
+
         // use case 2.1 - the constructor defines guest as the default state
         public Session startSession()
         {
@@ -34,7 +42,7 @@ namespace workshop192.ServiceLayer
         //use case 2.3
         public void login(Session user, String username, String password)
         {
-            db.login(user,username, password);
+            db.login(user, username, password);
         }
 
         //use case 2.2
@@ -46,9 +54,9 @@ namespace workshop192.ServiceLayer
             }
             if (username.Equals("") || password.Equals(""))
             {
-                throw new ArgumentException( "Illegal username or password");
+                throw new ArgumentException("Illegal username or password");
             }
-            db.register(user,username, password);
+            db.register(user, username, password);
         }
         //use case 6.2
         public void removeUser(Session admin, String username)
@@ -57,7 +65,7 @@ namespace workshop192.ServiceLayer
             {
                 throw new NullReferenceException("error - bad session");
             }
-            db.removeUser(admin,username);
+            db.removeUser(admin, username);
         }
 
         public void logout(Session user)
@@ -75,7 +83,7 @@ namespace workshop192.ServiceLayer
             {
                 throw new NullReferenceException("error - bad session");
             }
-            return db.createStore(session,storeName, description);
+            return db.createStore(session, storeName, description);
         }
 
         //use case 2.5
@@ -95,14 +103,14 @@ namespace workshop192.ServiceLayer
             try
             {
                 string str = DBCookies.getInstance().getUserByHash(hash).getState().getStateName();
-            
-            return str;
+
+                return str;
             }
             catch (Exception)
             {
                 return null;
             }
-        }       
+        }
 
         public void addToShoppingBasket(int product, int amount, Session session)
         {
@@ -115,12 +123,12 @@ namespace workshop192.ServiceLayer
             {
                 throw new NullReferenceException("error - bad session");
             }
-            db.addToShoppingBasket(product, amount,session);
+            db.addToShoppingBasket(product, amount, session);
         }
 
         public void purchaseBasket(Session session)
         {
-             db.purchaseBasket(session);
+            db.purchaseBasket(session);
         }
 
         /////////////////////////////////////////////////////////////////////////////////////
@@ -147,10 +155,6 @@ namespace workshop192.ServiceLayer
         }
 
         ////////////////////////
-
-
-    
-
-
+        
     }
 }

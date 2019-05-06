@@ -24,7 +24,7 @@ namespace workshop192.Domain.Tests
         {
             storeDB.init();
             productDB.init();
-            DBSubscribedUser.getInstance().cleanDB();
+            DBSubscribedUser.getInstance().init();
             session1 = new Session();
             session1.register("eyal", "123");
 

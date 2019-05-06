@@ -29,7 +29,7 @@ namespace workshop192.ServiceLayer.Tests
             basketService = BasketService.getInstance();
             session = userService.startSession();
             DBStore.getInstance().init();
-            DBSubscribedUser.getInstance().cleanDB();
+            DBSubscribedUser.getInstance().init();
             DBProduct.getInstance().initDB();
             int store1 = userService.createStore(session, "Golf", "Clothes");
             int store2 = userService.createStore(session, "Shiomi", "Technology");

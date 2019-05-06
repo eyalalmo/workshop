@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using workshop192.Bridge;
 using workshop192.Domain;
 
 namespace workshop192.ServiceLayer.Tests
@@ -13,7 +12,6 @@ namespace workshop192.ServiceLayer.Tests
     [TestClass()]
     public class BasketServiceTests
     {
-        DomainBridge domainBridge;
         BasketService basketService;
         UserService userService;
         StoreService storeService;
@@ -41,7 +39,6 @@ namespace workshop192.ServiceLayer.Tests
         [TestInitialize()]
         public void initial()
         {
-            domainBridge = DomainBridge.getInstance();
             basketService = BasketService.getInstance();
             userService = UserService.getInstance();
             storeService = StoreService.getInstance();
@@ -100,6 +97,7 @@ namespace workshop192.ServiceLayer.Tests
             try
             {
                 basketService.addToCart(session1, p3, 6); // should fail - too much 
+                //Assert.Fail();
             }
             catch (Exception)
             {

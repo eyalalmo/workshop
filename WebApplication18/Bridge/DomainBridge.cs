@@ -87,6 +87,9 @@ namespace workshop192.Bridge
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
             Product product = new Product(productName, productCategory, price, rank, quantityLeft, store);
 
+            if (sr == null)
+                throw new RoleException("no role for this user in this store");
+
             sr.addProduct(product);
             return product.getProductID();
         }
@@ -101,6 +104,9 @@ namespace workshop192.Bridge
             SubscribedUser user = session.getSubscribedUser();
             
             StoreRole sr = DBStore.getInstance().getStoreRole(product.getStore(), user);
+
+            if (sr == null)
+                throw new RoleException("no role for this user in this store");
 
             sr.removeProduct(product);
         }
@@ -126,6 +132,9 @@ namespace workshop192.Bridge
             
             StoreRole sr = DBStore.getInstance().getStoreRole(product.getStore(), user);
 
+            if (sr == null)
+                throw new RoleException("no role for this user in this store");
+
             sr.setProductPrice(product, price);
         }
 
@@ -139,6 +148,9 @@ namespace workshop192.Bridge
             SubscribedUser user = session.getSubscribedUser();
             
             StoreRole sr = DBStore.getInstance().getStoreRole(product.getStore(), user);
+
+            if (sr == null)
+                throw new RoleException("no role for this user in this store");
 
             sr.setProductName(product, name);
         }
@@ -154,6 +166,9 @@ namespace workshop192.Bridge
 
             StoreRole sr = DBStore.getInstance().getStoreRole(product.getStore(), user);
 
+            if (sr == null)
+                throw new RoleException("no role for this user in this store");
+
             sr.addToProductQuantity(product, amount);
         }
 
@@ -167,6 +182,9 @@ namespace workshop192.Bridge
             SubscribedUser user = session.getSubscribedUser();
             
             StoreRole sr = DBStore.getInstance().getStoreRole(product.getStore(), user);
+
+            if (sr == null)
+                throw new RoleException("no role for this user in this store");
 
             sr.decFromProductQuantity(product, amount);
         }
@@ -182,6 +200,9 @@ namespace workshop192.Bridge
 
             DBStore storeDB = DBStore.getInstance();
             StoreRole sr = storeDB.getStoreRole(product.getStore(), user);
+
+            if (sr == null)
+                throw new RoleException("no role for this user in this store");
 
             //??????????????????????????????/
             //sr.setProductDiscount(product, discount);
@@ -209,6 +230,10 @@ namespace workshop192.Bridge
                 throw new DoesntExistException("no such store");
             }
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
+
+            if (sr == null)
+                throw new RoleException("no role for this user in this store");
+
             if (sr.getStore() != store)
                 throw new RoleException("this user can't appoint to this store");
             Permissions permissions = new Permissions(editProduct, editDiscount, editPolicy);
@@ -226,6 +251,10 @@ namespace workshop192.Bridge
                 throw new DoesntExistException("no such store");
             }
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
+
+            if (sr == null)
+                throw new RoleException("no role for this user in this store");
+
             if (sr.getStore() != store)
                 throw new RoleException("this user can't appoint to this store");
             sr.addOwner(toAdd);
@@ -242,6 +271,10 @@ namespace workshop192.Bridge
                 throw new DoesntExistException("no such store");
             }
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
+
+            if (sr == null)
+                throw new RoleException("no role for this user in this store");
+
             if (sr.getStore() != store)
                 throw new RoleException("this user can't remove roles from this store");
             sr.remove(toRemove);
