@@ -18,12 +18,16 @@ namespace WebApplication18.Controllers
         [HttpGet]
         public string register(String Username, String Password)
         {
+            try
+            {
+                Session session = UserService.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                UserService.getInstance().register(session, Username, Password);
 
-            Session session = UserService.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-            UserService.getInstance().register(session, Username, Password);
- 
-           return "ok";
-    
+                return "ok";
+            } catch(Exception e)
+            {
+                return "fail";
+            }
           
         }
 
@@ -31,12 +35,34 @@ namespace WebApplication18.Controllers
         [HttpGet]
         public Object login(String Username, String Password)
         {
-            //Session session = UserService.getInstance().startSession();
-            Session session = UserService.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-            UserService.getInstance().login(session, Username, Password);
-           //String hash = System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value;
-           // UserService.addUser(hash, session);
-            return "ok";
+            try
+            {
+                Session session = UserService.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                UserService.getInstance().login(session, Username, Password);
+
+                return "ok";
+            }
+            catch(Exception e)
+            {
+                return "fail";
+            }
+        }
+
+        [Route("api/user/logout")]
+        [HttpGet]
+        public Object logout()
+        {
+            try
+            {
+                Session session = UserService.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                UserService.getInstance().logout(session);
+
+                return "ok";
+            }
+            catch (Exception e)
+            {
+                return "fail";
+            }
         }
 
 
