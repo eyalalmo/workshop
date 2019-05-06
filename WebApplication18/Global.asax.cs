@@ -10,6 +10,7 @@ using System.Web.SessionState;
 using System.Web.Http;
 using workshop192.Bridge;
 using workshop192.ServiceLayer;
+using workshop192.Domain;
 
 namespace WebApplication18
 {

@@ -8,9 +8,18 @@ using workshop192.ServiceLayer;
 
 namespace workshop192.Domain
 {
-    class System
+    public class MarketSystem
     {
-        public System()
+
+        private static MarketSystem instance;
+
+        public static MarketSystem getInstance()
+        {
+            if (instance == null)
+                instance = new MarketSystem();
+            return instance;
+        }
+        private MarketSystem()
         {
             init();
         }

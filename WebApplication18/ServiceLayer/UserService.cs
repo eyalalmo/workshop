@@ -78,6 +78,12 @@ namespace workshop192.ServiceLayer
             return db.createStore(session,storeName, description);
         }
 
+
+        public LinkedList<Product> getAllProducts()
+        {
+            return db.getAllProducts();
+        }
+
         //use case 2.5
 
         public List<Product> searchProducts(String name, String keywords, String category)
