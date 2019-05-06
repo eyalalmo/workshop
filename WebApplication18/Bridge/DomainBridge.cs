@@ -7,7 +7,7 @@ using workshop192.Domain;
 
 namespace workshop192.Bridge
 {
-    class DomainBridge
+    public class DomainBridge
     {
         private static DomainBridge instance;
 
@@ -21,12 +21,17 @@ namespace workshop192.Bridge
         private DomainBridge()
         { }
 
+        
         // use case 2.1 - the constructor defines guest as the default state
         public Session startSession()
         {
             return new Session();
         }
-        
+
+        public void setup()
+        {
+            MarketSystem.getInstance();
+        }
         //use case 2.3
         public void login(Session user, String username, String password)
         {
@@ -50,6 +55,10 @@ namespace workshop192.Bridge
             user.logout();
         }
 
+        public LinkedList<Product> getAllProducts()
+        {
+            return DBProduct.getInstance().getAllProducts();
+        }
         public int createStore(Session session, String storeName, String description)
         {
             Store s = session.createStore(storeName, description);
