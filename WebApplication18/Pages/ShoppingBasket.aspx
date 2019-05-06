@@ -8,7 +8,7 @@
 <!------ Include the above in your HEAD tag ---------->
 
  <div class="container">
-	<div class="row">
+	<<div id="allProducts" class="row">
 		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		<div class="my-list">
 			<img src="http://hpservicecenterschennai.in/images/hp_laptop_service_centers_in_guindy.png" alt="dsadas" />
@@ -24,19 +24,7 @@
 			</div>
 		</div>
 		</div>
-		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		<div class="my-list">
-				
-			<h3>Micromax Canvas Laptab</h3>
-			<span>RS:45K</span>
-			<span class="pull-right">SKU:100022</span>
-			<div class="offer">Extra 5% Off. Cart value Rs 500</div>
-			<div class="detail">
-			<p></p>
-		<a href="#" class="btn btn-info">Edit</a>
-			</div>
-		</div>
-		</div>
+		
 		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		<div class="my-list">
 			<img src="http://hpservicecenterschennai.in/images/hp_laptop_service_centers_in_guindy.png" alt="dsadas" />

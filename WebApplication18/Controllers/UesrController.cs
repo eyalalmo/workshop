@@ -38,6 +38,40 @@ namespace WebApplication18.Controllers
            // UserService.addUser(hash, session);
             return "ok";
         }
+        [Route("api/user/getAllProducts")]
+        [HttpGet]
+        public string getAllProducts(String Username, String Password)
+        {
+
+            //LinkedList<Product> list = UserService.getInstance().getAllProducts();
+            //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, list);
+            //return response;
+            return "ok";
+
+
+        }
+        [Route("api/user/getShoppingBasket")]
+        [HttpGet]
+        public string getShoppingBasket()
+        {
+            //Session session = UserService.getInstance().startSession();
+            Session session = UserService.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+            ShoppingBasket basket = UserService.getInstance().getShoppingBasket(session);
+            //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, basket);
+            //String hash = System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value;
+            // UserService.addUser(hash, session);
+            string response = "";
+            foreach (KeyValuePair<int, ShoppingCart> cart in basket.getShoppingCarts())
+            {
+                foreach (KeyValuePair<Product, int> p in cart.Value.getProductsInCarts())
+                {
+                    response = p.Key.getProductName() + "," + p.Key.getPrice() + "," + p.Value + ";";
+                }
+            }
+
+
+            return response;
+        }
 
 
 

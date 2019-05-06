@@ -13,11 +13,11 @@ namespace WebApplication18.Controllers
     {
         [Route("api/products/getAllProducts")]
         [HttpGet]
-        public LinkedList<Product> getAllProducts(String Username, String Password)
+        public string getAllProducts()
         {
 
-            LinkedList<Product> list = UserService.getInstance().getAllProducts();
-
+            string list = UserService.getInstance().getAllProducts();
+            //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, list);
             return list;
 
 

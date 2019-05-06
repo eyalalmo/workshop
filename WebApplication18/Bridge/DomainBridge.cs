@@ -55,9 +55,9 @@ namespace workshop192.Bridge
             user.logout();
         }
 
-        public LinkedList<Product> getAllProducts()
+        public string getAllProducts()
         {
-            return DBProduct.getInstance().getAllProducts();
+            return DBProduct.getInstance().AllproductsToJson();
         }
         public int createStore(Session session, String storeName, String description)
         {

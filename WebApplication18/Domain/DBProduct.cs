@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace workshop192.Domain
 {
@@ -40,7 +41,10 @@ namespace workshop192.Domain
             productList.AddFirst(p);
             return p.getProductID();
         }
-
+        
+        public string AllproductsToJson() {
+            return JsonConvert.SerializeObject(productList);
+        }
         public static int getNextProductID()
         {
             int id = nextProductID;

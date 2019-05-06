@@ -79,7 +79,7 @@ namespace workshop192.ServiceLayer
         }
 
 
-        public LinkedList<Product> getAllProducts()
+        public string getAllProducts()
         {
             return db.getAllProducts();
         }
@@ -122,6 +122,15 @@ namespace workshop192.ServiceLayer
                 throw new NullReferenceException("error - bad session");
             }
             db.addToShoppingBasket(product, amount,session);
+        }
+
+        public ShoppingBasket getShoppingBasket(Session session)
+        {
+            if (session == null)
+            {
+                throw new NullReferenceException("error - bad session");
+            }
+            return session.getShoppingBasket();
         }
 
         public void purchaseBasket(Session session)
