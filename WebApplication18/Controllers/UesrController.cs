@@ -24,7 +24,6 @@ namespace WebApplication18.Controllers
  
            return "ok";
     
-          
         }
 
         [Route("api/user/login")]

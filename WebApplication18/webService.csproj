@@ -140,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Pages\About.aspx" />
+    <Content Include="Pages\AdminPan.aspx" />
     <Content Include="Pages\Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -198,6 +199,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Controllers\AdminPanController.cs" />
     <Compile Include="Pages\About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -208,6 +210,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Bridge\DomainBridge.cs" />
+    <Compile Include="Pages\AdminPan.aspx.cs">
+      <DependentUpon>AdminPan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\AdminPan.aspx.designer.cs">
+      <DependentUpon>AdminPan.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
