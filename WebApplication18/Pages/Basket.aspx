@@ -40,7 +40,7 @@
             <div class ="col-md-12">
                 <h2 style ="margin-bottom: 30px">My Shopping Basket</h2>
             </div>
-            <div id="AllproductsInBasket" class ="col-md-12">
+            <div id="AllProductsInBasket" class ="col-md-12">
                 
             </div>
             <div class ="col-md-12">
@@ -76,37 +76,35 @@
                         if (response != "") {
                            
                             var str = "<table class =\"table table-bordered text-center\">"
-                                + " <thead>"
+                                + "<thead>"
                                 + "<tr>"
-                                + "< td style = \"width:80px\" > Image</td>"
+                                + "<td style = \"width:80px\" > Image</td>"
                                 + "<td>Name </td>"
                                 + "<td>Price</td>"
-                                + "<td>Rank</td>"
-                                + "<td style=\"width:80px\">Quantity</td>"
+                                + "<td style=\"width:110px\">ID</td>"
+                                + "<td style=\"width:110px\">Quantity</td>"
+                                + "<td style=\"width:60px\">Delete</td>"
                                 + "</tr>"
                                 + "</thead>"
                                 + "<tbody>";
-                            for (i = 0; i < products.length; i++){
-                                conosle.log("in for");
-                                    var products = response.split(";");
-                                    var productfields = products[i].split(",");
-                                    var productName = productfields[0];
-                                    var price = productfields[1];
-                                    var quantity = productfields[2];
+                            var products = response.split(";");
+                            for (i = 0; i < products.length-1; i++){
+                                
+                                    
+                                var productfields = products[i].split(",");
+                                var productName = productfields[0];
+                                var price = productfields[1];
+                                var id = productfields[2];
+                                var quantity = +productfields[3];
                                     str += "<tr>" +
-                                    "<td ><img src=\"../Images/NoImageAvailabe.jpg\"" + "height=\"60\" /></td>" +
-                                    + "<td style=\"vertical-align:middle\">DVD </td>" +
-                                    + "<td style=\"vertical-align :middle\">" + productName + "</td>" +
-                                    + "<td style=\"vertical-align:middle\">" + price + "</td>" +
-                                    + "<td style=\"vertical-align:middle\">" + quantity + "</td>" +
-                                    + "</tr>";
+                                    "<td ><img src=\"../Images/NoImageAvailabe.jpg\"" + "height=\"60\" /></td><td style=\"vertical-align :middle\">" + productName + "</td><td style=\"vertical-align:middle\">" + price + "</td><td style=\"vertical-align:middle\">" + id + "</td><td style=\"vertical-align:middle\">" + quantity + "</td><td style=\"vertical-align :middle\"><form><input type=\"image\" src=\"../Images/trash.png\" name=\"Delete\" width=\"25\" height=\"25\" align=\"top\" alt=\"Stop sign\ onclick=\"deleteRow(this);\"></form></td></tr>";
                             }
                             str += " </tbody>" + "</table>";
                             mainDiv.innerHTML = str;
-                            window.location.href = baseUrl+"/";
                         }
                         else {
                             console.log(response);   
+                            //<img src=\"../Images/trash.png\"" + "height=\"27\" />
                         }
                     },
                     error: function (response) {

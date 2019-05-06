@@ -136,6 +136,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\NoImageAvailabe.jpg" />
+    <Content Include="Images\trash.png" />
     <Content Include="Pages\About.aspx" />
     <Content Include="Pages\Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />

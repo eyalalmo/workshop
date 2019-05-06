@@ -36,14 +36,16 @@ namespace workshop192.Domain
         public void addToCart(Product product, int amount)
         {
             int quantityLeft = product.getQuantityLeft();
-            if ( quantityLeft - amount>= 0)
+            if (quantityLeft - amount >= 0)
             {
                 if (productList.ContainsKey(product))
-                    throw new CartException( "error: product exist");
+                    throw new CartException("error: product exist");
                 productList.Add(product, amount);
             }
-
-            throw new IllegalAmountException("The amount asked is larger than the quantity left");
+            else
+            {
+                throw new IllegalAmountException("The amount asked is larger than the quantity left");
+            }
 
         }
 

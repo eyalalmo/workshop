@@ -65,7 +65,7 @@ namespace WebApplication18.Controllers
             {
                 foreach (KeyValuePair<Product, int> p in cart.Value.getProductsInCarts())
                 {
-                    response = p.Key.getProductName() + "," + p.Key.getPrice() + "," + p.Value + ";";
+                    response+= p.Key.getProductName() + "," + p.Key.getPrice() + "," + p.Key.getProductID() +"," + p.Value + ";";
                 }
             }
 
