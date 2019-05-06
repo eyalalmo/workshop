@@ -15,7 +15,7 @@ namespace workshop192.Domain
         private List<StoreRole> roles;
         private int numOfOwners;
         private bool active;
-        private DiscountComponent discount;
+        private LinkedList<DiscountComponent> discountList;
        
 
         public Store(string storeName, string description)
@@ -27,6 +27,7 @@ namespace workshop192.Domain
             roles = new List<StoreRole>();
             numOfOwners = 0;
             active = true;
+            discountList = new LinkedList<DiscountComponent>();
         }
 
         public void addProduct(Product p)
@@ -114,7 +115,14 @@ namespace workshop192.Domain
 
         public Dictionary<Product, double> updatePrice(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
         {
-           return discount.updatePrice(productList, productsActualPrice);
+            foreach( DiscountComponent d in discountList)
+            {
+                if (d.checkCondition(productList, productsActualPrice))
+                {
+                    productsActualPrice = d.updatePrice(productList, productsActualPrice);
+                }
+            }
+            return productsActualPrice;
             
         }
 
@@ -173,7 +181,9 @@ namespace workshop192.Domain
         }*/
         public void addDiscount(DiscountComponent d)
         {
-            if(discount == null)
+            discountList.AddLast(d);
+            /*
+             if(discount == null)
                 this.discount = d;
             else
             {
@@ -183,34 +193,17 @@ namespace workshop192.Domain
                 DiscountComposite composite = new DiscountComposite(list, "or");
                 this.discount = composite;
             }
+            */
         }
 
         public void removeDiscount()
         {
-            if(discount == null)
+            if(discountList.Count== 0)
             {
                 throw new DoesntExistException("Discount does not exist so it cannot be removed");
             }
-            discount = null;
-            /* if(discount is Discount)
-             {
-                 if(discount.getId()==discountid)
-                     discount = null;
-             }
-             else
-             {
-                 if (discount.getId() == discountid)
-                     discount = null;
-                 else
-                 {
-                     DiscountComposite dis = (DiscountComposite)discount;
-                     dis.remove(discountid);
-                 }
-
-             }
-         }*/
+            discountList = new LinkedList<DiscountComponent>();
         }
-       // public Dictionary
     }
 
 }

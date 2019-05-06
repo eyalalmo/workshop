@@ -14,9 +14,13 @@ namespace UnitTestProject3
         [TestInitialize]
         public void initial()
         {
+            
             DBProduct.getInstance().init();
             DBProduct.getInstance().init();
+            DBStore.getInstance().init();
             store = new Store("store1", "games store");
+            DBStore.getInstance().addStore(store);
+
             cart = new ShoppingCart(store.getStoreID());
           
         }
@@ -107,7 +111,7 @@ namespace UnitTestProject3
             cart.addToCart(p2, 1);
             cart.addToCart(p3, 3);
             double fdsfds = cart.getTotalAmount();
-            Assert.AreEqual(fdsfds, 30);
+            Assert.AreEqual(fdsfds, 40);
         }
         
         [TestMethod]
