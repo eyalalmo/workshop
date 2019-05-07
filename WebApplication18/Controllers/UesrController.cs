@@ -119,12 +119,9 @@ namespace WebApplication18.Controllers
             {
                 string res = "";
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-                LinkedList<Store> s = UserService.getInstance().getAllStores(session);
-                foreach (Store s1 in s)
-                {
-                    res += s1.getStoreID() + "," + s1.getStoreName() + ";";
-                }
-                return res;
+                return UserService.getInstance().getAllStores(session);
+               
+                
 
             }
             catch (Exception e)

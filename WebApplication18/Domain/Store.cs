@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,15 +10,14 @@ namespace workshop192.Domain
 {
     public class Store
     {       
-        private int storeID;
-        private string storeName;
-        private string description;
-        private LinkedList<Product> productList;
-        private List<StoreRole> roles;
-        private int numOfOwners;
-        private bool active;
-        private LinkedList<DiscountComponent> discountList;
-        private LinkedList<PurchasePolicy> purchasePolicyList;
+        public int storeID;
+        public string storeName;
+        public string description;
+        public LinkedList<Product> productList;
+        public List<StoreRole> roles;
+        public int numOfOwners;
+        public bool active;
+        public LinkedList<DiscountComponent> discountList;
        
 
         public Store(string storeName, string description)
@@ -61,6 +61,12 @@ namespace workshop192.Domain
                     return true;
             }
             return false;
+        }
+
+        public string getProductsString()
+        {
+            return JsonConvert.SerializeObject(this.productList);
+           
         }
 
         public bool productExists(Product product)
