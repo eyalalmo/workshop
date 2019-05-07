@@ -208,6 +208,7 @@
     <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
+    <Compile Include="Domain\DBNotifications.cs" />
     <Compile Include="Domain\MarketSystem.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
