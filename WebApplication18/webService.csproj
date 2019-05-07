@@ -197,6 +197,7 @@
     <Content Include="Views\Pages\MyAccount.aspx" />
     <Content Include="Views\Pages\register.aspx" />
     <Content Include="Views\Pages\Store.aspx" />
+    <Content Include="Views\Pages\StoreDetails.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
     <Content Include="Site.Mobile.Master" />
@@ -374,6 +375,13 @@
     </Compile>
     <Compile Include="Views\Pages\Store.aspx.designer.cs">
       <DependentUpon>Store.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\StoreDetails.aspx.cs">
+      <DependentUpon>StoreDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Pages\StoreDetails.aspx.designer.cs">
+      <DependentUpon>StoreDetails.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -93,7 +93,7 @@ namespace WebApplication18.Controllers
             }
             catch (Exception e)
             {
-                return e.Message;
+                return e.Message.ToString();
             }
 
         }

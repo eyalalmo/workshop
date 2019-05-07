@@ -88,7 +88,7 @@ namespace workshop192.ServiceLayer
         {
             return db.getAllProducts();
         }
-        public LinkedList<Store> getAllStores(int session)
+        public string getAllStores(int session)
         {
            return db.getAllStores(session);
         }

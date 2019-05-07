@@ -1,11 +1,6 @@
-﻿<%@ Page  Title="Edit Stores" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditStore.aspx.cs"  Inherits="WebApplication18.Views.Pages.EditStore" %>
-
-<asp:Content ID="BodyContent"  ContentPlaceHolderID="MainContent" runat="server">
-    <h2><%: Title %>
-    </h2>
-     
-
-    <div class="container">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="StoreDetails.aspx.cs" Inherits="WebApplication18.Views.Pages.storeDetails" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+<div class="container">
 	<div id="allStores" class="row">
         </div>
 		</div>
@@ -17,28 +12,24 @@
                var baseUrl = getUrl.protocol + "//" + getUrl.host
             jQuery.ajax({
                 type: "GET",
-                url: baseUrl+"/api/user/getAllStores",
+                url: baseUrl+"/api/store/getAllStores",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
 
                     console.log(response);
-                    var responsJ= JSON.parse(response);
-                    if (responsJ !== "fail") {
-                      
+                    if (response !== "fail") {
+                        var responseSplit = response.split(';');
                         var HTML = "";
-                        for (i = 0; i < responsJ.length ; i++) {        
-                            var storeId = responsJ[i].storeID;
-                            var storeName = responsJ[i].storeName;
-                            var description = responsJ[i].description;
-                            var active = responsJ[i].active;
+                        for (i = 0; i < responseSplit.length - 1; i++) {
+                            split2 = responseSplit[i].split(',');
+                            var storeId = split2[0];
+                            var storeName = split2[1];
 
                             HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		                   <div class="my-list">
 			                <h2>Store Name:  `+ storeName+`</h2 >
-		                    <h4>Store ID:  `+ storeId +`</h4 >
-                             <h4>description:  `+ description +`</h4 >
-                            <h4>IsActive:  `+ active+`</h4 >
+		                    <h3>Store ID:  `+ storeId+`</h3 >
 
 			                    <div class="detail">
 			                    <p></p>`
@@ -68,6 +59,5 @@
         });
     </script>
  </asp:Content>
-
 
 
