@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Store" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Store.aspx.cs"  Inherits="WebApplication18.Views.Pages.Store" %>
 
 <asp:Content ID="BodyContent"  ContentPlaceHolderID="MainContent" runat="server">
-    <h2><%: Title %>
+    <h2><%: Title +" id:  " + ViewData["storeId"] %>
     </h2>
     
 
@@ -34,10 +34,14 @@
 
                             HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		                   <div class="my-list">
-			               <h3><div id=\"storeName" + i + "\"Product Name: `+ ProductName+ ` </div></h3>
-                            <a href=\"" + baseUrl + "/store?storeId=" `+ productId +` "\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >View Product</a>   
+			                <h3>Product Name :  `+ ProductName +`</h3 >
+                            <h3>Product id :  `+ storeId+`</h3 >
+		                    <div class="detail">
+			                    <p></p>`
+		                    +"<a href=\""+baseUrl+"/Store?storeId="+productId+"\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Edit Product info</a>" 
+			                 +`   </div>
 		                    </div>
-		                     </div>`
+		                    </div>`
                          
 
                         }

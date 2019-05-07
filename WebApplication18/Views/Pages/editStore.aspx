@@ -3,12 +3,7 @@
 <asp:Content ID="BodyContent"  ContentPlaceHolderID="MainContent" runat="server">
     <h2><%: Title %>
     </h2>
-     <%--<div class="bg0 m-t-23 p-b-140" style="margin-left: auto; margin-right: auto; margin-top: 45px; max-width: 100%;">
-        <div class="container">
-            <div id="allStores" class="row isotope-grid" style="position: relative;">
-            </div>
-        </div>
-    </div>--%>
+     
 
     <div class="container">
 	<div id="allStores" class="row">
@@ -36,7 +31,20 @@
                             var storeId = split2[0];
                             var storeName = split2[1];
 
-                            HTML  += "<a href=\""+baseUrl+"/Store?storeId="+storeId+"\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >View Store</a>"; 
+                            HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+		                   <div class="my-list">
+			                <h3>Store Name:  `+ storeName+`</h3 >
+		
+
+			                    <div class="detail">
+			                    <p></p>`
+		                    +"<a href=\""+baseUrl+"/Store?storeId="+storeId+"\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >View Store info</a>" 
+			                 +`   </div>
+		                    </div>
+		                    </div>`
+
+
+                       
                          
                         }
                         doc.innerHTML += HTML;;
