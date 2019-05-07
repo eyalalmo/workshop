@@ -28,7 +28,7 @@
                event.preventDefault();
                var getUrl = window.location;
                var baseUrl = getUrl.protocol + "//" + getUrl.host
-               window.location.href = baseUrl+"/Pages/AddStore";
+               window.location.href = baseUrl+"/AddStore";
             });
             $("#editStore").click(function () {
                 event.preventDefault();
@@ -40,13 +40,13 @@
                event.preventDefault();
                var getUrl = window.location;
                var baseUrl = getUrl.protocol + "//" + getUrl.host
-               window.location.href = baseUrl+"/Pages/login";
+               window.location.href = baseUrl+"/login";
             });
              $("#ShowProuduct").click(function () {
                event.preventDefault();
                var getUrl = window.location;
                var baseUrl = getUrl.protocol + "//" + getUrl.host
-               window.location.href = baseUrl+"/Pages/login";
+               window.location.href = baseUrl+"/login";
             });
 
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Add new Store" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddStore.aspx.cs"  Inherits="WebApplication18.Views.Pages.Addstore" %>
+﻿<%@ Page Title="Add new Store" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddStore.aspx.cs"  Inherits="WebApplication18.Views.Pages.AddStore" %>
 
 
 
