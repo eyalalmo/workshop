@@ -136,8 +136,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Pages\About.aspx" />
-    <Content Include="Pages\Contact.aspx" />
+    <Content Include="Views\Pages\About.aspx" />
+    <Content Include="Views\Pages\Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -155,13 +155,14 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Pages\login.aspx" />
-    <Content Include="Pages\Products.aspx" />
-    <Content Include="Pages\register.aspx" />
+    <Content Include="Views\Pages\Index.aspx" />
+    <Content Include="Views\Pages\login.aspx" />
+    <Content Include="Views\Pages\Products.aspx" />
+    <Content Include="Views\Pages\register.aspx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Pages\ShoppingBasket.aspx" />
-    <Content Include="Pages\AllProducts.aspx" />
-    <Content Include="Pages\Basket.aspx" />
+    <Content Include="Views\Pages\ShoppingBasket.aspx" />
+    <Content Include="Views\Pages\AllProducts.aspx" />
+    <Content Include="Views\Pages\Basket.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -200,18 +201,19 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Pages\About.aspx.cs">
+    <Compile Include="Views\Pages\About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\About.aspx.designer.cs">
+    <Compile Include="Views\Pages\About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Bridge\DomainBridge.cs" />
-    <Compile Include="Pages\Contact.aspx.designer.cs">
+    <Compile Include="Views\Pages\Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\UesrController.cs" />
@@ -274,25 +276,32 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ShoppingBasket.aspx.cs">
+    <Compile Include="Views\Pages\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Pages\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\ShoppingBasket.aspx.cs">
       <DependentUpon>ShoppingBasket.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\ShoppingBasket.aspx.designer.cs">
+    <Compile Include="Views\Pages\ShoppingBasket.aspx.designer.cs">
       <DependentUpon>ShoppingBasket.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AllProducts.aspx.cs">
+    <Compile Include="Views\Pages\AllProducts.aspx.cs">
       <DependentUpon>AllProducts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\AllProducts.aspx.designer.cs">
+    <Compile Include="Views\Pages\AllProducts.aspx.designer.cs">
       <DependentUpon>AllProducts.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Basket.aspx.cs">
+    <Compile Include="Views\Pages\Basket.aspx.cs">
       <DependentUpon>Basket.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Basket.aspx.designer.cs">
+    <Compile Include="Views\Pages\Basket.aspx.designer.cs">
       <DependentUpon>Basket.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -320,24 +329,25 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\login.aspx.cs">
+    <Compile Include="Views\Pages\login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\login.aspx.designer.cs">
+    <Compile Include="Views\Pages\login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\register.aspx.cs">
+    <Compile Include="Views\Pages\register.aspx.cs">
       <DependentUpon>register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\register.aspx.designer.cs">
+    <Compile Include="Views\Pages\register.aspx.designer.cs">
       <DependentUpon>register.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Pages\" />
     <Folder Include="Views\Cart\" />
     <Folder Include="Views\Products\" />
   </ItemGroup>
@@ -345,6 +355,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Pages\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
