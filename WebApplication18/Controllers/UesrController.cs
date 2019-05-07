@@ -56,11 +56,11 @@ namespace WebApplication18.Controllers
         {
             //Session session = UserService.getInstance().startSession();
             int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-            string basket = UserService.getInstance().getShoppingBasket(session);
+            return UserService.getInstance().getShoppingBasket(session);
             //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, basket);
             //String hash = System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value;
             // UserService.addUser(hash, session);
-            string response = basket;
+            //string response = basket;
             /*foreach (KeyValuePair<int, ShoppingCart> cart in basket.getShoppingCarts())
             {
                 foreach (KeyValuePair<Product, int> p in cart.Value.getProductsInCarts())
@@ -70,7 +70,7 @@ namespace WebApplication18.Controllers
             }*/
 
 
-            return response;
+           // return response;
         }
         [Route("api/user/removeProductFromCart")]
         [HttpGet]

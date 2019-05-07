@@ -8,7 +8,7 @@ namespace workshop192.Domain
 {
     public class ShoppingBasket
     {
-        private Dictionary<int,ShoppingCart> shoppingCarts;
+        public Dictionary<int,ShoppingCart> shoppingCarts;
 
         public ShoppingBasket()
         {

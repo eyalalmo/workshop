@@ -99,7 +99,17 @@ namespace workshop192.Bridge
         public string getShoppingBasket(int sessionid)
         {
             Session session = DBSession.getInstance().getSession(sessionid);
-            return BasketToJson(session.getShoppingBasket());
+            ShoppingBasket basket = session.getShoppingBasket();
+            string response = "";
+            foreach (KeyValuePair<int, ShoppingCart> cart in basket.getShoppingCarts())
+            {
+                foreach (KeyValuePair<Product, int> p in cart.Value.getProductsInCarts())
+                {
+                    response += p.Key.getProductName() + "," + p.Key.getPrice() + "," + p.Key.getProductID() + "," + p.Value + ";";
+                }
+            }
+            
+            return response;
         }
 
         public int addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, int storeID, int sessionid)
@@ -332,12 +342,13 @@ namespace workshop192.Bridge
                 throw new RoleException("this user can't remove roles from this store");
             sr.remove(toRemove);
         }
-
+        
         //use case 2.7
 
         public string BasketToJson(ShoppingBasket basket)
         {
-            return JsonConvert.SerializeObject(basket);
+            string s = JsonConvert.SerializeObject(basket);
+            return s;
         }
         public Dictionary<int, ShoppingCart> getShoppingCarts(int sessionid)
         {

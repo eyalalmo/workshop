@@ -143,7 +143,8 @@ namespace workshop192.ServiceLayer
 
         public string getShoppingBasket(int session)
         {
-            return db.getShoppingBasket(session);
+            string jsonBasket = db.getShoppingBasket(session);
+            return jsonBasket;
         }
 
         public void purchaseBasket(int session)

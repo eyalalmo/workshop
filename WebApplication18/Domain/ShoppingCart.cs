@@ -12,10 +12,10 @@ namespace workshop192.Domain
     public class ShoppingCart
     {
 
-        private Dictionary <Product, int> productList;
-        private Dictionary<Product, double> productsActualPrice;
-        private int storeID;
-        private Store store;
+        public Dictionary <Product, int> productList;
+        public Dictionary<Product, double> productsActualPrice;
+        public int storeID;
+        public Store store;
 
 
         public ShoppingCart(int storeID)
