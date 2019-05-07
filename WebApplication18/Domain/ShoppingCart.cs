@@ -46,7 +46,6 @@ namespace workshop192.Domain
             {
                 throw new IllegalAmountException("The amount asked is larger than the quantity left");
             }
-
         }
 
         public void removeFromCart(Product p)
@@ -89,7 +88,6 @@ namespace workshop192.Domain
         private void updateStoreDiscount()
         {
             productsActualPrice = store.updatePrice(productList, productsActualPrice);
-
         }
 
         private void updateActualProductPrice()

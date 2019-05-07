@@ -36,9 +36,8 @@ namespace workshop192.Domain.Tests
         {
             DBSubscribedUser db = DBSubscribedUser.getInstance();
             Session s = new Session();
-            s.register("etay", "etay");
-            Assert.AreNotEqual(db.getSubscribedUser("etay"), null);
-            db.init();
+            s.register("etay123", "etay123");
+            Assert.AreNotEqual(db.getSubscribedUser("etay"), null);            
         }
 
         [TestMethod()]
@@ -46,7 +45,7 @@ namespace workshop192.Domain.Tests
         {
             DBSubscribedUser db = DBSubscribedUser.getInstance();
             Session s = new Session();
-            s.register("etay", "etay");
+            s.register("etay11", "etay11");
             Assert.AreNotEqual(db.getSubscribedUser("etay"), null);
             db.init();
         }

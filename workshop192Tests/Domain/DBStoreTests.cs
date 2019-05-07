@@ -57,10 +57,11 @@ namespace workshop192.Domain.Tests
                 DBStore.getInstance().removeStore(s);
                 Assert.AreEqual(DBStore.getInstance().getStore(ID), null);
                 DBStore.getInstance().removeStore(s);
-            }
-            catch (Exception)
-            {
                 Assert.Fail();
+            }
+            catch (DoesntExistException)
+            {
+                Assert.IsTrue(true);
             }
         }
 

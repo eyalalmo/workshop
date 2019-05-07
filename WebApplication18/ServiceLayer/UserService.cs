@@ -25,12 +25,9 @@ namespace workshop192.ServiceLayer
 
         }
 
-        public static void init()
+        public void setup()
         {
-            DBProduct.getInstance().init();
-            DBSession.getInstance().init();
-            DBStore.getInstance().init();
-            DBSubscribedUser.getInstance().init();
+            db.setup();
         }
 
         // use case 2.1 - the constructor defines guest as the default state

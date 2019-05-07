@@ -43,17 +43,31 @@ namespace workshop192.Domain.Tests
         [TestMethod()]
         public void createStoreTest()
         {
-            UserState state = new Guest();
-            SubscribedUser sub = new SubscribedUser("dilan", "aaa", new ShoppingBasket());
-            Assert.IsNull(state.createStore("Wallmart", "sells everything", sub));
+            try
+            {
+                UserState state = new Guest();
+                SubscribedUser sub = new SubscribedUser("dilan", "aaa", new ShoppingBasket());
+                state.createStore("Wallmart", "sells everything", sub);
+                Assert.Fail();
+            }
+            catch (UserStateException) {
+                Assert.IsTrue(true);
+            }
         }
 
         [TestMethod()]
         public void getPurchaseHistoryTest()
         {
-            UserState state = new Guest();
-            SubscribedUser sub = new SubscribedUser("Benny", "BENNY", new ShoppingBasket());
-            Assert.IsTrue(Equals("ERROR: not a subscribed user", state.getPurchaseHistory(sub)));
+            try
+            {
+                UserState state = new Guest();
+                SubscribedUser sub = new SubscribedUser("Benny", "BENNY", new ShoppingBasket());
+                state.getPurchaseHistory(sub);
+                Assert.Fail();
+            }
+            catch (UserStateException) {
+                Assert.IsTrue(true);
+            }
         }
 
         [TestMethod()]

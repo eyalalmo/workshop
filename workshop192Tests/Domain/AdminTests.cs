@@ -17,14 +17,21 @@ namespace workshop192.Domain.Tests
         public void createStoreTest()
         {
             UserState state = new Admin();
-            Assert.IsNull(state.createStore("ToyRUs", "lots of toys", null));
+            state.createStore("ToyRUs", "lots of toys", new SubscribedUser("aa", "aa", null));
         }
 
         [TestMethod()]
         public void getPurchaseHistoryTest()
         {
-            UserState state = new Admin();
-            Assert.IsTrue(Equals(state.getPurchaseHistory(null), "ERROR: No purchase history in Admin"));
+            try
+            {
+                UserState state = new Admin();
+                state.getPurchaseHistory(null);
+                Assert.Fail();
+            }
+            catch (Exception) {
+                Assert.IsTrue(true);
+            }
         }
 
         [TestMethod()]
@@ -59,11 +66,11 @@ namespace workshop192.Domain.Tests
             {
                 UserState state = new Admin();
                 state.register("shalom", "1111", null);
-                Assert.IsTrue(true);
-            }
-            catch (LoginException)
-            {
                 Assert.Fail();
+            }
+            catch (RegisterException)
+            {
+                Assert.IsTrue(true);
             }
         }
     }
