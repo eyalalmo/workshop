@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplication18.Domain;
 
 namespace workshop192.Domain
 {
@@ -16,6 +17,7 @@ namespace workshop192.Domain
         private int numOfOwners;
         private bool active;
         private LinkedList<DiscountComponent> discountList;
+        private LinkedList<PurchasePolicy> purchasePolicyList;
        
 
         public Store(string storeName, string description)
@@ -28,6 +30,7 @@ namespace workshop192.Domain
             numOfOwners = 0;
             active = true;
             discountList = new LinkedList<DiscountComponent>();
+            purchasePolicyList = new LinkedList<PurchasePolicy>();
         }
 
         public void addProduct(Product p)
@@ -157,43 +160,10 @@ namespace workshop192.Domain
             roles.Remove(toRemove);
         }
         
-       /* public void addReliantDiscount(double percentage, String condition, String duration)
-        {
-            discount = new ReliantDiscount(condition, duration, percentage: percentage);
-        }
-
-        public void addVisibleDiscount(double percentage, String duration)
-        {
-            discount = new VisibleDiscount(percentage, duration);
-        }
-        public DiscountComponent getDiscount()
-        {
-            return this.discount;
-        }
-        public void addReliantDiscount(double percentage, String condition, String duration)
-        {
-            discount = new ReliantDiscount(percentage, condition, duration);
-        }
-
-        public void addVisibleDiscount(double percentage, String duration)
-        {
-            discount = new VisibleDiscount(percentage, duration);
-        }*/
+     
         public void addDiscount(DiscountComponent d)
         {
             discountList.AddLast(d);
-            /*
-             if(discount == null)
-                this.discount = d;
-            else
-            {
-                List<DiscountComponent> list = new List<DiscountComponent>();
-                list.Add(this.discount);
-                list.Add(d);
-                DiscountComposite composite = new DiscountComposite(list, "or");
-                this.discount = composite;
-            }
-            */
         }
 
         public void removeDiscount()
@@ -203,6 +173,35 @@ namespace workshop192.Domain
                 throw new DoesntExistException("Discount does not exist so it cannot be removed");
             }
             discountList = new LinkedList<DiscountComponent>();
+        }
+        public void addPurchasePolicy(PurchasePolicy p)
+        {
+            int listSize = purchasePolicyList.Count;
+            if (listSize == 0)
+            {
+                purchasePolicyList.AddLast(p);
+            }
+            else if(listSize == 2)
+            {
+                throw new IllegalAmountException("store can not have more than 2 purchase policies");
+            }
+            else
+            {
+                PurchasePolicy policy = purchasePolicyList.First();
+                if((policy.GetType() == typeof(MinAmountPurchase) && p.GetType() == typeof(MinAmountPurchase)) || 
+                    (policy.GetType() == typeof(MaxAmountPurchase) && p.GetType() == typeof(MaxAmountPurchase)))
+                {
+                    throw new AlreadyExistException("Store can not have purchase policies of the same type");
+                }
+                purchasePolicyList.AddLast(p);
+            }
+        }
+        public void checkPolicy(Product p, int amount)
+        {
+            foreach(PurchasePolicy policy in purchasePolicyList)
+            {
+                policy.checkPolicy(p, amount);
+            }
         }
     }
 

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain
 {
-    public class PurchasePolicy
+    public abstract class PurchasePolicy
     {
-       
+        public abstract void checkPolicy(Product p, int amount);
     }
 }
