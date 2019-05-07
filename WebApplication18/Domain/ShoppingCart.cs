@@ -37,6 +37,7 @@ namespace workshop192.Domain
 
         public void addToCart(Product product, int amount)
         {
+            store.checkPolicy(product, amount);
             int quantityLeft = product.getQuantityLeft();
             if (quantityLeft - amount >= 0)
             {
@@ -64,6 +65,8 @@ namespace workshop192.Domain
         {
             if (!productList.ContainsKey(p))
                 throw new CartException("error - cart does not contains product");
+            store.checkPolicy(p, newAmount);
+
             int oldAmount = productList[p];
             int quantity = p.getQuantityLeft();
             if (quantity + oldAmount - newAmount < 0)
