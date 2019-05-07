@@ -14,7 +14,7 @@ namespace workshop192.ServiceLayer.Tests
     {
         private StoreService storeService = StoreService.getInstance();
         private UserService userService = UserService.getInstance();
-        int session1, session2, session3;
+        int session1, session2 ,session3;
         int storeid;
         int productid;
 
@@ -58,9 +58,9 @@ namespace workshop192.ServiceLayer.Tests
                 Assert.Fail();
             }
 
-            /*****
+            /*************
             * checked if product exist
-            */
+            ***/
         }
 
         //4.1.2
@@ -81,7 +81,7 @@ namespace workshop192.ServiceLayer.Tests
             Assert.IsTrue(true);
 
         }
-
+        
         //4.1.2
         [TestMethod()]
         public void RemoveProductTest1()
@@ -98,7 +98,7 @@ namespace workshop192.ServiceLayer.Tests
             }
             Assert.IsTrue(true);
         }
-
+        
         //4.5
         [TestMethod()]
         public void addMannagerByAnOwner1()
@@ -244,7 +244,7 @@ namespace workshop192.ServiceLayer.Tests
                 Assert.IsTrue(true);
             }
         }
-
+        
         //4.3
         [TestMethod()]
         public void addOwnerByAnOwnerSuccTest()
@@ -252,7 +252,7 @@ namespace workshop192.ServiceLayer.Tests
             try
             {
                 storeService.addOwner(storeid, "dani1", session1);
-                /************/
+                /********************************/
                 //  need to check if he is an owner now
                 Assert.IsTrue(true);
             }
@@ -305,7 +305,7 @@ namespace workshop192.ServiceLayer.Tests
             {
                 addOwnerByAnOwnerSuccTest();
                 storeService.removeRole(storeid, "dani1", session1);
-                /*************/
+                /***********************************/
                 // check that is totaly removed
                 Assert.IsTrue(true);
             }

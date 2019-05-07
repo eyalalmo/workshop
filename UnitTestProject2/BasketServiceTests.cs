@@ -155,7 +155,7 @@ namespace workshop192.ServiceLayer.Tests
                 ShoppingCart sc1 = basketService.getCart(session3, store5); // shopping cart
                 double amount = sc1.getTotalAmount();
 
-                basketService.removeFromCart(session3, p6);
+                basketService.removeFromCart(session3, store5, p6);
 
                 Assert.AreNotEqual(amount, sc1.getTotalAmount());
 
