@@ -24,7 +24,7 @@ namespace workshop192.ServiceLayer
             return instance;
         }
 
-        public int addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, int store, Session session)
+        public int addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, int store, int session)
         {
             checkProduct(productName, productCategory, price, rank, quantityLeft);
             return db.addProduct(productName, productCategory, price, rank, quantityLeft, store, session);
@@ -35,17 +35,17 @@ namespace workshop192.ServiceLayer
           return  db.getProducts(id);
         }
 
-        public void removeProduct(int product, Session session)
+        public void removeProduct(int product, int session)
         {
             if (product < 0)
                 throw new ArgumentException("illegal product number");
-            if (session == null)
-                throw new NullReferenceException("session is a null reference");
+            if (session < 0)
+                throw new ArgumentException("illegal session number");
 
             db.removeProduct(product, session);
         }
 
-        public void setProductPrice(int product, int price, Session session)
+        public void setProductPrice(int product, int price, int session)
         {
             if (product < 0)
                 throw new ArgumentException("illegal product number");
@@ -54,7 +54,7 @@ namespace workshop192.ServiceLayer
             db.setProductPrice(product, price, session);
         }
 
-        public void setProductName(int product, String name, Session session)
+        public void setProductName(int product, String name, int session)
         {
             if (product < 0)
                 throw new ArgumentException("illegal product number");
@@ -63,7 +63,7 @@ namespace workshop192.ServiceLayer
             db.setProductName(product, name, session);
         }
 
-        public void addToProductQuantity(int product, int amount, Session session)
+        public void addToProductQuantity(int product, int amount, int session)
         {
             if (product < 0)
                 throw new ArgumentException("illegal product number");
@@ -72,7 +72,7 @@ namespace workshop192.ServiceLayer
             db.addToProductQuantity(product, amount, session);
         }
 
-        public void decFromProductQuantity(int product, int amount, Session session)
+        public void decFromProductQuantity(int product, int amount, int session)
         {
             if (product < 0)
                 throw new ArgumentException("illegal product number");
@@ -81,18 +81,18 @@ namespace workshop192.ServiceLayer
              db.decFromProductQuantity(product, amount, session);
         }
 
-        public void setProductDiscount(int product, int discount, Session session)
+        public void setProductDiscount(int product, int discount, int session)
         {
             if (product < 0)
                 throw new ArgumentException("illegal product number");
             //if (product < 0)
             //    throw new ArgumentException("illegal discount number");
-            if (session == null)
+            if (session < 0)
                 throw new NullReferenceException("session is a null reference");
             db.setProductDiscount(product, discount, session);
         }
 
-        public int addStore(string storeName, string storeDescription, Session session)
+        public int addStore(string storeName, string storeDescription, int session)
         {
             if (storeName.Length == 0)
             {
@@ -101,7 +101,7 @@ namespace workshop192.ServiceLayer
             return db.createStore(session, storeName, storeDescription);
         }
 
-        public void closeStore(int store, Session session)
+        public void closeStore(int store, int session)
         {
             if (store < 0)
             {
@@ -111,7 +111,7 @@ namespace workshop192.ServiceLayer
         }
 
         public void addManager(int store, string username, 
-            bool editProduct, bool editDiscount, bool editPolicy, Session session)
+            bool editProduct, bool editDiscount, bool editPolicy, int session)
         {
             if (store < 0)
             {
@@ -131,7 +131,7 @@ namespace workshop192.ServiceLayer
             db.addManager(store, username, editProduct, editDiscount, editPolicy, session);
         }
 
-        public void addOwner(int store, string username, Session session)
+        public void addOwner(int store, string username, int session)
         {
             if (store < 0)
             {
@@ -150,7 +150,7 @@ namespace workshop192.ServiceLayer
             db.addOwner(store, username, session);
         }
 
-        public void removeRole(int store, string username, Session session)
+        public void removeRole(int store, string username, int session)
         {
             if (store < 0)
             {

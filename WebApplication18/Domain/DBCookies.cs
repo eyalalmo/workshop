@@ -9,14 +9,12 @@ namespace workshop192.Domain
 {
     public class DBCookies
     {
-
-
         private static DBCookies instance;
-        private Dictionary<string, Session> cookies;
+        private Dictionary<string, int> cookies;
 
         private DBCookies()
         {
-            cookies = new Dictionary<string, Session>();
+            cookies = new Dictionary<string, int>();
         }
         public static DBCookies getInstance()
         {
@@ -25,11 +23,11 @@ namespace workshop192.Domain
             return instance;
         }
 
-        public string addSession(string hash, Session session)
+        public string addSession(string hash, int session)
         {
             if (hash == null )
                 return "fail";
-            if (session == null)
+            if (session < 0)
                 return "fail";
 
             
@@ -51,24 +49,19 @@ namespace workshop192.Domain
             return Guid.NewGuid().ToString();
         }
 
-        public Session getUserByHash(string hash)
+        public int getUserByHash(string hash)
         {
             if (hash == null)
-                return null;
+                return -1;
 
             if (cookies.ContainsKey(hash))
             {
                 return cookies[hash];
             }
 
-            return null;
+            return -1;
         }
-
-        public Session getUserByName(string name)
-        {
-   
-            return null;
-        }
+        
         public static void initDB()
         {
             instance = new DBCookies();

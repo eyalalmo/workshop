@@ -30,11 +30,11 @@ namespace WebApplication18
         {
             HttpCookie cookie = Context.Request.Cookies["HashCode"];
 
-            if (cookie == null || UserService.getUserByHash(cookie.Value) == null)
+            if (cookie == null || UserService.getInstance().getUserByHash(cookie.Value) == -1)
             {
-                String hash = UserService.generate();
-                Session session = UserService.getInstance().startSession();
-                UserService.addUser(hash, session);
+                String hash = UserService.getInstance().generate();
+                int session = UserService.getInstance().startSession();
+                UserService.getInstance().addUser(hash, session);
                 Response.Cookies[""]["HashCode"] = hash;
             }
 

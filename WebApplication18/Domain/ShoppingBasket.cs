@@ -8,7 +8,7 @@ namespace workshop192.Domain
 {
     public class ShoppingBasket
     {
-        private Dictionary<int,ShoppingCart> shoppingCarts;
+        public Dictionary<int,ShoppingCart> shoppingCarts;
 
         public ShoppingBasket()
         {
@@ -51,6 +51,19 @@ namespace workshop192.Domain
                     shoppingCarts.Add(storeID, sc);
                 }
             }
+        }
+        public void removeFromCart(int productId)
+        {
+            foreach (KeyValuePair<int, ShoppingCart> cart in shoppingCarts)
+            {
+                Product p = cart.Value.cartContainsProduct(productId);
+                if (p != null)
+                {
+                    cart.Value.removeFromCart(p);
+                    return;
+                }
+            }
+            throw new DoesntExistException("Product cannot be removed, it does not exist in cart");
         }
         //public String checkout (String address,String creditCard){
         //    // return the result of the proccess by order of cart

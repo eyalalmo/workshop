@@ -16,8 +16,12 @@ namespace workshop192.Domain
         {
             subscribedUser = null;
             userState = new Guest();
+            Product p = new Product("a", "a", 3, 3, 3, new Store("a", "a"));
+            Product p2 = new Product("b", "a", 3, 3, 3, new Store("a", "a"));
             shoppingBasket = new ShoppingBasket();
-            DBSession.getInstance().addSession(this);
+            shoppingBasket.addToCart(p,1);
+            shoppingBasket.addToCart(p2, 1);
+
         }
 
         public UserState getState()
@@ -97,6 +101,10 @@ namespace workshop192.Domain
                 throw new IllegalAmountException("ERROR: amount cannot not be a negative number");
             }
             shoppingBasket.addToCart(product, amount);
+        }
+        public void removeFromCart(int productId)
+        {
+            shoppingBasket.removeFromCart(productId);
         }
 
         public void purchaseBasket()

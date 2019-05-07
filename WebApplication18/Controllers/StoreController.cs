@@ -21,7 +21,7 @@ namespace WebApplication18.Controllers
             try
             {
                 string res = "";
-                Session session = UserService.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
                 LinkedList<Product> p = StoreService.getInstance().getProducts(storeId);
                 foreach (Product p1 in p)
                 {
@@ -45,7 +45,7 @@ namespace WebApplication18.Controllers
         {
             try
             {
-                Session session = UserService.getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
                return  StoreService.getInstance().addStore(name, description, session);
               
 

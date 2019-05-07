@@ -14,47 +14,53 @@ namespace workshop192.ServiceLayer.Tests
     {
         private StoreService storeService = StoreService.getInstance();
         private UserService userService = UserService.getInstance();
-        Session session1, session2, session3;
-        Store store;
+        int session1, session2, session3;
         int storeid;
-        Product product;
         int productid;
 
         [TestInitialize()]
         public void TestInitialize()
         {
-            session1 = userService.startSession();
-            userService.register(session1, "anna", "banana"); //first owner
-            userService.login(session1, "anna", "banana");
+            try
+            {
+                UserService.getInstance().setup();
 
-            session2 = userService.startSession();
-            userService.register(session2, "dani1", "123");
-            userService.login(session2, "dani1", "123");
+                session1 = userService.startSession();
+                userService.register(session1, "anna", "banana"); //first owner
+                userService.login(session1, "anna", "banana");
 
-            session3 = userService.startSession();
-            userService.register(session3, "eva2", "123");
-            userService.login(session3, "eva2", "123");
+                session2 = userService.startSession();
+                userService.register(session2, "dani1", "123");
+                userService.login(session2, "dani1", "123");
 
-            store = storeService.addStore("myStore", "the best store ever", session1);
+                session3 = userService.startSession();
+                userService.register(session3, "eva2", "123");
+                userService.login(session3, "eva2", "123");
+
+                storeid = storeService.addStore("myStore", "the best store ever", session1);
+            }
+            catch (Exception)
+            {
+                throw new ExecutionEngineException();
+            }
         }
 
         //4.1.1
         [TestMethod()]
         public void addProductTest()
         {
-            storeid = userService.createStore(session1, "Bananas", "all types of bananas");
             try
             {
                 productid = storeService.addProduct("banana1", "green bananas", 100, 2, 6, storeid, session1);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Assert.Fail();
             }
 
-            /*************
+            /*****
             * checked if product exist
-            ***/
+            */
         }
 
         //4.1.2
@@ -67,7 +73,7 @@ namespace workshop192.ServiceLayer.Tests
             {
                 storeService.removeProduct(productid, session1);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -75,11 +81,6 @@ namespace workshop192.ServiceLayer.Tests
             Assert.IsTrue(true);
 
         }
-
-
-
-
-
 
         //4.1.2
         [TestMethod()]
@@ -91,33 +92,32 @@ namespace workshop192.ServiceLayer.Tests
             {
                 storeService.addToProductQuantity(productid, 3, session1);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Assert.Fail();
             }
             Assert.IsTrue(true);
         }
 
-
         //4.5
         [TestMethod()]
         public void addMannagerByAnOwner1()
         {
             storeid = storeService.addStore("myStore", "the best store ever", session1);
-            storeService.addManager(store, "dani", true, true, true, session1);
+            storeService.addManager(storeid, "dani1", true, true, true, session1);
             productid = storeService.addProduct("myProduct", "some category", 10, 0, 10, storeid, session2);
 
             try
             {
                 storeService.addToProductQuantity(productid, 10, session2);
                 storeService.decFromProductQuantity(productid, 10, session2);
-                storeService.setProductDiscount(productid, null, session2);
+                storeService.setProductDiscount(productid, 0, session2);
                 try
                 {
                     storeService.addManager(storeid, "yaniv", false, false, false, session1);
                     Assert.Fail();
                 }
-                catch (StoreException e0)
+                catch (DoesntExistException)
                 {
                     try
                     {
@@ -125,31 +125,29 @@ namespace workshop192.ServiceLayer.Tests
                         Assert.Fail();
 
                     }
-                    catch (StoreException e1)
+                    catch (RoleException)
                     {
                         try
                         {
                             storeService.decFromProductQuantity(productid, 10, session3);
                             Assert.Fail();
                         }
-                        catch (StoreException e2)
+                        catch (RoleException)
                         {
                             try
                             {
-                                storeService.setProductDiscount(productid, null, session3);
+                                storeService.setProductDiscount(productid, 0, session3);
                                 Assert.Fail();
                             }
-                            catch (StoreException e3)
+                            catch (RoleException)
                             {
                                 Assert.IsTrue(true);
                             }
                         }
                     }
-
                 }
-
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -159,12 +157,11 @@ namespace workshop192.ServiceLayer.Tests
         [TestMethod()]
         public void addMannagerByAnOwner2()
         {
-            storeid = storeService.addStore("myStore", "the best store ever", session1);
             try
             {
-                storeService.addManager(storeid, "dani", true, true, true, session1);
+                storeService.addManager(storeid, "dani1", true, true, true, session1);
             }
-            catch (StoreException e)
+            catch (StoreException)
             {
                 Assert.Fail();
             }
@@ -178,10 +175,10 @@ namespace workshop192.ServiceLayer.Tests
             addMannagerByAnOwner2();
             try
             {
-                storeService.addManager(storeid, "dani", true, true, true, session1);
+                storeService.addManager(storeid, "dani1", true, true, true, session1);
                 Assert.Fail();
             }
-            catch (StoreException e)
+            catch (Exception)
             {
                 Assert.IsTrue(true);
             }
@@ -193,14 +190,14 @@ namespace workshop192.ServiceLayer.Tests
         public void removeManagerTest()
         {
 
-            store = storeService.addStore("myStore", "the best store ever", session1);
+            storeid = storeService.addStore("myStore", "the best store ever", session1);
             try
             {
                 storeService.addManager(storeid, "dani1", true, true, true, session1);
                 storeService.removeRole(storeid, "dani1", session1);
 
             }
-            catch (StoreException e)
+            catch (StoreException)
             {
                 Assert.Fail();
             }
@@ -211,23 +208,21 @@ namespace workshop192.ServiceLayer.Tests
         [TestMethod()]
         public void removeManagerTestFaild1()
         {
-
-            store = storeService.addStore("myStore", "the best store ever", session1);
+            storeid = storeService.addStore("myStore", "the best store ever", session1);
             try
             {
-                storeService.addOwner(storeid, "dani2", session1);
-                storeService.addManager(storeid, "dani1", true, true, true, session1);
+                storeService.addManager(storeid, "eva2", true, true, true, session1);
                 try
                 {
                     storeService.removeRole(storeid, "dani1", session3);
                     Assert.Fail();
                 }
-                catch (StoreException e2)
+                catch (RoleException)
                 {
                     Assert.IsTrue(true);
                 }
             }
-            catch (StoreException e1)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -238,24 +233,17 @@ namespace workshop192.ServiceLayer.Tests
         [TestMethod()]
         public void removeManagerTestFaild2()
         {
-            store = storeService.addStore("myStore", "the best store ever", session1);
+            storeid = storeService.addStore("myStore", "the best store ever", session1);
             try
             {
                 storeService.removeRole(storeid, "dani1", session1);
                 Assert.Fail();
             }
-            catch (StoreException e)
+            catch (RoleException)
             {
                 Assert.IsTrue(true);
             }
         }
-
-
-
-
-
-
-
 
         //4.3
         [TestMethod()]
@@ -264,11 +252,11 @@ namespace workshop192.ServiceLayer.Tests
             try
             {
                 storeService.addOwner(storeid, "dani1", session1);
-                /********************************/
+                /************/
                 //  need to check if he is an owner now
                 Assert.IsTrue(true);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -283,11 +271,11 @@ namespace workshop192.ServiceLayer.Tests
                 storeService.addOwner(storeid, "nouser", session1);
                 Assert.Fail();
             }
-            catch (UserException re)
+            catch (DoesntExistException)
             {
                 Assert.IsTrue(true);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -303,13 +291,9 @@ namespace workshop192.ServiceLayer.Tests
                 addOwnerByAnOwnerSuccTest();
                 Assert.Fail();
             }
-            catch (RoleException re)
+            catch (Exception)
             {
                 Assert.IsTrue(true);
-            }
-            catch (Exception e)
-            {
-                Assert.Fail();
             }
         }
 
@@ -321,11 +305,11 @@ namespace workshop192.ServiceLayer.Tests
             {
                 addOwnerByAnOwnerSuccTest();
                 storeService.removeRole(storeid, "dani1", session1);
-                /***********************************/
+                /*************/
                 // check that is totaly removed
                 Assert.IsTrue(true);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -340,13 +324,9 @@ namespace workshop192.ServiceLayer.Tests
                 removeOwnerSuccTest();
                 Assert.Fail();
             }
-            catch (RoleException re)
+            catch (Exception)
             {
                 Assert.IsTrue(true);
-            }
-            catch (Exception e)
-            {
-                Assert.Fail();
             }
         }
 
@@ -361,11 +341,11 @@ namespace workshop192.ServiceLayer.Tests
                 storeService.removeRole(storeid, "eva2", session1);
                 Assert.Fail();
             }
-            catch (RoleException re)
+            catch (RoleException)
             {
                 Assert.IsTrue(true);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Assert.Fail();
             }

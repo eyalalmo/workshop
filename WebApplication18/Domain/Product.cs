@@ -9,13 +9,14 @@ namespace workshop192.Domain
     public class Product
     {
         //represents product in store
-        private int productID;
-        private string productName;
-        private string productCategory;
-        private int price;
+        public int productID;
+        public string productName;
+        public string productCategory;
+        public int price;
         private Store store;
-        private int rank;
-        private int quantityLeft;
+        public int rank;
+        public int quantityLeft;
+        public int storeID;
         private VisibleDiscount discount;
         
         public Product(string productName, string productCategory, int price, int rank, int quantityLeft, Store store)
@@ -25,6 +26,7 @@ namespace workshop192.Domain
             this.productCategory = productCategory;
             this.price = price;
             this.rank = rank;
+            this.storeID = store.getStoreID();
             this.quantityLeft = quantityLeft;
             this.store = store;
             //this.numberOfRanking = 0;

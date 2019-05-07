@@ -32,7 +32,6 @@ namespace workshop192.Domain
         public Store createStore(String storeName, String description, SubscribedUser sub)
         {
             throw new UserStateException("Guest cannot create a store");
-            return null;
         }
 
         public String getComplaints()
@@ -45,14 +44,9 @@ namespace workshop192.Domain
             throw new UserStateException("Guest does not have a purchase history");
         }
 
-        public string getStateName(string hash)
-        {
-            throw new NotImplementedException();
-        }
-
         public string getStateName()
         {
-            throw new NotImplementedException();
+            return "Guest";
         }
 
         public void login(String username, String password, Session session)
@@ -94,12 +88,7 @@ namespace workshop192.Domain
             session.setSubscribedUser(sub);
             DBSubscribedUser.getInstance().register(sub);
         }
-
-        public string removeUser()
-        {
-            return "Guest";
-        }
-
+        
         public void removeUser(string subscribedUser)
         {
             throw new NotImplementedException();

@@ -122,9 +122,6 @@
     <Reference Include="System.Web.Mvc">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Formatting">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -189,6 +186,7 @@
     <Content Include="Views\Pages\About.aspx" />
     <Content Include="Views\Pages\AddStore.aspx" />
     <Content Include="Views\Pages\AllProducts.aspx" />
+    <Content Include="Views\Pages\Basket.aspx" />
     <Content Include="Views\Pages\Contact.aspx" />
     <Content Include="Views\Pages\Default.aspx" />
     <Content Include="Views\Pages\EditStore.aspx" />
@@ -309,6 +307,13 @@
     </Compile>
     <Compile Include="Views\Pages\AllProducts.aspx.designer.cs">
       <DependentUpon>AllProducts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Basket.aspx.cs">
+      <DependentUpon>Basket.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Pages\Basket.aspx.designer.cs">
+      <DependentUpon>Basket.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>

@@ -24,12 +24,12 @@ namespace workshop192.ServiceLayer
 
         }
         //use case 2.7
-        public Dictionary<int, ShoppingCart> getShoppingCarts(Session user)
+        public Dictionary<int, ShoppingCart> getShoppingCarts(int user)
         {
             return db.getShoppingCarts(user);
         }
 
-        public ShoppingCart getCart(Session user, int store)
+        public ShoppingCart getCart(int user, int store)
         {
             if (store < 0)
             {
@@ -39,7 +39,7 @@ namespace workshop192.ServiceLayer
             return db.getCart(user,store);
         }
         //use case 2.6
-        public void addToCart(Session user,int product,int amount)
+        public void addToCart(int user,int product,int amount)
         {
             if (product < 0)
             {
@@ -54,21 +54,16 @@ namespace workshop192.ServiceLayer
             
         }
         //use case 2.7
-        public void removeFromCart(Session user,int store, int product)
+        public void removeFromCart(int user,int product)
         {
             if (product < 0)
             {
                 throw new ArgumentException("invalid product id");
             }
-
-            if (store < 0)
-            {
-                throw new ArgumentException("invalid store id");
-            }
-            db.removeFromCart(user, store, product);
+            db.removeFromCart(user, product);
         }
         //use case 2.7
-        public void changeQuantity(Session user, int product,int store, int newAmount)
+        public void changeQuantity(int user, int product,int store, int newAmount)
         {
             if (product < 0)
             {
@@ -88,7 +83,7 @@ namespace workshop192.ServiceLayer
             db.changeQuantity(user, product, store, newAmount);
         }
 
-        public void checkoutCart(Session user,int store,String address,String creditCard){
+        public void checkoutCart(int user,int store,String address,String creditCard){
             if (store < 0)
             {
                 throw new ArgumentException("invalid store id");
@@ -97,9 +92,16 @@ namespace workshop192.ServiceLayer
              db.checkoutCart(user, store, address, creditCard);
         }
 
-        public void checkoutBasket(Session user, String address, String creditCard)
+        public void checkoutBasket(int user, String address, String creditCard)
         {
             db.checkoutBasket(user, address, creditCard);
-        }                                               
+        }
+
+        public double getProductPrice(int productid)
+        {
+            if (productid < 0)
+                throw new ArgumentException("invalid product id");
+            return db.getProductPrice(productid);
+        }
     }
 }

@@ -12,15 +12,17 @@ namespace workshop192.Domain
     public class ShoppingCart
     {
 
-        private Dictionary <Product, int> productList;
-        private Dictionary<Product, double> productsActualPrice;
-        private int storeID;
-        private Store store;
+        public Dictionary <Product, int> productList;
+        public Dictionary<Product, double> productsActualPrice;
+        public int storeID;
+        public Store store;
 
 
         public ShoppingCart(int storeID)
         {
             productList = new Dictionary<Product, int>();
+            productsActualPrice = new Dictionary<Product, double>();
+
             this.storeID = storeID;
             store = DBStore.getInstance().getStore(storeID);
         }
@@ -32,19 +34,29 @@ namespace workshop192.Domain
         {
             return this.storeID;
         }
-
+        public Product cartContainsProduct(int productId)
+        {
+            foreach (KeyValuePair<Product, int> p in productList)
+            {
+                if (p.Key.getProductID() == productId)
+                    return p.Key;
+            }
+            return null;
+        }
         public void addToCart(Product product, int amount)
         {
             int quantityLeft = product.getQuantityLeft();
-            if ( quantityLeft - amount>= 0)
+            if (quantityLeft - amount >= 0)
             {
                 if (productList.ContainsKey(product))
-                    throw new CartException( "error: product exist");
+                    throw new CartException("error: product exist");
                 productList.Add(product, amount);
+                productsActualPrice.Add(product, product.getPrice());
             }
-
-            throw new IllegalAmountException("The amount asked is larger than the quantity left");
-
+            else
+            {
+                throw new IllegalAmountException("The amount asked is larger than the quantity left");
+            }
         }
 
         public void removeFromCart(Product p)
@@ -52,8 +64,11 @@ namespace workshop192.Domain
             if (!productList.ContainsKey(p))
                 throw new CartException("error- product does not exist");
             productList.Remove(p);
+            productsActualPrice.Remove(p);
           
         }
+
+       
 
         public void changeQuantityOfProduct(Product p, int newAmount)
         {
@@ -71,23 +86,22 @@ namespace workshop192.Domain
         }
         public double getTotalAmount()
         {
-           // updateActualProductPrice();
-            updateStoreDiscount();
+            updateActualProductPrice();
+            updateStoreDiscount(productList, productsActualPrice);
             double sum = 0;
             foreach (KeyValuePair<Product, int> entry in productList)
             {
                 Product p = entry.Key;
                 double actualPrice = productsActualPrice[p];
-                sum += (entry.Key.getPrice() * actualPrice);
+                sum += (entry.Value * actualPrice);
             }
 
             return sum;
         }
 
-        private void updateStoreDiscount()
+        private void updateStoreDiscount(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
         {
             productsActualPrice = store.updatePrice(productList, productsActualPrice);
-
         }
 
         private void updateActualProductPrice()
@@ -96,7 +110,11 @@ namespace workshop192.Domain
             foreach (KeyValuePair<Product, int> entry in productList)
             {
                 Product p = entry.Key;
-                productsActualPrice.Add(p, p.getActualPrice());
+                double actual = p.getActualPrice();
+                if (actual != entry.Value)
+                {
+                    productsActualPrice[p] = actual;
+                }
             }
         }
 

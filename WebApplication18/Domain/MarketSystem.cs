@@ -10,30 +10,24 @@ namespace workshop192.Domain
 {
     public class MarketSystem
     {
-
-        private static MarketSystem instance;
-
-        public static MarketSystem getInstance()
+        public static void init()
         {
-            if (instance == null)
-                instance = new MarketSystem();
-            return instance;
-        }
-        private MarketSystem()
-        {
-            init();
-        }
+            DBProduct.getInstance().init();
+            DBSession.getInstance().init();
+            DBStore.getInstance().init();
+         //   DBComplaint.getInstance().init();
+            DBDiscount.getInstance().init();
+            DBSubscribedUser.getInstance().init();
+            //    DBCookies.getInstance().init();
 
-        private void init()
-        {
-            Session s = new Session();
-            //s.register("Admin", "1234");
+            int sessionid = DBSession.getInstance().generate();
+            Session s = DBSession.getInstance().getSession(sessionid);
+           
             s.register("et", "123");
             s.login("et", "123");
-            int sID = DomainBridge.getInstance().createStore(s, "startup", "This is the startup Store!");
-            int sID2 = DomainBridge.getInstance().createStore(s, "startup2", "2-This is the startup Store!");
-            DomainBridge.getInstance().addProduct("new Pro1", "Pros",5, 0, 10, sID, s);
-            DomainBridge.getInstance().addProduct("new Pro2", "Pros2", 7, 0, 8, sID, s);
+            int sID = DomainBridge.getInstance().createStore(sessionid, "startup", "This is the startup Store!");
+            DomainBridge.getInstance().addProduct("new Pro1", "Pros",5, 0, 10, sID, sessionid);
+            DomainBridge.getInstance().addProduct("new Pro2", "Pros2", 7, 0, 8, sID, sessionid);
             //SubscribedUser admin = new SubscribedUser("Admin", "1234", new ShoppingBasket());
             //Store s = new Store("startup", "This is the startup Store!");
             //DBStore.getInstance().addStore(s);
@@ -44,6 +38,7 @@ namespace workshop192.Domain
             PaymentService.getInstance().connectToSystem();
             DeliveryService.getInstance().connectToSystem();
             ConsistencySystem.getInstance().connectToSystem();
+
         }
     }
 }
