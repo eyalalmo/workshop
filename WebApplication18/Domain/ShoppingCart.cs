@@ -21,6 +21,8 @@ namespace workshop192.Domain
         public ShoppingCart(int storeID)
         {
             productList = new Dictionary<Product, int>();
+            productsActualPrice = new Dictionary<Product, double>();
+
             this.storeID = storeID;
             store = DBStore.getInstance().getStore(storeID);
         }
@@ -41,6 +43,7 @@ namespace workshop192.Domain
                 if (productList.ContainsKey(product))
                     throw new CartException("error: product exist");
                 productList.Add(product, amount);
+                productsActualPrice.Add(product, product.getPrice());
             }
             else
             {
@@ -53,6 +56,7 @@ namespace workshop192.Domain
             if (!productList.ContainsKey(p))
                 throw new CartException("error- product does not exist");
             productList.Remove(p);
+            productsActualPrice.Remove(p);
           
         }
 
@@ -72,20 +76,20 @@ namespace workshop192.Domain
         }
         public double getTotalAmount()
         {
-           // updateActualProductPrice();
-            updateStoreDiscount();
+            updateActualProductPrice();
+            updateStoreDiscount(productList, productsActualPrice);
             double sum = 0;
             foreach (KeyValuePair<Product, int> entry in productList)
             {
                 Product p = entry.Key;
                 double actualPrice = productsActualPrice[p];
-                sum += (entry.Key.getPrice() * actualPrice);
+                sum += (entry.Value * actualPrice);
             }
 
             return sum;
         }
 
-        private void updateStoreDiscount()
+        private void updateStoreDiscount(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
         {
             productsActualPrice = store.updatePrice(productList, productsActualPrice);
         }
@@ -96,7 +100,11 @@ namespace workshop192.Domain
             foreach (KeyValuePair<Product, int> entry in productList)
             {
                 Product p = entry.Key;
-                productsActualPrice.Add(p, p.getActualPrice());
+                double actual = p.getActualPrice();
+                if (actual != entry.Value)
+                {
+                    productsActualPrice[p] = actual;
+                }
             }
         }
 
