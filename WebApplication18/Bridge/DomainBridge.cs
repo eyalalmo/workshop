@@ -97,10 +97,10 @@ namespace workshop192.Bridge
             session.addToShoppingBasket(toAdd, amount);
         }
 
-        public void purchaseBasket(int sessionid)
+        public void purchaseBasket(int sessionid, string address, string creditCart)
         {
             Session session = DBSession.getInstance().getSession(sessionid);
-            session.purchaseBasket();
+            session.purchaseBasket(address, creditCart);
         }
 
         public string getShoppingBasket(int sessionid)
@@ -117,6 +117,11 @@ namespace workshop192.Bridge
             }
             
             return response;
+        }
+        public double getShoppingBasketTotalPrice(int sessionid)
+        {
+            Session session = DBSession.getInstance().getSession(sessionid);
+            return session.getShoppingBasket().getTotalPrice();
         }
 
         public int addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, int storeID, int sessionid)
@@ -406,18 +411,18 @@ namespace workshop192.Bridge
             user.getShoppingBasket().getShoppingCartByID(store).changeQuantityOfProduct(p, newAmount);
         }
 
-        public void checkoutCart(int sessionid, int store, String address, String creditCard)
+       /* public void checkoutCart(int sessionid, int store, String address, String creditCard)
         {
             Session user = DBSession.getInstance().getSession(sessionid);
 
             user.getShoppingBasket().getShoppingCartByID(store).checkout(address, creditCard);
-        }
+        }*/
 
         public void checkoutBasket(int sessionid, String address, String creditCard)
         {
             Session user = DBSession.getInstance().getSession(sessionid);
 
-            user.getShoppingBasket().purchaseBasket();
+            user.getShoppingBasket().purchaseBasket(address, creditCard);
         }
         public LinkedList<Store> getAllStores(int session1)
         {

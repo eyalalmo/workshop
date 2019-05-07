@@ -20,5 +20,7 @@ namespace WebApplication18.Controllers
             ViewData["user"] = user;
             return View();
         }
+
+
     }
 }

@@ -74,6 +74,29 @@ namespace WebApplication18.Controllers
 
             // return response;
         }
+        [Route("api/user/basketTotalPrice")]
+        [HttpGet]
+        public string basketTotalPrice()
+        {
+            //Session session = UserService.getInstance().startSession();
+            int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+            return ""+BasketService.getInstance().getTotalPrice(session);
+            //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, basket);
+            //String hash = System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value;
+            // UserService.addUser(hash, session);
+            //string response = basket;
+            /*foreach (KeyValuePair<int, ShoppingCart> cart in basket.getShoppingCarts())
+            {
+                foreach (KeyValuePair<Product, int> p in cart.Value.getProductsInCarts())
+                {
+                    response+= p.Key.getProductName() + "," + p.Key.getPrice() + "," + p.Key.getProductID() +"," + p.Value + ";";
+                }
+            }*/
+
+
+            // return response;
+        }
+
         [Route("api/user/removeProductFromCart")]
         [HttpGet]
         public string removeProductFromCart(int productId)
@@ -108,6 +131,24 @@ namespace WebApplication18.Controllers
             {
                 string s = "fail";
 
+                return s;
+            }
+        }
+
+        [Route("api/user/Checkout")]
+        [HttpGet]
+        public string Checkout(string address, string creditCard)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                UserService.getInstance().purchaseBasket(session, address, creditCard);
+                return "";
+
+            }
+            catch (Exception e)
+            {
+                string s = e.Message;
                 return s;
             }
         }

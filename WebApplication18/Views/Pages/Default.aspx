@@ -13,7 +13,7 @@
 
   <div class="jumbotron text-center">
     <h1>Welcome To Oshim Store</h1> 
-    <p>buy new product</p> 
+    <p>Buy new products</p> 
   </div>
 
 

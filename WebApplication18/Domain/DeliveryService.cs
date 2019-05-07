@@ -26,7 +26,7 @@ namespace workshop192.Domain
             return instance;
         }
 
-        public Boolean sendToUser(String address, Product p)
+        public Boolean sendToUser(String address)
         {
             return true;
         }

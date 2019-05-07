@@ -16,11 +16,12 @@ namespace workshop192.Domain
         {
             subscribedUser = null;
             userState = new Guest();
-           // Product p = new Product("a", "a", 3, 3, 3, new Store("a", "a"));
-            //Product p2 = new Product("b", "a", 3, 3, 3, new Store("a", "a"));
+           // Store store = DBStore.getInstance().addStore()
+            Product p = new Product("a", "a", 3, 3, 3, new Store("a", "a"));
+            Product p2 = new Product("b", "a", 3, 3, 3, new Store("a", "a"));
             shoppingBasket = new ShoppingBasket();
-          //  shoppingBasket.addToCart(p,1);
-            //shoppingBasket.addToCart(p2, 1);
+            shoppingBasket.addToCart(p,1);
+            shoppingBasket.addToCart(p2, 1);
 
         }
 
@@ -107,9 +108,10 @@ namespace workshop192.Domain
             shoppingBasket.removeFromCart(productId);
         }
 
-        public void purchaseBasket()
+        public void purchaseBasket(string address, string creditCard)
         {
-            shoppingBasket.purchaseBasket();
+            shoppingBasket.purchaseBasket(address, creditCard);
+            shoppingBasket = new ShoppingBasket();
         }
 
 

@@ -83,18 +83,23 @@ namespace workshop192.ServiceLayer
             db.changeQuantity(user, product, store, newAmount);
         }
 
-        public void checkoutCart(int user,int store,String address,String creditCard){
+        /*public void checkoutCart(int user,int store,String address,String creditCard){
             if (store < 0)
             {
                 throw new ArgumentException("invalid store id");
             }
 
              db.checkoutCart(user, store, address, creditCard);
-        }
+        }*/
 
         public void checkoutBasket(int user, String address, String creditCard)
         {
             db.checkoutBasket(user, address, creditCard);
+        }
+
+        public double getTotalPrice(int user)
+        {
+            return db.getShoppingBasketTotalPrice(user);
         }
 
         public double getProductPrice(int productid)

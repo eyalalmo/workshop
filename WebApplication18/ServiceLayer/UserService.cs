@@ -158,9 +158,9 @@ namespace workshop192.ServiceLayer
             return jsonBasket;
         }
 
-        public void purchaseBasket(int session)
+        public void purchaseBasket(int session, string address, string creditCard)
         {
-            db.purchaseBasket(session);
+            db.purchaseBasket(session, address, creditCard);
         }
 
         /////////////////////////////////////////////////////////////////////////////////////
