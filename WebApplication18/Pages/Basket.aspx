@@ -53,6 +53,7 @@
         
 
     </div>
+        
 
       <script type="text/javascript">
 
@@ -73,7 +74,8 @@
                     success:
                         function (response) {
                             console.log("response");
-                        if (response != "") {
+                            if (response != "") {
+                                console.log(response);
                            
                             var str = "<table class =\"table table-bordered text-center\">"
                                 + "<thead>"
@@ -97,21 +99,52 @@
                                 var id = productfields[2];
                                 var quantity = +productfields[3];
                                     str += "<tr>" +
-                                    "<td ><img src=\"../Images/NoImageAvailabe.jpg\"" + "height=\"60\" /></td><td style=\"vertical-align :middle\">" + productName + "</td><td style=\"vertical-align:middle\">" + price + "</td><td style=\"vertical-align:middle\">" + id + "</td><td style=\"vertical-align:middle\">" + quantity + "</td><td style=\"vertical-align :middle\"><form><input type=\"image\" src=\"../Images/trash.png\" name=\"Delete\" width=\"25\" height=\"25\" align=\"top\" alt=\"Stop sign\ onclick=\"deleteRow(this);\"></form></td></tr>";
+                                    "<td ><img src=\"../Images/NoImageAvailabe.jpg\"" + "height=\"60\" /></td><td style=\"vertical-align :middle\">" + productName + "</td><td style=\"vertical-align:middle\">" + price + "</td><td style=\"vertical-align:middle\">" + id + "</td><td style=\"vertical-align:middle\">" + quantity + "</td><td style=\"vertical-align :middle\"><form><input type = \"button\" value = \"Delete\" onclick=\"deleteRow("+id+");\"></form></td></tr>";
                             }
                             str += " </tbody>" + "</table>";
                             mainDiv.innerHTML = str;
                         }
                         else {
                             console.log(response);   
+                            //<form><input type=\"image\" src=\"../Images/trash.png\" name=\"Delete\" width=\"25\" height=\"25\" align=\"top\" alt=\"Stop sign\ onclick=\"deleteRow(this);\"></form>
                             //<img src=\"../Images/trash.png\"" + "height=\"27\" />
+                            //                                    "<td ><img src=\"../Images/NoImageAvailabe.jpg\"" + "height=\"60\" /></td><td style=\"vertical-align :middle\">" + productName + "</td><td style=\"vertical-align:middle\">" + price + "</td><td style=\"vertical-align:middle\">" + id + "</td><td style=\"vertical-align:middle\">" + quantity + "</td><td style=\"vertical-align :middle\"><form><input type=\"image\" src=\"../Images/trash.png\" name=\"Delete\" width=\"25\" height=\"25\" align=\"top\" alt=\"Stop sign\ onclick=\"deleteRow();\"></form></td></tr>";
+
                         }
                     },
                     error: function (response) {
                         console.log(response);
                     }
                 });
-        });
+          });
 
+          function deleteRow(id) {
+              event.preventDefault();
+              console.log(id);
+              var getUrl = window.location;
+              var baseUrl = getUrl.protocol + "//" + getUrl.host
+               jQuery.ajax({
+                    type: "GET",
+                    url: baseUrl+"/api/user/removeProductFromCart?productId=" + id,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+
+                        if (response == "ok") {
+
+                            location.reload();
+                        }
+                        else {
+                            console.log(response);   
+                        }
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    }
+                });
+          }
+         /* $(".deleteRow").click(function() {
+              console.log("11111");
+            });*/
     </script>
 </asp:Content>
