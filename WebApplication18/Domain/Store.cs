@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebApplication18.Domain;
+using WebApplication18;
 
 namespace workshop192.Domain
 {

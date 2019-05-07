@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using workshop192.Domain;
 
-namespace WebApplication18.Domain
+namespace workshop192.Domain
 {
     public class MinAmountPurchase : PurchasePolicy
     {
