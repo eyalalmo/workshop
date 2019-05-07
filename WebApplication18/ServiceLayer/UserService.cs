@@ -88,6 +88,10 @@ namespace workshop192.ServiceLayer
         {
             return db.getAllProducts();
         }
+        public LinkedList<Store> getAllStores(int session)
+        {
+           return db.getAllStores(session);
+        }
 
         //use case 2.5
 
@@ -137,9 +141,21 @@ namespace workshop192.ServiceLayer
             db.addToShoppingBasket(product, amount, session);
         }
 
-        public ShoppingBasket getShoppingBasket(int session)
+        public void removeFromShoppingBasket(int session, int productId)
         {
-            return db.getShoppingBasket(session);
+            if (productId < 0)
+            {
+                throw new ArgumentException("invalid product id");
+            }
+
+
+            db.removeFromCart(session, productId);
+        }
+
+        public string getShoppingBasket(int session)
+        {
+            string jsonBasket = db.getShoppingBasket(session);
+            return jsonBasket;
         }
 
         public void purchaseBasket(int session)

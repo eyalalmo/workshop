@@ -21,10 +21,10 @@ namespace WebApplication18.Controllers
 
             int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             UserService.getInstance().register(session, Username, Password);
- 
-           return "ok";
-    
-          
+
+            return "ok";
+
+
         }
 
         [Route("api/user/login")]
@@ -34,8 +34,8 @@ namespace WebApplication18.Controllers
             //Session session = UserService.getInstance().startSession();
             int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             UserService.getInstance().login(session, Username, Password);
-           //String hash = System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value;
-           // UserService.addUser(hash, session);
+            //String hash = System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value;
+            // UserService.addUser(hash, session);
             return "ok";
         }
         [Route("api/user/getAllProducts")]
@@ -50,30 +50,69 @@ namespace WebApplication18.Controllers
 
 
         }
+
+
         [Route("api/user/getShoppingBasket")]
         [HttpGet]
         public string getShoppingBasket()
         {
             //Session session = UserService.getInstance().startSession();
             int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-            ShoppingBasket basket = UserService.getInstance().getShoppingBasket(session);
+            return UserService.getInstance().getShoppingBasket(session);
             //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, basket);
             //String hash = System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value;
             // UserService.addUser(hash, session);
-            string response = "";
-            foreach (KeyValuePair<int, ShoppingCart> cart in basket.getShoppingCarts())
+            //string response = basket;
+            /*foreach (KeyValuePair<int, ShoppingCart> cart in basket.getShoppingCarts())
             {
                 foreach (KeyValuePair<Product, int> p in cart.Value.getProductsInCarts())
                 {
-                    response = p.Key.getProductName() + "," + p.Key.getPrice() + "," + p.Value + ";";
+                    response+= p.Key.getProductName() + "," + p.Key.getPrice() + "," + p.Key.getProductID() +"," + p.Value + ";";
                 }
-            }
+            }*/
 
 
-            return response;
+            // return response;
         }
+        [Route("api/user/removeProductFromCart")]
+        [HttpGet]
+        public string removeProductFromCart(int productId)
+        {
+            //Session session = UserService.getInstance().startSession();
+            int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
 
+            //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, basket);
+            //String hash = System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value;
+            // UserService.addUser(hash, session);
+            UserService.getInstance().removeFromShoppingBasket(session, productId);
+            return "ok";
 
+        }
+        [Route("api/user/getAllStores")]
+        [HttpGet]
+        public string getAllStores()
+        {
+            try
+            {
+                string res = "";
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                LinkedList<Store> s = UserService.getInstance().getAllStores(session);
+                foreach (Store s1 in s)
+                {
+                    res += s1.getStoreID() + "," + s1.getStoreName() + ";";
+                }
+                return res;
+
+            }
+            catch (Exception e)
+            {
+                string s = "fail";
+
+                return s;
+            }
+        }
 
     }
 }
+ 
+

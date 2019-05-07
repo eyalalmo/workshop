@@ -7,9 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebApplication18.Pages {
+namespace WebApplication18.Views.Pages {
     
     
-    public partial class WebForm2 {
+    public partial class AllProducts {
     }
 }

@@ -31,7 +31,7 @@ namespace workshop192.Bridge
 
         public void setup()
         {
-            MarketSystem.getInstance();
+            MarketSystem.init();
         }
 
         //use case 2.3
@@ -47,6 +47,12 @@ namespace workshop192.Bridge
             Session user = DBSession.getInstance().getSession(sessionid);
             user.register(username, password);
         }
+
+        public LinkedList<Product> getProducts(int id)
+        {
+           return DBStore.getInstance().getStore(id).getProductList();
+        }
+
         //use case 6.2
         public void removeUser(int sessionid, String username)
         {
@@ -97,10 +103,20 @@ namespace workshop192.Bridge
             session.purchaseBasket();
         }
 
-        public ShoppingBasket getShoppingBasket(int sessionid)
+        public string getShoppingBasket(int sessionid)
         {
             Session session = DBSession.getInstance().getSession(sessionid);
-            return session.getShoppingBasket();
+            ShoppingBasket basket = session.getShoppingBasket();
+            string response = "";
+            foreach (KeyValuePair<int, ShoppingCart> cart in basket.getShoppingCarts())
+            {
+                foreach (KeyValuePair<Product, int> p in cart.Value.getProductsInCarts())
+                {
+                    response += p.Key.getProductName() + "," + p.Key.getPrice() + "," + p.Key.getProductID() + "," + p.Value + ";";
+                }
+            }
+            
+            return response;
         }
 
         public int addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, int storeID, int sessionid)
@@ -333,8 +349,14 @@ namespace workshop192.Bridge
                 throw new RoleException("this user can't remove roles from this store");
             sr.remove(toRemove);
         }
-
+        
         //use case 2.7
+
+        public string BasketToJson(ShoppingBasket basket)
+        {
+            string s = JsonConvert.SerializeObject(basket);
+            return s;
+        }
         public Dictionary<int, ShoppingCart> getShoppingCarts(int sessionid)
         {
             Session user = DBSession.getInstance().getSession(sessionid);
@@ -362,12 +384,13 @@ namespace workshop192.Bridge
             user.getShoppingBasket().addToCart(p, amount);
 
         }
+
         //use case 2.7
-        public void removeFromCart(int sessionid, int store, int product)
+        public void removeFromCart(int sessionid, int product)
         {
             Session user = DBSession.getInstance().getSession(sessionid);
 
-            user.getShoppingBasket().getShoppingCartByID(store).removeFromCart(DBProduct.getInstance().getProductByID(product));
+            user.removeFromCart(product);
         }
         //use case 2.7
         public void changeQuantity(int sessionid, int product, int store, int newAmount)
@@ -395,6 +418,17 @@ namespace workshop192.Bridge
             Session user = DBSession.getInstance().getSession(sessionid);
 
             user.getShoppingBasket().purchaseBasket();
+        }
+        public LinkedList<Store> getAllStores(int session1)
+        {
+            Session session = DBSession.getInstance().getSession(session1);
+            List<StoreRole> lst = session.getSubscribedUser().getStoreRoles();
+            LinkedList<Store> stores = new LinkedList<Store>();
+            foreach (StoreRole element in lst)
+            {
+                stores.AddLast(element.getStore());
+            }
+            return stores;
         }
     }
 }
