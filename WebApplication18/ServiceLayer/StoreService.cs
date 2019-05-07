@@ -30,6 +30,11 @@ namespace workshop192.ServiceLayer
             return db.addProduct(productName, productCategory, price, rank, quantityLeft, store, session);
         }
 
+        public LinkedList<Product> getProducts(int id)
+        {
+          return  db.getProducts(id);
+        }
+
         public void removeProduct(int product, int session)
         {
             if (product < 0)

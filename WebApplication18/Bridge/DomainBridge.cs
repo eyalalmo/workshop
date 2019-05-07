@@ -47,6 +47,12 @@ namespace workshop192.Bridge
             Session user = DBSession.getInstance().getSession(sessionid);
             user.register(username, password);
         }
+
+        public LinkedList<Product> getProducts(int id)
+        {
+           return DBStore.getInstance().getStore(id).getProductList();
+        }
+
         //use case 6.2
         public void removeUser(int sessionid, String username)
         {
@@ -73,9 +79,9 @@ namespace workshop192.Bridge
 
         //use case 2.5
 
-        public List<Product> searchProducts(String name, String keywords, String category)
+        public string searchProducts(String name, String keywords, String category)
         {
-            return DBProduct.getInstance().searchProducts(name, keywords, category);
+            return JsonConvert.SerializeObject( DBProduct.getInstance().searchProducts(name, keywords, category));
         }
 
         public List<Product> filterProducts(List<Product> list, int[] price_range, int minimumRank)
@@ -412,6 +418,17 @@ namespace workshop192.Bridge
             Session user = DBSession.getInstance().getSession(sessionid);
 
             user.getShoppingBasket().purchaseBasket();
+        }
+        public LinkedList<Store> getAllStores(int session1)
+        {
+            Session session = DBSession.getInstance().getSession(session1);
+            List<StoreRole> lst = session.getSubscribedUser().getStoreRoles();
+            LinkedList<Store> stores = new LinkedList<Store>();
+            foreach (StoreRole element in lst)
+            {
+                stores.AddLast(element.getStore());
+            }
+            return stores;
         }
     }
 }

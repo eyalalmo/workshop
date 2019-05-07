@@ -16,6 +16,7 @@ namespace workshop192.Domain
         private Store store;
         public int rank;
         public int quantityLeft;
+        public int storeID;
         private VisibleDiscount discount;
         
         public Product(string productName, string productCategory, int price, int rank, int quantityLeft, Store store)
@@ -25,6 +26,7 @@ namespace workshop192.Domain
             this.productCategory = productCategory;
             this.price = price;
             this.rank = rank;
+            this.storeID = store.getStoreID();
             this.quantityLeft = quantityLeft;
             this.store = store;
             //this.numberOfRanking = 0;

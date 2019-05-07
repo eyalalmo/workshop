@@ -22,9 +22,9 @@ namespace workshop192.Domain
 
             int sessionid = DBSession.getInstance().generate();
             Session s = DBSession.getInstance().getSession(sessionid);
-            s.register("Admin", "1234");
-            s.register("storeOwner", "123");
-            s.login("storeOwner", "123");
+           
+            s.register("et", "123");
+            s.login("et", "123");
             int sID = DomainBridge.getInstance().createStore(sessionid, "startup", "This is the startup Store!");
             DomainBridge.getInstance().addProduct("new Pro1", "Pros",5, 0, 10, sID, sessionid);
             DomainBridge.getInstance().addProduct("new Pro2", "Pros2", 7, 0, 8, sID, sessionid);
@@ -34,6 +34,7 @@ namespace workshop192.Domain
             //Product p = new Product("pro", "pros", 10, 0, 10, s);
             //s.addProduct(p);
             //DBProduct.getInstance().addProduct(p);
+            s.logout();
             PaymentService.getInstance().connectToSystem();
             DeliveryService.getInstance().connectToSystem();
             ConsistencySystem.getInstance().connectToSystem();

@@ -23,6 +23,7 @@ namespace WebApplication18
                     logout.Visible = true;
                     login.Visible = false;
                     register.Visible = false;
+                    myAccount.Visible = true;
                 }
                 
             }

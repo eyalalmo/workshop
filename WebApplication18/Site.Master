@@ -49,18 +49,19 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/">Application name</a>
+                    <a class="navbar-brand" runat="server" href="~/">Oshim Store</a>
                 </div>
                 <div >
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/Pages/About">About</a></li>
-                        <li><a runat="server" href="~/Pages/AllProducts">Catalog</a></li>
-                        <li><a runat="server" href="~/Pages/Basket">Shopping Basket</a></li>
-                        <li><a runat="server" id="login" name="login" href="~/Pages/login" visible="true">Login</a></li>
-                         <li><a runat="server" id="register" name="register" href="~/Pages/register" visible="true">Register</a></li>
-                         <li><a runat="server" id="logout" name="logout" visible="false">logout</a></li>
-                       
+                        <li><a runat="server" href="/About">About</a></li>
+                        <li><a runat="server" href="/Contact">Contact</a></li>
+                        <li><a runat="server" id="login" name="login" href="/login" visible="true">Login</a></li>
+                         <li><a runat="server" id="register" name="register" href="register" visible="true">register</a></li>
+                         <li><a runat="server"  id="logout" name="logout" visible="false">logout</a></li>
+                         <li><a runat="server"  id="myAccount" name="myAccount" href="/myAccount" visible="false">myAccount</a></li>
+                        <li><a runat="server" id="Basket" name="Basket" href="/Basket" visible="true">ShoppingBasket</a></li>
+                        <li><a runat="server" id="AllProducts" name="AllProducts" href="/AllProducts" visible="true">AllProducts</a></li>
                       
                             
                         
@@ -77,6 +78,42 @@
             </footer>
         </div>
 
+
+          <script type="text/javascript">
+        $(document).ready(function () {
+            
+            $("#logout").click(function () {
+                event.preventDefault();
+               var getUrl = window.location;
+               var baseUrl = getUrl.protocol + "//" + getUrl.host
+                console.log(baseUrl);
+ 
+                jQuery.ajax({
+                    type: "GET",
+                    url: baseUrl+"/api/user/logout",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+
+                        if (response == "ok") {
+                                                  
+                            window.location.href = baseUrl+"/";
+                        }
+                        else {
+                            console.log(response);   
+                        }
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    }
+                });
+            });
+        });
+
+            
+            
+
+  </script>
     </form>
 </body>
 </html>

@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace workshop192.Domain
 {
     [Serializable]
-    internal class DoesntExistException : Exception
+    public class DoesntExistException : Exception
     {
         public DoesntExistException()
         {
