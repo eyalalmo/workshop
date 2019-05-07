@@ -13,6 +13,8 @@ namespace WebApplication18.Controllers
 {
     public class UesrController : ApiController
     {
+        private static int at = 0;
+
 
         [Route("api/user/register")]
         [HttpGet]
@@ -31,9 +33,11 @@ namespace WebApplication18.Controllers
         [HttpGet]
         public Object login(String Username, String Password)
         {
-            //Session session = UserService.getInstance().startSession();
             int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-            UserService.getInstance().login(session, Username, Password);
+            Mess.notifyUser(session, "hi there");
+            //Session session = UserService.getInstance().startSession();
+            //int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+            //UserService.getInstance().login(session, Username, Password);
            //String hash = System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value;
            // UserService.addUser(hash, session);
             return "ok";

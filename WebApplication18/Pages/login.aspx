@@ -19,14 +19,18 @@
 
    <script type="text/javascript">
 
-        $(document).ready(function () {
+
+
+       $(document).ready(function () {
             
             $("#btnLogin").click(function () {
+                
                 event.preventDefault();
                var getUrl = window.location;
-               var baseUrl = getUrl.protocol + "//" + getUrl.host
+                var baseUrl = getUrl.protocol + "//" + getUrl.host
+
                 console.log(baseUrl);
-                username = $("#name").val();
+                username = $("#name1").val();
                 pass = $("#pass").val();
 
                 jQuery.ajax({
@@ -36,8 +40,7 @@
                     dataType: "json",
                     success: function (response) {
 
-                        if (response == "ok") {
-                                                  
+                        if (response == "ok") {                  
                             window.location.href = baseUrl+"/";
                         }
                         else {

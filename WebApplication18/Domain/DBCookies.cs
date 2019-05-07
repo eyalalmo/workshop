@@ -10,8 +10,8 @@ namespace workshop192.Domain
     public class DBCookies
     {
         private static DBCookies instance;
-        private Dictionary<string, int> cookies;
-
+        public Dictionary<string, int> cookies;
+        
         private DBCookies()
         {
             cookies = new Dictionary<string, int>();
@@ -21,6 +21,7 @@ namespace workshop192.Domain
             if (instance == null)
                 instance = new DBCookies();
             return instance;
+
         }
 
         public string addSession(string hash, int session)
