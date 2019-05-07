@@ -16,11 +16,11 @@ namespace workshop192.Domain
         {
             subscribedUser = null;
             userState = new Guest();
-            Product p = new Product("a", "a", 3, 3, 3, new Store("a", "a"));
-            Product p2 = new Product("b", "a", 3, 3, 3, new Store("a", "a"));
+           // Product p = new Product("a", "a", 3, 3, 3, new Store("a", "a"));
+            //Product p2 = new Product("b", "a", 3, 3, 3, new Store("a", "a"));
             shoppingBasket = new ShoppingBasket();
-            shoppingBasket.addToCart(p,1);
-            shoppingBasket.addToCart(p2, 1);
+          //  shoppingBasket.addToCart(p,1);
+            //shoppingBasket.addToCart(p2, 1);
 
         }
 
