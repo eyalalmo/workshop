@@ -73,9 +73,9 @@ namespace workshop192.Bridge
 
         //use case 2.5
 
-        public List<Product> searchProducts(String name, String keywords, String category)
+        public string searchProducts(String name, String keywords, String category)
         {
-            return DBProduct.getInstance().searchProducts(name, keywords, category);
+            return JsonConvert.SerializeObject( DBProduct.getInstance().searchProducts(name, keywords, category));
         }
 
         public List<Product> filterProducts(List<Product> list, int[] price_range, int minimumRank)

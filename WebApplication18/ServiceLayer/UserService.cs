@@ -91,9 +91,19 @@ namespace workshop192.ServiceLayer
 
         //use case 2.5
 
-        public List<Product> searchProducts(String name, String keywords, String category)
+        public string searchByName(String name)
         {
-            return db.searchProducts(name, keywords, category);
+            return db.searchProducts(name, null,null);
+        }
+
+        public string searchByKeyword(String keyword)
+        {
+            return db.searchProducts(null, keyword, null);
+        }
+
+        public string searchByCategory(String category)
+        {
+            return db.searchProducts(null, null, category);
         }
 
         public List<Product> filterProducts(List<Product> list, int[] price_range, int minimumRank)

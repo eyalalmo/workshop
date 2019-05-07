@@ -14,5 +14,11 @@ namespace WebApplication18.Controllers
 
             return View();
         }
+
+        public ActionResult login(string user )
+        {
+            ViewData["user"] = user;
+            return View();
+        }
     }
 }
