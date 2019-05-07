@@ -15,8 +15,6 @@ namespace WebApplication18.Controllers
             ViewData["storeId"] = storeId;
             return View();
         }
-
-
        
         public ActionResult Index()
         {
@@ -65,6 +63,11 @@ namespace WebApplication18.Controllers
         }
         public ActionResult AllProducts()
         {
+            return View();
+        }
+        public ActionResult ManageStaff(int storeId)
+        {
+            ViewData["storeId"] = storeId;
             return View();
         }
 

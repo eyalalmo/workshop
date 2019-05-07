@@ -223,5 +223,10 @@ namespace workshop192.ServiceLayer
             if (quantityLeft < 0)
                 throw new IllegalAmountException("error - quantity must be a positive number");
         }
+
+        public string getStore(int id)
+        {
+            return db.getStore(id);
+        }
     }
 }
