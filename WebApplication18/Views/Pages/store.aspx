@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Store" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Store.aspx.cs"  Inherits="WebApplication18.Views.Pages.Store" %>
+﻿<%@ Page Title="Store Managment" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Store.aspx.cs"  Inherits="WebApplication18.Views.Pages.Store" %>
 
 <asp:Content ID="BodyContent"  ContentPlaceHolderID="MainContent" runat="server">
     <h2><%: Title +" id:  " + ViewData["storeId"] %>
@@ -44,7 +44,7 @@
                             <h3>Product id :  `+ productID + `</h3 >
 		                    <div class="detail">
 			                    <p></p>`
-                                + `productName: <input type="text" id="inNmae`+i+`" value="` + productName + `"><br>`
+                                + `productName: <input type="text" id="inName`+i+`" value="` + productName + `"><br>`
                                 + `price: <input type="text" id="inPrice`+i+`" name="inPrice" value="` + price + `"><br>`
                                 + `rank: <input type="text" id="inRank`+i+`" value="` + rank + `"><br>`
                                 + `quantityLeft: <input type="text" id="inQ`+i+`" value="` + quantityLeft + `"><br>`
