@@ -419,5 +419,6 @@ namespace workshop192.Bridge
 
             user.getShoppingBasket().purchaseBasket();
         }
+       public LinkedList<> getAllStores
     }
 }

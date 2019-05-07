@@ -76,6 +76,29 @@ namespace WebApplication18.Controllers
             return "ok";
 
         }
+        [Route("api/user/getAllStores")]
+        [HttpGet]
+        public string getAllStores()
+        {
+            try
+            {
+                string res = "";
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                LinkedList<Store> s = UserService.getInstance().getAllStores(session);
+                foreach (Store s1 in s)
+                {
+                    res += s1.getStoreID() + "," + s1.getStoreName() + ";";
+                }
+                return res;
+
+            }
+            catch (Exception e)
+            {
+                string s = "fail";
+
+                return s;
+            }
+        }
 
     }
 }
