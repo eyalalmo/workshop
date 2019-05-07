@@ -139,6 +139,7 @@
     <Content Include="Images\NoImageAvailabe.jpg" />
     <Content Include="Images\trash.png" />
     <Content Include="Pages\About.aspx" />
+    <Content Include="Pages\Checkout.html" />
     <Content Include="Pages\Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />

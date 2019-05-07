@@ -43,15 +43,9 @@
             <div id="AllProductsInBasket" class ="col-md-12">
                 
             </div>
-            <div class ="col-md-12">
-                <div class="pull-right">
-                    <a href="#" class="btn btn-success">Checkout</a>
-                </div>
-            </div>
-            
+            <div id="checkout" class ="col-md-12"> 
+            </div>      
         </div>
-        
-
     </div>
         
 
@@ -60,10 +54,12 @@
         $(document).ready(function () {
             
                var mainDiv = document.getElementById('AllProductsInBasket');
+               var checkoutDiv = document.getElementById('checkout');
                
                var getUrl = window.location;
                var baseUrl = getUrl.protocol + "//" + getUrl.host
                console.log(baseUrl);
+
                
                 console.log("before jquery");
                 jQuery.ajax({
@@ -103,9 +99,12 @@
                             }
                             str += " </tbody>" + "</table>";
                             mainDiv.innerHTML = str;
+                            checkoutDiv.innerHTML = "<div class=\"pull-right\"><input type=\"button\" class=\"btn btn-success\" value=\"Checkout\" onclick=\" deleteRow(3)\"></div>";
+//<a href=\"#\" class=\"btn btn-success\">Checkout</a>
+
                         }
                         else {
-                            console.log(response);   
+                              mainDiv.innerHTML = " <h3 style =\"margin-bottom: 30px\">Basket is EMPTY</h3>";
                             //<form><input type=\"image\" src=\"../Images/trash.png\" name=\"Delete\" width=\"25\" height=\"25\" align=\"top\" alt=\"Stop sign\ onclick=\"deleteRow(this);\"></form>
                             //<img src=\"../Images/trash.png\"" + "height=\"27\" />
                             //                                    "<td ><img src=\"../Images/NoImageAvailabe.jpg\"" + "height=\"60\" /></td><td style=\"vertical-align :middle\">" + productName + "</td><td style=\"vertical-align:middle\">" + price + "</td><td style=\"vertical-align:middle\">" + id + "</td><td style=\"vertical-align:middle\">" + quantity + "</td><td style=\"vertical-align :middle\"><form><input type=\"image\" src=\"../Images/trash.png\" name=\"Delete\" width=\"25\" height=\"25\" align=\"top\" alt=\"Stop sign\ onclick=\"deleteRow();\"></form></td></tr>";
