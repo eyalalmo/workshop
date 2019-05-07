@@ -203,6 +203,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Domain\MaxAmountPurchase.cs" />
+    <Compile Include="Domain\MinAmountPurchase.cs" />
     <Compile Include="Pages\About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
