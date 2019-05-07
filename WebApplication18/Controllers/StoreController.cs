@@ -22,12 +22,8 @@ namespace WebApplication18.Controllers
             {
                 string res = "";
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-                LinkedList<Product> p = StoreService.getInstance().getProducts(storeId);
-                foreach (Product p1 in p)
-                {
-                    res += p1.getProductID() + "," + p1.getProductName() + ";";
-                }
-                return res;
+                return StoreService.getInstance().getProducts(storeId);
+                
 
             }
             catch (Exception e)
@@ -55,7 +51,26 @@ namespace WebApplication18.Controllers
                 return -1;
             }
         }
-    
+
+
+
+        [Route("api/store/SetProductInformation")]
+        [HttpGet]
+        public string SetProductInformation(int storeID, int productID, int price, int rank,int quantityLeft,string productName)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                 StoreService.getInstance().SetProductInformation(storeID,productID,price,rank, quantityLeft,productName,session);
+                return "ok";
+
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
 
 
 

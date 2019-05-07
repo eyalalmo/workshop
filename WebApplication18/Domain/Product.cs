@@ -17,7 +17,7 @@ namespace workshop192.Domain
         public int rank;
         public int quantityLeft;
         public int storeID;
-        private VisibleDiscount discount;
+        public VisibleDiscount discount;
         
         public Product(string productName, string productCategory, int price, int rank, int quantityLeft, Store store)
         {

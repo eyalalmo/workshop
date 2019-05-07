@@ -52,7 +52,10 @@ namespace workshop192.Bridge
         {
            return DBStore.getInstance().getStore(id).getProductList();
         }
-
+        public string getProductsString(int id)
+        {
+            return DBStore.getInstance().getStore(id).getProductsString();
+        }
         //use case 6.2
         public void removeUser(int sessionid, String username)
         {
@@ -77,6 +80,25 @@ namespace workshop192.Bridge
             return s.getStoreID();
         }
 
+        public string getProductName(int productID)
+        {
+        
+            Product p = DBProduct.getInstance().getProductByID(productID);
+            return p.getProductName();
+        }
+
+        public int getProductRank(int productID)
+        {
+            Product p = DBProduct.getInstance().getProductByID(productID);
+            return p.getRank();
+        }
+
+        public int getProductQuantityLeft(int productID)
+        {
+            Product p = DBProduct.getInstance().getProductByID(productID);
+            return p.getQuantityLeft();
+        }
+
         //use case 2.5
 
         public string searchProducts(String name, String keywords, String category)
@@ -97,10 +119,22 @@ namespace workshop192.Bridge
             session.addToShoppingBasket(toAdd, amount);
         }
 
+        internal void setquantityLeft(int productID, int setquantityLeft, int session)
+        {
+            Product p = DBProduct.getInstance().getProductByID(productID);
+            p.setQuantityLeft(setquantityLeft);
+        }
+
         public void purchaseBasket(int sessionid)
         {
             Session session = DBSession.getInstance().getSession(sessionid);
             session.purchaseBasket();
+        }
+
+        public void setProductRank(int productID, int rank, int session)
+        {
+            Product p = DBProduct.getInstance().getProductByID(productID);
+             p.setRank(rank);
         }
 
         public string getShoppingBasket(int sessionid)
@@ -159,7 +193,7 @@ namespace workshop192.Bridge
             sr.removeProduct(product);
         }
 
-        internal double getProductPrice(int productid)
+        public int getProductPrice(int productid)
         {
             Product product = DBProduct.getInstance().getProductByID(productid);
 
@@ -419,7 +453,7 @@ namespace workshop192.Bridge
 
             user.getShoppingBasket().purchaseBasket();
         }
-        public LinkedList<Store> getAllStores(int session1)
+        public string getAllStores(int session1)
         {
             Session session = DBSession.getInstance().getSession(session1);
             List<StoreRole> lst = session.getSubscribedUser().getStoreRoles();
@@ -428,7 +462,7 @@ namespace workshop192.Bridge
             {
                 stores.AddLast(element.getStore());
             }
-            return stores;
+            return JsonConvert.SerializeObject(stores); 
         }
     }
 }
