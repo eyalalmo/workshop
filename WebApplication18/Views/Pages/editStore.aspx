@@ -40,7 +40,7 @@
 			                    <p></p>`
                                 + "<a href=\"" + baseUrl + "/Store?storeId=" + storeId + "\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >View Store info</a>" 
                                 + "<p></p><a href=\"" + baseUrl + "/Store?storeId=" + storeId + "\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Delete Store</a>" 
-                                + "<p></p><a href=\"" + baseUrl + "/Store?storeId=" + storeId + "\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Make It Unavilable</a>"
+                                + "<p></p><a href=\"" + baseUrl + "/Store?storeId=" + storeId + "\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Manage Staff</a>"
                                 +"<p></p><a href=\""+baseUrl+"/Store?storeId="+storeId+"\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Make It Avilable</a>"
 			                 +`   </div>
 		                    </div>
