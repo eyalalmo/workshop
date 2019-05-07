@@ -419,6 +419,16 @@ namespace workshop192.Bridge
 
             user.getShoppingBasket().purchaseBasket();
         }
-       public LinkedList<> getAllStores
+        public LinkedList<Store> getAllStores(int session1)
+        {
+            Session session = DBSession.getInstance().getSession(session1);
+            List<StoreRole> lst = session.getSubscribedUser().getStoreRoles();
+            LinkedList<Store> stores = new LinkedList<Store>();
+            foreach (StoreRole element in lst)
+            {
+                stores.AddLast(element.getStore());
+            }
+            return stores;
+        }
     }
 }

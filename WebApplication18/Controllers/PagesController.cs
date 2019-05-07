@@ -57,8 +57,16 @@ namespace WebApplication18.Controllers
         {
             return View();
         }
-        
-       
+        public ActionResult Basket()
+        {
+            return View();
+        }
+        public ActionResult AllProducts()
+        {
+            return View();
+        }
+
+
 
 
 

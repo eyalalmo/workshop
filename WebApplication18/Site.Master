@@ -60,6 +60,8 @@
                          <li><a runat="server" id="register" name="register" href="register" visible="true">register</a></li>
                          <li><a runat="server"  id="logout" name="logout" visible="false">logout</a></li>
                          <li><a runat="server"  id="myAccount" name="myAccount" href="/myAccount" visible="false">myAccount</a></li>
+                        <li><a runat="server" id="Basket" name="Basket" href="/Basket" visible="true">ShoppingBasket</a></li>
+                        <li><a runat="server" id="AllProducts" name="AllProducts" href="/AllProducts" visible="true">AllProducts</a></li>
                       
                             
                         
