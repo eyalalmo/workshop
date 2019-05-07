@@ -50,42 +50,7 @@ namespace WebApplication18.Controllers
 
 
         }
-        [Route("api/user/getShoppingBasket")]
-        [HttpGet]
-        public string getShoppingBasket()
-        {
-            //Session session = UserService.getInstance().startSession();
-            int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-            return UserService.getInstance().getShoppingBasket(session);
-            //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, basket);
-            //String hash = System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value;
-            // UserService.addUser(hash, session);
-            //string response = basket;
-            /*foreach (KeyValuePair<int, ShoppingCart> cart in basket.getShoppingCarts())
-            {
-                foreach (KeyValuePair<Product, int> p in cart.Value.getProductsInCarts())
-                {
-                    response+= p.Key.getProductName() + "," + p.Key.getPrice() + "," + p.Key.getProductID() +"," + p.Value + ";";
-                }
-            }*/
 
-
-           // return response;
-        }
-        [Route("api/user/removeProductFromCart")]
-        [HttpGet]
-        public string removeProductFromCart(int productId)
-        {
-            //Session session = UserService.getInstance().startSession();
-            int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-
-            //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, basket);
-            //String hash = System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value;
-            // UserService.addUser(hash, session);
-            UserService.getInstance().removeFromShoppingBasket(session, productId);
-            return "ok";
-           
-        }
 
         [Route("api/user/getShoppingBasket")]
         [HttpGet]
