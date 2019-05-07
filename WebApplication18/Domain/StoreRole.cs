@@ -24,7 +24,9 @@ namespace workshop192.Domain
         void removeRoleAppointedByMe(StoreRole role);
         SubscribedUser getAppointedBy();
         void removeAllAppointedBy();
-        void addStoreVisibleDiscount(int percentage, string duration);
+        void addProductVisibleDiscount(Product product, double percentage, string duration);
+        void removeProductDiscount(Product product);
+        void addStoreVisibleDiscount(double percentage, string duration);
         void addReliantDiscountSameProduct(double percentage, String duration, int numOfProducts, Product product);
         void addReliantDiscountTotalAmount(double percentage, String duration, int amount);
         void removeStoreDiscount(Store store);

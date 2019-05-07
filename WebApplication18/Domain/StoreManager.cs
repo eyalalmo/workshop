@@ -166,5 +166,19 @@ namespace workshop192.Domain
             store.addDiscount(composite);
         }
 
+        public void addProductVisibleDiscount(Product product, double percentage, string duration)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void removeProductDiscount(Product product)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void addStoreVisibleDiscount(double percentage, string duration)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

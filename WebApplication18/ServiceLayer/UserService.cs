@@ -178,5 +178,95 @@ namespace workshop192.ServiceLayer
         {
             return DBCookies.getInstance().getUserByHash(hash);
         }
+
+
+        ///////////////////////////////////////////////////
+
+        public void addProductVisibleDiscount(int product, int session, double percentage, string duration)
+        {
+            if (product < 0)
+                throw new ArgumentException("illegal product number");
+            if (session < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.addProductVisibleDiscount(product, percentage, duration, session);
+
+
+        }
+
+        public void removeProductDiscount(int product, int session)
+        {
+            if (product < 0)
+                throw new ArgumentException("illegal product number");
+            if (session < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.removeProductDiscount(product, session);
+
+        }
+
+
+        public void setProductDiscount(int product, int discount, int session)
+        {
+            if (product < 0)
+                throw new ArgumentException("illegal product number");
+            //if (product < 0)
+            //    throw new ArgumentException("illegal discount number");
+            if (session < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.setProductDiscount(product, discount, session);
+        }
+
+        public void addStoreVisibleDiscount(int store, double percentage, string duration, int session)
+        {
+            if (store < 0)
+                throw new ArgumentException("illegal store number");
+            if (percentage <= 0 || percentage >= 1)
+            {
+                throw new IllegalAmountException("percentage of discount must be a number between 0 to 1");
+            }
+            if (session < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.addStoreVisibleDiscount(store, percentage, duration, session);
+        }
+
+        public void addReliantDiscountSameProduct(int store, int session, double percentage, String duration, int numOfProducts, int product)
+        {
+            if (product < 0)
+                throw new ArgumentException("illegal product number");
+
+            if (store < 0)
+                throw new ArgumentException("illegal store number");
+            if (percentage <= 0 || percentage >= 1)
+            {
+                throw new IllegalAmountException("percentage of discount must be a number between 0 to 1");
+            }
+            if (session < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.addReliantdiscountSameProduct(store, product, percentage, numOfProducts, duration, session);
+        }
+        public void addReliantDiscountTotalAmount(int store, int session, double percentage, String duration, int amount)
+        {
+            if (store < 0)
+                throw new ArgumentException("illegal store number");
+            if (percentage <= 0 || percentage >= 1)
+            {
+                throw new IllegalAmountException("percentage of discount must be a number between 0 to 1");
+            }
+            if (session < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.addReliantdiscountTotalAmount(store, percentage, amount, duration, session);
+        }
+
+        public void removeStoreDiscount(int store, int sessionID)
+        {
+            if (store < 0)
+                throw new ArgumentException("illegal store number");
+            db.removeStoreDiscount(store, sessionID);
+        }
+        public void addComplexDiscount(List<DiscountComponent> list, string type)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
+

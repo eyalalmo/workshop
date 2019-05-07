@@ -32,7 +32,7 @@ namespace workshop192.ServiceLayer
 
         public LinkedList<Product> getProducts(int id)
         {
-          return  db.getProducts(id);
+            return db.getProducts(id);
         }
 
         public void removeProduct(int product, int session)
@@ -78,18 +78,7 @@ namespace workshop192.ServiceLayer
                 throw new ArgumentException("illegal product number");
             if (amount <= 0)
                 throw new IllegalAmountException("error - amount must be a positive number");
-             db.decFromProductQuantity(product, amount, session);
-        }
-
-        public void setProductDiscount(int product, int discount, int session)
-        {
-            if (product < 0)
-                throw new ArgumentException("illegal product number");
-            //if (product < 0)
-            //    throw new ArgumentException("illegal discount number");
-            if (session < 0)
-                throw new NullReferenceException("session is a null reference");
-            db.setProductDiscount(product, discount, session);
+            db.decFromProductQuantity(product, amount, session);
         }
 
         public int addStore(string storeName, string storeDescription, int session)
@@ -110,7 +99,7 @@ namespace workshop192.ServiceLayer
             db.closeStore(store, session);
         }
 
-        public void addManager(int store, string username, 
+        public void addManager(int store, string username,
             bool editProduct, bool editDiscount, bool editPolicy, int session)
         {
             if (store < 0)
@@ -168,11 +157,11 @@ namespace workshop192.ServiceLayer
             }
             db.removeRole(store, username, session);
         }
-        
+
         private void checkProduct(string productName, string productCategory, int price, int rank, int quantityLeft)
         {
             if (productName == "")
-                throw  new ArgumentException("illeagal name");
+                throw new ArgumentException("illeagal name");
             if (price < 0)
                 throw new IllegalAmountException("error - price must be a positive number");
             if (rank < 0 | rank > 5)
@@ -180,5 +169,11 @@ namespace workshop192.ServiceLayer
             if (quantityLeft < 0)
                 throw new IllegalAmountException("error - quantity must be a positive number");
         }
+
+
+
+
+
+
     }
 }
