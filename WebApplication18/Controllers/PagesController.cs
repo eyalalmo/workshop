@@ -8,26 +8,59 @@ namespace WebApplication18.Controllers
 {
     public class PagesController : Controller
     {
-        // GET: Pages
+        // GET: Load
+       
+        public ActionResult Store(int storeId)
+        {
+            ViewData["storeId"] = storeId;
+            return View();
+        }
+       
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult Login()
+        public ActionResult Default()
         {
             return View();
         }
-        public ActionResult AllProducts()
+
+        public ActionResult login()
         {
             return View();
         }
-        public ActionResult About()
+        public ActionResult register()
         {
             return View();
         }
-        public ActionResult Home()
+        public ActionResult about()
         {
             return View();
         }
+        public ActionResult AddStore()
+        {
+            return View();
+        }
+        public ActionResult AllProduct()
+        {
+            return View();
+        }
+        public ActionResult Contact()
+        {
+            return View();
+        }
+        public ActionResult MyAccount()
+        {
+            return View();
+        }
+        public ActionResult EditStore()
+        {
+            return View();
+        }
+        
+       
+
+
+
     }
 }

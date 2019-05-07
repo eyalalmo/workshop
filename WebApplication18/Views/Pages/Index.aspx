@@ -1,10 +1,15 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="WebApplication18.Views.Pages.Index" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="WebApplication18.Views.Pages.Index" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    @{
-    ViewBag.Title = "Index";
-}
+<!DOCTYPE html>
 
-<h2>Index</h2>
-    <span>welcome</span>
-</asp:Content>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+        </div>
+    </form>
+</body>
+</html>

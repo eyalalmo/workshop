@@ -47,6 +47,12 @@ namespace workshop192.Bridge
             Session user = DBSession.getInstance().getSession(sessionid);
             user.register(username, password);
         }
+
+        public LinkedList<Product> getProducts(int id)
+        {
+           return DBStore.getInstance().getStore(id).getProductList();
+        }
+
         //use case 6.2
         public void removeUser(int sessionid, String username)
         {

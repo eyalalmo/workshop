@@ -34,6 +34,7 @@ namespace workshop192.Domain
             //Product p = new Product("pro", "pros", 10, 0, 10, s);
             //s.addProduct(p);
             //DBProduct.getInstance().addProduct(p);
+            s.logout();
             PaymentService.getInstance().connectToSystem();
             DeliveryService.getInstance().connectToSystem();
             ConsistencySystem.getInstance().connectToSystem();

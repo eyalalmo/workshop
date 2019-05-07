@@ -88,6 +88,10 @@ namespace workshop192.ServiceLayer
         {
             return db.getAllProducts();
         }
+        public LinkedList<Store> getAllStores(Session session)
+        {
+           return db.getAllStores(session);
+        }
 
         //use case 2.5
 
