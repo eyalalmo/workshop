@@ -23,18 +23,22 @@
                 success: function (response) {
 
                     console.log(response);
-                    if (response !== "fail") {
-                        var responseSplit = response.split(';');
+                    var responsJ= JSON.parse(response);
+                    if (responsJ !== "fail") {
+                      
                         var HTML = "";
-                        for (i = 0; i < responseSplit.length - 1; i++) {
-                            split2 = responseSplit[i].split(',');
-                            var storeId = split2[0];
-                            var storeName = split2[1];
+                        for (i = 0; i < responsJ.length ; i++) {        
+                            var storeId = responsJ[i].storeID;
+                            var storeName = responsJ[i].storeName;
+                            var description = responsJ[i].description;
+                            var active = responsJ[i].active;
 
                             HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		                   <div class="my-list">
 			                <h2>Store Name:  `+ storeName+`</h2 >
-		                    <h3>Store ID:  `+ storeId+`</h3 >
+		                    <h4>Store ID:  `+ storeId +`</h4 >
+                             <h4>description:  `+ description +`</h4 >
+                            <h4>IsActive:  `+ active+`</h4 >
 
 			                    <div class="detail">
 			                    <p></p>`

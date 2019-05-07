@@ -30,9 +30,9 @@ namespace workshop192.ServiceLayer
             return db.addProduct(productName, productCategory, price, rank, quantityLeft, store, session);
         }
 
-        public LinkedList<Product> getProducts(int id)
+        public string getProducts(int id)
         {
-          return  db.getProducts(id);
+          return  db.getProductsString(id);
         }
 
         public void removeProduct(int product, int session)
@@ -61,6 +61,49 @@ namespace workshop192.ServiceLayer
             if (name.Length == 0)
                 throw new ArgumentException("error -product must have a name");
             db.setProductName(product, name, session);
+        }
+
+        public void SetProductInformation(int storeID, int productID, int price, int rank, int quantityLeft, string productName, int session)
+        {
+            int oldPrice = db.getProductPrice(productID);
+            string oldName = db.getProductName(productID);
+            int oldRank = db.getProductRank(productID);
+            int oldQuantityLeft = db.getProductQuantityLeft(productID);
+
+            try
+            {
+                setProductName(productID, productName, session);
+                setProductPrice(productID, price, session);
+                setProductRank(productID, rank, session);
+                setquantityLeft(productID, quantityLeft, session);
+
+
+            }
+            catch(Exception e)
+            {
+                setProductName(productID, oldName, session);
+                setProductPrice(productID, oldPrice, session);
+                setProductRank(productID, oldRank, session);
+                setquantityLeft(productID, oldQuantityLeft, session);
+                throw e;
+            }
+        }
+        
+        public void setquantityLeft(int productID, int setquantityLeft, int session)
+        {
+            if (productID < 0)
+                throw new ArgumentException("illegal product number");
+            if (setquantityLeft < 0)
+                throw new IllegalAmountException("error - amount must be a positive number");
+            db.setquantityLeft(productID, setquantityLeft, session);
+        }
+        private void setProductRank(int productID, int rank, int session)
+        {
+            if (productID < 0)
+                throw new ArgumentException("illegal product number");
+            if (rank < 0)
+                throw new IllegalAmountException("error - rank must be a positive number");
+            db.setProductRank(productID, rank, session);
         }
 
         public void addToProductQuantity(int product, int amount, int session)
