@@ -22,24 +22,24 @@ namespace workshop192.Domain
 
         public void addManager(SubscribedUser manager, Permissions permissions)
         {
-            throw new RoleException("manager can't appoint a manager");
+            throw new RoleException("A manager cannot appoint a manager");
         }
 
         public void addOwner(SubscribedUser owner)
         {
-            throw new RoleException("manager can't appoint an owner");
+            throw new RoleException("A manager cannot appoint an owner");
         }
 
         public void remove(SubscribedUser owner)
         {
-            throw new RoleException("manager can't remove a role from the store");
+            throw new RoleException("A manager can't remove a role from the store");
         }
 
         public void addProduct(Product product)
         {
             if (!permissions.editProduct())
                 throw new PermissionsException(user.getUsername() + 
-                    " have no permissions to edit products in store " +
+                    " has no permissions to edit products in store " +
                     store.getStoreName());
             store.addProduct(product);
             DBProduct.getInstance().addProduct(product);
@@ -49,7 +49,7 @@ namespace workshop192.Domain
         {
             if (!permissions.editProduct())
                 throw new PermissionsException(user.getUsername() +
-                     " have no permissions to edit products in store " +
+                     " has no permissions to edit products in store " +
                      store.getStoreName());
             if (product.getStore() != store || !store.getProductList().Contains(product))
                 throw new StoreException("product " + product.getProductName() +
