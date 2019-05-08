@@ -320,7 +320,7 @@ namespace workshop192.ServiceLayer
 
         }
 
-        public void addCouponToStore(int sessionID, int storeID, string couponCode, int percentage, string duration)
+        public void addCouponToStore(int sessionID, int storeID, string couponCode, double percentage, string duration)
         {
             if (sessionID < 0)
                 throw new NullReferenceException("session is a null reference");

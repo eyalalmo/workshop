@@ -346,7 +346,7 @@ namespace workshop192.Bridge
             sr.remove(toRemove);
         }
 
-        internal void addCouponToStore(int sessionID, int storeID, string couponCode, int percentage, string duration)
+        internal void addCouponToStore(int sessionID, int storeID, string couponCode, double percentage, string duration)
         {
             Session user = DBSession.getInstance().getSession(sessionID);
             if (user == null)

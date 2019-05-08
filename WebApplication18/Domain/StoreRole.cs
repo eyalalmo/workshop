@@ -38,6 +38,6 @@ namespace workshop192.Domain
         void addMinAmountPolicy( int minAmount);
         void setMaxAmountPolicy( int newMinAmount);
         void removeCouponFromStore(string couponCode);
-        void addCouponToStore(string couponCode, int percentage, string duration);
+        void addCouponToStore(string couponCode, double percentage, string duration);
     }
 }
