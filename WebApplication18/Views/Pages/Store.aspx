@@ -50,15 +50,10 @@
                                 + `price: <input type="number" min="0" size="2" id="inPrice`+i+`" name="inPrice" value="` + price + `"><br>`
                                 + `rank: <input type="number" min="0" size="2" id="inRank`+i+`" value="` + rank + `"><br>`
                                 + `Quantity Left: <input type="number" min="-1" size="2" id="inQ`+i+`" value="` + quantityLeft + `"><br>`
-                                + `discount: <input type="text" size="5"value="` + discount + `"><br><br>`
-                                + " <form><input type = \"button\" value = \"edit\" class=\"btn btn-primary\" onclick=\"edit(" + storeID + "," + productID + "," + i + ");\">"
-                                + "  &nbsp &nbsp &nbsp<input type = \"button\" value = \"delete\" class=\"btn btn-primary\" onclick=\"deleteProduct(" + storeID + "," + productID + "," +i +");\"></form>"
-                                + `productName: <input type="text" id="inName`+i+`" value="` + productName + `"><br>`
-                                + `price: <input type="text" id="inPrice`+i+`" name="inPrice" value="` + price + `"><br>`
-                                + `rank: <input type="text" id="inRank`+i+`" value="` + rank + `"><br>`
-                                + `quantityLeft: <input type="text" id="inQ`+i+`" value="` + quantityLeft + `"><br>`
-                                + "<form><input type = \"button\" value = \"Discount\" onclick=\"discount(" + storeID + "," + productID +");\"></form>"
-                                + " <form><input type = \"button\" value = \"edit\" onclick=\"edit(" + storeID + "," + productID + "," +i +");\"></form>"
+                                  + "<form><input type = \"button\" value = \"Discount\" onclick=\"discount(" + storeID + "," + productID +");\"></form>"
+
+                                //+ `discount: <input type="text" size="5"value="` + discount + `"><br><br>`
+                                 + " <form><input type = \"button\" value = \"edit\" onclick=\"edit(" + storeID + "," + productID + "," +i +");\"></form>"
                                 + `   </div>
 		                    </div>
 		                    </div>`

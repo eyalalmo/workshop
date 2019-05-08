@@ -190,7 +190,7 @@ namespace WebApplication18.Controllers
 
 
         }
-        }
+        
      
         [Route("api/store/isOwner")]
         [HttpGet]
