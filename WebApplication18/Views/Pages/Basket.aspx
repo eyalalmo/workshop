@@ -95,11 +95,11 @@
                                 var id = productfields[2];
                                 var quantity = +productfields[3];
                                     str += "<tr>" +
-                                    "<td ><img src=\"../Images/NoImageAvailabe.jpg\"" + "height=\"60\" /></td><td style=\"vertical-align :middle\">" + productName + "</td><td style=\"vertical-align:middle\">" + price + "</td><td style=\"vertical-align:middle\">" + id + "</td><td style=\"vertical-align:middle\">" + quantity + "</td><td style=\"vertical-align :middle\"><form><input type = \"button\" value = \"Delete\" onclick=\"deleteRow("+id+");\"></form></td></tr>";
+                                    "<td ><img src=\"../Images/NoImageAvailabe.jpg\"" + "height=\"60\" /></td><td style=\"vertical-align :middle\">" + productName + "</td><td style=\"vertical-align:middle\">" + price + "</td><td style=\"vertical-align:middle\">" + id + "</td><td style=\"vertical-align:middle\">" + quantity + "</td><td style=\"vertical-align :middle\"><form><input type = \"button\" class=\"btn btn-danger\" value = \"Delete\" onclick=\"deleteRow("+id+");\"></form></td></tr>";
                             }
                             str += " </tbody>" + "</table>";
                             mainDiv.innerHTML = str;
-                            checkoutDiv.innerHTML = "<div class=\"pull-right\"><input type=\"button\" class=\"btn btn-success\" value=\"Checkout\" onclick=\" deleteRow(3)\"></div>";
+                            checkoutDiv.innerHTML = "<div class=\"pull-right\"><input type=\"button\" class=\"btn btn-success\" value=\"Checkout\" onclick=\" checkout()\"></div>";
 //<a href=\"#\" class=\"btn btn-success\">Checkout</a>
 
                         }
@@ -142,6 +142,15 @@
                     }
                 });
           }
+
+                function checkout() {
+                                
+                              event.preventDefault();
+                              console.log("222");
+                              var getUrl = window.location;
+                              var baseUrl = getUrl.protocol + "//" + getUrl.host
+                              window.location.href = baseUrl+"/Checkout/";
+                          }
          /* $(".deleteRow").click(function() {
               console.log("11111");
             });*/

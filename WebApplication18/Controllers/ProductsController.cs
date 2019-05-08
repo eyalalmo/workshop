@@ -97,7 +97,23 @@ namespace WebApplication18.Controllers
             }
 
         }
-       
+        [Route("api/products/addVisibleDiscount")]
+        [HttpGet]
+        public string addVisibleDiscount(int productID,string percentage, string duration)
+        {
+            try
+            {
+                double per = Double.Parse(percentage);
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().addProductVisibleDiscount(productID, session, per, duration);
+                return "";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
 
     }
 }

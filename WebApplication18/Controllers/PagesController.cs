@@ -65,6 +65,26 @@ namespace WebApplication18.Controllers
         {
             return View();
         }
+        public ActionResult Checkout()
+        {
+            return View();
+        }
+        public ActionResult Discounts(int productID)
+        {
+            ViewData["productID"] = productID;
+            return View();
+        }
+        public ActionResult ViewStore(int storeId)
+        {
+            ViewData["storeId"] = storeId;
+            return View();
+        }
+        public ActionResult StoreDiscount(int storeId)
+        {
+            ViewData["storeID"] = storeId;
+            return View();
+        }
+
 
 
 

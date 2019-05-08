@@ -26,11 +26,11 @@ namespace workshop192.Domain
             return instance;
         }
 
-        public bool checkOut(String account ,int money)
+        public bool checkOut(String account ,double money)
         {
             return true;
         }
-        public bool cancelPayment(String account, int money)
+        public bool cancelPayment(String account, double money)
         {
             return true;
         }

@@ -21,12 +21,12 @@ namespace workshop192.Domain
         }
 
 
-        public double getTotalAmount()
+        public double getTotalPrice()
         {
             double sum = 0;
             foreach (ShoppingCart sc in shoppingCarts.Values)
             {
-                sum += sc.getTotalAmount();
+                sum += sc.getTotalPrice();
             }
             return sum;
 
@@ -104,6 +104,7 @@ namespace workshop192.Domain
         }
 
         public void purchaseBasket()
+        public void purchaseBasket(string address, string creditCard)
         {
             foreach (KeyValuePair<int, ShoppingCart> pair1 in shoppingCarts)
             {
@@ -115,11 +116,24 @@ namespace workshop192.Domain
                     int amount = pair2.Value;
                     if (product.getQuantityLeft() < amount)
                     {
-                        throw new AlreadyExistException("ERROR: cannot make purchase- " + product.getProductName() + " does not have enough quantity left");
+                        
+                        throw new IllegalAmountException("ERROR: cannot make purchase- " + product.getProductName() + " does not have enough quantity left");
                     }
                     product.decQuantityLeft(amount);
                 }
 
+            }
+            Boolean isOk = PaymentService.getInstance().checkOut(creditCard, getTotalPrice());
+            if (isOk)
+            {
+                if (DeliveryService.getInstance().sendToUser(address) == false)
+                {
+                    throw new CartException("Delivery FAILED");
+                }
+            }
+            else
+            {
+                throw new CartException("Payment FAILED");
             }
         }
 

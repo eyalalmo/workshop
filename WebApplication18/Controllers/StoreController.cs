@@ -22,12 +22,8 @@ namespace WebApplication18.Controllers
             {
                 string res = "";
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-                LinkedList<Product> p = StoreService.getInstance().getProducts(storeId);
-                foreach (Product p1 in p)
-                {
-                    res += p1.getProductID() + "," + p1.getProductName() + ";";
-                }
-                return res;
+                return StoreService.getInstance().getProducts(storeId);
+                
 
             }
             catch (Exception)
@@ -55,7 +51,79 @@ namespace WebApplication18.Controllers
                 return -1;
             }
         }
-    
+
+
+
+        [Route("api/store/SetProductInformation")]
+        [HttpGet]
+        public string SetProductInformation(int storeID, int productID, int price, int rank,int quantityLeft,string productName)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                 StoreService.getInstance().SetProductInformation(storeID,productID,price,rank, quantityLeft,productName,session);
+                return "ok";
+
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+        [Route("api/store/addVisibleDiscount")]
+        [HttpGet]
+        public string addVisibleDiscount(int storeID,string percentage, string duration)
+        {
+            try
+            {
+                double per = Double.Parse(percentage);
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().addStoreVisibleDiscount(storeID, per, duration, session);
+                return "";
+
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+        [Route("api/store/addReliantDiscountTotalAmount")]
+        [HttpGet]
+        public string addReliantDiscountTotalAmount(int storeID,int totalAmount, string percentage, string duration)
+        {
+            try
+            {
+                double per = Double.Parse(percentage);
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().addReliantDiscountTotalAmount(storeID, session, per, duration, totalAmount);
+                return "";
+
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+        [Route("api/store/addReliantDiscountSameProduct")]
+        [HttpGet]
+        public string addReliantDiscountSameProduct(int storeID,string percentage, string duration, int numOfProducts, int productID)
+        {
+            try
+            {
+                double per = Double.Parse(percentage);
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().addReliantDiscountSameProduct(storeID, session, per, duration, numOfProducts, productID);
+                return "";
+
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
 
 
 

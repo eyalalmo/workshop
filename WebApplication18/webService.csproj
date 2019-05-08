@@ -188,14 +188,19 @@
     <Content Include="Views\Pages\AddStore.aspx" />
     <Content Include="Views\Pages\AllProducts.aspx" />
     <Content Include="Views\Pages\Basket.aspx" />
+    <Content Include="Views\Pages\Checkout.aspx" />
     <Content Include="Views\Pages\Contact.aspx" />
     <Content Include="Views\Pages\Default.aspx" />
+    <Content Include="Views\Pages\Discounts.aspx" />
     <Content Include="Views\Pages\EditStore.aspx" />
     <Content Include="Views\Pages\Index.aspx" />
     <Content Include="Views\Pages\login.aspx" />
+    <Content Include="Views\Pages\ManageStaff.aspx" />
     <Content Include="Views\Pages\MyAccount.aspx" />
     <Content Include="Views\Pages\register.aspx" />
     <Content Include="Views\Pages\Store.aspx" />
+    <Content Include="Views\Pages\StoreDiscount.aspx" />
+    <Content Include="Views\Pages\ViewStore.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
     <Content Include="Site.Mobile.Master" />
@@ -320,6 +325,13 @@
     <Compile Include="Views\Pages\Basket.aspx.designer.cs">
       <DependentUpon>Basket.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\Checkout.aspx.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Pages\Checkout.aspx.designer.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -333,6 +345,13 @@
     </Compile>
     <Compile Include="Views\Pages\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Discounts.aspx.cs">
+      <DependentUpon>Discounts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Pages\Discounts.aspx.designer.cs">
+      <DependentUpon>Discounts.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\EditStore.aspx.cs">
       <DependentUpon>EditStore.aspx</DependentUpon>
@@ -355,6 +374,13 @@
     <Compile Include="Views\Pages\login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\ManageStaff.aspx.cs">
+      <DependentUpon>ManageStaff.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Pages\ManageStaff.aspx.designer.cs">
+      <DependentUpon>ManageStaff.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\MyAccount.aspx.cs">
       <DependentUpon>MyAccount.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -375,6 +401,20 @@
     </Compile>
     <Compile Include="Views\Pages\Store.aspx.designer.cs">
       <DependentUpon>Store.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\StoreDiscount.aspx.cs">
+      <DependentUpon>StoreDiscount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Pages\StoreDiscount.aspx.designer.cs">
+      <DependentUpon>StoreDiscount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\ViewStore.aspx.cs">
+      <DependentUpon>ViewStore.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Pages\ViewStore.aspx.designer.cs">
+      <DependentUpon>ViewStore.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

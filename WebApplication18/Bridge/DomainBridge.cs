@@ -53,7 +53,10 @@ namespace workshop192.Bridge
         {
             return DBStore.getInstance().getStore(id).getProductList();
         }
-
+        public string getProductsString(int id)
+        {
+            return DBStore.getInstance().getStore(id).getProductsString();
+        }
         //use case 6.2
         public void removeUser(int sessionid, String username)
         {
@@ -88,6 +91,25 @@ namespace workshop192.Bridge
             return s.getStoreID();
         }
 
+        public string getProductName(int productID)
+        {
+        
+            Product p = DBProduct.getInstance().getProductByID(productID);
+            return p.getProductName();
+        }
+
+        public int getProductRank(int productID)
+        {
+            Product p = DBProduct.getInstance().getProductByID(productID);
+            return p.getRank();
+        }
+
+        public int getProductQuantityLeft(int productID)
+        {
+            Product p = DBProduct.getInstance().getProductByID(productID);
+            return p.getQuantityLeft();
+        }
+
         //use case 2.5
 
         public string searchProducts(String name, String keywords, String category)
@@ -108,10 +130,22 @@ namespace workshop192.Bridge
             session.addToShoppingBasket(toAdd, amount);
         }
 
-        public void purchaseBasket(int sessionid)
+        internal void setquantityLeft(int productID, int setquantityLeft, int session)
+        {
+            Product p = DBProduct.getInstance().getProductByID(productID);
+            p.setQuantityLeft(setquantityLeft);
+        }
+
+        public void purchaseBasket(int sessionid, string address, string creditCard)
         {
             Session session = DBSession.getInstance().getSession(sessionid);
-            session.purchaseBasket();
+            session.purchaseBasket(address, creditCard);
+        }
+
+        public void setProductRank(int productID, int rank, int session)
+        {
+            Product p = DBProduct.getInstance().getProductByID(productID);
+             p.setRank(rank);
         }
 
         public void addcouponToCart(int sessionID, int storeID, string couponCode)
@@ -144,6 +178,11 @@ namespace workshop192.Bridge
             }
 
             return response;
+        }
+        public double getShoppingBasketTotalPrice(int sessionid)
+        {
+            Session session = DBSession.getInstance().getSession(sessionid);
+            return session.getShoppingBasket().getTotalPrice();
         }
 
         public int addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, int storeID, int sessionid)
@@ -454,20 +493,20 @@ namespace workshop192.Bridge
             user.getShoppingBasket().getShoppingCartByID(store).changeQuantityOfProduct(p, newAmount);
         }
 
-        public void checkoutCart(int sessionid, int store, String address, String creditCard)
+       /* public void checkoutCart(int sessionid, int store, String address, String creditCard)
         {
             Session user = DBSession.getInstance().getSession(sessionid);
 
             user.getShoppingBasket().getShoppingCartByID(store).checkout(address, creditCard);
-        }
+        }*/
 
         public void checkoutBasket(int sessionid, String address, String creditCard)
         {
             Session user = DBSession.getInstance().getSession(sessionid);
 
-            user.getShoppingBasket().purchaseBasket();
+            user.getShoppingBasket().purchaseBasket(address, creditCard);
         }
-        public LinkedList<Store> getAllStores(int session1)
+        public string getAllStores(int session1)
         {
             Session session = DBSession.getInstance().getSession(session1);
             List<StoreRole> lst = session.getSubscribedUser().getStoreRoles();
@@ -476,7 +515,7 @@ namespace workshop192.Bridge
             {
                 stores.AddLast(element.getStore());
             }
-            return stores;
+            return JsonConvert.SerializeObject(stores); 
         }
 
         ////////////////////////////////////////////

@@ -47,7 +47,7 @@ namespace workshop192.Domain
         }
         public void addToCart(Product product, int amount)
         {
-            store.checkPolicy(product, amount);
+            //store.checkPolicy(product, amount);
             int quantityLeft = product.getQuantityLeft();
             if (quantityLeft - amount >= 0)
             {
@@ -104,7 +104,7 @@ namespace workshop192.Domain
             productList.Add(p, newAmount);
 
         }
-        public double getTotalAmount()
+        public double getTotalPrice()
         {
             updatePriceAfterCoupon();
             updateActualProductPrice();
@@ -145,7 +145,7 @@ namespace workshop192.Domain
             }
         }
 
-        public void checkout(String address,String creditCard) {
+       /* public void checkout(String address,String creditCard) {
            // String res = "";
             int sum = 0;
             foreach (KeyValuePair<Product, int> entry in productList)
@@ -176,6 +176,6 @@ namespace workshop192.Domain
                 }
 
             }
-        } 
+        } */
     }
 }
