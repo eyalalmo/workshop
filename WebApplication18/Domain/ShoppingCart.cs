@@ -12,10 +12,11 @@ namespace workshop192.Domain
     public class ShoppingCart
     {
 
-        public Dictionary <Product, int> productList;
-        public Dictionary<Product, double> productsActualPrice;
-        public int storeID;
-        public Store store;
+        private Dictionary<Product, int> productList;
+        private Dictionary<Product, double> productsActualPrice;
+        private int storeID;
+        private Store store;
+        private string coupon;
 
 
         public ShoppingCart(int storeID)
@@ -25,6 +26,7 @@ namespace workshop192.Domain
 
             this.storeID = storeID;
             store = DBStore.getInstance().getStore(storeID);
+            coupon = "";
         }
         public Dictionary<Product, int> getProductsInCarts()
         {
@@ -60,6 +62,21 @@ namespace workshop192.Domain
             }
         }
 
+        public void addStoreCoupon(string couponCode)
+        {
+            if (coupon != "")
+                throw new AlreadyExistException("Can not have more than one coupon in shopping cart");
+            store.checkCouponCode(couponCode);
+            coupon = couponCode;
+        }
+
+
+        public void removeCoupon()
+        {
+            coupon = "";
+        }
+
+
         public void removeFromCart(Product p)
         {
             if (!productList.ContainsKey(p))
@@ -89,8 +106,9 @@ namespace workshop192.Domain
         }
         public double getTotalAmount()
         {
+            updatePriceAfterCoupon();
             updateActualProductPrice();
-            updateStoreDiscount(productList, productsActualPrice);
+            updateStoreDiscount();
             double sum = 0;
             foreach (KeyValuePair<Product, int> entry in productList)
             {
@@ -101,8 +119,14 @@ namespace workshop192.Domain
 
             return sum;
         }
+        
+            private void updatePriceAfterCoupon()
+        {
+            if (coupon != "")
+                productsActualPrice = store.updatePriceAfterCoupon(coupon, productList, productsActualPrice);
+        }
 
-        private void updateStoreDiscount(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
+        private void updateStoreDiscount()
         {
             productsActualPrice = store.updatePrice(productList, productsActualPrice);
         }

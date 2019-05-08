@@ -171,6 +171,173 @@ namespace workshop192.ServiceLayer
         }
 
 
+        ///////////////////////////////////////////////////
+
+        public void addProductVisibleDiscount(int product, int session, double percentage, string duration)
+        {
+            if (product < 0)
+                throw new ArgumentException("illegal product number");
+            if (session < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.addProductVisibleDiscount(product, percentage, duration, session);
+
+
+        }
+
+        public void removeProductDiscount(int product, int session)
+        {
+            if (product < 0)
+                throw new ArgumentException("illegal product number");
+            if (session < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.removeProductDiscount(product, session);
+
+        }
+
+
+        public void setProductDiscount(int product, int discount, int session)
+        {
+            if (product < 0)
+                throw new ArgumentException("illegal product number");
+            //if (product < 0)
+            //    throw new ArgumentException("illegal discount number");
+            if (session < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.setProductDiscount(product, discount, session);
+        }
+
+        public void addStoreVisibleDiscount(int store, double percentage, string duration, int session)
+        {
+            if (store < 0)
+                throw new ArgumentException("illegal store number");
+            if (percentage <= 0 || percentage >= 1)
+            {
+                throw new IllegalAmountException("percentage of discount must be a number between 0 to 1");
+            }
+            if (session < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.addStoreVisibleDiscount(store, percentage, duration, session);
+        }
+
+        public void addReliantDiscountSameProduct(int store, int session, double percentage, String duration, int numOfProducts, int product)
+        {
+            if (product < 0)
+                throw new ArgumentException("illegal product number");
+
+            if (store < 0)
+                throw new ArgumentException("illegal store number");
+            if (percentage <= 0 || percentage >= 1)
+            {
+                throw new IllegalAmountException("percentage of discount must be a number between 0 to 1");
+            }
+            if (session < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.addReliantdiscountSameProduct(store, product, percentage, numOfProducts, duration, session);
+        }
+        public void addReliantDiscountTotalAmount(int store, int session, double percentage, String duration, int amount)
+        {
+            if (store < 0)
+                throw new ArgumentException("illegal store number");
+            if (percentage <= 0 || percentage >= 1)
+            {
+                throw new IllegalAmountException("percentage of discount must be a number between 0 to 1");
+            }
+            if (session < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.addReliantdiscountTotalAmount(store, percentage, amount, duration, session);
+        }
+
+        public void removeStoreDiscount(int store, int sessionID)
+        {
+            if (store < 0)
+                throw new ArgumentException("illegal store number");
+            db.removeStoreDiscount(store, sessionID);
+        }
+        public void addComplexDiscount(List<DiscountComponent> list, string type)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void addMinAmountPolicy(int storeID, int sessionID, int minAmount)
+        {
+            if (storeID < 0)
+                throw new ArgumentException("illegal store number");
+
+            if (sessionID < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.addMinAmountPolicy(storeID, sessionID, minAmount);
+        }
+        public void setMinAmountPolicy(int storeID, int sessionID, int newMinAmount)
+        {
+            if (storeID < 0)
+                throw new ArgumentException("illegal store number");
+
+            if (sessionID < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.setMinAmountPolicy(storeID, sessionID, newMinAmount);
+
+        }
+        public void removeMinAmountPolicy(int storeID, int sessionID)
+        {
+            if (storeID < 0)
+                throw new ArgumentException("illegal store number");
+
+            if (sessionID < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.removeMaxAmountPolicy(storeID, sessionID);
+
+
+        }
+
+        public void addMaxAmountPolicy(int storeID, int sessionID, int maxAmount)
+        {
+            if (storeID < 0)
+                throw new ArgumentException("illegal store number");
+
+            if (sessionID < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.addMaxAmountPolicy(storeID, sessionID, maxAmount);
+        }
+        public void setMaxAmountPolicy(int storeID, int sessionID, int newMaxAmount)
+        {
+            if (storeID < 0)
+                throw new ArgumentException("illegal store number");
+
+            if (sessionID < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.setMaxAmountPolicy(storeID, sessionID, newMaxAmount);
+
+        }
+        public void removeMaxAmountPolicy(int storeID, int sessionID)
+        {
+            if (storeID < 0)
+                throw new ArgumentException("illegal store number");
+
+            if (sessionID < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.removeMaxAmountPolicy(storeID, sessionID);
+
+
+        }
+
+        public void addCouponToStore(int sessionID, int storeID, string couponCode, int percentage, string duration)
+        {
+            if (sessionID < 0)
+                throw new NullReferenceException("session is a null reference");
+            if (storeID < 0)
+                throw new NullReferenceException("store is a null reference");
+
+            db.addCouponToStore(sessionID, storeID, couponCode, percentage, duration);
+        }
+        public void removeCouponFromStore(int sessionID, int storeID, string couponCode)
+        {
+            if (sessionID < 0)
+                throw new NullReferenceException("session is a null reference");
+            if (storeID < 0)
+                throw new NullReferenceException("store is a null reference");
+
+            db.removeCouponFromStore(sessionID, storeID, couponCode);
+        }
 
 
 

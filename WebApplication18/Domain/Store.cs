@@ -17,6 +17,7 @@ namespace workshop192.Domain
         private int numOfOwners;
         private bool active;
         private LinkedList<DiscountComponent> discountList;
+        private LinkedList<InvisibleDiscount> invisibleDiscountList;
         private LinkedList<PurchasePolicy> purchasePolicyList;
        
 
@@ -31,6 +32,7 @@ namespace workshop192.Domain
             active = true;
             discountList = new LinkedList<DiscountComponent>();
             purchasePolicyList = new LinkedList<PurchasePolicy>();
+            invisibleDiscountList = new LinkedList<InvisibleDiscount>();
         }
 
         public void addProduct(Product p)
@@ -115,7 +117,54 @@ namespace workshop192.Domain
             roles.Add(toAdd);
         }
 
+        public void addCoupon(string coupon, int percentage, string duration)
+        {
+            foreach (InvisibleDiscount d1 in invisibleDiscountList)
+            {
+                string c = d1.getCoupon();
+                if (c == coupon)
+                    throw new AlreadyExistException("Store can not have to identical coupons");
 
+            }
+            InvisibleDiscount d = new InvisibleDiscount(percentage, coupon, duration);
+            invisibleDiscountList.AddLast(d);
+        }
+
+        public void removeCoupon(string coupon)
+        {
+            bool found = false;
+            foreach (InvisibleDiscount d1 in invisibleDiscountList)
+            {
+                string c = d1.getCoupon();
+                if (c == coupon)
+                {
+                    found = true;
+                    invisibleDiscountList.Remove(d1);
+                    break;
+                }
+            }
+
+            if (!found)
+                throw new DoesntExistException("no such coupon in store");
+        }
+
+        public void checkCouponCode(string coupon)
+        {
+            bool found = false;
+            foreach (InvisibleDiscount d in invisibleDiscountList)
+            {
+                string c = d.getCoupon();
+                if (c == coupon)
+                {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
+                throw new ArgumentException("no such coupon in the store");
+        }
+
+        
         public Dictionary<Product, double> updatePrice(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
         {
             foreach( DiscountComponent d in discountList)
@@ -128,6 +177,23 @@ namespace workshop192.Domain
             return productsActualPrice;
             
         }
+
+
+        public Dictionary<Product, double> updatePriceAfterCoupon(string coupon, Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
+        {
+            foreach(InvisibleDiscount d in invisibleDiscountList)
+            {
+                if(coupon == d.getCoupon())
+                {
+                    productsActualPrice = d.updatePrice(productList, productsActualPrice);
+                    break;
+                }
+            }
+            return productsActualPrice;
+
+        }
+
+
 
         public int getNumberOfOwners()
         {

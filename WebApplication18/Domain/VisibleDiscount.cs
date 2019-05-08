@@ -19,7 +19,6 @@ namespace workshop192.Domain
                 productsActualPrice[entry.Key] = productsActualPrice[entry.Key] * (1 -this.getPercentage());
             }
             return productsActualPrice;
-        
         }
 
         public override bool checkCondition(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)

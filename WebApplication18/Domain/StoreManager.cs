@@ -179,42 +179,47 @@ namespace workshop192.Domain
 
         //////
 
-        public void addMaxAmountPolicy(int storeID, int maxAmount)
+        public void addMaxAmountPolicy(int maxAmount)
         {
             MaxAmountPurchase p = new MaxAmountPurchase(maxAmount);
-            Store store = DBStore.getInstance().getStore(storeID);
             store.addPurchasePolicy(p);
         }
 
-        public void removeMaxAmountPolicy(int storeID)
+        public void removeMaxAmountPolicy()
         {
-            Store store = DBStore.getInstance().getStore(storeID);
             store.removeMaxAMountPolicy();
         }
-        public void removeMinAmountPolicy(int storeID)
+        public void removeMinAmountPolicy()
         {
-            Store store = DBStore.getInstance().getStore(storeID);
             store.removeMinAmountPolicy();
         }
 
-        public void setMinAmountPolicy(int storeID, int newMinAmount)
+        public void setMinAmountPolicy( int newMinAmount)
         {
-            Store store = DBStore.getInstance().getStore(storeID);
             store.setMinPurchasePolicy(newMinAmount);
         }
 
-        public void addMinAmountPolicy(int storeID, int minAmount)
+        public void addMinAmountPolicy( int minAmount)
         {
             MinAmountPurchase p = new MinAmountPurchase(minAmount);
-            Store store = DBStore.getInstance().getStore(storeID);
             store.addPurchasePolicy(p);
         }
 
-        public void setMaxAmountPolicy(int storeID, int newMaxAmount)
+        public void setMaxAmountPolicy( int newMaxAmount)
         {
-            Store store = DBStore.getInstance().getStore(storeID);
             store.setMaxPurchasePolicy(newMaxAmount);
 
         }
+
+        public void removeCouponFromStore(string couponCode)
+        {
+            store.removeCoupon(couponCode);
+        }
+
+        public void addCouponToStore(string couponCode, int percentage, string duration)
+        {
+            store.addCoupon(couponCode, percentage, duration);
+        }
+
     }
 }

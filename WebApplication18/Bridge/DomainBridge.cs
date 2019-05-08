@@ -103,6 +103,22 @@ namespace workshop192.Bridge
             session.purchaseBasket();
         }
 
+        public void addcouponToCart(int sessionID, int storeID, string couponCode)
+        {
+            Session session = DBSession.getInstance().getSession(sessionID);
+            ShoppingBasket shoppingBasket=  session.getShoppingBasket();
+            shoppingBasket.addCoupon(couponCode, storeID);
+
+        }
+
+
+        public void removeCouponFromCart(int sessionID, int storeID)
+        {
+            Session session = DBSession.getInstance().getSession(sessionID);
+            ShoppingBasket shoppingBasket = session.getShoppingBasket();
+            shoppingBasket.removeCoupon(storeID);
+        }
+
         public string getShoppingBasket(int sessionid)
         {
             Session session = DBSession.getInstance().getSession(sessionid);
@@ -330,6 +346,36 @@ namespace workshop192.Bridge
             sr.remove(toRemove);
         }
 
+        internal void addCouponToStore(int sessionID, int storeID, string couponCode, int percentage, string duration)
+        {
+            Session user = DBSession.getInstance().getSession(sessionID);
+            if (user == null)
+                throw new DoesntExistException("user is not logged in");
+            Store store = DBStore.getInstance().getStore(storeID);
+            SubscribedUser subscribedUser = user.getSubscribedUser();
+            if (subscribedUser == null)
+                throw new DoesntExistException("not a subscribed user");
+            StoreRole sr = subscribedUser.getStoreRole(store);
+            if (sr == null)
+                throw new RoleException("no role for this user in this store");
+            sr.addCouponToStore( couponCode, percentage, duration);
+        }
+
+        internal void removeCouponFromStore(int sessionID, int storeID, string couponCode)
+        {
+            Session user = DBSession.getInstance().getSession(sessionID);
+            if (user == null)
+                throw new DoesntExistException("user is not logged in");
+            Store store = DBStore.getInstance().getStore(storeID);
+            SubscribedUser subscribedUser = user.getSubscribedUser();
+            if (subscribedUser == null)
+                throw new DoesntExistException("not a subscribed user");
+            StoreRole sr = subscribedUser.getStoreRole(store);
+            if (sr == null)
+                throw new RoleException("no role for this user in this store");
+            sr.removeCouponFromStore(couponCode);
+        }
+
         //use case 2.7
 
         public string BasketToJson(ShoppingBasket basket)
@@ -550,7 +596,7 @@ namespace workshop192.Bridge
             StoreRole sr = subscribedUser.getStoreRole(store);
             if (sr == null)
                 throw new RoleException("no role for this user in this store");
-            sr.removeMaxAmountPolicy(storeID);
+            sr.removeMaxAmountPolicy();
         }
 
         public  void addMaxAmountPolicy(int storeID, int sessionID, int maxAmount)
@@ -565,7 +611,7 @@ namespace workshop192.Bridge
             StoreRole sr = subscribedUser.getStoreRole(store);
             if (sr == null)
                 throw new RoleException("no role for this user in this store");
-            sr.addMaxAmountPolicy(storeID, maxAmount);
+            sr.addMaxAmountPolicy(maxAmount);
         }
 
         public void setMinAmountPolicy(int storeID, int sessionID, int newMinAmount)
@@ -580,7 +626,7 @@ namespace workshop192.Bridge
             StoreRole sr = subscribedUser.getStoreRole(store);
             if (sr == null)
                 throw new RoleException("no role for this user in this store");
-            sr.setMinAmountPolicy(storeID, newMinAmount);
+            sr.setMinAmountPolicy(newMinAmount);
         }
 
         public void addMinAmountPolicy(int storeID, int sessionID, int minAmount)
@@ -595,7 +641,7 @@ namespace workshop192.Bridge
             StoreRole sr = subscribedUser.getStoreRole(store);
             if (sr == null)
                 throw new RoleException("no role for this user in this store");
-            sr.addMinAmountPolicy(storeID, minAmount);
+            sr.addMinAmountPolicy(minAmount);
         }
 
         internal void setMaxAmountPolicy(int storeID, int sessionID, int newMinAmount)
@@ -610,7 +656,7 @@ namespace workshop192.Bridge
             StoreRole sr = subscribedUser.getStoreRole(store);
             if (sr == null)
                 throw new RoleException("no role for this user in this store");
-            sr.setMaxAmountPolicy(storeID, newMinAmount);
+            sr.setMaxAmountPolicy( newMinAmount);
         }
 
 
