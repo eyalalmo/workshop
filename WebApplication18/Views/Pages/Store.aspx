@@ -50,8 +50,8 @@
                                 + `price: <input type="number" min="0" size="2" id="inPrice`+i+`" name="inPrice" value="` + price + `"><br>`
                                 + `rank: <input type="number" min="0" size="2" id="inRank`+i+`" value="` + rank + `"><br>`
                                 + `Quantity Left: <input type="number" min="-1" size="2" id="inQ`+i+`" value="` + quantityLeft + `"><br>`
-                               // + `discount: <input type="text" size="5"value="` + discount + `"><br><br>`
-                                 + "<form><input type = \"button\" value = \"Discount\" onclick=\"discount(" + storeID + "," + productID +");\"></form>"
+                                //+ `discount: <input type="text" size="5"value="` + discount + `"><br><br>`
+                                + "<form><input type = \"button\" value = \"Discount\" onclick=\"discount(" + storeID + "," + productID +");\"></form>"
                                 + " <form><input type = \"button\" value = \"edit\" class=\"btn btn-primary\" onclick=\"edit(" + storeID + "," + productID + "," + i + ");\">"
                                 + "  &nbsp &nbsp &nbsp<input type = \"button\" value = \"delete\" class=\"btn btn-primary\" onclick=\"deleteProduct(" + storeID + "," + productID + "," +i +");\"></form>"
                                 + `   </div>

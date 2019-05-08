@@ -5,9 +5,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-
-
-
 namespace WebApplication18.Views.Pages
 {
     public partial class Store : System.Web.Mvc.ViewPage
