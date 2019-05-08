@@ -102,12 +102,11 @@
             });
 
         }  
-        function discount(storeID, productID) {
-            console.log(storeID + "!" + productID);
+        function discount(productID) {
             event.preventDefault();
             var getUrl = window.location;
              var baseUrl = getUrl.protocol + "//" + getUrl.host;
-             window.location.href = baseUrl + "/Discounts?storeID=" + storeID + "&productID="+productID;
+             window.location.href = baseUrl + "/Discounts?productID="+productID;
         }  
 
     </script>

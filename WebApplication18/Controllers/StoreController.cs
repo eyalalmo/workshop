@@ -71,6 +71,59 @@ namespace WebApplication18.Controllers
             }
         }
 
+        [Route("api/store/addVisibleDiscount")]
+        [HttpGet]
+        public string addVisibleDiscount(int storeID,string percentage, string duration)
+        {
+            try
+            {
+                double per = Double.Parse(percentage);
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().addStoreVisibleDiscount(storeID, per, duration, session);
+                return "";
+
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+        [Route("api/store/addReliantDiscountTotalAmount")]
+        [HttpGet]
+        public string addReliantDiscountTotalAmount(int storeID,int totalAmount, string percentage, string duration)
+        {
+            try
+            {
+                double per = Double.Parse(percentage);
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().addReliantDiscountTotalAmount(storeID, session, per, duration, totalAmount);
+                return "";
+
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+        [Route("api/store/addReliantDiscountSameProduct")]
+        [HttpGet]
+        public string addReliantDiscountSameProduct(int storeID,string percentage, string duration, int numOfProducts, int productID)
+        {
+            try
+            {
+                double per = Double.Parse(percentage);
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().addReliantDiscountSameProduct(storeID, session, per, duration, numOfProducts, productID);
+                return "";
+
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
 
 
 

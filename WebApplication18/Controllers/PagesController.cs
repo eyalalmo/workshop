@@ -69,9 +69,8 @@ namespace WebApplication18.Controllers
         {
             return View();
         }
-        public ActionResult Discounts(int storeID, int productID)
+        public ActionResult Discounts(int productID)
         {
-            ViewData["storeID"] = storeID;
             ViewData["productID"] = productID;
             return View();
         }
@@ -80,7 +79,12 @@ namespace WebApplication18.Controllers
             ViewData["storeId"] = storeId;
             return View();
         }
-  
+        public ActionResult StoreDiscount(int storeId)
+        {
+            ViewData["storeID"] = storeId;
+            return View();
+        }
+
 
 
 
