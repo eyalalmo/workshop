@@ -117,6 +117,43 @@ namespace WebApplication18.Controllers
 
 
         }
+        [Route("api/store/removeRole")]
+        [HttpGet]
+        public string removeRole(string username,int storeId)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().removeRole(storeId, username, session);
+                return "ok";
+
+            }
+            catch (Exception e)
+            {
+                return e.Message.ToString();
+            }
+
+
+
+        }
+
+        [Route("api/store/addManager")]
+        [HttpGet]
+        public string addManager(string username, int storeId,bool prod,bool disc,bool poli)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().addManager(storeId, username, prod, disc, poli, session);
+                return "ok";
+            }
+            catch (Exception e)
+            {
+                return e.Message.ToString();
+            }
+        }
+
+
     }
 }
 

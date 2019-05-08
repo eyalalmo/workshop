@@ -7,7 +7,7 @@ namespace workshop192.Domain
 
     {
         public SubscribedUser appointedBy;
-        public Store store;
+        private Store store;
         public SubscribedUser user;
         public Permissions permissions;
         public bool isOwner = false;

@@ -144,7 +144,9 @@
                 });
             });
 
-            $("#searchN").click(function () {
+        $("#searchN").click(function () {
+                 document.getElementById('quantity').style.visibility = "hidden";
+                 document.getElementById('confirm').style.visibility = "hidden";
                 event.preventDefault();
                  search = $("#searchI").val();
                 var doc = document.getElementById('allProducts')
@@ -164,7 +166,9 @@
                     }
                 });
             });
-            $("#searchC").click(function () {
+        $("#searchC").click(function () {
+                 document.getElementById('quantity').style.visibility = "hidden";
+                 document.getElementById('confirm').style.visibility = "hidden";
                 event.preventDefault();
                  search = $("#searchI").val();
                 var doc = document.getElementById('allProducts')
@@ -184,7 +188,9 @@
                     }
                 });
             });
-            $("#searchK").click(function () {
+        $("#searchK").click(function () {
+                 document.getElementById('quantity').style.visibility = "hidden";
+                 document.getElementById('confirm').style.visibility = "hidden";
                 event.preventDefault();
                  search = $("#searchI").val();
                 var doc = document.getElementById('allProducts')
