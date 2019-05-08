@@ -65,6 +65,15 @@ namespace workshop192.Domain
         {
             sessions = new Dictionary<int, Session>();
         }
+
+        internal int getSessionOfUserName(string username)
+        {
+            foreach (KeyValuePair<int, Session> s in sessions) {
+                if (s.Value.getSubscribedUser().getUsername() == username)
+                    return s.Key;
+            }
+            return -1;
+        }
     }
 }
 
