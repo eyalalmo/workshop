@@ -355,7 +355,6 @@
     </Compile>
     <Compile Include="Views\Pages\EditStore.aspx.cs">
       <DependentUpon>EditStore.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\Pages\EditStore.aspx.designer.cs">
       <DependentUpon>EditStore.aspx</DependentUpon>
@@ -397,7 +396,6 @@
     </Compile>
     <Compile Include="Views\Pages\Store.aspx.cs">
       <DependentUpon>Store.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\Pages\Store.aspx.designer.cs">
       <DependentUpon>Store.aspx</DependentUpon>
