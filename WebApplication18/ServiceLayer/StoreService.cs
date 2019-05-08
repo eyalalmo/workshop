@@ -50,7 +50,7 @@ namespace workshop192.ServiceLayer
             if (product < 0)
                 throw new ArgumentException("illegal product number");
             if (price <= 0)
-                throw new IllegalAmountException("error - price must be a positive number");
+                throw new AlreadyExistException("error - price must be a positive number");
             db.setProductPrice(product, price, session);
         }
 
@@ -68,7 +68,7 @@ namespace workshop192.ServiceLayer
             if (product < 0)
                 throw new ArgumentException("illegal product number");
             if (amount <= 0)
-                throw new IllegalAmountException("error - amount must be a positive number");
+                throw new AlreadyExistException("error - amount must be a positive number");
             db.addToProductQuantity(product, amount, session);
         }
 
@@ -77,7 +77,7 @@ namespace workshop192.ServiceLayer
             if (product < 0)
                 throw new ArgumentException("illegal product number");
             if (amount <= 0)
-                throw new IllegalAmountException("error - amount must be a positive number");
+                throw new AlreadyExistException("error - amount must be a positive number");
             db.decFromProductQuantity(product, amount, session);
         }
 
@@ -163,11 +163,11 @@ namespace workshop192.ServiceLayer
             if (productName == "")
                 throw new ArgumentException("illeagal name");
             if (price < 0)
-                throw new IllegalAmountException("error - price must be a positive number");
+                throw new AlreadyExistException("error - price must be a positive number");
             if (rank < 0 | rank > 5)
-                throw new IllegalAmountException("error - rank must be a number between 1 to 5");
+                throw new AlreadyExistException("error - rank must be a number between 1 to 5");
             if (quantityLeft < 0)
-                throw new IllegalAmountException("error - quantity must be a positive number");
+                throw new AlreadyExistException("error - quantity must be a positive number");
         }
 
 
@@ -212,7 +212,7 @@ namespace workshop192.ServiceLayer
                 throw new ArgumentException("illegal store number");
             if (percentage <= 0 || percentage >= 1)
             {
-                throw new IllegalAmountException("percentage of discount must be a number between 0 to 1");
+                throw new AlreadyExistException("percentage of discount must be a number between 0 to 1");
             }
             if (session < 0)
                 throw new NullReferenceException("session is a null reference");
@@ -228,7 +228,7 @@ namespace workshop192.ServiceLayer
                 throw new ArgumentException("illegal store number");
             if (percentage <= 0 || percentage >= 1)
             {
-                throw new IllegalAmountException("percentage of discount must be a number between 0 to 1");
+                throw new AlreadyExistException("percentage of discount must be a number between 0 to 1");
             }
             if (session < 0)
                 throw new NullReferenceException("session is a null reference");
@@ -240,7 +240,7 @@ namespace workshop192.ServiceLayer
                 throw new ArgumentException("illegal store number");
             if (percentage <= 0 || percentage >= 1)
             {
-                throw new IllegalAmountException("percentage of discount must be a number between 0 to 1");
+                throw new AlreadyExistException("percentage of discount must be a number between 0 to 1");
             }
             if (session < 0)
                 throw new NullReferenceException("session is a null reference");
@@ -338,7 +338,14 @@ namespace workshop192.ServiceLayer
 
             db.removeCouponFromStore(sessionID, storeID, couponCode);
         }
+        /*
+        public void addMinPurchasePolicyint(int sessionID, int storeID, int minAmount, string duration)
+        {
 
+
+
+        }
+        */
 
 
 

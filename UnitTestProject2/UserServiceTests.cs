@@ -283,7 +283,7 @@ namespace workshop192.ServiceLayer.Tests
                 userService.purchaseBasket(session2);
                 Assert.Fail();
             }
-            catch (IllegalAmountException)
+            catch (AlreadyExistException)
             {
                 Assert.IsTrue(true);
             }

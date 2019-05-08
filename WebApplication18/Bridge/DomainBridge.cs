@@ -401,7 +401,7 @@ namespace workshop192.Bridge
         {
             if (amount <= 0)
             {
-                throw new IllegalAmountException("error : amount should be a positive number");
+                throw new AlreadyExistException("error : amount should be a positive number");
             }
             Product p = DBProduct.getInstance().getProductByID(product);
 
@@ -423,7 +423,7 @@ namespace workshop192.Bridge
         {
             if (newAmount <= 0)
             {
-                throw new IllegalAmountException("ERROR: quantity should be a positive number");
+                throw new AlreadyExistException("ERROR: quantity should be a positive number");
             }
             Product p = DBProduct.getInstance().getProductByID(product);
 

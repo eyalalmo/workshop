@@ -58,7 +58,7 @@ namespace workshop192.Domain
             }
             else
             {
-                throw new IllegalAmountException("The amount asked is larger than the quantity left");
+                throw new AlreadyExistException("The amount asked is larger than the quantity left");
             }
         }
 
@@ -98,7 +98,7 @@ namespace workshop192.Domain
             int quantity = p.getQuantityLeft();
             if (quantity + oldAmount - newAmount < 0)
             {
-                throw new IllegalAmountException("error - The amount asked is larger than the quantity left");
+                throw new AlreadyExistException("error - The amount asked is larger than the quantity left");
             }
             productList.Remove(p);
             productList.Add(p, newAmount);

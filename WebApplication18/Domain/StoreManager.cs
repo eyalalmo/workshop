@@ -93,7 +93,7 @@ namespace workshop192.Domain
                     + store.getStoreName());
             int curQuan = product.getQuantityLeft();
             if (curQuan < amount)
-                throw new IllegalAmountException("current quantity is " +
+                throw new AlreadyExistException("current quantity is " +
                     curQuan + " and it can't be decreased by " + amount);
             product.decQuantityLeft(amount);
         }

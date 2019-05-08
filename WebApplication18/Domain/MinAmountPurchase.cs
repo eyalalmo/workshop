@@ -17,7 +17,7 @@ namespace workshop192.Domain
         public override void checkPolicy(Product p, int amount)
         {
             if (amount < minAmount)
-                throw new IllegalAmountException("can not purchase less than " + minAmount + " of the same product");
+                throw new AlreadyExistException("can not purchase less than " + minAmount + " of the same product");
         }
 
         public override int getAmount()

@@ -98,7 +98,7 @@ namespace workshop192.Domain
         {
             if (amount < 0)
             {
-                throw new IllegalAmountException("ERROR: amount cannot not be a negative number");
+                throw new AlreadyExistException("ERROR: amount cannot not be a negative number");
             }
             shoppingBasket.addToCart(product, amount);
         }

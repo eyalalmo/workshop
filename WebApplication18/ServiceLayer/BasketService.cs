@@ -48,7 +48,7 @@ namespace workshop192.ServiceLayer
 
             if (amount <= 0)
             {
-                throw new IllegalAmountException("error : amount should be a positive number");
+                throw new AlreadyExistException("error : amount should be a positive number");
             }
             db.addToCart(user, product, amount);
             
@@ -77,7 +77,7 @@ namespace workshop192.ServiceLayer
 
             if (newAmount <= 0)
             {
-                throw new IllegalAmountException( "ERROR: quantity should be a positive number");
+                throw new AlreadyExistException( "ERROR: quantity should be a positive number");
             }
 
             db.changeQuantity(user, product, store, newAmount);

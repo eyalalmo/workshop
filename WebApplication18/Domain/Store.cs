@@ -249,7 +249,7 @@ namespace workshop192.Domain
             }
             else if(listSize == 2)
             {
-                throw new IllegalAmountException("store can not have more than 2 purchase policies");
+                throw new AlreadyExistException("store can not have more than 2 purchase policies");
             }
             else
             {

@@ -16,7 +16,7 @@ namespace workshop192.Domain
         {
             if (children == null)
             {
-                throw new IllegalAmountException();
+                throw new AlreadyExistException();
             }
             this.children = children;
             if (type == "and")

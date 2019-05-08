@@ -17,7 +17,7 @@ namespace workshop192.Domain
         public override void checkPolicy(Product p, int amount)
         {
             if (amount > maxAmount)
-                throw new IllegalAmountException("can not purchase more than " + maxAmount + " of the same product");
+                throw new AlreadyExistException("can not purchase more than " + maxAmount + " of the same product");
         }
         public override void setAmount(int newAmount)
         {

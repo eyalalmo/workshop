@@ -104,7 +104,7 @@ namespace workshop192.ServiceLayer.Tests
             {
                 basketService.addToCart(session1, p3, 6); // should fail - too much 
             }
-            catch (IllegalAmountException)
+            catch (AlreadyExistException)
             {
                 Assert.IsTrue(true);
             }
