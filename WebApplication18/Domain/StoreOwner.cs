@@ -23,6 +23,10 @@ namespace workshop192.Domain
             appointedByMe = new List<StoreRole>();
         }
 
+        public StoreOwner()
+        {
+        }
+
         public void addProduct(Product product)
         {
             store.addProduct(product);
@@ -144,7 +148,9 @@ namespace workshop192.Domain
                 remove(sr.getUser());
         }
 
-        public void addProductVisibleDiscount(Product product, int percentage, string duration)
+        
+
+        public void addProductVisibleDiscount(Product product, double percentage, string duration)
         {
             VisibleDiscount discount = new VisibleDiscount(percentage, duration);
             product.setDiscount(discount);
@@ -154,7 +160,7 @@ namespace workshop192.Domain
             product.removeDiscount();
         }
 
-        public void addStoreVisibleDiscount(int percentage, string duration)
+        public void addStoreVisibleDiscount(double percentage, string duration)
         {
             VisibleDiscount v = new VisibleDiscount(percentage, duration);
             store.addDiscount(v);
@@ -182,18 +188,42 @@ namespace workshop192.Domain
             store.addDiscount(composite);
         }
 
-        /*  public void addComplexReliantDiscount()
-     {
+        public void addMaxAmountPolicy(int storeID, int maxAmount)
+        {
+            MaxAmountPurchase p = new MaxAmountPurchase(maxAmount);
+            Store store = DBStore.getInstance().getStore(storeID);
+            store.addPurchasePolicy(p);
+        }
 
-     }
-    /* public void addReliantDiscountSameProduct(double percentage, String condition, String duration)
-     {
-         discount = new ReliantDiscount(percentage, condition, duration);
-     }
-     public void addReliantDiscountTotalAmount(double percentage, String condition, String duration)
-     {
-         discount = new ReliantDiscount(percentage, condition, duration);
-     }*/
+        public void removeMaxAmountPolicy(int storeID)
+        {
+            Store store = DBStore.getInstance().getStore(storeID);
+            store.removeMaxAMountPolicy();
+        }
+        public void removeMinAmountPolicy(int storeID)
+        {
+            Store store = DBStore.getInstance().getStore(storeID);
+            store.removeMinAmountPolicy();
+        }
 
+        public void setMinAmountPolicy(int storeID, int newMinAmount)
+        {
+            Store store = DBStore.getInstance().getStore(storeID);
+            store.setMinPurchasePolicy(newMinAmount);
+        }
+
+        public void addMinAmountPolicy(int storeID, int minAmount)
+        {
+            MinAmountPurchase p = new MinAmountPurchase(minAmount);
+            Store store = DBStore.getInstance().getStore(storeID);
+            store.addPurchasePolicy(p);
+        }
+
+        public void setMaxAmountPolicy(int storeID, int newMaxAmount)
+        {
+            Store store = DBStore.getInstance().getStore(storeID);
+            store.setMaxPurchasePolicy(newMaxAmount);
+
+        }
     }
 }

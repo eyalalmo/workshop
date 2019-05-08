@@ -19,5 +19,17 @@ namespace workshop192.Domain
             if (amount > maxAmount)
                 throw new IllegalAmountException("can not purchase more than " + maxAmount + " of the same product");
         }
+        public override void setAmount(int newAmount)
+        {
+            if (newAmount <= 0)
+            {
+                throw new ArgumentOutOfRangeException("maximum amount can not be negative or 0");
+            }
+            maxAmount = newAmount;
+        }
+        public  override int getAmount()
+        {
+            return maxAmount;
+        }
     }
 }
