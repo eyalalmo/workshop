@@ -85,12 +85,12 @@ namespace WebApplication18.Controllers
 
         [Route("api/store/SetProductInformation")]
         [HttpGet]
-        public string SetProductInformation(int storeID, int productID, int price, int rank,int quantityLeft,string productName)
+        public string SetProductInformation(int storeID, int productID, int price, int rank, int quantityLeft, string productName)
         {
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-                 StoreService.getInstance().SetProductInformation(storeID,productID,price,rank, quantityLeft,productName,session);
+                StoreService.getInstance().SetProductInformation(storeID, productID, price, rank, quantityLeft, productName, session);
                 return "ok";
 
             }
@@ -113,10 +113,11 @@ namespace WebApplication18.Controllers
             {
                 return e.Message.ToString();
             }
+        }
 
         [Route("api/store/addVisibleDiscount")]
         [HttpGet]
-        public string addVisibleDiscount(int storeID,string percentage, string duration)
+        public string addVisibleDiscount(int storeID, string percentage, string duration)
         {
             try
             {
@@ -134,7 +135,7 @@ namespace WebApplication18.Controllers
 
         [Route("api/store/addReliantDiscountTotalAmount")]
         [HttpGet]
-        public string addReliantDiscountTotalAmount(int storeID,int totalAmount, string percentage, string duration)
+        public string addReliantDiscountTotalAmount(int storeID, int totalAmount, string percentage, string duration)
         {
             try
             {
@@ -151,7 +152,7 @@ namespace WebApplication18.Controllers
         }
         [Route("api/store/addReliantDiscountSameProduct")]
         [HttpGet]
-        public string addReliantDiscountSameProduct(int storeID,string percentage, string duration, int numOfProducts, int productID)
+        public string addReliantDiscountSameProduct(int storeID, string percentage, string duration, int numOfProducts, int productID)
         {
             try
             {
@@ -169,10 +170,10 @@ namespace WebApplication18.Controllers
 
 
 
-        }
+
         [Route("api/store/removeRole")]
         [HttpGet]
-        public string removeRole(string username,int storeId)
+        public string removeRole(string username, int storeId)
         {
             try
             {
@@ -192,7 +193,7 @@ namespace WebApplication18.Controllers
 
         [Route("api/store/addManager")]
         [HttpGet]
-        public string addManager(string username, int storeId,bool prod,bool disc,bool poli)
+        public string addManager(string username, int storeId, bool prod, bool disc, bool poli)
         {
             try
             {
@@ -205,6 +206,10 @@ namespace WebApplication18.Controllers
                 return e.Message.ToString();
             }
         }
+
+
+
+
 
 
     }
