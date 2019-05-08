@@ -125,10 +125,10 @@ namespace workshop192.Bridge
             p.setQuantityLeft(setquantityLeft);
         }
 
-        public void purchaseBasket(int sessionid)
+        public void purchaseBasket(int sessionid, string address, string creditCard)
         {
             Session session = DBSession.getInstance().getSession(sessionid);
-            session.purchaseBasket(address, creditCart);
+            session.purchaseBasket(address, creditCard);
         }
 
         public void setProductRank(int productID, int rank, int session)

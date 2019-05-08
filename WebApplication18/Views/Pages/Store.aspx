@@ -48,7 +48,7 @@
                                 + `price: <input type="text" id="inPrice`+i+`" name="inPrice" value="` + price + `"><br>`
                                 + `rank: <input type="text" id="inRank`+i+`" value="` + rank + `"><br>`
                                 + `quantityLeft: <input type="text" id="inQ`+i+`" value="` + quantityLeft + `"><br>`
-                                + `discount: <input type="text" value="` + discount + `"><br>`
+                                + "<form><input type = \"button\" value = \"Discount\" onclick=\"discount(" + storeID + "," + productID +");\"></form>"
                                 + " <form><input type = \"button\" value = \"edit\" onclick=\"edit(" + storeID + "," + productID + "," +i +");\"></form>"
                                 + `   </div>
 		                    </div>
@@ -101,6 +101,13 @@
                 }
             });
 
+        }  
+        function discount(storeID, productID) {
+            console.log(storeID + "!" + productID);
+            event.preventDefault();
+            var getUrl = window.location;
+             var baseUrl = getUrl.protocol + "//" + getUrl.host;
+             window.location.href = baseUrl + "/Discounts?storeID=" + storeID + "&productID="+productID;
         }  
 
     </script>
