@@ -18,7 +18,6 @@ namespace workshop192.Domain
         public int numOfOwners;
         public bool active;
         public LinkedList<DiscountComponent> discountList;
-        private LinkedList<DiscountComponent> discountList;
         private LinkedList<PurchasePolicy> purchasePolicyList;
 
 

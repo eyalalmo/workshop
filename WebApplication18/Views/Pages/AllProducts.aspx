@@ -16,13 +16,19 @@
     <button  name="searchC" id="searchC" class="btn btn-primary">Search By Category</button>
     <button  name="searchC" id="searchK" class="btn btn-primary">Search By Keyword</button>
               </div>
+          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              min price :
+              <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="minPrice">
+              max price : 
+              <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="maxPrice">
+    <button type="button" id="prices" class="btn btn-primary" onclick="removeID()">Filter</button>
+              </div>
+
           </div>
        </div>
     
-    <div class="container">
-	<div id="allProducts" class="row">
-        </div>
-		</div>
+        ___________________________________________________________________________________________________________________________________
+	<div id="allProducts" class="row"></div>
          <input class="form-control align-middle" type="text"  visible="false" placeholder="Quantity" aria-label="Search" id="quantity" name="quantity"/>
         <button type="button" class="btn btn-primary" onClick="confirmBasket()" id="confirm" name="confirm"/>
              Confirm
@@ -61,13 +67,13 @@
             var jsonList = JSON.parse(response);
             var HTML;
             for (i = 0; i < jsonList.length; i++) {
-                HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" id="aa` + jsonList[i].productID +`">
 		                   <div class="my-list">
-			<span id="hhh">`+ jsonList[i].productName + `</span>
-            <span> Category:`+ jsonList[i].productCategory + `</span>
-			<span class="pull-right"> Quantity Left:`+ jsonList[i].quantityLeft + `</span>
+			<span>`+ jsonList[i].productName + `</span>
+            <span class="pull-right"> Category: `+ jsonList[i].productCategory + `     </span>
+			<span class="pull-right"> Quantity Left: `+ jsonList[i].quantityLeft + `</span>
 			<div class="detail">
-			<p>Price:`+ jsonList[i].price + `</p>
+			<span>Price: `+ jsonList[i].price + `    </span>
 		    <button type="button" class="btn btn-primary" onClick="addToCart(` + jsonList[i].productID + `)"/>
              Add To Cart
             </button>
@@ -75,9 +81,8 @@
 			</div>
 		</div>
 		</div>`
+                
                 //`+jsonList[i].ProductID+`
-
-
             }
             doc.innerHTML = HTML;
         };
@@ -88,6 +93,10 @@
             document.getElementById('quantity').style.visibility = "visible";
             currentProductID = productID;
             document.getElementById('confirm').style.visibility = "visible";
+        };
+        function removeID(productID) {
+
+            document.getElementById('aa'+productID).style.visibility = "hidden";
         };
         function confirmBasket() {
              var getUrl = window.location;
