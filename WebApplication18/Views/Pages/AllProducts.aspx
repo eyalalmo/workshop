@@ -7,15 +7,15 @@
     <h1> </h1>
       <h1> </h1>
       <div class="container ">
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-    <button  name="showAll" id="showAll" class="btn btn-primary">Show All Products</button>
-                  </div>
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="searchI" name="searchI">
-    <button  name="searchN" id="searchN" class="btn btn-primary">Search By Name</button>
-    <button  name="searchC" id="searchC" class="btn btn-primary">Search By Category</button>
+         
+    <button  name="showAll" id="showAll" class="btn btn-primary">Show All Products</button><p></p><p></p>
+       
+    
+     <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="searchI" name="searchI"><p></p><p></p> <p></p><p></p> 
+    <button  name="searchN" id="searchN" class="btn btn-primary">Search By Name</button> &nbsp &nbsp &nbsp
+    <button  name="searchC" id="searchC" class="btn btn-primary">Search By Category</button>&nbsp &nbsp &nbsp
     <button  name="searchC" id="searchK" class="btn btn-primary">Search By Keyword</button>
-              </div>
+             
           </div>
        </div>
     

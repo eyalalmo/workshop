@@ -49,7 +49,7 @@ namespace WebApplication18.Controllers
         {
             try
             {
-                string res = "";
+                
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
                 return StoreService.getInstance().getProducts(storeId);
 
@@ -190,6 +190,24 @@ namespace WebApplication18.Controllers
 
 
         }
+        }
+     
+        [Route("api/store/isOwner")]
+        [HttpGet]
+        public bool isOwner(int storeId)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().isOwner(storeId, session);
+                return true;
+
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
 
         [Route("api/store/addManager")]
         [HttpGet]
@@ -210,6 +228,104 @@ namespace WebApplication18.Controllers
 
 
 
+        [Route("api/store/isManager")]
+        [HttpGet]
+        public bool isManager(int storeId)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().isManager(storeId, session);
+                return true;
+
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        //IsAllowedToEditProduct
+        [Route("api/store/IsEP")]
+        [HttpGet]
+        public bool IsEP(int storeId)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                return StoreService.getInstance().isAllowedToEditProduct(storeId, session);
+               
+
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+        //isAllowedToEditDiscount
+        [Route("api/store/IsED")]
+        [HttpGet]
+        public bool IsED(int storeId)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                return StoreService.getInstance().isAllowedToEditDiscount(storeId, session);
+               
+
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        //isAllowedToEditProduct
+        [Route("api/store/IsEPo")]
+        [HttpGet]
+        public bool IsEPo(int storeId)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                return StoreService.getInstance().isAllowedToEditPolicy(storeId, session);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        [Route("api/store/addProduct")]
+        [HttpGet]
+        public string addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, int storeID)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().addProduct(productName, productCategory, price, rank, quantityLeft, storeID, session);
+                return "ok";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+        [Route("api/store/deleteProduct")]
+        [HttpGet]
+        public string deleteProduct(int storeID, int productID) { 
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                 StoreService.getInstance().removeProduct(productID,session);
+                return "ok";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
 
 
     }

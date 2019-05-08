@@ -9,10 +9,7 @@
     <span class="caret"></span></button>
     <ul class="dropdown-menu">
     <li><a href="#" id="AddStore" >Add Store</a></li>
-    <li><a href="#" id="editStore"  >Edit Store </a></li>
-        <li><a href="#" id="editDiscount">Edit Discount </a></li>
-    <li><a href="#" id="AddProuduct"  >Add Prouduct</a></li>
-      <li><a href="#" id="ShowProuduct" >Show Prouduct</a></li>
+    <li><a href="#" id="editStore"  >edit Store </a></li>
   </ul>
     <div class="form-group" id="DivStoreEdit" style="visibility:hidden">
   <label for="usr">Store id:</label>

@@ -7,7 +7,7 @@ namespace workshop192.Domain
 
     {
         public SubscribedUser appointedBy;
-        private Store store;
+        public Store store;
         public SubscribedUser user;
         public Permissions permissions;
         public bool isOwner = false;
@@ -133,6 +133,12 @@ namespace workshop192.Domain
         {
             return;
         }
+        public Permissions getPermissions()
+        {
+            return permissions;
+
+        }
+
         public void removeRoleAppointedByMe(StoreRole role)
         {
             return;
