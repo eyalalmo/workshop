@@ -30,7 +30,7 @@ namespace WebApplication18.Controllers
                 return res;
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 string s = "fail";
 
@@ -50,7 +50,7 @@ namespace WebApplication18.Controllers
               
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return -1;
             }

@@ -187,8 +187,43 @@ namespace workshop192.Domain
             DiscountComposite composite = new DiscountComposite(list, type);
             store.addDiscount(composite);
         }
-        
-        
 
+        public void addMaxAmountPolicy(int storeID, int maxAmount)
+        {
+            MaxAmountPurchase p = new MaxAmountPurchase(maxAmount);
+            Store store = DBStore.getInstance().getStore(storeID);
+            store.addPurchasePolicy(p);
+        }
+
+        public void removeMaxAmountPolicy(int storeID)
+        {
+            Store store = DBStore.getInstance().getStore(storeID);
+            store.removeMaxAMountPolicy();
+        }
+        public void removeMinAmountPolicy(int storeID)
+        {
+            Store store = DBStore.getInstance().getStore(storeID);
+            store.removeMinAmountPolicy();
+        }
+
+        public void setMinAmountPolicy(int storeID, int newMinAmount)
+        {
+            Store store = DBStore.getInstance().getStore(storeID);
+            store.setMinPurchasePolicy(newMinAmount);
+        }
+
+        public void addMinAmountPolicy(int storeID, int minAmount)
+        {
+            MinAmountPurchase p = new MinAmountPurchase(minAmount);
+            Store store = DBStore.getInstance().getStore(storeID);
+            store.addPurchasePolicy(p);
+        }
+
+        public void setMaxAmountPolicy(int storeID, int newMaxAmount)
+        {
+            Store store = DBStore.getInstance().getStore(storeID);
+            store.setMaxPurchasePolicy(newMaxAmount);
+
+        }
     }
 }

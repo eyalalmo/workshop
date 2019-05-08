@@ -20,5 +20,18 @@ namespace workshop192.Domain
                 throw new IllegalAmountException("can not purchase less than " + minAmount + " of the same product");
         }
 
+        public override int getAmount()
+        {
+            return minAmount;
+        }
+
+        public override void setAmount(int newAmount)
+        {
+            if (newAmount <= 0)
+            {
+                throw new ArgumentOutOfRangeException("minimum amount can not be negative or 0");
+            }
+            minAmount = newAmount;
+        }
     }
 }

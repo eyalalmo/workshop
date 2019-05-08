@@ -31,5 +31,11 @@ namespace workshop192.Domain
         void addReliantDiscountTotalAmount(double percentage, String duration, int amount);
         void removeStoreDiscount(Store store);
         void addComplexDiscount(List<DiscountComponent> list, string type);
+        void addMaxAmountPolicy(int storeID, int maxAmount);
+        void removeMaxAmountPolicy(int storeID);
+        void removeMinAmountPolicy(int storeID);
+        void setMinAmountPolicy(int storeID, int newMinAmount);
+        void addMinAmountPolicy(int storeID, int minAmount);
+        void setMaxAmountPolicy(int storeID, int newMinAmount);
     }
 }

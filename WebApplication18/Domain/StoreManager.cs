@@ -38,7 +38,7 @@ namespace workshop192.Domain
         public void addProduct(Product product)
         {
             if (!permissions.editProduct())
-                throw new PermissionsException(user.getUsername() + 
+                throw new PermissionsException(user.getUsername() +
                     " have no permissions to edit products in store " +
                     store.getStoreName());
             store.addProduct(product);
@@ -61,8 +61,8 @@ namespace workshop192.Domain
         public void setProductPrice(Product product, int price)
         {
             if (!permissions.editProduct())
-                throw new PermissionsException(user.getUsername() + 
-                    " has no permission to set product's price in store " 
+                throw new PermissionsException(user.getUsername() +
+                    " has no permission to set product's price in store "
                     + store.getStoreName());
             product.setPrice(price);
         }
@@ -70,8 +70,8 @@ namespace workshop192.Domain
         public void setProductName(Product product, string name)
         {
             if (!permissions.editProduct())
-                throw new PermissionsException(user.getUsername() + 
-                    " has no permission to set product's name in store " + 
+                throw new PermissionsException(user.getUsername() +
+                    " has no permission to set product's name in store " +
                     store.getStoreName());
             product.setProductName(name);
         }
@@ -79,8 +79,8 @@ namespace workshop192.Domain
         public void addToProductQuantity(Product product, int amount)
         {
             if (!permissions.editProduct())
-                throw new PermissionsException(user.getUsername() + 
-                    " has no permission to add to product's quantity in store " + 
+                throw new PermissionsException(user.getUsername() +
+                    " has no permission to add to product's quantity in store " +
                     store.getStoreName());
             product.addQuantityLeft(amount);
         }
@@ -88,12 +88,12 @@ namespace workshop192.Domain
         public void decFromProductQuantity(Product product, int amount)
         {
             if (!permissions.editProduct())
-                throw new PermissionsException(user.getUsername() + 
-                    " has no permission to decrease from product's quantity in store " 
+                throw new PermissionsException(user.getUsername() +
+                    " has no permission to decrease from product's quantity in store "
                     + store.getStoreName());
             int curQuan = product.getQuantityLeft();
             if (curQuan < amount)
-                throw new IllegalAmountException("current quantity is " + 
+                throw new IllegalAmountException("current quantity is " +
                     curQuan + " and it can't be decreased by " + amount);
             product.decQuantityLeft(amount);
         }
@@ -101,8 +101,8 @@ namespace workshop192.Domain
         public void setProductDiscount(Product product, DiscountComponent discount)
         {
             if (!permissions.editDiscount())
-                throw new PermissionsException(user.getUsername() + 
-                    " has no permission to set product's discount in store " + 
+                throw new PermissionsException(user.getUsername() +
+                    " has no permission to set product's discount in store " +
                     store.getStoreName());
             //product.setDiscount(discount);
         }
@@ -137,7 +137,7 @@ namespace workshop192.Domain
             return;
         }
 
-        public void addStoreVisibleDiscount(int percentage, string duration)
+        public void addStoreVisibleDiscount(double percentage, string duration)
         {
             VisibleDiscount v = new VisibleDiscount(percentage, duration);
             store.addDiscount(v);
@@ -165,20 +165,56 @@ namespace workshop192.Domain
             DiscountComposite composite = new DiscountComposite(list, type);
             store.addDiscount(composite);
         }
-
+        
         public void addProductVisibleDiscount(Product product, double percentage, string duration)
         {
-            throw new NotImplementedException();
+            VisibleDiscount discount = new VisibleDiscount(percentage, duration);
+            product.setDiscount(discount);
         }
 
         public void removeProductDiscount(Product product)
         {
-            throw new NotImplementedException();
+            product.removeDiscount();
         }
 
-        public void addStoreVisibleDiscount(double percentage, string duration)
+        //////
+
+        public void addMaxAmountPolicy(int storeID, int maxAmount)
         {
-            throw new NotImplementedException();
+            MaxAmountPurchase p = new MaxAmountPurchase(maxAmount);
+            Store store = DBStore.getInstance().getStore(storeID);
+            store.addPurchasePolicy(p);
+        }
+
+        public void removeMaxAmountPolicy(int storeID)
+        {
+            Store store = DBStore.getInstance().getStore(storeID);
+            store.removeMaxAMountPolicy();
+        }
+        public void removeMinAmountPolicy(int storeID)
+        {
+            Store store = DBStore.getInstance().getStore(storeID);
+            store.removeMinAmountPolicy();
+        }
+
+        public void setMinAmountPolicy(int storeID, int newMinAmount)
+        {
+            Store store = DBStore.getInstance().getStore(storeID);
+            store.setMinPurchasePolicy(newMinAmount);
+        }
+
+        public void addMinAmountPolicy(int storeID, int minAmount)
+        {
+            MinAmountPurchase p = new MinAmountPurchase(minAmount);
+            Store store = DBStore.getInstance().getStore(storeID);
+            store.addPurchasePolicy(p);
+        }
+
+        public void setMaxAmountPolicy(int storeID, int newMaxAmount)
+        {
+            Store store = DBStore.getInstance().getStore(storeID);
+            store.setMaxPurchasePolicy(newMaxAmount);
+
         }
     }
 }

@@ -104,7 +104,7 @@ namespace WebApplication18.Controllers
                 return res;
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 string s = "fail";
 

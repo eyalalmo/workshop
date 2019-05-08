@@ -267,6 +267,69 @@ namespace workshop192.ServiceLayer
             throw new NotImplementedException();
         }
 
+        public void addMinAmountPolicy(int storeID, int sessionID, int minAmount)
+        {
+            if (storeID < 0)
+                throw new ArgumentException("illegal store number");
+            
+            if (sessionID < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.addMinAmountPolicy(storeID, sessionID, minAmount);
+        }
+        public void setMinAmountPolicy(int storeID, int sessionID, int newMinAmount)
+        {
+            if (storeID < 0)
+                throw new ArgumentException("illegal store number");
+
+            if (sessionID < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.setMinAmountPolicy(storeID, sessionID, newMinAmount);
+
+        }
+        public void removeMinAmountPolicy(int storeID, int sessionID)
+        {
+            if (storeID < 0)
+                throw new ArgumentException("illegal store number");
+
+            if (sessionID < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.removeMaxAmountPolicy(storeID, sessionID);
+
+
+        }
+
+        public void addMaxAmountPolicy(int storeID, int sessionID, int maxAmount)
+            {
+            if (storeID < 0)
+                throw new ArgumentException("illegal store number");
+
+            if (sessionID < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.addMaxAmountPolicy(storeID, sessionID, maxAmount);
+        }
+        public void setMaxAmountPolicy(int storeID, int sessionID, int newMaxAmount)
+        {
+            if (storeID < 0)
+                throw new ArgumentException("illegal store number");
+
+            if (sessionID < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.setMaxAmountPolicy(storeID, sessionID, newMaxAmount);
+
+        }
+        public void removeMaxAmountPolicy(int storeID, int sessionID)
+        {
+            if (storeID < 0)
+                throw new ArgumentException("illegal store number");
+
+            if (sessionID < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.removeMaxAmountPolicy(storeID, sessionID);
+
+
+        }
+
+
     }
 }
 
