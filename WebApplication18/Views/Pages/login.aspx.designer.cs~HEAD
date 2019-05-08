@@ -7,9 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebApplication18.Views.Pages {
+namespace WebApplication18 {
     
     
-    public partial class ManageStaff {
+    public partial class WebForm1 {
     }
 }

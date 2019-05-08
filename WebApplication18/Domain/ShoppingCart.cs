@@ -52,7 +52,7 @@ namespace workshop192.Domain
             if (quantityLeft - amount >= 0)
             {
                 if (productList.ContainsKey(product))
-                    throw new CartException("error: product exist");
+                    throw new CartException("error: Product already exists on Cart");
                 productList.Add(product, amount);
                 productsActualPrice.Add(product, product.getPrice());
             }

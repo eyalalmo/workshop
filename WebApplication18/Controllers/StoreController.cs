@@ -12,7 +12,36 @@ namespace WebApplication18.Controllers
 {
     public class StoreController : ApiController
     {
+        [Route("api/store/getStoreById")]
+        [HttpGet]
+        public string getStoreByID(int storeId)
+        {
+            try
+            {
+                return StoreService.getInstance().getStore(storeId);
+            }
+            catch (Exception e)
+            {
+                string s = "fail";
 
+                return s;
+            }
+        }
+        [Route("api/store/addOwner")]
+        [HttpGet]
+        public string addOwner(string username, int storeId)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().addOwner(storeId, username, session);
+                return "ok";
+            }
+            catch (Exception e)
+            {
+                return e.Message.ToString();
+            }
+        }
 
         [Route("api/store/getStoreProducts")]
         [HttpGet]
@@ -23,7 +52,7 @@ namespace WebApplication18.Controllers
                 string res = "";
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
                 return StoreService.getInstance().getProducts(storeId);
-                
+
 
             }
             catch (Exception)
@@ -42,8 +71,8 @@ namespace WebApplication18.Controllers
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-               return  StoreService.getInstance().addStore(name, description, session);
-              
+                return StoreService.getInstance().addStore(name, description, session);
+
 
             }
             catch (Exception)
@@ -70,6 +99,20 @@ namespace WebApplication18.Controllers
                 return e.Message;
             }
         }
+
+        [Route("api/store/getAllRoles")]
+        [HttpGet]
+        public string getAllRoles(int storeId)
+        {
+            try
+            {
+                return StoreService.getInstance().getAllRoles(storeId);
+
+            }
+            catch (Exception e)
+            {
+                return e.Message.ToString();
+            }
 
         [Route("api/store/addVisibleDiscount")]
         [HttpGet]
@@ -125,6 +168,43 @@ namespace WebApplication18.Controllers
         }
 
 
+
+        }
+        [Route("api/store/removeRole")]
+        [HttpGet]
+        public string removeRole(string username,int storeId)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().removeRole(storeId, username, session);
+                return "ok";
+
+            }
+            catch (Exception e)
+            {
+                return e.Message.ToString();
+            }
+
+
+
+        }
+
+        [Route("api/store/addManager")]
+        [HttpGet]
+        public string addManager(string username, int storeId,bool prod,bool disc,bool poli)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().addManager(storeId, username, prod, disc, poli, session);
+                return "ok";
+            }
+            catch (Exception e)
+            {
+                return e.Message.ToString();
+            }
+        }
 
 
     }
