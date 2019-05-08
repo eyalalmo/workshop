@@ -48,7 +48,31 @@ namespace workshop192.Bridge
             user.register(username, password);
         }
 
-        public LinkedList<Product> getProducts(int id)
+        public bool isOwner(int storeId, int session)
+        {
+            Session user = DBSession.getInstance().getSession(session);
+            Store s = DBStore.getInstance().getStore(storeId);
+            StoreRole role=  s.getStoreRole(user.getSubscribedUser());
+            if(role is StoreOwner)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool isManager(object v, int session)
+        {
+            Session user = DBSession.getInstance().getSession(session);
+            Store s = DBStore.getInstance().getStore((int)v);
+            StoreRole role = s.getStoreRole(user.getSubscribedUser());
+            if (role is StoreManager)
+            {
+                return true;
+            }
+            return false;
+
+        }
+
+            public LinkedList<Product> getProducts(int id)
         {
            return DBStore.getInstance().getStore(id).getProductList();
         }
@@ -98,6 +122,55 @@ namespace workshop192.Bridge
             Product p = DBProduct.getInstance().getProductByID(productID);
             return p.getQuantityLeft();
         }
+
+        public bool isAllowedToEditProduct(int storeId, int session)
+        {
+            Session user = DBSession.getInstance().getSession(session);
+            Store s = DBStore.getInstance().getStore(storeId);
+            StoreRole role = s.getStoreRole(user.getSubscribedUser());
+            if (role is StoreOwner)
+            {
+                return true;
+            }
+            if(role is StoreManager && ((StoreManager)role).getPermissions().editProduct() == true)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool isAllowedToEditPolicy(int storeId, int session)
+        {
+            Session user = DBSession.getInstance().getSession(session);
+            Store s = DBStore.getInstance().getStore(storeId);
+            StoreRole role = s.getStoreRole(user.getSubscribedUser());
+            if (role is StoreOwner)
+            {
+                return true;
+            }
+            if (role is StoreManager && ((StoreManager)role).getPermissions().editPolicy() == true)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool isAllowedToEditDiscount(int storeId, int session)
+        {
+            Session user = DBSession.getInstance().getSession(session);
+            Store s = DBStore.getInstance().getStore(storeId);
+            StoreRole role = s.getStoreRole(user.getSubscribedUser());
+            if (role is StoreOwner)
+            {
+                return true;
+            }
+            if (role is StoreManager && ((StoreManager)role).getPermissions().editDiscount() == true)
+            {
+                return true;
+            }
+            return false;
+        }
+
+
 
         //use case 2.5
 

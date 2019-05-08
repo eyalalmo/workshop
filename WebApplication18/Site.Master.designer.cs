@@ -13,22 +13,31 @@ namespace WebApplication18 {
     public partial class SiteMaster {
         
         /// <summary>
-        /// login control.
+        /// myAccount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor login;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor myAccount;
         
         /// <summary>
-        /// register control.
+        /// Basket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor register;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor Basket;
+        
+        /// <summary>
+        /// AllProducts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor AllProducts;
         
         /// <summary>
         /// logout control.
@@ -40,13 +49,22 @@ namespace WebApplication18 {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor logout;
         
         /// <summary>
-        /// myAccount control.
+        /// register control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor myAccount;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor register;
+        
+        /// <summary>
+        /// login control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor login;
         
         /// <summary>
         /// MainContent control.

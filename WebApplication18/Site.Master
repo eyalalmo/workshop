@@ -53,15 +53,16 @@
                 </div>
                 <div >
                     <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/">Home</a></li>
+                       
                         <li><a runat="server" href="/About">About</a></li>
                         <li><a runat="server" href="/Contact">Contact</a></li>
-                        <li><a runat="server" id="login" name="login" href="/login" visible="true">Login</a></li>
-                         <li><a runat="server" id="register" name="register" href="register" visible="true">register</a></li>
-                         <li><a runat="server"  id="logout" name="logout" visible="false">logout</a></li>
+                        
                          <li><a runat="server"  id="myAccount" name="myAccount" href="/myAccount" visible="false">myAccount</a></li>
                         <li><a runat="server" id="Basket" name="Basket" href="/Basket" visible="true">ShoppingBasket</a></li>
                         <li><a runat="server" id="AllProducts" name="AllProducts" href="/AllProducts" visible="true">AllProducts</a></li>
+                          <li><a runat="server"  id="logout" name="logout" visible="false" style="float: right" >logout</a></li>
+                           <li><a runat="server" id="register" name="register" href="register" visible="true" style="text-align:right">register</a></li>
+                        <li><a runat="server" id="login" name="login" href="/login" visible="true" >Login</a></li>
                       
                             
                         

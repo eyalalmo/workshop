@@ -25,6 +25,7 @@ namespace WebApplication18
                     register.Visible = false;
                     myAccount.Visible = true;
                 }
+
                 
             }
         }

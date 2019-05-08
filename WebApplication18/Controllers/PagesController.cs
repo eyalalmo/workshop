@@ -70,7 +70,14 @@ namespace WebApplication18.Controllers
             ViewData["storeId"] = storeId;
             return View();
         }
-  
+
+        public ActionResult AddProduct(int storeId)
+        {
+            ViewData["storeId"] = storeId;
+            return View();
+        }
+        
+
 
 
 

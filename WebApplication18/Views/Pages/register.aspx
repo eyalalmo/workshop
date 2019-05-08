@@ -17,7 +17,7 @@
     <input type="password" class="form-control" id="pass2" name="pass2">
   </div>
   
-  <button type="submit" name="btnregister" id="btnregister" class="btn btn-default">Submit</button>
+  <button type="submit" name="btnregister" id="btnregister" class="btn btn-primary">Submit</button>
 
   
      <script type="text/javascript">
@@ -28,14 +28,11 @@
                 event.preventDefault();
                var getUrl = window.location;
                var baseUrl = getUrl.protocol + "//" + getUrl.host
-                console.log(baseUrl);
-                console.log(getUrl);
                 username = $("#name").val();
                 pass = $("#pass").val();
                 pass2 = $("#pass2").val();
                
-                console.log(pass);
-                console.log(pass2);
+                
                 if (pass !== pass2) {
                     window.alert("pass isnt the same")
                     return;
@@ -46,13 +43,12 @@
                     url: baseUrl+"/api/user/register?username=" + username + "&password=" + pass,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
-                    success: function (response) {
-                        console.log(response);            
+                    success: function (response) {          
                         if (response == "ok") {
                             window.location.href = baseUrl+"/";
                         }
                         else {
-                             console.log(response);  
+                           alert(response);  
                         }
                     },
                     error: function (response) {

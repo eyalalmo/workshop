@@ -184,6 +184,7 @@
     <Content Include="Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Views\Pages\About.aspx" />
+    <Content Include="Views\Pages\AddProduct.aspx" />
     <Content Include="Views\Pages\AddStore.aspx" />
     <Content Include="Views\Pages\AllProducts.aspx" />
     <Content Include="Views\Pages\Basket.aspx" />
@@ -294,6 +295,13 @@
     </Compile>
     <Compile Include="Views\Pages\About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\AddProduct.aspx.cs">
+      <DependentUpon>AddProduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Pages\AddProduct.aspx.designer.cs">
+      <DependentUpon>AddProduct.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\AddStore.aspx.cs">
       <DependentUpon>AddStore.aspx</DependentUpon>

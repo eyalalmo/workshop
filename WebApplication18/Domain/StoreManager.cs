@@ -6,10 +6,10 @@ namespace workshop192.Domain
     public class StoreManager : StoreRole
 
     {
-        private SubscribedUser appointedBy;
-        private Store store;
-        private SubscribedUser user;
-        private Permissions permissions;
+        public SubscribedUser appointedBy;
+        public Store store;
+        public SubscribedUser user;
+        public Permissions permissions;
 
         public StoreManager(SubscribedUser appointedBy, Store store,
             SubscribedUser user, Permissions permissions)
@@ -132,6 +132,12 @@ namespace workshop192.Domain
         {
             return;
         }
+        public Permissions getPermissions()
+        {
+            return permissions;
+
+        }
+
         public void removeRoleAppointedByMe(StoreRole role)
         {
             return;

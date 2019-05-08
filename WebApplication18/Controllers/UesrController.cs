@@ -18,12 +18,16 @@ namespace WebApplication18.Controllers
         [HttpGet]
         public string register(String Username, String Password)
         {
-
-            int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-            UserService.getInstance().register(session, Username, Password);
-
-            return "ok";
-
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                UserService.getInstance().register(session, Username, Password);
+                return "ok";
+            }
+            catch(Exception e)
+            {
+                return e.Message;
+            }
 
         }
 
@@ -31,12 +35,31 @@ namespace WebApplication18.Controllers
         [HttpGet]
         public Object login(String Username, String Password)
         {
-            //Session session = UserService.getInstance().startSession();
-            int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-            UserService.getInstance().login(session, Username, Password);
-            //String hash = System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value;
-            // UserService.addUser(hash, session);
-            return "ok";
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                UserService.getInstance().login(session, Username, Password);
+                return "ok";
+            }
+            catch(Exception e)
+            {
+                return e.Message;
+            }
+        }
+        [Route("api/user/logout")]
+        [HttpGet]
+        public Object logout()
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                UserService.getInstance().logout(session);
+                return "ok";
+            }
+            catch( Exception e)
+            {
+                return e.Message;
+            }
         }
 
 
@@ -44,34 +67,19 @@ namespace WebApplication18.Controllers
         [HttpGet]
         public string getShoppingBasket()
         {
-            //Session session = UserService.getInstance().startSession();
+           
             int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             return UserService.getInstance().getShoppingBasket(session);
-            //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, basket);
-            //String hash = System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value;
-            // UserService.addUser(hash, session);
-            //string response = basket;
-            /*foreach (KeyValuePair<int, ShoppingCart> cart in basket.getShoppingCarts())
-            {
-                foreach (KeyValuePair<Product, int> p in cart.Value.getProductsInCarts())
-                {
-                    response+= p.Key.getProductName() + "," + p.Key.getPrice() + "," + p.Key.getProductID() +"," + p.Value + ";";
-                }
-            }*/
+           
 
-
-            // return response;
         }
         [Route("api/user/removeProductFromCart")]
         [HttpGet]
         public string removeProductFromCart(int productId)
         {
-            //Session session = UserService.getInstance().startSession();
+            
             int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
 
-            //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, basket);
-            //String hash = System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value;
-            // UserService.addUser(hash, session);
             UserService.getInstance().removeFromShoppingBasket(session, productId);
             return "ok";
 
@@ -82,17 +90,13 @@ namespace WebApplication18.Controllers
         {
             try
             {
-                string res = "";
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
                 return UserService.getInstance().getAllStores(session);
-               
-                
-
+              
             }
             catch (Exception e)
             {
                 string s = "fail";
-
                 return s;
             }
         }
