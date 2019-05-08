@@ -9,7 +9,7 @@ namespace workshop192.Domain
     public class SubscribedUser
     {
 
-        private String username;
+        public String username;
         private String password;
         private ShoppingBasket shoppingBasket;
         private String purchaseHistory;

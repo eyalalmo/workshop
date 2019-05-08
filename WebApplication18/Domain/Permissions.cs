@@ -8,7 +8,7 @@ namespace workshop192.Domain
 {
     public class Permissions
     {
-        Dictionary<string, bool> per;
+       public  Dictionary<string, bool> per;
     
         public Permissions(bool editProduct, bool editDiscount, bool editPolicy)
         {

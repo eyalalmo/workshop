@@ -159,5 +159,9 @@ namespace workshop192.Domain
             }
             return res;
         }
+
+        public List<StoreRole> getRoles(int id) {
+            return getStore(id).getRoles();
+        }
     }
 }

@@ -10,10 +10,11 @@ namespace workshop192.Domain
     public class StoreOwner : StoreRole
 
     {
-        private SubscribedUser appointedBy;
-        private Store store;
-        private SubscribedUser user;
-        private List<StoreRole> appointedByMe;
+        public SubscribedUser appointedBy;
+        public Store store;
+        public SubscribedUser user;
+        public List<StoreRole> appointedByMe;
+        public bool isOwner = true;
 
         public StoreOwner(SubscribedUser appointedBy, SubscribedUser user, Store store)
         {

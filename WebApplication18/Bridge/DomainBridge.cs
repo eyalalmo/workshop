@@ -246,6 +246,11 @@ namespace workshop192.Bridge
             return JsonConvert.SerializeObject(DBStore.getInstance().getStore(id));
         }
 
+        public string getRoles(int id)
+        {
+            return JsonConvert.SerializeObject(DBStore.getInstance().getRoles(id));
+        }
+
         public void addToProductQuantity(int productid, int amount, int sessionid)
         {
             Product product = DBProduct.getInstance().getProductByID(productid);

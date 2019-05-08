@@ -228,5 +228,10 @@ namespace workshop192.ServiceLayer
         {
             return db.getStore(id);
         }
+
+        public string getAllRoles(int id)
+        {
+            return db.getRoles(id);
+        }
     }
 }

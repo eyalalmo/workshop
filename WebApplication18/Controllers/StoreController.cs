@@ -29,7 +29,7 @@ namespace WebApplication18.Controllers
         }
         [Route("api/store/addOwner")]
         [HttpGet]
-        public string addOwner(string username,int storeId)
+        public string addOwner(string username, int storeId)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace WebApplication18.Controllers
                 string res = "";
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
                 return StoreService.getInstance().getProducts(storeId);
-                
+
 
             }
             catch (Exception e)
@@ -71,8 +71,8 @@ namespace WebApplication18.Controllers
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-               return  StoreService.getInstance().addStore(name, description, session);
-              
+                return StoreService.getInstance().addStore(name, description, session);
+
 
             }
             catch (Exception e)
@@ -85,12 +85,12 @@ namespace WebApplication18.Controllers
 
         [Route("api/store/SetProductInformation")]
         [HttpGet]
-        public string SetProductInformation(int storeID, int productID, int price, int rank,int quantityLeft,string productName)
+        public string SetProductInformation(int storeID, int productID, int price, int rank, int quantityLeft, string productName)
         {
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-                 StoreService.getInstance().SetProductInformation(storeID,productID,price,rank, quantityLeft,productName,session);
+                StoreService.getInstance().SetProductInformation(storeID, productID, price, rank, quantityLeft, productName, session);
                 return "ok";
 
             }
@@ -100,9 +100,23 @@ namespace WebApplication18.Controllers
             }
         }
 
+        [Route("api/store/getAllRoles")]
+        [HttpGet]
+        public string getAllRoles(int storeId)
+        {
+            try
+            {
+                return StoreService.getInstance().getAllRoles(storeId);
+
+            }
+            catch (Exception e)
+            {
+                return e.Message.ToString();
+            }
 
 
 
+        }
     }
 }
 

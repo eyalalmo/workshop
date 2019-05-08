@@ -8,7 +8,7 @@
       <h1> </h1>
       <div class="container ">
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-    <button  name="addManager" id="addManager" class="btn btn-primary">Add Manager</button>
+    <button  name="addManager" id="addManager" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Manager</button>
                   </div>
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
               <h3>Add an Owner</h3>
@@ -26,7 +26,7 @@
          
   </div>
  
-<div class="modal" id="enterUsername">
+<div class="modal" id="myModal">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -56,20 +56,19 @@
             doc.innerHTML = "";
             var i;
             var jsonList = JSON.parse(response);
+            var role = "Store Owner"
             var HTML;
             for (i = 0; i < jsonList.length; i++) {
+                if (!jsonList[i].isOwner)
+                    role="Store Manager"
                 HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		                   <div class="my-list">
-			<span>`+ jsonList[i].productName + `</span>
-            <span> Category:`+ jsonList[i].productCategory + `</span>
-			<span class="pull-right"> Quantity Left:`+ jsonList[i].quantityLeft + `</span>
-			<div class="detail">
-			<p>Price:`+ jsonList[i].price + `</p>
-		    <button type="button" class="btn btn-primary" onClick="addToCart(` + jsonList[i].productID + `)"/>
-             Add To Cart
+			<span>`+ role + `</span>
+            <span> Username:`+ jsonList[i].user.username + `</span>
+			<span > Appointed By:`+ jsonList[i].appointedBy.username + `</span>
+		    <button type="button" class="btn btn-primary" onClick="removeRole(` + jsonList[i].user.username + `)"/>
+             Remove
             </button>
-            <a href="#" class="btn btn-info">Go To Store</a>
-			</div>
 		</div>
 		</div>`
                 //`+jsonList[i].ProductID+`
@@ -83,16 +82,12 @@
         }
     </script>
     <script type="text/javascript">
-        function addOwner() {
-            document.getElementById('quantity').style.visibility = "visible";
-            document.getElementById('confirm').style.visibility = "visible";
-        };
         function confirmOwner() {
              var getUrl = window.location;
             var baseUrl = getUrl.protocol + "//" + getUrl.host
             var username = $("#owner").val();
             var storeId =<%=ViewData["storeId"]%>;
-                console.log(baseUrl);
+                
                 jQuery.ajax({
                     type: "GET",
                     url: baseUrl + "/api/store/addOwner?username=" + username +"&storeID=" + storeId,
@@ -109,8 +104,6 @@
                         console.log(response);
                     }
             });
-              //document.getElementById('owner').style.visibility = "hidden";
-              //document.getElementById('confirm').style.visibility = "hidden";
             
         }
         
@@ -120,90 +113,28 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-        //document.getElementById('owner').style.visibility = "hidden";
-        //document.getElementById('confirm').style.visibility = "hidden";
-            $("#showAll").click(function () {
+            
                 event.preventDefault();
-                
+                  var storeId =<%=ViewData["storeId"]%>;
                 var getUrl = window.location;
                 var baseUrl = getUrl.protocol + "//" + getUrl.host
-                console.log(baseUrl);
                 jQuery.ajax({
                     type: "GET",
-                    url: baseUrl +"/api/products/getAllProducts",
+                    url: baseUrl + "/api/products/getAllRoles?storeId="+ storeId,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                        getProducts(response);
+                        console.log(response);
+                        getRoles(response);
                         
                     },
                     error: function (response) {
                         console.log(response);
                     }
                 });
-            });
 
-            $("#searchN").click(function () {
-                event.preventDefault();
-                 search = $("#searchI").val();
-                var doc = document.getElementById('allProducts')
-                var getUrl = window.location;
-                var baseUrl = getUrl.protocol + "//" + getUrl.host
-                console.log(baseUrl);
-                jQuery.ajax({
-                    type: "GET",
-                    url: baseUrl +"/api/products/searchByName?param="+ search,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        getProducts(response);
-                    },
-                    error: function (response) {
-                        console.log(response);
-                    }
-                });
-            });
-            $("#searchC").click(function () {
-                event.preventDefault();
-                 search = $("#searchI").val();
-                var doc = document.getElementById('allProducts')
-                var getUrl = window.location;
-                var baseUrl = getUrl.protocol + "//" + getUrl.host
-                console.log(baseUrl);
-                jQuery.ajax({
-                    type: "GET",
-                    url: baseUrl +"/api/products/searchByCat?param="+ search,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                       getProducts(response);
-                    },
-                    error: function (response) {
-                        console.log(response);
-                    }
-                });
-            });
-            $("#searchK").click(function () {
-                event.preventDefault();
-                 search = $("#searchI").val();
-                var doc = document.getElementById('allProducts')
-                var getUrl = window.location;
-                var baseUrl = getUrl.protocol + "//" + getUrl.host
-                console.log(baseUrl);
-                jQuery.ajax({
-                    type: "GET",
-                    url: baseUrl +"/api/products/searchByKey?param="+ search,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                       getProducts(response);
-                    },
-                    error: function (response) {
-                        console.log(response);
-                    }
-                });
-            });
-        });
+           
+     });
 
     </script>
     </asp:Content>
