@@ -103,7 +103,6 @@ namespace workshop192.Domain
                 throw new DoesntExistException("no such store ID in Shopping basket");
         }
 
-        public void purchaseBasket()
         public void purchaseBasket(string address, string creditCard)
         {
             foreach (KeyValuePair<int, ShoppingCart> pair1 in shoppingCarts)

@@ -221,5 +221,9 @@ namespace workshop192.Domain
             store.addCoupon(couponCode, percentage, duration);
         }
 
+        public void addCouponToStore(string couponCode, double percentage, string duration)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

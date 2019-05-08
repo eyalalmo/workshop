@@ -19,7 +19,7 @@ namespace workshop192.Domain
         public bool active;
         public LinkedList<DiscountComponent> discountList;
         public LinkedList<PurchasePolicy> purchasePolicyList;
-       
+        public LinkedList<InvisibleDiscount> invisibleDiscountList;
 
         public Store(string storeName, string description)
         {
