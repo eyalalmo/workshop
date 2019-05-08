@@ -12,11 +12,13 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-
+            
             var storeId =<%=ViewData["storeId"]%>;
             var doc = document.getElementById('allStores');
             var getUrl = window.location;
             var baseUrl = getUrl.protocol + "//" + getUrl.host
+            //////////////////////////////////////
+         
             jQuery.ajax({
                 type: "GET",
                 url: baseUrl + "/api/store/getStoreProducts?storeId=" + storeId,
@@ -44,12 +46,14 @@
                             <h3>Product id :  `+ productID + `</h3 >
 		                    <div class="detail">
 			                    <p></p>`
-                                + `productName: <input type="text" id="inName`+i+`" value="` + productName + `"><br>`
-                                + `price: <input type="text" id="inPrice`+i+`" name="inPrice" value="` + price + `"><br>`
-                                + `rank: <input type="text" id="inRank`+i+`" value="` + rank + `"><br>`
-                                + `quantityLeft: <input type="text" id="inQ`+i+`" value="` + quantityLeft + `"><br>`
+                                + `Product Name: <input type="text"  size="15" id="inName`+i+`" value="` + productName + `"><br>`
+                                + `price: <input type="number" min="0" size="2" id="inPrice`+i+`" name="inPrice" value="` + price + `"><br>`
+                                + `rank: <input type="number" min="0" size="2" id="inRank`+i+`" value="` + rank + `"><br>`
+                                + `Quantity Left: <input type="number" min="-1" size="2" id="inQ`+i+`" value="` + quantityLeft + `"><br>`
+                                //+ `discount: <input type="text" size="5"value="` + discount + `"><br><br>`
                                 + "<form><input type = \"button\" value = \"Discount\" onclick=\"discount(" + storeID + "," + productID +");\"></form>"
-                                + " <form><input type = \"button\" value = \"edit\" onclick=\"edit(" + storeID + "," + productID + "," +i +");\"></form>"
+                                + " <form><input type = \"button\" value = \"edit\" class=\"btn btn-primary\" onclick=\"edit(" + storeID + "," + productID + "," + i + ");\">"
+                                + "  &nbsp &nbsp &nbsp<input type = \"button\" value = \"delete\" class=\"btn btn-primary\" onclick=\"deleteProduct(" + storeID + "," + productID + "," +i +");\"></form>"
                                 + `   </div>
 		                    </div>
 		                    </div>`
@@ -71,6 +75,35 @@
 
           
         });
+          function deleteProduct (storeID, productID,i) {
+            event.preventDefault();
+            var getUrl = window.location;
+            var baseUrl = getUrl.protocol + "//" + getUrl.host
+
+            jQuery.ajax({
+                type: "GET",
+                url: baseUrl + "/api/store/deleteProduct?storeID=" + storeID + "&productID=" + productID,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    console.log(response);
+                    if (response === "ok") {
+                        alert("sucsses!");
+                        window.location.href = baseUrl + "/Store?storeId=" + storeID;
+                    }
+                    else {
+                        alert(response);
+                    }
+                },
+                error: function (response) {
+                    //alert("Lost DB connection");
+                    window.location.href = baseUrl + "/index";
+                }
+            });
+
+        } 
+
+
          function edit (storeID, productID,i) {
             event.preventDefault();
             var getUrl = window.location;

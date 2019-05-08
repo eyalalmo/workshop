@@ -30,6 +30,17 @@ namespace workshop192.ServiceLayer
             return db.addProduct(productName, productCategory, price, rank, quantityLeft, store, session);
         }
 
+        public bool isOwner(int storeId, int session)
+        {
+            
+           return  db.isOwner(storeId, session);
+        }
+        public bool isManager(int storeId, int session)
+        {
+            
+            return db.isOwner(storeId, session);
+        }
+
         public string getProducts(int id)
         {
           return  db.getProductsString(id);
@@ -88,7 +99,20 @@ namespace workshop192.ServiceLayer
                 throw e;
             }
         }
-        
+
+        public bool isAllowedToEditProduct(int storeId, int session)
+        {
+            return db.isAllowedToEditProduct(storeId, session);
+        }
+        public bool isAllowedToEditDiscount(int storeId, int session)
+        {
+            return db.isAllowedToEditDiscount(storeId, session);
+        }
+        public bool isAllowedToEditPolicy(int storeId, int session)
+        {
+            return db.isAllowedToEditPolicy(storeId, session);
+        }
+
         public void setquantityLeft(int productID, int setquantityLeft, int session)
         {
             if (productID < 0)

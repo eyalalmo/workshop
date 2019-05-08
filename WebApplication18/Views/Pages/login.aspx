@@ -16,17 +16,16 @@
   <div class="checkbox">
     <label><input type="checkbox"> Remember me</label>
   </div>
-  <button type="submit" name="btnLogin" id="btnLogin" class="btn btn-default">Submit</button>
+  <button type="submit" name="btnLogin" id="btnLogin" class="btn btn-primary">Submit</button>
 
    <script type="text/javascript">
-
         $(document).ready(function () {
-            
+
             $("#btnLogin").click(function () {
                 event.preventDefault();
                var getUrl = window.location;
                var baseUrl = getUrl.protocol + "//" + getUrl.host
-                console.log(baseUrl);
+               
                 username = $("#name").val();
                 pass = $("#pass").val();
 
@@ -42,7 +41,7 @@
                             window.location.href = baseUrl+"/";
                         }
                         else {
-                            console.log(response);   
+                            alert(response); 
                         }
                     },
                     error: function (response) {
