@@ -16,6 +16,7 @@ namespace workshop192.Domain
         {
             cookies = new Dictionary<string, int>();
         }
+
         public static DBCookies getInstance()
         {
             if (instance == null)

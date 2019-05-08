@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplication18.Domain;
 using workshop192.Domain;
 
 namespace workshop192.Bridge
@@ -58,6 +59,16 @@ namespace workshop192.Bridge
         {
             Session admin = DBSession.getInstance().getSession(sessionid);
             admin.removeUser(username);
+        }
+
+        internal int getSessionByUserName(string username)
+        {
+            return DBSession.getInstance().getSessionOfUserName(username);
+        }
+
+        internal void setWaitingMessages(LinkedList<Tuple<string, string>> remains)
+        {
+            DBNotifications.getInstance().setWaitingNotifications(remains);
         }
 
         public void logout(int sessionid)
@@ -173,6 +184,17 @@ namespace workshop192.Bridge
                 throw new RoleException("no role for this user in this store");
 
             sr.removeProduct(product);
+        }
+
+        internal LinkedList<Tuple<string, string>> getWaitingNotifications()
+        {
+            return DBNotifications.getInstance().getWaitingNotifications();
+        }
+
+        internal string getUserNameBySession(int session)
+        {
+            Session s = DBSession.getInstance().getSession(session);
+            return s.getSubscribedUser().getUsername();
         }
 
         internal double getProductPrice(int productid)

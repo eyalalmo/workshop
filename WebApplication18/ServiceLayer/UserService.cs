@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using workshop192.Domain;
 using workshop192.Bridge;
+using WebApplication18.Domain;
+
 namespace workshop192.ServiceLayer
 {
 
@@ -55,6 +57,17 @@ namespace workshop192.ServiceLayer
             }
             db.register(user, username, password);
         }
+
+        internal int getSessionByUserName(string username)
+        {
+            return db.getSessionByUserName(username);
+        }
+
+        internal void setWaitingMessages(LinkedList<Tuple<string, string>> remains)
+        {
+            db.setWaitingMessages(remains);
+        }
+
         //use case 6.2
         public void removeUser(int admin, String username)
         {
@@ -179,8 +192,20 @@ namespace workshop192.ServiceLayer
             return DBCookies.getInstance().getUserByHash(hash);
         }
 
+        public LinkedList<Tuple<string, string>> getWaitingMessages()
+        {
+            return db.getWaitingNotifications();
+        }
 
+        internal void addWaitingMessage(Tuple<string, string> tuple)
+        {
+            db.getWaitingNotifications().AddFirst(tuple);
+        }
 
+        internal string getUserNameBySession(int sessionid)
+        {
+            return db.getUserNameBySession(sessionid);
+        }
     }
 }
 
