@@ -287,6 +287,7 @@ namespace workshop192.Domain
 
             if (purchasePolicyList.Count == 0)
             {
+                
                 throw new MissingMemberException("store does not have a Minimum Policy to set");
             }
             bool found = false;
