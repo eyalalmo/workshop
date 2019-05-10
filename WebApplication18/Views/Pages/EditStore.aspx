@@ -42,13 +42,13 @@
 
 			                    <div class="detail">
 			                    <p></p>`
-                                + "<form><a href =\"" + baseUrl + "/Store?storeId=" + storeId + "\"  id=\"manage" + i + "\"  onclick=\"manageProducts(" + storeId + ");\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Manage Store Products</a></form>" 
-                                 + "<p></p><a href=\"" + baseUrl + "/StoreDiscount?storeID=" + storeId + "\"  id=\"manage" + i + "\"  onclick=\"manage(" + storeId + ");\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Edit Store Discounts</a>" 
+                                + "<form><a href =\"" + baseUrl + "/Store?storeId=" + storeId + "\"  id=\"manageProducts" + i + "\"  onclick=\"manageProducts(" + storeId + ");\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Manage Store Products</a></form>" 
+                                 + "<p></p><form><a href=\"" + baseUrl + "/StoreDiscount?storeID=" + storeId + "\"  id=\"editStoreDiscount" + i + "\"  onclick=\"editStoreDiscount(" + storeId + ");\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Edit Store Discounts</a></form>" 
                                + "<p></p><a href=\"" + baseUrl + "/ViewStore?storeId=" + storeId + "\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >View Store Products</a>" 
-                                + "<p></p><a href=\"" + baseUrl + "/ManageStaff?storeId=" + storeId + "\" id=\"manage" + i + "\"  onclick=\"manage(" + storeId + ");\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Staff Managment</a>"
+                                + "<p></p><form><a href=\"" + baseUrl + "/ManageStaff?storeId=" + storeId + "\" id=\"manage" + i + "\"  class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Staff Managment</a></form>"
                                 +"<p></p><a href=\""+baseUrl+"/Store?storeId="+storeId+"\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Make It Avilable</a>"
-                                + "<p></p><a href=\"" + baseUrl + "/AddProduct?storeId=" + storeId + "\"   id=\"manage" + i + "\"  onclick=\"manage(" + storeId + ");\"  class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Add Product</a>" 
-                                                                + "<p></p><a href=\"" + baseUrl + "/EditStorePolicy?storeId=" + storeId + "\"    id=\"manage" + i + "\"  onclick=\"manage(" + storeId + ");\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Edit Store Policy</a>"
+                                + "<p></p><form><a href=\"" + baseUrl + "/AddProduct?storeId=" + storeId + "\"   id=\"addProduct" + i + "\"  onclick=\"addProduct(" + storeId + ");\"  class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Add Product</a></form>" 
+                                + "<p></p><form><a href=\"" + baseUrl + "/EditStorePolicy?storeId=" + storeId + "\"    id=\"manageStorePolicy" + i + "\"  onclick=\"manageStorePolicy(" + storeId + ");\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Edit Store Policy</a></form>"
 			                 +`   </div>
 		                    </div>
 		                    </div>`
@@ -78,6 +78,77 @@
           
                     if (response === true) {
                          window.location.href = baseUrl + "/Store?storeId=" + id;
+                    }
+                    else {
+                        alert("you dont have the permissions to edit Discount");
+                    }
+                },
+                 error: function (response) {
+                    
+                    window.location.href = baseUrl + "/Default";
+                }
+            });
+          
+            }
+
+        function addProduct(id) {
+            event.preventDefault();
+            jQuery.ajax({
+                type: "GET",
+                url: baseUrl + "/api/store/IsEP?storeId=" + id,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+          
+                    if (response === true) {
+                         window.location.href = baseUrl + baseUrl + "/AddProduct?storeId=" + storeId;
+                    }
+                    else {
+                        alert("you dont have the permissions to edit Discount");
+                    }
+                },
+                 error: function (response) {
+                    
+                    window.location.href = baseUrl + "/Default";
+                }
+            });
+          
+            }
+        function editStoreDiscount(id) {
+            event.preventDefault();
+            jQuery.ajax({
+                type: "GET",
+                url: baseUrl + "/api/store/IsED?storeId=" + id,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+          
+                    if (response === true) {
+                        baseUrl + "/EditStorePolicy?storeId=" + storeId
+                         window.location.href =  baseUrl + "/EditStorePolicy?storeId=" + storeId
+                    }
+                    else {
+                        alert("you dont have the permissions to edit Policy");
+                    }
+                },
+                 error: function (response) {
+                     
+                    window.location.href = baseUrl + "/Default";
+                }
+            });
+          
+            }
+            function manageStorePolicy(id) {
+            event.preventDefault();
+            jQuery.ajax({
+                type: "GET",
+                url: baseUrl + "/api/store/IsEPo?storeId=" + id,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+          
+                    if (response === true) {
+                         window.location.href = baseUrl + "/StoreDiscount?storeID=" + id;
                     }
                     else {
                         alert("you dont have the permissions to edit products");
