@@ -324,7 +324,7 @@ namespace workshop192.ServiceLayer
         {
             throw new NotImplementedException();
         }
-
+        /*
         public void addMinAmountPolicy(int storeID, int sessionID, int minAmount)
         {
             if (storeID < 0)
@@ -334,6 +334,7 @@ namespace workshop192.ServiceLayer
                 throw new NullReferenceException("session is a null reference");
             db.addMinAmountPolicy(storeID, sessionID, minAmount);
         }
+        */
         public void setMinAmountPolicy(int storeID, int sessionID, int newMinAmount)
         {
             if (storeID < 0)
@@ -355,7 +356,7 @@ namespace workshop192.ServiceLayer
 
 
         }
-
+        /*
         public void addMaxAmountPolicy(int storeID, int sessionID, int maxAmount)
         {
             if (storeID < 0)
@@ -365,6 +366,7 @@ namespace workshop192.ServiceLayer
                 throw new NullReferenceException("session is a null reference");
             db.addMaxAmountPolicy(storeID, sessionID, maxAmount);
         }
+        */
         public void setMaxAmountPolicy(int storeID, int sessionID, int newMaxAmount)
         {
             if (storeID < 0)
@@ -425,6 +427,27 @@ namespace workshop192.ServiceLayer
         public string getAllRoles(int id)
         {
             return db.getRoles(id);
+        }
+
+
+
+
+        public bool hasMinPurchasePolicy(int storeID, int sessionID)
+        {
+            return db.hasMinPurchasePolicy(storeID, sessionID);
+        }
+        public bool hasMaxPurchasePolicy(int storeID, int sessionID)
+        {
+           return db.hasMaxPurchasePolicy(storeID, sessionID);
+        }
+
+        public MinAmountPurchase getMinAmountPolicy(int storeID, int sessionID)
+        {
+            return db.getMinAmountPolicy(storeID, sessionID);
+        }
+        public MaxAmountPurchase getMaxAmountPolicy(int storeID, int sessionID)
+        {
+            return db.getMaxAmountPolicy(storeID, sessionID);
         }
     }
 }

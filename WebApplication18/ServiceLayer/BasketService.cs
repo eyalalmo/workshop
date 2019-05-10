@@ -119,5 +119,10 @@ namespace workshop192.ServiceLayer
         {
             db.removeCouponFromCart(sessionID, storeID);
         }
+
+        public double getAmountOfCart(int storeID, int sessionID)
+        {
+            return db.getAmountByCart(storeID, sessionID);
+        }
     }
 }

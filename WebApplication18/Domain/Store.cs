@@ -18,7 +18,8 @@ namespace workshop192.Domain
         public int numOfOwners;
         public bool active;
         public LinkedList<DiscountComponent> discountList;
-        public LinkedList<PurchasePolicy> purchasePolicyList;
+        public MinAmountPurchase minPurchasePolicy;
+        public MaxAmountPurchase maxPurchasePolicy;
         public LinkedList<InvisibleDiscount> invisibleDiscountList;
 
         public Store(string storeName, string description)
@@ -31,8 +32,9 @@ namespace workshop192.Domain
             numOfOwners = 0;
             active = true;
             discountList = new LinkedList<DiscountComponent>();
-            purchasePolicyList = new LinkedList<PurchasePolicy>();
             invisibleDiscountList = new LinkedList<InvisibleDiscount>();
+            maxPurchasePolicy = null;
+            minPurchasePolicy = null;
         }
 
         public void addProduct(Product p)
@@ -246,30 +248,7 @@ namespace workshop192.Domain
             }
             discountList = new LinkedList<DiscountComponent>();
         }
-        public void addPurchasePolicy(PurchasePolicy p)
-        {
-            int listSize = purchasePolicyList.Count;
-            if (listSize == 0)
-            {
-                purchasePolicyList.AddLast(p);
-            }
-            else if(listSize == 2)
-            {
-                throw new AlreadyExistException("store can not have more than 2 purchase policies");
-            }
-            else
-            {
-                PurchasePolicy policy = purchasePolicyList.First();
-                if((policy.GetType() == typeof(MinAmountPurchase) && p.GetType() == typeof(MinAmountPurchase)) || 
-                    (policy.GetType() == typeof(MaxAmountPurchase) && p.GetType() == typeof(MaxAmountPurchase)))
-                {
-                    throw new AlreadyExistException("Store can not have purchase policies of the same type");
-                }
-                checkValidityofPurchases(p, policy);
-                purchasePolicyList.AddLast(p);
-            }
-        }
-
+       
         private void checkValidityofPurchases(PurchasePolicy p1, PurchasePolicy p2)
         {
             if (p1.GetType() == typeof(MaxAmountPurchase))
@@ -282,155 +261,62 @@ namespace workshop192.Domain
 
         }
 
-        public void setMinPurchasePolicy(int newMinAmount)
+        public void setMinPurchasePolicy(int MinAmount)
         {
-
-            if (purchasePolicyList.Count == 0)
-            {
-                throw new MissingMemberException("store does not have a Minimum Policy to set");
-            }
-            bool found = false;
-            PurchasePolicy p1 = purchasePolicyList.ElementAt(0);
-            if (purchasePolicyList.Count == 1)
-            {
-                if (p1 is MinAmountPurchase)
-                {
-                    p1.setAmount(newMinAmount);
-                    found = true;
-                }
-
-            }
-            else if (purchasePolicyList.Count == 2)
-            {
-                PurchasePolicy p2 = purchasePolicyList.ElementAt(1);
-                if (p1 is MinAmountPurchase)
-                {
-                    checkValidityofPurchases(p1, p2);
-                    p1.setAmount(newMinAmount);
-                    found = true;
-                }
-                else if (p2 is MinAmountPurchase)
-                {
-                    checkValidityofPurchases(p2, p1);
-                    p2.setAmount(newMinAmount);
-                    found = true;
-                }
-            }
-            if (!found)
-                throw new MissingMemberException("store does not have a Maximum Policy to set");
-
+            minPurchasePolicy = new MinAmountPurchase(MinAmount);
+            
         }
 
-        public void setMaxPurchasePolicy(int newMaxAmount)
+        public void addMaxPurchasePolicy(int maxAmount)
         {
-            if (purchasePolicyList.Count == 0)
-            {
-                throw new MissingMemberException("store does not have a Max Policy to set");
-            }
-            bool found = false;
-            PurchasePolicy p1 = purchasePolicyList.ElementAt(0);
-            if (purchasePolicyList.Count == 1) {
-                if (p1 is MaxAmountPurchase)
-                {
-                    p1.setAmount(newMaxAmount);
-                    found = true;
-                }
-                
-            }
-            else if(purchasePolicyList.Count == 2)
-            {
-                PurchasePolicy p2 = purchasePolicyList.ElementAt(1);
-                if (p1 is MaxAmountPurchase)
-                {
-                    checkValidityofPurchases(p1, p2);
-                    p1.setAmount(newMaxAmount);
-                    found = true;
-                }
-                else if(p2 is MaxAmountPurchase)
-                {
-                    checkValidityofPurchases(p2, p1);
-                    p2.setAmount(newMaxAmount);
-                    found = true;
-                }
-            }
-            if (!found)
-                    throw new MissingMemberException("store does not have a Max Policy to set");
-
+            maxPurchasePolicy = new MaxAmountPurchase(maxAmount);
         }
 
         public void checkPolicy(Product p, int amount)
         {
-            foreach(PurchasePolicy policy in purchasePolicyList)
-            {
-                policy.checkPolicy(p, amount);
-            }
+            if (maxPurchasePolicy != null)
+                maxPurchasePolicy.checkPolicy(p, amount);
+            if (minPurchasePolicy != null)
+                minPurchasePolicy.checkPolicy(p, amount);
         }
 
         public void removeMaxAMountPolicy()
         {
-            if (purchasePolicyList.Count == 0)
-            {
-                throw new MissingMemberException("store does not have a Max Policy to remove");
-            }
-            PurchasePolicy p1 = purchasePolicyList.ElementAt(0);
-            if (purchasePolicyList.Count == 1)
-            {
-                if (p1 is MaxAmountPurchase)
-                {
-                    purchasePolicyList.Remove(p1);
-                }
-                else
-                    throw new MissingMemberException("store does not have a Max Policy to remove");
-
-
-            }
-            else if (purchasePolicyList.Count == 2)
-            {
-                PurchasePolicy p2 = purchasePolicyList.ElementAt(1);
-                if (p1 is MaxAmountPurchase)
-                {
-                    purchasePolicyList.Remove(p1);
-                }
-                else if (p2 is MaxAmountPurchase)
-                {
-                    purchasePolicyList.Remove(p2);
-                }
-            }
+            maxPurchasePolicy = null;
 
         }
 
         public void removeMinAmountPolicy()
         {
-            if (purchasePolicyList.Count == 0)
-            {
-                throw new MissingMemberException("store does not have a Min Policy to remove");
-            }
-            PurchasePolicy p1 = purchasePolicyList.ElementAt(0);
-            if (purchasePolicyList.Count == 1)
-            {
-                if (p1 is MinAmountPurchase)
-                {
-                    purchasePolicyList.Remove(p1);
-                }
-                else
-                    throw new MissingMemberException("store does not have a min Policy to remove");
-
-
-            }
-            else if (purchasePolicyList.Count == 2)
-            {
-                PurchasePolicy p2 = purchasePolicyList.ElementAt(1);
-                if (p1 is MinAmountPurchase)
-                {
-                    purchasePolicyList.Remove(p1);
-                }
-                else if (p2 is MinAmountPurchase)
-                {
-                    purchasePolicyList.Remove(p2);
-                }
-            }
-
+            minPurchasePolicy = null;
         }
+
+        public bool hasMinPurchasePolicy()
+        {
+            return (minPurchasePolicy != null);
+        }
+        public bool hasMaxPurchasePolicy()
+        {
+            return (maxPurchasePolicy != null);
+        }
+
+        public MinAmountPurchase getMinAmountPolicy()
+        {
+            if (minPurchasePolicy != null)
+                return minPurchasePolicy;
+            else
+                throw new DoesntExistException();
+        }
+        public MaxAmountPurchase getMaxAmountPolicy()
+        {
+            if (maxPurchasePolicy != null)
+                return maxPurchasePolicy;
+            else
+                throw new DoesntExistException();
+        }
+
+
+
 
     }
 

@@ -95,7 +95,7 @@ namespace UnitTestProject3
                 cart.changeQuantityOfProduct(p1, 20);
                 Assert.Fail();
             }
-            catch (AlreadyExistException)
+            catch (Exception)
             {
                 Assert.IsTrue(true);
             }
