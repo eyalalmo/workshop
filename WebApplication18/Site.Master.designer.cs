@@ -13,15 +13,6 @@ namespace WebApplication18 {
     public partial class SiteMaster {
         
         /// <summary>
-        /// myAccount control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor myAccount;
-        
-        /// <summary>
         /// Basket control.
         /// </summary>
         /// <remarks>
@@ -38,6 +29,15 @@ namespace WebApplication18 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor AllProducts;
+        
+        /// <summary>
+        /// myAccount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor myAccount;
         
         /// <summary>
         /// logout control.
@@ -65,9 +65,6 @@ namespace WebApplication18 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor login;
-        
-
-       
         
         /// <summary>
         /// MainContent control.

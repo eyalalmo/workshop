@@ -1,4 +1,5 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebApplication18.SiteMaster" %>
+﻿
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebApplication18.SiteMaster" %>
 
 <!DOCTYPE html>
 
@@ -53,21 +54,18 @@
                 </div>
                 <div >
                     <ul class="nav navbar-nav">
-                       
                         <li><a runat="server" href="/About">About</a></li>
                         <li><a runat="server" href="/Contact">Contact</a></li>
-                        
-                         <li><a runat="server"  id="myAccount" name="myAccount" href="/MyAccount" visible="false">My Account</a></li>
                         <li><a runat="server" id="Basket" name="Basket" href="/Basket" visible="true">Shopping Basket</a></li>
                         <li><a runat="server" id="AllProducts" name="AllProducts" href="/AllProducts" visible="true">All Products</a></li>
-                          <li><a runat="server"  id="logout" name="logout" visible="false" style="float: right" >Logout</a></li>
-                           <li><a runat="server" id="register" name="register" href="register" visible="true" style="text-align:right">Register</a></li>
-                        <li><a runat="server" id="login" name="login" href="/login" visible="true" >Login</a></li>
-                      
-                            
-                        
                     </ul>
-                </div>
+                    <ul class="justify-content-end nav">
+                        <li class ="pull-right"><a runat="server" id="myAccount" name="myAccount" href="/MyAccount" visible="false">My Account</a></li>
+                        <li class ="pull-right"><a runat="server" id="logout" name="logout" visible="false" style="float: right" >Logout</a></li>
+                        <li class ="pull-right"><a runat="server" id="register" name="register" href="register" visible="true" style="text-align:right">Register</a></li>
+                        <li class ="pull-right"><a runat="server" id="login" name="login" href="/login" visible="true" >Login</a></li>  
+                    </ul>
+                </div>     
             </div>
         </div>
         <div class="container body-content">
@@ -112,7 +110,7 @@
         });
 
   </script>
-
+            
         <script type="text/javascript">
 
             var ws = new WebSocket("ws://" + window.location.host +"/api/WebSocket/");
