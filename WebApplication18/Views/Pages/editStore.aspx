@@ -42,13 +42,13 @@
 
 			                    <div class="detail">
 			                    <p></p>`
-                                + "<a href=\"" + baseUrl + "/Store?storeId=" + storeId + "\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Manage Store Products</a>" 
-                                 + "<p></p><a href=\"" + baseUrl + "/StoreDiscount?storeID=" + storeId + "\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Edit Store Discounts</a>" 
+                                + "<form><a href =\"" + baseUrl + "/Store?storeId=" + storeId + "\"  id=\"manage" + i + "\"  onclick=\"manageProducts(" + storeId + ");\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Manage Store Products</a></form>" 
+                                 + "<p></p><a href=\"" + baseUrl + "/StoreDiscount?storeID=" + storeId + "\"  id=\"manage" + i + "\"  onclick=\"manage(" + storeId + ");\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Edit Store Discounts</a>" 
                                + "<p></p><a href=\"" + baseUrl + "/ViewStore?storeId=" + storeId + "\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >View Store Products</a>" 
-                                + "<p></p><a href=\"" + baseUrl + "/ManageStaff?storeId=" + storeId + "\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Staff Managment</a>"
+                                + "<p></p><a href=\"" + baseUrl + "/ManageStaff?storeId=" + storeId + "\" id=\"manage" + i + "\"  onclick=\"manage(" + storeId + ");\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Staff Managment</a>"
                                 +"<p></p><a href=\""+baseUrl+"/Store?storeId="+storeId+"\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Make It Avilable</a>"
-                                + "<p></p><a href=\"" + baseUrl + "/AddProduct?storeId=" + storeId + "\"    class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Add Product</a>" 
-                                                                + "<p></p><a href=\"" + baseUrl + "/EditStorePolicy?storeId=" + storeId + "\"    class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Edit Store Policy</a>"
+                                + "<p></p><a href=\"" + baseUrl + "/AddProduct?storeId=" + storeId + "\"   id=\"manage" + i + "\"  onclick=\"manage(" + storeId + ");\"  class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Add Product</a>" 
+                                                                + "<p></p><a href=\"" + baseUrl + "/EditStorePolicy?storeId=" + storeId + "\"    id=\"manage" + i + "\"  onclick=\"manage(" + storeId + ");\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Edit Store Policy</a>"
 			                 +`   </div>
 		                    </div>
 		                    </div>`
@@ -67,7 +67,7 @@
             
 
         });
-        function manage(id) {
+        function manageProducts(id) {
             event.preventDefault();
             jQuery.ajax({
                 type: "GET",
