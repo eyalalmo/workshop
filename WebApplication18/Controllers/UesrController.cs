@@ -46,6 +46,7 @@ namespace WebApplication18.Controllers
                 return e.Message;
             }
         }
+
         [Route("api/user/logout")]
         [HttpGet]
         public Object logout()
@@ -151,6 +152,21 @@ namespace WebApplication18.Controllers
             {
                 string s = e.Message;
                 return s;
+            }
+        }
+
+        [Route("api/user/waitingMessages")]
+        [HttpGet]
+        public Object waitingMessages()
+        {
+            try
+            {
+                WebSocketController.messageClient("et", "");
+                return "ok";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
             }
         }
 

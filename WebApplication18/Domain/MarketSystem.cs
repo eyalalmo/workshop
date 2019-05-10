@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplication18.Domain;
 using workshop192.Bridge;
 using workshop192.ServiceLayer;
 
@@ -24,6 +25,9 @@ namespace workshop192.Domain
             Session s = DBSession.getInstance().getSession(sessionid);
            
             s.register("et", "123");
+
+            DBNotifications.getInstance().init();
+
             s.login("et", "123");
             int sID = DomainBridge.getInstance().createStore(sessionid, "startup", "This is the startup Store!");
             DomainBridge.getInstance().addProduct("new Pro1", "Pros",5, 0, 10, sID, sessionid);
