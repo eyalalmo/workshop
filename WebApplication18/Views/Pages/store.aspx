@@ -50,9 +50,10 @@
                                 + `price: <input type="number" min="0" size="2" id="inPrice`+i+`" name="inPrice" value="` + price + `"><br>`
                                 + `rank: <input type="number" min="0" size="2" id="inRank`+i+`" value="` + rank + `"><br>`
                                 + `Quantity Left: <input type="number" min="-1" size="2" id="inQ`+i+`" value="` + quantityLeft + `"><br>`
-                                  + "<form><input type = \"button\" class=\"btn btn-primary\" value = \"Edit Discount\" onclick=\"discount(" + storeID + "," + productID +");\">"
+                                + "<form><input type = \"button\" class=\"btn btn-primary\"  value = \"Edit Discount\" onclick=\"discount(" + storeID + "," + productID + ");\">&nbsp &nbsp"
+                                 + "<form><input type = \"button\" class=\"btn btn-danger\" value = \"Delete Product\" onclick=\"deleteProduct(" + storeID + "," + productID +");\"> &nbsp &nbsp"
                                 //+ `discount: <input type="text" size="5"value="` + discount + `"><br><br>`
-                                 + " <input type = \"button\" value = \"Edit\" class=\"btn btn-primary\" onclick=\"edit(" + storeID + "," + productID + "," +i +");\"></form>"
+                                 + " <input type = \"button\" value = \"Edit\" class=\"btn btn-success\" onclick=\"edit(" + storeID + "," + productID + "," +i +");\"></form>"
                                 + `   </div>
 		                    </div>
 		                    </div>`
