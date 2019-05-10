@@ -187,6 +187,7 @@
     <Content Include="Views\Pages\About.aspx" />
     <Content Include="Views\Pages\AddProduct.aspx" />
     <Content Include="Views\Pages\AddStore.aspx" />
+    <Content Include="Views\Pages\AdminPan.aspx" />
     <Content Include="Views\Pages\AllProducts.aspx" />
     <Content Include="Views\Pages\Basket.aspx" />
     <Content Include="Views\Pages\Checkout.aspx" />
@@ -322,6 +323,13 @@
     </Compile>
     <Compile Include="Views\Pages\AddStore.aspx.designer.cs">
       <DependentUpon>AddStore.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\AdminPan.aspx.cs">
+      <DependentUpon>AdminPan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Pages\AdminPan.aspx.designer.cs">
+      <DependentUpon>AdminPan.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\AllProducts.aspx.cs">
       <DependentUpon>AllProducts.aspx</DependentUpon>
