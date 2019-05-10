@@ -26,7 +26,7 @@
                 dataType: "json",
                 success: function (response) {
                     var responsJ = JSON.parse(response);
-                    console.log(response);
+                   
                     if (responsJ !== "fail") {
 
                         var HTML = "";
