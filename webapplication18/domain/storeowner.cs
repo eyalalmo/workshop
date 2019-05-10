@@ -1,111 +1,125 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using workshop192.Domain;
 
 namespace workshop192.Domain
-{
-    public class StoreManager : StoreRole
+{ 
+    public class StoreOwner : StoreRole
 
     {
         public SubscribedUser appointedBy;
-        public Store store;
+        private Store store;
         public SubscribedUser user;
-        public Permissions permissions;
-        public bool isOwner = false;
+        private List<StoreRole> appointedByMe;
+        public bool isOwner = true;
 
-        public StoreManager(SubscribedUser appointedBy, Store store,
-            SubscribedUser user, Permissions permissions)
+        public StoreOwner(SubscribedUser appointedBy, SubscribedUser user, Store store)
         {
             this.appointedBy = appointedBy;
-            this.store = store;
             this.user = user;
-            this.permissions = permissions;
+            this.store = store;
+            appointedByMe = new List<StoreRole>();
         }
 
-        public void addManager(SubscribedUser manager, Permissions permissions)
+        public StoreOwner()
         {
-            throw new RoleException("A manager cannot appoint a manager");
-        }
-
-        public void addOwner(SubscribedUser owner)
-        {
-            throw new RoleException("A manager cannot appoint an owner");
-        }
-
-        public void remove(SubscribedUser owner)
-        {
-            throw new RoleException("A manager can't remove a role from the store");
         }
 
         public void addProduct(Product product)
         {
-            if (!permissions.editProduct())
-                throw new PermissionsException(user.getUsername() + 
-                    " has no permissions to edit products in store " +
-                    store.getStoreName());
             store.addProduct(product);
             DBProduct.getInstance().addProduct(product);
         }
 
         public void removeProduct(Product product)
         {
-            if (!permissions.editProduct())
-                throw new PermissionsException(user.getUsername() +
-                     " has no permissions to edit products in store " +
-                     store.getStoreName());
             if (product.getStore() != store || !store.getProductList().Contains(product))
-                throw new StoreException("product " + product.getProductName() +
-                    " doesn't belong to store " + store.getStoreName());
+                throw new StoreException("product " 
+                    + product.getProductName() + " doesn't belong to store " 
+                    + store.getStoreName());
             store.removeProduct(product);
             DBProduct.getInstance().removeProduct(product);
         }
 
         public void setProductPrice(Product product, int price)
         {
-            if (!permissions.editProduct())
-                throw new PermissionsException(user.getUsername() +
-                    " has no permission to set product's price in store "
-                    + store.getStoreName());
             product.setPrice(price);
         }
 
         public void setProductName(Product product, string name)
         {
-            if (!permissions.editProduct())
-                throw new PermissionsException(user.getUsername() +
-                    " has no permission to set product's name in store " +
-                    store.getStoreName());
             product.setProductName(name);
         }
 
         public void addToProductQuantity(Product product, int amount)
         {
-            if (!permissions.editProduct())
-                throw new PermissionsException(user.getUsername() +
-                    " has no permission to add to product's quantity in store " +
-                    store.getStoreName());
             product.addQuantityLeft(amount);
         }
 
         public void decFromProductQuantity(Product product, int amount)
         {
-            if (!permissions.editProduct())
-                throw new PermissionsException(user.getUsername() +
-                    " has no permission to decrease from product's quantity in store "
-                    + store.getStoreName());
             int curQuan = product.getQuantityLeft();
             if (curQuan < amount)
-                throw new AlreadyExistException("current quantity is " +
-                    curQuan + " and it can't be decreased by " + amount);
+                throw new AlreadyExistException("product "
+                    + product.getProductName() + " quantity is " + product.getQuantityLeft() +
+                    "so you decrease " + amount + " of its quantity");
             product.decQuantityLeft(amount);
         }
 
         public void setProductDiscount(Product product, DiscountComponent discount)
         {
-            if (!permissions.editDiscount())
-                throw new PermissionsException(user.getUsername() +
-                    " has no permission to set product's discount in store " +
-                    store.getStoreName());
             //product.setDiscount(discount);
+        }
+
+        public void removeRoleAppointedByMe(StoreRole role)
+        {
+            appointedByMe.Remove(role);
+        }
+
+        public void addManager(SubscribedUser manager, Permissions permissions)
+        {
+            StoreRole newManager = new StoreManager(this.user, store, manager, permissions);
+            DBStore.getInstance().addStoreRole(newManager);
+            if (store.getStoreRole(manager) != null)
+                throw new RoleException("user " + manager.getUsername() + 
+                    " already have a role in store " + 
+                    store.getStoreName());
+            store.addStoreRole(newManager);
+            manager.addStoreRole(newManager);
+            appointedByMe.Add(newManager);
+        }
+        
+        public void addOwner(SubscribedUser owner)
+        {
+            StoreRole newOwner = new StoreOwner(this.user, owner, store);
+            if (store.getStoreRole(owner) != null)
+                throw new RoleException("user " + owner.getUsername() + 
+                    " already have a role in store " + 
+                    store.getStoreName());
+            store.addStoreRole(newOwner);
+            owner.addStoreRole(newOwner);
+            appointedByMe.Add(newOwner);
+            DBStore.getInstance().addStoreRole(newOwner);
+        }
+
+        public void remove(SubscribedUser role)
+        {
+            StoreRole sr = role.getStoreRole(store);
+            DBStore.getInstance().removeStoreRole(sr);
+            if (sr == null)
+                throw new RoleException("user " + role.getUsername() + 
+                    " doesn't have a role in store " 
+                    + store.getStoreName());
+            if (sr.getAppointedBy() != this.user)
+                throw new RoleException("user " + user.getUsername() + 
+                    " didn't appoint " + 
+                    role.getUsername());
+            sr.removeAllAppointedBy();
+            role.removeStoreRole(sr);
+            store.removeStoreRole(sr);
         }
 
         public void closeStore()
@@ -131,17 +145,20 @@ namespace workshop192.Domain
 
         public void removeAllAppointedBy()
         {
-            return;
-        }
-        public Permissions getPermissions()
-        {
-            return permissions;
-
+            foreach (StoreRole sr in appointedByMe)
+                remove(sr.getUser());
         }
 
-        public void removeRoleAppointedByMe(StoreRole role)
+        
+
+        public void addProductVisibleDiscount(Product product, double percentage, string duration)
         {
-            return;
+            VisibleDiscount discount = new VisibleDiscount(percentage, duration);
+            product.setDiscount(discount);
+        }
+        public void removeProductDiscount(Product product)
+        {
+            product.removeDiscount();
         }
 
         public void addStoreVisibleDiscount(double percentage, string duration)
@@ -166,25 +183,11 @@ namespace workshop192.Domain
         {
             store.removeDiscount();
         }
-
         public void addComplexDiscount(List<DiscountComponent> list, string type)
         {
             DiscountComposite composite = new DiscountComposite(list, type);
             store.addDiscount(composite);
         }
-        
-        public void addProductVisibleDiscount(Product product, double percentage, string duration)
-        {
-            VisibleDiscount discount = new VisibleDiscount(percentage, duration);
-            product.setDiscount(discount);
-        }
-
-        public void removeProductDiscount(Product product)
-        {
-            product.removeDiscount();
-        }
-
-        //////
         
         public void removeMaxAmountPolicy()
         {
@@ -200,7 +203,7 @@ namespace workshop192.Domain
             store.setMinPurchasePolicy(newMinAmount);
         }
         
-        public void setMaxAmountPolicy( int newMaxAmount)
+        public void setMaxAmountPolicy(int newMaxAmount)
         {
             store.setMaxPurchasePolicy(newMaxAmount);
 

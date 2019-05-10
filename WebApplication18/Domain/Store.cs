@@ -248,28 +248,53 @@ namespace workshop192.Domain
             }
             discountList = new LinkedList<DiscountComponent>();
         }
-       
+       /*
         private void checkValidityofPurchases(PurchasePolicy p1, PurchasePolicy p2)
         {
-            if (p1.GetType() == typeof(MaxAmountPurchase))
+            if (p1!= null && p1.GetType() == typeof(MaxAmountPurchase))
+            {
                 if (p1.getAmount() < p2.getAmount())
                     throw new ArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
+            }
             else if (p1.GetType() == typeof(MinAmountPurchase))
-                    if (p1.getAmount() > p2.getAmount())
-                        throw new ArgumentException("contradiction! minimum amount can not be larger than maximum amount Purchase Policy");
-
+            {
+                if (p1.getAmount() > p2.getAmount())
+                    throw new ArgumentException("contradiction! minimum amount can not be larger than maximum amount Purchase Policy");
+            }
 
         }
-
+        */
         public void setMinPurchasePolicy(int MinAmount)
         {
-            minPurchasePolicy = new MinAmountPurchase(MinAmount);
-            
+            if (maxPurchasePolicy == null)
+                minPurchasePolicy = new MinAmountPurchase(MinAmount);
+            else
+            {
+                if (maxPurchasePolicy.getAmount() < MinAmount)
+                {
+                    throw new ArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
+                }
+                else
+                    minPurchasePolicy = new MinAmountPurchase(MinAmount);
+
+            }
+
         }
 
-        public void addMaxPurchasePolicy(int maxAmount)
+        public void setMaxPurchasePolicy(int maxAmount)
         {
-            maxPurchasePolicy = new MaxAmountPurchase(maxAmount);
+            if (minPurchasePolicy == null)
+                maxPurchasePolicy = new MaxAmountPurchase(maxAmount);
+            else
+            {
+                if (minPurchasePolicy.getAmount() > maxAmount)
+                {
+                    throw new ArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
+                }
+                else
+                    maxPurchasePolicy = new MaxAmountPurchase(maxAmount);
+
+            }
         }
 
         public void checkPolicy(Product p, int amount)

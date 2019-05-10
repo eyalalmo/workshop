@@ -47,8 +47,8 @@ namespace UnitTestProject2
         {
             try
             {
-                storeService.addMaxAmountPolicy(store1, session1, 4);
-                storeService.addMinAmountPolicy(store1, session1, 6);
+                storeService.setMaxAmountPolicy(store1, session1, 4);
+                storeService.setMinAmountPolicy(store1, session1, 6);
                 Assert.Fail();
             }
             catch (ArgumentException)
@@ -56,6 +56,7 @@ namespace UnitTestProject2
                 Assert.IsTrue(true);
             }
         }
+        /*
         [TestMethod]
         public void MoreThanTwoPurchasePolicies()
         {
@@ -66,7 +67,7 @@ namespace UnitTestProject2
                 storeService.addMaxAmountPolicy(store1, session1, 3);
                 Assert.Fail();
             }
-            catch (AlreadyExistException)
+            catch (Exception)
             {
                 Assert.IsTrue(true);
             }
@@ -87,14 +88,14 @@ namespace UnitTestProject2
             }
 
         }
-
+        */
         [TestMethod]
         public void checkPurchasePolicyFail()
         {
             try
             {
-                storeService.addMaxAmountPolicy(store1, session1, 4);
-                storeService.addMinAmountPolicy(store1, session1, 3);
+                storeService.setMaxAmountPolicy(store1, session1, 4);
+                storeService.setMinAmountPolicy(store1, session1, 3);
                 basketService.addToCart(session2, bamba, 2);
                 basketService.addToCart(session2, bisli, 2);
                 Assert.Fail();
