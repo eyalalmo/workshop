@@ -17,8 +17,7 @@ namespace workshop192.Domain
         {
             dbSubscribedUser = DBSubscribedUser.getInstance();
         }
-
-
+        
         public void closeStore(Store store)
         {
             throw new UserStateException("Guest cannot close a store");
@@ -85,7 +84,7 @@ namespace workshop192.Domain
             if (s != null)
                throw new RegisterException("username already exists");
             SubscribedUser sub = new SubscribedUser(username, encrypted, session.getShoppingBasket());
-            session.setSubscribedUser(sub);
+            //session.setSubscribedUser(sub);
             DBSubscribedUser.getInstance().register(sub);
         }
         

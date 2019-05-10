@@ -16,24 +16,22 @@ namespace WebApplication18.Controllers
     public class WebSocketController : ApiController
     {
         public static Dictionary<int, WebSocket> sessionToSocket = new Dictionary<int, WebSocket>();
-        public static Dictionary<int, LinkedList<String>> waitingMessages = takeWaitingMessages();
+        public static Dictionary<string, LinkedList<String>> waitingMessages = takeWaitingMessages();
 
-        public static Dictionary<int, LinkedList<String>> takeWaitingMessages()
+        public static Dictionary<string, LinkedList<String>> takeWaitingMessages()
         {
-            Dictionary<int, LinkedList<String>> waitings = new Dictionary<int, LinkedList<String>>();
+            Dictionary<string, LinkedList<String>> waitings = new Dictionary<string, LinkedList<String>>();
             LinkedList<Tuple<string, string>> oldWaitingMessages = UserService.getInstance().getWaitingMessages();
             LinkedList<Tuple<string, string>> remains = new LinkedList<Tuple<string, string>>();
 
             foreach (Tuple<string, string> newMessage in oldWaitingMessages)
             {
-                int session = UserService.getInstance().getSessionByUserName(newMessage.Item1);
-                if (session >= 0) { 
-                    if(!waitings.ContainsKey(session))
-                        waitings.Add(session, new LinkedList<string>());
-                    else
-                        remains.AddLast(newMessage);
-                    waitings[session].AddFirst(newMessage.Item2);
-                }
+                if (!waitings.ContainsKey(newMessage.Item1))
+                    waitings.Add(newMessage.Item1, new LinkedList<string>());
+                else
+                    remains.AddLast(newMessage);
+                waitings[newMessage.Item1].AddFirst(newMessage.Item2);
+
             }
             UserService.getInstance().setWaitingMessages(remains);
             return waitings;
@@ -67,7 +65,7 @@ namespace WebApplication18.Controllers
             }
 
             int session = UserService.getInstance().getUserByHash(hashSession);
-            
+
             if (sessionToSocket.ContainsKey(session))
                 sessionToSocket.Remove(session);
             sessionToSocket.Add(session, socket);
@@ -75,10 +73,18 @@ namespace WebApplication18.Controllers
             if (socket.State == WebSocketState.Open)
             {
                 LinkedList<String> messagesToSend;
-                waitingMessages.TryGetValue(session, out messagesToSend);
+                string username;
+                try
+                {
+                    username = UserService.getInstance().getUserNameBySession(session);
+                }
+                catch (Exception)
+                {
+                    goto noSession;
+                }
+                waitingMessages.TryGetValue(username, out messagesToSend);
                 if (messagesToSend != null)
                 {
-                    string username = UserService.getInstance().getUserNameBySession(session);
                     foreach (String message in messagesToSend)
                     {
                         messageClient(username, message);
@@ -87,8 +93,8 @@ namespace WebApplication18.Controllers
                     messagesToSend.Clear();
                 }
             }
-            
-             while (socket.State == WebSocketState.Open)
+        noSession:
+            while (sessionToSocket.ContainsValue(socket) && socket.State == WebSocketState.Open)
             {
                 /*WebSocketReceiveResult result = await socket.ReceiveAsync(buffer, CancellationToken.None)
                                                             .ConfigureAwait(false);
@@ -101,7 +107,7 @@ namespace WebApplication18.Controllers
                 await socket.SendAsync(sendbuffer, WebSocketMessageType.Text, true, CancellationToken.None)
                             .ConfigureAwait(false);
                   */
-            } 
+            }
         }
 
         public static void messageClient(string username, String message)

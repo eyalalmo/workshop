@@ -35,44 +35,8 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-
-                        if (response == "ok") {             
-                            //<script type="text/javascript">
-
-                            var ws = new WebSocket("ws://" + window.location.host +"/api/WebSocket/");
-
-                            ws.onopen = function () {
-                                //alert("connected");
-                            };
-                            ws.onmessage = function (evt) {
-                                alert(evt.data);
-                            };
-                            ws.onerror = function (evt) {
-                                alert(evt.data);
-                            };
-                            ws.onclose = function () {
-                                //alert("disconnected");
-                            };
-            
-                            //$("#btnLogin").click(function () {
-                            //if (ws.readyState == WebSocket.OPEN) {
-                            //    ws.send($("name5").val());
-                            //}
-                            //else {
-                            //    $("#spanStatus").text("Connection is closed");
-                            //}
-                            //});
-                            
+                        if (response == "ok") {
                             window.location.href = baseUrl + "/";
-                            
-                            /*jQuery.ajax({
-                                type: "GET",
-                                url: baseUrl+"/api/user/waitingMessages",
-                                contentType: "application/json; charset=utf-8",
-                                dataType: "json",
-                                success: function (response) {},
-                                error: function (response) {}
-                                });*/
                         }
                         else {
                             alert(response); 

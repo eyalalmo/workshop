@@ -62,30 +62,25 @@ namespace WebApplication18.Controllers
                 return e.Message;
             }
         }
+
         [Route("api/user/getAllProducts")]
         [HttpGet]
         public string getAllProducts(String Username, String Password)
         {
-
             //LinkedList<Product> list = UserService.getInstance().getAllProducts();
             //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, list);
             //return response;
             return "ok";
-
-
         }
-
-
+        
         [Route("api/user/getShoppingBasket")]
         [HttpGet]
         public string getShoppingBasket()
         {
-           
             int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
             return UserService.getInstance().getShoppingBasket(session);
-           
-
         }
+
         [Route("api/user/basketTotalPrice")]
         [HttpGet]
         public string basketTotalPrice()

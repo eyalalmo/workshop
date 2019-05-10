@@ -56,16 +56,12 @@
                        
                         <li><a runat="server" href="/About">About</a></li>
                         <li><a runat="server" href="/Contact">Contact</a></li>
-                        
                          <li><a runat="server"  id="myAccount" name="myAccount" href="/MyAccount" visible="false">My Account</a></li>
                         <li><a runat="server" id="Basket" name="Basket" href="/Basket" visible="true">Shopping Basket</a></li>
                         <li><a runat="server" id="AllProducts" name="AllProducts" href="/AllProducts" visible="true">All Products</a></li>
                           <li><a runat="server"  id="logout" name="logout" visible="false" style="float: right" >Logout</a></li>
                            <li><a runat="server" id="register" name="register" href="register" visible="true" style="text-align:right">Register</a></li>
-                        <li><a runat="server" id="login" name="login" href="/login" visible="true" >Login</a></li>
-                      
-                            
-                        
+                        <li><a runat="server" id="login" name="login" href="/login" visible="true" >Login</a></li>                        
                     </ul>
                 </div>
             </div>
@@ -78,41 +74,76 @@
                 <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
             </footer>
         </div>
-
-
-          <script type="text/javascript">
-        $(document).ready(function () {
-            
-            $("#logout").click(function () {
-                event.preventDefault();
-               var getUrl = window.location;
-               var baseUrl = getUrl.protocol + "//" + getUrl.host
-                console.log(baseUrl);
  
-                jQuery.ajax({
-                    type: "GET",
-                    url: baseUrl+"/api/user/logout",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
+        <script type="text/javascript">
+              $(document).ready(function () {
 
-                        if (response == "ok") {
-                                                  
-                            window.location.href = baseUrl+"/";
-                        }
-                        else {
-                            console.log(response);   
-                        }
-                    },
-                    error: function (response) {
-                        console.log(response);
-                    }
-                });
-            });
-        });
 
-  </script>
+                  //<script type="text/javascript">
 
+                  var ws = new WebSocket("ws://" + window.location.host + "/api/WebSocket/");
+
+                  ws.onopen = function () {
+                      //alert("connected");
+                  };
+                  ws.onmessage = function (evt) {
+                      alert(evt.data);
+                  };
+                  ws.onerror = function (evt) {
+                      alert(evt.data);
+                  };
+                  ws.onclose = function () {
+                      //alert("disconnected");
+                  };
+
+                  //$("#btnLogin").click(function () {
+                  //if (ws.readyState == WebSocket.OPEN) {
+                  //    ws.send($("name5").val());
+                  //}
+                  //else {
+                  //    $("#spanStatus").text("Connection is closed");
+                  //}
+                  //});
+
+                  /*jQuery.ajax({
+                      type: "GET",
+                      url: baseUrl+"/api/user/waitingMessages",
+                      contentType: "application/json; charset=utf-8",
+                      dataType: "json",
+                      success: function (response) {},
+                      error: function (response) {}
+                      });*/
+
+
+                  $("#logout").click(function () {
+                      event.preventDefault();
+                      var getUrl = window.location;
+                      var baseUrl = getUrl.protocol + "//" + getUrl.host
+                      console.log(baseUrl);
+
+                      jQuery.ajax({
+                          type: "GET",
+                          url: baseUrl + "/api/user/logout",
+                          contentType: "application/json; charset=utf-8",
+                          dataType: "json",
+                          success: function (response) {
+
+                              if (response == "ok") {
+
+                                  window.location.href = baseUrl + "/";
+                              }
+                              else {
+                                  console.log(response);
+                              }
+                          },
+                          error: function (response) {
+                              console.log(response);
+                          }
+                      });
+                  });
+              });
+              
+              </script>
     </form>
 </body>
 </html>
