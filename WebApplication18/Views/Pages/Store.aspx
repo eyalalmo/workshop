@@ -25,10 +25,9 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    var responsJ = JSON.parse(response);
                    
-                    if (responsJ !== "fail") {
-
+                    if (response !== "fail") {
+                         var responsJ = JSON.parse(response);
                         var HTML = "";
                         for (i = 0; i < responsJ.length; i++) {
 

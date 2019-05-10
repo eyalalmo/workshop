@@ -195,7 +195,9 @@
     <Content Include="Views\Pages\Default.aspx" />
     <Content Include="Views\Pages\Discounts.aspx" />
     <Content Include="Views\Pages\EditStore.aspx" />
-    <Content Include="Views\Pages\EditStorePolicy.aspx" />
+    <Content Include="Views\Pages\EditStorePolicy.aspx">
+      <BrowseToURL>~/PagesEditStorePolicy</BrowseToURL>
+    </Content>
     <Content Include="Views\Pages\Index.aspx" />
     <Content Include="Views\Pages\login.aspx" />
     <Content Include="Views\Pages\ManageStaff.aspx" />

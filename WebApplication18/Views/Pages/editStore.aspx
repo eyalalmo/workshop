@@ -170,7 +170,7 @@
                 success: function (response) {
           
                     if (response === true) {
-                         window.location.href = baseUrl + "/StoreDiscount?storeID=" + id;
+                         window.location.href = baseUrl + "/EditStorePolicy?storeID=" + id;
                     }
                     else {
                         alert("you dont have the permissions to edit Policy");

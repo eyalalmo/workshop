@@ -419,13 +419,21 @@ namespace workshop192.ServiceLayer
             return db.hasMaxPurchasePolicy(storeID, sessionID);
         }
 
-        public MinAmountPurchase getMinAmountPolicy(int storeID, int sessionID)
+        public string getMinAmountPolicy(int storeID, int sessionID)
         {
-            return db.getMinAmountPolicy(storeID, sessionID);
+            return db.getMinAmountPolicyString(storeID, sessionID);
         }
-        public MaxAmountPurchase getMaxAmountPolicy(int storeID, int sessionID)
+        public string getMaxAmountPolicy(int storeID, int sessionID)
         {
-            return db.getMaxAmountPolicy(storeID, sessionID);
+            return db.getMaxAmountPolicyString(storeID, sessionID);
+        }
+        public string getMinAmountPolicyString(int storeID, int sessionID)
+        {
+            return db.getMinAmountPolicyString(storeID, sessionID);
+        }
+        public string getMaxAmountPolicyString(int storeID, int sessionID)
+        {
+            return db.getMaxAmountPolicyString(storeID, sessionID);
         }
     }
 }

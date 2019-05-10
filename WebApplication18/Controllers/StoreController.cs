@@ -358,8 +358,40 @@ namespace WebApplication18.Controllers
                 return e.Message;
             }
         }
+        [Route("api/store/GetMaxPolicy")]
+        [HttpGet]
+        public string GetMaxPolicy(int storeID)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+               return StoreService.getInstance().getMaxAmountPolicy(storeID,session);
+               
+            }
+            catch (Exception e)
+            {
+                return "fail";
+            }
+        }
+        [Route("api/store/GetMinPolicy")]
+        [HttpGet]
+        public string GetMinPolicy(int storeID)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                return StoreService.getInstance().getMinAmountPolicy(storeID, session);
 
-       
+            }
+            catch (Exception e)
+            {
+                return "fail";
+            }
+        }
+
+
+
+
 
     }
 }
