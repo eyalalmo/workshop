@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using workshop192.Domain;
 using workshop192.ServiceLayer;
@@ -10,11 +11,13 @@ namespace UnitTestProject3
     {
         public Store store;
         public ShoppingCart cart;
+        public int session;
+        public UserService userService;
 
         [TestInitialize]
         public void initial()
         {
-            
+            userService.init();
             DBProduct.getInstance().init();
             DBProduct.getInstance().init();
             DBStore.getInstance().init();
@@ -22,9 +25,9 @@ namespace UnitTestProject3
             DBStore.getInstance().addStore(store);
 
             cart = new ShoppingCart(store.getStoreID());
-          
+
         }
-        
+
         [TestMethod]
         public void TestAddProduct1()
         {
@@ -100,7 +103,7 @@ namespace UnitTestProject3
                 Assert.IsTrue(true);
             }
         }
-        
+
         [TestMethod]
         public void totalAmountTest1()
         {
@@ -113,42 +116,8 @@ namespace UnitTestProject3
             double fdsfds = cart.getTotalPrice();
             Assert.AreEqual(fdsfds, 40);
         }
-      /*  
-        [TestMethod]
-        public void checkout1()
-        {
-            try
-            {
-                Product p1 = new Product("p1", "ff", 10, 2, 10, store);
-                cart.addToCart(p1, 2);
-
-                cart.checkout("hamarganit", "20432232");
-                Assert.IsTrue(true);
-            }
-            catch (CartException)
-            {
-                Assert.Fail();
-            }
-        }
-        [TestMethod]
-        public void checkout2()
-        {
-            try
-            {
-                Product p1 = new Product("p1", "ff", 2, 2, 10, store);
-                Product p2 = new Product("p2", "ff", 10, 2, 10, store);
-                cart.addToCart(p1, 2);
-                cart.addToCart(p2, 2);
-                cart.checkout("hamarganit", "20432232");
-                Assert.IsTrue(true);
-            }
-            catch (CartException)
-            {
-                Assert.Fail();
-            }
-        }
-        */
     }
+      
 }
 
 

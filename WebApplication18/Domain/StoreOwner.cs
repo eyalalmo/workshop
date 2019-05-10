@@ -188,13 +188,7 @@ namespace workshop192.Domain
             DiscountComposite composite = new DiscountComposite(list, type);
             store.addDiscount(composite);
         }
-
-        public void addMaxAmountPolicy( int maxAmount)
-        {
-            MaxAmountPurchase p = new MaxAmountPurchase(maxAmount);
-            store.addPurchasePolicy(p);
-        }
-
+        
         public void removeMaxAmountPolicy()
         {
             store.removeMaxAMountPolicy();
@@ -208,13 +202,7 @@ namespace workshop192.Domain
         {
             store.setMinPurchasePolicy(newMinAmount);
         }
-
-        public void addMinAmountPolicy( int minAmount)
-        {
-            MinAmountPurchase p = new MinAmountPurchase(minAmount);
-            store.addPurchasePolicy(p);
-        }
-
+        
         public void setMaxAmountPolicy(int newMaxAmount)
         {
             store.setMaxPurchasePolicy(newMaxAmount);

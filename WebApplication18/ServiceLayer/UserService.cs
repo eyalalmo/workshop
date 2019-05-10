@@ -22,6 +22,11 @@ namespace workshop192.ServiceLayer
             return instance;
         }
 
+        public void init()
+        {
+            throw new NotImplementedException();
+        }
+
         private UserService()
         {
 
