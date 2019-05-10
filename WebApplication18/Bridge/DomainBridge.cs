@@ -743,21 +743,7 @@ namespace workshop192.Bridge
             sr.removeMaxAmountPolicy();
         }
 
-        public  void addMaxAmountPolicy(int storeID, int sessionID, int maxAmount)
-        {
-           Session user = DBSession.getInstance().getSession(sessionID);
-        if (user == null)
-            throw new DoesntExistException("user is not logged in");
-        Store store = DBStore.getInstance().getStore(storeID);
-        SubscribedUser subscribedUser = user.getSubscribedUser();
-        if (subscribedUser == null)
-            throw new DoesntExistException("not a subscribed user");
-        StoreRole sr = subscribedUser.getStoreRole(store);
-        if (sr == null)
-            throw new RoleException("no role for this user in this store");
-        sr.setMaxAmountPolicy(newMinAmount);
-        }
-
+     
         public void setMinAmountPolicy(int storeID, int sessionID, int newMinAmount)
         {
             Session user = DBSession.getInstance().getSession(sessionID);
@@ -773,21 +759,7 @@ namespace workshop192.Bridge
             sr.setMinAmountPolicy(newMinAmount);
         }
 
-        public void addMinAmountPolicy(int storeID, int sessionID, int minAmount)
-        {
-            Session user = DBSession.getInstance().getSession(sessionID);
-            if (user == null)
-                throw new DoesntExistException("user is not logged in");
-            Store store = DBStore.getInstance().getStore(storeID);
-            SubscribedUser subscribedUser = user.getSubscribedUser();
-            if (subscribedUser == null)
-                throw new DoesntExistException("not a subscribed user");
-            StoreRole sr = subscribedUser.getStoreRole(store);
-            if (sr == null)
-                throw new RoleException("no role for this user in this store");
-            sr.addMinAmountPolicy(minAmount);
-        }
-
+       
         internal void setMaxAmountPolicy(int storeID, int sessionID, int newMinAmount)
         {
             Session user = DBSession.getInstance().getSession(sessionID);
