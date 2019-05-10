@@ -24,7 +24,7 @@
                 event.preventDefault();
                var getUrl = window.location;
                var baseUrl = getUrl.protocol + "//" + getUrl.host
-                console.log(baseUrl);
+                
                 name = $("#name").val();
                 des = $("#des").val();
                  

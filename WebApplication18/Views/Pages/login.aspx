@@ -37,7 +37,7 @@
                     success: function (response) {
 
                         if (response == "ok") {
-                                                  
+                                alert("login success");                    
                             window.location.href = baseUrl+"/";
                         }
                         else {

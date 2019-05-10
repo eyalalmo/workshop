@@ -154,6 +154,23 @@ namespace WebApplication18.Controllers
             }
         }
 
+
+        [Route("api/user/removeUser")]
+        [HttpGet]
+        public string removeUser(String username)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                UserService.getInstance().removeUser(session, username);
+                return "ok";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
     }
 }
  

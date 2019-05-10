@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Title="Admin Panel" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="AdminPan.aspx.cs" Inherits="WebApplication18.Pages.AdminPan" %>
+﻿<%@ Page Language="C#" Title="Admin Panel" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="AdminPan.aspx.cs" Inherits="WebApplication18.Views.Pages.AdminPan" %>
 
 <asp:Content ID="BodyContent"  ContentPlaceHolderID="MainContent" runat="server">
     <h2><%: Title %>
@@ -23,7 +23,7 @@
                 if (confirm("Are you sure you want to remove " + username + " ?")) {
                     jQuery.ajax({
                         type: "GET",
-                        url: baseUrl + "/api/AdminPan/removeUser?username=" + username,
+                        url: baseUrl + "/api/user/removeUser?username=" + username,
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (response) {

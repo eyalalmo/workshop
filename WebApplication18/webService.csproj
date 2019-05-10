@@ -203,7 +203,9 @@
     <Content Include="Views\Pages\Products.aspx" />
     <Content Include="Views\Pages\register.aspx" />
     <Content Include="Views\Pages\ShoppingBasket.aspx" />
-    <Content Include="Views\Pages\Store.aspx" />
+    <Content Include="Views\Pages\Store.aspx">
+      <BrowseToURL>~/Pages/Store</BrowseToURL>
+    </Content>
     <Content Include="Views\Pages\StoreDiscount.aspx" />
     <Content Include="Views\Pages\ViewStore.aspx" />
     <Content Include="Views\Pages\StoreDetails.aspx" />

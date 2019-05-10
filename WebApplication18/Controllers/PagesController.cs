@@ -103,7 +103,11 @@ namespace WebApplication18.Controllers
             ViewData["storeId"] = storeId;
             return View();
         }
-
+        public ActionResult AdminPan()
+        {
+            return View();
+        }
+        
 
 
 

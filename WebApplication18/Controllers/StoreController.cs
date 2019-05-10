@@ -66,18 +66,18 @@ namespace WebApplication18.Controllers
 
         [Route("api/store/addStore")]
         [HttpGet]
-        public int addStore(string name, string description)
+        public string addStore(string name, string description)
         {
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-                return StoreService.getInstance().addStore(name, description, session);
+                return StoreService.getInstance().addStore(name, description, session)+"";
 
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return -1;
+                return e.Message;
             }
         }
 

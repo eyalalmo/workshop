@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebApplication18.Pages {
+namespace WebApplication18.Views.Pages {
     
     
     public partial class AdminPan {
