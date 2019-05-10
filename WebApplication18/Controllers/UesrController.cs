@@ -46,6 +46,7 @@ namespace WebApplication18.Controllers
                 return e.Message;
             }
         }
+
         [Route("api/user/logout")]
         [HttpGet]
         public Object logout()
@@ -163,6 +164,21 @@ namespace WebApplication18.Controllers
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
                 UserService.getInstance().removeUser(session, username);
+                return "ok";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+        [Route("api/user/waitingMessages")]
+        [HttpGet]
+        public Object waitingMessages()
+        {
+            try
+            {
+                WebSocketController.messageClient("et", "");
                 return "ok";
             }
             catch (Exception e)

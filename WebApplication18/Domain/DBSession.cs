@@ -10,7 +10,7 @@ namespace workshop192.Domain
     {
         private static DBSession instance;
         private Dictionary<int, Session> sessions;
-        private static int sessionNum = 0;
+        private static int sessionNum = 1;
 
         public static DBSession getInstance()
         {
