@@ -199,8 +199,7 @@ namespace WebApplication18.Controllers
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-                StoreService.getInstance().isOwner(storeId, session);
-                return true;
+                return StoreService.getInstance().isOwner(storeId, session);
 
             }
             catch (Exception e)
@@ -235,8 +234,8 @@ namespace WebApplication18.Controllers
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-                StoreService.getInstance().isManager(storeId, session);
-                return true;
+                return StoreService.getInstance().isManager(storeId, session);
+                
 
             }
             catch (Exception e)
@@ -359,6 +358,9 @@ namespace WebApplication18.Controllers
                 return e.Message;
             }
         }
+
+       
+
     }
 }
 
