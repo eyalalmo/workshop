@@ -11,6 +11,31 @@
         </div>
 		</div>
 
+    <div class="modal" id="enterQuantity">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h2 class="modal-title">Please Enter Quantity</h2>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <input class="form-control" type="text" placeholder="Quantity" aria-label="Search" id="quantity" name="quantity">
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" id="confirm" onclick="confirmBasket()" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+      </div>
+
+    </div>
+  </div>
+   </div>
+
     <script type="text/javascript">
         $(document).ready(function () {
 
@@ -27,12 +52,12 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                   
+                   var HTML = "";
                     var minPurchasePolicy;
                      var maxPurchasePolicy;
                     if (responsJ !== "fail") {
                     var responsJ = JSON.parse(response);
-                        var HTML = "";
+                      
                       try{
                             var minPurchasePolicy = responsJ.minPurchasePolicy.minAmount;
                             }
@@ -75,35 +100,32 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    var responsJ = JSON.parse(response);
-                    
-                    if (responsJ !== "fail") {
-
-                        var HTML = "";
+                    var HTML = "<p></p>";
+                    var doc = document.getElementById('allStores');
+                
+      
+                    if (response !== "fail") {
+                        var responsJ = JSON.parse(response);
+                       
                         for (i = 0; i < responsJ.length; i++) {
 
-                            var productID = responsJ[i].productID;
-                            var productName = responsJ[i].productName;
-                            var price = responsJ[i].price;
-                            var rank = responsJ[i].rank;
-                            var quantityLeft = responsJ[i].quantityLeft;
-                            var discount = responsJ[i].discount;
-                            var storeID = responsJ[i].storeID;
-                          
-                            HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                           
+                           HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" id="` + responsJ[i].productID + `">
 		                   <div class="my-list">
-			                <h3>Product Name :  `+ productName + `</h3 >
-                            <h3>Product id :  `+ productID + `</h3 >
-		                    <div class="detail">
-			                    <p></p>`
-                                + `price: ` + price + `<br>`
-                                + `rank: `+ rank +`<br>`
-                                + `quantity Left: `+ quantityLeft + `<br>`
-                                + `</div>
-		                    </div>
-		                    </div>`
+            			<p><b>`+ responsJ[i].productName + `</b></p>
+                        <span> Category: `+ responsJ[i].productCategory + `</span> <p></p>      
+            			<span > Quantity Left: `+ responsJ[i].quantityLeft + `</span> <p></p>   
+            			<div class="detail">
+	            		<span> Price: `+ responsJ[i].price + `$</span></p> <p></p>
+	            		<span> Rank: `+ responsJ[i].rank + `</span></p> <p></p>
+            		    <button type="button" class="btn btn-primary" onClick="addToCart(` + responsJ[i].productID + `)"/>
+                       Add To Cart
+                          </button>`+
 
-
+			            `</div>
+		            </div>
+		            </div>`
+                
                         }
                         doc.innerHTML += HTML;
 
@@ -119,7 +141,35 @@
             });
           
         });
+        var currentProductID;
+          function addToCart(productID) {
+            currentProductID = productID;
+            $("#enterQuantity").modal()
+        };
+        function confirmBasket() {
+            var getUrl = window.location;
+            var baseUrl = getUrl.protocol + "//" + getUrl.host
+            var amount = $("#quantity").val();
+            console.log(baseUrl);
+            jQuery.ajax({
+                type: "GET",
+                url: baseUrl + "/api/products/addToBasket?productID=" + currentProductID + "&amount=" + amount,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    if (response !== "ok") {
+                        alert(response);
+                    } else
+                        alert("Added succesfully to basket")
 
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+            
+        };
+              
     </script>
     
  </asp:Content>
