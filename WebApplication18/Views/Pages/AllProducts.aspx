@@ -59,7 +59,7 @@
             doc.innerHTML = "";
             var i;
             var jsonList = JSON.parse(response);
-            var HTML;
+            var HTML="";
             for (i = 0; i < jsonList.length; i++) {
                 HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		                   <div class="my-list">

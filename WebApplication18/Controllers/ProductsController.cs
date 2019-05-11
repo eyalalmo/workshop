@@ -83,7 +83,7 @@ namespace WebApplication18.Controllers
                 int am = Int32.Parse(amount);
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
               
-                    UserService.getInstance().addToShoppingBasket(productID, am, session);
+                UserService.getInstance().addToShoppingBasket(productID, am, session);
                 return "ok";
                 
             }

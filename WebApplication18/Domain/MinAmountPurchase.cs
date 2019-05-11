@@ -8,7 +8,7 @@ namespace workshop192.Domain
 {
     public class MinAmountPurchase : PurchasePolicy
     {
-        private int minAmount;
+        public int minAmount;
 
         public MinAmountPurchase(int minAmount)
         {

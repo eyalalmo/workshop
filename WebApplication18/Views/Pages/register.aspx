@@ -45,10 +45,11 @@
                     dataType: "json",
                     success: function (response) {          
                         if (response == "ok") {
+                            alert("register success")
                             window.location.href = baseUrl+"/";
                         }
                         else {
-                           alert(response);  
+                       alert("register failed "+response);  
                         }
                     },
                     error: function (response) {

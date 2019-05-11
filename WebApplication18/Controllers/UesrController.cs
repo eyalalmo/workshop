@@ -62,17 +62,20 @@ namespace WebApplication18.Controllers
                 return e.Message;
             }
         }
-
         [Route("api/user/getAllProducts")]
         [HttpGet]
         public string getAllProducts(String Username, String Password)
         {
+
             //LinkedList<Product> list = UserService.getInstance().getAllProducts();
             //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, list);
             //return response;
             return "ok";
+
+
         }
-        
+
+
         [Route("api/user/getShoppingBasket")]
         [HttpGet]
         public string getShoppingBasket()
@@ -125,10 +128,9 @@ namespace WebApplication18.Controllers
                 return UserService.getInstance().getAllStores(session);
               
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                string s = "fail";
-                return s;
+               return  e.Message;
             }
         }
 
@@ -147,6 +149,23 @@ namespace WebApplication18.Controllers
             {
                 string s = e.Message;
                 return s;
+            }
+        }
+
+
+        [Route("api/user/removeUser")]
+        [HttpGet]
+        public string removeUser(String username)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                UserService.getInstance().removeUser(session, username);
+                return "ok";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
             }
         }
 

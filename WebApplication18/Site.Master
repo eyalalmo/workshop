@@ -59,7 +59,8 @@
                          <li><a runat="server"  id="myAccount" name="myAccount" href="/MyAccount" visible="false">My Account</a></li>
                         <li><a runat="server" id="Basket" name="Basket" href="/Basket" visible="true">Shopping Basket</a></li>
                         <li><a runat="server" id="AllProducts" name="AllProducts" href="/AllProducts" visible="true">All Products</a></li>
-                          <li><a runat="server"  id="logout" name="logout" visible="false" style="float: right" >Logout</a></li>
+                        <li><a runat="server" id="Admin" name="Admin" href="/AdminPan" visible="false">Admin Options</a></li>
+                        <li><a runat="server"  id="logout" name="logout" visible="false" style="float: right" >Logout</a></li>
                            <li><a runat="server" id="register" name="register" href="register" visible="true" style="text-align:right">Register</a></li>
                         <li><a runat="server" id="login" name="login" href="/login" visible="true" >Login</a></li>                        
                     </ul>

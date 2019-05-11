@@ -7,7 +7,7 @@ namespace workshop192.Domain
 
     {
         public SubscribedUser appointedBy;
-        public Store store;
+        private Store store;
         public SubscribedUser user;
         public Permissions permissions;
         public bool isOwner = false;
@@ -186,11 +186,7 @@ namespace workshop192.Domain
 
         //////
 
-        public void addMaxAmountPolicy(int maxAmount)
-        {
-            MaxAmountPurchase p = new MaxAmountPurchase(maxAmount);
-            store.addPurchasePolicy(p);
-        }
+        
 
         public void removeMaxAmountPolicy()
         {
@@ -206,11 +202,7 @@ namespace workshop192.Domain
             store.setMinPurchasePolicy(newMinAmount);
         }
 
-        public void addMinAmountPolicy( int minAmount)
-        {
-            MinAmountPurchase p = new MinAmountPurchase(minAmount);
-            store.addPurchasePolicy(p);
-        }
+       
 
         public void setMaxAmountPolicy( int newMaxAmount)
         {
@@ -232,5 +224,6 @@ namespace workshop192.Domain
         {
             throw new NotImplementedException();
         }
+
     }
 }

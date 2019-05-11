@@ -8,7 +8,7 @@ namespace workshop192.Domain
 {
     public class MaxAmountPurchase : PurchasePolicy
     {
-        private int maxAmount;
+        public int maxAmount;
         
         public MaxAmountPurchase(int maxAmount)
         {

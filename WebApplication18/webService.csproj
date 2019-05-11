@@ -271,6 +271,7 @@
     <Content Include="Views\Pages\About.aspx" />
     <Content Include="Views\Pages\AddProduct.aspx" />
     <Content Include="Views\Pages\AddStore.aspx" />
+    <Content Include="Views\Pages\AdminPan.aspx" />
     <Content Include="Views\Pages\AllProducts.aspx" />
     <Content Include="Views\Pages\Basket.aspx" />
     <Content Include="Views\Pages\Checkout.aspx" />
@@ -278,12 +279,19 @@
     <Content Include="Views\Pages\Default.aspx" />
     <Content Include="Views\Pages\Discounts.aspx" />
     <Content Include="Views\Pages\EditStore.aspx" />
+    <Content Include="Views\Pages\EditStorePolicy.aspx">
+      <BrowseToURL>~/PagesEditStorePolicy</BrowseToURL>
+    </Content>
     <Content Include="Views\Pages\Index.aspx" />
     <Content Include="Views\Pages\login.aspx" />
     <Content Include="Views\Pages\ManageStaff.aspx" />
     <Content Include="Views\Pages\MyAccount.aspx" />
+    <Content Include="Views\Pages\Products.aspx" />
     <Content Include="Views\Pages\register.aspx" />
-    <Content Include="Views\Pages\Store.aspx" />
+    <Content Include="Views\Pages\ShoppingBasket.aspx" />
+    <Content Include="Views\Pages\Store.aspx">
+      <BrowseToURL>~/Pages/Store</BrowseToURL>
+    </Content>
     <Content Include="Views\Pages\StoreDiscount.aspx" />
     <Content Include="Views\Pages\ViewStore.aspx" />
     <Content Include="Views\Pages\StoreDetails.aspx" />
@@ -404,6 +412,13 @@
     <Compile Include="Views\Pages\AddStore.aspx.designer.cs">
       <DependentUpon>AddStore.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\AdminPan.aspx.cs">
+      <DependentUpon>AdminPan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Pages\AdminPan.aspx.designer.cs">
+      <DependentUpon>AdminPan.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\AllProducts.aspx.cs">
       <DependentUpon>AllProducts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -453,6 +468,13 @@
     <Compile Include="Views\Pages\EditStore.aspx.designer.cs">
       <DependentUpon>EditStore.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\EditStorePolicy.aspx.cs">
+      <DependentUpon>EditStorePolicy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Pages\EditStorePolicy.aspx.designer.cs">
+      <DependentUpon>EditStorePolicy.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -481,12 +503,26 @@
     <Compile Include="Views\Pages\MyAccount.aspx.designer.cs">
       <DependentUpon>MyAccount.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\Products.aspx.cs">
+      <DependentUpon>Products.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Pages\Products.aspx.designer.cs">
+      <DependentUpon>Products.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\register.aspx.cs">
       <DependentUpon>register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\Pages\register.aspx.designer.cs">
       <DependentUpon>register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\ShoppingBasket.aspx.cs">
+      <DependentUpon>ShoppingBasket.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Pages\ShoppingBasket.aspx.designer.cs">
+      <DependentUpon>ShoppingBasket.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\Store.aspx.cs">
       <DependentUpon>Store.aspx</DependentUpon>

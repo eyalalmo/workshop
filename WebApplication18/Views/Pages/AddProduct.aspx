@@ -25,6 +25,8 @@
   <label for="usr">Quantity:</label>
   <input type="number" class="form-control" id="quantityLeft" name="name">
 </div>
+ 
+
   
  
   <button type="submit" class="btn btn-primary" name="btnAdd" id="btnAdd" >Add Product</button>

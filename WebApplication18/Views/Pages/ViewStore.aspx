@@ -38,6 +38,7 @@
                             var quantityLeft = responsJ[i].quantityLeft;
                             var discount = responsJ[i].discount;
                             var storeID = responsJ[i].storeID;
+                            var minPurchasePolicy = responsJ[i].minPurchasePolicy;
 
                             HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		                   <div class="my-list">

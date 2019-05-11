@@ -10,6 +10,6 @@
 namespace WebApplication18.Views.Pages {
     
     
-    public partial class AddStore {
+    public partial class AdminPan {
     }
 }

@@ -25,7 +25,7 @@
     
     <div class="container">
 	<div id="allRoles" class="row">
-                <h2>Staff:</h2>
+     <h2>Staff:</h2>
 	</div>
 	</div>
          
@@ -35,7 +35,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
 
-      <!-- Modal Header -->
+     
       <div class="modal-header">
         <h2 class="modal-title">Please Enter Username</h2>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -75,7 +75,7 @@
             var appointed = "Store Founder"
            
             var role = "Store Owner"
-            var HTML;
+            var HTML="";
             for (i = 0; i < jsonList.length; i++) {
                  if (jsonList[i].appointedBy)
                     appointed = "Appointed By: " +jsonList[i].appointedBy.username;
@@ -119,6 +119,7 @@
                         alert(response);
                     } else
                         alert("Manager successfuly  added")
+                     window.location.href = baseUrl+"/ManageStaff?storeId="+storeId ;
 
                 },
                 error: function (response) {
@@ -144,6 +145,7 @@
                         alert(response);
                     } else
                         alert("Staff member successfuly  removed")
+                        window.location.href = baseUrl+"/ManageStaff?storeId="+storeId ;
 
                 },
                 error: function (response) {
@@ -167,6 +169,7 @@
                             alert(response);
                         } else
                             alert("Owner successfuly added")
+                            window.location.href = baseUrl+"/ManageStaff?storeId="+storeId ;
                         
                     },
                     error: function (response) {
@@ -192,7 +195,7 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                        console.log(response);
+                        
                         getRoles(response);
                         
                     },

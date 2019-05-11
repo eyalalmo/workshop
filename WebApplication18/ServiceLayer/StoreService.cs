@@ -325,15 +325,49 @@ namespace workshop192.ServiceLayer
             throw new NotImplementedException();
         }
 
-        public void addMinAmountPolicy(int storeID, int sessionID, int minAmount)
-        {
-            if (storeID < 0)
-                throw new ArgumentException("illegal store number");
+        
 
+        
+       
+      
+
+        ///////////////////////////////////////////////////
+
+
+        public void addCouponToStore(int sessionID, int storeID, string couponCode, double percentage, string duration)
+        {
             if (sessionID < 0)
                 throw new NullReferenceException("session is a null reference");
-            db.addMinAmountPolicy(storeID, sessionID, minAmount);
+            if (storeID < 0)
+                throw new NullReferenceException("store is a null reference");
+
+            db.addCouponToStore(sessionID, storeID, couponCode, percentage, duration);
         }
+
+      
+
+        public void removeCouponFromStore(int sessionID, int storeID, string couponCode)
+        {
+            if (sessionID < 0)
+                throw new NullReferenceException("session is a null reference");
+            if (storeID < 0)
+                throw new NullReferenceException("store is a null reference");
+
+            db.removeCouponFromStore(sessionID, storeID, couponCode);
+        }
+       
+        public string getStore(int id)
+        {
+            return db.getStore(id);
+        }
+
+        public string getAllRoles(int id)
+        {
+            return db.getRoles(id);
+        }
+
+
+
         public void setMinAmountPolicy(int storeID, int sessionID, int newMinAmount)
         {
             if (storeID < 0)
@@ -351,20 +385,11 @@ namespace workshop192.ServiceLayer
 
             if (sessionID < 0)
                 throw new NullReferenceException("session is a null reference");
-            db.removeMaxAmountPolicy(storeID, sessionID);
+            db.removeMinAmountPolicy(storeID, sessionID);
 
 
         }
-
-        public void addMaxAmountPolicy(int storeID, int sessionID, int maxAmount)
-        {
-            if (storeID < 0)
-                throw new ArgumentException("illegal store number");
-
-            if (sessionID < 0)
-                throw new NullReferenceException("session is a null reference");
-            db.addMaxAmountPolicy(storeID, sessionID, maxAmount);
-        }
+        
         public void setMaxAmountPolicy(int storeID, int sessionID, int newMaxAmount)
         {
             if (storeID < 0)
@@ -388,43 +413,30 @@ namespace workshop192.ServiceLayer
         }
 
 
-        ///////////////////////////////////////////////////
-
-
-        public void addCouponToStore(int sessionID, int storeID, string couponCode, double percentage, string duration)
+        public bool hasMinPurchasePolicy(int storeID, int sessionID)
         {
-            if (sessionID < 0)
-                throw new NullReferenceException("session is a null reference");
-            if (storeID < 0)
-                throw new NullReferenceException("store is a null reference");
-
-            db.addCouponToStore(sessionID, storeID, couponCode, percentage, duration);
+            return db.hasMinPurchasePolicy(storeID, sessionID);
         }
-        public void removeCouponFromStore(int sessionID, int storeID, string couponCode)
+        public bool hasMaxPurchasePolicy(int storeID, int sessionID)
         {
-            if (sessionID < 0)
-                throw new NullReferenceException("session is a null reference");
-            if (storeID < 0)
-                throw new NullReferenceException("store is a null reference");
-
-            db.removeCouponFromStore(sessionID, storeID, couponCode);
-        }
-        /*
-        public void addMinPurchasePolicyint(int sessionID, int storeID, int minAmount, string duration)
-        {
-
-
-
-        }*/
-
-        public string getStore(int id)
-        {
-            return db.getStore(id);
+            return db.hasMaxPurchasePolicy(storeID, sessionID);
         }
 
-        public string getAllRoles(int id)
+        public string getMinAmountPolicy(int storeID, int sessionID)
         {
-            return db.getRoles(id);
+            return db.getMinAmountPolicyString(storeID, sessionID);
+        }
+        public string getMaxAmountPolicy(int storeID, int sessionID)
+        {
+            return db.getMaxAmountPolicyString(storeID, sessionID);
+        }
+        public string getMinAmountPolicyString(int storeID, int sessionID)
+        {
+            return db.getMinAmountPolicyString(storeID, sessionID);
+        }
+        public string getMaxAmountPolicyString(int storeID, int sessionID)
+        {
+            return db.getMaxAmountPolicyString(storeID, sessionID);
         }
     }
 }

@@ -98,8 +98,16 @@ namespace WebApplication18.Controllers
         }
         
 
-
-
+        public ActionResult EditStorePolicy(int storeId)
+        {
+            ViewData["storeId"] = storeId;
+            return View();
+        }
+        public ActionResult AdminPan()
+        {
+            return View();
+        }
+        
 
 
 

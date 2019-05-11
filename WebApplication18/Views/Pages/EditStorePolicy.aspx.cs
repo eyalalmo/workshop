@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace WebApplication18
+namespace WebApplication18.Views.Pages
 {
-    public partial class Contact : Page
+    public partial class EditStorePolicy : System.Web.Mvc.ViewPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

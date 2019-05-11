@@ -14,7 +14,7 @@
     <input type="text" class="form-control" id="des" name="des">
   </div>
   
-  <button type="submit" name="btnAdd" class="btn btn-primary"  id="btnAdd" class="btn btn-default">Submit</button>
+  <button type="submit" name="btnAdd" class="btn btn-primary"  id="btnAdd" >Submit</button>
  
    <script type="text/javascript">
 
@@ -24,7 +24,7 @@
                 event.preventDefault();
                var getUrl = window.location;
                var baseUrl = getUrl.protocol + "//" + getUrl.host
-                console.log(baseUrl);
+                
                 name = $("#name").val();
                 des = $("#des").val();
                  
