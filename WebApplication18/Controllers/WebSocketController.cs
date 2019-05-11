@@ -146,24 +146,35 @@ namespace WebApplication18.Controllers
         public static void addMessageToDB(string username, String message)
         {
             UserService.getInstance().addWaitingMessage(new Tuple<string, string>(username, message));
-
-            /*
-            LinkedList<String> messagesToSend;
-            int sessionid = UserService.getInstance().getSessionByUserName(username);
-
-            waitingMessages.TryGetValue(sessionid, out messagesToSend);
-            if (messagesToSend == null)
+            LinkedList<string> messagesToSend;
+            waitingMessages.TryGetValue(username, out messagesToSend);
+            if (messagesToSend != null)
             {
-                UserService.getInstance().addWaitingMessage(new Tuple<string, string>(username, message));
-                messagesToSend = new LinkedList<String>();
                 messagesToSend.AddLast(message);
-                waitingMessages.Add(sessionid, messagesToSend);
             }
             else
             {
-                UserService.getInstance().addWaitingMessage(new Tuple<string, string>(username, message));
+                messagesToSend = new LinkedList<string>();
                 messagesToSend.AddLast(message);
-            }*/
-        }
+                waitingMessages.Add(username, messagesToSend);
+            }
+                /*
+                LinkedList<String> messagesToSend;
+                int sessionid = UserService.getInstance().getSessionByUserName(username);
+
+                waitingMessages.TryGetValue(sessionid, out messagesToSend);
+                if (messagesToSend == null)
+                {
+                    UserService.getInstance().addWaitingMessage(new Tuple<string, string>(username, message));
+                    messagesToSend = new LinkedList<String>();
+                    messagesToSend.AddLast(message);
+                    waitingMessages.Add(sessionid, messagesToSend);
+                }
+                else
+                {
+                    UserService.getInstance().addWaitingMessage(new Tuple<string, string>(username, message));
+                    messagesToSend.AddLast(message);
+                }*/
+            }
     }
 }
