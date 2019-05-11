@@ -388,7 +388,41 @@ namespace WebApplication18.Controllers
                 return "fail";
             }
         }
+     
 
+        [Route("api/store/DeleteMaxPolicy")]
+        [HttpGet]
+        public string DeleteMaxPolicy(int storeID)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                 StoreService.getInstance().removeMaxAmountPolicy(storeID, session);
+                 return "ok";
+
+            }
+            catch (Exception e)
+            {
+              return  e.Message;
+            }
+        }
+
+        [Route("api/store/DeleteMinPolicy")]
+        [HttpGet]
+        public string DeleteMinPolicy(int storeID)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().removeMinAmountPolicy(storeID, session);
+                return "ok";
+
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
 
 
 

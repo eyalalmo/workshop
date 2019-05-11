@@ -343,6 +343,9 @@ namespace workshop192.ServiceLayer
 
             db.addCouponToStore(sessionID, storeID, couponCode, percentage, duration);
         }
+
+      
+
         public void removeCouponFromStore(int sessionID, int storeID, string couponCode)
         {
             if (sessionID < 0)
@@ -382,7 +385,7 @@ namespace workshop192.ServiceLayer
 
             if (sessionID < 0)
                 throw new NullReferenceException("session is a null reference");
-            db.removeMaxAmountPolicy(storeID, sessionID);
+            db.removeMinAmountPolicy(storeID, sessionID);
 
 
         }
