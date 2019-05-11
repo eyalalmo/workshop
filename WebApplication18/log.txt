@@ -77,3 +77,8 @@ Parameter name: String
 2019-05-11 23:13:41,659 INFO  System Log - User q has successfuly registered
 2019-05-11 23:13:50,296 INFO  System Log - User e has successfuly logged in.
 2019-05-11 23:14:09,178 INFO  System Log - User e has logged out
+2019-05-11 23:50:49,470 INFO  System Log - User et has successfuly logged in.
+2019-05-11 23:51:03,772 INFO  System Log - User et has successfuly created a store
+2019-05-11 23:51:09,876 INFO  System Log - User et has successfuly created a store
+2019-05-11 23:51:42,281 INFO  System Log - User et has successfuly created a store
+2019-05-11 23:51:50,600 INFO  System Log - User et has logged out

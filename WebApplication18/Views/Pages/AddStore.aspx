@@ -35,12 +35,13 @@
                     dataType: "json",
                     success: function (response) {
 
-                        if (response != "fail") {
-                            alert("Store added successfuly, id:" + response)                 
+                        if (response === "ok") {
+                            alert("Store added successfuly");  
+                            window.location.href = baseUrl + "/MyAccount";
                            
                         }
                         else {
-                            alert("store added failes")    
+                            alert(response);    
                         }
                     },
                     error: function (response) {

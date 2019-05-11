@@ -10,7 +10,7 @@
     <span class="caret"></span></button>
     <ul class="dropdown-menu">
     <li><a href="#" id="AddStore" >Add Store</a></li>
-    <li><a href="#" id="editStore"  >edit Stores </a></li>
+    <li><a href="#" id="editStore"  >Edit Stores </a></li>
   </ul>
    </div>
      </div>
