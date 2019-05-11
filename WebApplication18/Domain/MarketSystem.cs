@@ -30,8 +30,8 @@ namespace workshop192.Domain
 
             s.login("et", "123");
             int sID = DomainBridge.getInstance().createStore(sessionid, "startup", "This is the startup Store!");
-            DomainBridge.getInstance().addProduct("new Pro1", "Pros",5, 0, 10, sID, sessionid);
-            DomainBridge.getInstance().addProduct("new Pro2", "Pros2", 7, 0, 8, sID, sessionid);
+            DomainBridge.getInstance().addProduct("new Pro1", "Pros",5, 5, 10, sID, sessionid);
+            DomainBridge.getInstance().addProduct("new Pro2", "Pros2", 7, 2, 8, sID, sessionid);
             //SubscribedUser admin = new SubscribedUser("Admin", "1234", new ShoppingBasket());
             //Store s = new Store("startup", "This is the startup Store!");
             //DBStore.getInstance().addStore(s);
