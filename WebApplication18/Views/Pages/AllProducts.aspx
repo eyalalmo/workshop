@@ -23,7 +23,7 @@
           <p></p><p></p>
           Min price: <input type="number" aria-label="Minimum Price" id="minPrice" name="minPrice" min="0" max="1000000" value="0">&nbsp &nbsp &nbsp
           Max price: <input type="number" aria-label="Maximum Price" id="maxPrice" name="maxPrice" min="0" max="1000000" value="1000000"> <p></p> <p></p>
-          Min rank:  <input type="number" aria-label="Minimum Price" id="minRank" name="minPrice" min="0" max="5" value="0" step="0.1">
+          Min rank:  <input type="number" id="minRank" min="0" max="5" value="0" step="0.1">
          
       </div>
   </div>
