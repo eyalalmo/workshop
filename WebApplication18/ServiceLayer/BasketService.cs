@@ -1,10 +1,11 @@
 ﻿using System;
-using workshop192.Domain;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using workshop192.Bridge;
+using workshop192.Domain;
 
 namespace workshop192.ServiceLayer
 {
@@ -24,21 +25,10 @@ namespace workshop192.ServiceLayer
         {
 
         }
-        //use case 2.7
-        public Dictionary<int, ShoppingCart> getShoppingCarts(int user)
-        {
-            return db.getShoppingCarts(user);
-        }
+       
+      
 
-        public ShoppingCart getCart(int user, int store)
-        {
-            if (store < 0)
-            {
-                throw new ArgumentException("invalid store id");
-            }
-
-            return db.getCart(user, store);
-        }
+       
         //use case 2.6
         public void addToCart(int user, int product, int amount)
         {

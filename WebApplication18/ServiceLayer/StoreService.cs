@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using workshop192.Domain;
+
 using workshop192.Bridge;
+using workshop192.Domain;
 
 namespace workshop192.ServiceLayer
 {
@@ -320,10 +321,10 @@ namespace workshop192.ServiceLayer
                 throw new ArgumentException("illegal store number");
             db.removeStoreDiscount(store, sessionID);
         }
-        public void addComplexDiscount(List<DiscountComponent> list, string type)
-        {
-            throw new NotImplementedException();
-        }
+        //public void addComplexDiscount(List<DiscountComponent> list, string type)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         
 
