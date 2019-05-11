@@ -92,7 +92,7 @@ namespace workshop192.ServiceLayer.Tests
             }
             Assert.IsTrue(true);
         }
-        /*
+        
         //4.5
         [TestMethod()]
         public void addMannagerByAnOwner1()
@@ -128,6 +128,7 @@ namespace workshop192.ServiceLayer.Tests
                         }
                         catch (RoleException)
                         {
+
                             try
                             {
                                 userService.setProductDiscount(productid, 0, session3);
@@ -146,7 +147,7 @@ namespace workshop192.ServiceLayer.Tests
                 Assert.Fail();
             }
         }
-        */
+        
         //4.5
         [TestMethod()]
         public void addMannagerByAnOwner2()

@@ -13,7 +13,7 @@ using workshop192.Domain;
 
 namespace workshop192.ServiceLayer.Tests
 {
-    /*
+    
     [TestClass()]
     public class UserServiceTests
     {
@@ -26,8 +26,7 @@ namespace workshop192.ServiceLayer.Tests
         [TestInitialize()]
         public void Initialize()
         {
-            try
-            {
+            
                 userService.setup();
 
                 session1 = userService.startSession();
@@ -47,12 +46,8 @@ namespace workshop192.ServiceLayer.Tests
                 storeService.addProduct("stove", "kitchen", 200, 3, 2, store1, session1);
                 storeService.addProduct("pants", "clothes", 120, 1, 2, store2, session1);
                 storeService.addProduct("socks", "clothes", 110, 4, 2, store2, session1);
-            }
-            catch (Exception)
-            {
-                throw new ExecutionEngineException();
-            }
-        }
+            
+                  }
         //2.2+2.3
         [TestMethod]
         public void registerSuccessTest()
@@ -284,7 +279,7 @@ namespace workshop192.ServiceLayer.Tests
                 userService.purchaseBasket(session2);
                 Assert.Fail();
             }
-            catch (AlreadyExistException)
+            catch (Exception)
             {
                 Assert.IsTrue(true);
             }
@@ -417,7 +412,7 @@ namespace workshop192.ServiceLayer.Tests
 
         }
     }
-    */
+    
 }
 
 
