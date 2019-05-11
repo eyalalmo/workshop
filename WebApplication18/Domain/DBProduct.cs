@@ -54,7 +54,7 @@ namespace workshop192.Domain
         public void removeProduct(Product p)
         {
             if (!productList.Contains(p))
-                throw new DoesntExistException("product " + p.getProductName() + " doesn't exist");
+                throw new DoesntExistException("Product " + p.getProductName() + " Doesn't exist");
             productList.Remove(p);
         }
 

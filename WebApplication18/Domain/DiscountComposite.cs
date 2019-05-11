@@ -32,7 +32,7 @@ namespace workshop192.Domain
                 this.type = Type.xor;
             }
             else
-                throw new IllegalNameException("wrong type name in discount composite");
+                throw new IllegalNameException("Error: Wrong type name in discount composite");
         }
 
         

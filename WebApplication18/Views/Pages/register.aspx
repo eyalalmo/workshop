@@ -45,7 +45,7 @@
                     dataType: "json",
                     success: function (response) {          
                         if (response == "ok") {
-                            alert("register success")
+                            alert("Registered Successfuly")
                             window.location.href = baseUrl+"/";
                         }
                         else {

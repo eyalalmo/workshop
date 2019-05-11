@@ -52,20 +52,20 @@ namespace workshop192.Domain
             if (quantityLeft - amount >= 0)
             {
                 if (productList.ContainsKey(product))
-                    throw new CartException("error: Product already exists on Cart");
+                    throw new CartException("Error: Product already exists on Cart");
                 productList.Add(product, amount);
                 productsActualPrice.Add(product, product.getPrice());
             }
             else
             {
-                throw new AlreadyExistException("The amount asked is larger than the quantity left");
+                throw new AlreadyExistException("Error: The amount asked is larger than the quantity left");
             }
         }
 
         public void addStoreCoupon(string couponCode)
         {
             if (coupon != "")
-                throw new AlreadyExistException("Can not have more than one coupon in shopping cart");
+                throw new AlreadyExistException("Error: Can not have more than one coupon in shopping cart");
             store.checkCouponCode(couponCode);
             coupon = couponCode;
         }

@@ -33,7 +33,7 @@ namespace workshop192.ServiceLayer
         {
             if (store < 0)
             {
-                throw new ArgumentException("invalid store id");
+                throw new ArgumentException("Invalid store id");
             }
 
             return db.getCart(user,store);
@@ -43,12 +43,12 @@ namespace workshop192.ServiceLayer
         {
             if (product < 0)
             {
-                throw new ArgumentException("invalid product id");
+                throw new ArgumentException("Invalid Product id");
             }
 
             if (amount <= 0)
             {
-                throw new AlreadyExistException("error : amount should be a positive number");
+                throw new AlreadyExistException("Error : Quantity should be a positive number");
             }
             db.addToCart(user, product, amount);
             
@@ -58,7 +58,7 @@ namespace workshop192.ServiceLayer
         {
             if (product < 0)
             {
-                throw new ArgumentException("invalid product id");
+                throw new ArgumentException("Invalid product id");
             }
             db.removeFromCart(user, product);
         }
@@ -67,12 +67,12 @@ namespace workshop192.ServiceLayer
         {
             if (product < 0)
             {
-                throw new ArgumentException("invalid product id");
+                throw new ArgumentException("Invalid product id");
             }
 
             if (store < 0)
             {
-                throw new ArgumentException("invalid store id");
+                throw new ArgumentException("Invalid store id");
             }
 
             if (newAmount <= 0)

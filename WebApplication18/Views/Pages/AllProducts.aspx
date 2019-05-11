@@ -3,32 +3,42 @@
 
     <div class="jumbotron d-flex align-items-center">
   <div class="container">
+
     <h1>Products Catalog</h1>   
     <h1> </h1>
       <h1> </h1>
-      <div class="container ">
+      <div class="container">
+
+          <button name="showAll" id="showAll" class="btn btn-primary">Show All Products</button> &nbsp &nbsp &nbsp                 
+            <p></p><p></p>
+     
+          <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="searchI" name="searchI">
+          <p></p><p></p>
+          <button  name="searchN" id="searchN" class="btn btn-primary">Search By Name</button> &nbsp &nbsp &nbsp
+          <button  name="searchC" id="searchC" class="btn btn-primary">Search By Category</button>&nbsp &nbsp &nbsp
+          <button  name="searchC" id="searchK" class="btn btn-primary">Search By Keyword</button>
+
+          <p></p><p></p> 
+          <h3> Filters  <button class="btn btn-primary" id="clearFilters">clear</button> </h3>
+          <p></p><p></p>
+          Min price: <input type="number" aria-label="Minimum Price" id="minPrice" name="minPrice" min="0" max="1000000" value="0">&nbsp &nbsp &nbsp
+          Max price: <input type="number" aria-label="Maximum Price" id="maxPrice" name="maxPrice" min="0" max="1000000" value="1000000"> <p></p> <p></p>
+          Min rank:  <input type="number" id="minRank" min="0" max="5" value="0" step="0.1">
          
-    <button  name="showAll" id="showAll" class="btn btn-primary">Show All Products</button><p></p><p></p>
-       
-    
-     <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="searchI" name="searchI"><p></p><p></p> <p></p><p></p> 
-    <button  name="searchN" id="searchN" class="btn btn-primary">Search By Name</button> &nbsp &nbsp &nbsp
-    <button  name="searchC" id="searchC" class="btn btn-primary">Search By Category</button>&nbsp &nbsp &nbsp
-    <button  name="searchC" id="searchK" class="btn btn-primary">Search By Keyword</button>
-             
-          </div>
-       </div>
-    
+      </div>
+  </div>
     <div class="container">
+        <p></p><p></p>
 	<div id="allProducts" class="row">
         </div>
+        <p></p><p></p>
 		</div>
-         <input class="form-control align-middle" type="text"  visible="false" placeholder="Quantity" aria-label="Search" id="quantity" name="quantity"/>
+       <%--  <input class="form-control align-middle" type="text"  visible="false" placeholder="Quantity" aria-label="Search" id="quantity" name="quantity"/>
         <button type="button" class="btn btn-primary" onClick="confirmBasket()" id="confirm" name="confirm"/>
-             Confirm
-  </div>
+             Confirm--%>
+
  
-<%--<div class="modal" id="enterQuantity">
+<div class="modal" id="enterQuantity">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -41,43 +51,46 @@
       <!-- Modal body -->
       <div class="modal-body">
         <input class="form-control" type="text" placeholder="Quantity" aria-label="Search" id="quantity" name="quantity">
-          <input type="hidden" name="bookId" id="bookId" value=""/>
       </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        <button  name="quant" id="quant" class="btn btn-primary">Add To Cart</button>
+        <button type="button" id="confirm" onclick="confirmBasket()" class="btn btn-primary" data-dismiss="modal">Confirm</button>
       </div>
 
     </div>
   </div>
-</div>--%>
+</div>
     <script type="text/javascript">
-        function getProducts(response) {
+        function getProducts(response,baseUrl) {
             var doc = document.getElementById('allProducts');
             doc.innerHTML = "";
             var i;
             var jsonList = JSON.parse(response);
-            var HTML="";
+            var HTML = "";
+            var minPrice = document.getElementById("minPrice").value;
+            var maxPrice = document.getElementById("maxPrice").value;
+            var rank = document.getElementById("minRank").value;
             for (i = 0; i < jsonList.length; i++) {
-                HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                if (jsonList[i].price >= minPrice && jsonList[i].price <= maxPrice && jsonList[i].rank >= rank){
+                HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" id="` + jsonList[i].productID + `">
 		                   <div class="my-list">
-			<span id="hhh">`+ jsonList[i].productName + `</span>
-            <span> Category:`+ jsonList[i].productCategory + `</span>
-			<span class="pull-right"> Quantity Left:`+ jsonList[i].quantityLeft + `</span>
-			<div class="detail">
-			<p>Price:`+ jsonList[i].price + `</p>
-		    <button type="button" class="btn btn-primary" onClick="addToCart(` + jsonList[i].productID + `)"/>
-             Add To Cart
-            </button>
-            <a href="#" class="btn btn-info">Go To Store</a>
-			</div>
+            			<p><b>`+ jsonList[i].productName + `</b></p>
+                        <span> Category: `+ jsonList[i].productCategory + `</span> <p></p>      
+            			<span > Quantity Left: `+ jsonList[i].quantityLeft + `</span> <p></p>   
+            			<div class="detail">
+	            		<span> Price: `+ jsonList[i].price + `$</span></p> <p></p>
+	            		<span> Rank: `+ jsonList[i].rank + `</span></p> <p></p>
+            		    <button type="button" class="btn btn-primary" onClick="addToCart(` + jsonList[i].productID + `)"/>
+                       Add To Cart
+                          </button>`
+           + "<a href=\"" + baseUrl + "/ViewStore?storeId=" + jsonList[i].storeID + "\" class=\"btn btn-info\">Go To Store</a>" +
+			`</div>
 		</div>
 		</div>`
                 //`+jsonList[i].ProductID+`
-
-
+                }
             }
             doc.innerHTML = HTML;
         };
@@ -85,9 +98,8 @@
     <script type="text/javascript">
         var currentProductID;
         function addToCart(productID) {
-            document.getElementById('quantity').style.visibility = "visible";
             currentProductID = productID;
-            document.getElementById('confirm').style.visibility = "visible";
+            $("#enterQuantity").modal()
         };
         function confirmBasket() {
              var getUrl = window.location;
@@ -110,19 +122,19 @@
                         console.log(response);
                     }
             });
-              document.getElementById('quantity').style.visibility = "hidden";
-              document.getElementById('confirm').style.visibility = "hidden";
+              
             
         }
-        
-
         
     </script>
 <script type="text/javascript">
 
     $(document).ready(function () {
-        document.getElementById('quantity').style.visibility = "hidden";
-        document.getElementById('confirm').style.visibility = "hidden";
+            $("#clearFilters").click(function clearFilters() {
+                document.getElementById('minPrice').value = 0; 
+                document.getElementById('maxPrice').value = 1000000;
+                document.getElementById('minRank').value = 0;
+            });
             $("#showAll").click(function () {
                 event.preventDefault();
                 
@@ -135,7 +147,7 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                        getProducts(response);
+                        getProducts(response,baseUrl);
                         
                     },
                     error: function (response) {
@@ -159,7 +171,7 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                        getProducts(response);
+                        getProducts(response,baseUrl);
                     },
                     error: function (response) {
                         console.log(response);
@@ -203,7 +215,7 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                       getProducts(response);
+                       getProducts(response,baseUrl);
                     },
                     error: function (response) {
                         console.log(response);

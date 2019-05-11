@@ -131,7 +131,7 @@ namespace workshop192.Domain
             {
                 string c = d1.getCoupon();
                 if (c == coupon)
-                    throw new AlreadyExistException("Store can not have to identical coupons");
+                    throw new AlreadyExistException("Error: A Store cannot have two identical coupons");
 
             }
             InvisibleDiscount d = new InvisibleDiscount(percentage, coupon, duration);
@@ -153,7 +153,7 @@ namespace workshop192.Domain
             }
 
             if (!found)
-                throw new DoesntExistException("no such coupon in store");
+                throw new DoesntExistException("Error:Coupon does not exist");
         }
 
         public void checkCouponCode(string coupon)
@@ -169,7 +169,7 @@ namespace workshop192.Domain
                 }
             }
             if (!found)
-                throw new ArgumentException("no such coupon in the store");
+                throw new ArgumentException("Error:Coupon does not exist");
         }
 
 
@@ -244,7 +244,7 @@ namespace workshop192.Domain
         {
             if (discountList.Count == 0)
             {
-                throw new DoesntExistException("Discount does not exist so it cannot be removed");
+                throw new DoesntExistException("Error: Discount does not exist so it cannot be removed");
             }
             discountList = new LinkedList<DiscountComponent>();
         }

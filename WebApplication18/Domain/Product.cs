@@ -99,7 +99,7 @@ namespace workshop192.Domain
         public void removeDiscount()
         {
             if (discount == null)
-                throw new DoesntExistException("Discount does not exist so it cannot be removed");
+                throw new DoesntExistException("Error: Discount does not exist so it cannot be removed");
             else
                 discount = null;
         }

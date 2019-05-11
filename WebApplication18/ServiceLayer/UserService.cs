@@ -53,7 +53,7 @@ namespace workshop192.ServiceLayer
             }
             if (username.Equals("") || password.Equals(""))
             {
-                throw new ArgumentException("Illegal username or password");
+                throw new ArgumentException("Error: Illegal username or password");
             }
             db.register(user, username, password);
         }

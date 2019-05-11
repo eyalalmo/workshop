@@ -20,27 +20,27 @@ namespace workshop192.Domain
         
         public void closeStore(Store store)
         {
-            throw new UserStateException("Guest cannot close a store");
+            throw new UserStateException("Error: A Guest cannot close a store");
         }
 
         public void complain(string description, SubscribedUser subscribedUser)
         {
-            throw new UserStateException("Guest cannot complain");
+            throw new UserStateException("Error: A Guest cannot complain");
         }
 
         public Store createStore(String storeName, String description, SubscribedUser sub)
         {
-            throw new UserStateException("Guest cannot create a store");
+            throw new UserStateException("Error: A Guest cannot create a store");
         }
 
         public String getComplaints()
         {
-            throw new UserStateException("Guest cannot get complaints");
+            throw new UserStateException("Error: A Guest cannot get complaints");
         }
 
         public string getPurchaseHistory(SubscribedUser sub)
         {
-            throw new UserStateException("Guest does not have a purchase history");
+            throw new UserStateException("Error: A Guest does not have a purchase history");
         }
 
         public string getStateName()
@@ -53,12 +53,12 @@ namespace workshop192.Domain
             String encrypted = DBSubscribedUser.getInstance().encryptPassword(password);
             SubscribedUser sub = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (sub == null)
-                throw new LoginException("Username does not exist");
+                throw new LoginException("Error: Username does not exist");
             SubscribedUser loggedIn = DBSubscribedUser.getInstance().getloggedInUser(username);
             if( loggedIn != null)
-                throw new LoginException("Username already logged in");
+                throw new LoginException("Error: Username already logged in");
             if (!Equals(sub.getPassword(), encrypted))
-                throw new LoginException("Incorrect password");
+                throw new LoginException("Error: Incorrect password");
             session.setSubscribedUser(sub);
             if (Equals(username, "admin"))
             {
@@ -74,7 +74,7 @@ namespace workshop192.Domain
 
         public void logout(SubscribedUser sub, Session session)
         {
-            throw new UserStateException("You're not logged in");
+            throw new UserStateException("Error: You're not logged in");
         }
 
         public void register(string username, string password, Session session)
@@ -82,7 +82,7 @@ namespace workshop192.Domain
             String encrypted = DBSubscribedUser.getInstance().encryptPassword(password);
             SubscribedUser s = dbSubscribedUser.getSubscribedUser(username);
             if (s != null)
-               throw new RegisterException("username already exists");
+               throw new RegisterException("Error: Username already exists");
             SubscribedUser sub = new SubscribedUser(username, encrypted, session.getShoppingBasket());
             //session.setSubscribedUser(sub);
             DBSubscribedUser.getInstance().register(sub);

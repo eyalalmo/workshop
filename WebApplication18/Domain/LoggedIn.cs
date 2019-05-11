@@ -19,7 +19,7 @@ namespace workshop192.Domain
 
         public void closeStore(Store store)
         {
-            throw new UserStateException("Logged In user cannot close a store");
+            throw new UserStateException("Error: Only an Admin can close stores");
         }
 
         public void complain(string description, SubscribedUser subscribedUser)
@@ -45,7 +45,7 @@ namespace workshop192.Domain
 
         public String getComplaints()
         {
-            throw new UserStateException("Logged in user cannot get complaints");
+            throw new UserStateException("Error: Only an Admin can get complaints");
         }
 
         public string getPurchaseHistory(SubscribedUser sub)
@@ -60,7 +60,7 @@ namespace workshop192.Domain
 
         public void login(string username, string password, Session session)
         {
-            throw new LoginException("User already logged in");
+            throw new LoginException("Error: User is already logged in");
         }
 
         public void logout(SubscribedUser sub, Session session)
@@ -71,12 +71,12 @@ namespace workshop192.Domain
 
         public void register(string username, string password, Session session)
         {
-            throw new UserStateException("ERROR: User already registered");
+            throw new UserStateException("Error: User already registered");
         }
 
         public void removeUser(String user)
         {
-            throw new UserStateException("ERROR: not an admin");
+            throw new UserStateException("Error: Not an admin");
         }
     }
 }

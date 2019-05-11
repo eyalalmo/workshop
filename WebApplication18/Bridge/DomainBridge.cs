@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebApplication18.Domain;
+using WebApplication18.Logger;
 using workshop192.Domain;
 
 namespace workshop192.Bridge
@@ -39,7 +40,9 @@ namespace workshop192.Bridge
         public void login(int sessionid, String username, String password)
         {
             Session s = DBSession.getInstance().getSession(sessionid);
+            
             s.login(username, password);
+            SystemLogger.getLog().Info("User " + username + " has successfuly logged in.");
         }
 
         //use case 2.2
@@ -47,6 +50,7 @@ namespace workshop192.Bridge
         {
             Session user = DBSession.getInstance().getSession(sessionid);
             user.register(username, password);
+            SystemLogger.getLog().Info("User " + username + " has successfuly registered");
         }
 
         public bool isOwner(int storeId, int session)
@@ -86,6 +90,7 @@ namespace workshop192.Bridge
         {
             Session admin = DBSession.getInstance().getSession(sessionid);
             admin.removeUser(username);
+            SystemLogger.getLog().Info("User " + username + " has been successfuly removed");
         }
 
         internal int getSessionByUserName(string username)
@@ -102,6 +107,7 @@ namespace workshop192.Bridge
         {
             Session user = DBSession.getInstance().getSession(sessionid);
             user.logout();
+            SystemLogger.getLog().Info("User " + user.getSubscribedUser().getUsername() + " has logged out");
         }
 
         public string getAllProducts()
@@ -112,6 +118,7 @@ namespace workshop192.Bridge
         {
             Session session = DBSession.getInstance().getSession(sessionId);
             Store s = session.createStore(storeName, description);
+            SystemLogger.getLog().Info("User " + session.getSubscribedUser().getUsername() + " has successfuly created a store");
             return s.getStoreID();
         }
 
@@ -213,6 +220,7 @@ namespace workshop192.Bridge
         {
             Session session = DBSession.getInstance().getSession(sessionid);
             session.purchaseBasket(address, creditCard);
+            SystemLogger.getLog().Info("A purchase has been made");
         }
 
         public void setProductRank(int productID, int rank, int session)
@@ -267,7 +275,7 @@ namespace workshop192.Bridge
             Product product = new Product(productName, productCategory, price, rank, quantityLeft, store);
 
             if (sr == null)
-                throw new RoleException("no role for this user in this store");
+                throw new RoleException("Error: You have no permission to add a product");
 
             sr.addProduct(product);
             return product.getProductID();
@@ -284,7 +292,7 @@ namespace workshop192.Bridge
             Product product = DBProduct.getInstance().getProductByID(productid);
 
             if (product == null)
-                throw new DoesntExistException("no such username");
+                throw new DoesntExistException("no such product");
 
             Session session = DBSession.getInstance().getSession(sessionid);
 
@@ -293,7 +301,7 @@ namespace workshop192.Bridge
             StoreRole sr = DBStore.getInstance().getStoreRole(product.getStore(), user);
 
             if (sr == null)
-                throw new RoleException("no role for this user in this store");
+                throw new RoleException("Error: You have no permission to remove a product");
 
             sr.removeProduct(product);
         }
@@ -333,7 +341,7 @@ namespace workshop192.Bridge
             StoreRole sr = DBStore.getInstance().getStoreRole(product.getStore(), user);
 
             if (sr == null)
-                throw new RoleException("no role for this user in this store");
+                throw new RoleException("Error: You have no permission to edit a product");
 
             sr.setProductPrice(product, price);
         }
@@ -352,7 +360,7 @@ namespace workshop192.Bridge
             StoreRole sr = DBStore.getInstance().getStoreRole(product.getStore(), user);
 
             if (sr == null)
-                throw new RoleException("no role for this user in this store");
+                throw new RoleException("Error: You have no permission to edit a product");
 
             sr.setProductName(product, name);
         }
@@ -381,7 +389,7 @@ namespace workshop192.Bridge
             StoreRole sr = DBStore.getInstance().getStoreRole(product.getStore(), user);
 
             if (sr == null)
-                throw new RoleException("no role for this user in this store");
+                throw new RoleException("Error: You have no permission to edit a product");
 
             sr.addToProductQuantity(product, amount);
         }
@@ -400,7 +408,7 @@ namespace workshop192.Bridge
             StoreRole sr = DBStore.getInstance().getStoreRole(product.getStore(), user);
 
             if (sr == null)
-                throw new RoleException("no role for this user in this store");
+                throw new RoleException("Error: You have no permission to edit a product");
 
             sr.decFromProductQuantity(product, amount);
         }
@@ -414,7 +422,7 @@ namespace workshop192.Bridge
                 throw new DoesntExistException("no such store");
 
             Session session = DBSession.getInstance().getSession(sessionid);
-
+            SystemLogger.getLog().Info("Store "+store.getStoreName()+" has been closed by Admin");
             session.closeStore(store);
         }
 
@@ -424,7 +432,7 @@ namespace workshop192.Bridge
             SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (toAdd == null)
             {
-                throw new DoesntExistException("no such username");
+                throw new DoesntExistException("Error: No such username");
             }
             Store store = DBStore.getInstance().getStore(storeid);
             if (store == null)
@@ -437,7 +445,7 @@ namespace workshop192.Bridge
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
 
             if (sr == null)
-                throw new RoleException("no role for this user in this store");
+                throw new RoleException("Error: You have no permission to add a manager");
 
             if (sr.getStore() != store)
                 throw new RoleException("this user can't appoint to this store");
@@ -448,7 +456,7 @@ namespace workshop192.Bridge
         {
             SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (toAdd == null)
-                throw new DoesntExistException("no such username");
+                throw new DoesntExistException("Error: No such username");
             Store store = DBStore.getInstance().getStore(storeid);
             if (store == null)
             {
@@ -460,7 +468,7 @@ namespace workshop192.Bridge
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
 
             if (sr == null)
-                throw new RoleException("no role for this user in this store");
+                throw new RoleException("Error: You don't have permissions to appoint an owner");
 
             if (sr.getStore() != store)
                 throw new RoleException("this user can't appoint to this store");
@@ -494,7 +502,7 @@ namespace workshop192.Bridge
         {
             Session user = DBSession.getInstance().getSession(sessionID);
             if (user == null)
-                throw new DoesntExistException("user is not logged in");
+                throw new DoesntExistException("Error: User is not logged in");
             Store store = DBStore.getInstance().getStore(storeID);
             SubscribedUser subscribedUser = user.getSubscribedUser();
             if (subscribedUser == null)
@@ -545,7 +553,7 @@ namespace workshop192.Bridge
         {
             if (amount <= 0)
             {
-                throw new AlreadyExistException("error : amount should be a positive number");
+                throw new ArgumentException("Error : Quantity should be a positive number");
             }
             Product p = DBProduct.getInstance().getProductByID(product);
 
@@ -567,7 +575,7 @@ namespace workshop192.Bridge
         {
             if (newAmount <= 0)
             {
-                throw new AlreadyExistException("ERROR: quantity should be a positive number");
+                throw new ArgumentException("Error: Quantity should be a positive number");
             }
             Product p = DBProduct.getInstance().getProductByID(product);
 
@@ -710,7 +718,7 @@ namespace workshop192.Bridge
             Product product = DBProduct.getInstance().getProductByID(productid);
 
             if (product == null)
-                throw new DoesntExistException("no such username");
+                throw new DoesntExistException("Product does not exist");
 
             Session session = DBSession.getInstance().getSession(sessionid);
 

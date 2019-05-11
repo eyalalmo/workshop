@@ -116,7 +116,7 @@ namespace workshop192.Domain
                     if (product.getQuantityLeft() < amount)
                     {
                         
-                        throw new IllegalAmountException("ERROR: cannot make purchase- " + product.getProductName() + " does not have enough quantity left");
+                        throw new IllegalAmountException("Error: Cannot complete purchase- " + product.getProductName() + " does not have enough quantity left");
                     }
                     product.decQuantityLeft(amount);
                 }

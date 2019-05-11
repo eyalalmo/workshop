@@ -4,8 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-
-using workshop192.Domain;
+using WebApplication18.Logger;
 using workshop192.ServiceLayer;
 
 
@@ -26,6 +25,7 @@ namespace WebApplication18.Controllers
             }
             catch(Exception e)
             {
+                SystemLogger.getLog().Error("Register : " + e.Message.ToString());
                 return e.Message;
             }
 
@@ -43,6 +43,7 @@ namespace WebApplication18.Controllers
             }
             catch(Exception e)
             {
+                SystemLogger.getLog().Error("Login : " + e.Message.ToString());
                 return e.Message;
             }
         }
@@ -59,20 +60,9 @@ namespace WebApplication18.Controllers
             }
             catch( Exception e)
             {
+                SystemLogger.getLog().Error("Logout : " + e.Message.ToString());
                 return e.Message;
             }
-        }
-        [Route("api/user/getAllProducts")]
-        [HttpGet]
-        public string getAllProducts(String Username, String Password)
-        {
-
-            //LinkedList<Product> list = UserService.getInstance().getAllProducts();
-            //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, list);
-            //return response;
-            return "ok";
-
-
         }
 
 
@@ -80,17 +70,32 @@ namespace WebApplication18.Controllers
         [HttpGet]
         public string getShoppingBasket()
         {
-            int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-            return UserService.getInstance().getShoppingBasket(session);
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                return UserService.getInstance().getShoppingBasket(session);
+            }
+            catch (Exception e)
+            {
+                return e.Message.ToString();
+            }
+
         }
 
         [Route("api/user/basketTotalPrice")]
         [HttpGet]
         public string basketTotalPrice()
         {
-            //Session session = UserService.getInstance().startSession();
-            int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-            return ""+BasketService.getInstance().getTotalPrice(session);
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                return "" + BasketService.getInstance().getTotalPrice(session);
+            }
+            catch (Exception e)
+            {
+
+                return e.Message.ToString();
+            }
             //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, basket);
             //String hash = System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value;
             // UserService.addUser(hash, session);
@@ -111,11 +116,18 @@ namespace WebApplication18.Controllers
         [HttpGet]
         public string removeProductFromCart(int productId)
         {
-            
-            int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
 
             UserService.getInstance().removeFromShoppingBasket(session, productId);
             return "ok";
+            }
+            catch (Exception e)
+            {
+                SystemLogger.getLog().Error("Remove from Cart : " + e.Message.ToString());
+                return e.Message.ToString();
+            }
 
         }
         [Route("api/user/getAllStores")]
@@ -130,7 +142,7 @@ namespace WebApplication18.Controllers
             }
             catch (Exception e)
             {
-               return  e.Message;
+                return e.Message.ToString();
             }
         }
 
@@ -147,8 +159,8 @@ namespace WebApplication18.Controllers
             }
             catch (Exception e)
             {
-                string s = e.Message;
-                return s;
+                SystemLogger.getLog().Error("Checkout : " + e.Message.ToString());
+                return e.Message.ToString();
             }
         }
 

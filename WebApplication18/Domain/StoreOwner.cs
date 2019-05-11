@@ -84,8 +84,8 @@ namespace workshop192.Domain
             StoreRole newManager = new StoreManager(this.user, store, manager, permissions);
             DBStore.getInstance().addStoreRole(newManager);
             if (store.getStoreRole(manager) != null)
-                throw new RoleException("user " + manager.getUsername() + 
-                    " already have a role in store " + 
+                throw new RoleException("Error: Username "  + manager.getUsername() + 
+                    " already has a role in store " + 
                     store.getStoreName());
             store.addStoreRole(newManager);
             manager.addStoreRole(newManager);
@@ -96,8 +96,8 @@ namespace workshop192.Domain
         {
             StoreRole newOwner = new StoreOwner(this.user, owner, store);
             if (store.getStoreRole(owner) != null)
-                throw new RoleException("user " + owner.getUsername() + 
-                    " already have a role in store " + 
+                throw new RoleException("Error: Username " + owner.getUsername() +
+                    " already has a role in store " +
                     store.getStoreName());
             store.addStoreRole(newOwner);
             owner.addStoreRole(newOwner);
@@ -114,7 +114,7 @@ namespace workshop192.Domain
                     " doesn't have a role in store " 
                     + store.getStoreName());
             if (sr.getAppointedBy() != this.user)
-                throw new RoleException("user " + user.getUsername() + 
+                throw new RoleException("Error: User " + user.getUsername() + 
                     " didn't appoint " + 
                     role.getUsername());
             sr.removeAllAppointedBy();

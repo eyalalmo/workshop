@@ -36,7 +36,7 @@
                     success: function (response) {
 
                         if (response != "fail") {
-                            alert("store added success, id:" + response)                 
+                            alert("Store added successfuly, id:" + response)                 
                            
                         }
                         else {

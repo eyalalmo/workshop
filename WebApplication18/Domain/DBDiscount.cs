@@ -36,13 +36,13 @@ namespace workshop192.Domain
         public void addDiscount(Discount d)
         {
             if (discounts.ContainsKey(d.getId()))
-                throw new AlreadyExistException("session already exists");
+                throw new AlreadyExistException("Error: Discount already exists");
             discounts.Add(d.getId(), d);
         }
         public void removeDiscount(Discount d)
         {
             if (!discounts.ContainsKey(d.getId()))
-                throw new DoesntExistException("session does not exist, can't remove it");
+                throw new DoesntExistException("Error: Discount does not exist");
             discounts.Remove(d.getId());
         }
         public static int getNextDiscountID()
