@@ -52,7 +52,7 @@
                     success: function (response) {
 
                         if (response == "ok") {
-                             alert("product added success!")                     
+                             alert("Product added successfuly")                     
                         }
                         else {
                             alert(response);   

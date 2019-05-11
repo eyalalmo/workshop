@@ -30,7 +30,7 @@ namespace workshop192.Domain
         public void removeComplaint(Complaint c)
         {
             if (!complaints.Contains(c))
-                throw new DoesntExistException("complaint doesn't exist");
+                throw new DoesntExistException("Error: Complaint doesn't exist");
             complaints.Remove(c);
         }
 

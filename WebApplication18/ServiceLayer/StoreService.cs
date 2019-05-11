@@ -61,7 +61,7 @@ namespace workshop192.ServiceLayer
             if (product < 0)
                 throw new ArgumentException("illegal product number");
             if (price <= 0)
-                throw new AlreadyExistException("error - price must be a positive number");
+                throw new AlreadyExistException("Error: Price must be a positive number");
             db.setProductPrice(product, price, session);
         }
 
@@ -70,7 +70,7 @@ namespace workshop192.ServiceLayer
             if (product < 0)
                 throw new ArgumentException("illegal product number");
             if (name.Length == 0)
-                throw new ArgumentException("error -product must have a name");
+                throw new ArgumentException("Error: A product's name cannot be empty");
             db.setProductName(product, name, session);
         }
 
@@ -118,7 +118,7 @@ namespace workshop192.ServiceLayer
             if (productID < 0)
                 throw new ArgumentException("illegal product number");
             if (setquantityLeft < 0)
-                throw new IllegalAmountException("error - amount must be a positive number");
+                throw new IllegalAmountException("Error: Quantity must be a positive number");
             db.setquantityLeft(productID, setquantityLeft, session);
         }
         private void setProductRank(int productID, int rank, int session)
@@ -126,7 +126,7 @@ namespace workshop192.ServiceLayer
             if (productID < 0)
                 throw new ArgumentException("illegal product number");
             if (rank < 0)
-                throw new IllegalAmountException("error - rank must be a positive number");
+                throw new IllegalAmountException("Error: Rank must be a positive number");
             db.setProductRank(productID, rank, session);
         }
 
@@ -135,7 +135,7 @@ namespace workshop192.ServiceLayer
             if (product < 0)
                 throw new ArgumentException("illegal product number");
             if (amount <= 0)
-                throw new AlreadyExistException("error - amount must be a positive number");
+                throw new AlreadyExistException("Error: Quantity must be a positive number");
             db.addToProductQuantity(product, amount, session);
         }
 
@@ -144,7 +144,7 @@ namespace workshop192.ServiceLayer
             if (product < 0)
                 throw new ArgumentException("illegal product number");
             if (amount <= 0)
-                throw new AlreadyExistException("error - amount must be a positive number");
+                throw new AlreadyExistException("Error: Quantity must be a positive number");
             db.decFromProductQuantity(product, amount, session);
         }
 
@@ -152,7 +152,7 @@ namespace workshop192.ServiceLayer
         {
             if (storeName.Length == 0)
             {
-                throw new ArgumentException("error - store must have a name");
+                throw new ArgumentException("Error: A store name cannot be empty");
             }
             return db.createStore(session, storeName, storeDescription);
         }
@@ -161,7 +161,7 @@ namespace workshop192.ServiceLayer
         {
             if (store < 0)
             {
-                throw new ArgumentException("illegal store number");
+                throw new ArgumentException("Invalid store id");
             }
             db.closeStore(store, session);
         }

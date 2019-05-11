@@ -75,7 +75,7 @@
             var appointed = "Store Founder"
            
             var role = "Store Owner"
-            var HTML;
+            var HTML="";
             for (i = 0; i < jsonList.length; i++) {
                  if (jsonList[i].appointedBy)
                     appointed = "Appointed By: " +jsonList[i].appointedBy.username;

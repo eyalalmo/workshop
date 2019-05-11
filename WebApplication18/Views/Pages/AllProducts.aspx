@@ -18,17 +18,17 @@
              
           </div>
        </div>
-    
+      </div>
     <div class="container">
 	<div id="allProducts" class="row">
         </div>
 		</div>
-         <input class="form-control align-middle" type="text"  visible="false" placeholder="Quantity" aria-label="Search" id="quantity" name="quantity"/>
+       <%--  <input class="form-control align-middle" type="text"  visible="false" placeholder="Quantity" aria-label="Search" id="quantity" name="quantity"/>
         <button type="button" class="btn btn-primary" onClick="confirmBasket()" id="confirm" name="confirm"/>
-             Confirm
-  </div>
+             Confirm--%>
+
  
-<%--<div class="modal" id="enterQuantity">
+<div class="modal" id="enterQuantity">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -41,38 +41,37 @@
       <!-- Modal body -->
       <div class="modal-body">
         <input class="form-control" type="text" placeholder="Quantity" aria-label="Search" id="quantity" name="quantity">
-          <input type="hidden" name="bookId" id="bookId" value=""/>
       </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        <button  name="quant" id="quant" class="btn btn-primary">Add To Cart</button>
+        <button type="button" id="confirm" onclick="confirmBasket()" class="btn btn-primary" data-dismiss="modal">Confirm</button>
       </div>
 
     </div>
   </div>
-</div>--%>
+</div>
     <script type="text/javascript">
-        function getProducts(response) {
+        function getProducts(response,baseUrl) {
             var doc = document.getElementById('allProducts');
             doc.innerHTML = "";
             var i;
             var jsonList = JSON.parse(response);
-            var HTML;
+            var HTML="";
             for (i = 0; i < jsonList.length; i++) {
                 HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		                   <div class="my-list">
-			<span id="hhh">`+ jsonList[i].productName + `</span>
-            <span> Category:`+ jsonList[i].productCategory + `</span>
-			<span class="pull-right"> Quantity Left:`+ jsonList[i].quantityLeft + `</span>
+			<h3>Name: `+ jsonList[i].productName + `</h3>
+            <span> Category: `+ jsonList[i].productCategory + `</span>
+			<span class="pull-right"> Quantity Left: `+ jsonList[i].quantityLeft + `</span>
 			<div class="detail">
-			<p>Price:`+ jsonList[i].price + `</p>
+			<p>Price: `+ jsonList[i].price + `$</p>
 		    <button type="button" class="btn btn-primary" onClick="addToCart(` + jsonList[i].productID + `)"/>
              Add To Cart
-            </button>
-            <a href="#" class="btn btn-info">Go To Store</a>
-			</div>
+            </button>`
+           + "<a href=\"" + baseUrl + "/ViewStore?storeId=" + jsonList[i].storeID + "\" class=\"btn btn-info\">Go To Store</a>" +
+			`</div>
 		</div>
 		</div>`
                 //`+jsonList[i].ProductID+`
@@ -85,9 +84,8 @@
     <script type="text/javascript">
         var currentProductID;
         function addToCart(productID) {
-            document.getElementById('quantity').style.visibility = "visible";
             currentProductID = productID;
-            document.getElementById('confirm').style.visibility = "visible";
+            $("#enterQuantity").modal()
         };
         function confirmBasket() {
              var getUrl = window.location;
@@ -110,8 +108,7 @@
                         console.log(response);
                     }
             });
-              document.getElementById('quantity').style.visibility = "hidden";
-              document.getElementById('confirm').style.visibility = "hidden";
+              
             
         }
         
@@ -121,8 +118,6 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-        document.getElementById('quantity').style.visibility = "hidden";
-        document.getElementById('confirm').style.visibility = "hidden";
             $("#showAll").click(function () {
                 event.preventDefault();
                 
@@ -135,7 +130,7 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                        getProducts(response);
+                        getProducts(response,baseUrl);
                         
                     },
                     error: function (response) {
@@ -159,7 +154,7 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                        getProducts(response);
+                        getProducts(response,baseUrl);
                     },
                     error: function (response) {
                         console.log(response);
@@ -203,7 +198,7 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                       getProducts(response);
+                       getProducts(response,baseUrl);
                     },
                     error: function (response) {
                         console.log(response);

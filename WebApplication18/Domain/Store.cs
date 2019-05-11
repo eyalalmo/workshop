@@ -129,7 +129,7 @@ namespace workshop192.Domain
             {
                 string c = d1.getCoupon();
                 if (c == coupon)
-                    throw new AlreadyExistException("Store can not have to identical coupons");
+                    throw new AlreadyExistException("Error: A Store cannot have two identical coupons");
 
             }
             InvisibleDiscount d = new InvisibleDiscount(percentage, coupon, duration);
@@ -151,7 +151,7 @@ namespace workshop192.Domain
             }
 
             if (!found)
-                throw new DoesntExistException("no such coupon in store");
+                throw new DoesntExistException("Error:Coupon does not exist");
         }
 
         public void checkCouponCode(string coupon)
@@ -167,7 +167,7 @@ namespace workshop192.Domain
                 }
             }
             if (!found)
-                throw new ArgumentException("no such coupon in the store");
+                throw new ArgumentException("Error:Coupon does not exist");
         }
 
         
@@ -242,7 +242,7 @@ namespace workshop192.Domain
         {
             if(discountList.Count== 0)
             {
-                throw new DoesntExistException("Discount does not exist so it cannot be removed");
+                throw new DoesntExistException("Error: Discount does not exist so it cannot be removed");
             }
             discountList = new LinkedList<DiscountComponent>();
         }
@@ -255,7 +255,7 @@ namespace workshop192.Domain
             }
             else if(listSize == 2)
             {
-                throw new AlreadyExistException("store can not have more than 2 purchase policies");
+                throw new AlreadyExistException("Error: A store can not have more than 2 purchase policies");
             }
             else
             {
@@ -263,7 +263,7 @@ namespace workshop192.Domain
                 if((policy.GetType() == typeof(MinAmountPurchase) && p.GetType() == typeof(MinAmountPurchase)) || 
                     (policy.GetType() == typeof(MaxAmountPurchase) && p.GetType() == typeof(MaxAmountPurchase)))
                 {
-                    throw new AlreadyExistException("Store can not have purchase policies of the same type");
+                    throw new AlreadyExistException("Error: A Store can not have purchase policies of the same type");
                 }
                 checkValidityofPurchases(p, policy);
                 purchasePolicyList.AddLast(p);
@@ -274,10 +274,10 @@ namespace workshop192.Domain
         {
             if (p1.GetType() == typeof(MaxAmountPurchase))
                 if (p1.getAmount() < p2.getAmount())
-                    throw new ArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
+                    throw new ArgumentException("Error: Contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
             else if (p1.GetType() == typeof(MinAmountPurchase))
                     if (p1.getAmount() > p2.getAmount())
-                        throw new ArgumentException("contradiction! minimum amount can not be larger than maximum amount Purchase Policy");
+                        throw new ArgumentException("Error: Contradiction! minimum amount can not be larger than maximum amount Purchase Policy");
 
 
         }
@@ -287,7 +287,7 @@ namespace workshop192.Domain
 
             if (purchasePolicyList.Count == 0)
             {
-                throw new MissingMemberException("store does not have a Minimum Policy to set");
+                throw new MissingMemberException("Error: store does not have a Minimum Policy to set");
             }
             bool found = false;
             PurchasePolicy p1 = purchasePolicyList.ElementAt(0);

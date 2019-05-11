@@ -17,13 +17,13 @@ namespace workshop192.Domain
         public override void checkPolicy(Product p, int amount)
         {
             if (amount > maxAmount)
-                throw new AlreadyExistException("can not purchase more than " + maxAmount + " of the same product");
+                throw new AlreadyExistException("Error: Cannot purchase more than " + maxAmount + " of the same product");
         }
         public override void setAmount(int newAmount)
         {
             if (newAmount <= 0)
             {
-                throw new ArgumentOutOfRangeException("maximum amount can not be negative or 0");
+                throw new ArgumentOutOfRangeException("Error: Maximum amount cannot be negative or 0");
             }
             maxAmount = newAmount;
         }

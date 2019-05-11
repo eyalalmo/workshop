@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-
+using WebApplication18.Logger;
 using workshop192.Domain;
 using workshop192.ServiceLayer;
 
@@ -22,9 +22,7 @@ namespace WebApplication18.Controllers
             }
             catch (Exception e)
             {
-                string s = "fail";
-
-                return s;
+                return e.Message.ToString();
             }
         }
         [Route("api/store/addOwner")]
@@ -39,6 +37,7 @@ namespace WebApplication18.Controllers
             }
             catch (Exception e)
             {
+                SystemLogger.getLog().Error("Error in adding an owner : " + e.Message.ToString());
                 return e.Message.ToString();
             }
         }
@@ -55,29 +54,31 @@ namespace WebApplication18.Controllers
 
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                string s = "fail";
-
-                return s;
+                SystemLogger.getLog().Error("Error in store display : " + e.Message.ToString());
+                return e.Message.ToString();
             }
         }
 
 
         [Route("api/store/addStore")]
         [HttpGet]
-        public int addStore(string name, string description)
+        public string addStore(string name, string description)
         {
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-                return StoreService.getInstance().addStore(name, description, session);
+                StoreService.getInstance().addStore(name, description, session);
+
+                return "ok";
 
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return -1;
+                SystemLogger.getLog().Error("Error in adding a store : " + e.Message.ToString());
+                return e.Message.ToString();
             }
         }
 
@@ -96,7 +97,8 @@ namespace WebApplication18.Controllers
             }
             catch (Exception e)
             {
-                return e.Message;
+                SystemLogger.getLog().Error("Edit product error : " + e.Message.ToString());
+                return e.Message.ToString();
             }
         }
 
@@ -129,7 +131,8 @@ namespace WebApplication18.Controllers
             }
             catch (Exception e)
             {
-                return e.Message;
+                SystemLogger.getLog().Error("Add Visible Discount : " + e.Message.ToString());
+                return e.Message.ToString();
             }
         }
 
@@ -147,7 +150,8 @@ namespace WebApplication18.Controllers
             }
             catch (Exception e)
             {
-                return e.Message;
+                SystemLogger.getLog().Error("Add Reliant Discount : " + e.Message.ToString());
+                return e.Message.ToString();
             }
         }
         [Route("api/store/addReliantDiscountSameProduct")]
@@ -164,7 +168,8 @@ namespace WebApplication18.Controllers
             }
             catch (Exception e)
             {
-                return e.Message;
+                SystemLogger.getLog().Error("Add Reliant Discount : " + e.Message.ToString());
+                return e.Message.ToString();
             }
         }
 
@@ -184,6 +189,7 @@ namespace WebApplication18.Controllers
             }
             catch (Exception e)
             {
+                SystemLogger.getLog().Error("Remove Role Error: " + e.Message.ToString());
                 return e.Message.ToString();
             }
 
@@ -221,6 +227,7 @@ namespace WebApplication18.Controllers
             }
             catch (Exception e)
             {
+                SystemLogger.getLog().Error("Add Manager : " + e.Message.ToString());
                 return e.Message.ToString();
             }
         }
@@ -308,6 +315,7 @@ namespace WebApplication18.Controllers
             }
             catch (Exception e)
             {
+                SystemLogger.getLog().Error("Add Product : " + e.Message.ToString());
                 return e.Message;
             }
         }
@@ -323,6 +331,7 @@ namespace WebApplication18.Controllers
             }
             catch (Exception e)
             {
+                SystemLogger.getLog().Error("Delete Product : " + e.Message.ToString());
                 return e.Message;
             }
         }

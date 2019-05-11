@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using WebApplication18.Logger;
 using workshop192.Domain;
 using workshop192.ServiceLayer;
 
@@ -22,7 +23,8 @@ namespace WebApplication18.Controllers
             }
             catch (Exception e)
             {
-                return e.Message;
+                SystemLogger.getLog().Error("Catalog Error : " + e.Message.ToString());
+                return e.Message.ToString();
             }
 
         }
@@ -39,7 +41,8 @@ namespace WebApplication18.Controllers
 
             catch (Exception e)
             {
-                return e.Message;
+                SystemLogger.getLog().Error("Search error : " + e.Message.ToString());
+                return e.Message.ToString();
             }
         }
 
@@ -55,7 +58,8 @@ namespace WebApplication18.Controllers
             
             catch (Exception e)
             {
-                return e.Message;
+                SystemLogger.getLog().Error("Search error : " + e.Message.ToString());
+                return e.Message.ToString();
             }
         }
 
@@ -70,7 +74,8 @@ namespace WebApplication18.Controllers
             }
             catch (Exception e)
             {
-                return e.Message;
+                SystemLogger.getLog().Error("Search error : " + e.Message.ToString());
+                return e.Message.ToString();
             }
         }
 
@@ -93,6 +98,7 @@ namespace WebApplication18.Controllers
             }
             catch (Exception e)
             {
+                SystemLogger.getLog().Error("Error in adding to shopping cart : " + e.Message.ToString());
                 return e.Message.ToString();
             }
 
@@ -110,7 +116,9 @@ namespace WebApplication18.Controllers
             }
             catch (Exception e)
             {
-                return e.Message;
+                SystemLogger.getLog().Error("Error in adding a visible discount : "+e.Message.ToString());
+                return e.Message.ToString();
+                
             }
         }
 

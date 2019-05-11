@@ -7,7 +7,7 @@ namespace workshop192.Domain
 
     {
         public SubscribedUser appointedBy;
-        public Store store;
+        private Store store;
         public SubscribedUser user;
         public Permissions permissions;
         public bool isOwner = false;
@@ -23,23 +23,23 @@ namespace workshop192.Domain
 
         public void addManager(SubscribedUser manager, Permissions permissions)
         {
-            throw new RoleException("A manager cannot appoint a manager");
+            throw new RoleException("Error: A manager cannot appoint a manager");
         }
 
         public void addOwner(SubscribedUser owner)
         {
-            throw new RoleException("A manager cannot appoint an owner");
+            throw new RoleException("Error: A manager cannot appoint an owner");
         }
 
         public void remove(SubscribedUser owner)
         {
-            throw new RoleException("A manager can't remove a role from the store");
+            throw new RoleException("Error: A manager can't remove a role from the store");
         }
 
         public void addProduct(Product product)
         {
             if (!permissions.editProduct())
-                throw new PermissionsException(user.getUsername() + 
+                throw new PermissionsException("Error:" + user.getUsername() + 
                     " has no permissions to edit products in store " +
                     store.getStoreName());
             store.addProduct(product);
@@ -49,7 +49,7 @@ namespace workshop192.Domain
         public void removeProduct(Product product)
         {
             if (!permissions.editProduct())
-                throw new PermissionsException(user.getUsername() +
+                throw new PermissionsException("Error:" + user.getUsername() +
                      " has no permissions to edit products in store " +
                      store.getStoreName());
             if (product.getStore() != store || !store.getProductList().Contains(product))
@@ -62,7 +62,7 @@ namespace workshop192.Domain
         public void setProductPrice(Product product, int price)
         {
             if (!permissions.editProduct())
-                throw new PermissionsException(user.getUsername() +
+                throw new PermissionsException("Error:" + user.getUsername() +
                     " has no permission to set product's price in store "
                     + store.getStoreName());
             product.setPrice(price);
@@ -71,7 +71,7 @@ namespace workshop192.Domain
         public void setProductName(Product product, string name)
         {
             if (!permissions.editProduct())
-                throw new PermissionsException(user.getUsername() +
+                throw new PermissionsException("Error:" + user.getUsername() +
                     " has no permission to set product's name in store " +
                     store.getStoreName());
             product.setProductName(name);
@@ -80,7 +80,7 @@ namespace workshop192.Domain
         public void addToProductQuantity(Product product, int amount)
         {
             if (!permissions.editProduct())
-                throw new PermissionsException(user.getUsername() +
+                throw new PermissionsException("Error:" + user.getUsername() +
                     " has no permission to add to product's quantity in store " +
                     store.getStoreName());
             product.addQuantityLeft(amount);
@@ -89,7 +89,7 @@ namespace workshop192.Domain
         public void decFromProductQuantity(Product product, int amount)
         {
             if (!permissions.editProduct())
-                throw new PermissionsException(user.getUsername() +
+                throw new PermissionsException("Error:" + user.getUsername() +
                     " has no permission to decrease from product's quantity in store "
                     + store.getStoreName());
             int curQuan = product.getQuantityLeft();
@@ -102,7 +102,7 @@ namespace workshop192.Domain
         public void setProductDiscount(Product product, DiscountComponent discount)
         {
             if (!permissions.editDiscount())
-                throw new PermissionsException(user.getUsername() +
+                throw new PermissionsException("Error:" + user.getUsername() +
                     " has no permission to set product's discount in store " +
                     store.getStoreName());
             //product.setDiscount(discount);

@@ -98,7 +98,7 @@ namespace workshop192.Domain
         {
             if (!stores.Contains(store))
             {
-                throw new DoesntExistException("store " + store.getStoreName() + " doesn't exist");
+                throw new DoesntExistException("Error: Store " + store.getStoreName() + " doesn't exist");
             }
             stores.Remove(store);
             foreach (StoreRole st in storeRole)
