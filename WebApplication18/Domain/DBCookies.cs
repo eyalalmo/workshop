@@ -67,5 +67,10 @@ namespace workshop192.Domain
         {
             instance = new DBCookies();
         }
+
+        internal void deleteUserBySessionId(string hash)
+        {
+            cookies.Remove(hash);
+        }
     }
 }

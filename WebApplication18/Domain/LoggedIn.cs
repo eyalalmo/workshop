@@ -67,6 +67,8 @@ namespace workshop192.Domain
         {
             dbSubscribedUser.logout(sub);
             session.setState(new Guest());
+            session.setShoppingBasket(new ShoppingBasket());
+
         }
 
         public void register(string username, string password, Session session)

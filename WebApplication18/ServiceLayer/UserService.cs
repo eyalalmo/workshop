@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using workshop192.Domain;
+
 using workshop192.Bridge;
 using WebApplication18.Domain;
 
@@ -39,9 +39,9 @@ namespace workshop192.ServiceLayer
         }
 
         //use case 2.3
-        public void login(int user, String username, String password)
+        public void login(int session, String username, String password)
         {
-            db.login(user, username, password);
+            db.login(session, username, password);
         }
 
         //use case 2.2
@@ -123,11 +123,7 @@ namespace workshop192.ServiceLayer
             return db.searchProducts(null, null, category);
         }
 
-        public List<Product> filterProducts(List<Product> list, int[] price_range, int minimumRank)
-        {
-            return db.filterProducts(list, price_range, minimumRank);
-
-        }
+        
         public static string getStateName(string hash)
         {
             try
@@ -164,7 +160,7 @@ namespace workshop192.ServiceLayer
 
             db.removeFromCart(session, productId);
         }
-
+        //use case 2.7
         public string getShoppingBasket(int session)
         {
             string jsonBasket = db.getShoppingBasket(session);
@@ -179,17 +175,18 @@ namespace workshop192.ServiceLayer
         /////////////////////////////////////////////////////////////////////////////////////
         public String addUser(string hash, int session)
         {
-            return DBCookies.getInstance().addSession(hash, session);
+            return db.addSession(hash, session);
         }
 
         public string generate()
         {
-            return DBCookies.getInstance().generate();
+            return db.generate();
         }
         
         public int getUserByHash(string hash)
         {
-            return DBCookies.getInstance().getUserByHash(hash);
+            return db.getUserByHash(hash);
+            
         }
 
         public LinkedList<Tuple<string, string>> getWaitingMessages()

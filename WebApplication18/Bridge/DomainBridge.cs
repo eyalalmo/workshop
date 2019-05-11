@@ -157,6 +157,22 @@ namespace workshop192.Bridge
             return false;
         }
 
+        internal string generate()
+        {
+            return DBCookies.getInstance().generate();
+        }
+
+        internal int getUserByHash(string hash)
+        {
+            return DBCookies.getInstance().getUserByHash(hash);
+        }
+
+        internal string addSession(string hash, int session)
+        {
+            return DBCookies.getInstance().addSession(hash, session);
+
+        }
+
         public bool isAllowedToEditPolicy(int storeId, int session)
         {
             Session user = DBSession.getInstance().getSession(session);
@@ -557,10 +573,9 @@ namespace workshop192.Bridge
             }
             Product p = DBProduct.getInstance().getProductByID(product);
 
-            Session user = DBSession.getInstance().getSession(sessionid);
-
-            user.getShoppingBasket().addToCart(p, amount);
-
+            Session s = DBSession.getInstance().getSession(sessionid);
+            
+            s.getShoppingBasket().addToCart(p, amount);
         }
 
         //use case 2.7
