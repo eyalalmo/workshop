@@ -18,6 +18,57 @@
             var doc = document.getElementById('allStores');
             var getUrl = window.location;
             var baseUrl = getUrl.protocol + "//" + getUrl.host
+
+///////////////////////////////
+
+            jQuery.ajax({
+                type: "GET",
+                url: baseUrl + "/api/store/getStoreById?storeId=" + storeId,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                   
+                    var minPurchasePolicy;
+                     var maxPurchasePolicy;
+                    if (responsJ !== "fail") {
+                    var responsJ = JSON.parse(response);
+                        var HTML = "";
+                      try{
+                            var minPurchasePolicy = responsJ.minPurchasePolicy.minAmount;
+                            }
+                        catch(error)
+                        {
+                        minPurchasePolicy= "none"
+                        }
+                        try{
+                            var maxPurchasePolicy = responsJ.maxPurchasePolicy.maxAmount;
+                            }
+                        catch(error)
+                        {
+                        maxPurchasePolicy= "none"
+                        }
+                           
+                            HTML += `
+		                   <div class="my-list">
+			                Min Purchase Policy :  `+ minPurchasePolicy + `<br>
+                            Max Purchase Policy :  `+ maxPurchasePolicy + `
+		                    </div>`
+
+                        doc.innerHTML += HTML;
+
+                    }
+                    else {
+                        alert("problem");
+                    }
+                },
+                error: function (response) {
+                  
+                    window.location.href = baseUrl + "/Default";
+                }
+            });
+          
+/////////////////////////
+
             jQuery.ajax({
                 type: "GET",
                 url: baseUrl + "/api/store/getStoreProducts?storeId=" + storeId,
@@ -25,7 +76,7 @@
                 dataType: "json",
                 success: function (response) {
                     var responsJ = JSON.parse(response);
-                    console.log(response);
+                    
                     if (responsJ !== "fail") {
 
                         var HTML = "";
@@ -38,8 +89,7 @@
                             var quantityLeft = responsJ[i].quantityLeft;
                             var discount = responsJ[i].discount;
                             var storeID = responsJ[i].storeID;
-                            var minPurchasePolicy = responsJ[i].minPurchasePolicy;
-
+                          
                             HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		                   <div class="my-list">
 			                <h3>Product Name :  `+ productName + `</h3 >
