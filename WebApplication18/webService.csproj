@@ -272,33 +272,75 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
-    <Content Include="Views\Pages\About.aspx" />
-    <Content Include="Views\Pages\AddProduct.aspx" />
-    <Content Include="Views\Pages\AddStore.aspx" />
-    <Content Include="Views\Pages\AdminPan.aspx" />
-    <Content Include="Views\Pages\AllProducts.aspx" />
-    <Content Include="Views\Pages\Basket.aspx" />
-    <Content Include="Views\Pages\Checkout.aspx" />
-    <Content Include="Views\Pages\Contact.aspx" />
-    <Content Include="Views\Pages\Default.aspx" />
-    <Content Include="Views\Pages\Discounts.aspx" />
-    <Content Include="Views\Pages\EditStore.aspx" />
+    <Content Include="Views\Pages\About.aspx">
+      <BrowseToURL>~/About</BrowseToURL>
+    </Content>
+    <Content Include="Views\Pages\AddProduct.aspx">
+      <BrowseToURL>~/AddProduct</BrowseToURL>
+    </Content>
+    <Content Include="Views\Pages\AddStore.aspx">
+      <BrowseToURL>~/AddStore</BrowseToURL>
+    </Content>
+    <Content Include="Views\Pages\AdminPan.aspx">
+      <BrowseToURL>~/AdminPan</BrowseToURL>
+    </Content>
+    <Content Include="Views\Pages\AllProducts.aspx">
+      <BrowseToURL>~/AllProducts</BrowseToURL>
+    </Content>
+    <Content Include="Views\Pages\Basket.aspx">
+      <BrowseToURL>~/Basket</BrowseToURL>
+    </Content>
+    <Content Include="Views\Pages\Checkout.aspx">
+      <BrowseToURL>~/Checkout</BrowseToURL>
+    </Content>
+    <Content Include="Views\Pages\Contact.aspx">
+      <BrowseToURL>~/Contact</BrowseToURL>
+    </Content>
+    <Content Include="Views\Pages\Default.aspx">
+      <BrowseToURL>~/Default</BrowseToURL>
+    </Content>
+    <Content Include="Views\Pages\Discounts.aspx">
+      <BrowseToURL>~/Discounts</BrowseToURL>
+    </Content>
+    <Content Include="Views\Pages\EditStore.aspx">
+      <BrowseToURL>~/EditStore</BrowseToURL>
+    </Content>
     <Content Include="Views\Pages\EditStorePolicy.aspx">
-      <BrowseToURL>~/PagesEditStorePolicy</BrowseToURL>
+      <BrowseToURL>~/EditStorePolicy</BrowseToURL>
     </Content>
-    <Content Include="Views\Pages\Index.aspx" />
-    <Content Include="Views\Pages\login.aspx" />
-    <Content Include="Views\Pages\ManageStaff.aspx" />
-    <Content Include="Views\Pages\MyAccount.aspx" />
-    <Content Include="Views\Pages\Products.aspx" />
-    <Content Include="Views\Pages\register.aspx" />
-    <Content Include="Views\Pages\ShoppingBasket.aspx" />
+    <Content Include="Views\Pages\Index.aspx">
+      <BrowseToURL>~/Index</BrowseToURL>
+    </Content>
+    <Content Include="Views\Pages\login.aspx">
+      <BrowseToURL>~/login</BrowseToURL>
+    </Content>
+    <Content Include="Views\Pages\ManageStaff.aspx">
+      <BrowseToURL>~/ManageStaff</BrowseToURL>
+    </Content>
+    <Content Include="Views\Pages\MyAccount.aspx">
+      <BrowseToURL>~/MyAccount</BrowseToURL>
+    </Content>
+    <Content Include="Views\Pages\Products.aspx">
+      <BrowseToURL>~/Products</BrowseToURL>
+    </Content>
+    <Content Include="Views\Pages\register.aspx">
+      <BrowseToURL>~/register</BrowseToURL>
+    </Content>
+    <Content Include="Views\Pages\ShoppingBasket.aspx">
+      <BrowseToURL>~/ShoppingBasket</BrowseToURL>
+    </Content>
     <Content Include="Views\Pages\Store.aspx">
-      <BrowseToURL>~/Pages/Store</BrowseToURL>
+      <BrowseToURL>~/Store</BrowseToURL>
     </Content>
-    <Content Include="Views\Pages\StoreDiscount.aspx" />
-    <Content Include="Views\Pages\ViewStore.aspx" />
-    <Content Include="Views\Pages\StoreDetails.aspx" />
+    <Content Include="Views\Pages\StoreDiscount.aspx">
+      <BrowseToURL>~/StoreDiscount</BrowseToURL>
+    </Content>
+    <Content Include="Views\Pages\ViewStore.aspx">
+      <BrowseToURL>~/ViewStore</BrowseToURL>
+    </Content>
+    <Content Include="Views\Pages\StoreDetails.aspx">
+      <BrowseToURL>~/StoreDetails</BrowseToURL>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
     <Content Include="Site.Mobile.Master" />
