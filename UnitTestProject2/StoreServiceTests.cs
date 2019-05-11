@@ -128,6 +128,7 @@ namespace workshop192.ServiceLayer.Tests
                         }
                         catch (RoleException)
                         {
+
                             try
                             {
                                 userService.setProductDiscount(productid, 0, session3);
