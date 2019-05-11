@@ -68,7 +68,10 @@
             doc.innerHTML = "";
             var i;
             var jsonList = JSON.parse(response);
-            var HTML;
+            var HTML = "";
+            var minPrice = document.getElementById("minPrice").value;
+            var maxPrice = document.getElementById("maxPrice").value;
+            var rank = document.getElementById("minRank").value;
             for (i = 0; i < jsonList.length; i++) {
                 if (jsonList[i].price >= minPrice && jsonList[i].price <= maxPrice && jsonList[i].rank >= rank){
                 HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" id="` + jsonList[i].productID + `">
