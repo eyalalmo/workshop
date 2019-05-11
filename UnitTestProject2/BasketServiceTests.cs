@@ -40,44 +40,39 @@ namespace workshop192.ServiceLayer.Tests
         [TestInitialize()]
         public void initial()
         {
-            try
-            {
-                userService.setup();
 
-                session1 = userService.startSession();
-                userService.register(session1, "user1", "user1");
-                userService.login(session1, "user1", "user1");
+            userService.setup();
 
-                store1 = storeService.addStore("zebra", "Clothes", session1);
-                p1 = storeService.addProduct("dress", "clothing", 20, 5, 2, store1, session1);
-                p2 = storeService.addProduct("coat", "clothing", 100, 2, 3, store1, session1);
-                p3 = storeService.addProduct("hat", "clothing", 200, 3, 4, store1, session1);
+            session1 = userService.startSession();
+            userService.register(session1, "user1", "user1");
+            userService.login(session1, "user1", "user1");
 
-                session2 = userService.startSession();
-                userService.register(session2, "user2", "user2");
-                userService.login(session2, "user2", "user2");
-                store3 = storeService.addStore("zara", "Clothes", session2);
-                store4 = storeService.addStore("bikeMe", "BikeStore", session2);
+            store1 = storeService.addStore("zebra", "Clothes", session1);
+            p1 = storeService.addProduct("dress", "clothing", 20, 5, 2, store1, session1);
+            p2 = storeService.addProduct("coat", "clothing", 100, 2, 3, store1, session1);
+            p3 = storeService.addProduct("hat", "clothing", 200, 3, 4, store1, session1);
 
-                p4 = storeService.addProduct("coat", "clothing", 100, 2, 2, store3, session2);
-                p5 = storeService.addProduct("hat", "clothing", 200, 3, 3, store3, session2);
+            session2 = userService.startSession();
+            userService.register(session2, "user2", "user2");
+            userService.login(session2, "user2", "user2");
+            store3 = storeService.addStore("zara", "Clothes", session2);
+            store4 = storeService.addStore("bikeMe", "BikeStore", session2);
 
-                session3 = userService.startSession();
-                userService.register(session3, "user3", "user3");
-                userService.login(session3, "user3", "user3");
+            p4 = storeService.addProduct("coat", "clothing", 100, 2, 2, store3, session2);
+            p5 = storeService.addProduct("hat", "clothing", 200, 3, 3, store3, session2);
 
-                store4 = storeService.addStore("TopTen", "Accesorize", session3);
-                store5 = storeService.addStore("H&M", "clothing", session3);
+            session3 = userService.startSession();
+            userService.register(session3, "user3", "user3");
+            userService.login(session3, "user3", "user3");
+
+            store4 = storeService.addStore("TopTen", "Accesorize", session3);
+            store5 = storeService.addStore("H&M", "clothing", session3);
 
 
-                p6 = storeService.addProduct("Earings", "Accesorize", 76, 5, 7, store5, session3);
-                p7 = storeService.addProduct("necklace", "Accesorize", 100, 2, 4, store5, session3);
-                p8 = storeService.addProduct("ring", "Accesorize", 200, 3, 39, store5, session3);
-            }
-            catch (Exception)
-            {
-                throw new ExecutionEngineException();
-            }
+            p6 = storeService.addProduct("Earings", "Accesorize", 76, 5, 7, store5, session3);
+            p7 = storeService.addProduct("necklace", "Accesorize", 100, 2, 4, store5, session3);
+            p8 = storeService.addProduct("ring", "Accesorize", 200, 3, 39, store5, session3);
+
         }
 
         //2.6 /
@@ -103,12 +98,13 @@ namespace workshop192.ServiceLayer.Tests
             try
             {
                 basketService.addToCart(session1, p3, 6); // should fail - too much 
+                Assert.Fail();
+
             }
-            catch (AlreadyExistException)
+            catch (Exception)
             {
                 Assert.IsTrue(true);
             }
-            //Assert.Fail();
 
 
         }
@@ -120,12 +116,14 @@ namespace workshop192.ServiceLayer.Tests
             {
                 basketService.addToCart(session2, p4, 2);
                 basketService.changeQuantity(session2, p4, store3, 1);
+                Assert.Fail();
 
             }
             catch (Exception)
             {
                 Assert.IsTrue(true);
             }
+
         }
 
         [TestMethod()]
@@ -152,16 +150,14 @@ namespace workshop192.ServiceLayer.Tests
                 basketService.addToCart(session3, p7, 3);
                 basketService.addToCart(session3, p8, 10);
 
-                ShoppingCart sc1 = basketService.getCart(session3, store5); // shopping cart
-                double amount = sc1.getTotalAmount();
-
+                double amount = basketService.getAmountOfCart(store5, session3);
                 basketService.removeFromCart(session3, p6);
 
-                Assert.AreNotEqual(amount, sc1.getTotalAmount());
+                Assert.AreNotEqual(amount, basketService.getAmountOfCart(store5,session3));
 
                 double newAmount = amount - basketService.getProductPrice(p6);
 
-                Assert.AreEqual(newAmount, sc1.getTotalAmount());
+                Assert.AreEqual(newAmount, basketService.getAmountOfCart(store5, session3));
             }
             catch (Exception) {
                 Assert.Fail();

@@ -262,8 +262,8 @@ namespace workshop192.Domain
                      throw new ArgumentException("contradiction! minimum amount can not be larger than maximum amount Purchase Policy");
              }
 
-         }
-         */
+        }
+       */ 
         public void setMinPurchasePolicy(int MinAmount)
         {
             if (maxPurchasePolicy == null)

@@ -48,6 +48,7 @@ namespace workshop192.Domain
         public void addToCart(Product product, int amount)
         {
             store.checkPolicy(product, amount);
+
             int quantityLeft = product.getQuantityLeft();
             if (quantityLeft - amount >= 0)
             {
