@@ -4,3 +4,4 @@
 2019-05-11 20:14:49,299 INFO  System Log - User et has successfuly logged in.
 2019-05-11 20:15:31,093 ERROR System Log - Error in adding to shopping cart : Value cannot be null.
 Parameter name: String
+2019-05-11 20:39:39,707 INFO  System Log - User et has successfuly logged in.
