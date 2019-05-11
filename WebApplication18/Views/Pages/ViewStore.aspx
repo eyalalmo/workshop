@@ -24,9 +24,10 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    var responsJ = JSON.parse(response);
-                    console.log(response);
-                    if (responsJ !== "fail") {
+                   
+                    
+                    if (respons !== "fail") {
+                       var responsJ = JSON.parse(response);
 
                         var HTML = "";
                         for (i = 0; i < responsJ.length; i++) {
@@ -38,7 +39,8 @@
                             var quantityLeft = responsJ[i].quantityLeft;
                             var discount = responsJ[i].discount;
                             var storeID = responsJ[i].storeID;
-
+                           // var storeDiscountMax = responsJ[i].maxPurchasePolicy;
+                           // var storeDiscountMin = responsJ[i].minPurchasePolicy;
                             HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		                   <div class="my-list">
 			                <h3>Product Name :  `+ productName + `</h3 >
