@@ -26,8 +26,8 @@ namespace workshop192.ServiceLayer.Tests
             DBProduct.getInstance().init();
             DBStore.getInstance().init();
             session1 = userService.startSession();// login 
-            userService.register(session1, "user1", "user1");
-            userService.login(session1, "user1", "user1");
+            userService.register(session1, "user6", "user6");
+            userService.login(session1, "user6", "user6");
             store1 = storeService.addStore("Makolet", "groceryStore", session1);
 
             p1 = storeService.addProduct("shirt", "clothing", 50, 4, 4, store1, session1);
@@ -35,8 +35,8 @@ namespace workshop192.ServiceLayer.Tests
             bisli = storeService.addProduct("bisli", "food", 20, 4, 50, store1, session1);
 
             session2 = userService.startSession();// login 
-            userService.register(session1, "user2", "user2");
-            userService.login(session1, "user2", "user2");
+            userService.register(session2, "user7", "user7");
+            userService.login(session2, "user7", "user7");
         }
         [TestMethod]
         public void AddVisibleDiscount()
@@ -53,7 +53,7 @@ namespace workshop192.ServiceLayer.Tests
             // above 3 bambas get 25 % of
             basketService.addToCart(session1, bamba, 5);
             double actualPrice = basketService.getAmountOfCart(store1, session1);
-            Assert.AreEqual(actualPrice, 3 * 0.75 * 15);
+            Assert.AreEqual(actualPrice, 5 * 0.75 * 15);
         }
         [TestMethod]
         public void ReliantDiscountFailOneProduct()
@@ -101,15 +101,25 @@ namespace workshop192.ServiceLayer.Tests
         [TestMethod]
         public void InvisibleCouponFail()
         {
-            storeService.addCouponToStore(session1, store1, "oshim3", 0.2, "a month");
+            try {
+                storeService.addCouponToStore(session1, store1, "oshim3", 0.2, "a month");
 
-            basketService.addToCart(session2, bamba, 2);
-            basketService.addToCart(session2, bisli, 2);
-            basketService.addCouponToCart(session2, store1, "notOshim");
-            double actualPrice = basketService.getAmountOfCart(store1, session2);
+                basketService.addToCart(session2, bamba, 2);
+                basketService.addToCart(session2, bisli, 2);
+                basketService.addCouponToCart(session2, store1, "notOshim");
+                //double actualPrice = basketService.getAmountOfCart(store1, session2);
 
-            Assert.AreEqual(actualPrice, 70);
-        }
+                //Assert.AreEqual(actualPrice, 70);
+                Assert.Fail();
+            }
+            catch(ArgumentException)
+            {
+                Assert.IsTrue(true);
+            }
+
+
+            }
+
     }
 
 

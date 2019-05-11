@@ -34,8 +34,8 @@ namespace workshop192.ServiceLayer.Tests
             bisli = storeService.addProduct("bisli", "food", 20, 4, 50, store1, session1);
 
             session2 = userService.startSession();// login 
-            userService.register(session1, "user2", "user2");
-            userService.login(session1, "user2", "user2");
+            userService.register(session2, "user2", "user2");
+            userService.login(session2, "user2", "user2");
         }
         [TestMethod]
         public void conflictionPurchasePolicy()

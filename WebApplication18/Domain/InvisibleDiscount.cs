@@ -10,7 +10,7 @@ namespace workshop192.Domain
     {
         private string coupon;
         
-        public InvisibleDiscount(int percentage, string coupon, string duration):base(percentage, duration)
+        public InvisibleDiscount(double percentage, string coupon, string duration):base(percentage, duration)
         {
             this.coupon = coupon;
         }

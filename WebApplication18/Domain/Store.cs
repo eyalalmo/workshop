@@ -125,7 +125,7 @@ namespace workshop192.Domain
             roles.Add(toAdd);
         }
 
-        public void addCoupon(string coupon, int percentage, string duration)
+        public void addCoupon(string coupon, double percentage, string duration)
         {
             foreach (InvisibleDiscount d1 in invisibleDiscountList)
             {

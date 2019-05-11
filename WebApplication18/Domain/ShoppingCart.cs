@@ -107,8 +107,10 @@ namespace workshop192.Domain
         }
         public double getTotalPrice()
         {
-            updatePriceAfterCoupon();
+            productsActualPrice = new Dictionary<Product, double>();
+            fillActualPriceDic();
             updateActualProductPrice();
+            updatePriceAfterCoupon();
             updateStoreDiscount();
             double sum = 0;
             foreach (KeyValuePair<Product, int> entry in productList)
@@ -120,8 +122,17 @@ namespace workshop192.Domain
 
             return sum;
         }
-        
-            private void updatePriceAfterCoupon()
+
+        private void fillActualPriceDic()
+        {
+            foreach(KeyValuePair<Product,int> entry in productList)
+            {
+                Product p = entry.Key;
+                productsActualPrice.Add(p, entry.Value);
+            }
+        }
+
+        private void updatePriceAfterCoupon()
         {
             if (coupon != "")
                 productsActualPrice = store.updatePriceAfterCoupon(coupon, productList, productsActualPrice);
@@ -134,7 +145,7 @@ namespace workshop192.Domain
 
         private void updateActualProductPrice()
         {
-            productsActualPrice = new Dictionary<Product, double>();
+            
             foreach (KeyValuePair<Product, int> entry in productList)
             {
                 Product p = entry.Key;

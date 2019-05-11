@@ -214,15 +214,15 @@ namespace workshop192.Domain
         {
             store.removeCoupon(couponCode);
         }
-
-        public void addCouponToStore(string couponCode, int percentage, string duration)
+        
+       /* public void addCouponToStore(string couponCode, int percentage, string duration)
         {
             store.addCoupon(couponCode, percentage, duration);
         }
-
+        */
         public void addCouponToStore(string couponCode, double percentage, string duration)
         {
-            throw new NotImplementedException();
+            store.addCoupon(couponCode, percentage, duration);
         }
 
     }
