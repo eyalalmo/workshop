@@ -30,5 +30,10 @@ namespace WebApplication18.Domain
         {
             waitingNotifications = remains;
         }
+
+        internal void init()
+        {
+            waitingNotifications.AddFirst(new Tuple<string, string>("ey", "hi there"));
+        }
     }
 }

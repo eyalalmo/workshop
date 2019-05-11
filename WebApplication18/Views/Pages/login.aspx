@@ -35,10 +35,8 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-
                         if (response == "ok") {
-                                                  
-                            window.location.href = baseUrl+"/";
+                            window.location.href = baseUrl + "/";
                         }
                         else {
                             alert(response); 

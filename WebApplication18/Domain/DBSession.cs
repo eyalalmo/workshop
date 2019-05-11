@@ -10,7 +10,7 @@ namespace workshop192.Domain
     {
         private static DBSession instance;
         private Dictionary<int, Session> sessions;
-        private static int sessionNum = 0;
+        private static int sessionNum = 1;
 
         public static DBSession getInstance()
         {
@@ -69,7 +69,8 @@ namespace workshop192.Domain
         internal int getSessionOfUserName(string username)
         {
             foreach (KeyValuePair<int, Session> s in sessions) {
-                if (s.Value.getSubscribedUser().getUsername() == username)
+                SubscribedUser su = s.Value.getSubscribedUser();
+                if (su != null && su.getUsername() == username)
                     return s.Key;
             }
             return -1;

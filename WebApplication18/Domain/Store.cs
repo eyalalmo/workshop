@@ -68,7 +68,6 @@ namespace workshop192.Domain
         public string getProductsString()
         {
             return JsonConvert.SerializeObject(this.productList);
-           
         }
 
         public bool productExists(Product product)
@@ -181,7 +180,6 @@ namespace workshop192.Domain
                 }
             }
             return productsActualPrice;
-            
         }
 
 
@@ -196,7 +194,6 @@ namespace workshop192.Domain
                 }
             }
             return productsActualPrice;
-
         }
 
 

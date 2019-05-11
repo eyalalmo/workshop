@@ -47,6 +47,7 @@ namespace WebApplication18.Controllers
                 return e.Message;
             }
         }
+
         [Route("api/user/logout")]
         [HttpGet]
         public Object logout()
@@ -80,6 +81,7 @@ namespace WebApplication18.Controllers
             }
 
         }
+
         [Route("api/user/basketTotalPrice")]
         [HttpGet]
         public string basketTotalPrice()
@@ -159,6 +161,21 @@ namespace WebApplication18.Controllers
             {
                 SystemLogger.getLog().Error("Checkout : " + e.Message.ToString());
                 return e.Message.ToString();
+            }
+        }
+
+        [Route("api/user/waitingMessages")]
+        [HttpGet]
+        public Object waitingMessages()
+        {
+            try
+            {
+                WebSocketController.messageClient("et", "");
+                return "ok";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
             }
         }
 
