@@ -208,7 +208,7 @@ namespace WebApplication18.Controllers
                 return StoreService.getInstance().isOwner(storeId, session);
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -245,7 +245,7 @@ namespace WebApplication18.Controllers
                 
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -263,7 +263,7 @@ namespace WebApplication18.Controllers
                
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -280,7 +280,7 @@ namespace WebApplication18.Controllers
                
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -296,7 +296,7 @@ namespace WebApplication18.Controllers
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
                 return StoreService.getInstance().isAllowedToEditPolicy(storeId, session);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -377,7 +377,7 @@ namespace WebApplication18.Controllers
                return StoreService.getInstance().getMaxAmountPolicy(storeID,session);
                
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return "fail";
             }
@@ -392,7 +392,7 @@ namespace WebApplication18.Controllers
                 return StoreService.getInstance().getMinAmountPolicy(storeID, session);
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return "fail";
             }

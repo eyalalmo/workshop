@@ -1,17 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using workshop192.Domain;
-using workshop192.ServiceLayer;
 
-namespace UnitTestProject2
+namespace workshop192.ServiceLayer.Tests
 {
-    [TestClass()]
-    class DiscountTests
+    [TestClass]
+    public class DiscountTests
     {
+        
         private UserService userService = UserService.getInstance();
         private StoreService storeService = StoreService.getInstance();
         private BasketService basketService = BasketService.getInstance();
@@ -42,7 +38,6 @@ namespace UnitTestProject2
             userService.register(session1, "user2", "user2");
             userService.login(session1, "user2", "user2");
         }
-
         [TestMethod]
         public void AddVisibleDiscount()
         {
@@ -116,4 +111,6 @@ namespace UnitTestProject2
             Assert.AreEqual(actualPrice, 70);
         }
     }
+
+
 }

@@ -1,11 +1,16 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using workshop192.Domain;
+using workshop192.ServiceLayer;
 
 namespace workshop192.ServiceLayer.Tests
 {
-    [TestClass]
-    public class PurchasePolicyTests
+    [TestClass()]
+    class PurchasePolicyTest
     {
         private UserService userService = UserService.getInstance();
         private StoreService storeService = StoreService.getInstance();
@@ -103,5 +108,5 @@ namespace workshop192.ServiceLayer.Tests
 
 
     }
-   
 }
+

@@ -105,7 +105,7 @@ namespace workshop192.ServiceLayer.Tests
             {
                 storeService.addToProductQuantity(productid, 10, session2);
                 storeService.decFromProductQuantity(productid, 10, session2);
-                userService.setProductDiscount(productid, 0, session2);
+                //userService.setProductDiscount(productid, 0, session2);
                 try
                 {
                     storeService.addManager(storeid, "yaniv", false, false, false, session1);
@@ -128,17 +128,7 @@ namespace workshop192.ServiceLayer.Tests
                         }
                         catch (RoleException)
                         {
-
-
-                            try
-                            {
-                                userService.setProductDiscount(productid, 0, session3);
-                                Assert.Fail();
-                            }
-                            catch (RoleException)
-                            {
-                                Assert.IsTrue(true);
-                            }
+                            Assert.IsTrue(true);
                         }
                     }
                 }

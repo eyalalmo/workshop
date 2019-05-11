@@ -139,8 +139,8 @@ namespace workshop192.ServiceLayer.Tests
         {
             //registerSuccessTest();
             loginSuccessTest();
-            List<Product> searchResult1 = userService.searchProducts(null, null, "kitchen");
-            Assert.IsTrue(searchResult1.Count == 2);
+            string searchResult1 = userService.searchByCategory("kitchen");
+            Assert.IsTrue(searchResult1.Equals("[{\"productID\":4,\"productName\":\"stove\",\"productCategory\":\"kitchen\",\"price\":200,\"rank\":3,\"quantityLeft\":2,\"storeID\":1,\"discount\":null},{\"productID\":3,\"productName\":\"pan\",\"productCategory\":\"kitchen\",\"price\":100,\"rank\":2,\"quantityLeft\":4,\"storeID\":1,\"discount\":null}]"));
             //Assert.IsTrue(productExists("pan", searchResult1));
             //Assert.IsTrue(productExists("stove", searchResult1));
         }
@@ -150,8 +150,8 @@ namespace workshop192.ServiceLayer.Tests
         {
             //registerSuccessTest();
             loginSuccessTest();
-            List<Product> searchResult2 = userService.searchProducts(null, null, "clothes");
-            Assert.IsTrue(searchResult2.Count == 3);
+            string searchResult2 = userService.searchByCategory("clothes");
+            Assert.IsTrue(searchResult2.Equals("[{\"productID\":6,\"productName\":\"socks\",\"productCategory\":\"clothes\",\"price\":110,\"rank\":4,\"quantityLeft\":2,\"storeID\":2,\"discount\":null},{\"productID\":5,\"productName\":\"pants\",\"productCategory\":\"clothes\",\"price\":120,\"rank\":1,\"quantityLeft\":2,\"storeID\":2,\"discount\":null},{\"productID\":2,\"productName\":\"shirt\",\"productCategory\":\"clothes\",\"price\":20,\"rank\":5,\"quantityLeft\":2,\"storeID\":1,\"discount\":null}]"));
             //Assert.IsTrue(productExists("shirt", searchResult2));
             //Assert.IsTrue(productExists("pants", searchResult2));
             //Assert.IsTrue(productExists("socks", searchResult2));
@@ -162,15 +162,15 @@ namespace workshop192.ServiceLayer.Tests
         {
          //   registerSuccessTest();
             loginSuccessTest();
-            List<Product> searchResult3 = userService.searchProducts(null, null, "pets");
-            Assert.IsTrue(searchResult3.Count == 0);
+            string searchResult3 = userService.searchByCategory("pets");
+            Assert.IsTrue(searchResult3.Equals("[]"));
         }
 
         [TestMethod]
         public void searchByNameSucc()
         {
-            List<Product> searchResult1 = userService.searchProducts("stove", null, null);
-            Assert.IsTrue(searchResult1.Count == 1);
+            string searchResult1 = userService.searchByName("stove");
+            Assert.IsTrue(searchResult1.Equals("[{\"productID\":4,\"productName\":\"stove\",\"productCategory\":\"kitchen\",\"price\":200,\"rank\":3,\"quantityLeft\":2,\"storeID\":1,\"discount\":null}]"));
             //Assert.IsTrue(productExists("stove", searchResult1));
 
         }
@@ -178,44 +178,9 @@ namespace workshop192.ServiceLayer.Tests
         [TestMethod]
         public void searchByNameFail()
         {
-            List<Product> searchResult2 = userService.searchProducts("toaster", null, null);
-            Assert.IsTrue(searchResult2.Count == 0);
+            string searchResult2 = userService.searchByName("toaster");
+            Assert.IsTrue(searchResult2.Equals("[]"));
         }
-        [TestMethod]
-        public void filterTest1()
-        {
-            
-            List<Product> searchResult2 = userService.searchProducts(null, null, "clothes");
-            Assert.IsTrue(searchResult2.Count == 3);
-            //Assert.IsTrue(productExists("shirt", searchResult2));
-            //Assert.IsTrue(productExists("pants", searchResult2));
-            //Assert.IsTrue(productExists("socks", searchResult2));
-        }
-        public void filterTest2()
-        {
-            List<Product> searchResult1 = userService.searchProducts(null, null, "kitchen");
-            int[] arr1 = { 60, 120 };
-            List<Product> filterResult1 = userService.filterProducts(searchResult1, arr1, 0);
-            Assert.IsTrue(filterResult1.Count == 1);
-            //Assert.IsTrue(productExists("pan", filterResult1));
-        }
-        public void filterTest3()
-        {
-            List<Product> searchResult2 = userService.searchProducts(null, null, "clothes");
-            int[] arr3 = { 10, 40 };
-            List<Product> filterResult3 = userService.filterProducts(searchResult2, arr3, 5);
-            Assert.IsTrue(filterResult3.Count == 1);
-        }
-        public void filterTestFail()
-        {
-            List<Product> searchResult2 = userService.searchProducts(null, null, "clothes");
-            int[] arr2 = { -40, -20 };
-            List<Product> filterResult2 = userService.filterProducts(searchResult2, arr2, 0);
-            Assert.IsTrue(filterResult2.Count == 0);
-
-
-        }
-
 
         public bool productExists(String name, List<Product> products)
         {
@@ -248,7 +213,7 @@ namespace workshop192.ServiceLayer.Tests
                 basketService.addToCart(session2, product3, 1);
                 basketService.addToCart(session2, product4, 3);
 
-                userService.purchaseBasket(session2);
+                userService.purchaseBasket(session2, "HaJelmonit 14", "234");
                 Assert.IsTrue(true);
 
                 //???????????????do we need to check state
@@ -276,16 +241,12 @@ namespace workshop192.ServiceLayer.Tests
                 int product1 = storeService.addProduct("dogs", "big dogs", 80, 2, 4, store1, session2);
 
                 basketService.addToCart(session2, product1, 6);
-                userService.purchaseBasket(session2);
+                userService.purchaseBasket(session2, "Neviot 22", "123");
                 Assert.Fail();
             }
             catch (Exception)
             {
                 Assert.IsTrue(true);
-            }
-            catch (Exception)
-            {
-                Assert.Fail();
             }
         }
 
