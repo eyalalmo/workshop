@@ -263,7 +263,7 @@ namespace workshop192.Domain
             }
 
         }
-        */
+       */ 
         public void setMinPurchasePolicy(int MinAmount)
         {
             if (maxPurchasePolicy == null)
