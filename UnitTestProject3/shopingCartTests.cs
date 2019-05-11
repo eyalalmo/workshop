@@ -12,12 +12,12 @@ namespace UnitTestProject3
         public Store store;
         public ShoppingCart cart;
         public int session;
-        public UserService userService;
+        public UserService userService = UserService.getInstance();
 
         [TestInitialize]
         public void initial()
         {
-            userService.init();
+            userService.setup();
             DBProduct.getInstance().init();
             DBProduct.getInstance().init();
             DBStore.getInstance().init();

@@ -98,12 +98,13 @@ namespace workshop192.ServiceLayer.Tests
             try
             {
                 basketService.addToCart(session1, p3, 6); // should fail - too much 
+                Assert.Fail();
+
             }
             catch (Exception)
             {
                 Assert.IsTrue(true);
             }
-            Assert.Fail();
 
 
         }
@@ -115,13 +116,13 @@ namespace workshop192.ServiceLayer.Tests
             {
                 basketService.addToCart(session2, p4, 2);
                 basketService.changeQuantity(session2, p4, store3, 1);
+                Assert.Fail();
 
             }
             catch (Exception)
             {
                 Assert.IsTrue(true);
             }
-            Assert.Fail();
 
         }
 
@@ -149,14 +150,14 @@ namespace workshop192.ServiceLayer.Tests
                 basketService.addToCart(session3, p7, 3);
                 basketService.addToCart(session3, p8, 10);
 
-                double amount = basketService.getAmountOfCart(store3, session3);
+                double amount = basketService.getAmountOfCart(store5, session3);
                 basketService.removeFromCart(session3, p6);
 
-                Assert.AreNotEqual(amount, basketService.getAmountOfCart(store3,session3));
+                Assert.AreNotEqual(amount, basketService.getAmountOfCart(store5,session3));
 
                 double newAmount = amount - basketService.getProductPrice(p6);
 
-                Assert.AreEqual(newAmount, basketService.getAmountOfCart(store3, session3));
+                Assert.AreEqual(newAmount, basketService.getAmountOfCart(store5, session3));
             }
             catch (Exception) {
                 Assert.Fail();
