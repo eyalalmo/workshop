@@ -37,11 +37,17 @@ namespace workshop192.Domain
 
         public double getActualPrice()
         {
+            double actualPrice = price;
             if (discount != null)
             {
-                return price * (1 - discount.getPercentage());
+                actualPrice = price * (1 - discount.getPercentage());
             }
-            return price;
+            VisibleDiscount storeDiscount = store.getVisibleDiscount();
+            if (storeDiscount != null)
+            {
+                actualPrice = actualPrice * (1 - storeDiscount.getPercentage());
+            }
+            return actualPrice;
         }
 
         public int getQuantityLeft()

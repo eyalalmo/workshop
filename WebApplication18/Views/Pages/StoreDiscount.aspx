@@ -8,7 +8,7 @@
  <div class="form-group">
   <h4>Add Visible Discount:</h4>
   <label for="per">Percentage:</label>
-  <input type="text" class="form-control" id="percentage" name="percentage">
+  <input type="number"  min="0" max="1" class="form-control" id="percentage" name="percentage">
   <label for="per">Duration:</label>
   <input type="text" class="form-control" id="duration" name="duration">
 </div>
@@ -16,23 +16,24 @@
  <div class="form-group">
   <h4>Add Reliant Discount - Total Amount:</h4>
   <label for="per">Percentage:</label>
-  <input type="text" class="form-control" id="percentage2" name="percentage2">
+  <input type="number"  min="0" max="1" class="form-control" id="percentage2" name="percentage2">
   <label for="per">Duration:</label>
   <input type="text" class="form-control" id="duration2" name="duration2">
   <label for="per">Total amount:</label>
-  <input type="text" class="form-control" id="amount" name="amount">
+  <input type="number" class="form-control" id="amount" name="amount">
 </div>
     <button type="submit" name="btnRelianTotalAmount" id="btnRelianTotalAmount" class="btn btn-default">Submit</button>
 <div class="form-group">
   <h4>Add Reliant Discount - Minimal amount of same product:</h4>
   <label for="per">Percentage:</label>
-  <input type="text" class="form-control" id="percentage3" name="percentage3">
+  <input type="number"  min="0" max="1" class="form-control" id="percentage3" name="percentage3">
   <label for="per">Duration:</label>
   <input type="text" class="form-control" id="duration3" name="duration3">
+    <label for="per">Total amount:</label>
+  <input type="number" class="form-control" id="numOfProducts" name="numOfProducts">
    <label for="per">Product ID:</label>
-  <input type="text" class="form-control" id="productID3" name="productID3">
-  <label for="per">Total amount:</label>
-  <input type="text" class="form-control" id="amount3" name="amount3">
+  <input type="number" class="form-control" id="productID3" name="productID3">
+  
 </div>
      <button type="submit" name="btnRelianSameProduct" id="btnRelianSameProduct" class="btn btn-default">Submit</button>
    <script type="text/javascript">
@@ -100,12 +101,14 @@
                 event.preventDefault();
                percentage = $("#percentage3").val();
                duration = $("#duration3").val(); 
-               console.log($("amount3").val()+"!!!")
-               am = $("amount3").val(); 
-               productID = $("productID3").val(); 
+           
+               numOfProducts = $("numOfProducts").val();
+               console.log(numOfProducts + "###!!!")
+                productID = $("productID3").val(); 
+                 console.log(productID+"id!!!")
                 jQuery.ajax({
                     type: "GET",
-                    url: baseUrl+"/api/store/addReliantDiscountSameProduct?storeID=" + storeID +"&percentage=" + percentage+"&duration=" + duration+"&numOfProducts=" + am+"&productID=" + productID,
+                    url: baseUrl+"/api/store/addReliantDiscountSameProduct?storeID=" + storeID +"&percentage=" + percentage+"&duration=" + duration+"&numOfProducts=" + numOfProducts+"&productID=" + productID,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {

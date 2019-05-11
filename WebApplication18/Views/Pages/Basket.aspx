@@ -95,7 +95,7 @@
                                 var id = productfields[2];
                                 var quantity = +productfields[3];
                                     str += "<tr>" +
-                                    "<td ><img src=\"../Images/NoImageAvailabe.jpg\"" + "height=\"60\" /></td><td style=\"vertical-align :middle\">" + productName + "</td><td style=\"vertical-align:middle\">" + price + "</td><td style=\"vertical-align:middle\">" + id + "</td><td style=\"vertical-align:middle\">" + quantity + "</td><td style=\"vertical-align :middle\"><form><input type = \"button\" class=\"btn btn-danger\" value = \"Delete\" onclick=\"deleteRow("+id+");\"></form></td></tr>";
+                                    "<td ><img src=\"../Images/NoImageAvailabe.jpg\"" + "height=\"60\" /></td><td style=\"vertical-align :middle\">" + productName + "</td><td style=\"vertical-align:middle\">" + price + "</td><td style=\"vertical-align:middle\">" + id + "</td><td type=\"text\" style=\"vertical-align:middle\">" + quantity + "</td><td style=\"vertical-align :middle\"><form><input type = \"button\" class=\"btn btn-danger\" value = \"Delete\" onclick=\"deleteRow("+id+");\"></form></td></tr>";
                             }
                             str += " </tbody>" + "</table>";
                             mainDiv.innerHTML = str;

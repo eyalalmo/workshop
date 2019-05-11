@@ -238,9 +238,9 @@ namespace workshop192.ServiceLayer
         }
         public void addProductVisibleDiscount(int product, int session, double percentage, string duration)
         {
-            if (percentage < 0 || percentage > 100)
+            if (percentage <= 0 || percentage >= 1)
             {
-                throw new ArgumentException("Illegal Discount Percentage\n Enter discount between 0-100");
+                throw new IllegalAmountException("percentage of discount must be a number between 0 to 1");
             }
             if (product < 0)
                 throw new ArgumentException("illegal product number");

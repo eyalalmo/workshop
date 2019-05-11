@@ -429,6 +429,16 @@ namespace workshop192.Domain
 
         }
 
+        public VisibleDiscount getVisibleDiscount()
+        {
+            foreach(Discount d in discountList)
+            {
+                if (d is VisibleDiscount)
+                    return (VisibleDiscount)d;
+            }
+            return null;
+        }
+
     }
 
 }
