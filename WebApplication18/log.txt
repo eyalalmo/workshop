@@ -14,3 +14,4 @@ Parameter name: String
 2019-05-11 21:44:38,111 INFO  System Log - User et has successfuly logged in.
 2019-05-11 21:45:58,263 ERROR System Log - Error in adding to shopping cart : Error: The amount asked is larger than the quantity left
 2019-05-11 21:46:02,107 INFO  System Log - User et has logged out
+2019-05-11 22:11:11,893 INFO  System Log - User et has successfuly logged in.
