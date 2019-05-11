@@ -36,7 +36,7 @@ namespace UnitTestProject2
 
             p1 = storeService.addProduct("shirt", "clothing", 50, 4, 4, store1, session1);
             bamba = storeService.addProduct("bamba", "food", 15, 5, 17, store1, session1);
-            bisli = storeService.addProduct("bisli", "food", 20,4,50,store1, session1);
+            bisli = storeService.addProduct("bisli", "food", 20, 4, 50, store1, session1);
 
             session2 = userService.startSession();// login 
             userService.register(session1, "user2", "user2");
@@ -48,8 +48,7 @@ namespace UnitTestProject2
         {
             storeService.addProductVisibleDiscount(p1, session1, 0.1, "1 month");
             basketService.addToCart(session1, p1, 3);
-            ShoppingCart sc = basketService.getCart(session1, store1);
-            double actualPrice = sc.getTotalAmount();
+            double actualPrice = basketService.getAmountOfCart(store1, session1);
             Assert.AreEqual(actualPrice, 135);
         }
         [TestMethod]
@@ -58,8 +57,7 @@ namespace UnitTestProject2
             storeService.addReliantDiscountSameProduct(store1, session1, 0.25, "1 month", 3, bamba);
             // above 3 bambas get 25 % of
             basketService.addToCart(session1, bamba, 5);
-            ShoppingCart sc = basketService.getCart(session1, store1);
-            double actualPrice = sc.getTotalAmount();
+            double actualPrice = basketService.getAmountOfCart(store1, session1);
             Assert.AreEqual(actualPrice, 3 * 0.75 * 15);
         }
         [TestMethod]
@@ -67,8 +65,7 @@ namespace UnitTestProject2
         {
             storeService.addReliantDiscountSameProduct(store1, session1, 0.25, "1 month", 3, bamba);
             basketService.addToCart(session1, bamba, 1);
-            ShoppingCart sc = basketService.getCart(session1, store1);
-            double actualPrice = sc.getTotalAmount();
+            double actualPrice = basketService.getAmountOfCart(store1, session1);
             Assert.AreNotEqual(actualPrice, 0.75 * 15);
             Assert.AreEqual(actualPrice, 15);
         }
@@ -78,8 +75,8 @@ namespace UnitTestProject2
             // total cart above 400 shekels get 40 % off
             basketService.addToCart(session1, bamba, 14);
             basketService.addToCart(session1, bisli, 30);
-            ShoppingCart sc = basketService.getCart(session1, store1);
-            double actualPrice = sc.getTotalAmount();
+            double actualPrice = basketService.getAmountOfCart(store1, session1);
+
             double expected = 0.4 * (14 * 15 + 30 * 20);
             Assert.AreEqual(actualPrice, expected);
         }
@@ -90,8 +87,7 @@ namespace UnitTestProject2
             // total cart above 400 shekels get 40 % off
             basketService.addToCart(session1, bamba, 2);
             basketService.addToCart(session1, bisli, 2);
-            ShoppingCart sc = basketService.getCart(session1, store1);
-            double actualPrice = sc.getTotalAmount();
+            double actualPrice = basketService.getAmountOfCart(store1, session1);
             double expected = (2 * 15 + 2 * 20);
             Assert.AreEqual(actualPrice, expected);
         }
@@ -103,10 +99,8 @@ namespace UnitTestProject2
             basketService.addToCart(session2, bamba, 2);
             basketService.addToCart(session2, bisli, 2);
             basketService.addCouponToCart(session2, store1, "oshim3");
-            Dictionary<int, ShoppingCart> shoppingCarts = basketService.getShoppingCarts(session2);
-            ShoppingCart sc = shoppingCarts[store1];
-
-            Assert.AreEqual(sc.getTotalAmount(), 56);
+            double actualPrice = basketService.getAmountOfCart(store1, session2);
+            Assert.AreEqual(actualPrice, 56);
         }
 
         [TestMethod]
@@ -117,10 +111,9 @@ namespace UnitTestProject2
             basketService.addToCart(session2, bamba, 2);
             basketService.addToCart(session2, bisli, 2);
             basketService.addCouponToCart(session2, store1, "notOshim");
-            Dictionary<int, ShoppingCart> shoppingCarts = basketService.getShoppingCarts(session2);
-            ShoppingCart sc = shoppingCarts[store1];
+            double actualPrice = basketService.getAmountOfCart(store1, session2);
 
-            Assert.AreEqual(sc.getTotalAmount(), 70);
+            Assert.AreEqual(actualPrice, 70);
         }
     }
 }

@@ -873,7 +873,14 @@ namespace workshop192.Bridge
         return store.getMaxAmountPolicy();
     }
 
+        public double getAmountByCart(int storeID, int sessionID)
+        {
+            ShoppingCart sc1 = getCart(sessionID, storeID);
+            double amount = sc1.getTotalPrice();
+            return amount;
+        }
 
 
-}
+
+    }
 }

@@ -13,7 +13,8 @@ namespace workshop192.ServiceLayer
         private static BasketService instance;
         private DomainBridge db = DomainBridge.getInstance();
 
-        public static BasketService getInstance() {
+        public static BasketService getInstance()
+        {
             if (instance == null)
                 instance = new BasketService();
             return instance;
@@ -33,51 +34,51 @@ namespace workshop192.ServiceLayer
         {
             if (store < 0)
             {
-                throw new ArgumentException("Invalid store id");
+                throw new ArgumentException("invalid store id");
             }
 
-            return db.getCart(user,store);
+            return db.getCart(user, store);
         }
         //use case 2.6
-        public void addToCart(int user,int product,int amount)
+        public void addToCart(int user, int product, int amount)
         {
             if (product < 0)
             {
-                throw new ArgumentException("Invalid Product id");
+                throw new ArgumentException("invalid product id");
             }
 
             if (amount <= 0)
             {
-                throw new AlreadyExistException("Error : Quantity should be a positive number");
+                throw new AlreadyExistException("error : amount should be a positive number");
             }
             db.addToCart(user, product, amount);
-            
+
         }
         //use case 2.7
-        public void removeFromCart(int user,int product)
+        public void removeFromCart(int user, int product)
         {
             if (product < 0)
             {
-                throw new ArgumentException("Invalid product id");
+                throw new ArgumentException("invalid product id");
             }
             db.removeFromCart(user, product);
         }
         //use case 2.7
-        public void changeQuantity(int user, int product,int store, int newAmount)
+        public void changeQuantity(int user, int product, int store, int newAmount)
         {
             if (product < 0)
             {
-                throw new ArgumentException("Invalid product id");
+                throw new ArgumentException("invalid product id");
             }
 
             if (store < 0)
             {
-                throw new ArgumentException("Invalid store id");
+                throw new ArgumentException("invalid store id");
             }
 
             if (newAmount <= 0)
             {
-                throw new AlreadyExistException( "ERROR: quantity should be a positive number");
+                throw new AlreadyExistException("ERROR: quantity should be a positive number");
             }
 
             db.changeQuantity(user, product, store, newAmount);
@@ -114,10 +115,15 @@ namespace workshop192.ServiceLayer
         {
             db.addcouponToCart(sessionID, storeID, couponCode);
         }
-         // costumer removes coupon from cart
+        // costumer removes coupon from cart
         public void removeCouponFromCart(int sessionID, int storeID)
         {
             db.removeCouponFromCart(sessionID, storeID);
+        }
+
+        public double getAmountOfCart(int storeID, int sessionID)
+        {
+            return db.getAmountByCart(storeID, sessionID);
         }
     }
 }
