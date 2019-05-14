@@ -82,3 +82,7 @@ Parameter name: String
 2019-05-11 23:51:09,876 INFO  System Log - User et has successfuly created a store
 2019-05-11 23:51:42,281 INFO  System Log - User et has successfuly created a store
 2019-05-11 23:51:50,600 INFO  System Log - User et has logged out
+2019-05-14 18:31:03,418 ERROR System Log - Error in adding to shopping cart : Value cannot be null.
+Parameter name: String
+2019-05-14 20:14:54,653 ERROR System Log - Error in adding to shopping cart : Value cannot be null.
+Parameter name: String

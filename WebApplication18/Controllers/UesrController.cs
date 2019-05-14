@@ -81,6 +81,22 @@ namespace WebApplication18.Controllers
             }
 
         }
+        [Route("api/user/setProductQuantity")]
+        [HttpGet]
+        public string setProductQuantity(int product, int quantity)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                BasketService.getInstance().changeQuantity(session, product, quantity);
+                return "ok";
+            }
+            catch (Exception e)
+            {
+                return e.Message.ToString();
+            }
+
+        }
 
         [Route("api/user/basketTotalPrice")]
         [HttpGet]
