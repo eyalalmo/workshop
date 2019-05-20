@@ -1,8 +1,8 @@
 init
 createSession
-register et 123
-login et 123
-createStore startup This_is_the_startup_Store!
-addProduct newProc1 pros1 5 5 10
-addProduct newProc2 pros2 7 2 8
-logout
+register et 123 1
+login et 123 1
+createStore startup This_is_the_startup_Store! 1
+addProduct newProc1 pros1 5 5 10 0 1
+addProduct newProc2 pros2 7 2 8 0 1
+logout 1

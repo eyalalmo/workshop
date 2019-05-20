@@ -64,8 +64,15 @@
                         <li><a runat="server" id="AllProducts" name="AllProducts" href="/AllProducts" visible="true">Catalog</a></li>
                         <li><a runat="server" id="Admin" name="Admin" href="/AdminPan" visible="false">Admin Options</a></li>
                         </ul>
+                      <div runat="server" id="myAccount" visible="false">
+                        <button  class="btn btn-primary dropdown-toggle pull-right" type="button" data-toggle="dropdown">My Account
+                        <span class="caret"></span> </button>
+                        <ul class="pull-right dropdown-menu justify-content-end nav " >
+                        <li ><a href="#" id="AddStore">Add Store</a></li>
+                        <li ><a href="#" id="editStore">Edit Stores</a></li>
+                        </ul>
+                     </div>
                      <ul class="justify-content-end nav">
-                      <li class ="pull-right"><a runat="server"  id="myAccount" name="myAccount" visible="false">My Account</a><ul ><li><a href="/AddStore">Add Store</a><a href="EditStore">Edit Stores</a></li></ul></li>
                         <li class ="pull-right"><a runat="server"  id="logout" name="logout" visible="false"  >Logout</a></li>
                            <li class ="pull-right"><a runat="server" id="register" name="register" href="register" visible="true" style="text-align:right">Register</a></li>
                         <li class ="pull-right"><a runat="server" id="login" name="login" href="/login" visible="true" >Login</a></li>
@@ -85,7 +92,19 @@
  
         <script type="text/javascript">
               $(document).ready(function () {
-
+                   $("#AddStore").click(function () {
+               event.preventDefault();
+               var getUrl = window.location;
+               var baseUrl = getUrl.protocol + "//" + getUrl.host
+               window.location.href = baseUrl+"/AddStore";
+            });
+            $("#editStore").click(function () {
+                event.preventDefault();
+                var getUrl = window.location;
+               var baseUrl = getUrl.protocol + "//" + getUrl.host
+               window.location.href = baseUrl+"/EditStore";
+              
+            });
 
                   //<script type="text/javascript">
 

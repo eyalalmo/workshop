@@ -15,28 +15,24 @@ namespace workshop192.Domain
     {
         public static void init()
         {
-           
-            //////////////////////////
-
-
-            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"\input.txt");
-            string[] lines = File.ReadAllLines(path);
-            //    string[] lines = System.IO.File.ReadAllLines("/input.txt");
-
-            int sessionid=0;
-            Session s=new Session();
-            int sID = 0;
+  
+            string filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
+            string[] lines = File.ReadAllLines(filePath+ "/input.txt");
+            //int sessionid =0;
+            //Session s=new Session();
+           // int sID = 0;
 
                foreach (string line in lines)
               {
               string[] input=  line.Split(' ');
                 if (input[0] == "createSession")
                 {
-                    sessionid = DBSession.getInstance().generate();
-                    s = DBSession.getInstance().getSession(sessionid);
+                    int sessionid = DBSession.getInstance().generate();
+                    DBSession.getInstance().getSession(sessionid);
                 }
                 else if(input[0] == "register")
                 {
+                   Session s= DBSession.getInstance().getSession(Int32.Parse(input[3]));
                     s.register(input[1], input[2]);
                 }
                 else if(input[0] == "init")
@@ -53,19 +49,57 @@ namespace workshop192.Domain
                 }
                 else if  (input[0] == "login")
                 {
+                    Session s = DBSession.getInstance().getSession(Int32.Parse(input[3]));
                     s.login(input[1], input[2]);
                 }
                 else if (input[0] == "createStore")
                 {
-                    sID= DomainBridge.getInstance().createStore(sessionid,input[1], input[2]);
+                     DomainBridge.getInstance().createStore(Int32.Parse(input[3]), input[1], input[2]);
                 }
-                else if (input[0] == "  ")
+                else if (input[0] == "addProduct")
                 {
-                    DomainBridge.getInstance().addProduct( input[1], input[2], Int32.Parse(input[3]), Int32.Parse(input[4]), Int32.Parse(input[5]), sID,sessionid);
+                    DomainBridge.getInstance().addProduct( input[1], input[2], Int32.Parse(input[3]), Int32.Parse(input[4]), Int32.Parse(input[5]), Int32.Parse(input[6]), Int32.Parse(input[7]));
                 }
                 else if (input[0] == "logout")
                 {
+                    Session s = DBSession.getInstance().getSession(Int32.Parse(input[1]));
                     s.logout();
+                }
+                else if (input[0] == "addManager")
+                {
+                    DomainBridge.getInstance().addManager(Int32.Parse(input[1]), input[2], Boolean.Parse(input[3]), Boolean.Parse(input[4]), Boolean.Parse(input[5]), Int32.Parse(input[6]));
+                }
+                else if (input[0] == "addOwner")
+                {
+                    DomainBridge.getInstance().addOwner(Int32.Parse(input[1]), input[2], Int32.Parse(input[3]));
+                }
+                else if (input[0] == "setMaxAmountPolicy")
+                {
+                    DomainBridge.getInstance().setMaxAmountPolicy(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+                }
+                else if (input[0] == "setMinAmountPolicy")
+                {
+                    DomainBridge.getInstance().setMinAmountPolicy(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+                }
+                else if (input[0] == "setProductDiscount")
+                {
+                    DomainBridge.getInstance().setProductDiscount(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+                }
+                else if (input[0] == "addToCart")
+                {
+                    DomainBridge.getInstance().addToCart(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+                }
+                else if (input[0] == "setProductDiscount")
+                {
+                    DomainBridge.getInstance().setProductDiscount(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+                }
+                else if (input[0] == "addStoreVisibleDiscount")
+                {
+                    DomainBridge.getInstance().addStoreVisibleDiscount(Int32.Parse(input[1]), Double.Parse(input[2]), input[3], Int32.Parse(input[4]));
+                }
+                else if (input[0] == "addProductVisibleDiscount")
+                {
+                    DomainBridge.getInstance().addProductVisibleDiscount(Int32.Parse(input[1]), Double.Parse(input[2]), input[3], Int32.Parse(input[4]));
                 }
 
             }

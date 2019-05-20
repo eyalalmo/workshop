@@ -242,7 +242,9 @@
     <Content Include="Images\emptyCart2.png" />
     <Content Include="Images\NoImageAvailabe.jpg" />
     <Content Include="Images\trash.png" />
-    <Content Include="input.txt" />
+    <Content Include="input.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="log.txt" />
     <Content Include="log4net.xml" />
     <Content Include="Scripts\bootstrap.js" />
