@@ -54,16 +54,11 @@ namespace workshop192.ServiceLayer
             db.removeFromCart(user, product);
         }
         //use case 2.7
-        public void changeQuantity(int user, int product, int store, int newAmount)
+        public void changeQuantity(int user, int product, int newAmount)
         {
             if (product < 0)
             {
                 throw new ArgumentException("invalid product id");
-            }
-
-            if (store < 0)
-            {
-                throw new ArgumentException("invalid store id");
             }
 
             if (newAmount <= 0)
@@ -71,7 +66,7 @@ namespace workshop192.ServiceLayer
                 throw new AlreadyExistException("ERROR: quantity should be a positive number");
             }
 
-            db.changeQuantity(user, product, store, newAmount);
+            db.changeQuantity(user, product, newAmount);
         }
 
         /*public void checkoutCart(int user,int store,String address,String creditCard){

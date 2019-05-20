@@ -239,6 +239,7 @@
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <Content Include="bin\WebApplication18.dll.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Images\emptyCart2.png" />
     <Content Include="Images\NoImageAvailabe.jpg" />
     <Content Include="Images\trash.png" />
     <Content Include="log.txt" />
@@ -330,6 +331,7 @@
     <Content Include="Views\Pages\ShoppingBasket.aspx">
       <BrowseToURL>~/ShoppingBasket</BrowseToURL>
     </Content>
+    <Content Include="Views\Pages\ShoppingCart.aspx" />
     <Content Include="Views\Pages\Store.aspx">
       <BrowseToURL>~/Store</BrowseToURL>
     </Content>
@@ -571,6 +573,13 @@
     </Compile>
     <Compile Include="Views\Pages\ShoppingBasket.aspx.designer.cs">
       <DependentUpon>ShoppingBasket.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\ShoppingCart.aspx.cs">
+      <DependentUpon>ShoppingCart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Pages\ShoppingCart.aspx.designer.cs">
+      <DependentUpon>ShoppingCart.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\Store.aspx.cs">
       <DependentUpon>Store.aspx</DependentUpon>

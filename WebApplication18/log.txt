@@ -82,3 +82,32 @@ Parameter name: String
 2019-05-11 23:51:09,876 INFO  System Log - User et has successfuly created a store
 2019-05-11 23:51:42,281 INFO  System Log - User et has successfuly created a store
 2019-05-11 23:51:50,600 INFO  System Log - User et has logged out
+2019-05-14 18:31:03,418 ERROR System Log - Error in adding to shopping cart : Value cannot be null.
+Parameter name: String
+2019-05-14 20:14:54,653 ERROR System Log - Error in adding to shopping cart : Value cannot be null.
+Parameter name: String
+2019-05-15 01:29:22,337 INFO  System Log - User et has successfuly logged in.
+2019-05-15 02:06:38,596 INFO  System Log - User et has successfuly logged in.
+2019-05-15 02:07:27,645 INFO  System Log - User et has logged out
+2019-05-15 02:07:32,962 INFO  System Log - User et has successfuly logged in.
+2019-05-15 11:12:19,841 INFO  System Log - User et has successfuly logged in.
+2019-05-15 11:36:57,111 INFO  System Log - User et has successfuly logged in.
+2019-05-15 12:17:42,433 INFO  System Log - User et has logged out
+2019-05-15 12:22:13,948 INFO  System Log - User et has successfuly logged in.
+2019-05-15 12:34:59,289 INFO  System Log - User et has successfuly logged in.
+2019-05-15 12:35:07,184 INFO  System Log - User et has logged out
+2019-05-15 12:35:13,805 INFO  System Log - User et has successfuly logged in.
+2019-05-15 12:35:20,486 INFO  System Log - User et has logged out
+2019-05-15 12:36:52,236 INFO  System Log - User et has successfuly logged in.
+2019-05-15 13:36:52,599 INFO  System Log - User et has successfuly logged in.
+2019-05-15 13:45:56,518 INFO  System Log - User et has logged out
+2019-05-15 13:46:08,303 INFO  System Log - User et has successfuly logged in.
+2019-05-15 13:54:32,536 INFO  System Log - User et has logged out
+2019-05-15 13:54:37,427 INFO  System Log - User et has successfuly logged in.
+2019-05-15 13:57:45,624 INFO  System Log - User et has logged out
+2019-05-15 13:58:46,628 INFO  System Log - User et has successfuly logged in.
+2019-05-15 14:00:17,684 INFO  System Log - User et has logged out
+2019-05-15 14:00:23,055 INFO  System Log - User et has successfuly logged in.
+2019-05-15 14:00:27,597 INFO  System Log - User et has logged out
+2019-05-20 14:51:34,921 INFO  System Log - User et has successfuly logged in.
+2019-05-20 14:52:21,286 INFO  System Log - User et has logged out

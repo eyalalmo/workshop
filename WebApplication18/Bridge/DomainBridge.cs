@@ -586,17 +586,18 @@ namespace workshop192.Bridge
             user.removeFromCart(product);
         }
         //use case 2.7
-        public void changeQuantity(int sessionid, int product, int store, int newAmount)
+        public void changeQuantity(int sessionid, int product, int newAmount)
         {
             if (newAmount <= 0)
             {
                 throw new ArgumentException("Error: Quantity should be a positive number");
             }
             Product p = DBProduct.getInstance().getProductByID(product);
+            Store store = p.getStore();
 
             Session user = DBSession.getInstance().getSession(sessionid);
 
-            user.getShoppingBasket().getShoppingCartByID(store).changeQuantityOfProduct(p, newAmount);
+            user.getShoppingBasket().getShoppingCartByID(store.getStoreID()).changeQuantityOfProduct(p, newAmount);
         }
 
        /* public void checkoutCart(int sessionid, int store, String address, String creditCard)

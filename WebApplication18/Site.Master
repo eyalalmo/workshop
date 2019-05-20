@@ -4,6 +4,8 @@
 
 <html lang="en">
 <head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %> - My ASP.NET Application</title>
@@ -53,7 +55,7 @@
                     </button>
                     <a class="navbar-brand" runat="server" href="~/">Oshim Store</a>
                 </div>
-                <div >
+                <div class ="navi">
                     <ul class="nav navbar-nav">
                        
                         <li><a runat="server" href="/About">About</a></li>
@@ -63,7 +65,7 @@
                         <li><a runat="server" id="Admin" name="Admin" href="/AdminPan" visible="false">Admin Options</a></li>
                         </ul>
                      <ul class="justify-content-end nav">
-                      <li class ="pull-right"><a runat="server"  id="myAccount" name="myAccount" href="/MyAccount" visible="false">My Account</a></li>
+                      <li class ="pull-right"><a runat="server"  id="myAccount" name="myAccount" visible="false">My Account</a><ul ><li><a href="/AddStore">Add Store</a><a href="EditStore">Edit Stores</a></li></ul></li>
                         <li class ="pull-right"><a runat="server"  id="logout" name="logout" visible="false"  >Logout</a></li>
                            <li class ="pull-right"><a runat="server" id="register" name="register" href="register" visible="true" style="text-align:right">Register</a></li>
                         <li class ="pull-right"><a runat="server" id="login" name="login" href="/login" visible="true" >Login</a></li>
