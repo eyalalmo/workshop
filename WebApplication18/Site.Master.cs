@@ -24,14 +24,16 @@ namespace WebApplication18
                     login.Visible = false;
                     register.Visible = false;
                     myAccount.Visible = true;
+
+
                 }
                 if (u != null && u == "Admin")
                 {
                     logout.Visible = true;
                     login.Visible = false;
                     register.Visible = false;
-                    myAccount.Visible = true;
                     Admin.Visible = true;
+                    myAccount.Visible = true;
                 }
 
             }
