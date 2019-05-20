@@ -11,7 +11,7 @@ using System.Web.Http;
 using workshop192.Bridge;
 using workshop192.ServiceLayer;
 using workshop192.Domain;
-using WebApplication18.Logger;
+using WebApplication18.Logs;
 
 namespace WebApplication18
 {
@@ -19,9 +19,9 @@ namespace WebApplication18
     {
         void Application_Start(object sender, EventArgs e)
         {
+            SystemLogger.configureLogs();
             DomainBridge.getInstance().setup();
             // Code that runs on application startup
-            SystemLogger.ConfigureFileAppender("log.txt");
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
