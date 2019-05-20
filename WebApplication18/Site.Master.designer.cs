@@ -46,7 +46,7 @@ namespace WebApplication18 {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor myAccount;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl myAccount;
         
         /// <summary>
         /// logout control.

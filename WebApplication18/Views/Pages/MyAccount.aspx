@@ -7,10 +7,10 @@
  <div class="container">
 <div class="dropdown">
     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Options
-    <span class="caret"></span></button>
+    </button>
     <ul class="dropdown-menu">
-    <li><a href="#" id="AddStore" >Add Store</a></li>
-    <li><a href="#" id="editStore"  >Edit Stores </a></li>
+    <li><a href="#" id="AddStore">Add Store</a></li>
+    <li><a href="#" id="editStore">Edit Stores </a></li>
   </ul>
    </div>
      </div>
