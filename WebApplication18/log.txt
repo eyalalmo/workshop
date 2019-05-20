@@ -111,3 +111,5 @@ Parameter name: String
 2019-05-15 14:00:27,597 INFO  System Log - User et has logged out
 2019-05-20 14:51:34,921 INFO  System Log - User et has successfuly logged in.
 2019-05-20 14:52:21,286 INFO  System Log - User et has logged out
+2019-05-20 20:51:41,432 ERROR System Log - Login : Error: Username does not exist
+2019-05-20 20:51:46,423 ERROR System Log - Login : Error: Username does not exist
