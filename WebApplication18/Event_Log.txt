@@ -1,3 +1,5 @@
 ﻿2019-05-20 17:39:31,158 INFO  Event Log - User eilon has successfuly registered
 2019-05-20 18:29:02,472 INFO EventLog: User et has successfuly created a store
 2019-05-20 18:29:30,134 INFO EventLog: User eilon has successfuly registered
+2019-05-20 19:18:25,948 INFO EventLog: User et has successfuly created a store
+2019-05-20 19:18:39,256 INFO EventLog: User ey has successfuly registered
