@@ -93,7 +93,7 @@ namespace workshop192.Bridge
             SystemLogger.getLog().Info("User " + username + " has been successfuly removed");
         }
 
-        internal int getSessionByUserName(string username)
+        internal LinkedList<int> getSessionByUserName(string username)
         {
             return DBSession.getInstance().getSessionOfUserName(username);
         }
@@ -114,6 +114,17 @@ namespace workshop192.Bridge
         {
             return DBProduct.getInstance().AllproductsToJson();
         }
+
+        internal LinkedList<string> getMessagesFor(string username)
+        {
+            return DBNotifications.getInstance().getMessagesFor(username);
+        }
+
+        internal void clearMessagesFor(string username)
+        {
+            DBNotifications.getInstance().clearMessagesFor(username);
+        }
+
         public int createStore(int sessionId, String storeName, String description)
         {
             Session session = DBSession.getInstance().getSession(sessionId);
@@ -160,6 +171,11 @@ namespace workshop192.Bridge
         internal string generate()
         {
             return DBCookies.getInstance().generate();
+        }
+
+        internal void addWaitingMessage(Tuple<string, string> tuple)
+        {
+            DBNotifications.getInstance().addMessage(tuple);
         }
 
         internal int getUserByHash(string hash)

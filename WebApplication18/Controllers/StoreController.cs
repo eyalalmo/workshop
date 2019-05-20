@@ -172,10 +172,7 @@ namespace WebApplication18.Controllers
                 return e.Message.ToString();
             }
         }
-
-
-
-
+        
         [Route("api/store/removeRole")]
         [HttpGet]
         public string removeRole(string username, int storeId)
@@ -184,7 +181,7 @@ namespace WebApplication18.Controllers
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
                 StoreService.getInstance().removeRole(storeId, username, session);
-                WebSocketController.messageClient(username, "you have no longer a role in store " + storeId);
+                //WebSocketController.messageClient(username, "you have no longer a role in store " + storeId);
                 return "ok";
             }
             catch (Exception e)

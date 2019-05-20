@@ -35,5 +35,27 @@ namespace WebApplication18.Domain
         {
             waitingNotifications.AddFirst(new Tuple<string, string>("ey", "hi there"));
         }
+
+        internal void clearMessagesFor(string username)
+        {
+            LinkedList<Tuple<string, string>> toDel = new LinkedList<Tuple<string, string>>();
+            foreach (Tuple<string, string> mess in waitingNotifications)
+                toDel.AddFirst(mess);
+            foreach (Tuple<string, string> mess in toDel)
+                waitingNotifications.Remove(mess);
+        }
+
+        internal LinkedList<string> getMessagesFor(string username)
+        {
+            LinkedList<string> result = new LinkedList<string>();
+            foreach (Tuple<string, string> mess in waitingNotifications)
+                result.AddFirst(mess.Item2);
+            return result;
+        }
+
+        internal void addMessage(Tuple<string, string> tuple)
+        {
+            waitingNotifications.AddFirst(tuple);
+        }
     }
 }
