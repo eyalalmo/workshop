@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace workshop192.Domain
 {
     [Serializable]
-    public class IllegalAmountException : Exception
+    public class IllegalAmountException : ClientException
     {
         public IllegalAmountException()
         {

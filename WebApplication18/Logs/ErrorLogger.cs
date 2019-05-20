@@ -10,11 +10,11 @@ using log4net.Core;
 using log4net.Layout;
 using log4net.Repository.Hierarchy;
 
-namespace WebApplication18.Logger
+namespace WebApplication18.Logs
 {
-    class SystemLogger
+    class ErrorLogger
     {
-        private static readonly ILog Log = LogManager.GetLogger("System Log");
+        private static readonly ILog Log = LogManager.GetLogger("Error Log");
         public static void ConfigureFileAppender(string logFile)
         {
             var fileAppender = GetFileAppender(logFile);

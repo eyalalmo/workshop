@@ -400,6 +400,7 @@
     <Compile Include="Domain\VisibleDiscount.cs" />
     <Compile Include="Exceptions\AlreadyExistException.cs" />
     <Compile Include="Exceptions\CartException.cs" />
+    <Compile Include="Exceptions\ClientException.cs" />
     <Compile Include="Exceptions\DoesntExistException.cs" />
     <Compile Include="Exceptions\IllegalAmountException.cs" />
     <Compile Include="Exceptions\IllegalNameException.cs" />
@@ -413,7 +414,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Logger\SystemLogger.cs" />
+    <Compile Include="Logs\ErrorLogger.cs" />
+    <Compile Include="Logs\SystemLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceLayer\BasketService.cs" />
     <Compile Include="ServiceLayer\StoreService.cs" />

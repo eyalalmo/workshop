@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace workshop192.Domain
 {
     [Serializable]
-    public class CartException : Exception
+    public class CartException : ClientException
     {
         public CartException()
         {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using WebApplication18.Logger;
+using WebApplication18.Logs;
 using workshop192.Domain;
 using workshop192.ServiceLayer;
 
@@ -20,9 +20,14 @@ namespace WebApplication18.Controllers
             {
                 return StoreService.getInstance().getStore(storeId);
             }
-            catch (Exception e)
+            catch (ClientException e)
             {
                 return e.Message.ToString();
+            }
+            catch (Exception e)
+            {
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: getStore; Stack Trace: " + e.StackTrace);
+                return "error";
             }
         }
         [Route("api/store/addOwner")]
@@ -35,10 +40,15 @@ namespace WebApplication18.Controllers
                 StoreService.getInstance().addOwner(storeId, username, session);
                 return "ok";
             }
+            catch (ClientException e)
+            {
+                SystemLogger.getEventLog().Error("Error in adding an owner : " + e.Message.ToString());
+                return e.Message.ToString();
+            }
             catch (Exception e)
             {
-                SystemLogger.getLog().Error("Error in adding an owner : " + e.Message.ToString());
-                return e.Message.ToString();
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: addOwner; Stack Trace: " + e.StackTrace);
+                return "error";
             }
         }
 
@@ -54,10 +64,15 @@ namespace WebApplication18.Controllers
 
 
             }
+            catch (ClientException e)
+            {
+                SystemLogger.getEventLog().Error("Error in store display : " + e.Message.ToString());
+                return e.Message.ToString();
+            }
             catch (Exception e)
             {
-                SystemLogger.getLog().Error("Error in store display : " + e.Message.ToString());
-                return e.Message.ToString();
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: getStoreProducts; Stack Trace: " + e.StackTrace);
+                return "error";
             }
         }
 
@@ -75,10 +90,15 @@ namespace WebApplication18.Controllers
 
 
             }
+            catch (ClientException e)
+            {
+                SystemLogger.getEventLog().Error("Error in adding a store : " + e.Message.ToString());
+                return e.Message.ToString();
+            }
             catch (Exception e)
             {
-                SystemLogger.getLog().Error("Error in adding a store : " + e.Message.ToString());
-                return e.Message.ToString();
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: getStore; Stack Trace: " + e.StackTrace);
+                return "error";
             }
         }
 
@@ -95,9 +115,9 @@ namespace WebApplication18.Controllers
                 return "ok";
 
             }
-            catch (Exception e)
+            catch (ClientException e)
             {
-                SystemLogger.getLog().Error("Edit product error : " + e.Message.ToString());
+                SystemLogger.getEventLog().Error("Edit product error : " + e.Message.ToString());
                 return e.Message.ToString();
             }
         }
@@ -111,7 +131,7 @@ namespace WebApplication18.Controllers
                 return StoreService.getInstance().getAllRoles(storeId);
 
             }
-            catch (Exception e)
+            catch (ClientException e)
             {
                 return e.Message.ToString();
             }
@@ -129,9 +149,9 @@ namespace WebApplication18.Controllers
                 return "";
 
             }
-            catch (Exception e)
+            catch (ClientException e)
             {
-                SystemLogger.getLog().Error("Add Visible Discount : " + e.Message.ToString());
+                SystemLogger.getEventLog().Error("Add Visible Discount : " + e.Message.ToString());
                 return e.Message.ToString();
             }
         }
@@ -148,9 +168,9 @@ namespace WebApplication18.Controllers
                 return "";
 
             }
-            catch (Exception e)
+            catch (ClientException e)
             {
-                SystemLogger.getLog().Error("Add Reliant Discount : " + e.Message.ToString());
+                SystemLogger.getEventLog().Error("Add Reliant Discount : " + e.Message.ToString());
                 return e.Message.ToString();
             }
         }
@@ -166,9 +186,9 @@ namespace WebApplication18.Controllers
                 return "";
 
             }
-            catch (Exception e)
+            catch (ClientException e)
             {
-                SystemLogger.getLog().Error("Add Reliant Discount : " + e.Message.ToString());
+                SystemLogger.getEventLog().Error("Add Reliant Discount : " + e.Message.ToString());
                 return e.Message.ToString();
             }
         }
@@ -187,9 +207,9 @@ namespace WebApplication18.Controllers
                 return "ok";
 
             }
-            catch (Exception e)
+            catch (ClientException e)
             {
-                SystemLogger.getLog().Error("Remove Role Error: " + e.Message.ToString());
+                SystemLogger.getEventLog().Error("Remove Role Error: " + e.Message.ToString());
                 return e.Message.ToString();
             }
 
@@ -224,9 +244,9 @@ namespace WebApplication18.Controllers
                 StoreService.getInstance().addManager(storeId, username, prod, disc, poli, session);
                 return "ok";
             }
-            catch (Exception e)
+            catch (ClientException e)
             {
-                SystemLogger.getLog().Error("Add Manager : " + e.Message.ToString());
+                SystemLogger.getEventLog().Error("Add Manager : " + e.Message.ToString());
                 return e.Message.ToString();
             }
         }
@@ -312,9 +332,9 @@ namespace WebApplication18.Controllers
                 StoreService.getInstance().addProduct(productName, productCategory, price, rank, quantityLeft, storeID, session);
                 return "ok";
             }
-            catch (Exception e)
+            catch (ClientException e)
             {
-                SystemLogger.getLog().Error("Add Product : " + e.Message.ToString());
+                SystemLogger.getEventLog().Error("Add Product : " + e.Message.ToString());
                 return e.Message;
             }
         }
@@ -328,9 +348,9 @@ namespace WebApplication18.Controllers
                  StoreService.getInstance().removeProduct(productID,session);
                 return "ok";
             }
-            catch (Exception e)
+            catch (ClientException e)
             {
-                SystemLogger.getLog().Error("Delete Product : " + e.Message.ToString());
+                SystemLogger.getEventLog().Error("Delete Product : " + e.Message.ToString());
                 return e.Message;
             }
         }
@@ -346,8 +366,9 @@ namespace WebApplication18.Controllers
                 StoreService.getInstance().setMaxAmountPolicy(storeID, session, maxVal);
                  return "ok";
             }
-            catch (Exception e)
+            catch (ClientException e)
             {
+                SystemLogger.getEventLog().Error("Policy edit :" + e.Message.ToString());
                 return e.Message;
             }
         }
@@ -362,8 +383,9 @@ namespace WebApplication18.Controllers
                 StoreService.getInstance().setMinAmountPolicy(storeID, session, minVal);
                 return "ok";
             }
-            catch (Exception e)
+            catch (ClientException e)
             {
+                SystemLogger.getEventLog().Error("Policy edit :" + e.Message.ToString());
                 return e.Message;
             }
         }
@@ -377,8 +399,9 @@ namespace WebApplication18.Controllers
                return StoreService.getInstance().getMaxAmountPolicy(storeID,session);
                
             }
-            catch (Exception)
+            catch (ClientException e)
             {
+                SystemLogger.getEventLog().Error("Policy get :" + e.Message.ToString());
                 return "fail";
             }
         }
@@ -392,8 +415,9 @@ namespace WebApplication18.Controllers
                 return StoreService.getInstance().getMinAmountPolicy(storeID, session);
 
             }
-            catch (Exception)
+            catch (ClientException e)
             {
+                SystemLogger.getEventLog().Error("Policy get :" + e.Message.ToString());
                 return "fail";
             }
         }
@@ -410,9 +434,10 @@ namespace WebApplication18.Controllers
                  return "ok";
 
             }
-            catch (Exception e)
+            catch (ClientException e)
             {
-              return  e.Message;
+                SystemLogger.getEventLog().Error("Policy Delete :" + e.Message.ToString());
+                return  e.Message;
             }
         }
 
@@ -427,8 +452,9 @@ namespace WebApplication18.Controllers
                 return "ok";
 
             }
-            catch (Exception e)
+            catch (ClientException e)
             {
+                SystemLogger.getEventLog().Error("Policy Delete :" + e.Message.ToString());
                 return e.Message;
             }
         }

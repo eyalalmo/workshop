@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace workshop192.Domain
 {
     [Serializable]
-    internal class AlreadyExistException : Exception
+    internal class AlreadyExistException : ClientException
     {
         public AlreadyExistException()
         {

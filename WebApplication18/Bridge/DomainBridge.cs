@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebApplication18.Domain;
-using WebApplication18.Logger;
+using WebApplication18.Logs;
 using workshop192.Domain;
 
 namespace workshop192.Bridge
@@ -42,7 +42,7 @@ namespace workshop192.Bridge
             Session s = DBSession.getInstance().getSession(sessionid);
             
             s.login(username, password);
-            SystemLogger.getLog().Info("User " + username + " has successfuly logged in.");
+            SystemLogger.getEventLog().Info("User " + username + " has successfuly logged in.");
         }
 
         //use case 2.2
@@ -50,7 +50,7 @@ namespace workshop192.Bridge
         {
             Session user = DBSession.getInstance().getSession(sessionid);
             user.register(username, password);
-            SystemLogger.getLog().Info("User " + username + " has successfuly registered");
+            SystemLogger.getEventLog().Info("User " + username + " has successfuly registered");
         }
 
         public bool isOwner(int storeId, int session)
@@ -90,7 +90,7 @@ namespace workshop192.Bridge
         {
             Session admin = DBSession.getInstance().getSession(sessionid);
             admin.removeUser(username);
-            SystemLogger.getLog().Info("User " + username + " has been successfuly removed");
+            SystemLogger.getEventLog().Info("User " + username + " has been successfuly removed");
         }
 
         internal int getSessionByUserName(string username)
@@ -107,7 +107,7 @@ namespace workshop192.Bridge
         {
             Session user = DBSession.getInstance().getSession(sessionid);
             user.logout();
-            SystemLogger.getLog().Info("User " + user.getSubscribedUser().getUsername() + " has logged out");
+            SystemLogger.getEventLog().Info("User " + user.getSubscribedUser().getUsername() + " has logged out");
         }
 
         public string getAllProducts()
@@ -118,7 +118,7 @@ namespace workshop192.Bridge
         {
             Session session = DBSession.getInstance().getSession(sessionId);
             Store s = session.createStore(storeName, description);
-            SystemLogger.getLog().Info("User " + session.getSubscribedUser().getUsername() + " has successfuly created a store");
+            SystemLogger.getEventLog().Info("User " + session.getSubscribedUser().getUsername() + " has successfuly created a store");
             return s.getStoreID();
         }
 
@@ -236,7 +236,7 @@ namespace workshop192.Bridge
         {
             Session session = DBSession.getInstance().getSession(sessionid);
             session.purchaseBasket(address, creditCard);
-            SystemLogger.getLog().Info("A purchase has been made");
+            SystemLogger.getEventLog().Info("A purchase has been made");
         }
 
         public void setProductRank(int productID, int rank, int session)
@@ -438,7 +438,7 @@ namespace workshop192.Bridge
                 throw new DoesntExistException("no such store");
 
             Session session = DBSession.getInstance().getSession(sessionid);
-            SystemLogger.getLog().Info("Store "+store.getStoreName()+" has been closed by Admin");
+            SystemLogger.getEventLog().Info("Store "+store.getStoreName()+" has been closed by Admin");
             session.closeStore(store);
         }
 
