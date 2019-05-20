@@ -61,8 +61,6 @@ namespace WebApplication18.Controllers
                 
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
                 return StoreService.getInstance().getProducts(storeId);
-
-
             }
             catch (ClientException e)
             {
@@ -120,6 +118,11 @@ namespace WebApplication18.Controllers
                 SystemLogger.getEventLog().Error("Edit product error : " + e.Message.ToString());
                 return e.Message.ToString();
             }
+            catch (Exception e)
+            {
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: Edit Product; Stack Trace: " + e.StackTrace);
+                return "error";
+            }
         }
 
         [Route("api/store/getAllRoles")]
@@ -134,6 +137,11 @@ namespace WebApplication18.Controllers
             catch (ClientException e)
             {
                 return e.Message.ToString();
+            }
+            catch (Exception e)
+            {
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: Get All Roles; Stack Trace: " + e.StackTrace);
+                return "error";
             }
         }
 
@@ -154,6 +162,11 @@ namespace WebApplication18.Controllers
                 SystemLogger.getEventLog().Error("Add Visible Discount : " + e.Message.ToString());
                 return e.Message.ToString();
             }
+            catch (Exception e)
+            {
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: Add Discount; Stack Trace: " + e.StackTrace);
+                return "error";
+            }
         }
 
         [Route("api/store/addReliantDiscountTotalAmount")]
@@ -173,6 +186,11 @@ namespace WebApplication18.Controllers
                 SystemLogger.getEventLog().Error("Add Reliant Discount : " + e.Message.ToString());
                 return e.Message.ToString();
             }
+            catch (Exception e)
+            {
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: Add Discount; Stack Trace: " + e.StackTrace);
+                return "error";
+            }
         }
         [Route("api/store/addReliantDiscountSameProduct")]
         [HttpGet]
@@ -190,6 +208,11 @@ namespace WebApplication18.Controllers
             {
                 SystemLogger.getEventLog().Error("Add Reliant Discount : " + e.Message.ToString());
                 return e.Message.ToString();
+            }
+            catch (Exception e)
+            {
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: Add Discount; Stack Trace: " + e.StackTrace);
+                return "error";
             }
         }
 
@@ -212,7 +235,11 @@ namespace WebApplication18.Controllers
                 SystemLogger.getEventLog().Error("Remove Role Error: " + e.Message.ToString());
                 return e.Message.ToString();
             }
-
+            catch (Exception e)
+            {
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: Remove Role; Stack Trace: " + e.StackTrace);
+                return "error";
+            }
 
 
         }

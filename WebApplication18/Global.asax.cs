@@ -19,10 +19,9 @@ namespace WebApplication18
     {
         void Application_Start(object sender, EventArgs e)
         {
+            SystemLogger.configureLogs();
             DomainBridge.getInstance().setup();
             // Code that runs on application startup
-
-            SystemLogger.ConfigureFileAppender("Event_Log.txt","Error_Log.txt");
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

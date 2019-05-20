@@ -14,13 +14,55 @@ namespace WebApplication18.Logs
 {
     class SystemLogger
     {
-        private static readonly ILog eventLog = LogManager.GetLogger("Event Log");
-        private static readonly ILog errorLog = LogManager.GetLogger("Error Log");
-        public static void ConfigureFileAppender(string eventLog , string errorLog)
+        public static void configureLogs()
         {
-            IAppender[] fileAppender = { GetFileAppender(eventLog), GetFileAppender(errorLog) };
-            BasicConfigurator.Configure(fileAppender);
-            ((Hierarchy)LogManager.GetRepository()).Root.Level = Level.All;
+            var hierarchy = (Hierarchy)LogManager.GetRepository();
+            hierarchy.Threshold = Level.Debug;
+
+            // Configure LoggerA
+            string logNameA = @"EventLog";
+            string fileNameA = @"Event_Log.txt";
+            var loggerA = hierarchy.LoggerFactory.CreateLogger(LogManager.GetRepository(),"EventLog");
+            loggerA.Hierarchy = hierarchy;
+            loggerA.AddAppender(CreateFileAppender(logNameA, fileNameA));
+            loggerA.Repository.Configured = true;
+            loggerA.Level = Level.Debug;
+
+            eventLog = new LogImpl(loggerA);
+
+            // Configure LoggerB
+
+            string logNameB = @"ErrorLog";
+            string fileNameB = @"Error_Log.txt";
+            var loggerB = hierarchy.LoggerFactory.CreateLogger(LogManager.GetRepository(), "ErrorLog");
+            loggerB.Hierarchy = hierarchy;
+            loggerB.AddAppender(CreateFileAppender(logNameB, fileNameB));
+            loggerB.Repository.Configured = true;
+            loggerB.Level = Level.Debug;
+
+             errorLog = new LogImpl(loggerB);
+        }
+        private static ILog eventLog;
+        private static ILog errorLog;
+
+        private static IAppender CreateFileAppender(string name, string fileName)
+        {
+            PatternLayout patternLayout = new PatternLayout();
+            patternLayout.ConversionPattern = "%date %level %logger: %message%newline";
+            patternLayout.ActivateOptions();
+
+            RollingFileAppender appender = new RollingFileAppender();
+            appender.Name = name;
+            appender.File = fileName;
+            appender.AppendToFile = true;
+            appender.MaxSizeRollBackups = 2;
+            appender.RollingStyle = RollingFileAppender.RollingMode.Size;
+            appender.MaximumFileSize = "10MB";
+            appender.Layout = patternLayout;
+            appender.LockingModel = new FileAppender.MinimalLock();
+            appender.StaticLogFileName = true;
+            appender.ActivateOptions();
+            return appender;
         }
 
         public static ILog getEventLog()
@@ -33,22 +75,22 @@ namespace WebApplication18.Logs
             return errorLog;
         }
 
-        private static IAppender GetFileAppender(string logFile)
-        {
-            var layout = new PatternLayout("%date %-5level %logger - %message%newline");
-            layout.ActivateOptions(); // According to the docs this must be called as soon as any properties have been changed.
+        //private static IAppender GetFileAppender(string logFile)
+        //{
+        //    var layout = new PatternLayout("%date %-5level %logger - %message%newline");
+        //    layout.ActivateOptions(); // According to the docs this must be called as soon as any properties have been changed.
 
-            var appender = new FileAppender
-            {
-                File = logFile,
-                Encoding = Encoding.UTF8,
-                Threshold = Level.All,
-                Layout = layout
-            };
+        //    var appender = new FileAppender
+        //    {
+        //        File = logFile,
+        //        Encoding = Encoding.UTF8,
+        //        Threshold = Level.All,
+        //        Layout = layout
+        //    };
 
-            appender.ActivateOptions();
+        //    appender.ActivateOptions();
 
-            return appender;
-        }
+        //    return appender;
+        //}
     }
 }
