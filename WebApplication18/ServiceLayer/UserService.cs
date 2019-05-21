@@ -172,6 +172,7 @@ namespace workshop192.ServiceLayer
             db.purchaseBasket(session, address, creditCard);
         }
 
+     
         /////////////////////////////////////////////////////////////////////////////////////
         public String addUser(string hash, int session)
         {

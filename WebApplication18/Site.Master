@@ -65,7 +65,7 @@
                         <li><a runat="server" id="Admin" name="Admin" href="/AdminPan" visible="false">Admin Options</a></li>
                         </ul>
                      <ul class="justify-content-end nav">
-                      <li class ="pull-right"><a runat="server"  id="myAccount" name="myAccount" visible="false">My Account</a><ul ><li><a href="/AddStore">Add Store</a><a href="EditStore">Edit Stores</a></li></ul></li>
+                      <li class ="pull-right"><a runat="server"  id="myAccount"  href="/MyAccount" name="myAccount" visible="false">My Account</a></li>
                         <li class ="pull-right"><a runat="server"  id="logout" name="logout" visible="false"  >Logout</a></li>
                            <li class ="pull-right"><a runat="server" id="register" name="register" href="register" visible="true" style="text-align:right">Register</a></li>
                         <li class ="pull-right"><a runat="server" id="login" name="login" href="/login" visible="true" >Login</a></li>

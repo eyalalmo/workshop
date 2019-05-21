@@ -77,5 +77,22 @@ namespace workshop192.Domain
             }
             return productsActualPrice;
         }
+        public override string description()
+        {
+            if (type == reliantType.sameProduct)
+            {
+                return "Quantity of product " + product.getProductName() + " ID: " + product.getProductID() +" is at least " + numOfProducts;
+            }
+            if(type == reliantType.totalAmount)
+            {
+                return "Total cart price over $" + totalAmount;
+            }
+            return "";
+        }
+
+        public override string getDiscountType()
+        {
+            return "Reliant Discount";
+        }
     }
 }

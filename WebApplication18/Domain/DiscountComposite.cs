@@ -12,6 +12,7 @@ namespace workshop192.Domain
         private List<DiscountComponent> children;
         private Type type;
 
+       
         public DiscountComposite(List<DiscountComponent> children, string type) : base()
         {
             if (children == null)
@@ -35,7 +36,16 @@ namespace workshop192.Domain
                 throw new IllegalNameException("Error: Wrong type name in discount composite");
         }
 
-        
+        public override string getDiscountType()
+        {
+            return "Complex";
+        }
+
+        public override string description()
+        {
+            return "composite";
+        }
+
         public override bool checkCondition(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
         {
             if (type == Type.and)

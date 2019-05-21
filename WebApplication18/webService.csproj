@@ -240,6 +240,7 @@
     <Content Include="bin\WebApplication18.dll.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Images\emptyCart2.png" />
+    <Content Include="Images\nodiscount_2.png" />
     <Content Include="Images\NoImageAvailabe.jpg" />
     <Content Include="Images\trash.png" />
     <Content Include="log.txt" />
@@ -338,6 +339,7 @@
     <Content Include="Views\Pages\StoreDiscount.aspx">
       <BrowseToURL>~/StoreDiscount</BrowseToURL>
     </Content>
+    <Content Include="Views\Pages\StoreDiscounts.aspx" />
     <Content Include="Views\Pages\ViewStore.aspx">
       <BrowseToURL>~/ViewStore</BrowseToURL>
     </Content>
@@ -594,6 +596,13 @@
     </Compile>
     <Compile Include="Views\Pages\StoreDiscount.aspx.designer.cs">
       <DependentUpon>StoreDiscount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\StoreDiscounts.aspx.cs">
+      <DependentUpon>StoreDiscounts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Pages\StoreDiscounts.aspx.designer.cs">
+      <DependentUpon>StoreDiscounts.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\ViewStore.aspx.cs">
       <DependentUpon>ViewStore.aspx</DependentUpon>

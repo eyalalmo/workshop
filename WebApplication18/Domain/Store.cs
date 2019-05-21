@@ -240,13 +240,14 @@ namespace workshop192.Domain
             discountList.AddLast(d);
         }
 
-        public void removeDiscount()
+        public void removeDiscount(int discountID)
         {
-            if (discountList.Count == 0)
+            DiscountComponent discount = DBDiscount.getInstance().getDiscountByID(discountID);
+            if (discount==null)
             {
                 throw new DoesntExistException("Error: Discount does not exist so it cannot be removed");
             }
-            discountList = new LinkedList<DiscountComponent>();
+            discountList.Remove(discount);
         }
         /*
          private void checkValidityofPurchases(PurchasePolicy p1, PurchasePolicy p2)
@@ -348,6 +349,10 @@ namespace workshop192.Domain
                     return (VisibleDiscount)d;
             }
             return null;
+        }
+        public LinkedList<DiscountComponent> getDiscounts()
+        {
+            return this.discountList;
         }
 
     }

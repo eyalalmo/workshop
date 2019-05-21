@@ -27,6 +27,10 @@ namespace workshop192.Domain
         {
             return duration;
         }
+        public void setPercentage(double percentage)
+        {
+            this.percentage = percentage;
+        }
        
 
     }

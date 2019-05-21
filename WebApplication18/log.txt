@@ -111,3 +111,29 @@ Parameter name: String
 2019-05-15 14:00:27,597 INFO  System Log - User et has logged out
 2019-05-20 14:51:34,921 INFO  System Log - User et has successfuly logged in.
 2019-05-20 14:52:21,286 INFO  System Log - User et has logged out
+2019-05-20 15:21:02,780 INFO  System Log - User et has successfuly logged in.
+2019-05-20 17:36:37,226 INFO  System Log - User et has successfuly logged in.
+2019-05-20 17:40:10,571 INFO  System Log - User et has successfuly logged in.
+2019-05-20 17:44:34,234 INFO  System Log - User et has successfuly logged in.
+2019-05-20 18:24:17,506 INFO  System Log - User et has successfuly logged in.
+2019-05-20 18:47:35,130 INFO  System Log - User et has successfuly logged in.
+2019-05-20 18:48:19,017 ERROR System Log - Login : Error: Username already logged in
+2019-05-21 11:11:21,036 INFO  System Log - User et has successfuly logged in.
+2019-05-21 11:21:06,858 ERROR System Log - Add Visible Discount : not a subscribed user
+2019-05-21 11:21:12,486 INFO  System Log - User et has successfuly logged in.
+2019-05-21 11:29:35,294 INFO  System Log - User et has successfuly logged in.
+2019-05-21 11:38:27,351 INFO  System Log - User et has successfuly logged in.
+2019-05-21 11:50:56,832 INFO  System Log - User et has successfuly logged in.
+2019-05-21 12:08:49,186 INFO  System Log - User et has successfuly logged in.
+2019-05-21 12:40:04,071 INFO  System Log - User et has successfuly logged in.
+2019-05-21 12:48:24,182 INFO  System Log - User et has successfuly logged in.
+2019-05-21 12:52:45,774 INFO  System Log - User et has successfuly logged in.
+2019-05-21 12:57:10,679 INFO  System Log - User et has successfuly logged in.
+2019-05-21 12:59:25,267 INFO  System Log - User et has successfuly logged in.
+2019-05-21 13:19:56,048 INFO  System Log - User et has successfuly logged in.
+2019-05-21 16:46:42,654 INFO  System Log - User et has successfuly logged in.
+2019-05-21 16:57:59,631 INFO  System Log - User et has successfuly logged in.
+2019-05-21 17:30:13,676 INFO  System Log - User et has successfuly logged in.
+2019-05-21 18:03:44,148 INFO  System Log - User et has successfuly logged in.
+2019-05-21 18:10:20,592 INFO  System Log - User et has successfuly logged in.
+2019-05-21 18:21:49,700 INFO  System Log - User et has successfuly logged in.

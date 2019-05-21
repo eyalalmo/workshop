@@ -29,7 +29,7 @@ namespace workshop192.Domain
         void addStoreVisibleDiscount(double percentage, string duration);
         void addReliantDiscountSameProduct(double percentage, String duration, int numOfProducts, Product product);
         void addReliantDiscountTotalAmount(double percentage, String duration, int amount);
-        void removeStoreDiscount(Store store);
+        void removeStoreDiscount(int discountID, Store store);
         void addComplexDiscount(List<DiscountComponent> list, string type);
         void removeMaxAmountPolicy();
         void removeMinAmountPolicy();

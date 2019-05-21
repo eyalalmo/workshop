@@ -10,8 +10,9 @@ namespace workshop192.Domain
     public abstract class DiscountComponent
     {
         int id;
-        
-        
+
+        public abstract string getDiscountType();
+        public abstract string description();
         public abstract bool checkCondition(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice);
         public abstract  Dictionary<Product, double> updatePrice(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice);
 
@@ -23,6 +24,7 @@ namespace workshop192.Domain
         {
             return this.id;
         }
+       
 
     }
 }

@@ -433,6 +433,55 @@ namespace WebApplication18.Controllers
             }
         }
 
+        [Route("api/store/StoreDiscounts")]
+        [HttpGet]
+        public string StoreDiscounts(int storeID)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                return StoreService.getInstance().getStoreDiscounts(storeID, session);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+
+        [Route("api/store/setDiscountPercentage")]
+        [HttpGet]
+        public Object setDiscountPercentage(int discountID, int percentage)
+        {
+            try
+            {
+                double p = percentage / 100.0;
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().setDiscountPercentage(discountID, p);
+                return "ok";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+        [Route("api/store/removeDiscount")]
+        [HttpGet]
+        public Object removeDiscount(int discountID,int storeID)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().removeStoreDiscount(discountID,storeID, session);
+                return "ok";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
 
 
 

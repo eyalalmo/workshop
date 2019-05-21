@@ -85,6 +85,12 @@ namespace WebApplication18.Controllers
             return View();
         }
 
+        public ActionResult StoreDiscounts(int storeId)
+        {
+            ViewData["storeID"] = storeId;
+            return View();
+        }
+
         public ActionResult ManageStaff(int storeId)
         {
             ViewData["storeId"] = storeId;

@@ -270,7 +270,7 @@ namespace workshop192.Bridge
             {
                 foreach (KeyValuePair<Product, int> p in cart.Value.getProductsInCarts())
                 {
-                    response += p.Key.getProductName() + "," + p.Key.getActualPrice() + "," + p.Key.getProductID() + "," + p.Value + ";";
+                    response += p.Key.getProductName() + "," + p.Key.getPrice()+"," + p.Key.getActualPrice() + "," + p.Key.getProductID() + "," + p.Value + ";";
                 }
             }
 
@@ -626,7 +626,24 @@ namespace workshop192.Bridge
         }
 
         ////////////////////////////////////////////
-
+        public string getStoreDiscounts(int storeID, int sessionID)
+        {
+            Session user = DBSession.getInstance().getSession(sessionID);
+            if (user == null)
+                throw new DoesntExistException("user is not logged in");
+            Store store = DBStore.getInstance().getStore(storeID);
+            LinkedList<DiscountComponent> discounts = store.getDiscounts();
+            string str = "";
+            foreach(DiscountComponent dis in discounts)
+            {
+                if (dis is Discount)
+                {
+                    Discount d = (Discount)dis;
+                    str += dis.getDiscountType() + "," + dis.description() + "," + d.getPercentage()*100 + "," + d.getDuration() + "," + d.getId() + ";";
+                }
+            }
+            return str;
+        }
         internal void removeProductDiscount(int product, int session)
         {
             Session user = DBSession.getInstance().getSession(session);
@@ -712,7 +729,7 @@ namespace workshop192.Bridge
             sr.addReliantDiscountTotalAmount(percentage, duration, amount);
         }
 
-        internal void removeStoreDiscount(int storeID, int session)
+        internal void removeStoreDiscount(int discountID, int storeID, int session)
         {
             Session user = DBSession.getInstance().getSession(session);
             if (user == null)
@@ -725,7 +742,7 @@ namespace workshop192.Bridge
             if (sr == null)
                 throw new RoleException("no role for this user in this store");
 
-            sr.removeStoreDiscount(store);
+            sr.removeStoreDiscount(discountID, store);
 
         }
 
@@ -894,6 +911,18 @@ namespace workshop192.Bridge
             ShoppingCart sc1 = getCart(sessionID, storeID);
             double amount = sc1.getTotalPrice();
             return amount;
+        }
+        public void setDiscountPercentage(int discountID, double percentage)
+        {
+            if (percentage > 1||percentage<=0)
+            {
+            }
+            else
+            {
+                DiscountComponent d = DBDiscount.getInstance().getDiscountByID(discountID);
+                if(d is Discount)
+                    ((Discount)d).setPercentage(percentage);
+            }
         }
 
 

@@ -153,8 +153,13 @@ namespace workshop192.Domain
 
         public void addProductVisibleDiscount(Product product, double percentage, string duration)
         {
-            VisibleDiscount discount = new VisibleDiscount(percentage, duration);
+            VisibleDiscount discount = new VisibleDiscount(percentage, duration, "ProductVisibleDiscount");
+            discount.setProduct(product);
             product.setDiscount(discount);
+            Store store = product.getStore();
+            store.addDiscount(discount);
+            DBDiscount.getInstance().addDiscount(discount);
+
         }
         public void removeProductDiscount(Product product)
         {
@@ -163,33 +168,43 @@ namespace workshop192.Domain
 
         public void addStoreVisibleDiscount(double percentage, string duration)
         {
-            VisibleDiscount v = new VisibleDiscount(percentage, duration);
+            VisibleDiscount v = new VisibleDiscount(percentage, duration, "StoreVisibleDiscount");
             store.addDiscount(v);
+            DBDiscount.getInstance().addDiscount(v);
+
         }
 
         public void addReliantDiscountSameProduct(double percentage, String duration, int numOfProducts, Product product)
         {
             ReliantDiscount r = new ReliantDiscount(percentage, duration, numOfProducts, product);
             store.addDiscount(r);
+            DBDiscount.getInstance().addDiscount(r);
+
         }
 
         public void addReliantDiscountTotalAmount(double percentage, String duration, int amount)
         {
             ReliantDiscount r = new ReliantDiscount(percentage, duration, amount);
             store.addDiscount(r);
+            DBDiscount.getInstance().addDiscount(r);
+
         }
 
-        public void removeStoreDiscount(Store store)
+        public void removeStoreDiscount(int discountID, Store store)
         {
-            store.removeDiscount();
+            //DBDiscount.getInstance().removeDiscount(discountID);
+            store.removeDiscount(discountID);
+
         }
         public void addComplexDiscount(List<DiscountComponent> list, string type)
         {
             DiscountComposite composite = new DiscountComposite(list, type);
             store.addDiscount(composite);
+            DBDiscount.getInstance().addDiscount(composite);
+
         }
 
-       
+
 
         public void removeMaxAmountPolicy()
         {

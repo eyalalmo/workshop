@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Basket.aspx.cs" Inherits="WebApplication18.Views.Pages.Basket" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h2><%: Title %>
+    <h2 ><%: Title %>
     </h2>
 
     <!--
@@ -76,8 +76,8 @@
                             console.log("response");
                             if (response != "") {
                                 console.log(response);
-                           
-                                var str ="<div class=\"card-body\"><div class=\"row\style=\"background-color:black\"> </div></div>";
+
+                                var str = "<div class=\"card-body\"><div class=\"row\style=\"background-color:black\"> </div></div>";
                                 /*    "<table class =\"table table-bordered text-center\">"
                                 + "<thead>"
                                 + "<tr>"
@@ -90,19 +90,28 @@
                                 + "</tr>"
                                 + "</thead>"
                                 + "<tbody>";*/
-                            var products = response.split(";");
-                            for (i = 0; i < products.length-1; i++){
-                                
-                                    
-                                var productfields = products[i].split(",");
-                                var productName = productfields[0];
-                                var price = productfields[1];
-                                var id = productfields[2];
-                                var quantity = +productfields[3];
-                                str +=
-                                    "<hr><div class=\"card-body\">" +
-                                    "<div class=\"row\"> <div class=\"col-12 col-sm-12 col-md-2 text-center\"><img src=\"../Images/NoImageAvailabe.jpg\"" + "height=\"80\" /></div><div class=\"col-12 text-sm-center col-sm-12 text-md-left col-md-6\"><h4 class=\"product-name\"><strong>"+ productName +"</strong></h4></div> <div class=\"col-12 col-sm-12 text-sm-center col-md-4 text-md-right row\"> <div class=\"col-2 col-sm-2 col-md-4 text-md-right\" style=\"padding-top: 5px\">  <h5><strong>$"+ price + "<span class=\"text-muted\"> x</span></strong></h5></div><div class=\"quantity\"><input type=\"button\" value=\"+\" onclick=\"plusQuantity("+id+","+quantity+");\" class=\"plus\"><input type=\"text\" value=\""+quantity+"\" title=\"Qty\" class=\"qty\"><input type=\"button\" value=\"-\" onclick=\"minusQuantity("+id+","+quantity+");\" class=\"minus\"></div><div class=\"col-2 col-sm-2 col-md-2 text-right\"><button type=\"button\" class=\"btn btn-danger\" onclick=\"deleteRow("+id+");\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></div></div></div></div>";
-                            }
+                                var products = response.split(";");
+                                for (i = 0; i < products.length - 1; i++) {
+
+
+                                    var productfields = products[i].split(",");
+                                    var productName = productfields[0];
+                                    var price = productfields[1];
+                                    var actualPrice = productfields[2];
+                                    var id = productfields[3];
+                                    var quantity = +productfields[4];
+                                    if (actualPrice == price) {
+                                        str +=
+                                            "<hr><div class=\"card-body\">" +
+                                            "<div class=\"row\"> <div class=\"col-12 col-sm-12 col-md-2 text-center\"><img src=\"../Images/NoImageAvailabe.jpg\"" + "height=\"80\" /></div><div class=\"col-12 text-sm-center col-sm-12 text-md-left col-md-6\"><h4 class=\"product-name\"><strong>" + productName + "</strong></h4></div> <div class=\"col-12 col-sm-12 text-sm-center col-md-4 text-md-right row\"> <div class=\"col-2 col-sm-2 col-md-4 text-md-right\" style=\"padding-top: 5px\">  <h5><strong>$" + price + "<span class=\"text-muted\"> x</span></strong></h5></div><div class=\"quantity\"><input type=\"button\" value=\"+\" onclick=\"plusQuantity(" + id + "," + quantity + ");\" class=\"plus\"><input type=\"text\" value=\"" + quantity + "\" title=\"Qty\" class=\"qty\"><input type=\"button\" value=\"-\" onclick=\"minusQuantity(" + id + "," + quantity + ");\" class=\"minus\"></div><div class=\"col-2 col-sm-2 col-md-2 text-right\"><button type=\"button\" class=\"btn btn-danger\" onclick=\"deleteRow(" + id + ");\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></div></div></div></div>";
+                                    }
+
+                                    else {
+                                        str +=
+                                            "<hr><div class=\"card-body\">" +
+                                            "<div class=\"row\"> <div class=\"col-12 col-sm-12 col-md-2 text-center\"><img src=\"../Images/NoImageAvailabe.jpg\"" + "height=\"80\" /></div><div class=\"col-12 text-sm-center col-sm-12 text-md-left col-md-6\"><h4 class=\"product-name\"><strong>" + productName + "</strong></h4></div> <div class=\"col-12 col-sm-12 text-sm-center col-md-4 text-md-right row\"> <div class=\"col-2 col-sm-2 col-md-4 text-md-right\" style=\"padding-top: 5px\">  <h4><small>$" + price + "<span class=\"text-muted\"> x</span></small></h4><h5 style =\"color:red\"><strong>$" + actualPrice + "</strong></h5></div><div class=\"quantity\"><input type=\"button\" value=\"+\" onclick=\"plusQuantity(" + id + "," + quantity + ");\" class=\"plus\"><input type=\"text\" value=\"" + quantity + "\" title=\"Qty\" class=\"qty\"><input type=\"button\" value=\"-\" onclick=\"minusQuantity(" + id + "," + quantity + ");\" class=\"minus\"></div><div class=\"col-2 col-sm-2 col-md-2 text-right\"><button type=\"button\" class=\"btn btn-danger\" onclick=\"deleteRow(" + id + ");\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></div></div></div></div>";
+                                    }
+                                }
                             //str += " </tbody>" + "</table>";
                                 totalPrice();
                             mainDiv.innerHTML = str;
