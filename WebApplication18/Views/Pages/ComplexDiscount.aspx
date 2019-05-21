@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="StoreDiscounts.aspx.cs" Inherits="WebApplication18.Views.Pages.StoreDiscounts" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ComplexDiscount.aspx.cs" Inherits="WebApplication18.Views.Pages.ComplexDiscount" %>
 
 
 <asp:Content ID="BodyContent"  ContentPlaceHolderID="MainContent" runat="server">
@@ -7,18 +7,17 @@
    <div class="container">
             <div id="Discounts" class ="col-md-12">  
             </div>
-        <div id="addDiscount" class ="col-md-12">
-            </div> 
-       <div id="complex" class ="col-md-12">
-            </div>  
+        <div id="makeComplex" class ="col-md-12">
+            </div>   
         </div>
+        <div id="t" class ="col-md-12"><input type="text" class="form-control" id="type" name="type"></div>
       <script type="text/javascript">
 
         $(document).ready(function () {
             
             var mainDiv = document.getElementById('Discounts');
-            var addDiscountDiv = document.getElementById('addDiscount');
-            var complex = document.getElementById('complex');
+            var makeComplexDiv = document.getElementById('makeComplex');
+
                
                var getUrl = window.location;
                 var baseUrl = getUrl.protocol + "//" + getUrl.host
@@ -49,13 +48,12 @@
                                     var discountID = discountfields[4];
                                     str +=
                                          str += "<tr>" +
-                                        "<td style = \"width:450px\" align=\"left\"> <h4 class=\"discount\"><strong>" + type + "</strong></h4><h4><small>" + description + "</small></h4></td><td style = \"width:120px\;top:100px; align=\"center\">"+duration+"</td><td style = \"width:50px\"> <div class=\"quantity\"><input type=\"button\" value=\"+\" onclick=\"plusQuantity(" + discountID + "," + percentage+");\" class=\"plus\"><input type=\"text\" value=\"" + percentage + " %\" title=\"Qty\" class=\"qty\"><input type=\"button\" value=\"-\" onclick=\"minusQuantity(" + discountID + "," + percentage+");\" class=\"minus\"></div></td><td style = \"width:50px\" align=\"center\"> <button type=\"button\" class=\"btn btn-danger\" onclick=\"deleteRow("+discountID+");\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td></tr>";
+                                        "<td  style = \"width:30px\"><input type=\"checkbox\"></td><td style = \"width:450px\" align=\"left\"> <h4 class=\"discount\"><strong>" + type + "</strong></h4><h4><small>" + description + "</small></h4></td><td style = \"width:120px\;top:100px; align=\"center\">"+duration+"</td><td style = \"width:50px\"> <div class=\"quantity\"><input type=\"button\" value=\"+\" onclick=\"plusQuantity(" + discountID + "," + percentage+");\" class=\"plus\"><input type=\"text\" value=\"" + percentage + " %\" title=\"Qty\" class=\"qty\"><input type=\"button\" value=\"-\" onclick=\"minusQuantity(" + discountID + "," + percentage+");\" class=\"minus\"></div></td><td style = \"width:50px\" align=\"center\"> <button type=\"button\" class=\"btn btn-danger\" onclick=\"deleteRow("+discountID+");\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td></tr>";
                                 }
                                 console.log(str);
                                 str += " </tbody>" + "</table>";
                                 mainDiv.innerHTML = str;
-                                addDiscountDiv.innerHTML = "<div class=\"pull-right\" style = \"margin: 10px\" ><input type=\"button\" class=\"btn btn-secondary\" value=\"Add Discount\" onclick=\" addDiscount("+storeID+")\"></div>";
-                                complex.innerHTML = "<div class=\"pull-right\" style = \"margin: 10px\" ><input type=\"button\" class=\"btn btn-secondary\" value=\"Complex Discount\" onclick=\" complex()\"></div>";
+                                makeComplexDiv.innerHTML = "<div class=\"pull-right\" style = \"margin: 10px\" ><input type=\"button\" class=\"btn btn-secondary\" value=\"Make Complex\" onclick=\" makeComplex(" + storeID + ")\"></div>";
 
                         }
                         else {
@@ -127,12 +125,9 @@
           }
 
           function deleteRow(id) {
-              console.log("!!!!" + id);
               event.preventDefault();
-              console.log("!!!!" + id);
                 var getUrl = window.location;
                 var storeID =<%=ViewData["storeID"]%>;
-                console.log("1");
               var baseUrl = getUrl.protocol + "//" + getUrl.host
                jQuery.ajax({
                    type: "GET",
@@ -154,30 +149,26 @@
                     }
                 });
           }
-           function complex() {
-               event.preventDefault();
-               var storeID =<%=ViewData["storeID"]%>;
-               var getUrl = window.location;
-               var baseUrl = getUrl.protocol + "//" + getUrl.host
-               window.location.href = baseUrl+"/ComplexDiscount?storeId=" + storeID;
-          }
-
           
-          function complex2() {
+          function makeComplex() {
               event.preventDefault();
                 var getUrl = window.location;
-                var storeID =<%=ViewData["storeID"]%>;
+               var storeID =<%=ViewData["storeID"]%>;
+              type = $("#type").val();
+              console.log("type::::" + type);
               var baseUrl = getUrl.protocol + "//" + getUrl.host
                jQuery.ajax({
                    type: "GET",
-                    url: baseUrl+"/api/store/complexDiscount?discountID1=1&discountID2=2"+"&storeID="+storeID+"&type=and",
+                    url: baseUrl+"/api/store/complexDiscount?discountID1=1&discountID2=2"+"&storeID="+storeID+"&type="+type,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
 
                         if (response == "ok") {
-
-                            location.reload();
+                            event.preventDefault();
+                            var getUrl = window.location;
+                            var baseUrl = getUrl.protocol + "//" + getUrl.host
+                            window.location.href = baseUrl+"/StoreDiscounts?storeId=" + storeID;
                         }
                         else {
                             console.log(response);   
@@ -188,14 +179,8 @@
                     }
                 });
           }
-
-          
-       function addDiscount(storeID) {         
-               event.preventDefault();
-               var getUrl = window.location;
-               var baseUrl = getUrl.protocol + "//" + getUrl.host
-               window.location.href = baseUrl+"/StoreDiscount?storeId=" + storeID;
-       }
+           
+         
 
     </script>
                           

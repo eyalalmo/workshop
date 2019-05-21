@@ -296,6 +296,7 @@
     <Content Include="Views\Pages\Checkout.aspx">
       <BrowseToURL>~/Checkout</BrowseToURL>
     </Content>
+    <Content Include="Views\Pages\ComplexDiscount.aspx" />
     <Content Include="Views\Pages\Contact.aspx">
       <BrowseToURL>~/Contact</BrowseToURL>
     </Content>
@@ -491,6 +492,13 @@
     </Compile>
     <Compile Include="Views\Pages\Checkout.aspx.designer.cs">
       <DependentUpon>Checkout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\ComplexDiscount.aspx.cs">
+      <DependentUpon>ComplexDiscount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Pages\ComplexDiscount.aspx.designer.cs">
+      <DependentUpon>ComplexDiscount.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>

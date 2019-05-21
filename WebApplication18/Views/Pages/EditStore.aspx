@@ -1,4 +1,4 @@
-﻿<%@ Page  Title="Edit Stores" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditStore.aspx.cs"  Inherits="WebApplication18.Views.Pages.EditStore" %>
+﻿    <%@ Page  Title="Edit Stores" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="EditStore.aspx.cs"  Inherits="WebApplication18.Views.Pages.EditStore" %>
 
 <asp:Content ID="BodyContent"  ContentPlaceHolderID="MainContent" runat="server">
     <h2><%: Title %>
@@ -146,8 +146,8 @@
                 success: function (response) {
           
                     if (response === true) {
-                        baseUrl + "/StoreDiscount?storeId=" + id
-                         window.location.href =  baseUrl + "/StoreDiscounts?storeId=" + id
+                        baseUrl + "/StoreDiscounts?storeID=" + id
+                         window.location.href =  baseUrl + "/StoreDiscounts?storeID=" + id
                     }
                     else {
                         alert("you dont have the permissions to edit Discount");

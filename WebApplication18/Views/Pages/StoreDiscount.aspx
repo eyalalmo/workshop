@@ -85,6 +85,7 @@
                     success: function (response) {
 
                         if (response == "") {
+                            event.preventDefault();
                             alert("Reliant Discount added Successfully")  
                             baseUrl + "/StoreDiscount?storeId=" + storeID
                             window.location.href =  baseUrl + "/StoreDiscounts?storeId=" + storeID

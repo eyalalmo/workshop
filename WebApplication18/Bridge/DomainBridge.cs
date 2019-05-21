@@ -641,6 +641,12 @@ namespace workshop192.Bridge
                     Discount d = (Discount)dis;
                     str += dis.getDiscountType() + "," + dis.description() + "," + d.getPercentage()*100 + "," + d.getDuration() + "," + d.getId() + ";";
                 }
+                if(dis is DiscountComposite)
+                {
+                    DiscountComposite d = (DiscountComposite)dis;
+                    str += dis.getDiscountType() + "," + dis.description() + "," + 100 + "," + 12 + "," + d.getId() + ";";
+                }
+            
             }
             return str;
         }
@@ -768,7 +774,25 @@ namespace workshop192.Bridge
 
 
         }
-
+        public void complexDiscount(int discountID1, int discountID2, int storeID,string type, int sessionID)
+        {
+            Session user = DBSession.getInstance().getSession(sessionID);
+            if (user == null)
+                throw new DoesntExistException("user is not logged in");
+            Store store = DBStore.getInstance().getStore(storeID);
+            SubscribedUser subscribedUser = user.getSubscribedUser();
+            if (subscribedUser == null)
+                throw new DoesntExistException("not a subscribed user");
+            StoreRole sr = subscribedUser.getStoreRole(store);
+            if (sr == null)
+                throw new RoleException("no role for this user in this store");
+            DiscountComponent dis1 = DBDiscount.getInstance().getDiscountByID(discountID1);
+            DiscountComponent dis2 = DBDiscount.getInstance().getDiscountByID(discountID2);
+            List<DiscountComponent> discounts = new List<DiscountComponent>();
+            discounts.Add(dis1);
+            discounts.Add(dis2);
+            sr.addComplexDiscount(discounts, type);
+        }
         public void removeMaxAmountPolicy(int storeID, int sessionID)
         {
             Session user = DBSession.getInstance().getSession(sessionID);

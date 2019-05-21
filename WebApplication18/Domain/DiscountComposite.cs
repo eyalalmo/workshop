@@ -43,7 +43,18 @@ namespace workshop192.Domain
 
         public override string description()
         {
-            return "composite";
+            string str = "(";
+            int i;
+            for(i=0; i<children.Count-1; i++)
+            {
+                DiscountComponent dis = children.ElementAt(i);
+                str = str + dis.description();
+                str = str +" " +type+ " ";
+            }
+            DiscountComponent dis2 = children.ElementAt(i);
+            str = str + dis2.description()+")";
+            return str;
+            
         }
 
         public override bool checkCondition(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
@@ -128,6 +139,7 @@ namespace workshop192.Domain
         
 
         }
+
     }
 }
 

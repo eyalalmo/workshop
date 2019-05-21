@@ -482,6 +482,22 @@ namespace WebApplication18.Controllers
             }
         }
 
+        [Route("api/store/complexDiscount")]
+        [HttpGet]
+        public Object complexDiscount(int discountID1, int discountID2, int storeID, string type)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().complexDiscount(discountID1, discountID2,storeID,type,session);
+                return "ok";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
 
 
 

@@ -200,6 +200,10 @@ namespace workshop192.Domain
         {
             DiscountComposite composite = new DiscountComposite(list, type);
             store.addDiscount(composite);
+            foreach(DiscountComponent d in list)
+            {
+                store.removeDiscount(d.getId());
+            }
             DBDiscount.getInstance().addDiscount(composite);
 
         }
