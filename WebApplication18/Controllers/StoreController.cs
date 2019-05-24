@@ -215,10 +215,7 @@ namespace WebApplication18.Controllers
                 return "error";
             }
         }
-
-
-
-
+        
         [Route("api/store/removeRole")]
         [HttpGet]
         public string removeRole(string username, int storeId)
@@ -227,7 +224,7 @@ namespace WebApplication18.Controllers
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
                 StoreService.getInstance().removeRole(storeId, username, session);
-                WebSocketController.messageClient(username, "you have no longer a role in store " + storeId);
+                //WebSocketController.messageClient(username, "you have no longer a role in store " + storeId);
                 return "ok";
             }
             catch (ClientException e)
@@ -240,10 +237,7 @@ namespace WebApplication18.Controllers
                 SystemLogger.getErrorLog().Error("An Error has occured. Function: Remove Role; Stack Trace: " + e.StackTrace);
                 return "error";
             }
-
-
-        }
-        
+        }        
      
         [Route("api/store/isOwner")]
         [HttpGet]
@@ -277,10 +271,7 @@ namespace WebApplication18.Controllers
                 return e.Message.ToString();
             }
         }
-
-
-
-
+                     
         [Route("api/store/isManager")]
         [HttpGet]
         public bool isManager(int storeId)
@@ -289,8 +280,6 @@ namespace WebApplication18.Controllers
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
                 return StoreService.getInstance().isManager(storeId, session);
-                
-
             }
             catch (Exception)
             {
@@ -308,7 +297,6 @@ namespace WebApplication18.Controllers
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
                 return StoreService.getInstance().isAllowedToEditProduct(storeId, session);
                
-
             }
             catch (Exception)
             {
@@ -485,10 +473,6 @@ namespace WebApplication18.Controllers
                 return e.Message;
             }
         }
-
-
-
-
     }
 }
 

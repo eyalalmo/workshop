@@ -10,9 +10,10 @@ using workshop192.Domain;
 
 namespace workshop192.Bridge
 {
-    public class DomainBridge
+    public class DomainBridge : Observer
     {
         private static DomainBridge instance;
+        private static Messager messager;
 
         public static DomainBridge getInstance()
         {
@@ -23,7 +24,6 @@ namespace workshop192.Bridge
 
         private DomainBridge()
         { }
-
 
         // use case 2.1 - the constructor defines guest as the default state
         public int startSession()
@@ -40,7 +40,6 @@ namespace workshop192.Bridge
         public void login(int sessionid, String username, String password)
         {
             Session s = DBSession.getInstance().getSession(sessionid);
-            
             s.login(username, password);
             SystemLogger.getEventLog().Info("User " + username + " has successfuly logged in.");
         }
@@ -50,7 +49,10 @@ namespace workshop192.Bridge
         {
             Session user = DBSession.getInstance().getSession(sessionid);
             user.register(username, password);
-            SystemLogger.getEventLog().Info("User " + username + " has successfuly registered");
+            //////
+            user.login(username,password);
+            //////
+            SystemLogger.getLog().Info("User " + username + " has successfuly registered");
         }
 
         public bool isOwner(int storeId, int session)
@@ -93,7 +95,7 @@ namespace workshop192.Bridge
             SystemLogger.getEventLog().Info("User " + username + " has been successfuly removed");
         }
 
-        internal int getSessionByUserName(string username)
+        internal LinkedList<int> getSessionByUserName(string username)
         {
             return DBSession.getInstance().getSessionOfUserName(username);
         }
@@ -114,6 +116,17 @@ namespace workshop192.Bridge
         {
             return DBProduct.getInstance().AllproductsToJson();
         }
+
+        internal LinkedList<string> getMessagesFor(string username)
+        {
+            return DBNotifications.getInstance().getMessagesFor(username);
+        }
+
+        internal void clearMessagesFor(string username)
+        {
+            DBNotifications.getInstance().clearMessagesFor(username);
+        }
+
         public int createStore(int sessionId, String storeName, String description)
         {
             Session session = DBSession.getInstance().getSession(sessionId);
@@ -160,6 +173,11 @@ namespace workshop192.Bridge
         internal string generate()
         {
             return DBCookies.getInstance().generate();
+        }
+
+        internal void addWaitingMessage(Tuple<string, string> tuple)
+        {
+            DBNotifications.getInstance().addMessage(tuple);
         }
 
         internal int getUserByHash(string hash)
@@ -235,8 +253,29 @@ namespace workshop192.Bridge
         public void purchaseBasket(int sessionid, string address, string creditCard)
         {
             Session session = DBSession.getInstance().getSession(sessionid);
+            LinkedList<Tuple<string, string>> messages = new LinkedList<Tuple<string, string>>();
+            
+            ShoppingBasket basket = session.getShoppingBasket();
+            foreach (KeyValuePair<int, ShoppingCart> cart in basket.getShoppingCarts())
+            {
+                foreach (KeyValuePair<Product, int> p in cart.Value.getProductsInCarts())
+                {
+                    foreach (StoreRole sr in p.Key.getStore().getRoles())
+                    {
+                        string message = session.getSubscribedUser().getUsername() +
+                                         " bought " + p.Key.getProductName() + " from store " +
+                                         p.Key.getStore().getStoreName();
+                        messages.AddFirst(new Tuple<string, string>(sr.getUser().getUsername(), message));
+                    }
+                }
+            }
+
             session.purchaseBasket(address, creditCard);
-            SystemLogger.getEventLog().Info("A purchase has been made");
+
+            foreach (Tuple<string, string> t in messages)
+                messager.message(t.Item1, t.Item2);
+
+            SystemLogger.getLog().Info("A purchase has been made");
         }
 
         public void setProductRank(int productID, int rank, int session)
@@ -512,6 +551,8 @@ namespace workshop192.Bridge
             if (sr.getStore() != store)
                 throw new RoleException("this user can't remove roles from this store");
             sr.remove(toRemove);
+            ////
+            messager.message(username, "Your role in store " + storeid + " has been removed");
         }
 
         internal void addCouponToStore(int sessionID, int storeID, string couponCode, double percentage, string duration)
@@ -613,6 +654,7 @@ namespace workshop192.Bridge
 
             user.getShoppingBasket().purchaseBasket(address, creditCard);
         }
+
         public string getAllStores(int session1)
         {
             Session session = DBSession.getInstance().getSession(session1);
@@ -896,7 +938,9 @@ namespace workshop192.Bridge
             return amount;
         }
 
-
-
+        public void observe(Messager m)
+        {
+            messager = m;
+        }
     }
 }

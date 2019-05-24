@@ -190,7 +190,6 @@ namespace WebApplication18.Controllers
         {
             try
             {
-                WebSocketController.messageClient("et", "");
                 return "ok";
             }
             catch (Exception e)
