@@ -40,7 +40,8 @@ namespace WebApplication18.Domain
         {
             LinkedList<Tuple<string, string>> toDel = new LinkedList<Tuple<string, string>>();
             foreach (Tuple<string, string> mess in waitingNotifications)
-                toDel.AddFirst(mess);
+                if(mess.Item1 == username)
+                    toDel.AddFirst(mess);
             foreach (Tuple<string, string> mess in toDel)
                 waitingNotifications.Remove(mess);
         }
@@ -49,7 +50,8 @@ namespace WebApplication18.Domain
         {
             LinkedList<string> result = new LinkedList<string>();
             foreach (Tuple<string, string> mess in waitingNotifications)
-                result.AddFirst(mess.Item2);
+                if(mess.Item1 == username)
+                    result.AddFirst(mess.Item2);
             return result;
         }
 

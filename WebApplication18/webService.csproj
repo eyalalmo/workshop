@@ -351,6 +351,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Bridge\NotificationsBridge.cs" />
+    <Compile Include="Bridge\Messager.cs" />
+    <Compile Include="Bridge\Observer.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />

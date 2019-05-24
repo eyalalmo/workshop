@@ -189,11 +189,7 @@ namespace WebApplication18.Controllers
                 SystemLogger.getLog().Error("Remove Role Error: " + e.Message.ToString());
                 return e.Message.ToString();
             }
-
-
-
-        }
-        
+        }        
      
         [Route("api/store/isOwner")]
         [HttpGet]
@@ -227,10 +223,7 @@ namespace WebApplication18.Controllers
                 return e.Message.ToString();
             }
         }
-
-
-
-
+                     
         [Route("api/store/isManager")]
         [HttpGet]
         public bool isManager(int storeId)
@@ -239,8 +232,6 @@ namespace WebApplication18.Controllers
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
                 return StoreService.getInstance().isManager(storeId, session);
-                
-
             }
             catch (Exception)
             {
@@ -258,7 +249,6 @@ namespace WebApplication18.Controllers
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
                 return StoreService.getInstance().isAllowedToEditProduct(storeId, session);
                
-
             }
             catch (Exception)
             {
@@ -429,10 +419,6 @@ namespace WebApplication18.Controllers
                 return e.Message;
             }
         }
-
-
-
-
     }
 }
 

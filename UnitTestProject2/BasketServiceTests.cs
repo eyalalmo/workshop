@@ -115,7 +115,7 @@ namespace workshop192.ServiceLayer.Tests
             try
             {
                 basketService.addToCart(session2, p4, 2);
-                basketService.changeQuantity(session2, p4, store3, 1);
+                basketService.changeQuantity(session2, p4, 1);
                 Assert.Fail();
 
             }
@@ -132,7 +132,7 @@ namespace workshop192.ServiceLayer.Tests
             try
             {
                 basketService.addToCart(session2, p5, 2);
-                basketService.changeQuantity(session2, p5, store3, 9);
+                basketService.changeQuantity(session2, p5, 9);
             }
             catch (Exception)
             {

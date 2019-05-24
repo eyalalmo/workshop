@@ -86,9 +86,9 @@ namespace WebApplication18.Controllers
                 LinkedList<string> waitingMessages = UserService.getInstance().getMessagesFor(username);
                 if (waitingMessages != null)
                 {
-                    foreach (String message in waitingMessages)
+                    foreach (String mess in waitingMessages)
                     {
-                        messageClient(username, message);
+                        message(username, mess);
                     }
                     //UserService.getInstance().getWaitingMessages().Remove(new Tuple<int, string>(session, ""));
                     UserService.getInstance().clearMessagesFor(username);
@@ -98,7 +98,7 @@ namespace WebApplication18.Controllers
             while (sessionToSocket.ContainsValue(socket) && socket.State == WebSocketState.Open) {}
         }
 
-        public static void messageClient(string username, String message)
+        public static void message(string username, string message)
         {
             WebSocket socket = null;
             LinkedList<int> sessions = UserService.getInstance().getSessionByUserName(username);
@@ -111,26 +111,27 @@ namespace WebApplication18.Controllers
             foreach (int sessionid in sessions)
             {
                 sessionToSocket.TryGetValue(sessionid, out socket);
-                try
-                {
-                    if (socket.State == WebSocketState.Open)
+                if (socket != null)
+                    try
                     {
-                        socket.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes(message)),
-                            WebSocketMessageType.Text, true, CancellationToken.None).ConfigureAwait(false);
-                        sentOnce = true;
-                    }
-                    else
-                    {
-                        lock (sessionToSocket)
+                        if (socket.State == WebSocketState.Open)
                         {
-                            sessionToSocket.Remove(sessionid);
+                            socket.SendAsync(new ArraySegment<byte>(Encoding.UTF8.GetBytes(message)),
+                                WebSocketMessageType.Text, true, CancellationToken.None).ConfigureAwait(false);
+                            sentOnce = true;
+                        }
+                        else
+                        {
+                            lock (sessionToSocket)
+                            {
+                                sessionToSocket.Remove(sessionid);
+                            }
                         }
                     }
-                }
-                catch (System.ObjectDisposedException)
-                {
-                    sessionToSocket.Remove(sessionid);
-                }
+                    catch (System.ObjectDisposedException)
+                    {
+                        sessionToSocket.Remove(sessionid);
+                    }
             }
             if(!sentOnce)
                 addMessageToDB(username, message);
