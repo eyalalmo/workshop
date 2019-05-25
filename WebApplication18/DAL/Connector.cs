@@ -15,14 +15,14 @@ namespace WebApplication18.DAL
 
             public SqlConnection connection;
 
-            public string Production_DB = "Server=tcp:ws192.database.windows.net,1433;Initial Catalog=ws192;Persist Security Info=False;User ID=etay;Password=ws192!!!!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            public string stringDB = "Server=tcp:ws192.database.windows.net,1433;Initial Catalog=ws192;Persist Security Info=False;User ID=etay;Password=ws192!!!!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
           
 
             public Connector()
             {
                 try
                 {   
-                        connection = new SqlConnection(Production_DB);               
+                        connection = new SqlConnection(stringDB);               
                 }
                 catch (Exception e)
                 {
@@ -30,10 +30,6 @@ namespace WebApplication18.DAL
                 }
             }
 
-           //public abstract LinkedList<DAO> Get();
-
-            //public abstract Boolean Add(DAO obj);
-
-            //public abstract Boolean Remove(DAO obj);
+      
         }
     }
