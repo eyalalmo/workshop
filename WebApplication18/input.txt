@@ -1,8 +1,16 @@
 init
 createSession
-register et 123 1
-login et 123 1
-createStore startup This_is_the_startup_Store! 1
-addProduct newProc1 pros1 5 5 10 0 1
-addProduct newProc2 pros2 7 2 8 0 1
-logout 1
+createSession
+createSession
+createSession
+createSession
+addAdmin u1 123 1
+register u2 123 2
+register u3 123 3
+register u4 123 4
+register u5 123 5
+login u2 123 2
+createStore s1 This_is_the_startup_Store! 2
+addProduct diapers pros1 30 5 20 0 2
+addManager 0 u3 true false false 2
+logout 2

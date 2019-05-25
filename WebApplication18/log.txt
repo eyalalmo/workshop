@@ -121,3 +121,23 @@ Parameter name: String
 2019-05-20 22:20:48,445 INFO  System Log - User et has logged out
 2019-05-20 22:20:53,880 INFO  System Log - User e has successfuly registered
 2019-05-20 22:20:58,077 INFO  System Log - User e has successfuly logged in.
+2019-05-24 20:22:09,267 INFO  System Log - User u2 has successfuly logged in.
+2019-05-24 21:56:14,379 ERROR System Log - Login : Error: Username does not exist
+2019-05-24 21:56:24,018 INFO  System Log - User u2 has successfuly logged in.
+2019-05-24 22:09:04,489 ERROR System Log - Login : Error: Username does not exist
+2019-05-24 22:09:12,071 ERROR System Log - Login : Error: Username does not exist
+2019-05-24 22:10:42,783 ERROR System Log - Login : Error: Username does not exist
+2019-05-24 22:10:50,636 INFO  System Log - User u1 has successfuly registered
+2019-05-24 22:14:06,268 ERROR System Log - Login : Error: Incorrect password
+2019-05-24 22:14:12,078 ERROR System Log - Login : Error: Incorrect password
+2019-05-24 22:14:14,906 ERROR System Log - Login : Error: Incorrect password
+2019-05-24 22:15:34,038 ERROR System Log - Login : Error: Incorrect password
+2019-05-24 22:15:38,551 ERROR System Log - Login : Error: Incorrect password
+2019-05-24 22:15:42,577 ERROR System Log - Login : Error: Incorrect password
+2019-05-24 22:15:47,218 ERROR System Log - Login : Error: Incorrect password
+2019-05-24 22:15:50,151 ERROR System Log - Login : Error: Incorrect password
+2019-05-24 22:16:32,012 INFO  System Log - User u1 has successfuly logged in.
+2019-05-24 22:16:38,137 INFO  System Log - User u1 has logged out
+2019-05-24 22:26:22,504 INFO  System Log - User u2 has successfuly logged in.
+2019-05-25 12:14:43,054 INFO  System Log - User u2 has successfuly logged in.
+2019-05-25 13:08:39,293 INFO  System Log - User u2 has successfuly logged in.

@@ -50,7 +50,6 @@ namespace workshop192.Domain
 
         public void login(String username, String password, Session session)
         {
-   
             String encrypted = DBSubscribedUser.getInstance().encryptPassword(password);
             SubscribedUser sub = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (sub == null)
@@ -63,7 +62,7 @@ namespace workshop192.Domain
 
             session.setSubscribedUser(sub);
             
-            if (Equals(username, "admin"))
+            if (Equals(username, "u1"))
             {
                 session.setState(new Admin());
             }

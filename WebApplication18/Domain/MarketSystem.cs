@@ -101,16 +101,17 @@ namespace workshop192.Domain
                 {
                     DomainBridge.getInstance().addProductVisibleDiscount(Int32.Parse(input[1]), Double.Parse(input[2]), input[3], Int32.Parse(input[4]));
                 }
+                else if (input[0] == "addAdmin")
+                {
+                    DomainBridge.getInstance().addAdmin(input[1], input[2], Int32.Parse(input[3]));
+                }
 
             }
 
           
        
         }
-
-
-        /////////////////////////////
-
+        
       //  int sessionid = DBSession.getInstance().generate();
             //Session s = DBSession.getInstance().getSession(sessionid);
            
