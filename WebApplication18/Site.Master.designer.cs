@@ -13,15 +13,6 @@ namespace WebApplication18 {
     public partial class SiteMaster {
         
         /// <summary>
-        /// Basket control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor Basket;
-        
-        /// <summary>
         /// AllProducts control.
         /// </summary>
         /// <remarks>
@@ -40,22 +31,22 @@ namespace WebApplication18 {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor Admin;
         
         /// <summary>
-        /// myAccount control.
+        /// Basket control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl myAccount;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor Basket;
         
         /// <summary>
-        /// logout control.
+        /// login control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor logout;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor login;
         
         /// <summary>
         /// register control.
@@ -67,13 +58,22 @@ namespace WebApplication18 {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor register;
         
         /// <summary>
-        /// login control.
+        /// myAccount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor login;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor myAccount;
+        
+        /// <summary>
+        /// logout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor logout;
         
         /// <summary>
         /// MainContent control.

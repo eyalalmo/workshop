@@ -52,7 +52,7 @@ namespace workshop192.Bridge
             //////
             user.login(username,password);
             //////
-            SystemLogger.getLog().Info("User " + username + " has successfuly registered");
+            SystemLogger.getEventLog().Info("User " + username + " has successfuly registered");
         }
 
         public bool isOwner(int storeId, int session)
@@ -275,7 +275,7 @@ namespace workshop192.Bridge
             foreach (Tuple<string, string> t in messages)
                 messager.message(t.Item1, t.Item2);
 
-            SystemLogger.getLog().Info("A purchase has been made");
+            SystemLogger.getEventLog().Info("A purchase has been made");
         }
 
         public void setProductRank(int productID, int rank, int session)

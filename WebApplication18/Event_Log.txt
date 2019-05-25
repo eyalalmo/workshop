@@ -3,3 +3,41 @@
 2019-05-20 18:29:30,134 INFO EventLog: User eilon has successfuly registered
 2019-05-20 19:18:25,948 INFO EventLog: User et has successfuly created a store
 2019-05-20 19:18:39,256 INFO EventLog: User ey has successfuly registered
+2019-05-25 00:23:38,465 INFO EventLog: User et has successfuly created a store
+2019-05-25 00:23:50,740 INFO EventLog: User et has successfuly logged in.
+2019-05-25 00:24:08,302 INFO EventLog: User ey has successfuly registered
+2019-05-25 00:24:32,759 INFO EventLog: A purchase has been made
+2019-05-25 00:26:47,350 INFO EventLog: User et has successfuly created a store
+2019-05-25 00:28:39,193 INFO EventLog: User et has successfuly created a store
+2019-05-25 00:30:33,389 INFO EventLog: User et has successfuly created a store
+2019-05-25 00:41:24,320 INFO EventLog: User et has successfuly created a store
+2019-05-25 00:44:31,206 INFO EventLog: User et has successfuly logged in.
+2019-05-25 00:48:07,330 INFO EventLog: User et has successfuly created a store
+2019-05-25 00:48:21,772 INFO EventLog: User et has successfuly logged in.
+2019-05-25 01:02:57,646 INFO EventLog: User et has successfuly created a store
+2019-05-25 01:03:10,160 INFO EventLog: User et has successfuly logged in.
+2019-05-25 01:13:57,861 INFO EventLog: User et has successfuly created a store
+2019-05-25 01:18:10,205 INFO EventLog: User et has successfuly created a store
+2019-05-25 01:20:53,468 INFO EventLog: User et has successfuly created a store
+2019-05-25 01:33:31,738 INFO EventLog: User et has successfuly created a store
+2019-05-25 01:34:51,928 INFO EventLog: User et has successfuly created a store
+2019-05-25 01:37:43,157 INFO EventLog: User et has successfuly created a store
+2019-05-25 01:38:34,483 INFO EventLog: User et has successfuly created a store
+2019-05-25 01:38:48,741 INFO EventLog: User et has successfuly logged in.
+2019-05-25 01:40:19,993 INFO EventLog: User et has successfuly created a store
+2019-05-25 01:40:37,076 INFO EventLog: User et has successfuly logged in.
+2019-05-25 01:40:46,167 INFO EventLog: User et has logged out
+2019-05-25 01:40:58,193 INFO EventLog: User et has successfuly logged in.
+2019-05-25 01:42:17,046 INFO EventLog: User et has logged out
+2019-05-25 01:42:50,629 INFO EventLog: User et has successfuly logged in.
+2019-05-25 01:51:49,187 INFO EventLog: User et has successfuly created a store
+2019-05-25 01:52:00,502 INFO EventLog: User et has successfuly logged in.
+2019-05-25 02:01:26,154 INFO EventLog: User et has successfuly created a store
+2019-05-25 02:04:47,146 INFO EventLog: User et has successfuly logged in.
+2019-05-25 02:06:46,451 INFO EventLog: User et has logged out
+2019-05-25 12:26:49,672 INFO EventLog: User et has successfuly created a store
+2019-05-25 12:27:16,753 INFO EventLog: User et has successfuly logged in.
+2019-05-25 12:28:13,054 INFO EventLog: User ey has successfuly registered
+2019-05-25 12:29:11,086 INFO EventLog: A purchase has been made
+2019-05-25 12:31:30,907 INFO EventLog: User et has successfuly created a store
+2019-05-25 12:31:50,431 INFO EventLog: User et has successfuly logged in.

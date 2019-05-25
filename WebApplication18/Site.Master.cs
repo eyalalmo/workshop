@@ -24,8 +24,6 @@ namespace WebApplication18
                     login.Visible = false;
                     register.Visible = false;
                     myAccount.Visible = true;
-
-
                 }
                 if (u != null && u == "Admin")
                 {
