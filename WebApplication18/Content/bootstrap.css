@@ -6863,8 +6863,8 @@ ul li ul li {
 ul li:hover ul li{
    display:block;
 }
-.container :hover {
-    background-color: red;
+.container .col-md-12 .table .tr :hover {
+    background-color: lightyellow;
 }
 
 

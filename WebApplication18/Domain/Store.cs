@@ -325,6 +325,7 @@ namespace workshop192.Domain
         {
             return (maxPurchasePolicy != null);
         }
+      
 
         public MinAmountPurchase getMinAmountPolicy()
         {

@@ -94,5 +94,24 @@ namespace workshop192.Domain
         {
             return "Reliant Discount";
         }
+        public Product getProduct()
+        {
+            return this.product;
+        }
+        public int getMinNumOfProducts()
+        {
+            return this.numOfProducts;
+        }
+
+        public int getTotalAmount()
+        {
+            return this.totalAmount;
+        }
+        public bool isTotalAmountDiscount()
+        {
+            if (type == reliantType.totalAmount)
+                return true;
+            return false;
+        }
     }
 }

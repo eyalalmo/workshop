@@ -270,11 +270,17 @@ namespace workshop192.Bridge
             {
                 foreach (KeyValuePair<Product, int> p in cart.Value.getProductsInCarts())
                 {
-                    response += p.Key.getProductName() + "," + p.Key.getPrice()+"," + p.Key.getActualPrice() + "," + p.Key.getProductID() + "," + p.Value + ";";
+
+                    response += p.Key.getProductName() + "," + p.Key.getPrice()+"," + p.Key.getActualPrice(p.Value) + "," + p.Key.getProductID() + "," + p.Value + ";";
                 }
             }
 
             return response;
+        }
+        public double getShoppingBasketActualTotalPrice(int sessionid)
+        {
+            Session session = DBSession.getInstance().getSession(sessionid);
+            return session.getShoppingBasket().getActualTotalPrice();
         }
         public double getShoppingBasketTotalPrice(int sessionid)
         {
@@ -774,7 +780,7 @@ namespace workshop192.Bridge
 
 
         }
-        public void complexDiscount(int discountID1, int discountID2, int storeID,string type, int sessionID)
+        public void complexDiscount(string discountString, int storeID,string type, int sessionID)
         {
             Session user = DBSession.getInstance().getSession(sessionID);
             if (user == null)
@@ -786,11 +792,14 @@ namespace workshop192.Bridge
             StoreRole sr = subscribedUser.getStoreRole(store);
             if (sr == null)
                 throw new RoleException("no role for this user in this store");
-            DiscountComponent dis1 = DBDiscount.getInstance().getDiscountByID(discountID1);
-            DiscountComponent dis2 = DBDiscount.getInstance().getDiscountByID(discountID2);
+            string[] discountArray = discountString.Split(' ');
             List<DiscountComponent> discounts = new List<DiscountComponent>();
-            discounts.Add(dis1);
-            discounts.Add(dis2);
+            LinkedList<DiscountComponent> storediscounts = store.getDiscounts();
+            for (int i=0; i<discountArray.Length-1; i++)
+            {
+                int index = Int32.Parse(discountArray[i])-1;
+                discounts.Add(storediscounts.ElementAt(index));
+            }
             sr.addComplexDiscount(discounts, type);
         }
         public void removeMaxAmountPolicy(int storeID, int sessionID)
@@ -933,7 +942,7 @@ namespace workshop192.Bridge
         public double getAmountByCart(int storeID, int sessionID)
         {
             ShoppingCart sc1 = getCart(sessionID, storeID);
-            double amount = sc1.getTotalPrice();
+            double amount = sc1.getActualTotalPrice();
             return amount;
         }
         public void setDiscountPercentage(int discountID, double percentage)

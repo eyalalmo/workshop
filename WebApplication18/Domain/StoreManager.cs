@@ -154,6 +154,8 @@ namespace workshop192.Domain
         {
             ReliantDiscount r = new ReliantDiscount(percentage, duration, numOfProducts, product);
             store.addDiscount(r);
+            product.setReliantDiscountSameProduct(r);
+
         }
 
         public void addReliantDiscountTotalAmount(double percentage, String duration, int amount)

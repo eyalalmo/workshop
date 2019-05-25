@@ -18,7 +18,9 @@ namespace workshop192.Domain
         public int quantityLeft;
         public int storeID;
         public VisibleDiscount discount;
-        
+        public ReliantDiscount sameProductDiscount;
+
+
         public Product(string productName, string productCategory, int price, int rank, int quantityLeft, Store store)
         {
             this.productID = DBProduct.getNextProductID();
@@ -35,6 +37,23 @@ namespace workshop192.Domain
         }
 
 
+        public double getActualPrice(int amountinBasket)
+        {
+            double actualPrice = price;
+            if (discount != null)
+            {
+                actualPrice = price * (1 - discount.getPercentage());
+            }
+            if (sameProductDiscount != null) { 
+                if (sameProductDiscount.getMinNumOfProducts() <= amountinBasket)
+                 {
+                            actualPrice = price * (1 - sameProductDiscount.getPercentage());
+                       
+                 }
+            }
+            return actualPrice;
+        }
+
         public double getActualPrice()
         {
             double actualPrice = price;
@@ -42,14 +61,14 @@ namespace workshop192.Domain
             {
                 actualPrice = price * (1 - discount.getPercentage());
             }
-            VisibleDiscount storeDiscount = store.getVisibleDiscount();
-            if (storeDiscount != null)
-            {
-                actualPrice = actualPrice * (1 - storeDiscount.getPercentage());
-            }
+
             return actualPrice;
         }
 
+        public void setReliantDiscountSameProduct(ReliantDiscount d)
+        {
+            this.sameProductDiscount = d;
+        }
         public int getQuantityLeft()
         {
             return this.quantityLeft;
@@ -94,6 +113,7 @@ namespace workshop192.Domain
         public void setDiscount(VisibleDiscount discount)
         {
             this.discount = discount;
+            store.addDiscount(discount);
         }
 
         public void removeDiscount()

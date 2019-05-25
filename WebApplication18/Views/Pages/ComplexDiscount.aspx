@@ -35,9 +35,7 @@
                             if (response != "") {
                                 console.log(response);
 
-                                var str ="<table class =\"table table-bordered text-center\">"
-                           
-                                + "<tbody>";
+                                var str ="<table class =\"table table-bordered text-center\"><tbody>";
                                 var discounts = response.split(";");
                                 for (i = 0; i < discounts.length - 1; i++) {
                                     var discountfields = discounts[i].split(",");
@@ -50,8 +48,8 @@
                                          str += "<tr>" +
                                         "<td  style = \"width:30px\"><input type=\"checkbox\"></td><td style = \"width:450px\" align=\"left\"> <h4 class=\"discount\"><strong>" + type + "</strong></h4><h4><small>" + description + "</small></h4></td><td style = \"width:120px\;top:100px; align=\"center\">"+duration+"</td><td style = \"width:50px\"> <div class=\"quantity\"><input type=\"button\" value=\"+\" onclick=\"plusQuantity(" + discountID + "," + percentage+");\" class=\"plus\"><input type=\"text\" value=\"" + percentage + " %\" title=\"Qty\" class=\"qty\"><input type=\"button\" value=\"-\" onclick=\"minusQuantity(" + discountID + "," + percentage+");\" class=\"minus\"></div></td><td style = \"width:50px\" align=\"center\"> <button type=\"button\" class=\"btn btn-danger\" onclick=\"deleteRow("+discountID+");\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td></tr>";
                                 }
-                                console.log(str);
                                 str += " </tbody>" + "</table>";
+                                console.log(str);
                                 mainDiv.innerHTML = str;
                                 makeComplexDiv.innerHTML = "<div class=\"pull-right\" style = \"margin: 10px\" ><input type=\"button\" class=\"btn btn-secondary\" value=\"Make Complex\" onclick=\" makeComplex(" + storeID + ")\"></div>";
 
@@ -153,13 +151,20 @@
           function makeComplex() {
               event.preventDefault();
                 var getUrl = window.location;
-               var storeID =<%=ViewData["storeID"]%>;
+              var storeID =<%=ViewData["storeID"]%>;
+              var s = "";
               type = $("#type").val();
+              $('table [type="checkbox"]').each(function(i, chk) {
+                    if (chk.checked) {
+                        console.log("Checked!", i, chk);
+                        s = s + i + " ";
+                    }
+                  });
               console.log("type::::" + type);
               var baseUrl = getUrl.protocol + "//" + getUrl.host
                jQuery.ajax({
                    type: "GET",
-                    url: baseUrl+"/api/store/complexDiscount?discountID1=1&discountID2=2"+"&storeID="+storeID+"&type="+type,
+                    url: baseUrl+"/api/store/complexDiscount?discounts="+s+"&storeID="+storeID+"&type="+type,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {

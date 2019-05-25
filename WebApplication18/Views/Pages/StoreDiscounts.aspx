@@ -32,13 +32,13 @@
                     dataType: "json",
                     success:
                         function (response) {
-                            console.log("response");
+                            console.log("111111111111111111\n");
                             if (response != "") {
                                 console.log(response);
 
                                 var str ="<table class =\"table table-bordered text-center\">"
-                           
-                                + "<tbody>";
+                                console.log("str:::::" + str+"\n");
+                                str = str + "<tbody>";
                                 var discounts = response.split(";");
                                 for (i = 0; i < discounts.length - 1; i++) {
                                     var discountfields = discounts[i].split(",");
@@ -51,9 +51,12 @@
                                          str += "<tr>" +
                                         "<td style = \"width:450px\" align=\"left\"> <h4 class=\"discount\"><strong>" + type + "</strong></h4><h4><small>" + description + "</small></h4></td><td style = \"width:120px\;top:100px; align=\"center\">"+duration+"</td><td style = \"width:50px\"> <div class=\"quantity\"><input type=\"button\" value=\"+\" onclick=\"plusQuantity(" + discountID + "," + percentage+");\" class=\"plus\"><input type=\"text\" value=\"" + percentage + " %\" title=\"Qty\" class=\"qty\"><input type=\"button\" value=\"-\" onclick=\"minusQuantity(" + discountID + "," + percentage+");\" class=\"minus\"></div></td><td style = \"width:50px\" align=\"center\"> <button type=\"button\" class=\"btn btn-danger\" onclick=\"deleteRow("+discountID+");\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td></tr>";
                                 }
-                                console.log(str);
                                 str += " </tbody>" + "</table>";
+                                                                console.log(str);
+                                console.log(str);
+
                                 mainDiv.innerHTML = str;
+                                var str = "";
                                 addDiscountDiv.innerHTML = "<div class=\"pull-right\" style = \"margin: 10px\" ><input type=\"button\" class=\"btn btn-secondary\" value=\"Add Discount\" onclick=\" addDiscount("+storeID+")\"></div>";
                                 complex.innerHTML = "<div class=\"pull-right\" style = \"margin: 10px\" ><input type=\"button\" class=\"btn btn-secondary\" value=\"Complex Discount\" onclick=\" complex()\"></div>";
 
@@ -194,7 +197,7 @@
                event.preventDefault();
                var getUrl = window.location;
                var baseUrl = getUrl.protocol + "//" + getUrl.host
-               window.location.href = baseUrl+"/StoreDiscount?storeId=" + storeID;
+           window.location.href = baseUrl + "/StoreDiscount?storeId=" + storeID;
        }
 
     </script>

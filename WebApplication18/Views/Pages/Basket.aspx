@@ -236,8 +236,14 @@
                       contentType: "application/json; charset=utf-8",
                       dataType: "json",
                       success: function (response) {
-                          if (response != "") {                   
-                           var str = "<div class=\"pull-right\" style=\"margin: 15px\">Total price: <b>$" + response + "</b></div> ";
+                          if (response != "") {  
+                              var prices = response.split(",");
+                              if (prices[0] == prices[1]) {
+                                  var str = "<div class=\"pull-right\" style=\"margin: 15px\">Total price: <b>$" + prices[0] + "</b></div> ";
+                              }
+                              else {
+                                  var str = "<div class=\"pull-right\" style=\"margin: 15px\"> Total price:<small>$" + prices[1] + "</small><h5 style =\"color:red\"><strong>$" + prices[0] + "</strong></h5></div> ";
+                              }
                             mainDiv2.innerHTML = str;
                              
                           }

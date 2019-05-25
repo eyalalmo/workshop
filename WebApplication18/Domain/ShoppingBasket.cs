@@ -21,6 +21,16 @@ namespace workshop192.Domain
         }
 
 
+        public double getActualTotalPrice()
+        {
+            double sum = 0;
+            foreach (ShoppingCart sc in shoppingCarts.Values)
+            {
+                sum += sc.getActualTotalPrice();
+            }
+            return sum;
+
+        }
         public double getTotalPrice()
         {
             double sum = 0;
@@ -122,7 +132,7 @@ namespace workshop192.Domain
                 }
 
             }
-            Boolean isOk = PaymentService.getInstance().checkOut(creditCard, getTotalPrice());
+            Boolean isOk = PaymentService.getInstance().checkOut(creditCard, getActualTotalPrice());
             if (isOk)
             {
                 if (DeliveryService.getInstance().sendToUser(address) == false)

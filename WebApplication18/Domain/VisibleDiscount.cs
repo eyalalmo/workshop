@@ -55,6 +55,14 @@ namespace workshop192.Domain
                 return "Entire Store Discount";
             }
         }
+        public bool isStoreVisibleDiscount()
+        {
+            if(type == visibleType.storeVisibleDiscount)
+            {
+                return true;
+            }
+            return false;
+        }
 
         public override string getDiscountType()
         {

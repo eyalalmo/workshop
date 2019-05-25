@@ -145,3 +145,39 @@ Parameter name: String
 2019-05-21 21:53:55,533 INFO  System Log - User et has successfuly logged in.
 2019-05-21 22:47:46,660 INFO  System Log - User et has successfuly logged in.
 2019-05-21 23:35:51,334 INFO  System Log - User et has successfuly logged in.
+2019-05-22 11:15:58,082 INFO  System Log - User et has successfuly logged in.
+2019-05-22 11:17:16,070 ERROR System Log - Catalog Error : Self referencing loop detected for property 'product' with type 'workshop192.Domain.Product'. Path '[1].discount'.
+2019-05-22 11:17:21,094 ERROR System Log - Catalog Error : Self referencing loop detected for property 'product' with type 'workshop192.Domain.Product'. Path '[1].discount'.
+2019-05-22 11:18:20,738 INFO  System Log - User et has logged out
+2019-05-22 11:18:26,399 INFO  System Log - User et has successfuly logged in.
+2019-05-22 11:21:06,249 INFO  System Log - User et has successfuly logged in.
+2019-05-22 11:27:22,905 INFO  System Log - User et has successfuly logged in.
+2019-05-22 11:27:57,644 ERROR System Log - Catalog Error : Self referencing loop detected for property 'product' with type 'workshop192.Domain.Product'. Path '[1].discount'.
+2019-05-22 11:28:02,600 ERROR System Log - Catalog Error : Self referencing loop detected for property 'product' with type 'workshop192.Domain.Product'. Path '[1].discount'.
+2019-05-22 11:28:02,762 ERROR System Log - Catalog Error : Self referencing loop detected for property 'product' with type 'workshop192.Domain.Product'. Path '[1].discount'.
+2019-05-22 11:28:02,956 ERROR System Log - Catalog Error : Self referencing loop detected for property 'product' with type 'workshop192.Domain.Product'. Path '[1].discount'.
+2019-05-22 11:28:03,143 ERROR System Log - Catalog Error : Self referencing loop detected for property 'product' with type 'workshop192.Domain.Product'. Path '[1].discount'.
+2019-05-22 11:28:03,290 ERROR System Log - Catalog Error : Self referencing loop detected for property 'product' with type 'workshop192.Domain.Product'. Path '[1].discount'.
+2019-05-22 11:29:16,156 ERROR System Log - Catalog Error : Self referencing loop detected for property 'product' with type 'workshop192.Domain.Product'. Path '[1].discount'.
+2019-05-22 11:43:04,327 INFO  System Log - User et has successfuly logged in.
+2019-05-25 12:27:23,296 INFO  System Log - User et has successfuly logged in.
+2019-05-25 12:36:13,737 INFO  System Log - User et has successfuly logged in.
+2019-05-25 13:38:59,527 INFO  System Log - User et has successfuly logged in.
+2019-05-25 15:49:43,750 INFO  System Log - User et has successfuly logged in.
+2019-05-25 15:54:25,824 INFO  System Log - User et has successfuly logged in.
+2019-05-25 15:58:40,785 INFO  System Log - User et has successfuly logged in.
+2019-05-25 16:00:42,304 INFO  System Log - User et has successfuly logged in.
+2019-05-25 16:07:49,168 INFO  System Log - User et has successfuly logged in.
+2019-05-25 16:11:07,265 INFO  System Log - User et has successfuly logged in.
+2019-05-25 20:02:53,878 INFO  System Log - User et has successfuly logged in.
+2019-05-25 20:19:52,785 INFO  System Log - User et has successfuly logged in.
+2019-05-25 20:25:42,895 INFO  System Log - User et has successfuly logged in.
+2019-05-25 20:27:13,062 INFO  System Log - User et has logged out
+2019-05-25 20:27:18,197 INFO  System Log - User et has successfuly logged in.
+2019-05-25 20:29:43,010 INFO  System Log - User et has successfuly logged in.
+2019-05-25 23:31:55,918 INFO  System Log - User et has successfuly logged in.
+2019-05-26 00:07:04,369 INFO  System Log - User et has successfuly logged in.
+2019-05-26 00:18:35,488 INFO  System Log - User et has successfuly logged in.
+2019-05-26 00:27:52,735 INFO  System Log - User et has successfuly logged in.
+2019-05-26 00:51:35,701 INFO  System Log - User et has successfuly logged in.
+2019-05-26 00:58:31,899 ERROR System Log - Remove from Cart : Product cannot be removed, it does not exist in cart
