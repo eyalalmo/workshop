@@ -174,8 +174,7 @@
                var getUrl = window.location;
                var baseUrl = getUrl.protocol + "//" + getUrl.host
                console.log(baseUrl);
-
-               
+  
                 console.log("before jquery");
                 jQuery.ajax({
                     type: "GET",
@@ -261,7 +260,7 @@
                 function checkout() {
                                 
                               event.preventDefault();
-                              console.log("222");
+                          
                               var getUrl = window.location;
                               var baseUrl = getUrl.protocol + "//" + getUrl.host
                               window.location.href = baseUrl+"/Checkout/";
