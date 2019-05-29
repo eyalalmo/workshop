@@ -40,11 +40,11 @@ namespace workshop192.Domain
         public double getActualPrice(int amountinBasket)
         {
             double actualPrice = price;
-            if (discount != null)
+            if (discount != null && !discount.getIsPartOfComplex())
             {
                 actualPrice = price * (1 - discount.getPercentage());
             }
-            if (sameProductDiscount != null) { 
+            if (sameProductDiscount != null && !sameProductDiscount.getIsPartOfComplex()) { 
                 if (sameProductDiscount.getMinNumOfProducts() <= amountinBasket)
                  {
                             actualPrice = price * (1 - sameProductDiscount.getPercentage());

@@ -271,7 +271,7 @@ namespace workshop192.Bridge
                 foreach (KeyValuePair<Product, int> p in cart.Value.getProductsInCarts())
                 {
 
-                    response += p.Key.getProductName() + "," + p.Key.getPrice()+"," + p.Key.getActualPrice(p.Value) + "," + p.Key.getProductID() + "," + p.Value + ";";
+                    response += p.Key.getProductName() + "," + p.Key.getPrice()+"," + p.Key.getActualPrice() + "," + p.Key.getProductID() + "," + p.Value + ";";
                 }
             }
 

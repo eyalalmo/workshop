@@ -181,3 +181,5 @@ Parameter name: String
 2019-05-26 00:27:52,735 INFO  System Log - User et has successfuly logged in.
 2019-05-26 00:51:35,701 INFO  System Log - User et has successfuly logged in.
 2019-05-26 00:58:31,899 ERROR System Log - Remove from Cart : Product cannot be removed, it does not exist in cart
+2019-05-26 10:20:25,818 INFO  System Log - User et has successfuly logged in.
+2019-05-26 10:50:43,448 INFO  System Log - User et has successfuly logged in.

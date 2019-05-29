@@ -13,13 +13,16 @@ namespace workshop192.Domain
         int numOfProducts;
         int totalAmount;
         Product product;
-       // Dictionary<Product, int> products;
+        public bool discountPartOfComplex;
+
+        // Dictionary<Product, int> products;
 
         public ReliantDiscount(double percentage, String duration, int numOfProducts, Product product) : base(percentage, duration)
         {
             this.numOfProducts = numOfProducts;
             this.type = reliantType.sameProduct;
             this.product = product;
+            this.discountPartOfComplex = false;
         }
 
         public ReliantDiscount(double percentage, String duration, int amount) : base(percentage, duration)
@@ -59,6 +62,10 @@ namespace workshop192.Domain
 
             return false;
         }
+        public override bool getIsPartOfComplex()
+        {
+            return this.getIsPartOfComplex();
+        }
 
         public override Dictionary<Product, double> updatePrice(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
         {
@@ -81,11 +88,11 @@ namespace workshop192.Domain
         {
             if (type == reliantType.sameProduct)
             {
-                return "Quantity of product " + product.getProductName() + " ID: " + product.getProductID() +" is at least " + numOfProducts;
+                return "Quantity of product " + product.getProductName() + " ID: " + product.getProductID() +" is at least " + numOfProducts + " Discount: "+percentage*100+"%";
             }
             if(type == reliantType.totalAmount)
             {
-                return "Total cart price over $" + totalAmount;
+                return "Total cart price over $" + totalAmount + "Discount: "+percentage*100+"%";
             }
             return "";
         }
@@ -112,6 +119,16 @@ namespace workshop192.Domain
             if (type == reliantType.totalAmount)
                 return true;
             return false;
+        }
+        public bool isSameProductDiscount()
+        {
+            if (type == reliantType.sameProduct)
+                return true;
+            return false;
+        }
+        public override void setIsPartOfComplex(bool isPartOfComplex)
+        {
+            this.discountPartOfComplex = isPartOfComplex;
         }
     }
 }

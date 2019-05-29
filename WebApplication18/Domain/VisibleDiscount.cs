@@ -10,8 +10,10 @@ namespace workshop192.Domain
     {
         public visibleType type;
         public Product product;
+        public bool discountPartOfComplex;
         public enum visibleType { productVisibleDiscount, storeVisibleDiscount }
         public VisibleDiscount(double percentage, string duration, string t): base (percentage, duration) {
+            this.discountPartOfComplex = false;
             if (t.Equals("StoreVisibleDiscount"))
             {
                 type = visibleType.storeVisibleDiscount;   
@@ -48,12 +50,18 @@ namespace workshop192.Domain
         {
             if (type == visibleType.productVisibleDiscount)
             {
-               return "Product " + product.getProductName() + " ID: " + product.getProductID();
+               return "Product " + product.getProductName() + " ID: " + product.getProductID() + " Discount "+ percentage*100+"%";
             }
             else
             {
                 return "Entire Store Discount";
             }
+        }
+        
+
+        public override bool getIsPartOfComplex()
+        {
+            return this.getIsPartOfComplex();
         }
         public bool isStoreVisibleDiscount()
         {
@@ -69,5 +77,9 @@ namespace workshop192.Domain
             return "Visible Discount";
         }
 
+        public override void setIsPartOfComplex(bool isPartOfComplex)
+        {
+            this.discountPartOfComplex = isPartOfComplex;
+        }
     }
 }

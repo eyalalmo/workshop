@@ -31,7 +31,8 @@ namespace workshop192.Domain
         {
             this.percentage = percentage;
         }
-       
 
+        public abstract bool getIsPartOfComplex();
+        public abstract void setIsPartOfComplex(bool isPartOfComplex);
     }
 }
