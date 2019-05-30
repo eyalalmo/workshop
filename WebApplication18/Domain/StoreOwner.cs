@@ -91,10 +91,7 @@ namespace workshop192.Domain
             manager.addStoreRole(newManager);
             appointedByMe.Add(newManager);
         }
-        public void addPendingOwner(SubscribedUser pending)
-        {
-
-        }
+        
         public void addOwner(SubscribedUser owner)
         {
             StoreRole newOwner = new StoreOwner(this.user, owner, store);
@@ -229,6 +226,25 @@ namespace workshop192.Domain
         public void addCouponToStore(string couponCode, double percentage, string duration)
         {
             store.addCoupon(couponCode, percentage, duration);
+        }
+
+        public void addPendingOwner(SubscribedUser pending)
+        {
+            store.addPendingOwner(user.getUsername(), pending);
+        }
+        public void signContract(string owner, SubscribedUser pending)
+        {
+            store.signContract(owner, pending);
+            HashSet<string> approvedOwners = store.getApproved(pending);
+            if (approvedOwners.Count == store.getNumberOfOwners())
+            {
+                store.removePendingOwner(pending);
+                addOwner(pending);
+            }
+        }
+        public void declineContract(string owner, SubscribedUser pending)
+        {
+            store.removePendingOwner(pending);
         }
     }
 }

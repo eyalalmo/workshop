@@ -37,5 +37,8 @@ namespace workshop192.Domain
         void setMaxAmountPolicy(int newMinAmount);
         void removeCouponFromStore(string couponCode);
         void addCouponToStore(string couponCode, double percentage, string duration);
+        void addPendingOwner(SubscribedUser pending);
+        void signContract(string owner, SubscribedUser pending);
+        void declineContract(string owner, SubscribedUser pending);
     }
 }

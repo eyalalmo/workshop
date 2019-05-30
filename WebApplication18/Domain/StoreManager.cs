@@ -31,6 +31,11 @@ namespace workshop192.Domain
             throw new RoleException("Error: A manager cannot appoint an owner");
         }
 
+        public void addPendingOwner(SubscribedUser owner)
+        {
+            throw new RoleException("Error: A manager cannot appoint an owner");
+        }
+
         public void remove(SubscribedUser owner)
         {
             throw new RoleException("Error: A manager can't remove a role from the store");
@@ -223,6 +228,14 @@ namespace workshop192.Domain
         public void addCouponToStore(string couponCode, double percentage, string duration)
         {
             store.addCoupon(couponCode, percentage, duration);
+        }
+
+        public void signContract(string owner, SubscribedUser pending) {
+            throw new RoleException("Error: A manager cannot sign a contract with an owner");
+        }
+        public void declineContract(string owner, SubscribedUser pending) {
+            throw new RoleException("Error: A manager cannot decline a contract with" +
+                " an owner");
         }
 
     }

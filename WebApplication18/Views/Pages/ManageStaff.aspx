@@ -28,6 +28,10 @@
      <h2>Staff:</h2>
 	</div>
 	</div>
+    <div class="container">
+	<div id="allPending" class="row">
+	</div>
+	</div>
          
   </div>
  
@@ -72,25 +76,62 @@
             var doc = document.getElementById('allRoles');
             var i;
             var jsonList = JSON.parse(response);
-            var appointed = "Store Founder"
-           
+            var appointed = ""
+            var buttons = "";
             var role = "Store Owner"
             var HTML="";
             for (i = 0; i < jsonList.length; i++) {
-                 if (jsonList[i].appointedBy)
-                    appointed = "Appointed By: " +jsonList[i].appointedBy.username;
-                if (!jsonList[i].isOwner)
-                    role="Store Manager"
+
+                    if (!jsonList[i].isOwner) {
+                        role = "Store Manager"
+                        appointed = "Appointed By: " + jsonList[i].appointedBy.username;
+                        buttons = `<button type="button" class="btn btn-primary" onClick="removeRole( \'`+ jsonList[i].user.username +`\' )"/>
+             Remove
+            </button>`
+                    }
                 HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		                   <div class="my-list">
 			<h4>`+ role + `\n</h4>
             <h5> Username:`+ jsonList[i].user.username + `\n</h5>
 			<span> ` + appointed + `\n</span>
             <div class="clearfix">
-		    <button type="button" class="btn btn-primary" onClick="removeRole( \'`+ jsonList[i].user.username +`\' )"/>
+            `+buttons+`
+        </div>
+		</div>
+		</div>`
+        
+            }
+            doc.innerHTML += HTML;
+
+            
+        };
+
+        function getPending(response) {
+            var doc = document.getElementById('allPending');
+            var i;
+            var jsonList = JSON.parse(response);
+            var HTML = "";
+            if (jsonList.length > 0) {
+                HTML+=`<h2>Staff:</h2>`
+            }
+            for (i = 0; i < jsonList.length; i++) {
+
+                        role = "Store Manager"
+                        appointed = "Appointed By: " + jsonList[i].appointedBy.username;
+                        buttons = `<button type="button" class="btn btn-primary" onClick="removeRole( \'`+ jsonList[i].user.username +`\' )"/>
              Remove
+            </button>`
+                HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+		                   <div class="my-list">
+            <h5> Username:`+ jsonList[i].user.username + `\n</h5>
+            <div class="clearfix">
+            <button type="button" class="btn btn-primary" onClick="signContract( \'`+ jsonList[i].user.username +`\' )"/>
+             Sign Contract
             </button>
-</div>
+            <button type="button" class="btn btn-danger" onClick="declineContract( \'`+ jsonList[i].user.username +`\' )"/>
+             declineContract
+            </button>
+        </div>
 		</div>
 		</div>`
         
@@ -153,6 +194,56 @@
                 }
             });
         }
+
+        function signContract(username) {
+
+            var getUrl = window.location;
+            var baseUrl = getUrl.protocol + "//" + getUrl.host
+            var storeId =<%=ViewData["storeId"]%>;
+
+            jQuery.ajax({
+                type: "GET",
+                url: baseUrl + "/api/store/signContract?username=" + username + "&storeID=" + storeId,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    if (response !== "ok") {
+                        alert(response);
+                    } else
+                        alert("Contract successfuly signed")
+                        window.location.href = baseUrl+"/ManageStaff?storeId="+storeId ;
+
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+        }
+
+        function removeRole(username) {
+
+            var getUrl = window.location;
+            var baseUrl = getUrl.protocol + "//" + getUrl.host
+            var storeId =<%=ViewData["storeId"]%>;
+
+            jQuery.ajax({
+                type: "GET",
+                url: baseUrl + "/api/store/declineContract?username=" + username + "&storeID=" + storeId,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    if (response !== "ok") {
+                        alert(response);
+                    } else
+                        alert("Declined the contract. The user will not be appointed as an owner")
+                        window.location.href = baseUrl+"/ManageStaff?storeId="+storeId ;
+
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+        }
         function confirmOwner() {
             var getUrl = window.location;
             var baseUrl = getUrl.protocol + "//" + getUrl.host
@@ -168,7 +259,7 @@
                         if (response !== "ok") {
                             alert(response);
                         } else
-                            alert("Owner successfuly added")
+                            alert("User has been successfuly offered as a store owner. Contract requests sent to all the other relevant owners")
                             window.location.href = baseUrl+"/ManageStaff?storeId="+storeId ;
                         
                     },
@@ -202,7 +293,22 @@
                     error: function (response) {
                         console.log(response);
                     }
-                });
+        });
+         jQuery.ajax({
+                    type: "GET",
+                    url: baseUrl + "/api/store/getAllPending?storeId="+ storeId,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        getPending(response);
+                        
+                    },
+                    error: function (response) {
+                        console.log(response);
+                    }
+        });
+
+
 
            
      });

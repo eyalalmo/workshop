@@ -24,7 +24,7 @@ namespace workshop192.Domain
         public MinAmountPurchase minPurchasePolicy;
         public MaxAmountPurchase maxPurchasePolicy;
         public LinkedList<InvisibleDiscount> invisibleDiscountList;
-        public Dictionary<string, LinkedList<string>> pendingOwners;
+        public Dictionary<string, HashSet<string>> pendingOwners;
 
         public Store(string storeName, string description)
         {
@@ -49,7 +49,7 @@ namespace workshop192.Domain
             roles = new List<StoreRole>();
             numOfOwners = 0;
             active = true;
-            pendingOwners = new Dictionary<string, LinkedList<string>>();
+            pendingOwners = new Dictionary<string, HashSet<string>>();
             discountList = new LinkedList<DiscountComponent>();
             invisibleDiscountList = new LinkedList<InvisibleDiscount>();
             maxPurchasePolicy = null;
@@ -374,7 +374,45 @@ namespace workshop192.Domain
             {
                 throw new AlreadyExistException("Owner already waiting for approval");
             }
+            HashSet<string> toAdd = new HashSet<string>();
+            toAdd.Add(appointer);
+            pendingOwners.Add(pending.getUsername(), toAdd);
 
+        }
+        public void removePendingOwner(SubscribedUser pending)
+        {
+            if (!pendingOwners.ContainsKey(pending.getUsername()))
+            {
+                throw new DoesntExistException("the username is not in the owners pending list");
+            }
+            pendingOwners.Remove(pending.getUsername());
+        }
+
+        public void signContract(string owner,SubscribedUser pending)
+        {
+            if (!pendingOwners.ContainsKey(pending.getUsername()))
+            {
+                throw new DoesntExistException("the username is not in the owners pending list");
+            }
+            HashSet<string> temp;
+            pendingOwners.TryGetValue(pending.getUsername(), out temp);
+            temp.Add(owner);
+            pendingOwners[pending.getUsername()] = temp;
+        }
+
+        public HashSet<string> getApproved(SubscribedUser pending)
+        {
+            HashSet<string> output;
+            if(pendingOwners.TryGetValue(pending.getUsername(), out output))
+            {
+                return output;
+            }
+            throw new DoesntExistException("User is not a pending owner");
+        }
+
+        public Dictionary<string,HashSet<string>> getPending()
+        {
+            return pendingOwners;
         }
 
     }

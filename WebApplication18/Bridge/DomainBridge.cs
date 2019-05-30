@@ -512,57 +512,28 @@ namespace workshop192.Bridge
             sr.addManager(toAdd, permissions);
         }
 
-        public void addPendingOwner(int storeid,string username,int sessionid)
-        {
-            SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
-            if (toAdd == null)
-                throw new DoesntExistException("Error: No such username");
-            Store store = DBStore.getInstance().getStore(storeid);
-            if (store == null)
-            {
-                throw new DoesntExistException("no such store");
-            }
+        //public void addOwner(int storeid, string username, int sessionid)
+        //{
+        //    SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
+        //    if (toAdd == null)
+        //        throw new DoesntExistException("Error: No such username");
+        //    Store store = DBStore.getInstance().getStore(storeid);
+        //    if (store == null)
+        //    {
+        //        throw new DoesntExistException("no such store");
+        //    }
 
-            Session session = DBSession.getInstance().getSession(sessionid);
+        //    Session session = DBSession.getInstance().getSession(sessionid);
 
-            StoreRole sr = store.getStoreRole(session.getSubscribedUser());
+        //    StoreRole sr = store.getStoreRole(session.getSubscribedUser());
 
-            if (sr == null)
-                throw new RoleException("Error: You don't have permissions to appoint an owner");
+        //    if (sr == null)
+        //        throw new RoleException("Error: You don't have permissions to appoint an owner");
 
-            if (sr.getStore() != store)
-                throw new RoleException("this user can't appoint to this store");
-            if (store.getNumberOfOwners() == 1)
-            {
-                sr.addOwner(toAdd);
-            }
-            else
-            {
-
-            }
-        }
-        public void addOwner(int storeid, string username, int sessionid)
-        {
-            SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
-            if (toAdd == null)
-                throw new DoesntExistException("Error: No such username");
-            Store store = DBStore.getInstance().getStore(storeid);
-            if (store == null)
-            {
-                throw new DoesntExistException("no such store");
-            }
-
-            Session session = DBSession.getInstance().getSession(sessionid);
-
-            StoreRole sr = store.getStoreRole(session.getSubscribedUser());
-
-            if (sr == null)
-                throw new RoleException("Error: You don't have permissions to appoint an owner");
-
-            if (sr.getStore() != store)
-                throw new RoleException("this user can't appoint to this store");
-            sr.addOwner(toAdd);
-        }
+        //    if (sr.getStore() != store)
+        //        throw new RoleException("this user can't appoint to this store");
+        //    sr.addOwner(toAdd);
+        //}
 
         public void removeRole(int storeid, string username, int sessionid)
         {
@@ -976,5 +947,133 @@ namespace workshop192.Bridge
         {
             messager = m;
         }
+
+        public void addPendingOwner(int storeid, string username, int sessionid)
+        {
+            SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
+            if (toAdd == null)
+                throw new DoesntExistException("Error: No such username");
+            Store store = DBStore.getInstance().getStore(storeid);
+            if (store == null)
+            {
+                throw new DoesntExistException("no such store");
+            }
+
+            Session session = DBSession.getInstance().getSession(sessionid);
+
+            StoreRole sr = store.getStoreRole(session.getSubscribedUser());
+
+            if (sr == null)
+                throw new RoleException("Error: You don't have permissions to appoint an owner");
+
+            if (sr.getStore() != store)
+                throw new RoleException("this user can't appoint to this store");
+            if (store.getNumberOfOwners() == 1)
+            {
+                sr.addPendingOwner(toAdd);
+            }
+            foreach (StoreRole role in store.getRoles()) // send messages to all the owners in the store - to approve the new owner
+            {
+                string message = "User " + username + "has been offered as an Owner to the store " +
+                store.getStoreName() + ". Please approve or decline the partnership.";
+                if (role is StoreOwner && role != sr)
+                {
+                    messager.message(role.getUser().getUsername(), message);
+                }
+            }
+
+        }
+
+        public void signContract(int storeid, string username, int sessionid)
+        {
+            SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
+            if (toAdd == null)
+                throw new DoesntExistException("Error: No such username");
+            Store store = DBStore.getInstance().getStore(storeid);
+            if (store == null)
+            {
+                throw new DoesntExistException("no such store");
+            }
+
+            Session session = DBSession.getInstance().getSession(sessionid);
+
+            StoreRole sr = store.getStoreRole(session.getSubscribedUser());
+
+            if (sr == null)
+                throw new RoleException("Error: You don't have permissions to appoint an owner");
+
+            if (sr.getStore() != store)
+                throw new RoleException("this user can't appoint to this store");
+            if (store.getNumberOfOwners() == 1)
+            {
+                sr.signContract(session.getSubscribedUser().getUsername(), toAdd);
+            }
+
+            foreach (StoreRole role in store.getRoles()) // send messages to all the owners in the store - to approve the new owner
+            {
+                string message = sr.getUser().getUsername() + "has declined the partnership contract of" +
+                    "user " + username + "in store " + store.getStoreName() + ". The owner addition has been canceled.";
+                ;
+                if (role is StoreOwner && role != sr)
+                {
+                    messager.message(role.getUser().getUsername(), message);
+                }
+            }
+
+        }
+        public void declineContract(int storeid, string username, int sessionid)
+        {
+            SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
+            if (toAdd == null)
+                throw new DoesntExistException("Error: No such username");
+            Store store = DBStore.getInstance().getStore(storeid);
+            if (store == null)
+            {
+                throw new DoesntExistException("no such store");
+            }
+
+            Session session = DBSession.getInstance().getSession(sessionid);
+
+            StoreRole sr = store.getStoreRole(session.getSubscribedUser());
+
+            if (sr == null)
+                throw new RoleException("Error: You don't have permissions to decline a contract ");
+
+            if (sr.getStore() != store)
+                throw new RoleException("this user can't appoint to this store");
+            if (store.getNumberOfOwners() == 1)
+            {
+                sr.declineContract(session.getSubscribedUser().getUsername(), toAdd);
+            }
+
+        }
+
+        public string getAllPending(int storeid,int sessionid)
+        {
+            Store store = DBStore.getInstance().getStore(storeid);
+            if (store == null)
+            {
+                throw new DoesntExistException("no such store");
+            }
+
+            Session session = DBSession.getInstance().getSession(sessionid);
+
+            StoreRole sr = store.getStoreRole(session.getSubscribedUser());
+
+            if (sr == null)
+                throw new RoleException("Error: You don't have permissions to decline a contract ");
+
+            if (sr.getStore() != store)
+                throw new RoleException("this user can't appoint to this store");
+            List<string> myPendingOwners = new List<string>();
+            Dictionary<string, HashSet<string>> pending = store.getPending();
+            foreach (KeyValuePair<string, HashSet<string>> entry in pending)
+            {
+                if (entry.Value.Contains(sr.getUser().getUsername()))
+                    myPendingOwners.Add(entry.Key);
+            }
+            return JsonConvert.SerializeObject(myPendingOwners);
+        }
+
     }
 }
