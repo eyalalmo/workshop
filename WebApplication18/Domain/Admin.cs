@@ -15,6 +15,7 @@ namespace workshop192.Domain
         private DBSession dbSession;
         private DBComplaint dbComplaint;
 
+
         public Admin()
         {
             dbStore = DBStore.getInstance();

@@ -50,7 +50,6 @@ namespace workshop192.Domain
 
         public void login(String username, String password, Session session)
         {
-   
             String encrypted = DBSubscribedUser.getInstance().encryptPassword(password);
             SubscribedUser sub = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (sub == null)
@@ -60,10 +59,17 @@ namespace workshop192.Domain
                 throw new LoginException("Error: Username already logged in");
             if (!Equals(sub.getPassword(), encrypted))
                 throw new LoginException("Error: Incorrect password");
+            ////////////erase
 
+           // Store st = new Store("bb", "cc");
+            //DBStore.getInstance().addStore(st);
+            
+
+
+            ////////erase
             session.setSubscribedUser(sub);
             
-            if (Equals(username, "admin"))
+            if (Equals(username, "u1"))
             {
                 session.setState(new Admin());
             }

@@ -2,47 +2,83 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebApplication18.Domain;
 using workshop192.Domain;
 using workshop192.ServiceLayer;
+using WebApplication18.DAL;
+using Dapper;
+
+
 
 namespace workshop192.Domain
 {
-    public class DBCookies
+    public class DBCookies : Connector
     {
         private static DBCookies instance;
-        private Dictionary<string, int> cookies;
+        // private LinkedList<Cookie> cookies;
 
         private DBCookies()
         {
-            cookies = new Dictionary<string, int>();
+            //cookies = new LinkedList<Cookie>();
         }
 
         public static DBCookies getInstance()
         {
             if (instance == null)
-                instance = new DBCookies();
+                 instance = new DBCookies();
             return instance;
         }
-
+      /*  public Cookie getCookieByHash(string hash)
+        {
+            foreach (Cookie c in cookies)
+            {
+                if (c.getHash().Equals(hash))
+                    return c;
+            }
+            return null;
+        }*/
         public string addSession(string hash, int session)
         {
-            if (hash == null )
+            if (hash == null)
                 return "fail";
             if (session < 0)
                 return "fail";
 
-            
-                if (!cookies.ContainsKey(hash))
+            try {
+                connection.Open();
+
+                var c = connection.Query<Cookie>("SELECT hash, session FROM [dbo].[Cookie] WHERE hash=@hash ", new { hash=hash });
+               // Cookie cooki = (Cookie)v[0];
+               // Cookie cookie = getCookieByHash(hash);
+                if (c.Count()==0) //doesnt exist in DB
                 {
-                cookies.Add(hash, session);
+                    // Cookie c = new Cookie(hash, session);
+                    //cookies.AddFirst(c);
+
+                    string sql = "INSERT INTO [dbo].[Cookie] (hash, session)" +
+                                 " VALUES (@hash, @session)";
+                    connection.Execute(sql, new { hash, session });
+                    connection.Close();
                     return "ok";
-                }
+
+                }           
                 else
                 {
-                cookies[hash] = session;
+
+                connection.Execute("UPDATE session = @session FROM Cookie WHERE hash=@hash ", new { session=session, hash=hash });
+                    // Cookie cooki = (Cookie)v;
+
+                    // cookie.setSession(session);
+                    connection.Close();
                     return "ok";
                 }
-            
+             }
+
+            catch (Exception)
+            {
+                connection.Close();
+                return "fail";
+            }
         }
 
         public string generate()
@@ -52,15 +88,35 @@ namespace workshop192.Domain
 
         public int getUserByHash(string hash)
         {
-            if (hash == null)
+            /*if (hash == null)
                 return -1;
-
-            if (cookies.ContainsKey(hash))
+            Cookie c = getCookieByHash(hash);
+            if (c!=null)
             {
-                return cookies[hash];
+                return c.getSession();
             }
 
-            return -1;
+            return -1;*/
+            try
+            {
+                connection.Open();
+
+                var c = connection.Query<Cookie>("SELECT hash, session FROM [dbo].[Cookie] WHERE hash=@hash ", new { hash=hash });
+                if (c.Count()==0)//doesnt exist in DB
+                {
+                    connection.Close();
+                    return -1;
+                }
+                // Cookie c = (Cookie)v[0];
+                Cookie cook = c.First();
+                connection.Close();
+                return cook.getSession();
+            }
+            catch (Exception)
+            {
+                connection.Close();
+                return -1;
+            }
         }
         
         public static void initDB()
@@ -70,7 +126,18 @@ namespace workshop192.Domain
 
         internal void deleteUserBySessionId(string hash)
         {
-            cookies.Remove(hash);
+            //Cookie c = getCookieByHash(hash);
+            //cookies.Remove(c);
+            try
+            {
+                connection.Open();
+                var affectedRows = connection.Execute("DELETE FROM Cookie WHERE  hash=@hash ", new {hash = hash });
+                connection.Close();
+            }
+            catch (Exception)
+            {
+                connection.Close();
+            }
         }
     }
 }

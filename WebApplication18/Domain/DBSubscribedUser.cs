@@ -14,6 +14,7 @@ namespace workshop192.Domain
         Dictionary<string, SubscribedUser> users;
         Dictionary<string, SubscribedUser> loggedInUser;
         private static DBSubscribedUser instance = null;
+        private int id;
 
 
 
@@ -21,15 +22,18 @@ namespace workshop192.Domain
         {
             users = new Dictionary<string, SubscribedUser>();
             loggedInUser = new Dictionary<string, SubscribedUser>();
-            SubscribedUser admin = new SubscribedUser("admin", encryptPassword("1234"), new ShoppingBasket());
-            register(admin);
+          
         }
 
         public void init()
         {
             users = new Dictionary<string, SubscribedUser>();
             loggedInUser = new Dictionary<string, SubscribedUser>();
-            SubscribedUser admin = new SubscribedUser("admin", encryptPassword("1234"), new ShoppingBasket());
+           
+        }
+        public void addAdmin(string name, string pass)
+        {
+            SubscribedUser admin = new SubscribedUser(name, encryptPassword(pass), new ShoppingBasket());
             register(admin);
         }
 
@@ -68,7 +72,6 @@ namespace workshop192.Domain
         public void remove(SubscribedUser user)
         {
             users.Remove(user.getUsername());
-
         }
         public SubscribedUser getloggedInUser(string name)
         {

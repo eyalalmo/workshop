@@ -35,6 +35,10 @@ namespace workshop192.Bridge
         {
             MarketSystem.init();
         }
+        public void addAdmin(string name,string pass)
+        {
+            DBSubscribedUser.getInstance().addAdmin(name,pass);
+        }
 
         //use case 2.3
         public void login(int sessionid, String username, String password)

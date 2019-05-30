@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplication18.DAL;
+using Dapper;
 
 namespace workshop192.Domain
 {
-    public class DBStore
+    public class DBStore :Connector
     {
         private static DBStore instance;
         private LinkedList<Store> stores;
@@ -78,11 +81,32 @@ namespace workshop192.Domain
         {
             storeRole.AddFirst(sr);
         }
-        public int addStore(Store store)
+        public int addStore(Store s)
         {
+            try
+            {
+                connection.Open();
+                string sql = "INSERT INTO [dbo].[Stores] (storeId, name, description)" +
+                             " VALUES (@storeId, @name, @description)";
+                connection.Execute(sql, new { storeId=555, name="Yael", description="aaa" });
 
-            stores.AddFirst(store);
-            return store.getStoreID();
+                var st2 = connection.Query<Store>("SELECT storeId, name, description FROM Stores WHERE storeId=@storeId ", new { storeId = 555 });
+
+                /* 
+                 cmd.ExecuteNonQuery();
+                 */
+                connection.Close();
+                stores.AddFirst(s);
+                return s.getStoreID();
+            }
+            catch (Exception e)
+            {
+                    connection.Close();
+                
+                throw new Exception("DB ERROR");
+            }
+            //////////////////////////////
+          
         }
 
         public Store getStore(int storeID)
