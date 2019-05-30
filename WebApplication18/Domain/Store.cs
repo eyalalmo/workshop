@@ -21,6 +21,7 @@ namespace workshop192.Domain
         public MinAmountPurchase minPurchasePolicy;
         public MaxAmountPurchase maxPurchasePolicy;
         public LinkedList<InvisibleDiscount> invisibleDiscountList;
+        public Dictionary<string, LinkedList<string>> pendingOwners;
 
         public Store(string storeName, string description)
         {
@@ -31,6 +32,7 @@ namespace workshop192.Domain
             roles = new List<StoreRole>();
             numOfOwners = 0;
             active = true;
+            pendingOwners = new Dictionary<string, LinkedList<string>>();
             discountList = new LinkedList<DiscountComponent>();
             invisibleDiscountList = new LinkedList<InvisibleDiscount>();
             maxPurchasePolicy = null;
@@ -348,6 +350,14 @@ namespace workshop192.Domain
                     return (VisibleDiscount)d;
             }
             return null;
+        }
+        public void addPendingOwner(string appointer,SubscribedUser pending)
+        {
+            if (pendingOwners.ContainsKey(pending.username))
+            {
+                throw new AlreadyExistException("Owner already waiting for approval");
+            }
+
         }
 
     }

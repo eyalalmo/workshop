@@ -91,7 +91,10 @@ namespace workshop192.Domain
             manager.addStoreRole(newManager);
             appointedByMe.Add(newManager);
         }
-        
+        public void addPendingOwner(SubscribedUser pending)
+        {
+
+        }
         public void addOwner(SubscribedUser owner)
         {
             StoreRole newOwner = new StoreOwner(this.user, owner, store);
