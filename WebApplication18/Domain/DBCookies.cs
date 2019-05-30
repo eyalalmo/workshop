@@ -47,10 +47,10 @@ namespace workshop192.Domain
             try {
                 connection.Open();
 
-                Cookie c = connection.Query<Cookie>("SELECT hash, session FROM [dbo].[Cookie] WHERE hash=@hash ", new { hash=hash }).First();
+                var c = connection.Query<Cookie>("SELECT hash, session FROM [dbo].[Cookie] WHERE hash=@hash ", new { hash=hash });
                // Cookie cooki = (Cookie)v[0];
                // Cookie cookie = getCookieByHash(hash);
-                if (c==null) //doesnt exist in DB
+                if (c.Count()==0) //doesnt exist in DB
                 {
                     // Cookie c = new Cookie(hash, session);
                     //cookies.AddFirst(c);
@@ -64,6 +64,7 @@ namespace workshop192.Domain
                 }           
                 else
                 {
+
                 connection.Execute("UPDATE session = @session FROM Cookie WHERE hash=@hash ", new { session=session, hash=hash });
                     // Cookie cooki = (Cookie)v;
 
@@ -100,16 +101,16 @@ namespace workshop192.Domain
             {
                 connection.Open();
 
-                Cookie c = connection.Query<Cookie>("SELECT hash, session FROM [dbo].[Cookie] WHERE hash=@hash ", new { hash=hash }).First();
-                if (c==null)//doesnt exist in DB
+                var c = connection.Query<Cookie>("SELECT hash, session FROM [dbo].[Cookie] WHERE hash=@hash ", new { hash=hash });
+                if (c.Count()==0)//doesnt exist in DB
                 {
                     connection.Close();
                     return -1;
                 }
-               // Cookie c = (Cookie)v[0];
-
+                // Cookie c = (Cookie)v[0];
+                Cookie cook = c.First();
                 connection.Close();
-                return c.getSession();
+                return cook.getSession();
             }
             catch (Exception)
             {
