@@ -59,7 +59,14 @@ namespace workshop192.Domain
                 throw new LoginException("Error: Username already logged in");
             if (!Equals(sub.getPassword(), encrypted))
                 throw new LoginException("Error: Incorrect password");
+            ////////////erase
 
+           // Store st = new Store("bb", "cc");
+            //DBStore.getInstance().addStore(st);
+            
+
+
+            ////////erase
             session.setSubscribedUser(sub);
             
             if (Equals(username, "u1"))

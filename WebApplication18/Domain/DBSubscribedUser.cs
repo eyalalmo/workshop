@@ -14,6 +14,7 @@ namespace workshop192.Domain
         Dictionary<string, SubscribedUser> users;
         Dictionary<string, SubscribedUser> loggedInUser;
         private static DBSubscribedUser instance = null;
+        private int id;
 
 
 
@@ -30,7 +31,7 @@ namespace workshop192.Domain
             loggedInUser = new Dictionary<string, SubscribedUser>();
            
         }
-        public void addAdmin(string name, string pass, int sessionId)
+        public void addAdmin(string name, string pass)
         {
             SubscribedUser admin = new SubscribedUser(name, encryptPassword(pass), new ShoppingBasket());
             register(admin);

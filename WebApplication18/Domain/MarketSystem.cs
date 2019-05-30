@@ -32,7 +32,8 @@ namespace workshop192.Domain
                 }
                 else if(input[0] == "register")
                 {
-                   Session s= DBSession.getInstance().getSession(Int32.Parse(input[3]));
+                    int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                    Session s = DBSession.getInstance().getSession(session);
                     s.register(input[1], input[2]);
                 }
                 else if(input[0] == "init")
@@ -49,7 +50,9 @@ namespace workshop192.Domain
                 }
                 else if  (input[0] == "login")
                 {
-                    Session s = DBSession.getInstance().getSession(Int32.Parse(input[3]));
+                    //////////////////////////////check
+                   int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                    Session s = DBSession.getInstance().getSession(session);
                     s.login(input[1], input[2]);
                 }
                 else if (input[0] == "createStore")
@@ -62,7 +65,9 @@ namespace workshop192.Domain
                 }
                 else if (input[0] == "logout")
                 {
-                    Session s = DBSession.getInstance().getSession(Int32.Parse(input[1]));
+
+                    int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                    Session s = DBSession.getInstance().getSession(session);
                     s.logout();
                 }
                 else if (input[0] == "addManager")
@@ -103,7 +108,7 @@ namespace workshop192.Domain
                 }
                 else if (input[0] == "addAdmin")
                 {
-                    DomainBridge.getInstance().addAdmin(input[1], input[2], Int32.Parse(input[3]));
+                    DomainBridge.getInstance().addAdmin(input[1], input[2]);
                 }
 
             }

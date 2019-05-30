@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebApplication18.DAL;
+using Dapper;
 
 namespace workshop192.Domain
 {
@@ -84,17 +85,17 @@ namespace workshop192.Domain
         {
             try
             {
-              string sql = "INSERT INTO [dbo].[Stores] (storeId, name, description)" +
+                connection.Open();
+                string sql = "INSERT INTO [dbo].[Stores] (storeId, name, description)" +
                              " VALUES (@storeId, @name, @description)";
-                SqlCommand cmd = new SqlCommand(sql, connection);
-                cmd.Parameters.AddWithValue("@storeId", s.getStoreID());
-                cmd.Parameters.AddWithValue("@name", s.getStoreName());
-                cmd.Parameters.AddWithValue("@description", s.getDescription());
-               
-                    connection.Open();
-                    cmd.ExecuteNonQuery();
-                    connection.Close();
+                connection.Execute(sql, new { storeId=555, name="Yael", description="aaa" });
 
+                var st2 = connection.Query<Store>("SELECT storeId, name, description FROM Stores WHERE storeId=@storeId ", new { storeId = 555 });
+
+                /* 
+                 cmd.ExecuteNonQuery();
+                 */
+                connection.Close();
                 stores.AddFirst(s);
                 return s.getStoreID();
             }

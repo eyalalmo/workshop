@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using MySql.Data.MySqlClient;
+using Dapper;
 
 
 namespace WebApplication18.DAL
