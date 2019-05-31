@@ -63,6 +63,7 @@
                var getUrl = window.location;
                var baseUrl = getUrl.protocol + "//" + getUrl.host
                console.log(baseUrl);
+              totalPrice();
 
                
                 console.log("before jquery");
@@ -76,7 +77,6 @@
                             console.log("response");
                             if (response != "") {
                                 console.log(response);
-
                                 var str = "<div class=\"card-body\"><div class=\"row\style=\"background-color:black\"> </div></div>";
                                 /*    "<table class =\"table table-bordered text-center\">"
                                 + "<thead>"
@@ -113,7 +113,7 @@
                                     }
                                 }
                             //str += " </tbody>" + "</table>";
-                                totalPrice();
+                                
                             mainDiv.innerHTML = str;
                             checkoutDiv.innerHTML = "<div class=\"pull-right\" style=\"margin: 10px\"><input type=\"button\" class=\"btn btn-success\" value=\"Checkout\" onclick=\" checkout()\"></div>";
 //<a href=\"#\" class=\"btn btn-success\">Checkout</a>

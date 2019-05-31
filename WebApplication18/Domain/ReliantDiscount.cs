@@ -13,7 +13,6 @@ namespace workshop192.Domain
         int numOfProducts;
         int totalAmount;
         Product product;
-        public bool discountPartOfComplex;
 
         // Dictionary<Product, int> products;
 
@@ -22,7 +21,6 @@ namespace workshop192.Domain
             this.numOfProducts = numOfProducts;
             this.type = reliantType.sameProduct;
             this.product = product;
-            this.discountPartOfComplex = false;
         }
 
         public ReliantDiscount(double percentage, String duration, int amount) : base(percentage, duration)
@@ -85,11 +83,11 @@ namespace workshop192.Domain
         {
             if (type == reliantType.sameProduct)
             {
-                return "Quantity of product " + product.getProductName() + " ID: " + product.getProductID() +" is at least " + numOfProducts + " Discount: "+percentage*100+"%";
+                return "Quantity of product " + product.getProductName() + " ID: " + product.getProductID() +" is at least " + numOfProducts;
             }
             if(type == reliantType.totalAmount)
             {
-                return "Total cart price over $" + totalAmount + " Discount: "+percentage*100+"%";
+                return "Total cart price over $" + totalAmount;
             }
             return "";
         }

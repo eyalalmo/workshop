@@ -642,16 +642,15 @@ namespace workshop192.Bridge
             string str = "";
             foreach(DiscountComponent dis in discounts)
             {
-                if (dis is Discount)
-                {
-                    Discount d = (Discount)dis;
-                    str += dis.getDiscountType() + "," + dis.description() + "," + d.getPercentage()*100 + "," + d.getDuration() + "," + d.getId() + ";";
-                }
-                if(dis is DiscountComposite)
+               
+ 
+                    str += dis.getDiscountType() + "," + dis.description() + "," + dis.getPercentage()*100 + "," + dis.getDuration() + "," + dis.getId() + ";";
+        
+               /* if(dis is DiscountComposite)
                 {
                     DiscountComposite d = (DiscountComposite)dis;
                     str += dis.getDiscountType() + "," + dis.description() + "," + 100 + "," + 12 + "," + d.getId() + ";";
-                }
+                }*/
             
             }
             return str;
@@ -780,7 +779,7 @@ namespace workshop192.Bridge
 
 
         }
-        public void complexDiscount(string discountString, int storeID,string type, int sessionID)
+        public void complexDiscount(string discountString, int storeID,string type, double percentage, string duration, int sessionID)
         {
             Session user = DBSession.getInstance().getSession(sessionID);
             if (user == null)
@@ -797,10 +796,10 @@ namespace workshop192.Bridge
             LinkedList<DiscountComponent> storediscounts = store.getDiscounts();
             for (int i=0; i<discountArray.Length-1; i++)
             {
-                int index = Int32.Parse(discountArray[i])-1;
+                int index = Int32.Parse(discountArray[i]);
                 discounts.Add(storediscounts.ElementAt(index));
             }
-            sr.addComplexDiscount(discounts, type);
+            sr.addComplexDiscount(discounts, type, percentage, duration);
         }
         public void removeMaxAmountPolicy(int storeID, int sessionID)
         {

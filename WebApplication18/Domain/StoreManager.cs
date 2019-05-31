@@ -171,9 +171,9 @@ namespace workshop192.Domain
 
         }
 
-        public void addComplexDiscount(List<DiscountComponent> list, string type)
+        public void addComplexDiscount(List<DiscountComponent> list, string type, double percentage, string duration)
         {
-            DiscountComposite composite = new DiscountComposite(list, type);
+            DiscountComposite composite = new DiscountComposite(list, type, percentage, duration);
             store.addDiscount(composite);
             foreach (DiscountComponent d in list)
             {

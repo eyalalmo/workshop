@@ -115,6 +115,21 @@ namespace workshop192.Domain
             double sum = 0;
             LinkedList<DiscountComponent> discounts = store.getDiscounts();
 
+            foreach (DiscountComponent dis in discounts)
+            {
+                if (dis is DiscountComposite)
+                {
+                    if (dis.checkCondition(productList, productsActualPrice))
+                    {
+                        dis.setComplexCondition(true, productList, productsActualPrice);
+                    }
+                    else
+                    {
+                        dis.setComplexCondition(false, productList, productsActualPrice);
+                    }
+
+                }
+            }
             foreach (KeyValuePair<Product, int> entry in productList)
             {
                     Product p = entry.Key;
@@ -133,10 +148,7 @@ namespace workshop192.Domain
                             sum = sum * (1 - r.getPercentage());
                     }
                 }
-                if(dis is DiscountComponent)
-                {
-
-                }
+          
 
 
             }

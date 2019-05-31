@@ -10,10 +10,8 @@ namespace workshop192.Domain
     {
         public visibleType type;
         public Product product;
-        public bool discountPartOfComplex;
         public enum visibleType { productVisibleDiscount, storeVisibleDiscount }
         public VisibleDiscount(double percentage, string duration, string t): base (percentage, duration) {
-            this.discountPartOfComplex = false;
             if (t.Equals("StoreVisibleDiscount"))
             {
                 type = visibleType.storeVisibleDiscount;   
@@ -72,6 +70,6 @@ namespace workshop192.Domain
             return "Visible Discount";
         }
 
- 
+     
     }
 }

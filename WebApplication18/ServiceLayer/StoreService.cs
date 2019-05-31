@@ -380,14 +380,14 @@ namespace workshop192.ServiceLayer
             db.setDiscountPercentage(discountID, percentage);
         }
 
-        public void complexDiscount(string discountArray, int storeID,string type, int sessionID)
+        public void complexDiscount(string discountArray, int storeID,string type, double percentage, string duration, int sessionID)
         {
             if (storeID < 0)
                 throw new ArgumentException("illegal store number");
 
             if (sessionID < 0)
                 throw new NullReferenceException("session is a null reference");
-            db.complexDiscount(discountArray, storeID,type, sessionID);
+            db.complexDiscount(discountArray, storeID,type, percentage,duration, sessionID);
         }
 
 

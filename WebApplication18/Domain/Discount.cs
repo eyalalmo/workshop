@@ -10,14 +10,12 @@ namespace workshop192.Domain
 
     {
        // protected double percentage;
-        protected string duration;
         protected bool isPartOfComplex;
         //private int id;
 
-        public Discount(double percentage, string duration): base(percentage)
+        public Discount(double percentage, string duration): base(percentage, duration)
         {
             //this.percentage = percentage;
-            this.duration = duration;
             this.isPartOfComplex = false;
         }
 
@@ -28,11 +26,11 @@ namespace workshop192.Domain
         public void setPercentage(double percentage)
         {
             this.percentage = percentage;
-        }*/
+        }
         public string getDuration()
         {
             return duration;
-        }
+        }*/
 
 
         public bool getIsPartOfComplex() {
@@ -41,6 +39,12 @@ namespace workshop192.Domain
         public void setIsPartOfComplex(bool isPartOfComplex)
         {
             this.isPartOfComplex = isPartOfComplex;
+        }
+        public override void setComplexCondition(bool complexCondition, Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
+        {
+            if (complexCondition)
+                this.complexCondition = checkCondition(productList, productsActualPrice);
+            this.complexCondition = complexCondition;
         }
     }
 }

@@ -11,16 +11,21 @@ namespace workshop192.Domain
     {
         int id;
 
-        double percentage;
+        public double percentage;
+        public string duration;
         public abstract string getDiscountType();
         public abstract string description();
         public abstract bool checkCondition(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice);
         public abstract  Dictionary<Product, double> updatePrice(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice);
+        protected bool complexCondition;
 
-        public DiscountComponent(double percentage)
+        public DiscountComponent(double percentage, string duration)
         {
             this.id = DBDiscount.getNextDiscountID();
             this.percentage = percentage;
+            this.duration = duration;
+            this.complexCondition = false;
+
         }
         public int getId()
         {
@@ -34,6 +39,15 @@ namespace workshop192.Domain
         {
             this.percentage = percentage;
         }
+        public string getDuration()
+        {
+            return duration;
+        }
+        public bool getComplexCondition()
+        {
+            return this.complexCondition;
+        }
+        public abstract void setComplexCondition(bool complexCondition, Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice);
 
     }
 }

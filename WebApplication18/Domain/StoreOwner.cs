@@ -157,7 +157,7 @@ namespace workshop192.Domain
             discount.setProduct(product);
             product.setDiscount(discount);
             Store store = product.getStore();
-            store.addDiscount(discount);
+            //store.addDiscount(discount);
             DBDiscount.getInstance().addDiscount(discount);
 
         }
@@ -197,9 +197,9 @@ namespace workshop192.Domain
             store.removeDiscount(discountID);
 
         }
-        public void addComplexDiscount(List<DiscountComponent> list, string type)
+        public void addComplexDiscount(List<DiscountComponent> list, string type, double percentage, string duration)
         {
-            DiscountComposite composite = new DiscountComposite(list, type);
+            DiscountComposite composite = new DiscountComposite(list, type, percentage, duration);
             store.addDiscount(composite);
             foreach(DiscountComponent d in list)
             {

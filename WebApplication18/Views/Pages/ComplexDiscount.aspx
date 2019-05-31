@@ -9,6 +9,10 @@
             </div>
           <div id="t" class="pull-right" style = "margin: 10px"><input type="text" class="form-control" id="type" name="type"></div>
          <div class="pull-right" style = "margin: 10px"><h5><strong>Type</strong> <small>(and/or/xor)</small></h5></div>
+        <div id="p" class="pull-right" style = "margin: 10px"><input type="text" class="form-control" id="percentage" name="percentage"></div>
+         <div class="pull-right" style = "margin: 10px"><h5><strong>Percentage</strong></h5></div>
+       <div id="d" class="pull-right" style = "margin: 10px"><input type="text" class="form-control" id="duration" name="duration"></div>
+         <div class="pull-right" style = "margin: 10px"><h5><strong>Duration</strong></h5></div>
         <div id="makeComplex" class ="col-md-12">
             </div>   
         </div>
@@ -45,8 +49,7 @@
                                     var percentage = discountfields[2];
                                     var duration = discountfields[3];
                                     var discountID = discountfields[4];
-                                    str +=
-                                         str += "<tr>" +
+                                    str += "<tr>" +
                                         "<td  style = \"width:30px\"><input type=\"checkbox\"></td><td style = \"width:450px\" align=\"left\"> <h4 class=\"discount\"><strong>" + type + "</strong></h4><h4><small>" + description + "</small></h4></td><td style = \"width:120px\;top:100px; align=\"center\">"+duration+"</td><td style = \"width:50px\"> <div class=\"quantity\"><input type=\"button\" value=\"+\" onclick=\"plusQuantity(" + discountID + "," + percentage+");\" class=\"plus\"><input type=\"text\" value=\"" + percentage + " %\" title=\"Qty\" class=\"qty\"><input type=\"button\" value=\"-\" onclick=\"minusQuantity(" + discountID + "," + percentage+");\" class=\"minus\"></div></td><td style = \"width:50px\" align=\"center\"> <button type=\"button\" class=\"btn btn-danger\" onclick=\"deleteRow("+discountID+");\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td></tr>";
                                 }
                                 str += " </tbody>" + "</table>";
@@ -155,6 +158,9 @@
               var storeID =<%=ViewData["storeID"]%>;
               var s = "";
               type = $("#type").val();
+              percentage = $("#percentage").val();
+              duration = $("#duration").val();
+
               $('table [type="checkbox"]').each(function(i, chk) {
                     if (chk.checked) {
                         console.log("Checked!", i, chk);
@@ -165,7 +171,7 @@
               var baseUrl = getUrl.protocol + "//" + getUrl.host
                jQuery.ajax({
                    type: "GET",
-                    url: baseUrl+"/api/store/complexDiscount?discounts="+s+"&storeID="+storeID+"&type="+type,
+                   url: baseUrl + "/api/store/complexDiscount?discounts=" + s + "&storeID=" + storeID + "&type=" + type + "&percentage=" + percentage+ "&duration=" + duration,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {

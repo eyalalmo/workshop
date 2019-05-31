@@ -484,12 +484,12 @@ namespace WebApplication18.Controllers
 
         [Route("api/store/complexDiscount")]
         [HttpGet]
-        public Object complexDiscount(string discounts, int storeID, string type)
+        public Object complexDiscount(string discounts, int storeID, string type, double percentage, string duration)
         {
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-                StoreService.getInstance().complexDiscount(discounts,storeID,type,session);
+                StoreService.getInstance().complexDiscount(discounts,storeID,type,percentage,duration,session);
                 return "ok";
             }
             catch (Exception e)

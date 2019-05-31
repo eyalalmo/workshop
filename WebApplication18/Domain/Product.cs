@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace workshop192.Domain
 {
@@ -17,7 +18,9 @@ namespace workshop192.Domain
         public int rank;
         public int quantityLeft;
         public int storeID;
+        [JsonIgnore]
         public VisibleDiscount discount;
+        [JsonIgnore]
         public ReliantDiscount sameProductDiscount;
 
 
@@ -50,6 +53,18 @@ namespace workshop192.Domain
                             actualPrice = price * (1 - sameProductDiscount.getPercentage());
                        
                  }
+            }
+            if (sameProductDiscount != null && sameProductDiscount.getIsPartOfComplex() && sameProductDiscount.getComplexCondition())
+            {
+                if (sameProductDiscount.getMinNumOfProducts() <= amountinBasket)
+                {
+                    actualPrice = price * (1 - sameProductDiscount.getPercentage());
+
+                }
+            }
+            if (discount != null && discount.getIsPartOfComplex() &&discount.getComplexCondition())
+            {
+                actualPrice = price * (1 - discount.getPercentage());
             }
             return actualPrice;
         }

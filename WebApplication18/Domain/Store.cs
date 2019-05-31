@@ -17,10 +17,11 @@ namespace workshop192.Domain
         public List<StoreRole> roles;
         public int numOfOwners;
         public bool active;
-        public LinkedList<DiscountComponent> discountList;
         public MinAmountPurchase minPurchasePolicy;
         public MaxAmountPurchase maxPurchasePolicy;
-        public LinkedList<InvisibleDiscount> invisibleDiscountList;
+        private LinkedList<InvisibleDiscount> invisibleDiscountList;
+        [JsonIgnore]
+        public LinkedList<DiscountComponent> discountList;
 
         public Store(string storeName, string description)
         {
