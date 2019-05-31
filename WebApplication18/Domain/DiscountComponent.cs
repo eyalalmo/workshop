@@ -33,7 +33,7 @@ namespace workshop192.Domain
             int day = Int32.Parse(duration.Substring(0, 2));
             int month = Int32.Parse(duration.Substring(3, 2));
             int year = Int32.Parse(duration.Substring(6, 4));
-            return new DateTime(day, month, year);
+            return new DateTime(year, month, day);
         }
 
         public int getId()
@@ -48,7 +48,7 @@ namespace workshop192.Domain
         {
             this.percentage = percentage;
         }
-        public string getDuration()
+        public DateTime getDuration()
         {
             return duration;
         }

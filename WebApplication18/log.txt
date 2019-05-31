@@ -221,3 +221,13 @@ Parameter name: value
 2019-05-31 22:06:16,408 INFO  System Log - User et has successfuly logged in.
 2019-05-31 22:41:05,718 INFO  System Log - User et has successfuly logged in.
 2019-05-31 22:43:45,559 ERROR System Log - Error in adding to shopping cart : Error: Product already exists on Cart
+2019-05-31 22:52:20,767 INFO  System Log - User et has successfuly logged in.
+2019-05-31 22:52:35,993 ERROR System Log - Add Visible Discount : Discount duration is not in the required foramt DD/MM/YYYY
+2019-05-31 22:52:48,211 ERROR System Log - Add Visible Discount : Date is not valid
+2019-05-31 22:53:05,459 ERROR System Log - Add Visible Discount : Year, Month, and Day parameters describe an un-representable DateTime.
+2019-05-31 22:53:29,450 ERROR System Log - Add Visible Discount : Date is not valid
+2019-05-31 22:53:56,842 ERROR System Log - Add Visible Discount : Discount duration is not in the required foramt DD/MM/YYYY
+2019-05-31 22:54:15,103 ERROR System Log - Add Visible Discount : Year, Month, and Day parameters describe an un-representable DateTime.
+2019-05-31 22:58:19,299 INFO  System Log - User et has successfuly logged in.
+2019-05-31 23:03:40,900 INFO  System Log - User et has successfuly logged in.
+2019-05-31 23:04:47,187 ERROR System Log - Add Reliant Discount : Date is not valid

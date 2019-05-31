@@ -644,7 +644,7 @@ namespace workshop192.Bridge
             {
                
  
-                    str += dis.getDiscountType() + "," + dis.description() + "," + dis.getPercentage()*100 + "," + dis.getDuration() + "," + dis.getId() + ";";
+                    str += dis.getDiscountType() + "," + dis.description() + "," + dis.getPercentage()*100 + "," + dis.getDuration().ToString("dd/MM/yyyy") + "," + dis.getId() + ";";
         
                /* if(dis is DiscountComposite)
                 {
@@ -717,7 +717,7 @@ namespace workshop192.Bridge
                 throw new ArgumentException("Date is not valid");
             if(year < 2019)
                 throw new ArgumentException("Date is not valid");
-            DateTime d = new DateTime(day, month, year);
+            DateTime d = new DateTime(year, month, day);
             DateTime now = DateTime.Now;
             if(DateTime.Compare(d, now) <0)
                 throw new ArgumentException("Discount duration must be future dateד");
