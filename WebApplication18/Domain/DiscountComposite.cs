@@ -94,7 +94,7 @@ namespace workshop192.Domain
                         count++;
                     }
                 }
-                if (count == 0)
+                if (count == 0||count>1)
                     return false;
                 return true;
             }

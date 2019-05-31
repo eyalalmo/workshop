@@ -121,23 +121,36 @@ namespace workshop192.Domain
                     double actualPrice = p.getActualPrice(entry.Value);
                     sum += (entry.Value * actualPrice);
             }
-            foreach (DiscountComponent dis in discounts)
-            {
-                if(dis is VisibleDiscount)
-                {
-                    VisibleDiscount v = (VisibleDiscount)dis;
-                    if (v.isStoreVisibleDiscount())
-                    sum = sum *(1- v.getPercentage());
-                }
-
-            }
+         
             foreach (DiscountComponent dis in discounts)
             {
                 if (dis is ReliantDiscount)
                 {
                     ReliantDiscount r = (ReliantDiscount)dis;
-                    if (r.isTotalAmountDiscount()&&sum>=r.getTotalAmount())
-                        sum = sum * (1-r.getPercentage());
+                    if (!r.getIsPartOfComplex())
+                    {
+                        if (r.isTotalAmountDiscount() && sum >= r.getTotalAmount())
+                            sum = sum * (1 - r.getPercentage());
+                    }
+                }
+                if(dis is DiscountComponent)
+                {
+
+                }
+
+
+            }
+
+            foreach (DiscountComponent dis in discounts)
+            {
+                if (dis is VisibleDiscount)
+                {
+                    VisibleDiscount v = (VisibleDiscount)dis;
+                    if (!v.getIsPartOfComplex())
+                    {
+                        if (v.isStoreVisibleDiscount())
+                            sum = sum * (1 - v.getPercentage());
+                    }
                 }
 
             }

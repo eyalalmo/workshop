@@ -58,11 +58,6 @@ namespace workshop192.Domain
             }
         }
         
-
-        public override bool getIsPartOfComplex()
-        {
-            return this.getIsPartOfComplex();
-        }
         public bool isStoreVisibleDiscount()
         {
             if(type == visibleType.storeVisibleDiscount)
@@ -77,9 +72,6 @@ namespace workshop192.Domain
             return "Visible Discount";
         }
 
-        public override void setIsPartOfComplex(bool isPartOfComplex)
-        {
-            this.discountPartOfComplex = isPartOfComplex;
-        }
+ 
     }
 }

@@ -183,3 +183,11 @@ Parameter name: String
 2019-05-26 00:58:31,899 ERROR System Log - Remove from Cart : Product cannot be removed, it does not exist in cart
 2019-05-26 10:20:25,818 INFO  System Log - User et has successfuly logged in.
 2019-05-26 10:50:43,448 INFO  System Log - User et has successfuly logged in.
+2019-05-30 16:01:36,857 INFO  System Log - User et has successfuly logged in.
+2019-05-30 16:05:38,207 INFO  System Log - User et has successfuly logged in.
+2019-05-30 16:05:53,254 ERROR System Log - Add Reliant Discount : Value cannot be null.
+Parameter name: value
+2019-05-30 16:07:34,262 INFO  System Log - User et has successfuly logged in.
+2019-05-30 16:14:32,782 INFO  System Log - User et has successfuly logged in.
+2019-05-30 16:23:43,576 INFO  System Log - User et has successfuly logged in.
+2019-05-30 16:47:08,849 INFO  System Log - User et has successfuly logged in.

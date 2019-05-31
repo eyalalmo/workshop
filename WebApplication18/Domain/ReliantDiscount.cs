@@ -62,10 +62,7 @@ namespace workshop192.Domain
 
             return false;
         }
-        public override bool getIsPartOfComplex()
-        {
-            return this.getIsPartOfComplex();
-        }
+  
 
         public override Dictionary<Product, double> updatePrice(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
         {
@@ -92,7 +89,7 @@ namespace workshop192.Domain
             }
             if(type == reliantType.totalAmount)
             {
-                return "Total cart price over $" + totalAmount + "Discount: "+percentage*100+"%";
+                return "Total cart price over $" + totalAmount + " Discount: "+percentage*100+"%";
             }
             return "";
         }
@@ -126,9 +123,6 @@ namespace workshop192.Domain
                 return true;
             return false;
         }
-        public override void setIsPartOfComplex(bool isPartOfComplex)
-        {
-            this.discountPartOfComplex = isPartOfComplex;
-        }
+
     }
 }

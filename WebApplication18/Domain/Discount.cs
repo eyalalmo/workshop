@@ -11,12 +11,14 @@ namespace workshop192.Domain
     {
         protected double percentage;
         protected string duration;
+        protected bool isPartOfComplex;
         //private int id;
 
         public Discount(double percentage, string duration): base()
         {
             this.percentage = percentage;
             this.duration = duration;
+            this.isPartOfComplex = false;
         }
 
         public double getPercentage()
@@ -32,7 +34,12 @@ namespace workshop192.Domain
             this.percentage = percentage;
         }
 
-        public abstract bool getIsPartOfComplex();
-        public abstract void setIsPartOfComplex(bool isPartOfComplex);
+        public bool getIsPartOfComplex() {
+            return this.isPartOfComplex;
+        }
+        public void setIsPartOfComplex(bool isPartOfComplex)
+        {
+            this.isPartOfComplex = isPartOfComplex;
+        }
     }
 }
