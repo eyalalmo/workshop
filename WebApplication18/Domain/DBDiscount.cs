@@ -25,15 +25,41 @@ namespace workshop192.Domain
         private DBDiscount()
         {
             discounts = new Dictionary<int, Discount>();
-            nextID = 1;
+            nextID = 0;
         }
-
 
         public void init()
         {
-            discounts = new Dictionary<int, Discount>();
-            nextID = 1;
+            try
+            {
+                connection.Open();
+                var d = connection.Query<Discount>("SELECT * FROM [dbo].[Discount]");
+
+                if (d.Count() == 0)
+                {
+                    connection.Close();
+                    return;
+                }
+
+                foreach (Discount discount in d)
+                {
+                    discounts.Add(discount.getId(), discount);
+                    if (discount.getId() > nextID)
+                        nextID = discount.getId();
+                }
+
+                connection.Close();
+            }
+
+            catch (Exception e)
+            {
+                connection.Close();
+                throw e;
+            }
+
+            nextID++;
         }
+
         public void addDiscount(Discount d)
         {
             try

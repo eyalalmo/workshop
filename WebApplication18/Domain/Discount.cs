@@ -13,17 +13,17 @@ namespace workshop192.Domain
         protected string duration;
         //private int id;
 
+        internal Discount(int id, double percentage, string duration)
+        {
+            this.percentage = percentage;
+            this.duration = duration;
+            this.id = id;
+        }
+
         public Discount(double percentage, string duration): base()
         {
             this.percentage = percentage;
             this.duration = duration;
-        }
-
-        internal Discount(int discountID, double percentage, string duration)
-        {
-            this.percentage = percentage;
-            this.duration = duration;
-            this.id = discountID;
         }
 
         public double getPercentage()
