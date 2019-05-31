@@ -122,3 +122,17 @@
 2019-05-31 18:42:09,992 INFO EventLog: User u2 has logged out
 2019-05-31 18:42:32,975 INFO EventLog: User u2 has successfuly created a store
 2019-05-31 18:42:42,527 INFO EventLog: User u2 has successfuly logged in.
+2019-05-31 19:01:02,802 INFO EventLog: User u2 has successfuly created a store
+2019-05-31 19:01:14,308 INFO EventLog: User u2 has successfuly logged in.
+2019-05-31 19:01:32,984 INFO EventLog: User u2 has logged out
+2019-05-31 19:01:38,195 INFO EventLog: User u4 has successfuly logged in.
+2019-05-31 19:02:55,281 INFO EventLog: User u4 has logged out
+2019-05-31 19:03:13,589 INFO EventLog: User u2 has successfuly logged in.
+2019-05-31 19:04:49,777 INFO EventLog: User u2 has successfuly created a store
+2019-05-31 19:04:58,273 INFO EventLog: User u2 has successfuly logged in.
+2019-05-31 19:05:15,617 INFO EventLog: User u2 has logged out
+2019-05-31 19:05:21,200 INFO EventLog: User u4 has successfuly logged in.
+2019-05-31 19:06:56,906 INFO EventLog: User u2 has successfuly created a store
+2019-05-31 19:07:06,689 INFO EventLog: User u2 has successfuly logged in.
+2019-05-31 19:07:24,501 INFO EventLog: User u2 has logged out
+2019-05-31 19:07:28,123 INFO EventLog: User u4 has successfuly logged in.

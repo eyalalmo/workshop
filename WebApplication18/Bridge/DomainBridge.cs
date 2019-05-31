@@ -1008,21 +1008,7 @@ namespace workshop192.Bridge
 
             if (sr.getStore() != store)
                 throw new RoleException("this user can't appoint to this store");
-            if (store.getNumberOfOwners() == 1)
-            {
                 sr.signContract(session.getSubscribedUser().getUsername(), toAdd);
-            }
-
-            foreach (StoreRole role in store.getRoles()) // send messages to all the owners in the store - to approve the new owner
-            {
-                string message = sr.getUser().getUsername() + "has declined the partnership contract of" +
-                    "user " + username + "in store " + store.getStoreName() + ". The owner addition has been canceled.";
-                ;
-                if (role is StoreOwner && role != sr)
-                {
-                    messager.message(role.getUser().getUsername(), message);
-                }
-            }
 
         }
         public void declineContract(int storeid, string username, int sessionid)

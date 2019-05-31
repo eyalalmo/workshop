@@ -395,7 +395,7 @@ namespace workshop192.Domain
             {
                 throw new DoesntExistException("the username is not in the owners pending list");
             }
-            HashSet<string> temp;
+            HashSet<string> temp = new HashSet<string>();
             pendingOwners.TryGetValue(pending.getUsername(), out temp);
             temp.Add(owner);
             pendingOwners[pending.getUsername()] = temp;
