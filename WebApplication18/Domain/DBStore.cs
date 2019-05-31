@@ -56,8 +56,13 @@ namespace workshop192.Domain
                     {
                         if (element.getStoreId() == s.getStoreID() && element.getIsOwner() == 1)
                         {
-                            SubscribedUser appointedBy = DBSubscribedUser.getInstance().getSubscribedUser(element.getAppointedBy());
-                            SubscribedUser user = DBSubscribedUser.getInstance().getSubscribedUser(element.getUserName());
+                            SubscribedUser appointedBy = null;
+                            try
+                            {
+                                appointedBy = DBSubscribedUser.getInstance().getSubscribedUser(element.getAppointedBy());
+                            }
+                            catch (Exception e) { }
+                                SubscribedUser user = DBSubscribedUser.getInstance().getSubscribedUser(element.getUserName());
                             StoreOwner so = new StoreOwner(appointedBy, user, s);
                             s.addStoreRole(so);
                             storeRole.AddLast(so);
@@ -89,6 +94,7 @@ namespace workshop192.Domain
             }
             catch(Exception e)
             {
+               // StackTrace = "   ב-  System.Collections.Generic.Dictionary`2.FindEntry(TKey key)\r\n   ב-  System.Collections.Generic.Dictionary`2.ContainsKey(TKey key)\r\n   ב-  workshop192.Domain.DBSubscribedUser.getSubscribedUser(String username) ב- C:\\Users\\etay2\\Desktop\\C#Work...
                 connection.Close();
                 throw new StoreException("cant init");
             }

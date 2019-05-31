@@ -42,7 +42,7 @@ namespace workshop192.Domain
         }
         public Store(int storeId,string name, string description)
         {
-            this.storeId = DBStore.getInstance().getNextStoreID();
+            this.storeId = storeId;
             this.name = name;
             this.description = description;
             productList = new LinkedList<Product>();

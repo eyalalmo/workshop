@@ -33,7 +33,7 @@ namespace workshop192.Bridge
 
         public void setup()
         {
-            //MarketSystem.init();
+            MarketSystem.init();
         }
         public void addAdmin(string name,string pass)
         {

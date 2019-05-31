@@ -22,7 +22,18 @@ namespace workshop192.Domain
             //Session s=new Session();
             // int sID = 0;
             if (doIt == 1)
+            {
+                DBProduct.getInstance().init();
+                DBSession.getInstance().init();
+                DBStore.getInstance().init();
+                DBDiscount.getInstance().init();
+                DBSubscribedUser.getInstance().init();
+                DBNotifications.getInstance().init();
+                PaymentService.getInstance().connectToSystem();
+                DeliveryService.getInstance().connectToSystem();
+                ConsistencySystem.getInstance().connectToSystem();
                 return;
+            }
                 foreach (string line in lines)
                 {
                     string[] input = line.Split(' ');
