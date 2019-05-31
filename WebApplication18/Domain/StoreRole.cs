@@ -40,5 +40,8 @@ namespace workshop192.Domain
         void addPendingOwner(SubscribedUser pending);
         void signContract(string owner, SubscribedUser pending);
         void declineContract(string owner, SubscribedUser pending);
+         int getIsOwner();
+        Permissions GetPermissions();
+        
     }
 }

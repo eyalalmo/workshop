@@ -423,9 +423,11 @@
     <Compile Include="Domain\ShoppingBasket.cs" />
     <Compile Include="Domain\ShoppingCart.cs" />
     <Compile Include="Domain\Store.cs" />
+    <Compile Include="Domain\StoreEntry.cs" />
     <Compile Include="Domain\StoreManager.cs" />
     <Compile Include="Domain\StoreOwner.cs" />
     <Compile Include="Domain\StoreRole.cs" />
+    <Compile Include="Domain\StoreRoleEntry.cs" />
     <Compile Include="Domain\SubscribedUser.cs" />
     <Compile Include="Domain\UserState.cs" />
     <Compile Include="Domain\VisibleDiscount.cs" />
