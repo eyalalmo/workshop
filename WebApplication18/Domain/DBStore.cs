@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplication18.DAL;
+using Dapper;
 
 namespace workshop192.Domain
 {
-    public class DBStore
+    public class DBStore :Connector
     {
         private static DBStore instance;
         private LinkedList<Store> stores;
@@ -80,8 +82,30 @@ namespace workshop192.Domain
         }
         public int addStore(Store store)
         {
+            try
+            {
+                stores.AddFirst(store);
 
-            stores.AddFirst(store);
+                var c = connection.Query<>("SELECT hash, session FROM [dbo].[Cookie] WHERE hash=@hash ", new { hash = hash });
+                // Cookie cooki = (Cookie)v[0];
+                // Cookie cookie = getCookieByHash(hash);
+                if (c.Count() == 0) //doesnt exist in DB
+                {
+                    // Cookie c = new Cookie(hash, session);
+                    //cookies.AddFirst(c);
+
+                    string sql = "INSERT INTO [dbo].[Cookie] (hash, session)" +
+                                 " VALUES (@hash, @session)";
+                    connection.Execute(sql, new { hash, session });
+                    connection.Close();
+                    return "ok";
+
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
             return store.getStoreID();
         }
 
