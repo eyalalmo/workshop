@@ -44,7 +44,8 @@ namespace workshop192.Domain
 
                 foreach (Product product in products)
                 {
-                    product.discount = DBDiscount.getInstance().getDiscount(product.discountID);
+                    if(product.discountID != -1)
+                        product.discount = DBDiscount.getInstance().getDiscount(product.discountID);
                     productList.AddFirst(product);
                     if (product.getProductID() > nextProductID)
                         nextProductID = product.getProductID();
@@ -71,7 +72,7 @@ namespace workshop192.Domain
                 string sql = "INSERT INTO [dbo].[Product] (productID, productName, " +
                                                           "productCategory, price, rank, " +
                                                           "quantityLeft, storeID, discountID)" +
-                                 " VALUES (@productID, @productName, @productCategory, " +
+                                 " VALUES (@productID, @productName, @productCategory," +
                                  " @price, @rank, @quantityLeft, @storeID, @discountID)";
                 connection.Execute(sql, new
                 {
@@ -82,10 +83,11 @@ namespace workshop192.Domain
                     rank = p.getRank(),
                     quantityLeft = p.getQuantityLeft(),
                     storeID = p.getStoreID(),
-                    discountID = p.discount.getId()
+                    discountID = p.getDiscountID()
                 });
-
-                DBDiscount.getInstance().addDiscount(p.discount);
+                
+                if(p.discount != null)
+                    DBDiscount.getInstance().addDiscount(p.discount);
                 /*sql = "INSERT INTO [dbo].[Discount] (discountID, percentage, duration) " +
                                  " VALUES (@discountID, @percentage, @duration) ";
                 connection.Execute(sql, new
@@ -163,7 +165,8 @@ namespace workshop192.Domain
             {
                 connection.Open();
                 connection.Execute("DELETE FROM Product WHERE productID=@productID ", new { productID = p.getProductID() });
-                DBDiscount.getInstance().removeDiscount(p.discount);
+                if(p.discount != null)
+                    DBDiscount.getInstance().removeDiscount(p.discount);
                 productList.Remove(p);
                 connection.Close();
             }
@@ -195,7 +198,8 @@ namespace workshop192.Domain
                 connection.Close();
 
                 Product product = c.First();
-                product.discount = DBDiscount.getInstance().getDiscount(product.discountID);
+                if(product.discountID != -1)
+                    product.discount = DBDiscount.getInstance().getDiscount(product.discountID);
                 productList.AddFirst(product);
                 return product;
             }
@@ -332,10 +336,11 @@ namespace workshop192.Domain
                           rank = p.getRank(),
                           quantityLeft = p.getQuantityLeft(),
                           storeID = p.getStoreID(),
-                          discountID = p.discount.getId()
+                          discountID = p.getDiscountID()
                       });
                 
-                DBDiscount.getInstance().update(p.discount);
+                if(p.discount != null)
+                    DBDiscount.getInstance().update(p.discount);
                 connection.Close();
             }
             catch (Exception e)

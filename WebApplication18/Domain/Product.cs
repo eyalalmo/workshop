@@ -9,13 +9,13 @@ namespace workshop192.Domain
     public class Product
     {
         //represents product in store
-        private int productID;
-        private string productName;
-        private string productCategory;
-        private int price;
-        private int rank;
-        private int quantityLeft;
-        private int storeID;
+        public int productID;
+        public string productName;
+        public string productCategory;
+        public int price;
+        public int rank;
+        public int quantityLeft;
+        public int storeID;
         internal VisibleDiscount discount;
         internal int discountID;
 
@@ -30,6 +30,7 @@ namespace workshop192.Domain
             this.quantityLeft = quantityLeft;
             //this.numberOfRanking = 0;
             this.discount = null;
+            this.discountID = -1;
         }
 
         //added
@@ -87,7 +88,7 @@ namespace workshop192.Domain
             return productID;
         }
 
-        internal object getStoreID()
+        internal int getStoreID()
         {
             return storeID;
         }
@@ -151,6 +152,10 @@ namespace workshop192.Domain
         internal Store getStore()
         {
             return DBStore.getInstance().getStore(storeID);
+        }
+
+        internal int getDiscountID() {
+            return this.discountID;
         }
     }
 }

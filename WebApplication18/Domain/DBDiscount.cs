@@ -87,6 +87,7 @@ namespace workshop192.Domain
         }
         public void removeDiscount(Discount d)
         {
+
             if (!discounts.ContainsKey(d.getId()))
                 throw new DoesntExistException("Error: Discount does not exist");
             
