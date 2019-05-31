@@ -31,9 +31,9 @@ namespace UnitTestProject3
         [TestMethod]
         public void TestAddProduct1()
         {
-            Product p1 = new Product("p1", "ff", 56, 2, 10, store);
-            Product p2 = new Product("p2", "ff", 56, 2, 10, store);
-            Product p3 = new Product("p3", "ff", 56, 2, 10, store);
+            Product p1 = new Product("p1", "ff", 56, 2, 10, store.getStoreID());
+            Product p2 = new Product("p2", "ff", 56, 2, 10, store.getStoreID());
+            Product p3 = new Product("p3", "ff", 56, 2, 10, store.getStoreID());
             cart.addToCart(p1, 5);
             cart.addToCart(p2, 5);
             cart.addToCart(p3, 5);
@@ -47,8 +47,8 @@ namespace UnitTestProject3
         public void TestAddProduct2()
         {
 
-            Product p1 = new Product("p1", "ff", 56, 2, 10, store);
-            Product p2 = new Product("p2", "ff", 56, 2, 10, store);
+            Product p1 = new Product("p1", "ff", 56, 2, 10, store.getStoreID());
+            Product p2 = new Product("p2", "ff", 56, 2, 10, store.getStoreID());
             cart.addToCart(p1, 5);
             cart.addToCart(p2, 5);
 
@@ -64,8 +64,8 @@ namespace UnitTestProject3
         [TestMethod]
         public void TestRemoveProduct1()
         {
-            Product p1 = new Product("p1", "ff", 56, 2, 10, store);
-            Product p2 = new Product("p2", "ff", 56, 2, 10, store);
+            Product p1 = new Product("p1", "ff", 56, 2, 10, store.getStoreID());
+            Product p2 = new Product("p2", "ff", 56, 2, 10, store.getStoreID());
             cart.addToCart(p1, 5);
             cart.addToCart(p2, 5);
             cart.removeFromCart(p1);
@@ -74,7 +74,7 @@ namespace UnitTestProject3
         [TestMethod]
         public void TestRemoveProduct2()
         {
-            Product p1 = new Product("p1", "ff", 56, 2, 10, store);
+            Product p1 = new Product("p1", "ff", 56, 2, 10, store.getStoreID());
             cart.addToCart(p1, 5);
             cart.removeFromCart(p1);
             Assert.AreEqual(0, cart.getProductsInCarts().Keys.Count);
@@ -83,7 +83,7 @@ namespace UnitTestProject3
         [TestMethod]
         public void changeQuantityOfProductTest1()
         {
-            Product p1 = new Product("p1", "ff", 56, 2, 10, store);
+            Product p1 = new Product("p1", "ff", 56, 2, 10, store.getStoreID());
             cart.addToCart(p1, 5);
             cart.changeQuantityOfProduct(p1, 7);
             Assert.AreEqual(7, cart.getProductsInCarts()[p1]);
@@ -93,7 +93,7 @@ namespace UnitTestProject3
         {
             try
             {
-                Product p1 = new Product("p1", "ff", 56, 2, 10, store);
+                Product p1 = new Product("p1", "ff", 56, 2, 10, store.getStoreID());
                 cart.addToCart(p1, 5);
                 cart.changeQuantityOfProduct(p1, 20);
                 Assert.Fail();
@@ -107,9 +107,9 @@ namespace UnitTestProject3
         [TestMethod]
         public void totalAmountTest1()
         {
-            Product p1 = new Product("p1", "ff", 10, 2, 10, store);
-            Product p2 = new Product("p2", "ff", 5, 2, 10, store);
-            Product p3 = new Product("p3", "ff", 5, 2, 10, store);
+            Product p1 = new Product("p1", "ff", 10, 2, 10, store.getStoreID());
+            Product p2 = new Product("p2", "ff", 5, 2, 10, store.getStoreID());
+            Product p3 = new Product("p3", "ff", 5, 2, 10, store.getStoreID());
             cart.addToCart(p1, 2);
             cart.addToCart(p2, 1);
             cart.addToCart(p3, 3);

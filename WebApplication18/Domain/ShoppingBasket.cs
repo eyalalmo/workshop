@@ -115,7 +115,6 @@ namespace workshop192.Domain
                     int amount = pair2.Value;
                     if (product.getQuantityLeft() < amount)
                     {
-                        
                         throw new IllegalAmountException("Error: Cannot complete purchase- " + product.getProductName() + " does not have enough quantity left");
                     }
                     product.decQuantityLeft(amount);

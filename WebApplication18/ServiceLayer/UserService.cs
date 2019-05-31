@@ -183,9 +183,9 @@ namespace workshop192.ServiceLayer
         }
 
         /////////////////////////////////////////////////////////////////////////////////////
-        public String addUser(string hash, int session)
+        public void addUser(string hash, int session)
         {
-            return db.addSession(hash, session);
+            db.addSession(hash, session);
         }
 
         public string generate()

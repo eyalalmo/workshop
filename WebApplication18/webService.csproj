@@ -384,6 +384,7 @@
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\WebSocketController.cs" />
     <Compile Include="DAL\Connector.cs" />
+    <Compile Include="Domain\Notification.cs" />
     <Compile Include="Domain\Cookie.cs" />
     <Compile Include="Domain\DBNotifications.cs" />
     <Compile Include="Domain\MarketSystem.cs" />
