@@ -28,7 +28,7 @@ namespace UnitTestProject3
             store1 = storeService.addStore("billabong", "clothing", session1);
 
             cart = new ShoppingCart(store1);
-            basket = new ShoppingBasket();
+            basket = new ShoppingBasket("user1");
 
 
         }
