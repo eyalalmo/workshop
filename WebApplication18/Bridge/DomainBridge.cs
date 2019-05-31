@@ -512,28 +512,28 @@ namespace workshop192.Bridge
             sr.addManager(toAdd, permissions);
         }
 
-        //public void addOwner(int storeid, string username, int sessionid)
-        //{
-        //    SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
-        //    if (toAdd == null)
-        //        throw new DoesntExistException("Error: No such username");
-        //    Store store = DBStore.getInstance().getStore(storeid);
-        //    if (store == null)
-        //    {
-        //        throw new DoesntExistException("no such store");
-        //    }
+        public void addOwner(int storeid, string username, int sessionid)
+        {
+            SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
+            if (toAdd == null)
+                throw new DoesntExistException("Error: No such username");
+            Store store = DBStore.getInstance().getStore(storeid);
+            if (store == null)
+            {
+                throw new DoesntExistException("no such store");
+            }
 
-        //    Session session = DBSession.getInstance().getSession(sessionid);
+            Session session = DBSession.getInstance().getSession(sessionid);
 
-        //    StoreRole sr = store.getStoreRole(session.getSubscribedUser());
+            StoreRole sr = store.getStoreRole(session.getSubscribedUser());
 
-        //    if (sr == null)
-        //        throw new RoleException("Error: You don't have permissions to appoint an owner");
+            if (sr == null)
+                throw new RoleException("Error: You don't have permissions to appoint an owner");
 
-        //    if (sr.getStore() != store)
-        //        throw new RoleException("this user can't appoint to this store");
-        //    sr.addOwner(toAdd);
-        //}
+            if (sr.getStore() != store)
+                throw new RoleException("this user can't appoint to this store");
+            sr.addOwner(toAdd);
+        }
 
         public void removeRole(int storeid, string username, int sessionid)
         {
