@@ -8,14 +8,23 @@ namespace workshop192.Domain
 {
     public class ShoppingBasket
     {
-        public Dictionary<int,ShoppingCart> shoppingCarts;
+        private string username = null;
+        public Dictionary<int, ShoppingCart> shoppingCarts;
+
+        public ShoppingBasket(string username)
+        {
+            this.shoppingCarts = new Dictionary<int, ShoppingCart>();
+            this.username = username;
+        }
 
         public ShoppingBasket()
         {
             this.shoppingCarts = new Dictionary<int, ShoppingCart>();
         }
 
-        public Dictionary<int,ShoppingCart> getShoppingCarts()
+
+
+        public Dictionary<int, ShoppingCart> getShoppingCarts()
         {
             return this.shoppingCarts;
         }
@@ -65,16 +74,6 @@ namespace workshop192.Domain
             }
             throw new DoesntExistException("Product cannot be removed, it does not exist in cart");
         }
-        //public String checkout (String address,String creditCard){
-        //    // return the result of the proccess by order of cart
-        //    String output = "";
-        //    foreach (ShoppingCart sc in shoppingCarts.Values)
-        //    {
-        //        output += sc.checkout(address,creditCard);
-        //    }
-        //    return output;
-        //}
-
 
         public ShoppingCart getShoppingCartByID(int storeID)
         {
@@ -85,7 +84,7 @@ namespace workshop192.Domain
             }
             return null;
         }
-        public void addCoupon(string coupon,int storeID)
+        public void addCoupon(string coupon, int storeID)
         {
             ShoppingCart sc = getShoppingCartByID(storeID);
             if (sc != null)
@@ -109,13 +108,13 @@ namespace workshop192.Domain
             {
                 ShoppingCart cart = pair1.Value;
                 Dictionary<Product, int> productsInCart = cart.getProductsInCarts();
-                foreach(KeyValuePair<Product,int> pair2 in productsInCart)
+                foreach (KeyValuePair<Product, int> pair2 in productsInCart)
                 {
                     Product product = pair2.Key;
                     int amount = pair2.Value;
                     if (product.getQuantityLeft() < amount)
                     {
-                        
+
                         throw new IllegalAmountException("Error: Cannot complete purchase- " + product.getProductName() + " does not have enough quantity left");
                     }
                     product.decQuantityLeft(amount);
@@ -136,7 +135,10 @@ namespace workshop192.Domain
             }
         }
 
+        internal void setUsername(string username)
+        {
+            this.username = username;
 
-
+        }
     }
 }
