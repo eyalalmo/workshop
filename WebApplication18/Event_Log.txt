@@ -75,3 +75,6 @@
 2019-05-30 13:20:50,995 ERROR EventLog: Login : Error: Username does not exist
 2019-05-30 13:23:26,990 INFO EventLog: User u1 has successfuly registered
 2019-05-30 15:00:27,383 INFO EventLog: User u1 has successfuly registered
+2019-05-31 13:47:20,372 INFO EventLog: User u1 has successfuly registered
+2019-05-31 13:47:46,693 INFO EventLog: User u1 has successfuly created a store
+2019-05-31 13:48:47,884 INFO EventLog: User u1 has successfuly created a store
