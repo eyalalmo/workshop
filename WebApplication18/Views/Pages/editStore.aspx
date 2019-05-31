@@ -25,6 +25,7 @@
                 success: function (response) {
                     
                     if (response !== "fail") {
+                        console.log(response);
                       var responsJ= JSON.parse(response);
                         var HTML = "";
                         for (i = 0; i < responsJ.length ; i++) {        
