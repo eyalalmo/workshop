@@ -74,3 +74,20 @@
 2019-05-30 13:18:41,057 ERROR EventLog: Login : Error: Username does not exist
 2019-05-30 13:20:50,995 ERROR EventLog: Login : Error: Username does not exist
 2019-05-30 13:23:26,990 INFO EventLog: User u1 has successfuly registered
+2019-05-30 17:28:31,895 ERROR EventLog: Login : Error: Username does not exist
+2019-05-30 17:28:44,405 ERROR EventLog: Login : Error: Username does not exist
+2019-05-30 17:28:53,327 INFO EventLog: User u1 has successfuly registered
+2019-05-30 17:42:35,514 INFO EventLog: User u1 has successfuly registered
+2019-05-30 17:43:02,701 INFO EventLog: User ey has successfuly registered
+2019-05-30 17:43:36,709 INFO EventLog: User ey has logged out
+2019-05-30 17:44:56,716 INFO EventLog: User u1 has successfuly registered
+2019-05-30 18:10:22,386 INFO EventLog: User ey has successfuly registered
+2019-05-30 18:14:01,092 INFO EventLog: User u1 has successfuly registered
+2019-05-30 18:15:24,774 INFO EventLog: User u1 has successfuly registered
+2019-05-30 18:16:02,624 ERROR EventLog: Login : Error: Username already logged in
+2019-05-30 18:16:36,492 INFO EventLog: User u1 has successfuly registered
+2019-05-30 18:26:26,964 INFO EventLog: User u1 has successfuly registered
+2019-05-30 18:26:40,650 INFO EventLog: User u1 has successfuly created a store
+2019-05-30 18:27:01,802 ERROR EventLog: Error in adding a store : Error: A Guest cannot create a store
+2019-05-30 18:32:07,638 INFO EventLog: User u1 has successfuly registered
+2019-05-30 18:32:28,973 INFO EventLog: User u1 has successfuly created a store

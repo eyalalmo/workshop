@@ -15,28 +15,28 @@ namespace workshop192.Domain
     {
         public static void init()
         {
-  
+
             string filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
-            string[] lines = File.ReadAllLines(filePath+ "/input.txt");
+            string[] lines = File.ReadAllLines(filePath + "/input.txt");
             //int sessionid =0;
             //Session s=new Session();
-           // int sID = 0;
+            // int sID = 0;
 
-               foreach (string line in lines)
-              {
-              string[] input=  line.Split(' ');
+            foreach (string line in lines)
+            {
+                string[] input = line.Split(' ');
                 if (input[0] == "createSession")
                 {
                     int sessionid = DBSession.getInstance().generate();
                     DBSession.getInstance().getSession(sessionid);
                 }
-                else if(input[0] == "register")
+                else if (input[0] == "register")
                 {
                     int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
                     Session s = DBSession.getInstance().getSession(session);
                     s.register(input[1], input[2]);
                 }
-                else if(input[0] == "init")
+                else if (input[0] == "init")
                 {
                     DBProduct.getInstance().init();
                     DBSession.getInstance().init();
@@ -48,20 +48,20 @@ namespace workshop192.Domain
                     DeliveryService.getInstance().connectToSystem();
                     ConsistencySystem.getInstance().connectToSystem();
                 }
-                else if  (input[0] == "login")
+                else if (input[0] == "login")
                 {
                     //////////////////////////////check
-                   int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                    int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
                     Session s = DBSession.getInstance().getSession(session);
                     s.login(input[1], input[2]);
                 }
                 else if (input[0] == "createStore")
                 {
-                     DomainBridge.getInstance().createStore(Int32.Parse(input[3]), input[1], input[2]);
+                    DomainBridge.getInstance().createStore(Int32.Parse(input[3]), input[1], input[2]);
                 }
                 else if (input[0] == "addProduct")
                 {
-                    DomainBridge.getInstance().addProduct( input[1], input[2], Int32.Parse(input[3]), Int32.Parse(input[4]), Int32.Parse(input[5]), Int32.Parse(input[6]), Int32.Parse(input[7]));
+                    DomainBridge.getInstance().addProduct(input[1], input[2], Int32.Parse(input[3]), Int32.Parse(input[4]), Int32.Parse(input[5]), Int32.Parse(input[6]), Int32.Parse(input[7]));
                 }
                 else if (input[0] == "logout")
                 {
@@ -112,9 +112,6 @@ namespace workshop192.Domain
                 }
 
             }
-
-          
-       
         }
         
       //  int sessionid = DBSession.getInstance().generate();

@@ -19,6 +19,13 @@ namespace workshop192.Domain
             this.duration = duration;
         }
 
+        internal Discount(int discountID, double percentage, string duration)
+        {
+            this.percentage = percentage;
+            this.duration = duration;
+            this.id = discountID;
+        }
+
         public double getPercentage()
         {
             return percentage;
@@ -27,7 +34,5 @@ namespace workshop192.Domain
         {
             return duration;
         }
-       
-
     }
 }

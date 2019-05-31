@@ -39,8 +39,8 @@ namespace workshop192.Domain.Tests
 
             store = session1.createStore("mystore", "a store");
             sr = session1.getSubscribedUser().getStoreRole(store);
-            p = new Product("product", "cat", 10, 0, 10, store);
-            p1 = new Product("product1", "cat", 10, 0, 10, store);
+            p = new Product("product", "cat", 10, 0, 10, store.getStoreID());
+            p1 = new Product("product1", "cat", 10, 0, 10, store.getStoreID());
 
             per = new Permissions(true, true, true);
         }
