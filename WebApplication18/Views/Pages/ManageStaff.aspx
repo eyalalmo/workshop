@@ -76,6 +76,7 @@
             var doc = document.getElementById('allRoles');
             var i;
             var jsonList = JSON.parse(response);
+            console.log(jsonList)
             var appointed = ""
             var buttons = "";
             var role = "Store Owner"
@@ -92,7 +93,7 @@
                 HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		                   <div class="my-list">
 			<h4>`+ role + `\n</h4>
-            <h5> Username:`+ jsonList[i].user.username + `\n</h5>
+            <h5> Username:`+ jsonList[i].userName + `\n</h5>
 			<span> ` + appointed + `\n</span>
             <div class="clearfix">
             `+buttons+`

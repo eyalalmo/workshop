@@ -3,3 +3,13 @@
    at workshop192.Bridge.DomainBridge.addPendingOwner(Int32 storeid, String username, Int32 sessionid) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Bridge\DomainBridge.cs:line 973
    at workshop192.ServiceLayer.StoreService.addOwner(Int32 store, String username, Int32 session) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\ServiceLayer\StoreService.cs:line 207
    at WebApplication18.Controllers.StoreController.addOwner(String username, Int32 storeId) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Controllers\StoreController.cs:line 40
+2019-05-31 21:07:20,936 ERROR ErrorLog: An Error has occured. Function: addOwner; Stack Trace:    ?-  workshop192.Domain.Store.addPendingOwner(String appointer, SubscribedUser pending) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Domain\Store.cs:???? 373
+   ?-  workshop192.Domain.StoreOwner.addPendingOwner(SubscribedUser pending) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Domain\StoreOwner.cs:???? 236
+   ?-  workshop192.Bridge.DomainBridge.addPendingOwner(Int32 storeid, String username, Int32 sessionid) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Bridge\DomainBridge.cs:???? 973
+   ?-  workshop192.ServiceLayer.StoreService.addOwner(Int32 store, String username, Int32 session) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\ServiceLayer\StoreService.cs:???? 207
+   ?-  WebApplication18.Controllers.StoreController.addOwner(String username, Int32 storeId) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Controllers\StoreController.cs:???? 40
+2019-05-31 21:08:16,756 ERROR ErrorLog: An Error has occured. Function: addOwner; Stack Trace:    ?-  workshop192.Domain.Store.addPendingOwner(String appointer, SubscribedUser pending) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Domain\Store.cs:???? 373
+   ?-  workshop192.Domain.StoreOwner.addPendingOwner(SubscribedUser pending) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Domain\StoreOwner.cs:???? 236
+   ?-  workshop192.Bridge.DomainBridge.addPendingOwner(Int32 storeid, String username, Int32 sessionid) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Bridge\DomainBridge.cs:???? 973
+   ?-  workshop192.ServiceLayer.StoreService.addOwner(Int32 store, String username, Int32 session) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\ServiceLayer\StoreService.cs:???? 207
+   ?-  WebApplication18.Controllers.StoreController.addOwner(String username, Int32 storeId) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Controllers\StoreController.cs:???? 40

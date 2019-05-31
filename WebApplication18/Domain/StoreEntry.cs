@@ -14,8 +14,6 @@ namespace workshop192.Domain
         public int active;
         public int minPurchasePolicy;
         public int maxPurchasePolicy;
-        // System.String active, System.Int32 minPurchasePolicy, System.Int32 maxPurchasePolicy) is required.
-
         public StoreEntry(int storeId,string name, string description, int numOfOwners, int active, int minPurchasePolicy,  int maxPurchasePolicy)
         {
             this.storeId = storeId;

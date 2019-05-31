@@ -26,6 +26,9 @@ namespace workshop192.Domain
         public void init()
         {
             //init both
+            if (instance == null)
+                instance = new DBStore();
+            storeRole = new LinkedList<StoreRole>();
             stores = initStores();
             nextStoreID = getUpdatedId();
         }
@@ -58,6 +61,7 @@ namespace workshop192.Domain
                             StoreOwner so = new StoreOwner(appointedBy, user, s);
                             s.addStoreRole(so);
                             storeRole.AddLast(so);
+                            newStores.AddLast(s);
 
                         }
                         else if (element.getStoreId() == s.getStoreID() && element.getIsOwner() == 0)
@@ -74,12 +78,13 @@ namespace workshop192.Domain
                             StoreManager sm = new StoreManager(appointedBy, s, user, p);
                             s.addStoreRole(sm);
                             storeRole.AddLast(sm);
+                            newStores.AddLast(s);
                         }
                     }
 
 
                 }
-                connection.Close();
+      
                 return newStores;
             }
             catch(Exception e)
@@ -160,13 +165,20 @@ namespace workshop192.Domain
                 string sql = "INSERT INTO [dbo].[StoreRoles] (storeId, appointedBy,userName,isOwner,editProduct,editDiscount,editPolicy)" +
                                  " VALUES (@storeId, @appointedBy, @userName,@isOwner,@editProduct,@editDiscount,@editPolicy)";
                 int storeId = sr.getStore().getStoreID();
-                string appointedBy = sr.getAppointedBy().getUsername();
+                string appointedBy=null;
+                if (sr.getAppointedBy()!=null)
+                     appointedBy = sr.getAppointedBy().getUsername();
                 string userName = sr.getUser().getUsername();
                 int isOwner = sr.getIsOwner();
-                int editProduct = sr.GetPermissions().getPermission("editProduct");
-                int editDiscount = sr.GetPermissions().getPermission("editDiscount");
-                int editPolicy = sr.GetPermissions().getPermission("editPolicy");
-
+                int editProduct = 1;
+                int editDiscount = 1;
+                int editPolicy = 1;
+                if (isOwner == 0)
+                {
+                     editProduct = sr.GetPermissions().getPermission("editProduct");
+                     editDiscount = sr.GetPermissions().getPermission("editDiscount");
+                     editPolicy = sr.GetPermissions().getPermission("editPolicy");
+                }
                 connection.Execute(sql, new { storeId, appointedBy, userName, isOwner, editProduct, editDiscount, editPolicy });
                 storeRole.AddFirst(sr);
                 connection.Close();
@@ -303,12 +315,11 @@ namespace workshop192.Domain
             {
                 connection.Open();
                 int idNum = connection.Query<int>("SELECT id FROM [dbo].[IDS] WHERE type=@type ", new { type = "store" }).First();
-                int next = idNum + 1;
+                int next = idNum+1;
                 connection.Execute("UPDATE [dbo].[IDS] SET id = @id WHERE type = @type", new { id = next, type = "store" });
-                nextStoreID = next;
-                int id = nextStoreID;
+                nextStoreID = idNum;
                 connection.Close();
-                return id;
+                return idNum;
             }
            catch (Exception e)
             {
