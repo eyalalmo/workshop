@@ -83,11 +83,11 @@ namespace workshop192.Domain
         {
             if (type == reliantType.sameProduct)
             {
-                return "Quantity of product " + product.getProductName() + " ID: " + product.getProductID() +" is at least " + numOfProducts;
+                return "Quantity of product " + product.getProductName() + " ID: " + product.getProductID() +" is at least " + numOfProducts + " Discount "+percentage*100+"%";
             }
             if(type == reliantType.totalAmount)
             {
-                return "Total cart price over $" + totalAmount;
+                return "Total cart price over $" + totalAmount + " Discount " + percentage * 100 + "%";
             }
             return "";
         }

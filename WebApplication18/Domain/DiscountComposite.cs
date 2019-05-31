@@ -63,7 +63,7 @@ namespace workshop192.Domain
             if (type == Type.and)
             {
                 bool cond = true;
-                foreach (Discount d in children)
+                foreach (DiscountComponent d in children)
                 {
                     if (!d.checkCondition(productList, productsActualPrice))
                     {
@@ -76,7 +76,7 @@ namespace workshop192.Domain
             else if (type == Type.or)
             {
                 bool cond = false;
-                foreach (Discount d in children)
+                foreach (DiscountComponent d in children)
                 {
                     if (d.checkCondition(productList, productsActualPrice))
                     {
@@ -88,7 +88,7 @@ namespace workshop192.Domain
             }
             else { 
                 int count = 0;
-                foreach (Discount d in children)
+                foreach (DiscountComponent d in children)
                 {
                     if (d.checkCondition(productList, productsActualPrice))
                     {
@@ -150,7 +150,7 @@ namespace workshop192.Domain
                 return productsActualPrice;
             if(type == Type.and )
             {
-                foreach (Discount d in children)
+                foreach (DiscountComponent d in children)
                 {
                     productsActualPrice = d.updatePrice(productList, productsActualPrice);
                 }
@@ -158,7 +158,7 @@ namespace workshop192.Domain
             }
             else if (type == Type.or)
             {
-                foreach(Discount d in children)
+                foreach(DiscountComponent d in children)
                 {
                     if(d.checkCondition(productList, productsActualPrice))
                     {
@@ -168,7 +168,7 @@ namespace workshop192.Domain
             }
             else
             { // xor
-                foreach (Discount d in children)
+                foreach (DiscountComponent d in children)
                 {
                     if (d.checkCondition(productList, productsActualPrice))
                     {
@@ -185,10 +185,32 @@ namespace workshop192.Domain
 
         public override void setComplexCondition(bool complexCondition, Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
         {
-            foreach (Discount d in children)
+            if (type == Type.xor && complexCondition)
             {
-                d.setComplexCondition(complexCondition, productList, productsActualPrice);
-               
+                bool found = false;
+                foreach (DiscountComponent d in children)
+                {
+                    if (!found)
+                    {
+                        if (d.checkCondition(productList, productsActualPrice)){
+                            d.setComplexCondition(complexCondition, productList, productsActualPrice);
+                            found = true;
+                        }
+                    }
+                    else
+                    {
+                        d.setComplexCondition(false, productList, productsActualPrice);
+                    }
+
+                }
+            }
+            else
+            {
+                foreach (DiscountComponent d in children)
+                {
+                    d.setComplexCondition(complexCondition, productList, productsActualPrice);
+
+                }
             }
         }
     }

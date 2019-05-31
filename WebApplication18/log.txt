@@ -213,3 +213,11 @@ Parameter name: value
 2019-05-31 20:35:37,639 INFO  System Log - User et has successfuly logged in.
 2019-05-31 20:48:41,550 INFO  System Log - User et has successfuly logged in.
 2019-05-31 20:56:27,700 INFO  System Log - User et has successfuly logged in.
+2019-05-31 21:11:54,384 INFO  System Log - User et has successfuly logged in.
+2019-05-31 21:15:13,968 ERROR System Log - Add Reliant Discount : percentage of discount must be a number between 0 to 1
+2019-05-31 21:20:11,954 INFO  System Log - User et has successfuly logged in.
+2019-05-31 21:28:16,033 INFO  System Log - User et has successfuly logged in.
+2019-05-31 21:52:44,733 INFO  System Log - User et has successfuly logged in.
+2019-05-31 22:06:16,408 INFO  System Log - User et has successfuly logged in.
+2019-05-31 22:41:05,718 INFO  System Log - User et has successfuly logged in.
+2019-05-31 22:43:45,559 ERROR System Log - Error in adding to shopping cart : Error: Product already exists on Cart

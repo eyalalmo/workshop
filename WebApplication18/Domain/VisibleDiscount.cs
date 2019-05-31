@@ -52,7 +52,7 @@ namespace workshop192.Domain
             }
             else
             {
-                return "Entire Store Discount";
+                return "Entire Store Discount "+percentage*100+" % ";
             }
         }
         

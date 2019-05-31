@@ -36,8 +36,8 @@
                             if (response != "") {
                                 console.log(response);
 
-                                var str ="<table class =\"table table-bordered text-center\">"
-                                console.log("str:::::" + str+"\n");
+                                var str = "<table class =\"table table-bordered text-center\">"
+                                console.log("str:::::" + str + "\n");
                                 str = str + "<tbody>";
                                 var discounts = response.split(";");
                                 for (i = 0; i < discounts.length - 1; i++) {
@@ -47,10 +47,19 @@
                                     var percentage = discountfields[2];
                                     var duration = discountfields[3];
                                     var discountID = discountfields[4];
-                                    str +=
-                                        "<tr>" +
-                                        "<td style = \"width:450px\" align=\"left\"> <h4 class=\"discount\"><strong>" + type + "</strong></h4><h4><small>" + description + "</small></h4></td><td style = \"width:120px\;top:100px; align=\"center\">"+duration+"</td><td style = \"width:50px\"> <div class=\"quantity\"><input type=\"button\" value=\"+\" onclick=\"plusQuantity(" + discountID + "," + percentage+");\" class=\"plus\"><input type=\"text\" value=\"" + percentage + " %\" title=\"Qty\" class=\"qty\"><input type=\"button\" value=\"-\" onclick=\"minusQuantity(" + discountID + "," + percentage+");\" class=\"minus\"></div></td><td style = \"width:50px\" align=\"center\"> <button type=\"button\" class=\"btn btn-danger\" onclick=\"deleteRow("+discountID+");\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td></tr>";
+                                    if (type == "Complex") {
+                                        str +=
+                                            "<tr>" +
+                                            "<td style = \"width:450px\" align=\"left\"> <h4 class=\"discount\"><strong>" + type + "</strong></h4><h4><small>" + description + "</small></h4></td><td style = \"width:120px\;top:100px; align=\"center\">" + duration + "</td><td style = \"width:50px\"><div></div></td><td style = \"width:50px\" align=\"center\"> <button type=\"button\" class=\"btn btn-danger\" onclick=\"deleteRow(" + discountID + ");\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td></tr>";
+                                    }
+                                    
+                                    else {
+                                        str +=
+                                            "<tr>" +
+                                            "<td style = \"width:450px\" align=\"left\"> <h4 class=\"discount\"><strong>" + type + "</strong></h4><h4><small>" + description + "</small></h4></td><td style = \"width:120px\;top:100px; align=\"center\">" + duration + "</td><td style = \"width:50px\"> <div class=\"quantity\"><input type=\"button\" value=\"+\" onclick=\"plusQuantity(" + discountID + "," + percentage + ");\" class=\"plus\"><input type=\"text\" value=\"" + percentage + " %\" title=\"Qty\" class=\"qty\"><input type=\"button\" value=\"-\" onclick=\"minusQuantity(" + discountID + "," + percentage + ");\" class=\"minus\"></div></td><td style = \"width:50px\" align=\"center\"> <button type=\"button\" class=\"btn btn-danger\" onclick=\"deleteRow(" + discountID + ");\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td></tr>";
+                                    }
                                 }
+               
                                 str += " </tbody>" + "</table>";
                                 mainDiv.innerHTML = str;
                                 var str = "";
