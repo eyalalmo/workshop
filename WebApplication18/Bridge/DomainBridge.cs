@@ -189,10 +189,9 @@ namespace workshop192.Bridge
             return DBCookies.getInstance().getUserByHash(hash);
         }
 
-        internal string addSession(string hash, int session)
+        internal void addSession(string hash, int session)
         {
-            return DBCookies.getInstance().addSession(hash, session);
-
+            DBCookies.getInstance().addSession(hash, session);
         }
 
         public bool isAllowedToEditPolicy(int storeId, int session)
@@ -331,7 +330,7 @@ namespace workshop192.Bridge
             Store store = storeDB.getStore(storeID);
             Session session = DBSession.getInstance().getSession(sessionid);
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
-            Product product = new Product(productName, productCategory, price, rank, quantityLeft, store);
+            Product product = new Product(productName, productCategory, price, rank, quantityLeft, store.getStoreID());
 
             if (sr == null)
                 throw new RoleException("Error: You have no permission to add a product");

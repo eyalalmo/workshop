@@ -17,9 +17,9 @@ namespace UnitTestProject3
         [TestMethod]
         public void testAddRemoveStore()
         {
-            Product p1 = new Product("p1", "ff", 56, 2, 10, store);
-            Product p2 = new Product("p2", "ff", 56, 2, 10, store);
-            Product p3 = new Product("p3", "ff", 56, 2, 10, store);
+            Product p1 = new Product("p1", "ff", 56, 2, 10, store.getStoreID());
+            Product p2 = new Product("p2", "ff", 56, 2, 10, store.getStoreID());
+            Product p3 = new Product("p3", "ff", 56, 2, 10, store.getStoreID());
             store.addProduct(p1);
             store.addProduct(p2);
             store.addProduct(p3);

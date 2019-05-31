@@ -35,7 +35,7 @@ namespace UnitTestProject3
         [TestMethod]
         public void addToCartTest1()
         {
-            Product p1 = new Product("p1", "ff", 56, 2, 10, DBStore.getInstance().getStore(store1));
+            Product p1 = new Product("p1", "ff", 56, 2, 10, DBStore.getInstance().getStore(store1).getStoreID());
             basket.addToCart(p1, 5);
             Assert.AreEqual(basket.getShoppingCarts().Keys.Count, 1);
         }
