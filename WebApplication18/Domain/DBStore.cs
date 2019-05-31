@@ -1,24 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebApplication18.DAL;
-using Dapper;
 
 namespace workshop192.Domain
 {
-    public class DBStore :Connector
+    public class DBStore
     {
         private static DBStore instance;
         private LinkedList<Store> stores;
         private LinkedList<StoreRole> storeRole;
-        private static int nextStoreID=0;
+        private static int nextStoreID = 0;
 
         public static DBStore getInstance()
         {
-            if (instance == null) 
+            if (instance == null)
                 instance = new DBStore();
 
             return instance;
@@ -34,7 +31,7 @@ namespace workshop192.Domain
         {
             stores = new LinkedList<Store>();
             storeRole = new LinkedList<StoreRole>();
-           // nextStoreID = 0;
+            // nextStoreID = 0;
         }
         public void init()
         {
@@ -81,32 +78,11 @@ namespace workshop192.Domain
         {
             storeRole.AddFirst(sr);
         }
-        public int addStore(Store s)
+        public int addStore(Store store)
         {
-            try
-            {
-                connection.Open();
-                string sql = "INSERT INTO [dbo].[Stores] (storeId, name, description)" +
-                             " VALUES (@storeId, @name, @description)";
-                connection.Execute(sql, new { storeId=555, name="Yael", description="aaa" });
 
-                var st2 = connection.Query<Store>("SELECT storeId, name, description FROM Stores WHERE storeId=@storeId ", new { storeId = 555 });
-
-                /* 
-                 cmd.ExecuteNonQuery();
-                 */
-                connection.Close();
-                stores.AddFirst(s);
-                return s.getStoreID();
-            }
-            catch (Exception e)
-            {
-                    connection.Close();
-                
-                throw new Exception("DB ERROR");
-            }
-            //////////////////////////////
-          
+            stores.AddFirst(store);
+            return store.getStoreID();
         }
 
         public Store getStore(int storeID)
@@ -136,7 +112,7 @@ namespace workshop192.Domain
         {
             if (stores.Contains(s))
             {
-             
+
                 s.closeStore();
                 foreach (StoreRole sr in storeRole)
                 {
@@ -184,7 +160,8 @@ namespace workshop192.Domain
             return res;
         }
 
-        public List<StoreRole> getRoles(int id) {
+        public List<StoreRole> getRoles(int id)
+        {
             return getStore(id).getRoles();
         }
     }

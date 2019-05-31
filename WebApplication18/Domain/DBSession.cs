@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebApplication18.DAL;
-using Dapper;
 
 namespace workshop192.Domain
 {
-    public class DBSession :Connector
+    public class DBSession
     {
         private static DBSession instance;
         private Dictionary<int, Session> sessions;
-       // private static int sessionNum = 1;
+        private static int sessionNum = 1;
 
         public static DBSession getInstance()
         {
@@ -33,71 +31,22 @@ namespace workshop192.Domain
 
         public int generate()
         {
-            try
-            {
-                connection.Open();
-                int sessionNum = connection.Query<int>("SELECT id FROM [dbo].[IDS] WHERE type=@type ", new { type = "session" }).First();
-                int next = sessionNum + 1;
-                connection.Execute("UPDATE [dbo].[IDS] SET id = @id WHERE type = @type", new { id = next, type = "session" });
-                string sql = "INSERT INTO [dbo].[Session] (id)" +
-                                 " VALUES (@id)";
-                connection.Execute(sql, new {id=sessionNum});
-                sessions.Add(sessionNum, new Session());
-
-                connection.Close();
-                return sessionNum;
-            }
-            catch (Exception)
-            {
-                connection.Close();
-                return -1;
-            }
+            sessions.Add(sessionNum, new Session());
+            return sessionNum++;
         }
 
         internal Session getSession(int sessionid)
         {
-            try
-            {
-                connection.Open();
-                var v = connection.Query<Session>("SELECT id FROM [dbo].[Session] WHERE id=@id ", new { id = sessionid });
-                if (!sessions.ContainsKey(sessionid))
-                {
-                    Session s = new Session();
-                    sessions.Add(sessionid,s);
-                    connection.Close();
-                    return s;
-                }
-                else
-                {
-                    sessions.TryGetValue(sessionid, out Session s);
-                    connection.Close();
-                    return s;
-                }
-                
-            }
-            catch (Exception)
-            {
-                connection.Close();
-                return null;
-            }
+            if (!sessions.ContainsKey(sessionid))
+                throw new DoesntExistException("session doesnt exist");
+            return sessions[sessionid];
         }
 
         public void removeSession(int s)
         {
             if (!sessions.ContainsKey(s))
                 throw new DoesntExistException("session doesnt exist");
-            try
-            {
-                sessions.Remove(s);
-                connection.Open();
-                connection.Execute("DELETE FROM Session WHERE  id=@id ", new { id = s });
-                connection.Close();
-            }
-            catch (Exception)
-            {
-                connection.Close();
-
-            }
+            sessions.Remove(s);
         }
 
         public Session getSessionOfSubscribedUser(SubscribedUser sub)
@@ -111,7 +60,7 @@ namespace workshop192.Domain
             }
             throw new DoesntExistException("session doesnt exist");
         }
-        
+
         public void initSession()
         {
             sessions = new Dictionary<int, Session>();
@@ -121,7 +70,8 @@ namespace workshop192.Domain
         {
             LinkedList<int> result = new LinkedList<int>();
 
-            foreach (KeyValuePair<int, Session> s in sessions) {
+            foreach (KeyValuePair<int, Session> s in sessions)
+            {
                 SubscribedUser su = s.Value.getSubscribedUser();
                 if (su != null && su.getUsername() == username)
                     result.AddFirst(s.Key);
