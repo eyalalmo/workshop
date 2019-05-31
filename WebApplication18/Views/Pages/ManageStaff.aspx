@@ -86,14 +86,14 @@
                     if (!jsonList[i].isOwner) {
                         role = "Store Manager"
                         appointed = "Appointed By: " + jsonList[i].appointedBy.username;
-                        buttons = `<button type="button" class="btn btn-primary" onClick="removeRole( \'`+ jsonList[i].user.username +`\' )"/>
+                        buttons = `<button type="button" class="btn btn-primary" onClick="removeRole( \'`+ jsonList[i].userName.username +`\' )"/>
              Remove
             </button>`
                     }
                 HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		                   <div class="my-list">
 			<h4>`+ role + `\n</h4>
-            <h5> Username:`+ jsonList[i].userName + `\n</h5>
+            <h5> Username:`+ jsonList[i].userName.username + `\n</h5>
 			<span> ` + appointed + `\n</span>
             <div class="clearfix">
             `+buttons+`
@@ -119,7 +119,7 @@
 
                         role = "Store Manager"
                         appointed = "Appointed By: " + jsonList[i].appointedBy.username;
-                        buttons = `<button type="button" class="btn btn-primary" onClick="removeRole( \'`+ jsonList[i].user.username +`\' )"/>
+                        buttons = `<button type="button" class="btn btn-primary" onClick="removeRole( \'`+ jsonList[i].userName.username +`\' )"/>
              Remove
             </button>`
                 HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">

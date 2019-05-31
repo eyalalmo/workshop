@@ -205,3 +205,4 @@
 2019-06-01 01:02:35,644 INFO EventLog: User u4 has successfuly logged in.
 2019-06-01 01:02:41,521 INFO EventLog: User u4 has successfuly created a store
 2019-06-01 01:03:06,225 INFO EventLog: User u4 has successfuly logged in.
+2019-06-01 01:46:57,925 INFO EventLog: User u3 has successfuly logged in.
