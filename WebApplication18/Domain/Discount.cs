@@ -12,9 +12,11 @@ namespace workshop192.Domain
        // protected double percentage;
         protected bool isPartOfComplex;
         //private int id;
+        DateTime duration;
 
         public Discount(double percentage, string duration): base(percentage, duration)
         {
+
             //this.percentage = percentage;
             this.isPartOfComplex = false;
         }
