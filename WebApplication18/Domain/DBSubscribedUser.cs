@@ -23,7 +23,7 @@ namespace workshop192.Domain
             users = new Dictionary<string, SubscribedUser>();
             loggedInUser = new Dictionary<string, SubscribedUser>();
           
-        }
+         }
 
         public void init()
         {
