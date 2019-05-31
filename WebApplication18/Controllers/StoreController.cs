@@ -145,6 +145,74 @@ namespace WebApplication18.Controllers
             }
         }
 
+        [Route("api/store/getAllPending")]
+        [HttpGet]
+        public string getAllPending(int storeId)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                return StoreService.getInstance().getAllPending(storeId,session);
+
+            }
+            catch (ClientException e)
+            {
+                return e.Message.ToString();
+            }
+            catch (Exception e)
+            {
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: Get All Roles; Stack Trace: " + e.StackTrace);
+                return "error";
+            }
+        }
+
+        [Route("api/store/signContract")]
+        [HttpGet]
+        public string signContract(string username, int storeId)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().signContract(storeId, username, session);
+                return "ok";
+            }
+            catch (ClientException e)
+            {
+                SystemLogger.getEventLog().Error("Error in signing a contract : " + e.Message.ToString());
+                return e.Message.ToString();
+            }
+            catch (Exception e)
+            {
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: signContract; Stack Trace: " + e.StackTrace);
+                return "error";
+            }
+        }
+
+        [Route("api/store/declineContract")]
+        [HttpGet]
+        public string declineContract(string username, int storeId)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().declineContract(storeId, username, session);
+                return "ok";
+            }
+            catch (ClientException e)
+            {
+                SystemLogger.getEventLog().Error("Error in declining a contract : " + e.Message.ToString());
+                return e.Message.ToString();
+            }
+            catch (Exception e)
+            {
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: declineContract; Stack Trace: " + e.StackTrace);
+                return "error";
+            }
+        }
+
+
+
+
         [Route("api/store/addVisibleDiscount")]
         [HttpGet]
         public string addVisibleDiscount(int storeID, string percentage, string duration)

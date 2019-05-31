@@ -39,6 +39,7 @@ namespace workshop192.Domain
             invisibleDiscountList = new LinkedList<InvisibleDiscount>();
             maxPurchasePolicy = null;
             minPurchasePolicy = null;
+            pendingOwners = new Dictionary<string, HashSet<string>>();
         }
         public Store(int storeId,string name, string description)
         {

@@ -82,3 +82,43 @@
 2019-05-31 14:18:35,058 INFO EventLog: User u1 has successfuly created a store
 2019-05-31 14:19:38,501 ERROR EventLog: Error in adding an owner : Error: No such username
 2019-05-31 14:21:00,738 INFO EventLog: User u1 has logged out
+2019-05-31 17:10:00,072 INFO EventLog: User u2 has successfuly created a store
+2019-05-31 17:34:37,212 INFO EventLog: User u2 has successfuly created a store
+2019-05-31 17:34:51,006 INFO EventLog: User u1 has successfuly logged in.
+2019-05-31 17:34:56,747 INFO EventLog: User u1 has successfuly created a store
+2019-05-31 17:38:02,393 INFO EventLog: User u2 has successfuly created a store
+2019-05-31 17:39:39,675 INFO EventLog: User u2 has successfuly logged in.
+2019-05-31 17:39:45,235 INFO EventLog: User u2 has successfuly created a store
+2019-05-31 17:49:10,852 INFO EventLog: User u2 has successfuly created a store
+2019-05-31 17:49:21,190 INFO EventLog: User u2 has successfuly logged in.
+2019-05-31 17:54:15,975 INFO EventLog: User u2 has successfuly created a store
+2019-05-31 17:54:28,728 INFO EventLog: User u2 has successfuly logged in.
+2019-05-31 17:57:59,760 INFO EventLog: User u2 has successfuly created a store
+2019-05-31 18:03:45,319 INFO EventLog: User u2 has successfuly logged in.
+2019-05-31 18:06:52,276 INFO EventLog: User u2 has successfuly created a store
+2019-05-31 18:07:07,329 INFO EventLog: User u2 has successfuly logged in.
+2019-05-31 18:07:56,255 INFO EventLog: User u2 has successfuly created a store
+2019-05-31 18:08:06,312 INFO EventLog: User u2 has successfuly logged in.
+2019-05-31 18:10:49,230 INFO EventLog: User u2 has successfuly created a store
+2019-05-31 18:11:01,892 INFO EventLog: User u2 has successfuly logged in.
+2019-05-31 18:17:25,660 INFO EventLog: User u2 has successfuly created a store
+2019-05-31 18:17:40,513 INFO EventLog: User u2 has successfuly logged in.
+2019-05-31 18:19:03,002 INFO EventLog: User u2 has successfuly created a store
+2019-05-31 18:19:13,492 INFO EventLog: User u2 has successfuly logged in.
+2019-05-31 18:22:10,344 INFO EventLog: User u2 has successfuly created a store
+2019-05-31 18:22:19,881 INFO EventLog: User u2 has successfuly logged in.
+2019-05-31 18:23:23,955 ERROR EventLog: Add Manager : Error: Username u4 already has a role in store s1
+2019-05-31 18:24:06,769 INFO EventLog: User u2 has successfuly created a store
+2019-05-31 18:24:16,956 INFO EventLog: User u2 has successfuly logged in.
+2019-05-31 18:38:15,109 INFO EventLog: User u2 has successfuly created a store
+2019-05-31 18:38:27,218 INFO EventLog: User u2 has successfuly logged in.
+2019-05-31 18:38:36,037 ERROR EventLog: Error in adding an owner : Error: Username u3 already has a role in store s1
+2019-05-31 18:38:54,670 INFO EventLog: User u2 has logged out
+2019-05-31 18:38:58,302 INFO EventLog: User u4 has successfuly logged in.
+2019-05-31 18:39:48,368 ERROR EventLog: Remove Role Error: Error: User u4 didn't appoint u3
+2019-05-31 18:40:05,455 ERROR EventLog: Error in adding an owner : Owner already waiting for approval
+2019-05-31 18:41:57,420 INFO EventLog: User u2 has successfuly created a store
+2019-05-31 18:42:07,204 INFO EventLog: User u2 has successfuly logged in.
+2019-05-31 18:42:09,992 INFO EventLog: User u2 has logged out
+2019-05-31 18:42:32,975 INFO EventLog: User u2 has successfuly created a store
+2019-05-31 18:42:42,527 INFO EventLog: User u2 has successfuly logged in.

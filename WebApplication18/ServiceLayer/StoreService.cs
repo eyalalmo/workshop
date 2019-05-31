@@ -368,6 +368,12 @@ namespace workshop192.ServiceLayer
         }
 
 
+        public string getAllPending(int id,int sessionId)
+        {
+            return db.getAllPending(id,sessionId);
+        }
+
+
 
         public void setMinAmountPolicy(int storeID, int sessionID, int newMinAmount)
         {

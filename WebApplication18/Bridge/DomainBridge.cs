@@ -970,15 +970,19 @@ namespace workshop192.Bridge
                 throw new RoleException("this user can't appoint to this store");
             if (store.getNumberOfOwners() == 1)
             {
-                sr.addPendingOwner(toAdd);
+                sr.addOwner(toAdd);
             }
-            foreach (StoreRole role in store.getRoles()) // send messages to all the owners in the store - to approve the new owner
+            else
             {
-                string message = "User " + username + "has been offered as an Owner to the store " +
-                store.getStoreName() + ". Please approve or decline the partnership.";
-                if (role is StoreOwner && role != sr)
+                sr.addPendingOwner(toAdd);
+                foreach (StoreRole role in store.getRoles()) // send messages to all the owners in the store - to approve the new owner
                 {
-                    messager.message(role.getUser().getUsername(), message);
+                    string message = "User " + username + "has been offered as an Owner to the store " +
+                    store.getStoreName() + ". Please approve or decline the partnership.";
+                    if (role is StoreOwner && role != sr)
+                    {
+                        messager.message(role.getUser().getUsername(), message);
+                    }
                 }
             }
 
@@ -1041,10 +1045,7 @@ namespace workshop192.Bridge
 
             if (sr.getStore() != store)
                 throw new RoleException("this user can't appoint to this store");
-            if (store.getNumberOfOwners() == 1)
-            {
-                sr.declineContract(session.getSubscribedUser().getUsername(), toAdd);
-            }
+            sr.declineContract(session.getSubscribedUser().getUsername(), toAdd);
 
         }
 
@@ -1069,10 +1070,11 @@ namespace workshop192.Bridge
             Dictionary<string, HashSet<string>> pending = store.getPending();
             foreach (KeyValuePair<string, HashSet<string>> entry in pending)
             {
-                if (entry.Value.Contains(sr.getUser().getUsername()))
+                if (!entry.Value.Contains(sr.getUser().getUsername()))
                     myPendingOwners.Add(entry.Key);
             }
-            return JsonConvert.SerializeObject(myPendingOwners);
+            string s = JsonConvert.SerializeObject(myPendingOwners, Formatting.Indented);
+            return s;
         }
 
     }

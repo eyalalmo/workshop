@@ -28,12 +28,13 @@
      <h2>Staff:</h2>
 	</div>
 	</div>
+    
+         
+  </div>
     <div class="container">
 	<div id="allPending" class="row">
 	</div>
 	</div>
-         
-  </div>
  
 <div class="modal" id="myModal">
   <div class="modal-dialog">
@@ -76,13 +77,12 @@
             var doc = document.getElementById('allRoles');
             var i;
             var jsonList = JSON.parse(response);
-            var appointed = ""
-            var buttons = "";
-            var role = "Store Owner"
             var HTML="";
             for (i = 0; i < jsonList.length; i++) {
-
-                    if (!jsonList[i].isOwner) {
+                var appointed = ""
+                var buttons = "";
+                var role = "Store Owner"
+                    if (jsonList[i].isOwner===false) {
                         role = "Store Manager"
                         appointed = "Appointed By: " + jsonList[i].appointedBy.username;
                         buttons = `<button type="button" class="btn btn-primary" onClick="removeRole( \'`+ jsonList[i].user.username +`\' )"/>
@@ -109,26 +109,22 @@
         function getPending(response) {
             var doc = document.getElementById('allPending');
             var i;
+            console.log(response);
             var jsonList = JSON.parse(response);
             var HTML = "";
+            
             if (jsonList.length > 0) {
-                HTML+=`<h2>Staff:</h2>`
+                HTML+=`<h2>Pending Store Owners:</h2>`
             }
             for (i = 0; i < jsonList.length; i++) {
-
-                        role = "Store Manager"
-                        appointed = "Appointed By: " + jsonList[i].appointedBy.username;
-                        buttons = `<button type="button" class="btn btn-primary" onClick="removeRole( \'`+ jsonList[i].user.username +`\' )"/>
-             Remove
-            </button>`
                 HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 		                   <div class="my-list">
-            <h5> Username:`+ jsonList[i].user.username + `\n</h5>
+            <h5> Username:`+ jsonList[i] + `\n</h5>
             <div class="clearfix">
-            <button type="button" class="btn btn-primary" onClick="signContract( \'`+ jsonList[i].user.username +`\' )"/>
+            <button type="button" class="btn btn-primary" onClick="signContract( \'`+ jsonList[i] +`\' )"/>
              Sign Contract
             </button>
-            <button type="button" class="btn btn-danger" onClick="declineContract( \'`+ jsonList[i].user.username +`\' )"/>
+            <button type="button" class="btn btn-danger" onClick="declineContract( \'`+ jsonList[i] +`\' )"/>
              declineContract
             </button>
         </div>
@@ -220,7 +216,7 @@
             });
         }
 
-        function removeRole(username) {
+        function declineContract(username) {
 
             var getUrl = window.location;
             var baseUrl = getUrl.protocol + "//" + getUrl.host
