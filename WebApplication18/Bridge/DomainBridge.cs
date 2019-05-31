@@ -674,6 +674,7 @@ namespace workshop192.Bridge
 
         internal void addStoreVisibleDiscount(int storeID, double percentage, string duration, int session)
         {
+            checkDiscoutDuration(duration);
             Session user = DBSession.getInstance().getSession(session);
             if (user == null)
                 throw new DoesntExistException("user is not logged in");
@@ -690,8 +691,41 @@ namespace workshop192.Bridge
 
         }
 
+        private void checkDiscoutDuration(string duration)
+        {
+            if (duration.Length != 10)
+                throw new ArgumentException("Discount duration is not in the required foramt DD/MM/YYYY");
+            char[] arr = duration.ToCharArray();
+            if(arr[2] != '/' || arr[5] != '/')
+                throw new ArgumentException("Discount duration is not in the required foramt DD/MM/YYYY");
+            for(int i=0; i<arr.Length; i++)
+            {
+                if(i!= 2 && i != 5)
+                {
+                    if(arr[i]<'0' ||arr[i] >'9')
+                        throw new ArgumentException("Discount duration is not in the required foramt DD/MM/YYYY");
+
+                }
+            }
+
+            int day = Int32.Parse(duration.Substring(0, 2));
+            int month = Int32.Parse(duration.Substring(3, 2));
+            int year = Int32.Parse(duration.Substring(6, 4));
+            if(day==0 || day >31)
+                throw new ArgumentException("Date is not valid");
+            if(month==0 || month >12)
+                throw new ArgumentException("Date is not valid");
+            if(year < 2019)
+                throw new ArgumentException("Date is not valid");
+            DateTime d = new DateTime(day, month, year);
+            DateTime now = DateTime.Now;
+            if(DateTime.Compare(d, now) <0)
+                throw new ArgumentException("Discount duration must be future dateד");
+        }
+
         internal void addProductVisibleDiscount(int product, double percentage, string duration, int session)
         {
+            checkDiscoutDuration(duration);
             Session user = DBSession.getInstance().getSession(session);
             if (user == null)
                 throw new DoesntExistException("user is not logged in");
@@ -708,6 +742,7 @@ namespace workshop192.Bridge
         }
         internal void addReliantdiscountSameProduct(int storeID, int product, double percentage, int numOfProducts, string duration, int session)
         {
+            checkDiscoutDuration(duration);
             Session user = DBSession.getInstance().getSession(session);
             if (user == null)
                 throw new DoesntExistException("user is not logged in");
@@ -725,7 +760,7 @@ namespace workshop192.Bridge
 
         internal void addReliantdiscountTotalAmount(int storeID, double percentage, int amount, string duration, int session)
         {
-
+            checkDiscoutDuration(duration);
             Session user = DBSession.getInstance().getSession(session);
             if (user == null)
                 throw new DoesntExistException("user is not logged in");
@@ -781,6 +816,7 @@ namespace workshop192.Bridge
         }
         public void complexDiscount(string discountString, int storeID,string type, double percentage, string duration, int sessionID)
         {
+            checkDiscoutDuration(duration);
             Session user = DBSession.getInstance().getSession(sessionID);
             if (user == null)
                 throw new DoesntExistException("user is not logged in");
@@ -861,13 +897,7 @@ namespace workshop192.Bridge
                 throw new RoleException("no role for this user in this store");
             sr.setMaxAmountPolicy(newMinAmount);
         }
-
-
-
-        /////////////////////////////////////////////////////////////
         
-   
-   
  
     public bool hasMinPurchasePolicy(int storeID, int sessionID)
     {

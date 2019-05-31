@@ -12,7 +12,7 @@ namespace workshop192.Domain
         int id;
 
         public double percentage;
-        public string duration;
+        public DateTime duration;
         public abstract string getDiscountType();
         public abstract string description();
         public abstract bool checkCondition(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice);
@@ -23,10 +23,19 @@ namespace workshop192.Domain
         {
             this.id = DBDiscount.getNextDiscountID();
             this.percentage = percentage;
-            this.duration = duration;
+            this.duration = stringToDate(duration);
             this.complexCondition = false;
 
         }
+
+        private DateTime stringToDate(string duration)
+        {
+            int day = Int32.Parse(duration.Substring(0, 2));
+            int month = Int32.Parse(duration.Substring(3, 2));
+            int year = Int32.Parse(duration.Substring(6, 4));
+            return new DateTime(day, month, year);
+        }
+
         public int getId()
         {
             return this.id;
