@@ -39,6 +39,7 @@ namespace workshop192.Domain
         {
             if (!sessions.ContainsKey(sessionid))
                 throw new DoesntExistException("session doesnt exist");
+
             return sessions[sessionid];
         }
 

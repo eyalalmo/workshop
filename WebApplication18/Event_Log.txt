@@ -162,3 +162,46 @@
 2019-05-31 22:18:55,534 INFO EventLog: User u2 has logged out
 2019-05-31 22:19:00,874 INFO EventLog: User u2 has successfuly logged in.
 2019-05-31 22:34:39,584 INFO EventLog: User u2 has successfuly logged in.
+2019-05-31 22:54:36,288 INFO EventLog: User u2 has successfuly logged in.
+2019-05-31 22:55:22,063 INFO EventLog: User et has successfuly registered
+2019-05-31 22:55:32,696 INFO EventLog: User et has successfuly created a store
+2019-05-31 23:55:49,392 INFO EventLog: User u2 has successfuly logged in.
+2019-05-31 23:55:52,931 INFO EventLog: User u2 has logged out
+2019-06-01 00:08:27,350 INFO EventLog: User u2 has successfuly logged in.
+2019-06-01 00:08:48,848 INFO EventLog: User u2 has successfuly created a store
+2019-06-01 00:08:51,157 INFO EventLog: User u2 has logged out
+2019-06-01 00:08:56,352 ERROR EventLog: Login : Error: Username does not exist
+2019-06-01 00:10:35,850 INFO EventLog: User u3 has successfuly logged in.
+2019-06-01 00:10:48,383 INFO EventLog: User u3 has successfuly created a store
+2019-06-01 00:10:51,410 INFO EventLog: User u3 has logged out
+2019-06-01 00:11:20,507 INFO EventLog: User u2 has successfuly logged in.
+2019-06-01 00:11:26,549 INFO EventLog: User u2 has logged out
+2019-06-01 00:11:31,853 ERROR EventLog: Login : Error: Username does not exist
+2019-06-01 00:11:34,944 INFO EventLog: User u3 has successfuly logged in.
+2019-06-01 00:15:04,341 INFO EventLog: User u2 has successfuly logged in.
+2019-06-01 00:15:08,565 INFO EventLog: User u2 has logged out
+2019-06-01 00:15:14,705 ERROR EventLog: Login : Error: Username does not exist
+2019-06-01 00:16:58,874 INFO EventLog: User u2 has successfuly logged in.
+2019-06-01 00:17:03,620 INFO EventLog: User u2 has logged out
+2019-06-01 00:20:33,874 INFO EventLog: User u2 has successfuly logged in.
+2019-06-01 00:20:37,951 INFO EventLog: User u2 has logged out
+2019-06-01 00:21:11,559 INFO EventLog: User u3 has successfuly logged in.
+2019-06-01 00:21:23,937 INFO EventLog: User u3 has successfuly created a store
+2019-06-01 00:22:22,449 INFO EventLog: User u3 has logged out
+2019-06-01 00:22:45,051 INFO EventLog: User u2 has successfuly logged in.
+2019-06-01 00:23:47,036 INFO EventLog: User u3 has successfuly logged in.
+2019-06-01 00:27:17,329 INFO EventLog: User u3 has successfuly logged in.
+2019-06-01 00:28:35,221 INFO EventLog: User u3 has successfuly logged in.
+2019-06-01 00:28:39,733 INFO EventLog: User u3 has logged out
+2019-06-01 00:28:45,476 INFO EventLog: User u2 has successfuly logged in.
+2019-06-01 00:28:49,207 INFO EventLog: User u2 has logged out
+2019-06-01 00:28:54,255 INFO EventLog: User u3 has successfuly logged in.
+2019-06-01 01:01:51,961 INFO EventLog: User u3 has successfuly logged in.
+2019-06-01 01:02:04,950 INFO EventLog: User u3 has logged out
+2019-06-01 01:02:10,457 INFO EventLog: User u2 has successfuly logged in.
+2019-06-01 01:02:19,170 INFO EventLog: User u2 has logged out
+2019-06-01 01:02:24,358 INFO EventLog: User u4 has successfuly logged in.
+2019-06-01 01:02:28,976 INFO EventLog: User u4 has logged out
+2019-06-01 01:02:35,644 INFO EventLog: User u4 has successfuly logged in.
+2019-06-01 01:02:41,521 INFO EventLog: User u4 has successfuly created a store
+2019-06-01 01:03:06,225 INFO EventLog: User u4 has successfuly logged in.

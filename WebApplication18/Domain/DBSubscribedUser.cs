@@ -27,9 +27,11 @@ namespace workshop192.Domain
 
         public void init()
         {
-            users = new Dictionary<string, SubscribedUser>();
-            loggedInUser = new Dictionary<string, SubscribedUser>();
-           
+            if (instance == null)
+            {
+                instance = new DBSubscribedUser();
+            }
+
         }
         public void addAdmin(string name, string pass)
         {
@@ -118,6 +120,7 @@ namespace workshop192.Domain
                     }
 
                     SubscribedUser su = new SubscribedUser(username, password, sb);
+                    
                     users.Add(username, su);
                     connection.Close();
                     return su;
@@ -129,10 +132,19 @@ namespace workshop192.Domain
                     return null;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Console.WriteLine(e);
                 connection.Close();
                 return null;
+            }
+        }
+        public void updateStoreRole(SubscribedUser user)
+        {
+            string username = user.getUsername();
+            foreach (StoreRole sr in DBStore.getInstance().getRolesByUserName(username))
+            {
+                user.addStoreRole(sr);
             }
         }
 

@@ -54,6 +54,7 @@ namespace workshop192.Domain
             SubscribedUser sub = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (sub == null)
                 throw new LoginException("Error: Username does not exist");
+            DBSubscribedUser.getInstance().updateStoreRole(sub);
             SubscribedUser loggedIn = DBSubscribedUser.getInstance().getloggedInUser(username);
             if( loggedIn != null)
                 throw new LoginException("Error: Username already logged in");

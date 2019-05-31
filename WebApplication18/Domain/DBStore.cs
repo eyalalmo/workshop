@@ -15,10 +15,20 @@ namespace workshop192.Domain
         public LinkedList<StoreRole> storeRole;
         public static int nextStoreID = 0;
 
+
+        private DBStore()
+        {
+            storeRole = new LinkedList<StoreRole>();
+            stores = initStores();
+            nextStoreID = getUpdatedId();
+        }
         public static DBStore getInstance()
         {
             if (instance == null)
+            {
                 instance = new DBStore();
+                
+            }
 
             return instance;
         }
@@ -28,9 +38,7 @@ namespace workshop192.Domain
             //init both
             if (instance == null)
                 instance = new DBStore();
-            storeRole = new LinkedList<StoreRole>();
-            stores = initStores();
-            nextStoreID = getUpdatedId();
+           
         }
 
       
@@ -107,6 +115,17 @@ namespace workshop192.Domain
             stores = new LinkedList<Store>();
             storeRole = new LinkedList<StoreRole>();
             nextStoreID = 0;
+        }
+
+        public LinkedList<StoreRole> getRolesByUserName(string username)
+        {
+            LinkedList<StoreRole> lst = new LinkedList<StoreRole>();
+            foreach(StoreRole st in storeRole)
+            {
+                if (st.getUser().getUsername() == username)
+                    lst.AddLast(st);
+            }
+            return lst;
         }
 
         public void removeStoreRole(StoreRole sr)
