@@ -94,8 +94,7 @@ namespace workshop192.Domain
                             newStores.AddLast(s);
                         }
                     }
-
-
+                    
                 }
       
                 return newStores;
