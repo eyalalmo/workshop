@@ -7,10 +7,11 @@
    <div class="container">
             <div id="Discounts" class ="col-md-12">  
             </div>
+          <div id="t" class="pull-right" style = "margin: 10px"><input type="text" class="form-control" id="type" name="type"></div>
+         <div class="pull-right" style = "margin: 10px"><h5><strong>Type</strong> <small>(and/or/xor)</small></h5></div>
         <div id="makeComplex" class ="col-md-12">
             </div>   
         </div>
-        <div id="t" class ="col-md-12"><input type="text" class="form-control" id="type" name="type"></div>
       <script type="text/javascript">
 
         $(document).ready(function () {

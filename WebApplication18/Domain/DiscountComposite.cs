@@ -13,12 +13,13 @@ namespace workshop192.Domain
         private Type type;
 
        
-        public DiscountComposite(List<DiscountComponent> children, string type) : base()
+        public DiscountComposite(List<DiscountComponent> children, string type, double percentage) : base(percentage)
         {
             if (children == null)
             {
                 throw new AlreadyExistException();
             }
+            
             this.children = children;
             if (type == "and")
             {

@@ -191,3 +191,7 @@ Parameter name: value
 2019-05-30 16:14:32,782 INFO  System Log - User et has successfuly logged in.
 2019-05-30 16:23:43,576 INFO  System Log - User et has successfuly logged in.
 2019-05-30 16:47:08,849 INFO  System Log - User et has successfuly logged in.
+2019-05-31 14:01:04,654 ERROR System Log - Login : Error: Username does not exist
+2019-05-31 14:02:12,693 INFO  System Log - User et has successfuly logged in.
+2019-05-31 14:21:50,630 INFO  System Log - User et has successfuly logged in.
+2019-05-31 14:24:36,108 INFO  System Log - User et has successfuly logged in.
