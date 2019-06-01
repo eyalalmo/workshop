@@ -32,6 +32,7 @@ namespace workshop192.Domain
                 PaymentService.getInstance().connectToSystem();
                 DeliveryService.getInstance().connectToSystem();
                 ConsistencySystem.getInstance().connectToSystem();
+                NotificationsBridge.getInstance().setObserver(DomainBridge.getInstance());
                 return;
             }
                 foreach (string line in lines)

@@ -222,3 +222,18 @@
 2019-06-01 20:47:49,015 INFO EventLog: User u1 has successfuly logged in.
 2019-06-01 20:49:03,206 INFO EventLog: User u1 has successfuly logged in.
 2019-06-01 20:50:15,411 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 21:09:11,212 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 21:09:39,360 INFO EventLog: User u1 has successfuly created a store
+2019-06-01 21:10:09,987 ERROR EventLog: Error in adding an owner : Error: No such username
+2019-06-01 21:13:53,413 ERROR EventLog: Error in adding an owner : Owner already waiting for approval
+2019-06-01 21:14:01,448 ERROR EventLog: Add Manager : Error: No such username
+2019-06-01 21:14:04,648 INFO EventLog: User u1 has logged out
+2019-06-01 21:14:10,724 INFO EventLog: User ey has successfuly registered
+2019-06-01 21:14:14,104 INFO EventLog: User ey has logged out
+2019-06-01 21:14:19,204 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 21:22:32,269 ERROR EventLog: Register : Error: Username already exists
+2019-06-01 21:22:39,334 ERROR EventLog: Register : Error: Username already exists
+2019-06-01 21:22:47,926 INFO EventLog: User eee1 has successfuly registered
+2019-06-01 21:22:54,888 INFO EventLog: User eee1 has logged out
+2019-06-01 21:23:02,552 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 21:23:13,604 ERROR EventLog: Error in adding an owner : Error: No such username
