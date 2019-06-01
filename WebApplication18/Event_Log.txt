@@ -213,3 +213,18 @@
 2019-06-01 11:06:47,935 INFO EventLog: User u2 has successfuly created a store
 2019-06-01 16:17:37,665 INFO EventLog: User u7 has successfuly registered
 2019-06-01 16:17:51,488 INFO EventLog: User u7 has successfuly created a store
+2019-06-01 17:44:46,239 ERROR EventLog: Login : Error: Username does not exist
+2019-06-01 17:44:59,733 ERROR EventLog: Login : Error: Username does not exist
+2019-06-01 17:50:43,546 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 17:50:45,491 INFO EventLog: User u1 has logged out
+2019-06-01 17:50:51,164 ERROR EventLog: Login : Error: Username does not exist
+2019-06-01 17:50:55,646 INFO EventLog: User u3 has successfuly logged in.
+2019-06-01 17:51:25,923 ERROR EventLog: Error in adding an owner : Error: No such username
+2019-06-01 17:58:46,234 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-01 17:58:46,252 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-01 18:14:15,417 INFO EventLog: User u3 has logged out
+2019-06-01 18:14:24,239 ERROR EventLog: Login : Error: Username does not exist
+2019-06-01 18:14:27,299 ERROR EventLog: Login : Error: Username does not exist
+2019-06-01 18:14:33,846 INFO EventLog: User u3 has successfuly logged in.
+2019-06-01 18:14:40,782 INFO EventLog: User u3 has logged out
+2019-06-01 18:25:20,918 INFO EventLog: User u3 has successfuly logged in.

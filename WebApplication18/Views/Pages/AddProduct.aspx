@@ -11,7 +11,7 @@
 </div>
     <div class="form-group">
   <label for="usr">Product Category:</label>
-  <input type="number" class="form-control" id="productCategory" name="name">
+  <input type="text" class="form-control" id="productCategory" name="name">
 </div>
     <div class="form-group">
   <label for="usr">Price:</label>
