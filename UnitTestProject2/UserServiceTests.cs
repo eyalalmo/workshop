@@ -26,7 +26,6 @@ namespace workshop192.ServiceLayer.Tests
         [TestInitialize()]
         public void Initialize()
         {
-            
                 userService.setup();
 
                 session1 = userService.startSession();
@@ -129,7 +128,13 @@ namespace workshop192.ServiceLayer.Tests
         {
             loginSuccessTest();
             string searchResult1 = userService.searchByCategory("kitchen");
-            Assert.IsTrue(searchResult1.Equals("[{\"productID\":4,\"productName\":\"stove\",\"productCategory\":\"kitchen\",\"price\":200,\"rank\":3,\"quantityLeft\":2,\"storeID\":1},{\"productID\":3,\"productName\":\"pan\",\"productCategory\":\"kitchen\",\"price\":100,\"rank\":2,\"quantityLeft\":4,\"storeID\":1}]"));
+            int storeid = (DBStore.nextStoreID - 1);
+            Assert.IsTrue(searchResult1.Equals("[{\"productID\":2,\"productName" +
+                "\":\"stove\",\"productCategory\":\"kitchen\",\"price\":200,\"rank" +
+                "\":3,\"quantityLeft\":2,\"storeID\":" + storeid + "},{\"productID\":1," +
+                "\"productName\":\"pan\",\"productCategory\":\"kitchen\"," +
+                "\"price\":100,\"rank\":2,\"quantityLeft\":4,\"storeID" +
+                "\":" + storeid + "}]"));
         }
 
         [TestMethod]
@@ -137,8 +142,15 @@ namespace workshop192.ServiceLayer.Tests
         {
             loginSuccessTest();
             string searchResult2 = userService.searchByCategory("clothes");
-            Assert.IsTrue(searchResult2.Equals("[{\"productID\":6,\"productName\":\"socks\",\"productCategory\":\"clothes\",\"price\":110,\"rank\":4,\"quantityLeft\":2,\"storeID\":2},{\"productID\":5,\"productName\":\"pants\",\"productCategory\":\"clothes\",\"price\":120,\"rank\":1,\"quantityLeft\":2,\"storeID\":2},{\"productID\":2,\"productName\":\"shirt\",\"productCategory\":\"clothes\",\"price\":20,\"rank\":5,\"quantityLeft\":2,\"storeID\":1}]"));
-
+            int storeid = (DBStore.nextStoreID);
+            Assert.IsTrue(searchResult2.Equals("[{\"productID\":4,\"productName" +
+                "\":\"socks\",\"productCategory\":\"clothes\",\"price\":110," +
+                "\"rank\":4,\"quantityLeft\":2,\"storeID\":" + storeid + "},{\"productID" +
+                "\":3,\"productName\":\"pants\",\"productCategory\":\"clothes" +
+                "\",\"price\":120,\"rank\":1,\"quantityLeft\":2,\"storeID" +
+                "\":" + storeid + "},{\"productID\":0,\"productName\":\"shirt\"," +
+                "\"productCategory\":\"clothes\",\"price\":20,\"rank\":5," +
+                "\"quantityLeft\":2,\"storeID\":" + (storeid - 1) + "}]"));
         }
         [TestMethod]
         public void searchByCategoryFail()
@@ -153,9 +165,12 @@ namespace workshop192.ServiceLayer.Tests
         public void searchByNameSucc()
         {
             string searchResult1 = userService.searchByName("stove");
-            Assert.IsTrue(searchResult1.Equals("[{\"productID\":4,\"productName\":\"stove\",\"productCategory\":\"kitchen\",\"price\":200,\"rank\":3,\"quantityLeft\":2,\"storeID\":1}]"));
+            int next = DBStore.nextStoreID;
+            Assert.IsTrue(searchResult1.Equals("[{\"productID\":2,\"productName\":" +
+                "\"stove\",\"productCategory\":\"kitchen\",\"price\":200,\"rank\":3" +
+                ",\"quantityLeft\":2,\"storeID\":" + 
+                (next - 1) +"}]"));
             //Assert.IsTrue(productExists("stove", searchResult1));
-
         }
 
         [TestMethod]
@@ -205,7 +220,7 @@ namespace workshop192.ServiceLayer.Tests
                 // Assert.IsTrue(product3.getQuantityLeft() == 0);
                 // Assert.IsTrue(product4.getQuantityLeft() == 1);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 Assert.Fail();
             }

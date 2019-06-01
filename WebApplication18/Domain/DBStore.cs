@@ -426,6 +426,7 @@ namespace workshop192.Domain
         {
             return getStore(id).getRoles();
         }
+
         public int getUpdatedId()
         {
             try
