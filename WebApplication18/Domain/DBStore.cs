@@ -19,7 +19,7 @@ namespace workshop192.Domain
         private DBStore()
         {
             storeRole = new LinkedList<StoreRole>();
-            stores = initStores();
+            stores = new LinkedList<Store>();
             nextStoreID = getUpdatedId();
         }
         public static DBStore getInstance()
@@ -32,8 +32,87 @@ namespace workshop192.Domain
 
             return instance;
         }
+        public Store getStore(int storeId)
+        {
+            foreach (Store s in stores)
+            {
+                if (s.getStoreID() == storeId)
+                {
+                    return s;
+                }
+            }
+            return getStoreFromAzure(storeId);
+        }
 
-        public void init()
+        public Store getStoreFromAzure(int storeId)
+        {
+            try { 
+            connection.Open();
+            LinkedList<Store> newStores = new LinkedList<Store>();
+            var StoreResult = connection.Query<StoreEntry>("SELECT * FROM [dbo].[Stores] WHERE storeId = @storeId", new { storeId = storeId });
+            var StoreRoleResult = connection.Query<StoreRoleEntry>("SELECT * FROM [dbo].[StoreRoles] WHERE storeId = @storeId", new { storeId = storeId });
+            connection.Close();
+
+
+            Store s = new Store(StoreResult.ElementAt(0).getStoreId(), StoreResult.ElementAt(0).getName(), StoreResult.ElementAt(0).getDescription());
+            LinkedList<Product> lst = DBProduct.getInstance().getAllProducts();
+            foreach (Product p in lst)
+            {
+                if (p.getStoreID() == s.getStoreID())
+                    s.addProduct(p);
+            }
+            if (StoreResult.ElementAt(0).getMaxPurchasePolicy() != -1)
+                s.setMaxPurchasePolicy(StoreResult.ElementAt(0).getMaxPurchasePolicy());
+            if (StoreResult.ElementAt(0).getMinPurchasePolicy() != -1)
+                s.setMinPurchasePolicy(StoreResult.ElementAt(0).getMinPurchasePolicy());
+            foreach (StoreRoleEntry element in StoreRoleResult)
+            {
+                if (element.getStoreId() == s.getStoreID() && element.getIsOwner() == 1)
+                {
+                    SubscribedUser appointedBy = null;
+                    try
+                    {
+                        appointedBy = DBSubscribedUser.getInstance().getSubscribedUser(element.getAppointedBy());
+                    }
+                    catch (Exception) { }
+                    SubscribedUser user = DBSubscribedUser.getInstance().getSubscribedUser(element.getUserName());
+                    StoreOwner so = new StoreOwner(appointedBy, user, s);
+                    s.addStoreRole(so);
+                    storeRole.AddLast(so);
+                    newStores.AddLast(s);
+
+                }
+                else if (element.getStoreId() == s.getStoreID() && element.getIsOwner() == 0)
+                {
+                    SubscribedUser appointedBy = DBSubscribedUser.getInstance().getSubscribedUser(element.getAppointedBy());
+                    SubscribedUser user = DBSubscribedUser.getInstance().getSubscribedUser(element.getUserName());
+                    Permissions p = new Permissions(false, false, false);
+                    if (element.getEditDiscount() == 1)
+                        p.setEditDiscount(true);
+                    if (element.getEditPolicy() == 1)
+                        p.setEditPolicy(true);
+                    if (element.getEditProduct() == 1)
+                        p.setEditProduct(true);
+                    StoreManager sm = new StoreManager(appointedBy, s, user, p);
+                    s.addStoreRole(sm);
+                    storeRole.AddLast(sm);
+                    newStores.AddLast(s);
+                }
+            }
+
+
+
+            return s;
+        }
+            catch(Exception e)
+            {
+                connection.Close();
+                throw new StoreException("cant get store from db");
+    }
+
+}
+
+    public void init()
         {
             //init both
             if (instance == null)
@@ -43,78 +122,17 @@ namespace workshop192.Domain
 
       
 
-        private LinkedList<Store> initStores()
+        
+
+        public void addownerNumerByOne(int storeId, int newNumber)
         {
-            try
-            {
-                connection.Open();
-                LinkedList<Store> newStores = new LinkedList<Store>();
-                var StoreResult = connection.Query<StoreEntry>("SELECT * FROM [dbo].[Stores] ");
-                var StoreRoleResult = connection.Query<StoreRoleEntry>("SELECT * FROM [dbo].[StoreRoles] ");
-                connection.Close();
-                for (int i = 0; i < StoreResult.Count(); i++)
-                {
-                    StoreEntry se = StoreResult.ElementAt(i);
-                    Store s = new Store(se.getStoreId(), se.getName(), se.getDescription());
-                    LinkedList<Product> lst= DBProduct.getInstance().getAllProducts();
-                    foreach(Product p in lst)
-                    {
-                        if (p.getStoreID() == s.getStoreID())
-                            s.addProduct(p);
-                    }
-                    if(se.getMaxPurchasePolicy()!=-1)
-                        s.setMaxPurchasePolicy(se.getMaxPurchasePolicy());
-                    if (se.getMinPurchasePolicy() != -1)
-                        s.setMinPurchasePolicy(se.getMinPurchasePolicy());
-                    foreach (StoreRoleEntry element in StoreRoleResult)
-                    {
-                        if (element.getStoreId() == s.getStoreID() && element.getIsOwner() == 1)
-                        {
-                            SubscribedUser appointedBy = null;
-                            try
-                            {
-                                appointedBy = DBSubscribedUser.getInstance().getSubscribedUser(element.getAppointedBy());
-                            }
-                            catch (Exception) { }
-                                SubscribedUser user = DBSubscribedUser.getInstance().getSubscribedUser(element.getUserName());
-                            StoreOwner so = new StoreOwner(appointedBy, user, s);
-                            s.addStoreRole(so);
-                            storeRole.AddLast(so);
-                            newStores.AddLast(s);
-
-                        }
-                        else if (element.getStoreId() == s.getStoreID() && element.getIsOwner() == 0)
-                        {
-                            SubscribedUser appointedBy = DBSubscribedUser.getInstance().getSubscribedUser(element.getAppointedBy());
-                            SubscribedUser user = DBSubscribedUser.getInstance().getSubscribedUser(element.getUserName());
-                            Permissions p = new Permissions(false, false, false);
-                            if (element.getEditDiscount() == 1)
-                                p.setEditDiscount(true);
-                            if (element.getEditPolicy() == 1)
-                                p.setEditPolicy(true);
-                            if (element.getEditProduct() == 1)
-                                p.setEditProduct(true);
-                            StoreManager sm = new StoreManager(appointedBy, s, user, p);
-                            s.addStoreRole(sm);
-                            storeRole.AddLast(sm);
-                            newStores.AddLast(s);
-                        }
-                    }
-                    
-                }
-      
-                return newStores;
-            }
-            catch(Exception)
-            {
-               // StackTrace = "   ב-  System.Collections.Generic.Dictionary`2.FindEntry(TKey key)\r\n   ב-  System.Collections.Generic.Dictionary`2.ContainsKey(TKey key)\r\n   ב-  workshop192.Domain.DBSubscribedUser.getSubscribedUser(String username) ב- C:\\Users\\etay2\\Desktop\\C#Work...
-                connection.Close();
-                throw new StoreException("cant init");
-            }
-
+            Store s = getStore(storeId);
+            connection.Open();
+            connection.Execute("UPDATE [dbo].[Stores] SET numOfOwners = @newNumber WHERE storeId = @storeId", new { storeId = storeId, newNumber = newNumber });
+            connection.Close();
         }
 
-        
+
         public void cleanDB()
         {
             stores = new LinkedList<Store>();
@@ -220,6 +238,14 @@ namespace workshop192.Domain
                 throw new StoreException("cant add store roll");
             }
         }
+
+        public void reduceOwnerByOne(int storeId,int newNumber)
+        {
+            connection.Open();
+            connection.Execute("UPDATE [dbo].[Stores] SET numOfOwners = @newNumber WHERE storeId = @storeId", new { storeId = storeId, newNumber = newNumber });
+            connection.Close();
+        }
+
         public int addStore(Store store)
         {
             try
@@ -280,15 +306,7 @@ namespace workshop192.Domain
             }
         }
 
-        public Store getStore(int storeID)
-        {
-            foreach (Store s in stores)
-            {
-                if (s.getStoreID() == storeID)
-                    return s;
-            }
-            return null;
-        }
+    
         public void removeStore(Store store)
         {
             try

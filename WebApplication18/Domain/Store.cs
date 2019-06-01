@@ -146,7 +146,9 @@ namespace workshop192.Domain
         {
             if (toAdd is StoreOwner)
             {
+            
                 numOfOwners++;
+                DBStore.getInstance().addownerNumerByOne(storeId, numOfOwners);
             }
             roles.Add(toAdd);
         }
@@ -256,6 +258,7 @@ namespace workshop192.Domain
             if (toRemove is StoreOwner)
             {
                 numOfOwners--;
+                DBStore.getInstance().reduceOwnerByOne(storeId,numOfOwners);
             }
             roles.Remove(toRemove);
         }
