@@ -92,7 +92,7 @@ namespace workshop192.Domain
                         s.setMinPurchasePolicy(se.getMinPurchasePolicy());
                     foreach (StoreRoleEntry element in StoreRoleResult)
                     {
-                        if (element.getStoreId() == s.getStoreID() && element.getIsOwner() == 1)
+                        if (element.getStoreId() == s.getStoreID() && element.getIsOwner() == 1 )
                         {
                             SubscribedUser appointedBy = null;
                             try
@@ -244,6 +244,11 @@ namespace workshop192.Domain
                 connection.Close();
                 throw new StoreException("cant add store roll");
             }
+        }
+
+        public LinkedList<StoreRole> getAllStoreRoles()
+        {
+            return storeRole;
         }
 
         public void removeOwnerNumerByOne(int storeId, int numOfOwners)

@@ -257,3 +257,11 @@
 2019-06-02 01:12:19,198 INFO EventLog: User u1 has logged out
 2019-06-02 01:12:23,878 INFO EventLog: User u2 has successfuly logged in.
 2019-06-02 01:17:41,964 INFO EventLog: User u2 has successfuly logged in.
+2019-06-02 01:27:27,143 INFO EventLog: User u2 has successfuly logged in.
+2019-06-02 01:27:38,835 ERROR EventLog: Remove Role Error: cant remove role
+2019-06-02 01:29:51,040 ERROR EventLog: Remove Role Error: cant remove role
+2019-06-02 01:30:37,217 ERROR EventLog: Remove Role Error: cant remove role
+2019-06-02 01:31:24,625 ERROR EventLog: Remove Role Error: cant remove role
+2019-06-02 01:42:17,005 INFO EventLog: User u2 has successfuly logged in.
+2019-06-02 01:52:58,301 INFO EventLog: User u2 has successfuly created a store
+2019-06-02 01:55:08,743 INFO EventLog: User u2 has successfuly logged in.
