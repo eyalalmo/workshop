@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using WebApplication18.DAL;
 using Dapper;
-using Domain;
 
 namespace workshop192.Domain
 {
@@ -436,7 +435,7 @@ namespace workshop192.Domain
                 connection.Close();
                 return idNum;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 connection.Close();
                 throw new StoreException("cant connect");

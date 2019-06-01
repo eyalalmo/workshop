@@ -237,3 +237,5 @@
 2019-06-01 20:56:02,354 INFO EventLog: User d has successfuly registered
 2019-06-01 20:56:13,209 INFO EventLog: User d has successfuly created a store
 2019-06-01 20:56:53,382 INFO EventLog: User d has successfuly created a store
+2019-06-01 21:34:43,902 INFO EventLog: User u2 has successfuly logged in.
+2019-06-01 21:34:49,431 INFO EventLog: User u2 has logged out

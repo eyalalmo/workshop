@@ -29,7 +29,7 @@ namespace WebApplication18.DAL
                     connection = new SqlConnection(stringDBTest);               
                 
                 else
-                    connection = new SqlConnection(stringDBTest);
+                    connection = new SqlConnection(stringDB);
             
                  }
                 catch (Exception)
