@@ -62,16 +62,17 @@ namespace workshop192.Domain
             try
             {
                 connection.Open();
-                var c = connection.Query("SELECT username, password FROM [dbo].[Register] WHERE username=@username ", new { username=username });
-                
+                var c = connection.Query("SELECT username, password FROM [dbo].[Register] WHERE username=@username ", new { username = username });
+
                 if (Enumerable.Count(c) == 0)
-               {
+                {
 
                     string sql = "INSERT INTO [dbo].[Register] (username, password)" +
                                                      " VALUES (@username, @password)";
                     connection.Execute(sql, new { username, password });
-                    connection.Close();
                 }
+
+                connection.Close();
             }
             catch (Exception e)
             {
@@ -107,13 +108,14 @@ namespace workshop192.Domain
                             int storeID = bc.getStoreID();
                             sql = "SELECT * FROM CartProduct WHERE storeID=@storeID AND username=@username;";
                             var c3 = connection.Query<CartProductEntry>(sql, new { storeID, username });
+                            connection.Close();
                             for (int j=0; j<Enumerable.Count(c3); j++)
                             {
                                 CartProductEntry cp = c3.ElementAt(j);
                                 int productID = cp.getProductID();
                                 int amount = cp.getAmount();
                                 Product p = DBProduct.getInstance().getProductByID(productID);
-                                sb.addToCart(p, amount);
+                                sb.addToCartNoDBUpdate(p, amount);
                             }
                         }
                     }
@@ -121,7 +123,6 @@ namespace workshop192.Domain
                     SubscribedUser su = new SubscribedUser(username, password, sb);
                     
                     users.Add(username, su);
-                    connection.Close();
                     return su;
                 }
 
@@ -163,8 +164,9 @@ namespace workshop192.Domain
                     string sql = "INSERT INTO [dbo].[Register] (username, password)" +
                                                      " VALUES (@username, @password)";
                     connection.Execute(sql, new { username, password });
-                    connection.Close();
+                    
                 }
+                connection.Close();
             }
             catch (Exception)
             {
@@ -209,7 +211,27 @@ namespace workshop192.Domain
 
         public void remove(SubscribedUser user)
         {
-            users.Remove(user.getUsername());
+            string username = user.getUsername();
+            if (loggedInUser.ContainsKey(username))
+                loggedInUser.Remove(username);
+            users.Remove(username);
+            string sql1 = "DELETE * FROM Register WHERE username =@username";
+            string sql2 = "DELETE * FROM BasketCart WHERE username=@username";
+            string sql3 = "DELETE * FROM CartProduct WHERE username=@username";
+            
+            try
+            {
+                connection.Open();
+                connection.Execute(sql1, new { username });
+                connection.Execute(sql2, new { username });
+                connection.Execute(sql3, new { username });
+                connection.Close();
+            }
+            catch (Exception)
+            {
+                connection.Close();
+            }
+
         }
         public SubscribedUser getloggedInUser(string name)
         {
