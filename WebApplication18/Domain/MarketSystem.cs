@@ -28,6 +28,7 @@ namespace workshop192.Domain
                 DBDiscount.getInstance().init();
                 DBSubscribedUser.getInstance().init();
                 DBStore.getInstance().init();
+                DBSubscribedUser.getInstance().updateShoppingBasket();
                 DBNotifications.getInstance().init();
                 PaymentService.getInstance().connectToSystem();
                 DeliveryService.getInstance().connectToSystem();

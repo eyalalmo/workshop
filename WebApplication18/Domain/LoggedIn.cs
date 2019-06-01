@@ -36,7 +36,7 @@ namespace workshop192.Domain
             }
             Store store = new Store(storeName, description);
             StoreOwner owner = new StoreOwner(null, sub, store);
-            store.addStoreRole(owner);
+            store.addStoreRoleFromInitOwner(owner);
             sub.addStoreRole(owner);
             DBStore.getInstance().addStore(store);
             DBStore.getInstance().addStoreRole(owner);
