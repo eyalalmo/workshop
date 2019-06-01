@@ -44,8 +44,8 @@ namespace workshop192.Domain
 
                 foreach (Product product in products)
                 {
-                    if(product.discountID != -1)
-                        product.discount = DBDiscount.getInstance().getDiscount(product.discountID);
+                    //if(product.discountID != -1)
+                    //    product.discount = DBDiscount.getInstance().getDiscount(product.discountID);
                     productList.AddFirst(product);
                     if (product.getProductID() > nextProductID)
                         nextProductID = product.getProductID();

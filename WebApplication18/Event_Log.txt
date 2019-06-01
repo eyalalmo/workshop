@@ -211,3 +211,5 @@
 2019-06-01 11:03:25,184 INFO EventLog: User u2 has successfuly logged in.
 2019-06-01 11:06:38,624 INFO EventLog: User u2 has successfuly logged in.
 2019-06-01 11:06:47,935 INFO EventLog: User u2 has successfuly created a store
+2019-06-01 16:17:37,665 INFO EventLog: User u7 has successfuly registered
+2019-06-01 16:17:51,488 INFO EventLog: User u7 has successfuly created a store
