@@ -83,6 +83,24 @@ namespace workshop192.Domain
            register(admin);
        }
 
+        public void initTests()
+        {
+            
+                try
+                {
+                    connection.Open();
+                    connection.Execute("DELETE FROM Register");
+                    connection.Close();
+                }
+                catch (Exception e)
+                {
+                    connection.Close();
+                }
+            }
+
+        
+
+
        public static DBSubscribedUser getInstance()
        {
            if (instance == null)

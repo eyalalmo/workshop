@@ -35,6 +35,11 @@ namespace workshop192.Domain
             return sessionNum++;
         }
 
+        public void initTests()
+        {
+            init();
+        }
+
         internal Session getSession(int sessionid)
         {
             if (!sessions.ContainsKey(sessionid))

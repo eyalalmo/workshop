@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebApplication18.DAL;
 using Dapper;
+using Domain;
 
 namespace workshop192.Domain
 {
@@ -41,7 +42,21 @@ namespace workshop192.Domain
            
         }
 
-      
+        public void initTests()
+        {
+            try
+            {
+                connection.Open();
+                connection.Execute("DELETE FROM Stores");
+                connection.Execute("DELETE FROM StoreRoles");
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                connection.Close();
+            }
+        }
+
 
         private LinkedList<Store> initStores()
         {
@@ -230,10 +245,16 @@ namespace workshop192.Domain
 
         public void addownerNumerByOne(int storeId, int newNumber)
         {
-   
-            connection.Open();
-            connection.Execute("UPDATE [dbo].[Stores] SET numOfOwners = @newNumber WHERE storeId = @storeId", new { storeId = storeId, newNumber = newNumber });
-            connection.Close();
+            try
+            {
+                connection.Open();
+                connection.Execute("UPDATE [dbo].[Stores] SET numOfOwners = @newNumber WHERE storeId = @storeId", new { storeId = storeId, newNumber = newNumber });
+                connection.Close();
+            }
+            catch(Exception e)
+            {
+                connection.Close();
+            }
         }
 
         public int addStore(Store store)
