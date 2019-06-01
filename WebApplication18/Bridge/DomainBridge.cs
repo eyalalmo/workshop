@@ -602,8 +602,7 @@ namespace workshop192.Bridge
             Store store = p.getStore();
 
             Session user = DBSession.getInstance().getSession(sessionid);
-
-            user.getShoppingBasket().getShoppingCartByID(store.getStoreID()).changeQuantityOfProduct(p, newAmount);
+            user.getShoppingBasket().changeQuantityOfProduct(store.getStoreID(), p, newAmount);
         }
         
         public void checkoutBasket(int sessionid, String address, String creditCard)

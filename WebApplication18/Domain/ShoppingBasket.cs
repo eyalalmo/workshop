@@ -8,13 +8,21 @@ namespace workshop192.Domain
 {
     public class ShoppingBasket
     {
-        public Dictionary<int,ShoppingCart> shoppingCarts;
+        private Dictionary<int,ShoppingCart> shoppingCarts;
+        private string username;
+
+        public ShoppingBasket(string username)
+        {
+            this.shoppingCarts = new Dictionary<int, ShoppingCart>();
+            this.username = username;
+        }
+
 
         public ShoppingBasket()
         {
             this.shoppingCarts = new Dictionary<int, ShoppingCart>();
+            this.username = null;
         }
-
         public Dictionary<int,ShoppingCart> getShoppingCarts()
         {
             return this.shoppingCarts;
@@ -58,6 +66,7 @@ namespace workshop192.Domain
                 ShoppingCart sc = new ShoppingCart(storeID);
                 sc.addToCart(product, amount);
                 {
+                    DBSubscribedUser.getInstance().addCart()
                     shoppingCarts.Add(storeID, sc);
                 }
             }
@@ -136,7 +145,11 @@ namespace workshop192.Domain
             }
         }
 
+        internal void changeQuantityOfProduct(int storeID, Product p, int newAmount)
+        {
+            ShoppingCart sc = getShoppingCartByID(storeID);
+            sc.changeQuantityOfProduct(p, newAmount);
 
-
+        }
     }
 }

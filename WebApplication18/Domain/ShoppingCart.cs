@@ -45,6 +45,8 @@ namespace workshop192.Domain
             }
             return null;
         }
+
+
         public void addToCart(Product product, int amount)
         {
             store.checkPolicy(product, amount);
