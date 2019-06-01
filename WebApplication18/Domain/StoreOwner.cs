@@ -85,11 +85,20 @@ namespace workshop192.Domain
         public void addManager(SubscribedUser manager, Permissions permissions)
         {
             StoreRole newManager = new StoreManager(this.userName, store, manager, permissions);
-            DBStore.getInstance().addStoreRole(newManager);
+           
             if (store.getStoreRole(manager) != null)
                 throw new RoleException("Error: Username "  + manager.getUsername() + 
                     " already has a role in store " + 
                     store.getStoreName());
+            if (store.getStoreRole(manager) != null)
+                throw new RoleException("Error: Username " + manager.getUsername() +
+                    " already has a role in store " +
+                    store.getStoreName());
+            if (store.getPending().ContainsKey(manager.getUsername()))
+                throw new RoleException("Error: Username " + manager.getUsername() +
+                    " has been offered as a store owner " +
+                    store.getStoreName());
+            DBStore.getInstance().addStoreRole(newManager);
             store.addStoreRole(newManager);
             manager.addStoreRole(newManager);
             appointedByMe.Add(newManager);
