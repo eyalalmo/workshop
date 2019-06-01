@@ -78,9 +78,9 @@ namespace workshop192.Domain
             sc.addToCart(product, amount);
 
         }
-        public void addToCartNoDBUpdate(Product product, int amount)
+        public void addToCartNoDBUpdate(Product product, int amount, int storeID)
         {
-            int storeID = product.getStore().getStoreID();
+            //int storeID = product.getStore().getStoreID();
             bool found = false;
             ShoppingCart sc = null;
             foreach (ShoppingCart s in shoppingCarts.Values)

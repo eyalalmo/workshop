@@ -73,10 +73,10 @@ namespace workshop192.Domain
                             SubscribedUser appointedBy = null;
                             try
                             {
-                                appointedBy = DBSubscribedUser.getInstance().getSubscribedUser(element.getAppointedBy());
+                                appointedBy = DBSubscribedUser.getInstance().getSubscribedUserForInitStore(element.getAppointedBy());
                             }
                             catch (Exception) { }
-                                SubscribedUser user = DBSubscribedUser.getInstance().getSubscribedUser(element.getUserName());
+                                SubscribedUser user = DBSubscribedUser.getInstance().getSubscribedUserForInitStore(element.getUserName());
                             StoreOwner so = new StoreOwner(appointedBy, user, s);
                             s.addStoreRoleFromInitOwner(so);
                             storeRole.AddLast(so);
