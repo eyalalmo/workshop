@@ -258,21 +258,21 @@ namespace workshop192.Domain
 
         public void addPendingOwner(SubscribedUser pending)
         {
-            store.addPendingOwner(userName.getUsername(), pending);
+            DBStore.getInstance().addPendingOwner(store.getStoreID(),userName.getUsername(), pending);
         }
         public void signContract(string owner, SubscribedUser pending)
         {
-            store.signContract(owner, pending);
-            HashSet<string> approvedOwners = store.getApproved(pending);
+            DBStore.getInstance().signContract(store.getStoreID(), owner, pending);
+            HashSet<string> approvedOwners = DBStore.getInstance().getApproved(store.getStoreID(), pending);
             if (approvedOwners.Count == store.getNumberOfOwners())
             {
-                store.removePendingOwner(pending);
-                addOwner(pending);
+                DBStore.getInstance().removePendingOwner(store.getStoreID(), pending);
+                addOwner( pending);
             }
         }
         public void declineContract(string owner, SubscribedUser pending)
         {
-            store.removePendingOwner(pending);
+            DBStore.getInstance().removePendingOwner(store.getStoreID(), pending);
         }
         public Permissions GetPermissions()
         {

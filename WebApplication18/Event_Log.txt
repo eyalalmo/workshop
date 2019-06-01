@@ -228,3 +228,20 @@
 2019-06-01 18:14:33,846 INFO EventLog: User u3 has successfuly logged in.
 2019-06-01 18:14:40,782 INFO EventLog: User u3 has logged out
 2019-06-01 18:25:20,918 INFO EventLog: User u3 has successfuly logged in.
+2019-06-01 19:18:01,596 INFO EventLog: User u3 has successfuly logged in.
+2019-06-01 19:18:12,070 ERROR EventLog: Remove Role Error: cant remove role
+2019-06-01 19:18:15,619 ERROR EventLog: Remove Role Error: cant remove role
+2019-06-01 19:18:37,597 ERROR EventLog: Remove Role Error: cant remove role
+2019-06-01 19:18:50,748 ERROR EventLog: Remove Role Error: cant remove role
+2019-06-01 19:19:33,417 ERROR EventLog: Remove Role Error: cant remove role
+2019-06-01 19:19:38,735 ERROR EventLog: Remove Role Error: cant remove role
+2019-06-01 19:20:05,774 ERROR EventLog: Remove Role Error: cant remove role
+2019-06-01 19:21:59,528 INFO EventLog: User eee has successfuly registered
+2019-06-01 19:22:02,163 INFO EventLog: User eee has logged out
+2019-06-01 19:22:50,446 INFO EventLog: User eee has successfuly logged in.
+2019-06-01 19:23:23,679 INFO EventLog: User eee has successfuly created a store
+2019-06-01 19:24:14,597 ERROR EventLog: Error in adding an owner : Owner already waiting for approval
+2019-06-01 19:24:22,800 INFO EventLog: User eee has logged out
+2019-06-01 19:24:26,985 INFO EventLog: User u4 has successfuly logged in.
+2019-06-01 19:25:21,128 INFO EventLog: User u4 has logged out
+2019-06-01 19:25:26,865 INFO EventLog: User u5 has successfuly logged in.

@@ -405,5 +405,57 @@ namespace workshop192.Domain
                 throw new StoreException("cant connect");
             }
         }
+
+        public void addPendingOwner(int storeId, string appointer, SubscribedUser pending)
+        {
+            Dictionary<string, HashSet<string>> pendingOwners = getStore(storeId).getPending();
+            if (pendingOwners.ContainsKey(pending.username))
+            {
+                throw new AlreadyExistException("Owner already waiting for approval");
+            }
+            HashSet<string> toAdd = new HashSet<string>();
+            toAdd.Add(appointer);
+            pendingOwners.Add(pending.getUsername(), toAdd);
+
+        }
+        public void removePendingOwner(int storeId, SubscribedUser pending)
+        {
+            Dictionary<string, HashSet<string>> pendingOwners = getStore(storeId).getPending();
+            if (!pendingOwners.ContainsKey(pending.getUsername()))
+            {
+                throw new DoesntExistException("the username is not in the owners pending list");
+            }
+            pendingOwners.Remove(pending.getUsername());
+        }
+
+        public void signContract(int storeId,string owner, SubscribedUser pending)
+        {
+            Dictionary<string, HashSet<string>> pendingOwners = getStore(storeId).getPending();
+            if (!pendingOwners.ContainsKey(pending.getUsername()))
+            {
+                throw new DoesntExistException("the username is not in the owners pending list");
+            }
+            HashSet<string> temp = new HashSet<string>();
+            pendingOwners.TryGetValue(pending.getUsername(), out temp);
+            temp.Add(owner);
+            pendingOwners[pending.getUsername()] = temp;
+        }
+
+        public HashSet<string> getApproved(int storeId,SubscribedUser pending)
+        {
+            Dictionary<string, HashSet<string>> pendingOwners = getStore(storeId).getPending();
+            HashSet<string> output;
+            if (pendingOwners.TryGetValue(pending.getUsername(), out output))
+            {
+                return output;
+            }
+            throw new DoesntExistException("User is not a pending owner");
+        }
+
+        public Dictionary<string, HashSet<string>> getPending(int storeId)
+        {
+            Dictionary<string, HashSet<string>> pendingOwners = getStore(storeId).getPending();
+            return pendingOwners;
+        }
     }
 }

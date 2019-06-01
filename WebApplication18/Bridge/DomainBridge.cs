@@ -1135,7 +1135,7 @@ namespace workshop192.Bridge
             if (sr.getStore() != store)
                 throw new RoleException("this user can't appoint to this store");
             List<string> myPendingOwners = new List<string>();
-            Dictionary<string, HashSet<string>> pending = store.getPending();
+            Dictionary<string, HashSet<string>> pending = DBStore.getInstance().getPending(store.getStoreID());
             foreach (KeyValuePair<string, HashSet<string>> entry in pending)
             {
                 if (!entry.Value.Contains(sr.getUser().getUsername()))

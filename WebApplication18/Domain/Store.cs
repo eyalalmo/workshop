@@ -383,53 +383,55 @@ namespace workshop192.Domain
             }
             return null;
         }
-        public void addPendingOwner(string appointer,SubscribedUser pending)
-        {
-            if (pendingOwners.ContainsKey(pending.username))
-            {
-                throw new AlreadyExistException("Owner already waiting for approval");
-            }
-            HashSet<string> toAdd = new HashSet<string>();
-            toAdd.Add(appointer);
-            pendingOwners.Add(pending.getUsername(), toAdd);
+        //public void addPendingOwner(string appointer,SubscribedUser pending)
+        //{
+        //    if (pendingOwners.ContainsKey(pending.username))
+        //    {
+        //        throw new AlreadyExistException("Owner already waiting for approval");
+        //    }
+        //    HashSet<string> toAdd = new HashSet<string>();
+        //    toAdd.Add(appointer);
+        //    pendingOwners.Add(pending.getUsername(), toAdd);
 
-        }
-        public void removePendingOwner(SubscribedUser pending)
-        {
-            if (!pendingOwners.ContainsKey(pending.getUsername()))
-            {
-                throw new DoesntExistException("the username is not in the owners pending list");
-            }
-            pendingOwners.Remove(pending.getUsername());
-        }
+        //}
+        //public void removePendingOwner(SubscribedUser pending)
+        //{
+        //    if (!pendingOwners.ContainsKey(pending.getUsername()))
+        //    {
+        //        throw new DoesntExistException("the username is not in the owners pending list");
+        //    }
+        //    pendingOwners.Remove(pending.getUsername());
+        //}
 
-        public void signContract(string owner,SubscribedUser pending)
-        {
-            if (!pendingOwners.ContainsKey(pending.getUsername()))
-            {
-                throw new DoesntExistException("the username is not in the owners pending list");
-            }
-            HashSet<string> temp = new HashSet<string>();
-            pendingOwners.TryGetValue(pending.getUsername(), out temp);
-            temp.Add(owner);
-            pendingOwners[pending.getUsername()] = temp;
-        }
+        //public void signContract(string owner,SubscribedUser pending)
+        //{
+        //    if (!pendingOwners.ContainsKey(pending.getUsername()))
+        //    {
+        //        throw new DoesntExistException("the username is not in the owners pending list");
+        //    }
+        //    HashSet<string> temp = new HashSet<string>();
+        //    pendingOwners.TryGetValue(pending.getUsername(), out temp);
+        //    temp.Add(owner);
+        //    pendingOwners[pending.getUsername()] = temp;
+        //}
 
-        public HashSet<string> getApproved(SubscribedUser pending)
-        {
-            HashSet<string> output;
-            if(pendingOwners.TryGetValue(pending.getUsername(), out output))
-            {
-                return output;
-            }
-            throw new DoesntExistException("User is not a pending owner");
-        }
+        //public HashSet<string> getApproved(SubscribedUser pending)
+        //{
+        //    HashSet<string> output;
+        //    if(pendingOwners.TryGetValue(pending.getUsername(), out output))
+        //    {
+        //        return output;
+        //    }
+        //    throw new DoesntExistException("User is not a pending owner");
+        //}
 
-        public Dictionary<string,HashSet<string>> getPending()
+        public Dictionary<string, HashSet<string>> getPending()
         {
             return pendingOwners;
         }
 
     }
+
+    
 
 }
