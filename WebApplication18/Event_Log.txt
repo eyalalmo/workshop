@@ -251,3 +251,9 @@
 2019-06-02 00:41:10,231 INFO EventLog: User u3 has successfuly logged in.
 2019-06-02 00:46:21,590 INFO EventLog: User u3 has successfuly logged in.
 2019-06-02 00:51:22,961 INFO EventLog: User u3 has successfuly logged in.
+2019-06-02 01:08:51,347 INFO EventLog: User u2 has successfuly created a store
+2019-06-02 01:11:54,725 INFO EventLog: User u2 has successfuly created a store
+2019-06-02 01:12:14,330 INFO EventLog: User u1 has successfuly logged in.
+2019-06-02 01:12:19,198 INFO EventLog: User u1 has logged out
+2019-06-02 01:12:23,878 INFO EventLog: User u2 has successfuly logged in.
+2019-06-02 01:17:41,964 INFO EventLog: User u2 has successfuly logged in.

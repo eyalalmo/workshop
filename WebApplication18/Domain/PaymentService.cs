@@ -56,7 +56,6 @@ namespace workshop192.Domain
 
         public bool connectToSystem()
         {
-          
             return true;
         }
         public async Task<bool> handShake()

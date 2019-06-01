@@ -664,7 +664,8 @@ namespace workshop192.Bridge
             LinkedList<Store> stores = new LinkedList<Store>();
             foreach (StoreRole element in lst)
             {
-                stores.AddLast(element.getStore());
+                if(!stores.Contains(element.getStore()))
+                    stores.AddLast(element.getStore());
             }
             return JsonConvert.SerializeObject(stores); 
         }
