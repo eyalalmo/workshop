@@ -148,9 +148,9 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-
+                        totalPrice();
                         if (response == "ok") {
-
+                            totalPrice();
                             location.reload();
                         }
                         else {
@@ -229,7 +229,8 @@
           function totalPrice() {
                   var getUrl = window.location;
                   var baseUrl = getUrl.protocol + "//" + getUrl.host
-                  var mainDiv2 = document.getElementById('totalPrice');
+              var mainDiv2 = document.getElementById('totalPrice');
+              console.log("total price");
                   jQuery.ajax({
                       type: "GET",
                       url: baseUrl + "/api/user/basketTotalPrice",

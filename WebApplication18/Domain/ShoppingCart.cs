@@ -158,7 +158,7 @@ namespace workshop192.Domain
                 if (dis is VisibleDiscount)
                 {
                     VisibleDiscount v = (VisibleDiscount)dis;
-                    if (!v.getIsPartOfComplex())
+                    if (!v.getIsPartOfComplex()&&v.isStoreVisibleDiscount())
                     {
                         if (v.isStoreVisibleDiscount())
                             sum = sum * (1 - v.getPercentage());
