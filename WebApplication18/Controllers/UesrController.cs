@@ -151,12 +151,12 @@ namespace WebApplication18.Controllers
 
         [Route("api/user/Checkout")]
         [HttpGet]
-        public string Checkout(string address, string creditCard)
+        public string Checkout(string address, string creditcard, string month, string year, string holder, string cvv)
         {
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-                UserService.getInstance().purchaseBasket(session, address, creditCard);
+                UserService.getInstance().purchaseBasket(session, address,  creditcard,  month,  year,  holder,  cvv);
                 return "";
 
             }

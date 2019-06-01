@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebApplication18.DAL;
 using Dapper;
+using WebApplication18.Domain;
 
 namespace workshop192.Domain
 {
@@ -18,9 +19,18 @@ namespace workshop192.Domain
 
         private DBStore()
         {
-            storeRole = new LinkedList<StoreRole>();
-            stores = initStores();
-            nextStoreID = getUpdatedId();
+            if (IsTestsMode.isTest == false)
+            {
+                storeRole = new LinkedList<StoreRole>();
+                stores = initStores();
+                nextStoreID = getUpdatedId();
+            }
+            else
+            {
+                storeRole = new LinkedList<StoreRole>();
+                stores = new LinkedList<Store>();
+
+            }
         }
         public static DBStore getInstance()
         {
@@ -100,6 +110,7 @@ namespace workshop192.Domain
                         else if (element.getStoreId() == s.getStoreID() && element.getIsOwner() == 0)
                         {
                             SubscribedUser appointedBy = DBSubscribedUser.getInstance().getSubscribedUser(element.getAppointedBy());
+                            
                             SubscribedUser user = DBSubscribedUser.getInstance().getSubscribedUser(element.getUserName());
                             Permissions p = new Permissions(false, false, false);
                             if (element.getEditDiscount() == 1)

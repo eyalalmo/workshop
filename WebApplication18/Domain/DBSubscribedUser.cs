@@ -190,13 +190,15 @@ namespace workshop192.Domain
             {
                 connection.Open();
                 var c1 = connection.Query<RegisterEntry>("SELECT username, password FROM [dbo].[Register] WHERE username=@username ", new { username = username });
+                connection.Close();
                 if (Enumerable.Count(c1) == 1)
                 {
                     RegisterEntry re = c1.ElementAt(0);
                     string password = re.getPassword();
-
+                    connection.Open();
                     string sql = "SELECT * FROM BasketCart WHERE username=@username;";
                     var c2 = connection.Query<BasketCartEntry>(sql, new { username= username });
+                    connection.Close();
                     ShoppingBasket sb = new ShoppingBasket(username);
 
                     if (Enumerable.Count(c2) > 0)
@@ -205,7 +207,9 @@ namespace workshop192.Domain
                         {
                             BasketCartEntry bc = c2.ElementAt(i);
                             int storeID = bc.getStoreID();
+                            connection.Open();
                             sql = "SELECT * FROM CartProduct WHERE storeID=@storeID AND username=@username;";
+                           
                             var c3 = connection.Query<CartProductEntry>(sql, new { storeID, username });
                             connection.Close();
                             for (int j=0; j<Enumerable.Count(c3); j++)
@@ -237,7 +241,7 @@ namespace workshop192.Domain
                 connection.Close();
                 return null;
             }
-        }
+        }//
         public void updateStoreRole(SubscribedUser user)
         {
             string username = user.getUsername();
@@ -285,7 +289,7 @@ namespace workshop192.Domain
                 connection.Close();
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 connection.Close();
             }

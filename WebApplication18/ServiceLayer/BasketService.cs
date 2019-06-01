@@ -78,10 +78,7 @@ namespace workshop192.ServiceLayer
              db.checkoutCart(user, store, address, creditCard);
         }*/
 
-        public void checkoutBasket(int user, String address, String creditCard)
-        {
-            db.checkoutBasket(user, address, creditCard);
-        }
+        
 
         public double getActualTotalPrice(int user)
         {

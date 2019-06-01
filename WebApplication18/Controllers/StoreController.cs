@@ -606,8 +606,9 @@ namespace WebApplication18.Controllers
                 return e.Message;
             }
         }
+        //url: baseUrl+"/api/store/payAndSend?address=" + address + "&creditcard=" + creditcard + "&month=" + month + "&year=" + year + "&holder=" + holder + "&cvv=" + cvv + "&creditcard=" + creditcard,
 
-
+        
 
 
     }

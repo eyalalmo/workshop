@@ -93,97 +93,18 @@
                 cvv = $("#cvv").val();
                 id = $("#id").val();
 
-                 jQuery.ajax({
-                    type: 'POST',
-                    url: 'https://cs-bgu-wsep.herokuapp.com/',
-                    contentType: "application/x-www-form-urlencoded",
-                     dataType: "jsonp",
-                     crossDomain:true,
-                     data: { action_type: 'handshake' },
-                     success: function (response) {
-                           Console.log("dd")
+                jQuery.ajax({
+                      type: "GET",
+                    url: baseUrl+"/api/user/Checkout?address=" + address + "&creditcard=" + creditcard + "&month=" + month + "&year=" + year + "&holder=" + holder + "&cvv=" + cvv,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                      success: function (response) {
                          if (response === "OK") {
-                             //new
-
-                             Console.log("ddddd")
-                             jQuery.ajax({
-                                 type: "POST",
-                                 url: "https://cs-bgu-wsep.herokuapp.com/",
-                                 contentType: "application/json; charset=utf-8",
-                                 dataType: "jsonp",
-                                 crossDomain: true,
-                                 data: {
-                                     action_type: "pay",
-                                     card_number: creditcard,
-                                     month: month,
-                                     year: year,
-                                     holder: holder,
-                                     ccv: cvv,
-                                     id: id
-                                 },
-
-                                 success: function (response) {
-                                     if (response !== -1) {
-                                         //new
-                                         jQuery.ajax({
-                                             type: "POST",
-                                             url: "https://cs-bgu-wsep.herokuapp.com/",
-                                             contentType: "application/json; charset=utf-8",
-                                             dataType: "jsonp",
-                                             crossDomain: true,
-                                             data: {
-                                                 "action_type": "supply",
-                                                 name: name,
-                                                 address: address,
-                                                 city: city,
-                                                 country: country,
-                                                 zip: zip
-                                             },
-                                             success: function (response) {
-                                                 if (response !== -1) {
-                                                     alert("succeded!")
-                                                 }
-                                                 else {
-                                                    alert("supply failed")
-                                                 }
-                                             }
-                                             //end
-                                         });
-
-
-                                         //end
-                                     } else {
-                                         alert("payment failed")
-                                     }
-
-                                 }
-                                 
-
-
-                                 //    jQuery.ajax({
-                                 //        type: "GET",
-                                 //        url: baseUrl+"/api/user/Checkout?address=" + address + "&creditcard=" + creditcard,
-                                 //        contentType: "application/json; charset=utf-8",
-                                 //        dataType: "json",
-                                 //        success: function (response) {
-
-                                 //            if (response == "") {
-                                 //                window.location.href = baseUrl+"/";
-                                 //                alert("Purchase ended sucessfully\nThe delivery is on the way!")                     
-                                 //            }
-                                 //            else {
-                                 //                alert(response);
-                                 //                console.log(response);   
-                                 //            }
-                                 //        },
-                                 //        error: function (response) {
-                                 //            console.log(response);
-                                 //        }
-                                 //    });
-                             });
+                             alert("payment succeded")
+                             window.location.href = baseUrl;
                          }
                          else {
-                             alert("handShake failed")
+                             alert("failed checkout & payment")
                          }
                      }
                });

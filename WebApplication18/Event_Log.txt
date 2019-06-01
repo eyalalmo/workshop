@@ -237,3 +237,12 @@
 2019-06-01 21:22:54,888 INFO EventLog: User eee1 has logged out
 2019-06-01 21:23:02,552 INFO EventLog: User u1 has successfuly logged in.
 2019-06-01 21:23:13,604 ERROR EventLog: Error in adding an owner : Error: No such username
+2019-06-01 23:11:10,111 INFO EventLog: User u3 has successfuly logged in.
+2019-06-01 23:11:20,700 ERROR EventLog: Error in adding to shopping cart : Error: The amount asked is larger than the quantity left
+2019-06-01 23:26:26,434 INFO EventLog: User u2 has successfuly created a store
+2019-06-01 23:35:21,918 INFO EventLog: User u2 has successfuly created a store
+2019-06-01 23:36:50,246 ERROR EventLog: Login : Error: Username does not exist
+2019-06-01 23:36:57,000 INFO EventLog: User u2 has successfuly logged in.
+2019-06-01 23:39:56,366 INFO EventLog: User u3 has successfuly logged in.
+2019-06-01 23:46:25,990 INFO EventLog: User u3 has successfuly logged in.
+2019-06-01 23:47:07,016 ERROR EventLog: Error in adding to shopping cart : Error: Product already exists on Cart

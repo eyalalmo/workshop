@@ -85,7 +85,7 @@ namespace workshop192.Domain
 
                 string sql = "INSERT INTO [dbo].[Product] (productID, productName, " +
                                                           "productCategory, price, rank, " +
-                                                          "quantityLeft, storeID, discountID)" +
+                                                          "quantityLeft, storeID)" +
                                  " VALUES (@productID, @productName, @productCategory," +
                                  " @price, @rank, @quantityLeft, @storeID)";
                 connection.Execute(sql, new
