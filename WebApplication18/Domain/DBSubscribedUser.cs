@@ -105,7 +105,7 @@ namespace workshop192.Domain
             return sb.ToString();
         }
 
-        public void deleteCartFromBasketCartTable(string username, int v)
+        public void deleteCartFromBasketCartTable(string username, int storeID)
         {
             throw new NotImplementedException();
         }
