@@ -64,7 +64,7 @@ namespace workshop192.Domain
             }
             if (!found)
             {
-                 sc = new ShoppingCart(storeID);
+                sc = new ShoppingCart(storeID);
                 if (username != null)
                 {
                     DBSubscribedUser.getInstance().addCartToBasketCartTable(username, storeID);
@@ -75,8 +75,30 @@ namespace workshop192.Domain
             {
                 DBSubscribedUser.getInstance().addProductToCartProductTable(username, storeID, product.getProductID(), amount);
             }
-             sc.addToCart(product, amount);
-            
+            sc.addToCart(product, amount);
+
+        }
+        public void addToCartNoDBUpdate(Product product, int amount)
+        {
+            int storeID = product.getStore().getStoreID();
+            bool found = false;
+            ShoppingCart sc = null;
+            foreach (ShoppingCart s in shoppingCarts.Values)
+            {
+                if (s.getStoreID() == storeID)
+                {
+                    sc = s;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
+            {
+                sc = new ShoppingCart(storeID);
+                shoppingCarts.Add(storeID, sc);
+            }
+            sc.addToCart(product, amount);
+
         }
         public void removeFromCart(int productId)
         {

@@ -213,3 +213,7 @@
 2019-06-01 11:06:47,935 INFO EventLog: User u2 has successfuly created a store
 2019-06-01 16:17:37,665 INFO EventLog: User u7 has successfuly registered
 2019-06-01 16:17:51,488 INFO EventLog: User u7 has successfuly created a store
+2019-06-01 18:29:18,829 INFO EventLog: User b has successfuly logged in.
+2019-06-01 18:52:42,486 INFO EventLog: User b has successfuly logged in.
+2019-06-01 18:57:12,959 ERROR EventLog: Login : Error: Username does not exist
+2019-06-01 18:57:24,227 ERROR EventLog: Login : Error: Username does not exist
