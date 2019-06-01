@@ -88,11 +88,15 @@ namespace workshop192.Domain
             
                 try
                 {
-                    connection.Open();
-                    connection.Execute("DELETE FROM Register");
-                    connection.Close();
-                }
-                catch (Exception e)
+                connection.Open();
+                connection.Execute("DELETE FROM Register");
+                connection.Execute("DELETE FROM BasketCart");
+                connection.Execute("DELETE FROM CartProduct");
+                connection.Close();
+                instance = new DBSubscribedUser();
+
+            }
+            catch (Exception e)
                 {
                     connection.Close();
                 }
