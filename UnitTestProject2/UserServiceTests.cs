@@ -211,7 +211,7 @@ namespace workshop192.ServiceLayer.Tests
                 basketService.addToCart(session2, product3, 1);
                 basketService.addToCart(session2, product4, 3);
 
-                userService.purchaseBasket(session2, "HaJelmonit 14", "234");
+                userService.purchaseBasket(session2, "HaJelmonit 14", "234","","","","");
                 Assert.IsTrue(true);
 
                 //???????????????do we need to check state
@@ -239,7 +239,7 @@ namespace workshop192.ServiceLayer.Tests
                 int product1 = storeService.addProduct("dogs", "big dogs", 80, 2, 4, store1, session2);
 
                 basketService.addToCart(session2, product1, 6);
-                userService.purchaseBasket(session2, "Neviot 22", "123");
+                userService.purchaseBasket(session2, "Neviot 22", "123","","","","");
                 Assert.Fail();
             }
             catch (Exception)
