@@ -129,10 +129,11 @@ namespace workshop192.Domain
             {
                /* connection.Open();
 
-                connection.Execute("UPDATE id = @id, " +
+                connection.Execute("UPDATE Discount SET " +
+                                          "id = @id, " +
                                           "percentage = @percentage, " +
                                           "duration = @duration " +
-                                          "FROM Discount WHERE id=@id",
+                                          "WHERE id=@id",
                       new
                       {
                           id = discount.getId(),

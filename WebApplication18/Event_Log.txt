@@ -213,29 +213,27 @@
 2019-06-01 11:06:47,935 INFO EventLog: User u2 has successfuly created a store
 2019-06-01 16:17:37,665 INFO EventLog: User u7 has successfuly registered
 2019-06-01 16:17:51,488 INFO EventLog: User u7 has successfuly created a store
-2019-06-01 17:44:46,239 ERROR EventLog: Login : Error: Username does not exist
-2019-06-01 17:44:59,733 ERROR EventLog: Login : Error: Username does not exist
-2019-06-01 17:50:43,546 INFO EventLog: User u1 has successfuly logged in.
-2019-06-01 17:50:45,491 INFO EventLog: User u1 has logged out
-2019-06-01 17:50:51,164 ERROR EventLog: Login : Error: Username does not exist
-2019-06-01 17:50:55,646 INFO EventLog: User u3 has successfuly logged in.
-2019-06-01 17:51:25,923 ERROR EventLog: Error in adding an owner : Error: No such username
-2019-06-01 17:58:46,234 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
-2019-06-01 17:58:46,252 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
-2019-06-01 18:14:15,417 INFO EventLog: User u3 has logged out
-2019-06-01 18:14:24,239 ERROR EventLog: Login : Error: Username does not exist
-2019-06-01 18:14:27,299 ERROR EventLog: Login : Error: Username does not exist
-2019-06-01 18:14:33,846 INFO EventLog: User u3 has successfuly logged in.
-2019-06-01 18:14:40,782 INFO EventLog: User u3 has logged out
-2019-06-01 18:25:20,918 INFO EventLog: User u3 has successfuly logged in.
-2019-06-01 20:52:49,342 ERROR EventLog: Login : Error: Username does not exist
-2019-06-01 20:52:54,146 INFO EventLog: User u3 has successfuly logged in.
-2019-06-01 20:53:19,591 INFO EventLog: User u3 has logged out
-2019-06-01 20:53:26,524 INFO EventLog: User u4 has successfuly logged in.
-2019-06-01 20:55:44,942 ERROR EventLog: Error in adding to shopping cart : Error: The amount asked is larger than the quantity left
-2019-06-01 20:55:56,209 INFO EventLog: User u4 has logged out
-2019-06-01 20:56:02,354 INFO EventLog: User d has successfuly registered
-2019-06-01 20:56:13,209 INFO EventLog: User d has successfuly created a store
-2019-06-01 20:56:53,382 INFO EventLog: User d has successfuly created a store
-2019-06-01 21:34:43,902 INFO EventLog: User u2 has successfuly logged in.
-2019-06-01 21:34:49,431 INFO EventLog: User u2 has logged out
+2019-06-01 20:16:22,086 ERROR EventLog: Register : Error: Username already exists
+2019-06-01 20:16:28,903 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 20:43:12,451 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 20:44:54,146 ERROR EventLog: Login : Error: Incorrect password
+2019-06-01 20:44:57,957 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 20:47:44,562 ERROR EventLog: Login : Error: Incorrect password
+2019-06-01 20:47:49,015 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 20:49:03,206 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 20:50:15,411 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 21:09:11,212 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 21:09:39,360 INFO EventLog: User u1 has successfuly created a store
+2019-06-01 21:10:09,987 ERROR EventLog: Error in adding an owner : Error: No such username
+2019-06-01 21:13:53,413 ERROR EventLog: Error in adding an owner : Owner already waiting for approval
+2019-06-01 21:14:01,448 ERROR EventLog: Add Manager : Error: No such username
+2019-06-01 21:14:04,648 INFO EventLog: User u1 has logged out
+2019-06-01 21:14:10,724 INFO EventLog: User ey has successfuly registered
+2019-06-01 21:14:14,104 INFO EventLog: User ey has logged out
+2019-06-01 21:14:19,204 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 21:22:32,269 ERROR EventLog: Register : Error: Username already exists
+2019-06-01 21:22:39,334 ERROR EventLog: Register : Error: Username already exists
+2019-06-01 21:22:47,926 INFO EventLog: User eee1 has successfuly registered
+2019-06-01 21:22:54,888 INFO EventLog: User eee1 has logged out
+2019-06-01 21:23:02,552 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 21:23:13,604 ERROR EventLog: Error in adding an owner : Error: No such username
