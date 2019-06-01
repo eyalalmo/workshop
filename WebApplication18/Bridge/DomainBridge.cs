@@ -54,7 +54,7 @@ namespace workshop192.Bridge
             Session user = DBSession.getInstance().getSession(sessionid);
             user.register(username, password);
             //////
-            user.login(username,password);
+           // user.login(username,password);
             //////
             SystemLogger.getEventLog().Info("User " + username + " has successfuly registered");
         }

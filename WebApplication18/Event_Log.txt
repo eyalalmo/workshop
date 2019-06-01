@@ -237,3 +237,4 @@
 2019-06-01 21:22:54,888 INFO EventLog: User eee1 has logged out
 2019-06-01 21:23:02,552 INFO EventLog: User u1 has successfuly logged in.
 2019-06-01 21:23:13,604 ERROR EventLog: Error in adding an owner : Error: No such username
+2019-06-01 22:47:08,931 INFO EventLog: User b has successfuly logged in.

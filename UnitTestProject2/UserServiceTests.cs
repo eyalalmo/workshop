@@ -129,7 +129,7 @@ namespace workshop192.ServiceLayer.Tests
         {
             loginSuccessTest();
             string searchResult1 = userService.searchByCategory("kitchen");
-            Assert.IsTrue(searchResult1.Equals("[{\"productID\":4,\"productName\":\"stove\",\"productCategory\":\"kitchen\",\"price\":200,\"rank\":3,\"quantityLeft\":2,\"storeID\":1,\"discount\":null},{\"productID\":3,\"productName\":\"pan\",\"productCategory\":\"kitchen\",\"price\":100,\"rank\":2,\"quantityLeft\":4,\"storeID\":1,\"discount\":null}]"));
+            Assert.IsTrue(searchResult1.Equals("[{\"productID\":4,\"productName\":\"stove\",\"productCategory\":\"kitchen\",\"price\":200,\"rank\":3,\"quantityLeft\":2,\"storeID\":1},{\"productID\":3,\"productName\":\"pan\",\"productCategory\":\"kitchen\",\"price\":100,\"rank\":2,\"quantityLeft\":4,\"storeID\":1}]"));
         }
 
         [TestMethod]
@@ -137,7 +137,7 @@ namespace workshop192.ServiceLayer.Tests
         {
             loginSuccessTest();
             string searchResult2 = userService.searchByCategory("clothes");
-            Assert.IsTrue(searchResult2.Equals("[{\"productID\":6,\"productName\":\"socks\",\"productCategory\":\"clothes\",\"price\":110,\"rank\":4,\"quantityLeft\":2,\"storeID\":2,\"discount\":null},{\"productID\":5,\"productName\":\"pants\",\"productCategory\":\"clothes\",\"price\":120,\"rank\":1,\"quantityLeft\":2,\"storeID\":2,\"discount\":null},{\"productID\":2,\"productName\":\"shirt\",\"productCategory\":\"clothes\",\"price\":20,\"rank\":5,\"quantityLeft\":2,\"storeID\":1,\"discount\":null}]"));
+            Assert.IsTrue(searchResult2.Equals("[{\"productID\":6,\"productName\":\"socks\",\"productCategory\":\"clothes\",\"price\":110,\"rank\":4,\"quantityLeft\":2,\"storeID\":2},{\"productID\":5,\"productName\":\"pants\",\"productCategory\":\"clothes\",\"price\":120,\"rank\":1,\"quantityLeft\":2,\"storeID\":2},{\"productID\":2,\"productName\":\"shirt\",\"productCategory\":\"clothes\",\"price\":20,\"rank\":5,\"quantityLeft\":2,\"storeID\":1}]"));
 
         }
         [TestMethod]
@@ -153,7 +153,7 @@ namespace workshop192.ServiceLayer.Tests
         public void searchByNameSucc()
         {
             string searchResult1 = userService.searchByName("stove");
-            Assert.IsTrue(searchResult1.Equals("[{\"productID\":4,\"productName\":\"stove\",\"productCategory\":\"kitchen\",\"price\":200,\"rank\":3,\"quantityLeft\":2,\"storeID\":1,\"discount\":null}]"));
+            Assert.IsTrue(searchResult1.Equals("[{\"productID\":4,\"productName\":\"stove\",\"productCategory\":\"kitchen\",\"price\":200,\"rank\":3,\"quantityLeft\":2,\"storeID\":1}]"));
             //Assert.IsTrue(productExists("stove", searchResult1));
 
         }
