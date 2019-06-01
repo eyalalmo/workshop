@@ -221,3 +221,22 @@
 2019-06-01 15:37:42,068 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
 2019-06-01 15:37:42,100 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
 2019-06-01 15:39:23,053 INFO EventLog: User et has successfuly logged in.
+2019-06-01 15:45:33,277 INFO EventLog: User yael has successfuly registered
+2019-06-01 15:47:11,335 INFO EventLog: User yael has successfuly created a store
+2019-06-01 15:49:55,293 INFO EventLog: User yael has logged out
+2019-06-01 15:50:08,180 INFO EventLog: User yaelk has successfuly registered
+2019-06-01 15:50:28,939 INFO EventLog: User yaelk has successfuly created a store
+2019-06-01 15:53:03,188 ERROR EventLog: Error in adding a visible discount : no role for this user in this store
+2019-06-01 16:03:11,455 INFO EventLog: User yaelk has successfuly created a store
+2019-06-01 16:05:41,177 ERROR EventLog: Add Reliant Discount : no role for this user in this store
+2019-06-01 16:18:53,140 ERROR EventLog: Add Reliant Discount : no role for this user in this store
+2019-06-01 16:21:01,188 INFO EventLog: User yaelk has successfuly created a store
+2019-06-01 16:27:30,902 ERROR EventLog: Add Reliant Discount : no role for this user in this store
+2019-06-01 16:30:39,254 ERROR EventLog: Add Reliant Discount : no role for this user in this store
+2019-06-01 16:32:56,698 ERROR EventLog: Add Reliant Discount : no role for this user in this store
+2019-06-01 16:39:23,215 ERROR EventLog: An Error has occured. Stack Trace:    at workshop192.Domain.DBSubscribedUser.addCartToBasketCartTable(String username, Int32 storeID)
+   at workshop192.Domain.ShoppingBasket.addToCart(Product product, Int32 amount)
+   at workshop192.Domain.Session.addToShoppingBasket(Product product, Int32 amount)
+   at workshop192.Bridge.DomainBridge.addToShoppingBasket(Int32 product, Int32 amount, Int32 sessionid)
+   at workshop192.ServiceLayer.UserService.addToShoppingBasket(Int32 product, Int32 amount, Int32 session)
+   at WebApplication18.Controllers.ProductsController.addToBasket(Int32 productID, String amount) Function: addToBasket

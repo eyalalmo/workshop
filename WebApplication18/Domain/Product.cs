@@ -30,8 +30,9 @@ namespace workshop192.Domain
             this.productCategory = productCategory;
             this.price = price;
             this.rank = rank;
-            this.storeID = storeID;
+            this.storeID = store.getStoreID();
             this.quantityLeft = quantityLeft;
+
             //this.numberOfRanking = 0;
             this.discount = null;
             //this.discountID = -1;
