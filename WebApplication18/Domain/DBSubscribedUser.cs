@@ -56,9 +56,7 @@ namespace workshop192.Domain
 
         public void register(SubscribedUser user)
         {
-            //prev
             users.Add(user.getUsername(), user);
-            // new
             string username = user.getUsername();
             string password = user.getPassword();
             try
@@ -107,8 +105,8 @@ namespace workshop192.Domain
                         {
                             BasketCartEntry bc = c2.ElementAt(i);
                             int storeID = bc.getStoreID();
-                            sql = "SELECT * FROM CartProduct WHERE storeID=@storeID;";
-                            var c3 = connection.Query<CartProductEntry>(sql, new { storeID = storeID });
+                            sql = "SELECT * FROM CartProduct WHERE storeID=@storeID AND username=@username;";
+                            var c3 = connection.Query<CartProductEntry>(sql, new { storeID, username });
                             for (int j=0; j<Enumerable.Count(c3); j++)
                             {
                                 CartProductEntry cp = c3.ElementAt(j);
@@ -177,12 +175,36 @@ namespace workshop192.Domain
 
         public void addCartToBasketCartTable(string username, int storeID)
         {
-            throw new NotImplementedException();
+            string sql = "INSERT INTO [dbo].[BasketCart] (username, storeID)" +
+                                                   " VALUES (@username, @storeID)";
+            try
+            {
+                connection.Open();
+                connection.Execute(sql, new { username, storeID });
+                connection.Close();
+
+            }
+            catch (Exception)
+            {
+                connection.Close();
+            }
         }
 
-        public void addProductToCartProductTable(int storeID, int v, int amount)
+        public void addProductToCartProductTable(string username, int storeID, int productID, int amount)
         {
-            throw new NotImplementedException();
+            string sql = "INSERT INTO [dbo].[CartProduct] (username, productID, storeID, amount)" +
+                                                               " VALUES (@username, @productID, @storeID, @amount)";
+            try
+            {
+                connection.Open();
+                connection.Execute(sql, new { username, productID, storeID, amount });
+                connection.Close();
+
+            }
+            catch (Exception)
+            {
+                connection.Close();
+            }
         }
 
         public void remove(SubscribedUser user)
@@ -197,9 +219,20 @@ namespace workshop192.Domain
             return user;
         }
 
-        public void removeProductFromCartProductTable(int v, int productId)
+        public void removeProductFromCartProductTable(string username, int storeID, int productId)
         {
-            throw new NotImplementedException();
+            string sql = "DELETE FROM [dbo].[CartProduct] WHERE username =@username producdID =@productID AND storeID =@storeID";
+            try
+            {
+                connection.Open();
+                connection.Execute(sql, new { username, productId, storeID });
+                connection.Close();
+
+            }
+            catch (Exception)
+            {
+                connection.Close();
+            }
         }
 
         public string encryptPassword(string password)
@@ -218,17 +251,59 @@ namespace workshop192.Domain
 
         public void deleteCartFromBasketCartTable(string username, int storeID)
         {
-            throw new NotImplementedException();
+            string sql = "DELETE FROM [dbo].[BasketCart]  WHERE username =@username AND storeID =@storeID";
+            try
+            {
+                connection.Open();
+                connection.Execute(sql, new { username, storeID });
+                connection.Close();
+
+            }
+            catch (Exception)
+            {
+                connection.Close();
+            }
         }
 
-        public void updateAmountOnCartProductTable(int storeID, int productID, int newAmount)
+        public void updateAmountOnCartProductTable(string username,  int storeID, int productID, int newAmount)
         {
-            throw new NotImplementedException();
+            string sql = "UPDATE CartProduct SET amount = @newAmount WHERE username = @username productID = @productID AND storeID = @storeID";
+            try
+            {
+                connection.Open();
+                connection.Execute(sql, new { newAmount,username, productID, storeID });
+                connection.Close();
+
+            }
+            catch (Exception)
+            {
+                connection.Close();
+            }
+
         }
 
-        public void updateTablesAfterPurchase(string username)
+        public void updateTablesAfterPurchase(string username, Dictionary<int, ShoppingCart> shoppingCarts)
         {
-            throw new NotImplementedException();
+            string sql1 = "DELETE FROM BasketCart WHERE username=@username";
+            string sql2 = "DELETE FROM CartProduct WHERE username=@username AND storeID=@storeID";
+            try
+            {
+                connection.Open();
+                connection.Execute(sql1, new { username });
+                foreach(KeyValuePair<int, ShoppingCart> pair in shoppingCarts)
+                {
+                    int storeID = pair.Key;
+                    connection.Execute(sql2, new { username, storeID });
+                }
+
+                connection.Close();
+
+            }
+            catch (Exception)
+            {
+                connection.Close();
+            }
+            
         }
     }
 }

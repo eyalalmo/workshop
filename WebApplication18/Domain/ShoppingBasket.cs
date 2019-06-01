@@ -73,7 +73,7 @@ namespace workshop192.Domain
             }
             if (username != null)
             {
-                DBSubscribedUser.getInstance().addProductToCartProductTable(storeID, product.getProductID(), amount);
+                DBSubscribedUser.getInstance().addProductToCartProductTable(username, storeID, product.getProductID(), amount);
             }
              sc.addToCart(product, amount);
             
@@ -89,7 +89,7 @@ namespace workshop192.Domain
                     cart.Value.removeFromCart(p);
                     if (username != null)
                     {
-                        dbuser.removeProductFromCartProductTable(cart.Value.getStoreID(), productId);
+                        dbuser.removeProductFromCartProductTable(username, cart.Value.getStoreID(), productId);
                     }
 
                     if (cart.Value.CartIsEmpty())
@@ -177,7 +177,7 @@ namespace workshop192.Domain
                 }
                 if (username != null)
                 {
-                    DBSubscribedUser.getInstance().updateTablesAfterPurchase(username);
+                    DBSubscribedUser.getInstance().updateTablesAfterPurchase(username, shoppingCarts);
                 }
             }
             else
@@ -192,7 +192,7 @@ namespace workshop192.Domain
             sc.changeQuantityOfProduct(p, newAmount);
             if (username != null)
             {
-                DBSubscribedUser.getInstance().updateAmountOnCartProductTable(storeID, p.getProductID(), newAmount);
+                DBSubscribedUser.getInstance().updateAmountOnCartProductTable(username, storeID, p.getProductID(), newAmount);
             }
         }
         internal void setUsername(string username)
