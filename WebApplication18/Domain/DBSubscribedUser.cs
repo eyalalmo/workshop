@@ -19,7 +19,7 @@ namespace workshop192.Domain
         {
             users = new Dictionary<string, SubscribedUser>();
             loggedInUser = new Dictionary<string, SubscribedUser>();
-            SubscribedUser admin = new SubscribedUser("admin", encryptPassword("1234"), new ShoppingBasket());
+            SubscribedUser admin = new SubscribedUser("admin", encryptPassword("1234"), new ShoppingBasket("admin"));
             register(admin);
         } 
 
@@ -27,7 +27,7 @@ namespace workshop192.Domain
         {
             users = new Dictionary<string, SubscribedUser>();
             loggedInUser = new Dictionary<string, SubscribedUser>();
-            SubscribedUser admin = new SubscribedUser("admin", encryptPassword("1234"), new ShoppingBasket());
+            SubscribedUser admin = new SubscribedUser("admin", encryptPassword("1234"), new ShoppingBasket("admin"));
             register(admin);
         }
 
@@ -63,6 +63,16 @@ namespace workshop192.Domain
              loggedInUser.Add(user.getUsername(), user);
         }
 
+        public void addCartToBasketCartTable(string username, int storeID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void addProductToCartProductTable(int storeID, int v, int amount)
+        {
+            throw new NotImplementedException();
+        }
+
         public void remove(SubscribedUser user)
         {
             users.Remove(user.getUsername());
@@ -74,6 +84,11 @@ namespace workshop192.Domain
             if (!loggedInUser.TryGetValue(name, out user))
                 return null;
             return user;
+        }
+
+        public void removeProductFromCartProductTable(int v, int productId)
+        {
+            throw new NotImplementedException();
         }
 
         public string encryptPassword(string password)
@@ -90,5 +105,19 @@ namespace workshop192.Domain
             return sb.ToString();
         }
 
+        public void deleteCartFromBasketCartTable(string username, int storeID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void updateAmountOnCartProductTable(int storeID, int productID, int newAmount)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void updateTablesAfterPurchase(string username)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

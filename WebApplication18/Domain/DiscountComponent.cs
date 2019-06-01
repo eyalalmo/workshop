@@ -58,5 +58,12 @@ namespace workshop192.Domain
         }
         public abstract void setComplexCondition(bool complexCondition, Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice);
 
+        internal bool checkDate()
+        {
+            DateTime now = DateTime.Now;
+            if (DateTime.Compare(duration, now) < 0)
+                return false;
+            return true;
+        }
     }
 }

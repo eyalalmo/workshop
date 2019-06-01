@@ -32,6 +32,10 @@ namespace workshop192.Domain
         {
             return productList;
         }
+        public Boolean CartIsEmpty()
+        {
+            return productList.Count == 0;
+        }
         public int getStoreID()
         {
             return this.storeID;
@@ -45,6 +49,8 @@ namespace workshop192.Domain
             }
             return null;
         }
+
+
         public void addToCart(Product product, int amount)
         {
             store.checkPolicy(product, amount);
@@ -109,9 +115,6 @@ namespace workshop192.Domain
         {
             productsActualPrice = new Dictionary<Product, double>();
             fillActualPriceDic();
-            //updateActualProductPrice();
-           // updatePriceAfterCoupon();
-            //updateStoreDiscount();
             double sum = 0;
             LinkedList<DiscountComponent> discounts = store.getDiscounts();
 
@@ -119,12 +122,17 @@ namespace workshop192.Domain
             {
                 if (dis is DiscountComposite)
                 {
-                    if (dis.checkCondition(productList, productsActualPrice))
+                    if (dis.checkCondition(productList, productsActualPrice) && dis.checkDate())
                     {
                         dis.setComplexCondition(true, productList, productsActualPrice);
                     }
                     else
                     {
+                        if(! dis.checkDate())
+                        {
+                            // discount is invalid - date has passed
+                            store.removeDiscount(dis.getId());
+                        }
                         dis.setComplexCondition(false, productList, productsActualPrice);
                     }
 

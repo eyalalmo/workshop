@@ -241,6 +241,12 @@ namespace workshop192.Domain
             discountList.AddLast(d);
         }
 
+        public void removeDiscount(DiscountComponent d)
+        {
+            discountList.Remove(d);
+        }
+
+
         public void removeDiscount(int discountID)
         {
             DiscountComponent discount = DBDiscount.getInstance().getDiscountByID(discountID);

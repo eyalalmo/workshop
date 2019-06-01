@@ -9,31 +9,12 @@ namespace workshop192.Domain
     public abstract class Discount : DiscountComponent
 
     {
-       // protected double percentage;
         protected bool isPartOfComplex;
-        //private int id;
-        DateTime duration;
 
         public Discount(double percentage, string duration): base(percentage, duration)
         {
-
-            //this.percentage = percentage;
             this.isPartOfComplex = false;
         }
-
-      /*  public double getPercentage()
-        {
-            return percentage;
-        }
-        public void setPercentage(double percentage)
-        {
-            this.percentage = percentage;
-        }
-        public string getDuration()
-        {
-            return duration;
-        }*/
-
 
         public bool getIsPartOfComplex() {
             return this.isPartOfComplex;

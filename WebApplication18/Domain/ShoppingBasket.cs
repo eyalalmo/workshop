@@ -8,13 +8,21 @@ namespace workshop192.Domain
 {
     public class ShoppingBasket
     {
-        public Dictionary<int,ShoppingCart> shoppingCarts;
+        private Dictionary<int,ShoppingCart> shoppingCarts;
+        private string username;
+
+        public ShoppingBasket(string username)
+        {
+            this.shoppingCarts = new Dictionary<int, ShoppingCart>();
+            this.username = username;
+        }
+
 
         public ShoppingBasket()
         {
             this.shoppingCarts = new Dictionary<int, ShoppingCart>();
+            this.username = null;
         }
-
         public Dictionary<int,ShoppingCart> getShoppingCarts()
         {
             return this.shoppingCarts;
@@ -45,46 +53,75 @@ namespace workshop192.Domain
         {
             int storeID = product.getStore().getStoreID();
             bool found = false;
-            foreach (ShoppingCart sc in shoppingCarts.Values)
+            ShoppingCart sc = null;
+            foreach (ShoppingCart s in shoppingCarts.Values)
             {
-                if (sc.getStoreID() == storeID)
+                if (s.getStoreID() == storeID)
                 {
-                    sc.addToCart(product, amount);
-                    return;
+                    sc = s;
+                    found = true;
+                    break;
                 }
             }
             if (!found)
             {
-                ShoppingCart sc = new ShoppingCart(storeID);
-                sc.addToCart(product, amount);
+                 sc = new ShoppingCart(storeID);
+                if (username != null)
                 {
-                    shoppingCarts.Add(storeID, sc);
+                    DBSubscribedUser.getInstance().addCartToBasketCartTable(username, storeID);
                 }
+                shoppingCarts.Add(storeID, sc);
             }
+            if (username != null)
+            {
+                DBSubscribedUser.getInstance().addProductToCartProductTable(storeID, product.getProductID(), amount);
+            }
+             sc.addToCart(product, amount);
+            
         }
         public void removeFromCart(int productId)
         {
+            DBSubscribedUser dbuser = DBSubscribedUser.getInstance();
             foreach (KeyValuePair<int, ShoppingCart> cart in shoppingCarts)
             {
                 Product p = cart.Value.cartContainsProduct(productId);
                 if (p != null)
                 {
                     cart.Value.removeFromCart(p);
+                    if (username != null)
+                    {
+                        dbuser.removeProductFromCartProductTable(cart.Value.getStoreID(), productId);
+                    }
+
+                    if (cart.Value.CartIsEmpty())
+                    {
+                        deleteCart(cart.Value);
+                       
+                    }
+
                     return;
                 }
             }
             throw new DoesntExistException("Product cannot be removed, it does not exist in cart");
         }
-        //public String checkout (String address,String creditCard){
-        //    // return the result of the proccess by order of cart
-        //    String output = "";
-        //    foreach (ShoppingCart sc in shoppingCarts.Values)
-        //    {
-        //        output += sc.checkout(address,creditCard);
-        //    }
-        //    return output;
-        //}
 
+        private void deleteCart(ShoppingCart sc)
+        {
+
+            foreach (KeyValuePair<int, ShoppingCart> cart in shoppingCarts)
+            {
+                if (cart.Value.getStoreID() == sc.getStoreID())
+                {
+                    shoppingCarts.Remove(cart.Key);
+
+                    if (username != null)
+                    {
+                        DBSubscribedUser.getInstance().deleteCartFromBasketCartTable(username, cart.Value.getStoreID());
+                    }
+                    return;
+                }
+            }
+        }
 
         public ShoppingCart getShoppingCartByID(int storeID)
         {
@@ -139,6 +176,10 @@ namespace workshop192.Domain
                 {
                     throw new CartException("Delivery FAILED");
                 }
+                if (username != null)
+                {
+                    DBSubscribedUser.getInstance().updateTablesAfterPurchase(username);
+                }
             }
             else
             {
@@ -146,7 +187,14 @@ namespace workshop192.Domain
             }
         }
 
-
-
+        internal void changeQuantityOfProduct(int storeID, Product p, int newAmount)
+        {
+            ShoppingCart sc = getShoppingCartByID(storeID);
+            sc.changeQuantityOfProduct(p, newAmount);
+            if (username != null)
+            {
+                DBSubscribedUser.getInstance().updateAmountOnCartProductTable(storeID, p.getProductID(), newAmount);
+            }
+        }
     }
 }
