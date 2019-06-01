@@ -93,6 +93,12 @@ namespace workshop192.Domain
             return false;
         }
 
+        public void addStoreRoleFromInitOwner(StoreOwner so)
+        {
+            roles.Add(so);
+            numOfOwners++;
+        }
+
         public string getProductsString()
         {
             string s = JsonConvert.SerializeObject(this.productList);
@@ -132,6 +138,11 @@ namespace workshop192.Domain
             this.name = storeName;
         }
 
+        public void addStoreRoleFromInitManager(StoreRole so)
+        {
+            roles.Add(so);
+        }
+
         public String getDescription()
         {
             return this.description;
@@ -142,11 +153,12 @@ namespace workshop192.Domain
             this.description = description;
         }
 
-        public void addStoreRole(StoreRole toAdd)
+        public void addStoreRoleFromInitOwner(StoreRole toAdd)
         {
             if (toAdd is StoreOwner)
             {
                 numOfOwners++;
+                DBStore.getInstance().addownerNumerByOne(storeId, numOfOwners);
             }
             roles.Add(toAdd);
         }
@@ -256,8 +268,11 @@ namespace workshop192.Domain
             if (toRemove is StoreOwner)
             {
                 numOfOwners--;
+                DBStore.getInstance().removeOwnerNumerByOne(storeId, numOfOwners);
+
             }
             roles.Remove(toRemove);
+            DBStore.getInstance().removeStoreRole(toRemove);
         }
 
 

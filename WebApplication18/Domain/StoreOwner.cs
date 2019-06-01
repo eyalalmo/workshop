@@ -90,7 +90,7 @@ namespace workshop192.Domain
                 throw new RoleException("Error: Username "  + manager.getUsername() + 
                     " already has a role in store " + 
                     store.getStoreName());
-            store.addStoreRole(newManager);
+            store.addStoreRoleFromInitOwner(newManager);
             manager.addStoreRole(newManager);
             appointedByMe.Add(newManager);
         }
@@ -102,7 +102,7 @@ namespace workshop192.Domain
                 throw new RoleException("Error: Username " + owner.getUsername() +
                     " already has a role in store " +
                     store.getStoreName());
-            store.addStoreRole(newOwner);
+            store.addStoreRoleFromInitOwner(newOwner);
             owner.addStoreRole(newOwner);
             appointedByMe.Add(newOwner);
             DBStore.getInstance().addStoreRole(newOwner);

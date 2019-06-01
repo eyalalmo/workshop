@@ -213,3 +213,7 @@
 2019-06-01 11:06:47,935 INFO EventLog: User u2 has successfuly created a store
 2019-06-01 16:17:37,665 INFO EventLog: User u7 has successfuly registered
 2019-06-01 16:17:51,488 INFO EventLog: User u7 has successfuly created a store
+2019-06-01 20:01:18,918 INFO EventLog: User u3 has successfuly logged in.
+2019-06-01 20:01:28,471 INFO EventLog: User u3 has successfuly created a store
+2019-06-01 20:01:39,457 ERROR EventLog: Error in adding an owner : Error: No such username
+2019-06-01 20:01:45,049 ERROR EventLog: Error in adding an owner : Error: No such username
