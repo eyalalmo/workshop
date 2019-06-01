@@ -75,16 +75,6 @@ namespace workshop192.Domain
             }
             throw new DoesntExistException("Product cannot be removed, it does not exist in cart");
         }
-        //public String checkout (String address,String creditCard){
-        //    // return the result of the proccess by order of cart
-        //    String output = "";
-        //    foreach (ShoppingCart sc in shoppingCarts.Values)
-        //    {
-        //        output += sc.checkout(address,creditCard);
-        //    }
-        //    return output;
-        //}
-
 
         public ShoppingCart getShoppingCartByID(int storeID)
         {

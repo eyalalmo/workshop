@@ -109,9 +109,6 @@ namespace workshop192.Domain
         {
             productsActualPrice = new Dictionary<Product, double>();
             fillActualPriceDic();
-            //updateActualProductPrice();
-           // updatePriceAfterCoupon();
-            //updateStoreDiscount();
             double sum = 0;
             LinkedList<DiscountComponent> discounts = store.getDiscounts();
 
@@ -119,12 +116,17 @@ namespace workshop192.Domain
             {
                 if (dis is DiscountComposite)
                 {
-                    if (dis.checkCondition(productList, productsActualPrice))
+                    if (dis.checkCondition(productList, productsActualPrice) && dis.checkDate())
                     {
                         dis.setComplexCondition(true, productList, productsActualPrice);
                     }
                     else
                     {
+                        if(! dis.checkDate())
+                        {
+                            // discount is invalid - date has passed
+                            store.removeDiscount(dis.getId());
+                        }
                         dis.setComplexCondition(false, productList, productsActualPrice);
                     }
 

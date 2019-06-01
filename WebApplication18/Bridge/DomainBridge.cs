@@ -605,14 +605,7 @@ namespace workshop192.Bridge
 
             user.getShoppingBasket().getShoppingCartByID(store.getStoreID()).changeQuantityOfProduct(p, newAmount);
         }
-
-       /* public void checkoutCart(int sessionid, int store, String address, String creditCard)
-        {
-            Session user = DBSession.getInstance().getSession(sessionid);
-
-            user.getShoppingBasket().getShoppingCartByID(store).checkout(address, creditCard);
-        }*/
-
+        
         public void checkoutBasket(int sessionid, String address, String creditCard)
         {
             Session user = DBSession.getInstance().getSession(sessionid);
