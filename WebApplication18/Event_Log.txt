@@ -246,3 +246,8 @@
 2019-06-01 23:39:56,366 INFO EventLog: User u3 has successfuly logged in.
 2019-06-01 23:46:25,990 INFO EventLog: User u3 has successfuly logged in.
 2019-06-01 23:47:07,016 ERROR EventLog: Error in adding to shopping cart : Error: Product already exists on Cart
+2019-06-02 00:31:59,486 INFO EventLog: User u3 has successfuly logged in.
+2019-06-02 00:39:36,761 INFO EventLog: User u3 has successfuly logged in.
+2019-06-02 00:41:10,231 INFO EventLog: User u3 has successfuly logged in.
+2019-06-02 00:46:21,590 INFO EventLog: User u3 has successfuly logged in.
+2019-06-02 00:51:22,961 INFO EventLog: User u3 has successfuly logged in.

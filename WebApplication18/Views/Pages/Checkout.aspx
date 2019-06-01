@@ -92,7 +92,7 @@
                 holder = $("#holder").val();
                 cvv = $("#cvv").val();
                 id = $("#id").val();
-
+                console.log("dd")
                 jQuery.ajax({
                       type: "GET",
                     url: baseUrl+"/api/user/Checkout?address=" + address + "&creditcard=" + creditcard + "&month=" + month + "&year=" + year + "&holder=" + holder + "&cvv=" + cvv,

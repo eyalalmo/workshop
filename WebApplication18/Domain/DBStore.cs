@@ -109,9 +109,9 @@ namespace workshop192.Domain
                         }
                         else if (element.getStoreId() == s.getStoreID() && element.getIsOwner() == 0)
                         {
-                            SubscribedUser appointedBy = DBSubscribedUser.getInstance().getSubscribedUser(element.getAppointedBy());
+                            SubscribedUser appointedBy = DBSubscribedUser.getInstance().getSubscribedUserForInitStore(element.getAppointedBy());
                             
-                            SubscribedUser user = DBSubscribedUser.getInstance().getSubscribedUser(element.getUserName());
+                            SubscribedUser user = DBSubscribedUser.getInstance().getSubscribedUserForInitStore(element.getUserName());
                             Permissions p = new Permissions(false, false, false);
                             if (element.getEditDiscount() == 1)
                                 p.setEditDiscount(true);

@@ -29,11 +29,7 @@ namespace workshop192.Domain
 
         public  async Task<int> checkOut(string card, string month, string year, string holder, string ccv, string id, double price)
         {
-            if (PaymentService.getInstance().handShake().Result != true)
-            {
-                throw new StoreException("cant handshake");
-                
-            }
+           
                 var massage = new Dictionary<string, string>
             {
              { "action_type", "pay" },
@@ -60,6 +56,7 @@ namespace workshop192.Domain
 
         public bool connectToSystem()
         {
+          
             return true;
         }
         public async Task<bool> handShake()

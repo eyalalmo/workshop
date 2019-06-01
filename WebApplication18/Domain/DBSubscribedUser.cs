@@ -152,21 +152,22 @@ namespace workshop192.Domain
            {
                connection.Open();
                var c1 = connection.Query<RegisterEntry>("SELECT username, password FROM [dbo].[Register] WHERE username=@username ", new { username = username });
-               if (Enumerable.Count(c1) == 1)
+                connection.Close();
+                if (Enumerable.Count(c1) == 1)
                {
                    RegisterEntry re = c1.ElementAt(0);
                    string password = re.getPassword();
 
                     ShoppingBasket sb = new ShoppingBasket(username);
                     SubscribedUser su = new SubscribedUser(username, password, sb);
-
+                 
                     users.Add(username, su);
                     return su;
                 }
 
                 else
                 {
-                    connection.Close();
+                   
                     return null;
                 }
             }

@@ -30,11 +30,7 @@ namespace workshop192.Domain
 
         public async Task<int> sendToUser(string name, string address, string city, string country, string zip, string cvv)
         {
-            if (DeliveryService.getInstance().handShake().Result != true)
-            {
-                throw new StoreException("cant handshake");
-
-            }
+            
             var massage = new Dictionary<string, string>
             {
              { "action_type", "supply" },
