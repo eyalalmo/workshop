@@ -237,3 +237,4 @@ Parameter name: value
 2019-06-01 00:32:38,339 INFO  System Log - User et has successfuly logged in.
 2019-06-01 00:34:02,322 ERROR System Log - Add Visible Discount : Value cannot be null.
 Parameter name: value
+2019-06-01 14:34:22,942 INFO  System Log - User et has successfuly logged in.
