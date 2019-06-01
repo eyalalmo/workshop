@@ -96,7 +96,7 @@
                  jQuery.ajax({
                     type: 'POST',
                     url: 'https://cs-bgu-wsep.herokuapp.com/',
-                    contentType: "application/json; charset=utf-8",
+                    contentType: "application/x-www-form-urlencoded",
                      dataType: "jsonp",
                      crossDomain:true,
                      data: { action_type: 'handshake' },

@@ -34,6 +34,24 @@ namespace workshop192.Domain
             }
 
         }
+
+        public void initTests()
+        {
+            
+                try
+                {
+                    connection.Open();
+                    connection.Execute("DELETE FROM Register");
+                    connection.Close();
+                }
+                catch (Exception e)
+                {
+                    connection.Close();
+                }
+            }
+
+        
+
         public void addAdmin(string name, string pass)
         {
             SubscribedUser admin = new SubscribedUser(name, encryptPassword(pass), new ShoppingBasket());

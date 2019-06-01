@@ -60,6 +60,11 @@ namespace workshop192.Domain
             nextID++;*/
         }
 
+        public void initTests()
+        {
+            init();
+        }
+
         public void addDiscount(Discount d)
         {
             try

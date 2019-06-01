@@ -63,6 +63,20 @@ namespace workshop192.Domain
             nextProductID++;
         }
 
+        public void initTests()
+        {
+            try
+            {
+                connection.Open();
+                connection.Execute("DELETE FROM Product");
+                connection.Close();
+            }
+            catch(Exception e)
+            {
+                connection.Close();
+            }
+        }
+
         public int addProduct(Product p)
         {
             try
