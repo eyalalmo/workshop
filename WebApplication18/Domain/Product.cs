@@ -202,8 +202,8 @@ namespace workshop192.Domain
             return DBStore.getInstance().getStore(storeID);
         }
 
-       /* internal int getDiscountID() {
-            return this.discountID;
-        }*/
+        /* internal int getDiscountID() {
+             return this.discountID;
+         }*/
     }
 }

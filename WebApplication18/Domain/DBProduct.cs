@@ -73,7 +73,7 @@ namespace workshop192.Domain
                                                           "productCategory, price, rank, " +
                                                           "quantityLeft, storeID, discountID)" +
                                  " VALUES (@productID, @productName, @productCategory," +
-                                 " @price, @rank, @quantityLeft, @storeID, @discountID)";
+                                 " @price, @rank, @quantityLeft, @storeID)";
                 connection.Execute(sql, new
                 {
                     productID = p.getProductID(),
@@ -83,11 +83,10 @@ namespace workshop192.Domain
                     rank = p.getRank(),
                     quantityLeft = p.getQuantityLeft(),
                     storeID = p.getStoreID(),
-                    discountID = 0
                 });
                 
-                if(p.discount != null)
-                    DBDiscount.getInstance().addDiscount(p.discount);
+                //if(p.discount != null)
+                  //  DBDiscount.getInstance().addDiscount(p.discount);
                 /*sql = "INSERT INTO [dbo].[Discount] (discountID, percentage, duration) " +
                                  " VALUES (@discountID, @percentage, @duration) ";
                 connection.Execute(sql, new
@@ -165,8 +164,8 @@ namespace workshop192.Domain
             {
                 connection.Open();
                 connection.Execute("DELETE FROM Product WHERE productID=@productID ", new { productID = p.getProductID() });
-                if(p.discount != null)
-                    DBDiscount.getInstance().removeDiscount(p.discount);
+                //if(p.discount != null)
+                  //  DBDiscount.getInstance().removeDiscount(p.discount);
                 productList.Remove(p);
                 connection.Close();
             }
@@ -318,15 +317,15 @@ namespace workshop192.Domain
             {
                 connection.Open();
 
-                connection.Execute("UPDATE productID = @productID, " +
-                                          "productName = @productName, " +
-                                          "productCategory = @productCategory, " +
-                                          "price = @price, " +
-                                          "rank = @rank, " +
-                                          "quantityLeft = @quantityLeft, " +
-                                          "storeID = @storeID, " +
-                                          "discountID = @discountID " +
-                                          "FROM Product WHERE productID=@productID",
+                connection.Execute("UPDATE Product SET " +
+                                          "productID=@productID, " +
+                                          "productName=@productName, " +
+                                          "productCategory=@productCategory, " +
+                                          "price=@price, " +
+                                          "rank=@rank, " +
+                                          "quantityLeft=@quantityLeft, " +
+                                          "storeID=@storeID " +
+                                          "WHERE productID=@productID",
                       new
                       {
                           productID = p.getProductID(),
@@ -335,12 +334,11 @@ namespace workshop192.Domain
                           price = p.getPrice(),
                           rank = p.getRank(),
                           quantityLeft = p.getQuantityLeft(),
-                          storeID = p.getStoreID(),
-                          //discountID = p.getDiscountID()
+                          storeID = p.getStoreID()
                       });
                 
-                if(p.discount != null)
-                    DBDiscount.getInstance().update(p.discount);
+                //if(p.discount != null)
+                  //  DBDiscount.getInstance().update(p.discount);
                 connection.Close();
             }
             catch (Exception e)

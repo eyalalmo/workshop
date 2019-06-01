@@ -213,3 +213,12 @@
 2019-06-01 11:06:47,935 INFO EventLog: User u2 has successfuly created a store
 2019-06-01 16:17:37,665 INFO EventLog: User u7 has successfuly registered
 2019-06-01 16:17:51,488 INFO EventLog: User u7 has successfuly created a store
+2019-06-01 20:16:22,086 ERROR EventLog: Register : Error: Username already exists
+2019-06-01 20:16:28,903 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 20:43:12,451 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 20:44:54,146 ERROR EventLog: Login : Error: Incorrect password
+2019-06-01 20:44:57,957 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 20:47:44,562 ERROR EventLog: Login : Error: Incorrect password
+2019-06-01 20:47:49,015 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 20:49:03,206 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 20:50:15,411 INFO EventLog: User u1 has successfuly logged in.
