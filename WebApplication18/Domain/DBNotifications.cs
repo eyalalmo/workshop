@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using WebApplication18.DAL;
+using Dapper;
+using System.Linq;
 
 namespace WebApplication18.Domain
 {
-    public class DBNotifications
+    public class DBNotifications : Connector
     {
         private static DBNotifications instance;
         private LinkedList<Tuple<String, String>> waitingNotifications;
@@ -28,12 +31,121 @@ namespace WebApplication18.Domain
 
         internal void setWaitingNotifications(LinkedList<Tuple<string, string>> remains)
         {
-            waitingNotifications = remains;
+            //waitingNotifications = remains;
+            try
+            {
+                connection.Open();
+                foreach (Tuple<string, string> message in remains)
+                {
+                    string sql = "INSERT INTO [dbo].[Notification] (username, message)" +
+                                 " VALUES (@username, @message)";
+                    connection.Execute(sql, new { message.Item1, message.Item2 });
+                }
+
+                connection.Close();
+            }
+
+            catch (Exception)
+            {
+                connection.Close();
+            }
         }
 
         internal void init()
         {
-            waitingNotifications.AddFirst(new Tuple<string, string>("ey", "hi there"));
+            //waitingNotifications.AddFirst(new Tuple<string, string>("ey", "hi there"));
+            try
+            {
+                string username = "ey";
+                string message = "an old message to ey";
+                connection.Open();
+                string sql = "INSERT INTO [dbo].[Notification] (username, message)" +
+                             " VALUES (@username, @message)";
+                connection.Execute(sql, new {username , message});
+                connection.Close();
+            }
+
+            catch (Exception e)
+            {
+                connection.Close();
+            }
+        }
+
+        internal void clearMessagesFor(string username)
+        {
+            try
+            {
+                connection.Open();
+                connection.Execute("DELETE FROM Notification WHERE username=@username ", new { username });
+                connection.Close();
+            }
+
+            catch (Exception)
+            {
+                connection.Close();
+            }
+            
+            /*
+            LinkedList<Tuple<string, string>> toDel = new LinkedList<Tuple<string, string>>();
+            foreach (Tuple<string, string> mess in waitingNotifications)
+                if(mess.Item1 == username)
+                    toDel.AddFirst(mess);
+            foreach (Tuple<string, string> mess in toDel)
+                waitingNotifications.Remove(mess);
+            */
+        }
+
+        internal LinkedList<string> getMessagesFor(string username)
+        {
+            LinkedList<string> result = new LinkedList<string>();
+            try
+            {
+                connection.Open();
+                var c = connection.Query<Notification>("SELECT username, message FROM [dbo].[Notification] WHERE username=@username ", new { username });
+                if (c.Count() == 0)
+                {
+                    connection.Close();
+                    return result;
+                }
+
+                foreach (Notification message in c) {
+                    result.AddFirst(message.message);
+                }
+
+                connection.Close();
+                return result;
+            }
+
+            catch (Exception e)
+            {
+                connection.Close();
+                return result;
+            }
+
+            /*            LinkedList<string> result = new LinkedList<string>();
+                        foreach (Tuple<string, string> mess in waitingNotifications)
+                            if(mess.Item1 == username)
+                                result.AddFirst(mess.Item2);
+                        return result;
+                        */
+        }
+
+        internal void addMessage(Tuple<string, string> tuple)
+        {
+            //waitingNotifications.AddFirst(tuple);
+            try
+            {
+                connection.Open();
+                string sql = "INSERT INTO [dbo].[Notification] (username, message)" +
+                                 " VALUES (@username, @message)";
+                connection.Execute(sql, new { username = tuple.Item1, message = tuple.Item2 });
+                connection.Close();
+            }
+
+            catch (Exception)
+            {
+                connection.Close();
+            }
         }
     }
 }

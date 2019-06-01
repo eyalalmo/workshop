@@ -50,20 +50,27 @@ namespace workshop192.Domain
 
         public void login(String username, String password, Session session)
         {
-   
             String encrypted = DBSubscribedUser.getInstance().encryptPassword(password);
             SubscribedUser sub = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (sub == null)
                 throw new LoginException("Error: Username does not exist");
+            DBSubscribedUser.getInstance().updateStoreRole(sub);
             SubscribedUser loggedIn = DBSubscribedUser.getInstance().getloggedInUser(username);
             if( loggedIn != null)
                 throw new LoginException("Error: Username already logged in");
             if (!Equals(sub.getPassword(), encrypted))
                 throw new LoginException("Error: Incorrect password");
+            ////////////erase
 
+           // Store st = new Store("bb", "cc");
+            //DBStore.getInstance().addStore(st);
+            
+
+
+            ////////erase
             session.setSubscribedUser(sub);
             
-            if (Equals(username, "admin"))
+            if (Equals(username, "u1"))
             {
                 session.setState(new Admin());
             }
@@ -71,7 +78,7 @@ namespace workshop192.Domain
             {
                 session.setState(new LoggedIn());
             }
-            session.setShoppingBasket(new ShoppingBasket());
+            session.setShoppingBasket(new ShoppingBasket(sub.getUsername()));
             session.setShoppingBasket(sub.getShoppingBasket());
             DBSubscribedUser.getInstance().login(sub);
         }
@@ -87,6 +94,7 @@ namespace workshop192.Domain
             SubscribedUser s = dbSubscribedUser.getSubscribedUser(username);
             if (s != null)
                throw new RegisterException("Error: Username already exists");
+            session.getShoppingBasket().setUsername(username);
             SubscribedUser sub = new SubscribedUser(username, encrypted, session.getShoppingBasket());
 
             //session.setSubscribedUser(sub);

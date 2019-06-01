@@ -11,6 +11,7 @@ namespace workshop192.Domain
         private SubscribedUser subscribedUser;
         private UserState userState;
         private ShoppingBasket shoppingBasket;
+        private int id;
 
         public Session()
         {

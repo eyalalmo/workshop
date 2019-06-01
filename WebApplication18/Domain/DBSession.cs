@@ -39,6 +39,7 @@ namespace workshop192.Domain
         {
             if (!sessions.ContainsKey(sessionid))
                 throw new DoesntExistException("session doesnt exist");
+
             return sessions[sessionid];
         }
 
@@ -60,20 +61,23 @@ namespace workshop192.Domain
             }
             throw new DoesntExistException("session doesnt exist");
         }
-        
+
         public void initSession()
         {
             sessions = new Dictionary<int, Session>();
         }
 
-        internal int getSessionOfUserName(string username)
+        internal LinkedList<int> getSessionOfUserName(string username)
         {
-            foreach (KeyValuePair<int, Session> s in sessions) {
+            LinkedList<int> result = new LinkedList<int>();
+
+            foreach (KeyValuePair<int, Session> s in sessions)
+            {
                 SubscribedUser su = s.Value.getSubscribedUser();
                 if (su != null && su.getUsername() == username)
-                    return s.Key;
+                    result.AddFirst(s.Key);
             }
-            return -1;
+            return result;
         }
     }
 }

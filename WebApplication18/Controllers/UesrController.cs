@@ -4,8 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using WebApplication18.Logger;
+using WebApplication18.Logs;
 using workshop192.ServiceLayer;
+using workshop192.Domain;
 
 
 namespace WebApplication18.Controllers
@@ -23,9 +24,9 @@ namespace WebApplication18.Controllers
                 UserService.getInstance().register(session, Username, Password);
                 return "ok";
             }
-            catch(Exception e)
+            catch(ClientException e)
             {
-                SystemLogger.getLog().Error("Register : " + e.Message.ToString());
+                SystemLogger.getEventLog().Error("Register : " + e.Message.ToString());
                 return e.Message;
             }
 
@@ -41,9 +42,9 @@ namespace WebApplication18.Controllers
                 UserService.getInstance().login(session, Username, Password);
                 return "ok";
             }
-            catch(Exception e)
+            catch(ClientException e)
             {
-                SystemLogger.getLog().Error("Login : " + e.Message.ToString());
+                SystemLogger.getEventLog().Error("Login : " + e.Message.ToString());
                 return e.Message;
             }
         }
@@ -58,9 +59,9 @@ namespace WebApplication18.Controllers
                 UserService.getInstance().logout(session);
                 return "ok";
             }
-            catch( Exception e)
+            catch(ClientException e)
             {
-                SystemLogger.getLog().Error("Logout : " + e.Message.ToString());
+                SystemLogger.getEventLog().Error("Logout : " + e.Message.ToString());
                 return e.Message;
             }
         }
@@ -112,20 +113,6 @@ namespace WebApplication18.Controllers
 
                 return e.Message.ToString();
             }
-            //HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, basket);
-            //String hash = System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value;
-            // UserService.addUser(hash, session);
-            //string response = basket;
-            /*foreach (KeyValuePair<int, ShoppingCart> cart in basket.getShoppingCarts())
-            {
-                foreach (KeyValuePair<Product, int> p in cart.Value.getProductsInCarts())
-                {
-                    response+= p.Key.getProductName() + "," + p.Key.getPrice() + "," + p.Key.getProductID() +"," + p.Value + ";";
-                }
-            }*/
-
-
-            // return response;
         }
 
         [Route("api/user/removeProductFromCart")]
@@ -139,9 +126,9 @@ namespace WebApplication18.Controllers
             UserService.getInstance().removeFromShoppingBasket(session, productId);
             return "ok";
             }
-            catch (Exception e)
+            catch (ClientException e)
             {
-                SystemLogger.getLog().Error("Remove from Cart : " + e.Message.ToString());
+                SystemLogger.getEventLog().Error("Remove from Cart : " + e.Message.ToString());
                 return e.Message.ToString();
             }
 
@@ -173,9 +160,9 @@ namespace WebApplication18.Controllers
                 return "";
 
             }
-            catch (Exception e)
+            catch (ClientException e)
             {
-                SystemLogger.getLog().Error("Checkout : " + e.Message.ToString());
+                SystemLogger.getEventLog().Error("Checkout : " + e.Message.ToString());
                 return e.Message.ToString();
             }
         }
@@ -191,7 +178,7 @@ namespace WebApplication18.Controllers
                 UserService.getInstance().removeUser(session, username);
                 return "ok";
             }
-            catch (Exception e)
+            catch (ClientException e)
             {
                 return e.Message;
             }
@@ -203,7 +190,6 @@ namespace WebApplication18.Controllers
         {
             try
             {
-                WebSocketController.messageClient("et", "");
                 return "ok";
             }
             catch (Exception e)

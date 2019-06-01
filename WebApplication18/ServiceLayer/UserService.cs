@@ -58,7 +58,7 @@ namespace workshop192.ServiceLayer
             db.register(user, username, password);
         }
 
-        internal int getSessionByUserName(string username)
+        internal LinkedList<int> getSessionByUserName(string username)
         {
             return db.getSessionByUserName(username);
         }
@@ -136,6 +136,16 @@ namespace workshop192.ServiceLayer
             }
         }
 
+        internal LinkedList<string> getMessagesFor(string username)
+        {
+            return db.getMessagesFor(username);
+        }
+
+        internal void clearMessagesFor(string username)
+        {
+            db.clearMessagesFor(username);
+        }
+
         public void addToShoppingBasket(int product, int amount, int session)
         {
             if (product < 0)
@@ -174,9 +184,9 @@ namespace workshop192.ServiceLayer
 
      
         /////////////////////////////////////////////////////////////////////////////////////
-        public String addUser(string hash, int session)
+        public void addUser(string hash, int session)
         {
-            return db.addSession(hash, session);
+            db.addSession(hash, session);
         }
 
         public string generate()
@@ -194,15 +204,15 @@ namespace workshop192.ServiceLayer
         {
             return db.getWaitingNotifications();
         }
-
-        internal void addWaitingMessage(Tuple<string, string> tuple)
-        {
-            db.getWaitingNotifications().AddFirst(tuple);
-        }
-
+        
         internal string getUserNameBySession(int sessionid)
         {
             return db.getUserNameBySession(sessionid);
+        }
+
+        internal void addWaitingMessage(Tuple<string, string> tuple)
+        {
+            db.addWaitingMessage(tuple);
         }
     }
 }

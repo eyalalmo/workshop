@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using WebApplication18.Logger;
+using WebApplication18.Logs;
 using workshop192.Domain;
 using workshop192.ServiceLayer;
 
@@ -21,10 +21,15 @@ namespace WebApplication18.Controllers
                 string list = UserService.getInstance().getAllProducts();
                 return list;
             }
+            catch (ClientException e)
+            {
+                SystemLogger.getEventLog().Error("Catalog Error : " + e.Message.ToString());
+                return e.Message.ToString();
+            }
             catch (Exception e)
             {
-                SystemLogger.getLog().Error("Catalog Error : " + e.Message.ToString());
-                return e.Message.ToString();
+                SystemLogger.getEventLog().Error("An Error has occured. Stack Trace: " + e.StackTrace +" Function: getAllProducts");
+                return "error";
             }
 
         }
@@ -39,10 +44,15 @@ namespace WebApplication18.Controllers
                 return list;
             }
 
+            catch (ClientException e)
+            {
+                SystemLogger.getEventLog().Error("Search error : " + e.Message.ToString());
+                return e.Message.ToString();
+            }
             catch (Exception e)
             {
-                SystemLogger.getLog().Error("Search error : " + e.Message.ToString());
-                return e.Message.ToString();
+                SystemLogger.getEventLog().Error("An Error has occured. Stack Trace: " + e.StackTrace + " Function: SearchByName , Params: " +param);
+                return "error";
             }
         }
 
@@ -56,10 +66,15 @@ namespace WebApplication18.Controllers
                 return list;
             }
             
+            catch (ClientException e)
+            {
+                SystemLogger.getEventLog().Error("Search error : " + e.Message.ToString());
+                return e.Message.ToString();
+            }
             catch (Exception e)
             {
-                SystemLogger.getLog().Error("Search error : " + e.Message.ToString());
-                return e.Message.ToString();
+                SystemLogger.getEventLog().Error("An Error has occured. Stack Trace: " + e.StackTrace + " Function: SearchByCat , Params: " + param);
+                return "error";
             }
         }
 
@@ -72,10 +87,15 @@ namespace WebApplication18.Controllers
                 string list = UserService.getInstance().searchByKeyword(param);
                 return list;
             }
+            catch (ClientException e)
+            {
+                SystemLogger.getEventLog().Error("Search error : " + e.Message.ToString());
+                return e.Message.ToString();
+            }
             catch (Exception e)
             {
-                SystemLogger.getLog().Error("Search error : " + e.Message.ToString());
-                return e.Message.ToString();
+                SystemLogger.getEventLog().Error("An Error has occured. Stack Trace: " + e.StackTrace + " Function: Search , Params: " + param);
+                return "error";
             }
         }
 
@@ -96,10 +116,15 @@ namespace WebApplication18.Controllers
             {
                 return "please enter a valid Number";
             }
+            catch (ClientException e)
+            {
+                SystemLogger.getEventLog().Error("Error in adding to shopping cart : " + e.Message.ToString());
+                return e.Message.ToString();
+            }
             catch (Exception e)
             {
-                SystemLogger.getLog().Error("Error in adding to shopping cart : " + e.Message.ToString());
-                return e.Message.ToString();
+                SystemLogger.getEventLog().Error("An Error has occured. Stack Trace: " + e.StackTrace + " Function: addToBasket");
+                return "error";
             }
 
         }
@@ -114,11 +139,16 @@ namespace WebApplication18.Controllers
                 StoreService.getInstance().addProductVisibleDiscount(productID, session, per, duration);
                 return "";
             }
-            catch (Exception e)
+            catch (ClientException e)
             {
-                SystemLogger.getLog().Error("Error in adding a visible discount : "+e.Message.ToString());
+                SystemLogger.getEventLog().Error("Error in adding a visible discount : "+e.Message.ToString());
                 return e.Message.ToString();
                 
+            }
+            catch (Exception e)
+            {
+                SystemLogger.getEventLog().Error("An Error has occured. Stack Trace: " + e.StackTrace + " Function: addDiscount");
+                return "error";
             }
         }
 

@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace workshop192.Domain
 {
     [Serializable]
-    public class IllegalNameException : Exception
+    public class IllegalNameException : ClientException
     {
         public IllegalNameException()
         {

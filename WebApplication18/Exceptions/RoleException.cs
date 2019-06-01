@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace workshop192.Domain
 {
     [Serializable]
-    public class RoleException : Exception
+    public class RoleException : ClientException
     {
         public RoleException()
         {

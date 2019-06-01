@@ -12,18 +12,21 @@ namespace workshop192.Domain
     {
         public SubscribedUser appointedBy;
         private Store store;
-        public SubscribedUser user;
+        public SubscribedUser userName;
         private List<StoreRole> appointedByMe;
         public bool isOwner = true;
 
         public StoreOwner(SubscribedUser appointedBy, SubscribedUser user, Store store)
         {
             this.appointedBy = appointedBy;
-            this.user = user;
+            this.userName = user;
             this.store = store;
             appointedByMe = new List<StoreRole>();
         }
-
+        public int getIsOwner()
+        {
+            return 1;
+        }
         public StoreOwner()
         {
         }
@@ -81,7 +84,7 @@ namespace workshop192.Domain
 
         public void addManager(SubscribedUser manager, Permissions permissions)
         {
-            StoreRole newManager = new StoreManager(this.user, store, manager, permissions);
+            StoreRole newManager = new StoreManager(this.userName, store, manager, permissions);
             DBStore.getInstance().addStoreRole(newManager);
             if (store.getStoreRole(manager) != null)
                 throw new RoleException("Error: Username "  + manager.getUsername() + 
@@ -94,7 +97,7 @@ namespace workshop192.Domain
         
         public void addOwner(SubscribedUser owner)
         {
-            StoreRole newOwner = new StoreOwner(this.user, owner, store);
+            StoreRole newOwner = new StoreOwner(this.userName, owner, store);
             if (store.getStoreRole(owner) != null)
                 throw new RoleException("Error: Username " + owner.getUsername() +
                     " already has a role in store " +
@@ -113,8 +116,8 @@ namespace workshop192.Domain
                 throw new RoleException("user " + role.getUsername() + 
                     " doesn't have a role in store " 
                     + store.getStoreName());
-            if (sr.getAppointedBy() != this.user)
-                throw new RoleException("Error: User " + user.getUsername() + 
+            if (sr.getAppointedBy() != this.userName)
+                throw new RoleException("Error: User " + userName.getUsername() + 
                     " didn't appoint " + 
                     role.getUsername());
             sr.removeAllAppointedBy();
@@ -130,7 +133,7 @@ namespace workshop192.Domain
 
         public SubscribedUser getUser()
         {
-            return user;
+            return userName;
         }
 
         public Store getStore()
@@ -251,6 +254,29 @@ namespace workshop192.Domain
         public void addCouponToStore(string couponCode, double percentage, string duration)
         {
             store.addCoupon(couponCode, percentage, duration);
+        }
+
+        public void addPendingOwner(SubscribedUser pending)
+        {
+            store.addPendingOwner(userName.getUsername(), pending);
+        }
+        public void signContract(string owner, SubscribedUser pending)
+        {
+            store.signContract(owner, pending);
+            HashSet<string> approvedOwners = store.getApproved(pending);
+            if (approvedOwners.Count == store.getNumberOfOwners())
+            {
+                store.removePendingOwner(pending);
+                addOwner(pending);
+            }
+        }
+        public void declineContract(string owner, SubscribedUser pending)
+        {
+            store.removePendingOwner(pending);
+        }
+        public Permissions GetPermissions()
+        {
+            return new Permissions(true, true, true);
         }
     }
 }

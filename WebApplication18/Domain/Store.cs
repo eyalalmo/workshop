@@ -5,13 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebApplication18;
+using Dapper.Contrib;
+using Dapper;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace workshop192.Domain
 {
     public class Store
     {
-        public int storeID;
-        public string storeName;
+        public int storeId;
+        public string name;
         public string description;
         public LinkedList<Product> productList;
         public List<StoreRole> roles;
@@ -22,16 +25,34 @@ namespace workshop192.Domain
         private LinkedList<InvisibleDiscount> invisibleDiscountList;
         [JsonIgnore]
         public LinkedList<DiscountComponent> discountList;
+        public LinkedList<InvisibleDiscount> invisibleDiscountList;
+        public Dictionary<string, HashSet<string>> pendingOwners;
 
         public Store(string storeName, string description)
         {
-            this.storeID = DBStore.getNextStoreID();
-            this.storeName = storeName;
+            this.storeId = DBStore.getInstance().getNextStoreID();
+            this.name = storeName;
             this.description = description;
             productList = new LinkedList<Product>();
             roles = new List<StoreRole>();
             numOfOwners = 0;
             active = true;
+            discountList = new LinkedList<DiscountComponent>();
+            invisibleDiscountList = new LinkedList<InvisibleDiscount>();
+            maxPurchasePolicy = null;
+            minPurchasePolicy = null;
+            pendingOwners = new Dictionary<string, HashSet<string>>();
+        }
+        public Store(int storeId,string name, string description)
+        {
+            this.storeId = storeId;
+            this.name = name;
+            this.description = description;
+            productList = new LinkedList<Product>();
+            roles = new List<StoreRole>();
+            numOfOwners = 0;
+            active = true;
+            pendingOwners = new Dictionary<string, HashSet<string>>();
             discountList = new LinkedList<DiscountComponent>();
             invisibleDiscountList = new LinkedList<InvisibleDiscount>();
             maxPurchasePolicy = null;
@@ -70,8 +91,8 @@ namespace workshop192.Domain
 
         public string getProductsString()
         {
-            return JsonConvert.SerializeObject(this.productList);
-
+            string s = JsonConvert.SerializeObject(this.productList);
+            return s;
         }
 
         public bool productExists(Product product)
@@ -90,21 +111,21 @@ namespace workshop192.Domain
 
         public int getStoreID()
         {
-            return this.storeID;
+            return this.storeId;
         }
         public void setStoreID(int id)
         {
-            this.storeID = id;
+            this.storeId = id;
         }
 
         public String getStoreName()
         {
-            return this.storeName;
+            return this.name;
         }
 
         public void setStoreName(String storeName)
         {
-            this.storeName = storeName;
+            this.name = storeName;
         }
 
         public String getDescription()
@@ -358,9 +379,51 @@ namespace workshop192.Domain
             }
             return null;
         }
-        public LinkedList<DiscountComponent> getDiscounts()
+        public void addPendingOwner(string appointer,SubscribedUser pending)
         {
-            return this.discountList;
+            if (pendingOwners.ContainsKey(pending.username))
+            {
+                throw new AlreadyExistException("Owner already waiting for approval");
+            }
+            HashSet<string> toAdd = new HashSet<string>();
+            toAdd.Add(appointer);
+            pendingOwners.Add(pending.getUsername(), toAdd);
+
+        }
+        public void removePendingOwner(SubscribedUser pending)
+        {
+            if (!pendingOwners.ContainsKey(pending.getUsername()))
+            {
+                throw new DoesntExistException("the username is not in the owners pending list");
+            }
+            pendingOwners.Remove(pending.getUsername());
+        }
+
+        public void signContract(string owner,SubscribedUser pending)
+        {
+            if (!pendingOwners.ContainsKey(pending.getUsername()))
+            {
+                throw new DoesntExistException("the username is not in the owners pending list");
+            }
+            HashSet<string> temp = new HashSet<string>();
+            pendingOwners.TryGetValue(pending.getUsername(), out temp);
+            temp.Add(owner);
+            pendingOwners[pending.getUsername()] = temp;
+        }
+
+        public HashSet<string> getApproved(SubscribedUser pending)
+        {
+            HashSet<string> output;
+            if(pendingOwners.TryGetValue(pending.getUsername(), out output))
+            {
+                return output;
+            }
+            throw new DoesntExistException("User is not a pending owner");
+        }
+
+        public Dictionary<string,HashSet<string>> getPending()
+        {
+            return pendingOwners;
         }
 
     }

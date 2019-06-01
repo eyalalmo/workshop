@@ -5,14 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebApplication18.Domain;
-using WebApplication18.Logger;
+using WebApplication18.Logs;
 using workshop192.Domain;
 
 namespace workshop192.Bridge
 {
-    public class DomainBridge
+    public class DomainBridge : Observer
     {
         private static DomainBridge instance;
+        private static Messager messager;
 
         public static DomainBridge getInstance()
         {
@@ -24,7 +25,6 @@ namespace workshop192.Bridge
         private DomainBridge()
         { }
 
-
         // use case 2.1 - the constructor defines guest as the default state
         public int startSession()
         {
@@ -35,14 +35,17 @@ namespace workshop192.Bridge
         {
             MarketSystem.init();
         }
+        public void addAdmin(string name,string pass)
+        {
+            DBSubscribedUser.getInstance().addAdmin(name,pass);
+        }
 
         //use case 2.3
         public void login(int sessionid, String username, String password)
         {
             Session s = DBSession.getInstance().getSession(sessionid);
-            
             s.login(username, password);
-            SystemLogger.getLog().Info("User " + username + " has successfuly logged in.");
+            SystemLogger.getEventLog().Info("User " + username + " has successfuly logged in.");
         }
 
         //use case 2.2
@@ -50,7 +53,10 @@ namespace workshop192.Bridge
         {
             Session user = DBSession.getInstance().getSession(sessionid);
             user.register(username, password);
-            SystemLogger.getLog().Info("User " + username + " has successfuly registered");
+            //////
+            user.login(username,password);
+            //////
+            SystemLogger.getEventLog().Info("User " + username + " has successfuly registered");
         }
 
         public bool isOwner(int storeId, int session)
@@ -90,10 +96,10 @@ namespace workshop192.Bridge
         {
             Session admin = DBSession.getInstance().getSession(sessionid);
             admin.removeUser(username);
-            SystemLogger.getLog().Info("User " + username + " has been successfuly removed");
+            SystemLogger.getEventLog().Info("User " + username + " has been successfuly removed");
         }
 
-        internal int getSessionByUserName(string username)
+        internal LinkedList<int> getSessionByUserName(string username)
         {
             return DBSession.getInstance().getSessionOfUserName(username);
         }
@@ -107,18 +113,29 @@ namespace workshop192.Bridge
         {
             Session user = DBSession.getInstance().getSession(sessionid);
             user.logout();
-            SystemLogger.getLog().Info("User " + user.getSubscribedUser().getUsername() + " has logged out");
+            SystemLogger.getEventLog().Info("User " + user.getSubscribedUser().getUsername() + " has logged out");
         }
 
         public string getAllProducts()
         {
             return DBProduct.getInstance().AllproductsToJson();
         }
+
+        internal LinkedList<string> getMessagesFor(string username)
+        {
+            return DBNotifications.getInstance().getMessagesFor(username);
+        }
+
+        internal void clearMessagesFor(string username)
+        {
+            DBNotifications.getInstance().clearMessagesFor(username);
+        }
+
         public int createStore(int sessionId, String storeName, String description)
         {
             Session session = DBSession.getInstance().getSession(sessionId);
             Store s = session.createStore(storeName, description);
-            SystemLogger.getLog().Info("User " + session.getSubscribedUser().getUsername() + " has successfuly created a store");
+            SystemLogger.getEventLog().Info("User " + session.getSubscribedUser().getUsername() + " has successfuly created a store");
             return s.getStoreID();
         }
 
@@ -162,15 +179,19 @@ namespace workshop192.Bridge
             return DBCookies.getInstance().generate();
         }
 
+        internal void addWaitingMessage(Tuple<string, string> tuple)
+        {
+            DBNotifications.getInstance().addMessage(tuple);
+        }
+
         internal int getUserByHash(string hash)
         {
             return DBCookies.getInstance().getUserByHash(hash);
         }
 
-        internal string addSession(string hash, int session)
+        internal void addSession(string hash, int session)
         {
-            return DBCookies.getInstance().addSession(hash, session);
-
+            DBCookies.getInstance().addSession(hash, session);
         }
 
         public bool isAllowedToEditPolicy(int storeId, int session)
@@ -235,8 +256,29 @@ namespace workshop192.Bridge
         public void purchaseBasket(int sessionid, string address, string creditCard)
         {
             Session session = DBSession.getInstance().getSession(sessionid);
+            LinkedList<Tuple<string, string>> messages = new LinkedList<Tuple<string, string>>();
+            
+            ShoppingBasket basket = session.getShoppingBasket();
+            foreach (KeyValuePair<int, ShoppingCart> cart in basket.getShoppingCarts())
+            {
+                foreach (KeyValuePair<Product, int> p in cart.Value.getProductsInCarts())
+                {
+                    foreach (StoreRole sr in p.Key.getStore().getRoles())
+                    {
+                        string message = session.getSubscribedUser().getUsername() +
+                                         " bought " + p.Key.getProductName() + " from store " +
+                                         p.Key.getStore().getStoreName();
+                        messages.AddFirst(new Tuple<string, string>(sr.getUser().getUsername(), message));
+                    }
+                }
+            }
+
             session.purchaseBasket(address, creditCard);
-            SystemLogger.getLog().Info("A purchase has been made");
+
+            foreach (Tuple<string, string> t in messages)
+                messager.message(t.Item1, t.Item2);
+
+            SystemLogger.getEventLog().Info("A purchase has been made");
         }
 
         public void setProductRank(int productID, int rank, int session)
@@ -294,7 +336,7 @@ namespace workshop192.Bridge
             Store store = storeDB.getStore(storeID);
             Session session = DBSession.getInstance().getSession(sessionid);
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
-            Product product = new Product(productName, productCategory, price, rank, quantityLeft, store);
+            Product product = new Product(productName, productCategory, price, rank, quantityLeft, store.getStoreID());
 
             if (sr == null)
                 throw new RoleException("Error: You have no permission to add a product");
@@ -444,7 +486,7 @@ namespace workshop192.Bridge
                 throw new DoesntExistException("no such store");
 
             Session session = DBSession.getInstance().getSession(sessionid);
-            SystemLogger.getLog().Info("Store "+store.getStoreName()+" has been closed by Admin");
+            SystemLogger.getEventLog().Info("Store "+store.getStoreName()+" has been closed by Admin");
             session.closeStore(store);
         }
 
@@ -474,6 +516,7 @@ namespace workshop192.Bridge
             Permissions permissions = new Permissions(editProduct, editDiscount, editPolicy);
             sr.addManager(toAdd, permissions);
         }
+
         public void addOwner(int storeid, string username, int sessionid)
         {
             SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
@@ -518,6 +561,8 @@ namespace workshop192.Bridge
             if (sr.getStore() != store)
                 throw new RoleException("this user can't remove roles from this store");
             sr.remove(toRemove);
+            ////
+            messager.message(username, "Your role in store " + storeid + " has been removed");
         }
 
         internal void addCouponToStore(int sessionID, int storeID, string couponCode, double percentage, string duration)
@@ -611,6 +656,7 @@ namespace workshop192.Bridge
 
             user.getShoppingBasket().purchaseBasket(address, creditCard);
         }
+
         public string getAllStores(int session1)
         {
             Session session = DBSession.getInstance().getSession(session1);
@@ -979,7 +1025,125 @@ namespace workshop192.Bridge
             }
         }
 
+        public void observe(Messager m)
+        {
+            messager = m;
+        }
 
+        public void addPendingOwner(int storeid, string username, int sessionid)
+        {
+            SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
+            if (toAdd == null)
+                throw new DoesntExistException("Error: No such username");
+            Store store = DBStore.getInstance().getStore(storeid);
+            if (store == null)
+            {
+                throw new DoesntExistException("no such store");
+            }
+
+            Session session = DBSession.getInstance().getSession(sessionid);
+
+            StoreRole sr = store.getStoreRole(session.getSubscribedUser());
+
+            if (sr == null)
+                throw new RoleException("Error: You don't have permissions to appoint an owner");
+
+            if (sr.getStore() != store)
+                throw new RoleException("this user can't appoint to this store");
+            if (store.getNumberOfOwners() == 1)
+            {
+                sr.addOwner(toAdd);
+            }
+            else
+            {
+                sr.addPendingOwner(toAdd);
+                foreach (StoreRole role in store.getRoles()) // send messages to all the owners in the store - to approve the new owner
+                {
+                    string message = "User " + username + "has been offered as an Owner to the store " +
+                    store.getStoreName() + ". Please approve or decline the partnership.";
+                    if (role is StoreOwner && role != sr)
+                    {
+                        messager.message(role.getUser().getUsername(), message);
+                    }
+                }
+            }
+
+        }
+
+        public void signContract(int storeid, string username, int sessionid)
+        {
+            SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
+            if (toAdd == null)
+                throw new DoesntExistException("Error: No such username");
+            Store store = DBStore.getInstance().getStore(storeid);
+            if (store == null)
+            {
+                throw new DoesntExistException("no such store");
+            }
+
+            Session session = DBSession.getInstance().getSession(sessionid);
+
+            StoreRole sr = store.getStoreRole(session.getSubscribedUser());
+
+            if (sr == null)
+                throw new RoleException("Error: You don't have permissions to appoint an owner");
+
+            if (sr.getStore() != store)
+                throw new RoleException("this user can't appoint to this store");
+                sr.signContract(session.getSubscribedUser().getUsername(), toAdd);
+
+        }
+        public void declineContract(int storeid, string username, int sessionid)
+        {
+            SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
+            if (toAdd == null)
+                throw new DoesntExistException("Error: No such username");
+            Store store = DBStore.getInstance().getStore(storeid);
+            if (store == null)
+            {
+                throw new DoesntExistException("no such store");
+            }
+
+            Session session = DBSession.getInstance().getSession(sessionid);
+
+            StoreRole sr = store.getStoreRole(session.getSubscribedUser());
+
+            if (sr == null)
+                throw new RoleException("Error: You don't have permissions to decline a contract ");
+
+            if (sr.getStore() != store)
+                throw new RoleException("this user can't appoint to this store");
+            sr.declineContract(session.getSubscribedUser().getUsername(), toAdd);
+
+        }
+
+        public string getAllPending(int storeid,int sessionid)
+        {
+            Store store = DBStore.getInstance().getStore(storeid);
+            if (store == null)
+            {
+                throw new DoesntExistException("no such store");
+            }
+
+            Session session = DBSession.getInstance().getSession(sessionid);
+
+            StoreRole sr = store.getStoreRole(session.getSubscribedUser());
+
+            if (sr == null)
+                throw new RoleException("Error: You don't have permissions to decline a contract ");
+
+            if (sr.getStore() != store)
+                throw new RoleException("this user can't appoint to this store");
+            List<string> myPendingOwners = new List<string>();
+            Dictionary<string, HashSet<string>> pending = store.getPending();
+            foreach (KeyValuePair<string, HashSet<string>> entry in pending)
+            {
+                if (!entry.Value.Contains(sr.getUser().getUsername()))
+                    myPendingOwners.Add(entry.Key);
+            }
+            string s = JsonConvert.SerializeObject(myPendingOwners, Formatting.Indented);
+            return s;
+        }
 
     }
 }

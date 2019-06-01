@@ -204,7 +204,7 @@ namespace workshop192.ServiceLayer
             {
                 throw new ArgumentException("illegal username");
             }
-            db.addOwner(store, username, session);
+            db.addPendingOwner(store, username, session);
         }
 
         public void removeRole(int store, string username, int session)
@@ -392,6 +392,12 @@ namespace workshop192.ServiceLayer
 
 
 
+        public string getAllPending(int id,int sessionId)
+        {
+            return db.getAllPending(id,sessionId);
+        }
+
+
 
         public void setMinAmountPolicy(int storeID, int sessionID, int newMinAmount)
         {
@@ -462,6 +468,46 @@ namespace workshop192.ServiceLayer
         public string getMaxAmountPolicyString(int storeID, int sessionID)
         {
             return db.getMaxAmountPolicyString(storeID, sessionID);
+        }
+
+        public void signContract(int store, string username,int sessionID)
+        {
+           
+                if (store < 0)
+                {
+                    throw new ArgumentException("illegal store number");
+                }
+
+                if (username == null)
+                {
+                    throw new ArgumentNullException("null username");
+                }
+
+                if (username.Length == 0)
+                {
+                    throw new ArgumentException("illegal username");
+                }
+                db.signContract(store, username, sessionID);
+        }
+
+        public void declineContract(int store, string username, int sessionID)
+        {
+
+            if (store < 0)
+            {
+                throw new ArgumentException("illegal store number");
+            }
+
+            if (username == null)
+            {
+                throw new ArgumentNullException("null username");
+            }
+
+            if (username.Length == 0)
+            {
+                throw new ArgumentException("illegal username");
+            }
+            db.declineContract(store, username, sessionID);
         }
     }
 }

@@ -26,23 +26,23 @@ namespace workshop192.Domain
 
         public string addSession(string hash, int session)
         {
-            if (hash == null )
+            if (hash == null)
                 return "fail";
             if (session < 0)
                 return "fail";
 
-            
-                if (!cookies.ContainsKey(hash))
-                {
+
+            if (!cookies.ContainsKey(hash))
+            {
                 cookies.Add(hash, session);
-                    return "ok";
-                }
-                else
-                {
+                return "ok";
+            }
+            else
+            {
                 cookies[hash] = session;
-                    return "ok";
-                }
-            
+                return "ok";
+            }
+
         }
 
         public string generate()
@@ -62,15 +62,10 @@ namespace workshop192.Domain
 
             return -1;
         }
-        
+
         public static void initDB()
         {
             instance = new DBCookies();
-        }
-
-        internal void deleteUserBySessionId(string hash)
-        {
-            cookies.Remove(hash);
         }
     }
 }

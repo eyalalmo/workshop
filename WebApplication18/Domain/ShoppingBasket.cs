@@ -8,10 +8,16 @@ namespace workshop192.Domain
 {
     public class ShoppingBasket
     {
-        private Dictionary<int,ShoppingCart> shoppingCarts;
-        private string username;
+        private string username = null;
+        public Dictionary<int, ShoppingCart> shoppingCarts;
 
         public ShoppingBasket(string username)
+        {
+            this.shoppingCarts = new Dictionary<int, ShoppingCart>();
+            this.username = username;
+        }
+
+        public ShoppingBasket()
         {
             this.shoppingCarts = new Dictionary<int, ShoppingCart>();
             this.username = username;
@@ -132,7 +138,7 @@ namespace workshop192.Domain
             }
             return null;
         }
-        public void addCoupon(string coupon,int storeID)
+        public void addCoupon(string coupon, int storeID)
         {
             ShoppingCart sc = getShoppingCartByID(storeID);
             if (sc != null)
@@ -156,13 +162,13 @@ namespace workshop192.Domain
             {
                 ShoppingCart cart = pair1.Value;
                 Dictionary<Product, int> productsInCart = cart.getProductsInCarts();
-                foreach(KeyValuePair<Product,int> pair2 in productsInCart)
+                foreach (KeyValuePair<Product, int> pair2 in productsInCart)
                 {
                     Product product = pair2.Key;
                     int amount = pair2.Value;
                     if (product.getQuantityLeft() < amount)
                     {
-                        
+
                         throw new IllegalAmountException("Error: Cannot complete purchase- " + product.getProductName() + " does not have enough quantity left");
                     }
                     product.decQuantityLeft(amount);
@@ -195,6 +201,13 @@ namespace workshop192.Domain
             {
                 DBSubscribedUser.getInstance().updateAmountOnCartProductTable(storeID, p.getProductID(), newAmount);
             }
+        }
+    }
+}
+        internal void setUsername(string username)
+        {
+            this.username = username;
+
         }
     }
 }

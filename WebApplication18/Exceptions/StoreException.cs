@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace workshop192.Domain
 {
     [Serializable]
-    public class StoreException : Exception
+    public class StoreException : ClientException
     {
         public StoreException()
         {

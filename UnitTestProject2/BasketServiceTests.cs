@@ -115,7 +115,7 @@ namespace workshop192.ServiceLayer.Tests
             try
             {
                 basketService.addToCart(session2, p4, 2);
-                basketService.changeQuantity(session2, p4, store3, 1);
+                basketService.changeQuantity(session2, p4, 1);
                 Assert.Fail();
 
             }
