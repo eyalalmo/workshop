@@ -182,7 +182,7 @@ namespace workshop192.Domain
             ReliantDiscount r = new ReliantDiscount(percentage, duration, numOfProducts, product);
             store.addDiscount(r);
             product.setReliantDiscountSameProduct(r);
-            DBDiscount.getInstance().addDiscount(r);
+           // DBDiscount.getInstance().addDiscount(r);
 
         }
 
