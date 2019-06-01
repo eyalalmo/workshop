@@ -27,6 +27,14 @@ namespace workshop192.Domain
             this.complexCondition = false;
 
         }
+        public DiscountComponent(int id, double percentage, string duration)
+        {
+            this.id = id;
+            this.percentage = percentage;
+            this.duration = stringToDate(duration);
+            this.complexCondition = false;
+
+        }
 
         private DateTime stringToDate(string duration)
         {

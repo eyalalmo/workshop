@@ -9,16 +9,13 @@ namespace workshop192.Domain
     public abstract class Discount : DiscountComponent
     {
         protected bool isPartOfComplex;
-        private int id;
 
-        internal Discount(int id, double percentage, string duration) : base(percentage, duration)
+        internal Discount(int id, double percentage, string duration) : base(id, percentage, duration)
         {
-            this.id = id;
         }
 
         public Discount(double percentage, string duration): base(percentage, duration)
         {
-            this.id = DBDiscount.getNextDiscountID();
             this.isPartOfComplex = false;
         }
 

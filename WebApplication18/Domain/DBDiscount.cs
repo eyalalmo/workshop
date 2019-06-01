@@ -60,7 +60,7 @@ namespace workshop192.Domain
             nextID++;*/
         }
 
-        public void addDiscount(Discount d)
+        public void addDiscount(DiscountComponent d)
         {
             try
             {

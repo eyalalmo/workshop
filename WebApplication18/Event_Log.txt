@@ -257,3 +257,15 @@
 2019-06-01 18:51:25,105 INFO EventLog: User yaelk has successfuly registered
 2019-06-01 18:51:47,005 INFO EventLog: User yaelk has successfuly created a store
 2019-06-01 18:55:33,003 ERROR EventLog: Error in adding to shopping cart : Error: The amount asked is larger than the quantity left
+2019-06-01 19:21:32,753 ERROR EventLog: Login : Error: Username does not exist
+2019-06-01 19:22:01,221 INFO EventLog: User yaelk has successfuly registered
+2019-06-01 19:22:44,319 INFO EventLog: User yaelk has successfuly created a store
+2019-06-01 19:35:33,732 INFO EventLog: User yaelk has successfuly registered
+2019-06-01 19:35:53,725 INFO EventLog: User yaelk has successfuly created a store
+2019-06-01 19:49:51,037 ERROR EventLog: Login : Error: Username does not exist
+2019-06-01 19:49:59,002 INFO EventLog: User yaelk has successfuly registered
+2019-06-01 19:50:30,655 INFO EventLog: User yaelk has successfuly created a store
+2019-06-01 20:05:34,224 INFO EventLog: User yaelk has successfuly registered
+2019-06-01 20:05:52,798 INFO EventLog: User yaelk has successfuly created a store
+2019-06-01 20:36:23,588 ERROR EventLog: Add Reliant Discount : no role for this user in this store
+2019-06-01 20:37:02,597 ERROR EventLog: Add Reliant Discount : no role for this user in this store
