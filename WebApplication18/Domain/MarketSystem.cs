@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using WebApplication18.Domain;
+using WebApplication18.Logs;
 using workshop192.Bridge;
 using workshop192.ServiceLayer;
 
@@ -16,14 +17,13 @@ namespace workshop192.Domain
         public static void init()
         {
             int doIt = 1;
-            string filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
 
-            string[] lines = File.ReadAllLines(filePath + "/input.txt");
             //int sessionid =0;
             //Session s=new Session();
             // int sID = 0;
             if (IsTestsMode.isTest == true)
             {
+                SystemLogger.configureLogs();
                 DBProduct.getInstance().initTests();
                 DBSession.getInstance().initTests();
                 DBDiscount.getInstance().initTests();
@@ -33,8 +33,13 @@ namespace workshop192.Domain
                 PaymentService.getInstance().connectToSystem();
                 DeliveryService.getInstance().connectToSystem();
                 ConsistencySystem.getInstance().connectToSystem();
+                NotificationsBridge.getInstance().setObserver(DomainBridge.getInstance());
                 return;
             }
+            string filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
+
+            string[] lines = File.ReadAllLines(filePath + "/input.txt");
+
             if (doIt == 1)
             {
                 DBProduct.getInstance().init();

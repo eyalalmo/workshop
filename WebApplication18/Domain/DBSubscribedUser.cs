@@ -88,11 +88,15 @@ namespace workshop192.Domain
             
                 try
                 {
-                    connection.Open();
-                    connection.Execute("DELETE FROM Register");
-                    connection.Close();
-                }
-                catch (Exception e)
+                connection.Open();
+                connection.Execute("DELETE FROM Register");
+                connection.Execute("DELETE FROM BasketCart");
+                connection.Execute("DELETE FROM CartProduct");
+                connection.Close();
+                instance = new DBSubscribedUser();
+
+            }
+            catch (Exception e)
                 {
                     connection.Close();
                 }
@@ -393,11 +397,11 @@ namespace workshop192.Domain
 
         public void updateAmountOnCartProductTable(string username,  int storeID, int productID, int newAmount)
         {
-            string sql = "UPDATE CartProduct SET amount =@newAmount WHERE username = @username AND productID =@productID AND storeID =@storeID";
+            string sql = "UPDATE CartProduct SET amount =@newAmount WHERE username = @username AND productID =@productID AND storeID =@storeID;";
             try
             {
                 connection.Open();
-                connection.Execute(sql, new { newAmount,username, productID, storeID });
+                connection.Execute(sql, new {newAmount,username, productID, storeID });
                 connection.Close();
 
             }
