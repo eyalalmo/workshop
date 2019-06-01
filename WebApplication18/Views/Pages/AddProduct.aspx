@@ -54,7 +54,8 @@
                     success: function (response) {
 
                         if (response == "ok") {
-                             alert("Product added successfuly")                     
+                            alert("Product added successfuly")
+                            window.location.href = baseUrl + "/EditStore";
                         }
                         else {
                             alert(response);   

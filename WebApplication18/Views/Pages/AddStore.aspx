@@ -37,7 +37,7 @@
 
                         if (response === "ok") {
                             alert("Store added successfuly");  
-                            window.location.href = baseUrl + "/MyAccount";
+                            window.location.href = baseUrl + "/EditStore";
                            
                         }
                         else {
