@@ -23,8 +23,8 @@ namespace workshop192.ServiceLayer.Tests
         public void initial()
         {
             userService.setup();
-            DBProduct.getInstance().init();
-            DBStore.getInstance().init();
+            DBProduct.getInstance().initTests();
+            DBStore.getInstance().initTests();
             session1 = userService.startSession();// login 
             userService.register(session1, "user6", "user6");
             userService.login(session1, "user6", "user6");

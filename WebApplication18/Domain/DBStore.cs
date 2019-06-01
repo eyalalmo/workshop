@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebApplication18.DAL;
 using Dapper;
+using Domain;
 
 namespace workshop192.Domain
 {

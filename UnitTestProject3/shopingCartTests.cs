@@ -18,9 +18,9 @@ namespace UnitTestProject3
         public void initial()
         {
             userService.setup();
-            DBProduct.getInstance().init();
-            DBProduct.getInstance().init();
-            DBStore.getInstance().init();
+            DBProduct.getInstance().initTests();
+            DBProduct.getInstance().initTests();
+            DBStore.getInstance().initTests();
             store = new Store("store1", "games store");
             DBStore.getInstance().addStore(store);
 
