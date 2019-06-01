@@ -211,3 +211,5 @@
 2019-06-01 11:03:25,184 INFO EventLog: User u2 has successfuly logged in.
 2019-06-01 11:06:38,624 INFO EventLog: User u2 has successfuly logged in.
 2019-06-01 11:06:47,935 INFO EventLog: User u2 has successfuly created a store
+2019-06-01 14:20:31,270 INFO EventLog: User et has successfuly logged in.
+2019-06-01 14:20:33,776 ERROR EventLog: Login : Error: User is already logged in
