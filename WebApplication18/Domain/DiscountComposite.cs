@@ -12,12 +12,14 @@ namespace workshop192.Domain
         private List<DiscountComponent> children;
         private Type type;
 
-        public DiscountComposite(List<DiscountComponent> children, string type) : base()
+       
+        public DiscountComposite(List<DiscountComponent> children, string type, double percentage, string duration) : base(percentage, duration)
         {
             if (children == null)
             {
                 throw new AlreadyExistException();
             }
+            
             this.children = children;
             if (type == "and")
             {
@@ -35,8 +37,70 @@ namespace workshop192.Domain
                 throw new IllegalNameException("Error: Wrong type name in discount composite");
         }
 
-        
+        public override string getDiscountType()
+        {
+            return "Complex";
+        }
+
+        public override string description()
+        {
+            string str = "(";
+            int i;
+            for(i=0; i<children.Count-1; i++)
+            {
+                DiscountComponent dis = children.ElementAt(i);
+                str = str + dis.description();
+                str = str +" " +type+ " ";
+            }
+            DiscountComponent dis2 = children.ElementAt(i);
+            str = str + dis2.description()+")";
+            return str;
+            
+        }
+
         public override bool checkCondition(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
+        {
+            if (type == Type.and)
+            {
+                bool cond = true;
+                foreach (DiscountComponent d in children)
+                {
+                    if (!d.checkCondition(productList, productsActualPrice))
+                    {
+                        cond = false;
+                        break;
+                    }
+                }
+                return cond;
+            }
+            else if (type == Type.or)
+            {
+                bool cond = false;
+                foreach (DiscountComponent d in children)
+                {
+                    if (d.checkCondition(productList, productsActualPrice))
+                    {
+                        cond = true;
+                        break;
+                    }
+                }
+                return cond;
+            }
+            else { 
+                int count = 0;
+                foreach (DiscountComponent d in children)
+                {
+                    if (d.checkCondition(productList, productsActualPrice))
+                    {
+                        count++;
+                    }
+                }
+                if (count>0)
+                    return true;
+                return false;
+            }
+        }
+        /*public override bool checkCondition(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
         {
             if (type == Type.and)
             {
@@ -64,7 +128,8 @@ namespace workshop192.Domain
                 }
                 return cond;
             }
-            else { 
+            else
+            {
                 int count = 0;
                 foreach (Discount d in children)
                 {
@@ -73,12 +138,11 @@ namespace workshop192.Domain
                         count++;
                     }
                 }
-                if (count == 0)
+                if (count == 0 || count > 1)
                     return false;
                 return true;
             }
-        }
-
+        }*/
         public override Dictionary<Product, double> updatePrice(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
         {
             bool cond = checkCondition(productList, productsActualPrice);
@@ -86,7 +150,7 @@ namespace workshop192.Domain
                 return productsActualPrice;
             if(type == Type.and )
             {
-                foreach (Discount d in children)
+                foreach (DiscountComponent d in children)
                 {
                     productsActualPrice = d.updatePrice(productList, productsActualPrice);
                 }
@@ -94,7 +158,7 @@ namespace workshop192.Domain
             }
             else if (type == Type.or)
             {
-                foreach(Discount d in children)
+                foreach(DiscountComponent d in children)
                 {
                     if(d.checkCondition(productList, productsActualPrice))
                     {
@@ -104,7 +168,7 @@ namespace workshop192.Domain
             }
             else
             { // xor
-                foreach (Discount d in children)
+                foreach (DiscountComponent d in children)
                 {
                     if (d.checkCondition(productList, productsActualPrice))
                     {
@@ -117,6 +181,37 @@ namespace workshop192.Domain
             return productsActualPrice;
         
 
+        }
+
+        public override void setComplexCondition(bool complexCondition, Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
+        {
+            if (type == Type.xor && complexCondition)
+            {
+                bool found = false;
+                foreach (DiscountComponent d in children)
+                {
+                    if (!found)
+                    {
+                        if (d.checkCondition(productList, productsActualPrice)){
+                            d.setComplexCondition(complexCondition, productList, productsActualPrice);
+                            found = true;
+                        }
+                    }
+                    else
+                    {
+                        d.setComplexCondition(false, productList, productsActualPrice);
+                    }
+
+                }
+            }
+            else
+            {
+                foreach (DiscountComponent d in children)
+                {
+                    d.setComplexCondition(complexCondition, productList, productsActualPrice);
+
+                }
+            }
         }
     }
 }

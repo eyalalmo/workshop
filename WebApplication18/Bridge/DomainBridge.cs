@@ -312,11 +312,17 @@ namespace workshop192.Bridge
             {
                 foreach (KeyValuePair<Product, int> p in cart.Value.getProductsInCarts())
                 {
-                    response += p.Key.getProductName() + "," + p.Key.getActualPrice() + "," + p.Key.getProductID() + "," + p.Value + ";";
+
+                    response += p.Key.getProductName() + "," + p.Key.getPrice()+"," + p.Key.getActualPrice(p.Value) + "," + p.Key.getProductID() + "," + p.Value + ";";
                 }
             }
 
             return response;
+        }
+        public double getShoppingBasketActualTotalPrice(int sessionid)
+        {
+            Session session = DBSession.getInstance().getSession(sessionid);
+            return session.getShoppingBasket().getActualTotalPrice();
         }
         public double getShoppingBasketTotalPrice(int sessionid)
         {
@@ -330,7 +336,7 @@ namespace workshop192.Bridge
             Store store = storeDB.getStore(storeID);
             Session session = DBSession.getInstance().getSession(sessionid);
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
-            Product product = new Product(productName, productCategory, price, rank, quantityLeft, store.getStoreID());
+            Product product = new Product(productName, productCategory, price, rank, quantityLeft, store);
 
             if (sr == null)
                 throw new RoleException("Error: You have no permission to add a product");
@@ -641,17 +647,9 @@ namespace workshop192.Bridge
             Store store = p.getStore();
 
             Session user = DBSession.getInstance().getSession(sessionid);
-
-            user.getShoppingBasket().getShoppingCartByID(store.getStoreID()).changeQuantityOfProduct(p, newAmount);
+            user.getShoppingBasket().changeQuantityOfProduct(store.getStoreID(), p, newAmount);
         }
-
-       /* public void checkoutCart(int sessionid, int store, String address, String creditCard)
-        {
-            Session user = DBSession.getInstance().getSession(sessionid);
-
-            user.getShoppingBasket().getShoppingCartByID(store).checkout(address, creditCard);
-        }*/
-
+        
         public void checkoutBasket(int sessionid, String address, String creditCard)
         {
             Session user = DBSession.getInstance().getSession(sessionid);
@@ -672,7 +670,29 @@ namespace workshop192.Bridge
         }
 
         ////////////////////////////////////////////
-
+        public string getStoreDiscounts(int storeID, int sessionID)
+        {
+            Session user = DBSession.getInstance().getSession(sessionID);
+            if (user == null)
+                throw new DoesntExistException("user is not logged in");
+            Store store = DBStore.getInstance().getStore(storeID);
+            LinkedList<DiscountComponent> discounts = store.getDiscounts();
+            string str = "";
+            foreach(DiscountComponent dis in discounts)
+            {
+               
+ 
+                    str += dis.getDiscountType() + "," + dis.description() + "," + dis.getPercentage()*100 + "," + dis.getDuration().ToString("dd/MM/yyyy") + "," + dis.getId() + ";";
+        
+               /* if(dis is DiscountComposite)
+                {
+                    DiscountComposite d = (DiscountComposite)dis;
+                    str += dis.getDiscountType() + "," + dis.description() + "," + 100 + "," + 12 + "," + d.getId() + ";";
+                }*/
+            
+            }
+            return str;
+        }
         internal void removeProductDiscount(int product, int session)
         {
             Session user = DBSession.getInstance().getSession(session);
@@ -692,6 +712,7 @@ namespace workshop192.Bridge
 
         internal void addStoreVisibleDiscount(int storeID, double percentage, string duration, int session)
         {
+            checkDiscoutDuration(duration);
             Session user = DBSession.getInstance().getSession(session);
             if (user == null)
                 throw new DoesntExistException("user is not logged in");
@@ -708,8 +729,41 @@ namespace workshop192.Bridge
 
         }
 
+        private void checkDiscoutDuration(string duration)
+        {
+            if (duration.Length != 10)
+                throw new ArgumentException("Discount duration is not in the required foramt DD/MM/YYYY");
+            char[] arr = duration.ToCharArray();
+            if(arr[2] != '/' || arr[5] != '/')
+                throw new ArgumentException("Discount duration is not in the required foramt DD/MM/YYYY");
+            for(int i=0; i<arr.Length; i++)
+            {
+                if(i!= 2 && i != 5)
+                {
+                    if(arr[i]<'0' ||arr[i] >'9')
+                        throw new ArgumentException("Discount duration is not in the required foramt DD/MM/YYYY");
+
+                }
+            }
+
+            int day = Int32.Parse(duration.Substring(0, 2));
+            int month = Int32.Parse(duration.Substring(3, 2));
+            int year = Int32.Parse(duration.Substring(6, 4));
+            if(day==0 || day >31)
+                throw new ArgumentException("Date is not valid");
+            if(month==0 || month >12)
+                throw new ArgumentException("Date is not valid");
+            if(year < 2019)
+                throw new ArgumentException("Date is not valid");
+            DateTime d = new DateTime(year, month, day);
+            DateTime now = DateTime.Now;
+            if(DateTime.Compare(d, now) <0)
+                throw new ArgumentException("Discount duration must be future dateד");
+        }
+
         internal void addProductVisibleDiscount(int product, double percentage, string duration, int session)
         {
+            checkDiscoutDuration(duration);
             Session user = DBSession.getInstance().getSession(session);
             if (user == null)
                 throw new DoesntExistException("user is not logged in");
@@ -726,6 +780,7 @@ namespace workshop192.Bridge
         }
         internal void addReliantdiscountSameProduct(int storeID, int product, double percentage, int numOfProducts, string duration, int session)
         {
+            checkDiscoutDuration(duration);
             Session user = DBSession.getInstance().getSession(session);
             if (user == null)
                 throw new DoesntExistException("user is not logged in");
@@ -743,7 +798,7 @@ namespace workshop192.Bridge
 
         internal void addReliantdiscountTotalAmount(int storeID, double percentage, int amount, string duration, int session)
         {
-
+            checkDiscoutDuration(duration);
             Session user = DBSession.getInstance().getSession(session);
             if (user == null)
                 throw new DoesntExistException("user is not logged in");
@@ -758,7 +813,7 @@ namespace workshop192.Bridge
             sr.addReliantDiscountTotalAmount(percentage, duration, amount);
         }
 
-        internal void removeStoreDiscount(int storeID, int session)
+        internal void removeStoreDiscount(int discountID, int storeID, int session)
         {
             Session user = DBSession.getInstance().getSession(session);
             if (user == null)
@@ -771,7 +826,7 @@ namespace workshop192.Bridge
             if (sr == null)
                 throw new RoleException("no role for this user in this store");
 
-            sr.removeStoreDiscount(store);
+            sr.removeStoreDiscount(discountID, store);
 
         }
 
@@ -797,7 +852,29 @@ namespace workshop192.Bridge
 
 
         }
-
+        public void complexDiscount(string discountString, int storeID,string type, double percentage, string duration, int sessionID)
+        {
+            checkDiscoutDuration(duration);
+            Session user = DBSession.getInstance().getSession(sessionID);
+            if (user == null)
+                throw new DoesntExistException("user is not logged in");
+            Store store = DBStore.getInstance().getStore(storeID);
+            SubscribedUser subscribedUser = user.getSubscribedUser();
+            if (subscribedUser == null)
+                throw new DoesntExistException("not a subscribed user");
+            StoreRole sr = subscribedUser.getStoreRole(store);
+            if (sr == null)
+                throw new RoleException("no role for this user in this store");
+            string[] discountArray = discountString.Split(' ');
+            List<DiscountComponent> discounts = new List<DiscountComponent>();
+            LinkedList<DiscountComponent> storediscounts = store.getDiscounts();
+            for (int i=0; i<discountArray.Length-1; i++)
+            {
+                int index = Int32.Parse(discountArray[i]);
+                discounts.Add(storediscounts.ElementAt(index));
+            }
+            sr.addComplexDiscount(discounts, type, percentage, duration);
+        }
         public void removeMaxAmountPolicy(int storeID, int sessionID)
         {
             Session user = DBSession.getInstance().getSession(sessionID);
@@ -858,13 +935,7 @@ namespace workshop192.Bridge
                 throw new RoleException("no role for this user in this store");
             sr.setMaxAmountPolicy(newMinAmount);
         }
-
-
-
-        /////////////////////////////////////////////////////////////
         
-   
-   
  
     public bool hasMinPurchasePolicy(int storeID, int sessionID)
     {
@@ -938,8 +1009,20 @@ namespace workshop192.Bridge
         public double getAmountByCart(int storeID, int sessionID)
         {
             ShoppingCart sc1 = getCart(sessionID, storeID);
-            double amount = sc1.getTotalPrice();
+            double amount = sc1.getActualTotalPrice();
             return amount;
+        }
+        public void setDiscountPercentage(int discountID, double percentage)
+        {
+            if (percentage > 1||percentage<=0)
+            {
+            }
+            else
+            {
+                DiscountComponent d = DBDiscount.getInstance().getDiscountByID(discountID);
+                if(d is Discount)
+                    ((Discount)d).setPercentage(percentage);
+            }
         }
 
         public void observe(Messager m)

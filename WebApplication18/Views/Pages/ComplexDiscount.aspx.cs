@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace WebApplication18.Views.Pages
 {
-    public partial class Store : System.Web.Mvc.ViewPage
+    public partial class ComplexDiscount : System.Web.Mvc.ViewPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -7,32 +7,33 @@ using System.Threading.Tasks;
 namespace workshop192.Domain
 {
     public abstract class Discount : DiscountComponent
-
     {
-        protected double percentage;
-        protected string duration;
-        //private int id;
+        protected bool isPartOfComplex;
+        private int id;
 
-        internal Discount(int id, double percentage, string duration)
+        internal Discount(int id, double percentage, string duration) : base(percentage, duration)
         {
-            this.percentage = percentage;
-            this.duration = duration;
             this.id = id;
         }
 
-        public Discount(double percentage, string duration): base()
+        public Discount(double percentage, string duration): base(percentage, duration)
         {
-            this.percentage = percentage;
-            this.duration = duration;
+            this.isPartOfComplex = false;
         }
 
-        public double getPercentage()
-        {
-            return percentage;
+        public bool getIsPartOfComplex() {
+            return this.isPartOfComplex;
         }
-        public string getDuration()
+        public void setIsPartOfComplex(bool isPartOfComplex)
         {
-            return duration;
+            this.isPartOfComplex = isPartOfComplex;
         }
+        public override void setComplexCondition(bool complexCondition, Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
+        {
+            if (complexCondition)
+                this.complexCondition = checkCondition(productList, productsActualPrice);
+            this.complexCondition = complexCondition;
+        }
+     
     }
 }

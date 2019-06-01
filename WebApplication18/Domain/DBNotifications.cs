@@ -65,7 +65,7 @@ namespace WebApplication18.Domain
                 connection.Close();
             }
 
-            catch (Exception e)
+            catch (Exception)
             {
                 connection.Close();
             }
@@ -116,7 +116,7 @@ namespace WebApplication18.Domain
                 return result;
             }
 
-            catch (Exception e)
+            catch (Exception)
             {
                 connection.Close();
                 return result;

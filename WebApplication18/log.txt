@@ -1,0 +1,240 @@
+2019-05-11 12:59:58,380 INFO  System Log - User eilon has successfuly registered in.
+2019-05-11 13:00:04,396 ERROR System Log - Register : Error: Username already exists
+2019-05-11 19:16:32,900 INFO  System Log - User eeee has successfuly registered
+2019-05-11 20:14:49,299 INFO  System Log - User et has successfuly logged in.
+2019-05-11 20:15:31,093 ERROR System Log - Error in adding to shopping cart : Value cannot be null.
+Parameter name: String
+2019-05-11 21:05:49,829 INFO  System Log - User et has successfuly logged in.
+2019-05-11 21:07:28,421 INFO  System Log - User et has logged out
+2019-05-11 21:07:34,353 INFO  System Log - User e has successfuly registered
+2019-05-11 21:07:39,618 INFO  System Log - User et has successfuly logged in.
+2019-05-11 21:07:55,651 ERROR System Log - Add Manager : Error: Username e already has a role in store startup
+2019-05-11 21:17:29,846 INFO  System Log - User et has successfuly logged in.
+2019-05-11 21:17:31,160 INFO  System Log - User et has logged out
+2019-05-11 21:44:38,111 INFO  System Log - User et has successfuly logged in.
+2019-05-11 21:45:58,263 ERROR System Log - Error in adding to shopping cart : Error: The amount asked is larger than the quantity left
+2019-05-11 21:46:02,107 INFO  System Log - User et has logged out
+2019-05-11 22:11:11,893 INFO  System Log - User et has successfuly logged in.
+2019-05-11 22:32:00,793 INFO  System Log - User et has successfuly logged in.
+2019-05-11 22:32:02,448 INFO  System Log - User et has logged out
+2019-05-11 22:32:09,598 INFO  System Log - User e has successfuly registered
+2019-05-11 22:32:14,275 INFO  System Log - User e has successfuly logged in.
+2019-05-11 22:32:31,042 INFO  System Log - User e has logged out
+2019-05-11 22:32:36,638 INFO  System Log - User et has successfuly logged in.
+2019-05-11 22:34:33,977 INFO  System Log - User et has logged out
+2019-05-11 22:37:51,954 ERROR System Log - Login : Error: Incorrect password
+2019-05-11 22:37:55,522 INFO  System Log - User e has successfuly logged in.
+2019-05-11 22:38:00,160 INFO  System Log - User e has logged out
+2019-05-11 22:38:04,639 INFO  System Log - User et has successfuly logged in.
+2019-05-11 22:53:44,594 INFO  System Log - User e has successfuly registered
+2019-05-11 22:53:49,971 INFO  System Log - User et has successfuly logged in.
+2019-05-11 22:54:07,504 INFO  System Log - User et has logged out
+2019-05-11 22:54:14,600 INFO  System Log - User et has successfuly logged in.
+2019-05-11 22:54:23,975 INFO  System Log - User et has logged out
+2019-05-11 22:54:28,134 INFO  System Log - User e has successfuly logged in.
+2019-05-11 22:56:24,359 INFO  System Log - User et has successfuly logged in.
+2019-05-11 22:56:27,994 INFO  System Log - User et has logged out
+2019-05-11 22:56:32,675 INFO  System Log - User e has successfuly registered
+2019-05-11 22:56:53,307 INFO  System Log - User e has successfuly logged in.
+2019-05-11 22:57:14,852 INFO  System Log - User e has logged out
+2019-05-11 22:57:20,711 INFO  System Log - User et has successfuly logged in.
+2019-05-11 22:57:40,717 INFO  System Log - User et has logged out
+2019-05-11 22:57:46,648 INFO  System Log - User et has successfuly logged in.
+2019-05-11 22:57:57,800 INFO  System Log - User et has logged out
+2019-05-11 22:58:03,509 INFO  System Log - User et has successfuly logged in.
+2019-05-11 22:58:09,901 INFO  System Log - User et has logged out
+2019-05-11 22:58:15,365 INFO  System Log - User et has successfuly logged in.
+2019-05-11 22:58:18,129 INFO  System Log - User et has logged out
+2019-05-11 22:58:22,505 ERROR System Log - Login : Error: Incorrect password
+2019-05-11 22:58:25,470 INFO  System Log - User e has successfuly logged in.
+2019-05-11 22:58:47,418 INFO  System Log - User e has logged out
+2019-05-11 22:58:51,956 INFO  System Log - User et has successfuly logged in.
+2019-05-11 22:59:15,208 INFO  System Log - User et has logged out
+2019-05-11 22:59:20,815 INFO  System Log - User e has successfuly logged in.
+2019-05-11 22:59:25,786 INFO  System Log - User e has logged out
+2019-05-11 22:59:32,970 INFO  System Log - User e has successfuly logged in.
+2019-05-11 22:59:39,781 INFO  System Log - User e has logged out
+2019-05-11 22:59:45,000 INFO  System Log - User et has successfuly logged in.
+2019-05-11 23:04:23,566 INFO  System Log - User et has successfuly logged in.
+2019-05-11 23:05:34,978 INFO  System Log - User et has logged out
+2019-05-11 23:05:54,410 INFO  System Log - User e has successfuly registered
+2019-05-11 23:05:59,658 INFO  System Log - User e has successfuly logged in.
+2019-05-11 23:07:37,759 INFO  System Log - User e has successfuly registered
+2019-05-11 23:07:43,965 INFO  System Log - User b has successfuly registered
+2019-05-11 23:08:02,298 INFO  System Log - User e has successfuly logged in.
+2019-05-11 23:08:19,027 INFO  System Log - User e has logged out
+2019-05-11 23:08:33,496 INFO  System Log - User b has successfuly logged in.
+2019-05-11 23:09:34,999 INFO  System Log - User e has successfuly registered
+2019-05-11 23:09:40,548 INFO  System Log - User q has successfuly registered
+2019-05-11 23:09:52,822 INFO  System Log - User e has successfuly logged in.
+2019-05-11 23:10:15,158 INFO  System Log - User e has logged out
+2019-05-11 23:10:25,325 INFO  System Log - User q has successfuly logged in.
+2019-05-11 23:11:43,424 INFO  System Log - User q has logged out
+2019-05-11 23:11:53,535 INFO  System Log - User d has successfuly registered
+2019-05-11 23:12:56,348 INFO  System Log - User d has successfuly logged in.
+2019-05-11 23:13:07,630 INFO  System Log - User d has logged out
+2019-05-11 23:13:34,978 INFO  System Log - User e has successfuly registered
+2019-05-11 23:13:41,659 INFO  System Log - User q has successfuly registered
+2019-05-11 23:13:50,296 INFO  System Log - User e has successfuly logged in.
+2019-05-11 23:14:09,178 INFO  System Log - User e has logged out
+2019-05-11 23:50:49,470 INFO  System Log - User et has successfuly logged in.
+2019-05-11 23:51:03,772 INFO  System Log - User et has successfuly created a store
+2019-05-11 23:51:09,876 INFO  System Log - User et has successfuly created a store
+2019-05-11 23:51:42,281 INFO  System Log - User et has successfuly created a store
+2019-05-11 23:51:50,600 INFO  System Log - User et has logged out
+2019-05-14 18:31:03,418 ERROR System Log - Error in adding to shopping cart : Value cannot be null.
+Parameter name: String
+2019-05-14 20:14:54,653 ERROR System Log - Error in adding to shopping cart : Value cannot be null.
+Parameter name: String
+2019-05-15 01:29:22,337 INFO  System Log - User et has successfuly logged in.
+2019-05-15 02:06:38,596 INFO  System Log - User et has successfuly logged in.
+2019-05-15 02:07:27,645 INFO  System Log - User et has logged out
+2019-05-15 02:07:32,962 INFO  System Log - User et has successfuly logged in.
+2019-05-15 11:12:19,841 INFO  System Log - User et has successfuly logged in.
+2019-05-15 11:36:57,111 INFO  System Log - User et has successfuly logged in.
+2019-05-15 12:17:42,433 INFO  System Log - User et has logged out
+2019-05-15 12:22:13,948 INFO  System Log - User et has successfuly logged in.
+2019-05-15 12:34:59,289 INFO  System Log - User et has successfuly logged in.
+2019-05-15 12:35:07,184 INFO  System Log - User et has logged out
+2019-05-15 12:35:13,805 INFO  System Log - User et has successfuly logged in.
+2019-05-15 12:35:20,486 INFO  System Log - User et has logged out
+2019-05-15 12:36:52,236 INFO  System Log - User et has successfuly logged in.
+2019-05-15 13:36:52,599 INFO  System Log - User et has successfuly logged in.
+2019-05-15 13:45:56,518 INFO  System Log - User et has logged out
+2019-05-15 13:46:08,303 INFO  System Log - User et has successfuly logged in.
+2019-05-15 13:54:32,536 INFO  System Log - User et has logged out
+2019-05-15 13:54:37,427 INFO  System Log - User et has successfuly logged in.
+2019-05-15 13:57:45,624 INFO  System Log - User et has logged out
+2019-05-15 13:58:46,628 INFO  System Log - User et has successfuly logged in.
+2019-05-15 14:00:17,684 INFO  System Log - User et has logged out
+2019-05-15 14:00:23,055 INFO  System Log - User et has successfuly logged in.
+2019-05-15 14:00:27,597 INFO  System Log - User et has logged out
+2019-05-20 14:51:34,921 INFO  System Log - User et has successfuly logged in.
+2019-05-20 14:52:21,286 INFO  System Log - User et has logged out
+2019-05-20 15:21:02,780 INFO  System Log - User et has successfuly logged in.
+2019-05-20 17:36:37,226 INFO  System Log - User et has successfuly logged in.
+2019-05-20 17:40:10,571 INFO  System Log - User et has successfuly logged in.
+2019-05-20 17:44:34,234 INFO  System Log - User et has successfuly logged in.
+2019-05-20 18:24:17,506 INFO  System Log - User et has successfuly logged in.
+2019-05-20 18:47:35,130 INFO  System Log - User et has successfuly logged in.
+2019-05-20 18:48:19,017 ERROR System Log - Login : Error: Username already logged in
+2019-05-21 11:11:21,036 INFO  System Log - User et has successfuly logged in.
+2019-05-21 11:21:06,858 ERROR System Log - Add Visible Discount : not a subscribed user
+2019-05-21 11:21:12,486 INFO  System Log - User et has successfuly logged in.
+2019-05-21 11:29:35,294 INFO  System Log - User et has successfuly logged in.
+2019-05-21 11:38:27,351 INFO  System Log - User et has successfuly logged in.
+2019-05-21 11:50:56,832 INFO  System Log - User et has successfuly logged in.
+2019-05-21 12:08:49,186 INFO  System Log - User et has successfuly logged in.
+2019-05-21 12:40:04,071 INFO  System Log - User et has successfuly logged in.
+2019-05-21 12:48:24,182 INFO  System Log - User et has successfuly logged in.
+2019-05-21 12:52:45,774 INFO  System Log - User et has successfuly logged in.
+2019-05-21 12:57:10,679 INFO  System Log - User et has successfuly logged in.
+2019-05-21 12:59:25,267 INFO  System Log - User et has successfuly logged in.
+2019-05-21 13:19:56,048 INFO  System Log - User et has successfuly logged in.
+2019-05-21 16:46:42,654 INFO  System Log - User et has successfuly logged in.
+2019-05-21 16:57:59,631 INFO  System Log - User et has successfuly logged in.
+2019-05-21 17:30:13,676 INFO  System Log - User et has successfuly logged in.
+2019-05-21 18:03:44,148 INFO  System Log - User et has successfuly logged in.
+2019-05-21 18:10:20,592 INFO  System Log - User et has successfuly logged in.
+2019-05-21 18:21:49,700 INFO  System Log - User et has successfuly logged in.
+2019-05-21 20:07:43,333 INFO  System Log - User et has successfuly logged in.
+2019-05-21 20:14:45,050 INFO  System Log - User et has successfuly logged in.
+2019-05-21 20:18:30,500 INFO  System Log - User et has successfuly logged in.
+2019-05-21 20:41:30,998 INFO  System Log - User et has successfuly logged in.
+2019-05-21 21:33:47,597 INFO  System Log - User et has successfuly logged in.
+2019-05-21 21:53:55,533 INFO  System Log - User et has successfuly logged in.
+2019-05-21 22:47:46,660 INFO  System Log - User et has successfuly logged in.
+2019-05-21 23:35:51,334 INFO  System Log - User et has successfuly logged in.
+2019-05-22 11:15:58,082 INFO  System Log - User et has successfuly logged in.
+2019-05-22 11:17:16,070 ERROR System Log - Catalog Error : Self referencing loop detected for property 'product' with type 'workshop192.Domain.Product'. Path '[1].discount'.
+2019-05-22 11:17:21,094 ERROR System Log - Catalog Error : Self referencing loop detected for property 'product' with type 'workshop192.Domain.Product'. Path '[1].discount'.
+2019-05-22 11:18:20,738 INFO  System Log - User et has logged out
+2019-05-22 11:18:26,399 INFO  System Log - User et has successfuly logged in.
+2019-05-22 11:21:06,249 INFO  System Log - User et has successfuly logged in.
+2019-05-22 11:27:22,905 INFO  System Log - User et has successfuly logged in.
+2019-05-22 11:27:57,644 ERROR System Log - Catalog Error : Self referencing loop detected for property 'product' with type 'workshop192.Domain.Product'. Path '[1].discount'.
+2019-05-22 11:28:02,600 ERROR System Log - Catalog Error : Self referencing loop detected for property 'product' with type 'workshop192.Domain.Product'. Path '[1].discount'.
+2019-05-22 11:28:02,762 ERROR System Log - Catalog Error : Self referencing loop detected for property 'product' with type 'workshop192.Domain.Product'. Path '[1].discount'.
+2019-05-22 11:28:02,956 ERROR System Log - Catalog Error : Self referencing loop detected for property 'product' with type 'workshop192.Domain.Product'. Path '[1].discount'.
+2019-05-22 11:28:03,143 ERROR System Log - Catalog Error : Self referencing loop detected for property 'product' with type 'workshop192.Domain.Product'. Path '[1].discount'.
+2019-05-22 11:28:03,290 ERROR System Log - Catalog Error : Self referencing loop detected for property 'product' with type 'workshop192.Domain.Product'. Path '[1].discount'.
+2019-05-22 11:29:16,156 ERROR System Log - Catalog Error : Self referencing loop detected for property 'product' with type 'workshop192.Domain.Product'. Path '[1].discount'.
+2019-05-22 11:43:04,327 INFO  System Log - User et has successfuly logged in.
+2019-05-25 12:27:23,296 INFO  System Log - User et has successfuly logged in.
+2019-05-25 12:36:13,737 INFO  System Log - User et has successfuly logged in.
+2019-05-25 13:38:59,527 INFO  System Log - User et has successfuly logged in.
+2019-05-25 15:49:43,750 INFO  System Log - User et has successfuly logged in.
+2019-05-25 15:54:25,824 INFO  System Log - User et has successfuly logged in.
+2019-05-25 15:58:40,785 INFO  System Log - User et has successfuly logged in.
+2019-05-25 16:00:42,304 INFO  System Log - User et has successfuly logged in.
+2019-05-25 16:07:49,168 INFO  System Log - User et has successfuly logged in.
+2019-05-25 16:11:07,265 INFO  System Log - User et has successfuly logged in.
+2019-05-25 20:02:53,878 INFO  System Log - User et has successfuly logged in.
+2019-05-25 20:19:52,785 INFO  System Log - User et has successfuly logged in.
+2019-05-25 20:25:42,895 INFO  System Log - User et has successfuly logged in.
+2019-05-25 20:27:13,062 INFO  System Log - User et has logged out
+2019-05-25 20:27:18,197 INFO  System Log - User et has successfuly logged in.
+2019-05-25 20:29:43,010 INFO  System Log - User et has successfuly logged in.
+2019-05-25 23:31:55,918 INFO  System Log - User et has successfuly logged in.
+2019-05-26 00:07:04,369 INFO  System Log - User et has successfuly logged in.
+2019-05-26 00:18:35,488 INFO  System Log - User et has successfuly logged in.
+2019-05-26 00:27:52,735 INFO  System Log - User et has successfuly logged in.
+2019-05-26 00:51:35,701 INFO  System Log - User et has successfuly logged in.
+2019-05-26 00:58:31,899 ERROR System Log - Remove from Cart : Product cannot be removed, it does not exist in cart
+2019-05-26 10:20:25,818 INFO  System Log - User et has successfuly logged in.
+2019-05-26 10:50:43,448 INFO  System Log - User et has successfuly logged in.
+2019-05-30 16:01:36,857 INFO  System Log - User et has successfuly logged in.
+2019-05-30 16:05:38,207 INFO  System Log - User et has successfuly logged in.
+2019-05-30 16:05:53,254 ERROR System Log - Add Reliant Discount : Value cannot be null.
+Parameter name: value
+2019-05-30 16:07:34,262 INFO  System Log - User et has successfuly logged in.
+2019-05-30 16:14:32,782 INFO  System Log - User et has successfuly logged in.
+2019-05-30 16:23:43,576 INFO  System Log - User et has successfuly logged in.
+2019-05-30 16:47:08,849 INFO  System Log - User et has successfuly logged in.
+2019-05-31 14:01:04,654 ERROR System Log - Login : Error: Username does not exist
+2019-05-31 14:02:12,693 INFO  System Log - User et has successfuly logged in.
+2019-05-31 14:21:50,630 INFO  System Log - User et has successfuly logged in.
+2019-05-31 14:24:36,108 INFO  System Log - User et has successfuly logged in.
+2019-05-31 15:37:20,599 INFO  System Log - User et has successfuly logged in.
+2019-05-31 15:53:46,838 INFO  System Log - User et has successfuly logged in.
+2019-05-31 16:19:05,758 ERROR System Log - Login : Error: Username does not exist
+2019-05-31 16:19:11,869 INFO  System Log - User et has successfuly logged in.
+2019-05-31 16:38:20,389 INFO  System Log - User et has successfuly logged in.
+2019-05-31 16:46:29,154 INFO  System Log - User et has successfuly logged in.
+2019-05-31 16:52:26,318 INFO  System Log - User et has successfuly logged in.
+2019-05-31 17:35:26,192 INFO  System Log - User et has successfuly logged in.
+2019-05-31 18:52:58,297 INFO  System Log - User et has successfuly logged in.
+2019-05-31 19:38:22,812 INFO  System Log - User et has successfuly logged in.
+2019-05-31 20:04:49,321 INFO  System Log - User et has successfuly logged in.
+2019-05-31 20:05:31,762 ERROR System Log - Add Reliant Discount : percentage of discount must be a number between 0 to 1
+2019-05-31 20:14:10,698 INFO  System Log - User et has successfuly logged in.
+2019-05-31 20:27:28,872 INFO  System Log - User et has successfuly logged in.
+2019-05-31 20:31:13,261 INFO  System Log - User et has successfuly logged in.
+2019-05-31 20:35:37,639 INFO  System Log - User et has successfuly logged in.
+2019-05-31 20:48:41,550 INFO  System Log - User et has successfuly logged in.
+2019-05-31 20:56:27,700 INFO  System Log - User et has successfuly logged in.
+2019-05-31 21:11:54,384 INFO  System Log - User et has successfuly logged in.
+2019-05-31 21:15:13,968 ERROR System Log - Add Reliant Discount : percentage of discount must be a number between 0 to 1
+2019-05-31 21:20:11,954 INFO  System Log - User et has successfuly logged in.
+2019-05-31 21:28:16,033 INFO  System Log - User et has successfuly logged in.
+2019-05-31 21:52:44,733 INFO  System Log - User et has successfuly logged in.
+2019-05-31 22:06:16,408 INFO  System Log - User et has successfuly logged in.
+2019-05-31 22:41:05,718 INFO  System Log - User et has successfuly logged in.
+2019-05-31 22:43:45,559 ERROR System Log - Error in adding to shopping cart : Error: Product already exists on Cart
+2019-05-31 22:52:20,767 INFO  System Log - User et has successfuly logged in.
+2019-05-31 22:52:35,993 ERROR System Log - Add Visible Discount : Discount duration is not in the required foramt DD/MM/YYYY
+2019-05-31 22:52:48,211 ERROR System Log - Add Visible Discount : Date is not valid
+2019-05-31 22:53:05,459 ERROR System Log - Add Visible Discount : Year, Month, and Day parameters describe an un-representable DateTime.
+2019-05-31 22:53:29,450 ERROR System Log - Add Visible Discount : Date is not valid
+2019-05-31 22:53:56,842 ERROR System Log - Add Visible Discount : Discount duration is not in the required foramt DD/MM/YYYY
+2019-05-31 22:54:15,103 ERROR System Log - Add Visible Discount : Year, Month, and Day parameters describe an un-representable DateTime.
+2019-05-31 22:58:19,299 INFO  System Log - User et has successfuly logged in.
+2019-05-31 23:03:40,900 INFO  System Log - User et has successfuly logged in.
+2019-05-31 23:04:47,187 ERROR System Log - Add Reliant Discount : Date is not valid
+2019-06-01 00:05:06,633 INFO  System Log - User et has successfuly logged in.
+2019-06-01 00:07:36,843 ERROR System Log - Add Reliant Discount : Discount duration is not in the required foramt DD/MM/YYYY
+2019-06-01 00:16:44,369 INFO  System Log - User et has successfuly logged in.
+2019-06-01 00:32:38,339 INFO  System Log - User et has successfuly logged in.
+2019-06-01 00:34:02,322 ERROR System Log - Add Visible Discount : Value cannot be null.
+Parameter name: value
+2019-06-01 14:34:22,942 INFO  System Log - User et has successfuly logged in.

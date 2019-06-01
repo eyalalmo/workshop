@@ -83,6 +83,10 @@ namespace workshop192.ServiceLayer
             db.checkoutBasket(user, address, creditCard);
         }
 
+        public double getActualTotalPrice(int user)
+        {
+            return db.getShoppingBasketActualTotalPrice(user);
+        }
         public double getTotalPrice(int user)
         {
             return db.getShoppingBasketTotalPrice(user);

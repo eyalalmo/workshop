@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace workshop192.Domain
 {
@@ -16,21 +17,25 @@ namespace workshop192.Domain
         public int rank;
         public int quantityLeft;
         public int storeID;
-        internal VisibleDiscount discount;
-        internal int discountID;
+        [JsonIgnore]
+        public VisibleDiscount discount;
+        [JsonIgnore]
+        public ReliantDiscount sameProductDiscount;
 
-        public Product(string productName, string productCategory, int price, int rank, int quantityLeft, int storeID)
+
+        public Product(string productName, string productCategory, int price, int rank, int quantityLeft, Store store)
         {
             this.productID = DBProduct.getNextProductID();
             this.productName = productName;
             this.productCategory = productCategory;
             this.price = price;
             this.rank = rank;
-            this.storeID = storeID;
+            this.storeID = store.getStoreID();
             this.quantityLeft = quantityLeft;
+
             //this.numberOfRanking = 0;
             this.discount = null;
-            this.discountID = -1;
+            //this.discountID = -1;
         }
 
         //added
@@ -44,7 +49,50 @@ namespace workshop192.Domain
             this.storeID = storeID;
             this.quantityLeft = quantityLeft;
             this.discount = null;
-            this.discountID = discountID;
+           //this.discountID = discountID;
+        }
+
+        public Product(int productID, string productName, string productCategory, int price, int rank, int quantityLeft, int storeID)
+        {
+            this.productID = productID;
+            this.productName = productName;
+            this.productCategory = productCategory;
+            this.price = price;
+            this.rank = rank;
+            this.storeID = storeID;
+            this.quantityLeft = quantityLeft;
+            this.discount = null;
+            //this.discountID = discountID;
+        }
+
+
+        public double getActualPrice(int amountinBasket)
+        {
+            double actualPrice = price;
+            if (discount != null && !discount.getIsPartOfComplex())
+            {
+                actualPrice = price * (1 - discount.getPercentage());
+            }
+            if (sameProductDiscount != null && !sameProductDiscount.getIsPartOfComplex()) { 
+                if (sameProductDiscount.getMinNumOfProducts() <= amountinBasket)
+                 {
+                            actualPrice = price * (1 - sameProductDiscount.getPercentage());
+                       
+                 }
+            }
+            if (sameProductDiscount != null && sameProductDiscount.getIsPartOfComplex() && sameProductDiscount.getComplexCondition())
+            {
+                if (sameProductDiscount.getMinNumOfProducts() <= amountinBasket)
+                {
+                    actualPrice = price * (1 - sameProductDiscount.getPercentage());
+
+                }
+            }
+            if (discount != null && discount.getIsPartOfComplex() &&discount.getComplexCondition())
+            {
+                actualPrice = price * (1 - discount.getPercentage());
+            }
+            return actualPrice;
         }
 
         public double getActualPrice()
@@ -55,14 +103,13 @@ namespace workshop192.Domain
                 actualPrice = price * (1 - discount.getPercentage());
             }
 
-            VisibleDiscount storeDiscount = DBStore.getInstance().getStore(storeID).getVisibleDiscount();
-            if (storeDiscount != null)
-            {
-                actualPrice = actualPrice * (1 - storeDiscount.getPercentage());
-            }
             return actualPrice;
         }
 
+        public void setReliantDiscountSameProduct(ReliantDiscount d)
+        {
+            this.sameProductDiscount = d;
+        }
         public int getQuantityLeft()
         {
             return this.quantityLeft;
@@ -114,8 +161,9 @@ namespace workshop192.Domain
         public void setDiscount(VisibleDiscount discount)
         {             
             this.discount = discount;
-            this.discountID = discount.getId();
-            DBProduct.getInstance().update(this);
+           // this.discountID = discount.getId();
+            //DBProduct.getInstance().update(this);
+            //store.addDiscount(discount);
         }
 
         public void removeDiscount()
@@ -154,8 +202,8 @@ namespace workshop192.Domain
             return DBStore.getInstance().getStore(storeID);
         }
 
-        internal int getDiscountID() {
+       /* internal int getDiscountID() {
             return this.discountID;
-        }
+        }*/
     }
 }

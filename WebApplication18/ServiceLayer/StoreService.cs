@@ -315,11 +315,11 @@ namespace workshop192.ServiceLayer
             db.addReliantdiscountTotalAmount(store, percentage, amount, duration, session);
         }
 
-        public void removeStoreDiscount(int store, int sessionID)
+        public void removeStoreDiscount(int discountID, int store, int sessionID)
         {
             if (store < 0)
                 throw new ArgumentException("illegal store number");
-            db.removeStoreDiscount(store, sessionID);
+            db.removeStoreDiscount(discountID, store, sessionID);
         }
         //public void addComplexDiscount(List<DiscountComponent> list, string type)
         //{
@@ -356,6 +356,15 @@ namespace workshop192.ServiceLayer
 
             db.removeCouponFromStore(sessionID, storeID, couponCode);
         }
+        public string getStoreDiscounts(int storeID, int sessionID)
+        {
+            if (sessionID < 0)
+                throw new NullReferenceException("session is a null reference");
+            if (storeID < 0)
+                throw new NullReferenceException("store is a null reference");
+
+            return db.getStoreDiscounts(storeID, sessionID);
+        }
        
         public string getStore(int id)
         {
@@ -366,6 +375,21 @@ namespace workshop192.ServiceLayer
         {
             return db.getRoles(id);
         }
+        public void setDiscountPercentage(int discountID, double percentage)
+        {
+            db.setDiscountPercentage(discountID, percentage);
+        }
+
+        public void complexDiscount(string discountArray, int storeID,string type, double percentage, string duration, int sessionID)
+        {
+            if (storeID < 0)
+                throw new ArgumentException("illegal store number");
+
+            if (sessionID < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.complexDiscount(discountArray, storeID,type, percentage,duration, sessionID);
+        }
+
 
 
         public string getAllPending(int id,int sessionId)

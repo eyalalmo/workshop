@@ -10,6 +10,6 @@
 namespace WebApplication18.Views.Pages {
     
     
-    public partial class EditStore {
+    public partial class ComplexDiscount {
     }
 }

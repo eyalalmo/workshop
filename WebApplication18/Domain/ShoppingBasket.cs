@@ -20,16 +20,24 @@ namespace workshop192.Domain
         public ShoppingBasket()
         {
             this.shoppingCarts = new Dictionary<int, ShoppingCart>();
+            this.username = null;
         }
-
-
-
-        public Dictionary<int, ShoppingCart> getShoppingCarts()
+        public Dictionary<int,ShoppingCart> getShoppingCarts()
         {
             return this.shoppingCarts;
         }
 
 
+        public double getActualTotalPrice()
+        {
+            double sum = 0;
+            foreach (ShoppingCart sc in shoppingCarts.Values)
+            {
+                sum += sc.getActualTotalPrice();
+            }
+            return sum;
+
+        }
         public double getTotalPrice()
         {
             double sum = 0;
@@ -44,35 +52,74 @@ namespace workshop192.Domain
         {
             int storeID = product.getStore().getStoreID();
             bool found = false;
-            foreach (ShoppingCart sc in shoppingCarts.Values)
+            ShoppingCart sc = null;
+            foreach (ShoppingCart s in shoppingCarts.Values)
             {
-                if (sc.getStoreID() == storeID)
+                if (s.getStoreID() == storeID)
                 {
-                    sc.addToCart(product, amount);
-                    return;
+                    sc = s;
+                    found = true;
+                    break;
                 }
             }
             if (!found)
             {
-                ShoppingCart sc = new ShoppingCart(storeID);
-                sc.addToCart(product, amount);
+                 sc = new ShoppingCart(storeID);
+                if (username != null)
                 {
-                    shoppingCarts.Add(storeID, sc);
+                    DBSubscribedUser.getInstance().addCartToBasketCartTable(username, storeID);
                 }
+                shoppingCarts.Add(storeID, sc);
             }
+            if (username != null)
+            {
+                DBSubscribedUser.getInstance().addProductToCartProductTable(username, storeID, product.getProductID(), amount);
+            }
+             sc.addToCart(product, amount);
+            
         }
         public void removeFromCart(int productId)
         {
+            DBSubscribedUser dbuser = DBSubscribedUser.getInstance();
             foreach (KeyValuePair<int, ShoppingCart> cart in shoppingCarts)
             {
                 Product p = cart.Value.cartContainsProduct(productId);
                 if (p != null)
                 {
                     cart.Value.removeFromCart(p);
+                    if (username != null)
+                    {
+                        dbuser.removeProductFromCartProductTable(username, cart.Value.getStoreID(), productId);
+                    }
+
+                    if (cart.Value.CartIsEmpty())
+                    {
+                        deleteCart(cart.Value);
+                       
+                    }
+
                     return;
                 }
             }
             throw new DoesntExistException("Product cannot be removed, it does not exist in cart");
+        }
+
+        private void deleteCart(ShoppingCart sc)
+        {
+
+            foreach (KeyValuePair<int, ShoppingCart> cart in shoppingCarts)
+            {
+                if (cart.Value.getStoreID() == sc.getStoreID())
+                {
+                    shoppingCarts.Remove(cart.Key);
+
+                    if (username != null)
+                    {
+                        DBSubscribedUser.getInstance().deleteCartFromBasketCartTable(username, cart.Value.getStoreID());
+                    }
+                    return;
+                }
+            }
         }
 
         public ShoppingCart getShoppingCartByID(int storeID)
@@ -121,12 +168,16 @@ namespace workshop192.Domain
                 }
 
             }
-            Boolean isOk = PaymentService.getInstance().checkOut(creditCard, getTotalPrice());
+            Boolean isOk = PaymentService.getInstance().checkOut(creditCard, getActualTotalPrice());
             if (isOk)
             {
                 if (DeliveryService.getInstance().sendToUser(address) == false)
                 {
                     throw new CartException("Delivery FAILED");
+                }
+                if (username != null)
+                {
+                    DBSubscribedUser.getInstance().updateTablesAfterPurchase(username, shoppingCarts);
                 }
             }
             else
@@ -135,6 +186,15 @@ namespace workshop192.Domain
             }
         }
 
+        internal void changeQuantityOfProduct(int storeID, Product p, int newAmount)
+        {
+            ShoppingCart sc = getShoppingCartByID(storeID);
+            sc.changeQuantityOfProduct(p, newAmount);
+            if (username != null)
+            {
+                DBSubscribedUser.getInstance().updateAmountOnCartProductTable(username, storeID, p.getProductID(), newAmount);
+            }
+        }
         internal void setUsername(string username)
         {
             this.username = username;

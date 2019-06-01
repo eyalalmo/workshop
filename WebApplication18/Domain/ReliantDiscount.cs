@@ -13,7 +13,8 @@ namespace workshop192.Domain
         int numOfProducts;
         int totalAmount;
         Product product;
-       // Dictionary<Product, int> products;
+
+        // Dictionary<Product, int> products;
 
         public ReliantDiscount(double percentage, String duration, int numOfProducts, Product product) : base(percentage, duration)
         {
@@ -59,6 +60,7 @@ namespace workshop192.Domain
 
             return false;
         }
+  
 
         public override Dictionary<Product, double> updatePrice(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
         {
@@ -77,5 +79,48 @@ namespace workshop192.Domain
             }
             return productsActualPrice;
         }
+        public override string description()
+        {
+            if (type == reliantType.sameProduct)
+            {
+                return "Quantity of product " + product.getProductName() + " ID: " + product.getProductID() +" is at least " + numOfProducts + " Discount "+percentage*100+"%";
+            }
+            if(type == reliantType.totalAmount)
+            {
+                return "Total cart price over $" + totalAmount + " Discount " + percentage * 100 + "%";
+            }
+            return "";
+        }
+
+        public override string getDiscountType()
+        {
+            return "Reliant Discount";
+        }
+        public Product getProduct()
+        {
+            return this.product;
+        }
+        public int getMinNumOfProducts()
+        {
+            return this.numOfProducts;
+        }
+
+        public int getTotalAmount()
+        {
+            return this.totalAmount;
+        }
+        public bool isTotalAmountDiscount()
+        {
+            if (type == reliantType.totalAmount)
+                return true;
+            return false;
+        }
+        public bool isSameProductDiscount()
+        {
+            if (type == reliantType.sameProduct)
+                return true;
+            return false;
+        }
+
     }
 }

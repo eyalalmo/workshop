@@ -67,8 +67,10 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                       success: function (response) {
-                        if (response != "") {                   
-                            var str = "<label for=\"usr\">Total Price: $"+response+"</label>";
+                          if (response != "") {    
+                             var total = response.split(",");
+
+                            var str = "<label for=\"usr\">Total Price: $"+total[0]+"</label>";
                             mainDiv.innerHTML = str;
                         }
                         else {

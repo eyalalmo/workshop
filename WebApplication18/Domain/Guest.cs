@@ -96,6 +96,7 @@ namespace workshop192.Domain
                throw new RegisterException("Error: Username already exists");
             session.getShoppingBasket().setUsername(username);
             SubscribedUser sub = new SubscribedUser(username, encrypted, session.getShoppingBasket());
+
             //session.setSubscribedUser(sub);
             DBSubscribedUser.getInstance().register(sub);
         }

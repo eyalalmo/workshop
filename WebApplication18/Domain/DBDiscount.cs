@@ -10,7 +10,7 @@ namespace workshop192.Domain
     public class DBDiscount : Connector
     {
         private static DBDiscount instance;
-        private Dictionary<int, Discount> discounts;
+        private Dictionary<int, DiscountComponent> discounts;
         private static int nextID;
 
         public static DBDiscount getInstance()
@@ -24,13 +24,13 @@ namespace workshop192.Domain
 
         private DBDiscount()
         {
-            discounts = new Dictionary<int, Discount>();
+            discounts = new Dictionary<int, DiscountComponent>();
             nextID = 0;
         }
 
         public void init()
         {
-            try
+            /*try
             {
                 connection.Open();
                 var d = connection.Query<Discount>("SELECT * FROM [dbo].[Discount]");
@@ -57,7 +57,7 @@ namespace workshop192.Domain
                 throw e;
             }
 
-            nextID++;
+            nextID++;*/
         }
 
         public void addDiscount(Discount d)
@@ -87,9 +87,8 @@ namespace workshop192.Domain
         }
         public void removeDiscount(Discount d)
         {
-
-            if (!discounts.ContainsKey(d.getId()))
-                throw new DoesntExistException("Error: Discount does not exist");
+            //if (!discounts.ContainsKey(d))
+              //  throw new DoesntExistException("Error: Discount does not exist");
             
             LinkedList<Product> result = new LinkedList<Product>();
             try
@@ -144,6 +143,12 @@ namespace workshop192.Domain
                 throw e;
             }
         }
+        public DiscountComponent getDiscountByID(int id)
+        {
+            discounts.TryGetValue(id, out DiscountComponent value);
+            return value;
+        }
+
     }
 }
 

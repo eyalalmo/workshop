@@ -29,8 +29,8 @@ namespace workshop192.Domain
         void addStoreVisibleDiscount(double percentage, string duration);
         void addReliantDiscountSameProduct(double percentage, String duration, int numOfProducts, Product product);
         void addReliantDiscountTotalAmount(double percentage, String duration, int amount);
-        void removeStoreDiscount(Store store);
-        void addComplexDiscount(List<DiscountComponent> list, string type);
+        void removeStoreDiscount(int discountID, Store store);
+        void addComplexDiscount(List<DiscountComponent> list, string type, double percentage, string duration);
         void removeMaxAmountPolicy();
         void removeMinAmountPolicy();
         void setMinAmountPolicy(int newMinAmount);

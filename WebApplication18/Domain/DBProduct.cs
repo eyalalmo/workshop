@@ -44,7 +44,7 @@ namespace workshop192.Domain
 
                 foreach (Product product in products)
                 {
-                    //if(product.discountID != -1)
+                   // if(product.discountID != -1)
                     //    product.discount = DBDiscount.getInstance().getDiscount(product.discountID);
                     productList.AddFirst(product);
                     if (product.getProductID() > nextProductID)
@@ -83,7 +83,7 @@ namespace workshop192.Domain
                     rank = p.getRank(),
                     quantityLeft = p.getQuantityLeft(),
                     storeID = p.getStoreID(),
-                    discountID = p.getDiscountID()
+                    discountID = 0
                 });
                 
                 if(p.discount != null)
@@ -180,7 +180,7 @@ namespace workshop192.Domain
 
         public Product getProductByID(int id)
         {
-            Product result;
+            //Product result;
             try
             {
                 foreach (Product p in productList)
@@ -198,8 +198,8 @@ namespace workshop192.Domain
                 connection.Close();
 
                 Product product = c.First();
-                if(product.discountID != -1)
-                    product.discount = DBDiscount.getInstance().getDiscount(product.discountID);
+                //  if(product.discountID != -1)
+                 //   product.discount = DBDiscount.getInstance().getDiscount(product.discountID);
                 productList.AddFirst(product);
                 return product;
             }
@@ -336,7 +336,7 @@ namespace workshop192.Domain
                           rank = p.getRank(),
                           quantityLeft = p.getQuantityLeft(),
                           storeID = p.getStoreID(),
-                          discountID = p.getDiscountID()
+                          //discountID = p.getDiscountID()
                       });
                 
                 if(p.discount != null)

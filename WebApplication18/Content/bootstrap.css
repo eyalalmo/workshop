@@ -184,7 +184,9 @@ table {
   border-spacing: 0;
   border-collapse: collapse;
 }
-td,
+td {
+    border-collapse: collapse;
+}
 th {
   padding: 0;
 }
@@ -6860,6 +6862,9 @@ ul li ul li {
 }
 ul li:hover ul li{
    display:block;
+}
+.container .col-md-12 .table .tr :hover {
+    background-color: lightyellow;
 }
 
 

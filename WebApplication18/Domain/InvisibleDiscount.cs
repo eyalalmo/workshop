@@ -25,6 +25,17 @@ namespace workshop192.Domain
                 return true;
             return false;
         }
+
+        public override string description()
+        {
+            return "Coupun: ...";
+        }
+
+        public override string getDiscountType()
+        {
+            return "Invisible Discount";
+        }
+
         public override Dictionary<Product, double> updatePrice(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
         {
             foreach (KeyValuePair<Product, int> entry in productList)

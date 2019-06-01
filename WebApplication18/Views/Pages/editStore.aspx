@@ -147,8 +147,8 @@
                 success: function (response) {
           
                     if (response === true) {
-                        baseUrl + "/EditStorePolicy?storeId=" + storeId
-                         window.location.href =  baseUrl + "/EditStorePolicy?storeId=" + storeId
+                        baseUrl + "/StoreDiscouts?storeId=" + id
+                         window.location.href =  baseUrl + "/StoreDiscounts?storeId=" + id
                     }
                     else {
                         alert("you dont have the permissions to edit Discount");

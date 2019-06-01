@@ -106,7 +106,7 @@ namespace WebApplication18.Controllers
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-                return "" + BasketService.getInstance().getTotalPrice(session);
+                return "" + BasketService.getInstance().getActualTotalPrice(session)+","+BasketService.getInstance().getTotalPrice(session);
             }
             catch (Exception e)
             {
@@ -197,6 +197,7 @@ namespace WebApplication18.Controllers
                 return e.Message;
             }
         }
+
 
     }
 }

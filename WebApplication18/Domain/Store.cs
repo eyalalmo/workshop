@@ -20,10 +20,12 @@ namespace workshop192.Domain
         public List<StoreRole> roles;
         public int numOfOwners;
         public bool active;
-        public LinkedList<DiscountComponent> discountList;
         public MinAmountPurchase minPurchasePolicy;
         public MaxAmountPurchase maxPurchasePolicy;
-        public LinkedList<InvisibleDiscount> invisibleDiscountList;
+        private LinkedList<InvisibleDiscount> invisibleDiscountList;
+        [JsonIgnore]
+        public LinkedList<DiscountComponent> discountList;
+       // public LinkedList<InvisibleDiscount> invisibleDiscountList;
         public Dictionary<string, HashSet<string>> pendingOwners;
 
         public Store(string storeName, string description)
@@ -36,7 +38,7 @@ namespace workshop192.Domain
             numOfOwners = 0;
             active = true;
             discountList = new LinkedList<DiscountComponent>();
-            invisibleDiscountList = new LinkedList<InvisibleDiscount>();
+           // invisibleDiscountList = new LinkedList<InvisibleDiscount>();
             maxPurchasePolicy = null;
             minPurchasePolicy = null;
             pendingOwners = new Dictionary<string, HashSet<string>>();
@@ -60,6 +62,10 @@ namespace workshop192.Domain
         public void addProduct(Product p)
         {
             productList.AddFirst(p);
+        }
+        public LinkedList<DiscountComponent> getDiscounts()
+        {
+            return this.discountList;
         }
         public bool isActive()
         {
@@ -260,13 +266,20 @@ namespace workshop192.Domain
             discountList.AddLast(d);
         }
 
-        public void removeDiscount()
+        public void removeDiscount(DiscountComponent d)
         {
-            if (discountList.Count == 0)
+            discountList.Remove(d);
+        }
+
+
+        public void removeDiscount(int discountID)
+        {
+            DiscountComponent discount = DBDiscount.getInstance().getDiscountByID(discountID);
+            if (discount==null)
             {
                 throw new DoesntExistException("Error: Discount does not exist so it cannot be removed");
             }
-            discountList = new LinkedList<DiscountComponent>();
+            discountList.Remove(discount);
         }
         /*
          private void checkValidityofPurchases(PurchasePolicy p1, PurchasePolicy p2)
@@ -344,6 +357,7 @@ namespace workshop192.Domain
         {
             return (maxPurchasePolicy != null);
         }
+      
 
         public MinAmountPurchase getMinAmountPolicy()
         {

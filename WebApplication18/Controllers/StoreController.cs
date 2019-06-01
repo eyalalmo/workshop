@@ -541,6 +541,75 @@ namespace WebApplication18.Controllers
                 return e.Message;
             }
         }
+
+        [Route("api/store/StoreDiscounts")]
+        [HttpGet]
+        public string StoreDiscounts(int storeID)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                return StoreService.getInstance().getStoreDiscounts(storeID, session);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+
+        [Route("api/store/setDiscountPercentage")]
+        [HttpGet]
+        public Object setDiscountPercentage(int discountID, int percentage)
+        {
+            try
+            {
+                double p = percentage / 100.0;
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().setDiscountPercentage(discountID, p);
+                return "ok";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+        [Route("api/store/removeDiscount")]
+        [HttpGet]
+        public Object removeDiscount(int discountID,int storeID)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().removeStoreDiscount(discountID,storeID, session);
+                return "ok";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+        [Route("api/store/complexDiscount")]
+        [HttpGet]
+        public Object complexDiscount(string discounts, int storeID, string type, double percentage, string duration)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().complexDiscount(discounts,storeID,type,percentage,duration,session);
+                return "ok";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
+
+
+
     }
 }
 

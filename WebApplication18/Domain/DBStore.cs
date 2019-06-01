@@ -75,7 +75,7 @@ namespace workshop192.Domain
                             {
                                 appointedBy = DBSubscribedUser.getInstance().getSubscribedUser(element.getAppointedBy());
                             }
-                            catch (Exception e) { }
+                            catch (Exception) { }
                                 SubscribedUser user = DBSubscribedUser.getInstance().getSubscribedUser(element.getUserName());
                             StoreOwner so = new StoreOwner(appointedBy, user, s);
                             s.addStoreRole(so);
@@ -105,7 +105,7 @@ namespace workshop192.Domain
       
                 return newStores;
             }
-            catch(Exception e)
+            catch(Exception)
             {
                // StackTrace = "   ב-  System.Collections.Generic.Dictionary`2.FindEntry(TKey key)\r\n   ב-  System.Collections.Generic.Dictionary`2.ContainsKey(TKey key)\r\n   ב-  workshop192.Domain.DBSubscribedUser.getSubscribedUser(String username) ב- C:\\Users\\etay2\\Desktop\\C#Work...
                 connection.Close();
@@ -127,7 +127,8 @@ namespace workshop192.Domain
             LinkedList<StoreRole> lst = new LinkedList<StoreRole>();
             foreach(StoreRole st in storeRole)
             {
-                if (st.getUser().getUsername() == username)
+                /////////////////////check
+                if (st.getUser()!=null && st.getUser().getUsername() == username)
                     lst.AddLast(st);
             }
             return lst;
@@ -144,7 +145,7 @@ namespace workshop192.Domain
                 storeRole.Remove(sr);
                 connection.Close();
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 connection.Close();
                 throw new StoreException("cant remove role");
@@ -213,7 +214,7 @@ namespace workshop192.Domain
                 storeRole.AddFirst(sr);
                 connection.Close();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 connection.Close();
                 throw new StoreException("cant add store roll");
@@ -255,13 +256,13 @@ namespace workshop192.Domain
                 {
                     minPurchasePolicy = store.getMinAmountPolicy().getAmount();
                 }
-                catch(Exception e) { }
+                catch(Exception) { }
                 int maxPurchasePolicy = -1;
                 try
                 {
                     maxPurchasePolicy = store.getMaxAmountPolicy().getAmount();
                 }
-                catch (Exception e) { }
+                catch (Exception) { }
                
                 connection.Execute(sql, new { storeId, name, description, numOfOwners, active, minPurchasePolicy, maxPurchasePolicy });
 
@@ -272,7 +273,7 @@ namespace workshop192.Domain
                     /////////////////////////
                     return store.getStoreID();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 connection.Close();
                 throw new StoreException("faild to add store");
@@ -313,7 +314,7 @@ namespace workshop192.Domain
                         storeRole.Remove(st);
                 }
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 connection.Close();
                 throw new StoreException("cant delete store");
@@ -351,7 +352,7 @@ namespace workshop192.Domain
                 connection.Close();
                 return idNum;
             }
-           catch (Exception e)
+           catch (Exception)
             {
                 connection.Close();
                 throw new StoreException("connection to db faild");
@@ -398,7 +399,7 @@ namespace workshop192.Domain
                 connection.Close();
                 return idNum;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 connection.Close();
                 throw new StoreException("cant connect");
