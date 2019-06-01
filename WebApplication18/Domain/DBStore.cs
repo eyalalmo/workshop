@@ -56,6 +56,12 @@ namespace workshop192.Domain
                 {
                     StoreEntry se = StoreResult.ElementAt(i);
                     Store s = new Store(se.getStoreId(), se.getName(), se.getDescription());
+                    LinkedList<Product> lst= DBProduct.getInstance().getAllProducts();
+                    foreach(Product p in lst)
+                    {
+                        if (p.getStoreID() == s.getStoreID())
+                            s.addProduct(p);
+                    }
                     if(se.getMaxPurchasePolicy()!=-1)
                         s.setMaxPurchasePolicy(se.getMaxPurchasePolicy());
                     if (se.getMinPurchasePolicy() != -1)
@@ -94,8 +100,7 @@ namespace workshop192.Domain
                             newStores.AddLast(s);
                         }
                     }
-
-
+                    
                 }
       
                 return newStores;

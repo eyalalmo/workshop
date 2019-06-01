@@ -89,8 +89,8 @@ namespace workshop192.Domain
 
         public string getProductsString()
         {
-            return JsonConvert.SerializeObject(this.productList);
-
+            string s = JsonConvert.SerializeObject(this.productList);
+            return s;
         }
 
         public bool productExists(Product product)

@@ -58,9 +58,9 @@ namespace WebApplication18.Controllers
         {
             try
             {
-                
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-                return StoreService.getInstance().getProducts(storeId);
+                string s = StoreService.getInstance().getProducts(storeId);
+                return s;
             }
             catch (ClientException e)
             {

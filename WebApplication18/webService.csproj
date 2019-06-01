@@ -414,6 +414,7 @@
     <Compile Include="Domain\LotteryPurchase.cs" />
     <Compile Include="Domain\MaxAmountPurchase.cs" />
     <Compile Include="Domain\MinAmountPurchase.cs" />
+    <Compile Include="Domain\Notification.cs" />
     <Compile Include="Domain\PaymentService.cs" />
     <Compile Include="Domain\Permissions.cs" />
     <Compile Include="Domain\Product.cs" />
