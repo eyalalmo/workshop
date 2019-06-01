@@ -28,14 +28,14 @@ namespace UnitTestProject3
             store1 = storeService.addStore("billabong", "clothing", session1);
 
             cart = new ShoppingCart(store1);
-            basket = new ShoppingBasket();
+            basket = new ShoppingBasket("user1");
 
 
         }
         [TestMethod]
         public void addToCartTest1()
         {
-            Product p1 = new Product("p1", "ff", 56, 2, 10, DBStore.getInstance().getStore(store1));
+            Product p1 = new Product("p1", "ff", 56, 2, 10, DBStore.getInstance().getStore(store1).getStoreID());
             basket.addToCart(p1, 5);
             Assert.AreEqual(basket.getShoppingCarts().Keys.Count, 1);
         }

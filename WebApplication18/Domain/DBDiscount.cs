@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Dapper;
+using WebApplication18.DAL;
 namespace workshop192.Domain
 {
-    public class DBDiscount
+    public class DBDiscount : Connector
     {
         private static DBDiscount instance;
         private Dictionary<int, Discount> discounts;
@@ -24,27 +25,88 @@ namespace workshop192.Domain
         private DBDiscount()
         {
             discounts = new Dictionary<int, Discount>();
-            nextID = 1;
+            nextID = 0;
         }
-
 
         public void init()
         {
-            discounts = new Dictionary<int, Discount>();
-            nextID = 1;
+            try
+            {
+                connection.Open();
+                var d = connection.Query<Discount>("SELECT * FROM [dbo].[Discount]");
+
+                if (d.Count() == 0)
+                {
+                    connection.Close();
+                    return;
+                }
+
+                foreach (Discount discount in d)
+                {
+                    discounts.Add(discount.getId(), discount);
+                    if (discount.getId() > nextID)
+                        nextID = discount.getId();
+                }
+
+                connection.Close();
+            }
+
+            catch (Exception e)
+            {
+                connection.Close();
+                throw e;
+            }
+
+            nextID++;
         }
+
         public void addDiscount(Discount d)
         {
-            if (discounts.ContainsKey(d.getId()))
-                throw new AlreadyExistException("Error: Discount already exists");
-            discounts.Add(d.getId(), d);
+            try
+            {
+                connection.Open();
+
+                string sql = "INSERT INTO [dbo].[Discount] (id, percentage, duration)" +
+                                 " VALUES (@id, @percentage, @duration)";
+                connection.Execute(sql, new
+                {
+                    id = d.getId(),
+                    percentage = d.getPercentage(),
+                    duration = d.getDuration()
+                });
+                
+                connection.Close();
+                discounts.Add(d.getId(), d);
+            }
+
+            catch (Exception e)
+            {
+                connection.Close();
+                throw e;
+            }
         }
         public void removeDiscount(Discount d)
         {
+
             if (!discounts.ContainsKey(d.getId()))
                 throw new DoesntExistException("Error: Discount does not exist");
-            discounts.Remove(d.getId());
+            
+            LinkedList<Product> result = new LinkedList<Product>();
+            try
+            {
+                connection.Open();
+                connection.Execute("DELETE FROM Discount WHERE id=@id ", new { id = d.getId() });
+                discounts.Remove(d.getId());
+                connection.Close();
+            }
+
+            catch (Exception e)
+            {
+                connection.Close();
+                throw e;
+            }
         }
+
         public static int getNextDiscountID()
         {
             int id = nextID;
@@ -52,6 +114,36 @@ namespace workshop192.Domain
             return id;
         }
 
+        internal VisibleDiscount getDiscount(int discountID)
+        {
+            return (VisibleDiscount)discounts[discountID];
+        }
+
+        internal void update(Discount discount)
+        {
+            try
+            {
+                connection.Open();
+
+                connection.Execute("UPDATE id = @id, " +
+                                          "percentage = @percentage, " +
+                                          "duration = @duration " +
+                                          "FROM Discount WHERE id=@id",
+                      new
+                      {
+                          id = discount.getId(),
+                          percentage = discount.getPercentage(),
+                          duration = discount.getDuration()
+                      });
+
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                connection.Close();
+                throw e;
+            }
+        }
     }
 }
 

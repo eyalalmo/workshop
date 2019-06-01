@@ -25,7 +25,7 @@ namespace WebApplication18.DAL
                 {   
                         connection = new SqlConnection(stringDB);               
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     throw new Exception("error");
                 }

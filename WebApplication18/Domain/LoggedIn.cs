@@ -40,6 +40,7 @@ namespace workshop192.Domain
             sub.addStoreRole(owner);
             DBStore.getInstance().addStore(store);
             DBStore.getInstance().addStoreRole(owner);
+
             return store;
         }
 

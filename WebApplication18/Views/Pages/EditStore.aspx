@@ -27,9 +27,10 @@
                     if (response !== "fail") {
                       var responsJ= JSON.parse(response);
                         var HTML = "";
-                        for (i = 0; i < responsJ.length ; i++) {        
-                            var storeId = responsJ[i].storeID;
-                            var storeName = responsJ[i].storeName;
+                        for (i = 0; i < responsJ.length; i++) {    
+                            
+                            var storeId = responsJ[i].storeId;
+                            var storeName = responsJ[i].name;
                             var description = responsJ[i].description;
                             var active = responsJ[i].active;
 

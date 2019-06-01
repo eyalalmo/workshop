@@ -47,5 +47,11 @@ namespace workshop192.Domain
         {
             per["editPolicy"] = editPolicy;
         }
+        public int getPermission(string s)
+        {
+            if (per[s] == true)
+                return 1;
+            return 0;
+        }
     }
 }

@@ -54,6 +54,7 @@ namespace workshop192.Domain
             SubscribedUser sub = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (sub == null)
                 throw new LoginException("Error: Username does not exist");
+            DBSubscribedUser.getInstance().updateStoreRole(sub);
             SubscribedUser loggedIn = DBSubscribedUser.getInstance().getloggedInUser(username);
             if( loggedIn != null)
                 throw new LoginException("Error: Username already logged in");
@@ -77,7 +78,7 @@ namespace workshop192.Domain
             {
                 session.setState(new LoggedIn());
             }
-            session.setShoppingBasket(new ShoppingBasket());
+            session.setShoppingBasket(new ShoppingBasket(sub.getUsername()));
             session.setShoppingBasket(sub.getShoppingBasket());
             DBSubscribedUser.getInstance().login(sub);
         }
@@ -93,6 +94,7 @@ namespace workshop192.Domain
             SubscribedUser s = dbSubscribedUser.getSubscribedUser(username);
             if (s != null)
                throw new RegisterException("Error: Username already exists");
+            session.getShoppingBasket().setUsername(username);
             SubscribedUser sub = new SubscribedUser(username, encrypted, session.getShoppingBasket());
             //session.setSubscribedUser(sub);
             DBSubscribedUser.getInstance().register(sub);

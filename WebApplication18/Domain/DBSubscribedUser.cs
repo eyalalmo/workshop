@@ -3,33 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using workshop192.Domain;
+using Dapper;
+using WebApplication18.DAL;
+using WebApplication18.Domain;
 
 namespace workshop192.Domain
 {
-    public class DBSubscribedUser
+    public class DBSubscribedUser :Connector
     {
+
 
         Dictionary<string, SubscribedUser> users;
         Dictionary<string, SubscribedUser> loggedInUser;
         private static DBSubscribedUser instance = null;
         private int id;
-
-
-
+        
         private DBSubscribedUser()
         {
             users = new Dictionary<string, SubscribedUser>();
             loggedInUser = new Dictionary<string, SubscribedUser>();
           
-        }
+         }
 
         public void init()
         {
-            users = new Dictionary<string, SubscribedUser>();
-            loggedInUser = new Dictionary<string, SubscribedUser>();
-           
+            if (instance == null)
+            {
+                instance = new DBSubscribedUser();
+            }
+
         }
         public void addAdmin(string name, string pass)
         {
@@ -53,20 +55,123 @@ namespace workshop192.Domain
 
         public void register(SubscribedUser user)
         {
-           users.Add(user.getUsername(), user);
+            //prev
+            users.Add(user.getUsername(), user);
+            // new
+            string username = user.getUsername();
+            string password = user.getPassword();
+            try
+            {
+                connection.Open();
+                var c = connection.Query("SELECT username, password FROM [dbo].[Register] WHERE username=@username ", new { username=username });
+                
+                if (Enumerable.Count(c) == 0)
+               {
+
+                    string sql = "INSERT INTO [dbo].[Register] (username, password)" +
+                                                     " VALUES (@username, @password)";
+                    connection.Execute(sql, new { username, password });
+                    connection.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                connection.Close();
+            }
         }
 
         public SubscribedUser getSubscribedUser(string username)
         {
-            SubscribedUser user;
-            if (!users.TryGetValue(username, out user))
+            if (users.ContainsKey(username))
+            {
+                return users[username];
+            }   
+            try
+            {
+                connection.Open();
+                var c1 = connection.Query<RegisterEntry>("SELECT username, password FROM [dbo].[Register] WHERE username=@username ", new { username = username });
+                if (Enumerable.Count(c1) == 1)
+                {
+                    RegisterEntry re = c1.ElementAt(0);
+                    string password = re.getPassword();
+
+                    string sql = "SELECT * FROM BasketCart WHERE username=@username;";
+                    var c2 = connection.Query<BasketCartEntry>(sql, new { username= username });
+                    ShoppingBasket sb = new ShoppingBasket(username);
+
+                    if (Enumerable.Count(c2) > 0)
+                    {
+                        for (int i = 0; i < Enumerable.Count(c2); i++)
+                        {
+                            BasketCartEntry bc = c2.ElementAt(i);
+                            int storeID = bc.getStoreID();
+                            sql = "SELECT * FROM CartProduct WHERE storeID=@storeID;";
+                            var c3 = connection.Query<CartProductEntry>(sql, new { storeID = storeID });
+                            for (int j=0; j<Enumerable.Count(c3); j++)
+                            {
+                                CartProductEntry cp = c3.ElementAt(j);
+                                int productID = cp.getProductID();
+                                int amount = cp.getAmount();
+                                Product p = DBProduct.getInstance().getProductByID(productID);
+                                sb.addToCart(p, amount);
+                            }
+                        }
+                    }
+
+                    SubscribedUser su = new SubscribedUser(username, password, sb);
+                    
+                    users.Add(username, su);
+                    connection.Close();
+                    return su;
+                }
+
+                else
+                {
+                    connection.Close();
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                connection.Close();
                 return null;
-            return user;
+            }
+        }
+        public void updateStoreRole(SubscribedUser user)
+        {
+            string username = user.getUsername();
+            foreach (StoreRole sr in DBStore.getInstance().getRolesByUserName(username))
+            {
+                user.addStoreRole(sr);
+            }
         }
 
         public void login(SubscribedUser user)
         {
              loggedInUser.Add(user.getUsername(), user);
+            string username = user.getUsername();
+            string password = user.getPassword();
+            try
+            {
+                connection.Open();
+                var c = connection.Query("SELECT username, password FROM [dbo].[Register] WHERE username=@username ", new { username = username });
+
+                if (Enumerable.Count(c) == 0)
+                {
+
+                    string sql = "INSERT INTO [dbo].[Register] (username, password)" +
+                                                     " VALUES (@username, @password)";
+                    connection.Execute(sql, new { username, password });
+                    connection.Close();
+                }
+            }
+            catch (Exception)
+            {
+                connection.Close();
+            }
+
         }
 
         public void remove(SubscribedUser user)

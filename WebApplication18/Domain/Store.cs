@@ -24,10 +24,11 @@ namespace workshop192.Domain
         public MinAmountPurchase minPurchasePolicy;
         public MaxAmountPurchase maxPurchasePolicy;
         public LinkedList<InvisibleDiscount> invisibleDiscountList;
+        public Dictionary<string, HashSet<string>> pendingOwners;
 
         public Store(string storeName, string description)
         {
-            this.storeId = DBStore.getNextStoreID();
+            this.storeId = DBStore.getInstance().getNextStoreID();
             this.name = storeName;
             this.description = description;
             productList = new LinkedList<Product>();
@@ -38,16 +39,18 @@ namespace workshop192.Domain
             invisibleDiscountList = new LinkedList<InvisibleDiscount>();
             maxPurchasePolicy = null;
             minPurchasePolicy = null;
+            pendingOwners = new Dictionary<string, HashSet<string>>();
         }
         public Store(int storeId,string name, string description)
         {
-            this.storeId = DBStore.getNextStoreID();
+            this.storeId = storeId;
             this.name = name;
             this.description = description;
             productList = new LinkedList<Product>();
             roles = new List<StoreRole>();
             numOfOwners = 0;
             active = true;
+            pendingOwners = new Dictionary<string, HashSet<string>>();
             discountList = new LinkedList<DiscountComponent>();
             invisibleDiscountList = new LinkedList<InvisibleDiscount>();
             maxPurchasePolicy = null;
@@ -86,8 +89,8 @@ namespace workshop192.Domain
 
         public string getProductsString()
         {
-            return JsonConvert.SerializeObject(this.productList);
-
+            string s = JsonConvert.SerializeObject(this.productList);
+            return s;
         }
 
         public bool productExists(Product product)
@@ -365,6 +368,52 @@ namespace workshop192.Domain
                     return (VisibleDiscount)d;
             }
             return null;
+        }
+        public void addPendingOwner(string appointer,SubscribedUser pending)
+        {
+            if (pendingOwners.ContainsKey(pending.username))
+            {
+                throw new AlreadyExistException("Owner already waiting for approval");
+            }
+            HashSet<string> toAdd = new HashSet<string>();
+            toAdd.Add(appointer);
+            pendingOwners.Add(pending.getUsername(), toAdd);
+
+        }
+        public void removePendingOwner(SubscribedUser pending)
+        {
+            if (!pendingOwners.ContainsKey(pending.getUsername()))
+            {
+                throw new DoesntExistException("the username is not in the owners pending list");
+            }
+            pendingOwners.Remove(pending.getUsername());
+        }
+
+        public void signContract(string owner,SubscribedUser pending)
+        {
+            if (!pendingOwners.ContainsKey(pending.getUsername()))
+            {
+                throw new DoesntExistException("the username is not in the owners pending list");
+            }
+            HashSet<string> temp = new HashSet<string>();
+            pendingOwners.TryGetValue(pending.getUsername(), out temp);
+            temp.Add(owner);
+            pendingOwners[pending.getUsername()] = temp;
+        }
+
+        public HashSet<string> getApproved(SubscribedUser pending)
+        {
+            HashSet<string> output;
+            if(pendingOwners.TryGetValue(pending.getUsername(), out output))
+            {
+                return output;
+            }
+            throw new DoesntExistException("User is not a pending owner");
+        }
+
+        public Dictionary<string,HashSet<string>> getPending()
+        {
+            return pendingOwners;
         }
 
     }
