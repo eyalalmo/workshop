@@ -49,7 +49,7 @@
                                     var discountID = discountfields[4];
                                     if (type == "Complex") {
                                         str += "<tr>" +
-                                            "<td style = \"width:450px\" align=\"left\"> <h4 class=\"discount\"><strong>" + type + "</strong></h4><h4><small>" + description + "</small></h4></td><td style = \"width:120px\;top:100px; align=\"center\">" + duration + "</td><td style = \"width:50px\"></td><div></div><td style = \"width:50px\" align=\"center\"> <button type=\"button\" class=\"btn btn-danger\" onclick=\"deleteRow(" + discountID + ");\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td></tr>";
+                                            "<td  style = \"width:30px\"><input type=\"checkbox\"></td><td style = \"width:450px\" align=\"left\"> <h4 class=\"discount\"><strong>" + type + "</strong></h4><h4><small>" + description + "</small></h4></td><td style = \"width:120px\;top:100px; align=\"center\">" + duration + "</td><td style = \"width:50px\"><div></div></td><td style = \"width:50px\" align=\"center\"> <button type=\"button\" class=\"btn btn-danger\" onclick=\"deleteRow(" + discountID + ");\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td></tr>";
                                     }
                                     else {
                                         str += "<tr>" +
@@ -158,7 +158,7 @@
           
           function makeComplex() {
               event.preventDefault();
-                var getUrl = window.location;
+              var getUrl = window.location;
               var storeID =<%=ViewData["storeID"]%>;
               var s = "";
               type = $("#type").val();
@@ -171,6 +171,7 @@
                     }
                   });
               console.log("type::::" + type);
+             console.log("Make COMPLEX!!!!");
               var baseUrl = getUrl.protocol + "//" + getUrl.host
                jQuery.ajax({
                    type: "GET",
@@ -186,7 +187,7 @@
                             window.location.href = baseUrl+"/StoreDiscounts?storeId=" + storeID;
                         }
                         else {
-                            console.log(response);   
+                            console.log("ERROR:" + response);   
                         }
                     },
                     error: function (response) {

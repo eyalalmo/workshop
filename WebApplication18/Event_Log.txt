@@ -213,36 +213,27 @@
 2019-06-01 11:06:47,935 INFO EventLog: User u2 has successfuly created a store
 2019-06-01 16:17:37,665 INFO EventLog: User u7 has successfuly registered
 2019-06-01 16:17:51,488 INFO EventLog: User u7 has successfuly created a store
-2019-06-01 17:44:46,239 ERROR EventLog: Login : Error: Username does not exist
-2019-06-01 17:44:59,733 ERROR EventLog: Login : Error: Username does not exist
-2019-06-01 17:50:43,546 INFO EventLog: User u1 has successfuly logged in.
-2019-06-01 17:50:45,491 INFO EventLog: User u1 has logged out
-2019-06-01 17:50:51,164 ERROR EventLog: Login : Error: Username does not exist
-2019-06-01 17:50:55,646 INFO EventLog: User u3 has successfuly logged in.
-2019-06-01 17:51:25,923 ERROR EventLog: Error in adding an owner : Error: No such username
-2019-06-01 17:58:46,234 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
-2019-06-01 17:58:46,252 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
-2019-06-01 18:14:15,417 INFO EventLog: User u3 has logged out
-2019-06-01 18:14:24,239 ERROR EventLog: Login : Error: Username does not exist
-2019-06-01 18:14:27,299 ERROR EventLog: Login : Error: Username does not exist
-2019-06-01 18:14:33,846 INFO EventLog: User u3 has successfuly logged in.
-2019-06-01 18:14:40,782 INFO EventLog: User u3 has logged out
-2019-06-01 18:25:20,918 INFO EventLog: User u3 has successfuly logged in.
-2019-06-01 19:18:01,596 INFO EventLog: User u3 has successfuly logged in.
-2019-06-01 19:18:12,070 ERROR EventLog: Remove Role Error: cant remove role
-2019-06-01 19:18:15,619 ERROR EventLog: Remove Role Error: cant remove role
-2019-06-01 19:18:37,597 ERROR EventLog: Remove Role Error: cant remove role
-2019-06-01 19:18:50,748 ERROR EventLog: Remove Role Error: cant remove role
-2019-06-01 19:19:33,417 ERROR EventLog: Remove Role Error: cant remove role
-2019-06-01 19:19:38,735 ERROR EventLog: Remove Role Error: cant remove role
-2019-06-01 19:20:05,774 ERROR EventLog: Remove Role Error: cant remove role
-2019-06-01 19:21:59,528 INFO EventLog: User eee has successfuly registered
-2019-06-01 19:22:02,163 INFO EventLog: User eee has logged out
-2019-06-01 19:22:50,446 INFO EventLog: User eee has successfuly logged in.
-2019-06-01 19:23:23,679 INFO EventLog: User eee has successfuly created a store
-2019-06-01 19:24:14,597 ERROR EventLog: Error in adding an owner : Owner already waiting for approval
-2019-06-01 19:24:22,800 INFO EventLog: User eee has logged out
-2019-06-01 19:24:26,985 INFO EventLog: User u4 has successfuly logged in.
-2019-06-01 19:25:21,128 INFO EventLog: User u4 has logged out
-2019-06-01 19:25:26,865 INFO EventLog: User u5 has successfuly logged in.
-2019-06-02 00:38:20,045 ERROR EventLog: Login : Error: Username does not exist
+2019-06-01 20:16:22,086 ERROR EventLog: Register : Error: Username already exists
+2019-06-01 20:16:28,903 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 20:43:12,451 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 20:44:54,146 ERROR EventLog: Login : Error: Incorrect password
+2019-06-01 20:44:57,957 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 20:47:44,562 ERROR EventLog: Login : Error: Incorrect password
+2019-06-01 20:47:49,015 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 20:49:03,206 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 20:50:15,411 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 21:09:11,212 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 21:09:39,360 INFO EventLog: User u1 has successfuly created a store
+2019-06-01 21:10:09,987 ERROR EventLog: Error in adding an owner : Error: No such username
+2019-06-01 21:13:53,413 ERROR EventLog: Error in adding an owner : Owner already waiting for approval
+2019-06-01 21:14:01,448 ERROR EventLog: Add Manager : Error: No such username
+2019-06-01 21:14:04,648 INFO EventLog: User u1 has logged out
+2019-06-01 21:14:10,724 INFO EventLog: User ey has successfuly registered
+2019-06-01 21:14:14,104 INFO EventLog: User ey has logged out
+2019-06-01 21:14:19,204 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 21:22:32,269 ERROR EventLog: Register : Error: Username already exists
+2019-06-01 21:22:39,334 ERROR EventLog: Register : Error: Username already exists
+2019-06-01 21:22:47,926 INFO EventLog: User eee1 has successfuly registered
+2019-06-01 21:22:54,888 INFO EventLog: User eee1 has logged out
+2019-06-01 21:23:02,552 INFO EventLog: User u1 has successfuly logged in.
+2019-06-01 21:23:13,604 ERROR EventLog: Error in adding an owner : Error: No such username

@@ -19,7 +19,7 @@ namespace workshop192.Domain.Tests
         {
             
             DBSubscribedUser db = DBSubscribedUser.getInstance();
-            db.init();
+            db.initTests();
             Session s = new Session();
 
             s.register("etay", "etay");
@@ -47,19 +47,19 @@ namespace workshop192.Domain.Tests
             Session s = new Session();
             s.register("etay11", "etay11");
             Assert.AreNotEqual(db.getSubscribedUser("etay"), null);
-            db.init();
+            db.initTests();
         }
 
         [TestMethod()]
         public void loginTest()
         {
             DBSubscribedUser db = DBSubscribedUser.getInstance();
-            db.init();
+            db.initTests();
             Session s = new Session();
             s.register("etay", "etay");
             s.login("etay", "etay");
             Assert.AreEqual(db.getloggedInUser("etay"), s.getSubscribedUser());
-            db.init();
+            db.initTests();
         }
     }
 }

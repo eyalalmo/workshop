@@ -21,9 +21,9 @@ namespace workshop192.Domain.Tests
         [TestInitialize()]
         public void TestInitialize()
         {
-            storeDB.init();
-            productDB.init();
-            DBSubscribedUser.getInstance().init();
+            storeDB.initTests();
+            productDB.initTests();
+            DBSubscribedUser.getInstance().initTests();
             session1 = new Session();
             session1.register("eyal", "123");
 
@@ -39,8 +39,8 @@ namespace workshop192.Domain.Tests
 
             store = session1.createStore("mystore", "a store");
             sr = session1.getSubscribedUser().getStoreRole(store);
-            p = new Product("product", "cat", 10, 0, 10, store.getStoreID());
-            p1 = new Product("product1", "cat", 10, 0, 10, store.getStoreID());
+            p = new Product("product", "cat", 10, 0, 10, store);
+            p1 = new Product("product1", "cat", 10, 0, 10, store);
 
             per = new Permissions(true, true, true);
         }

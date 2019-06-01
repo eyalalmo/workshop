@@ -19,8 +19,8 @@ namespace UnitTestProject3
         public void initial()
         {
             userService.setup();
-            DBProduct.getInstance().init();
-            DBStore.getInstance().init();
+            DBProduct.getInstance().initTests();
+            DBStore.getInstance().initTests();
             session1 = userService.startSession();// login 
             userService.register(session1, "user1", "user1");
             userService.login(session1, "user1", "user1");
@@ -35,7 +35,7 @@ namespace UnitTestProject3
         [TestMethod]
         public void addToCartTest1()
         {
-            Product p1 = new Product("p1", "ff", 56, 2, 10, DBStore.getInstance().getStore(store1).getStoreID());
+            Product p1 = new Product("p1", "ff", 56, 2, 10, DBStore.getInstance().getStore(store1));
             basket.addToCart(p1, 5);
             Assert.AreEqual(basket.getShoppingCarts().Keys.Count, 1);
         }

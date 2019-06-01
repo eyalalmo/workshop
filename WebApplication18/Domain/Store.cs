@@ -93,6 +93,12 @@ namespace workshop192.Domain
             return false;
         }
 
+        public void addStoreRoleFromInitOwner(StoreOwner so)
+        {
+            roles.Add(so);
+            numOfOwners++;
+        }
+
         public string getProductsString()
         {
             string s = JsonConvert.SerializeObject(this.productList);
@@ -132,6 +138,11 @@ namespace workshop192.Domain
             this.name = storeName;
         }
 
+        public void addStoreRoleFromInitManager(StoreRole so)
+        {
+            roles.Add(so);
+        }
+
         public String getDescription()
         {
             return this.description;
@@ -142,11 +153,12 @@ namespace workshop192.Domain
             this.description = description;
         }
 
-        public void addStoreRole(StoreRole toAdd)
+        public void addStoreRoleFromInitOwner(StoreRole toAdd)
         {
             if (toAdd is StoreOwner)
             {
                 numOfOwners++;
+                DBStore.getInstance().addownerNumerByOne(storeId, numOfOwners);
             }
             roles.Add(toAdd);
         }
@@ -256,8 +268,11 @@ namespace workshop192.Domain
             if (toRemove is StoreOwner)
             {
                 numOfOwners--;
+                DBStore.getInstance().removeOwnerNumerByOne(storeId, numOfOwners);
+
             }
             roles.Remove(toRemove);
+            DBStore.getInstance().removeStoreRole(toRemove);
         }
 
 
@@ -266,21 +281,28 @@ namespace workshop192.Domain
             discountList.AddLast(d);
         }
 
-        public void removeDiscount(DiscountComponent d)
+        public void removeDiscount(int discountID)
         {
-            discountList.Remove(d);
+            foreach (DiscountComponent d in discountList)
+            {
+                if (d.getId() == discountID)
+                {
+                    discountList.Remove(d);
+                    break;
+                }
+            }
         }
 
 
-        public void removeDiscount(int discountID)
-        {
-            DiscountComponent discount = DBDiscount.getInstance().getDiscountByID(discountID);
+      //  public void removeDiscount(DiscountComponent discount)
+      //  {
+           /* DiscountComponent discount = DBDiscount.getInstance().getDiscountByID(discountID);
             if (discount==null)
             {
                 throw new DoesntExistException("Error: Discount does not exist so it cannot be removed");
-            }
-            discountList.Remove(discount);
-        }
+            }*/
+         //   discountList.Remove(discount);
+       // }
         /*
          private void checkValidityofPurchases(PurchasePolicy p1, PurchasePolicy p2)
          {

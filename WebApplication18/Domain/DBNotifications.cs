@@ -51,6 +51,21 @@ namespace WebApplication18.Domain
             }
         }
 
+        public void initTests()
+        {
+            try
+            {
+                connection.Open();
+                connection.Execute("DELETE FROM Notification");
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                connection.Close();
+            }
+        }
+
+
         internal void init()
         {
             //waitingNotifications.AddFirst(new Tuple<string, string>("ey", "hi there"));

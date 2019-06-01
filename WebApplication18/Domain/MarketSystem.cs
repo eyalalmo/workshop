@@ -17,10 +17,24 @@ namespace workshop192.Domain
         {
             int doIt = 1;
             string filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
+
             string[] lines = File.ReadAllLines(filePath + "/input.txt");
             //int sessionid =0;
             //Session s=new Session();
             // int sID = 0;
+            if (IsTestsMode.isTest == true)
+            {
+                DBProduct.getInstance().initTests();
+                DBSession.getInstance().initTests();
+                DBDiscount.getInstance().initTests();
+                DBSubscribedUser.getInstance().initTests();
+                DBStore.getInstance().initTests();
+                DBNotifications.getInstance().initTests();
+                PaymentService.getInstance().connectToSystem();
+                DeliveryService.getInstance().connectToSystem();
+                ConsistencySystem.getInstance().connectToSystem();
+                return;
+            }
             if (doIt == 1)
             {
                 DBProduct.getInstance().init();
@@ -28,10 +42,12 @@ namespace workshop192.Domain
                 DBDiscount.getInstance().init();
                 DBSubscribedUser.getInstance().init();
                 DBStore.getInstance().init();
+                DBSubscribedUser.getInstance().updateShoppingBasket();
                 DBNotifications.getInstance().init();
                 PaymentService.getInstance().connectToSystem();
                 DeliveryService.getInstance().connectToSystem();
                 ConsistencySystem.getInstance().connectToSystem();
+                NotificationsBridge.getInstance().setObserver(DomainBridge.getInstance());
                 return;
             }
                 foreach (string line in lines)

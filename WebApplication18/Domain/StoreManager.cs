@@ -157,6 +157,8 @@ namespace workshop192.Domain
         {
             VisibleDiscount v = new VisibleDiscount(percentage, duration, "StoreVisibleDiscount");
             store.addDiscount(v);
+            DBDiscount.getInstance().addDiscount(v);
+
         }
 
         public void addReliantDiscountSameProduct(double percentage, String duration, int numOfProducts, Product product)
@@ -164,6 +166,8 @@ namespace workshop192.Domain
             ReliantDiscount r = new ReliantDiscount(percentage, duration, numOfProducts, product);
             store.addDiscount(r);
             product.setReliantDiscountSameProduct(r);
+            DBDiscount.getInstance().addDiscount(r);
+
 
         }
 
@@ -171,11 +175,13 @@ namespace workshop192.Domain
         {
             ReliantDiscount r = new ReliantDiscount(percentage, duration, amount);
             store.addDiscount(r);
+            DBDiscount.getInstance().addDiscount(r);
+
         }
 
         public void removeStoreDiscount(int discountID, Store store)
         {
-            //DBDiscount.getInstance().removeDiscount(discountID);
+           // DBDiscount.getInstance().removeDiscount(discountID);
             store.removeDiscount(discountID);
 
         }
@@ -193,7 +199,7 @@ namespace workshop192.Domain
                     di.setIsPartOfComplex(true);
                 }
             }
-           // DBDiscount.getInstance().addDiscount(composite);
+           //DBDiscount.getInstance().addDiscount(composite);
 
         }
 

@@ -41,7 +41,21 @@ namespace workshop192.Domain
            
         }
 
-      
+        public void initTests()
+        {
+            try
+            {
+                connection.Open();
+                connection.Execute("DELETE FROM Stores");
+                connection.Execute("DELETE FROM StoreRoles");
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                connection.Close();
+            }
+        }
+
 
         private LinkedList<Store> initStores()
         {
@@ -73,12 +87,12 @@ namespace workshop192.Domain
                             SubscribedUser appointedBy = null;
                             try
                             {
-                                appointedBy = DBSubscribedUser.getInstance().getSubscribedUser(element.getAppointedBy());
+                                appointedBy = DBSubscribedUser.getInstance().getSubscribedUserForInitStore(element.getAppointedBy());
                             }
                             catch (Exception) { }
-                                SubscribedUser user = DBSubscribedUser.getInstance().getSubscribedUser(element.getUserName());
+                                SubscribedUser user = DBSubscribedUser.getInstance().getSubscribedUserForInitStore(element.getUserName());
                             StoreOwner so = new StoreOwner(appointedBy, user, s);
-                            s.addStoreRole(so);
+                            s.addStoreRoleFromInitOwner(so);
                             storeRole.AddLast(so);
                             newStores.AddLast(s);
 
@@ -95,7 +109,7 @@ namespace workshop192.Domain
                             if (element.getEditProduct() == 1)
                                 p.setEditProduct(true);
                             StoreManager sm = new StoreManager(appointedBy, s, user, p);
-                            s.addStoreRole(sm);
+                            s.addStoreRoleFromInitManager(sm);
                             storeRole.AddLast(sm);
                             newStores.AddLast(s);
                         }
@@ -220,6 +234,28 @@ namespace workshop192.Domain
                 throw new StoreException("cant add store roll");
             }
         }
+
+        public void removeOwnerNumerByOne(int storeId, int numOfOwners)
+        {
+            connection.Open();
+            connection.Execute("UPDATE [dbo].[Stores] SET numOfOwners = @newNumber WHERE storeId = @storeId", new { storeId = storeId, newNumber = numOfOwners });
+            connection.Close();
+        }
+
+        public void addownerNumerByOne(int storeId, int newNumber)
+        {
+            try
+            {
+                connection.Open();
+                connection.Execute("UPDATE [dbo].[Stores] SET numOfOwners = @newNumber WHERE storeId = @storeId", new { storeId = storeId, newNumber = newNumber });
+                connection.Close();
+            }
+            catch(Exception e)
+            {
+                connection.Close();
+            }
+        }
+
         public int addStore(Store store)
         {
             try
@@ -399,7 +435,7 @@ namespace workshop192.Domain
                 connection.Close();
                 return idNum;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 connection.Close();
                 throw new StoreException("cant connect");
