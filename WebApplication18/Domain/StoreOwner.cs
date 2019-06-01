@@ -196,7 +196,7 @@ namespace workshop192.Domain
 
         public void removeStoreDiscount(int discountID, Store store)
         {
-            //DBDiscount.getInstance().removeDiscount(discountID);
+           // DBDiscount.getInstance().removeDiscount(discountID);
             store.removeDiscount(discountID);
 
         }
@@ -204,19 +204,18 @@ namespace workshop192.Domain
         {
             DiscountComposite composite = new DiscountComposite(list, type, percentage, duration);
             store.addDiscount(composite);
-            foreach(DiscountComponent d in list)
+            foreach (DiscountComponent d in list)
             {
                 store.removeDiscount(d.getId());
-               if(d is Discount)
+                if (d is Discount)
                 {
                     Discount di = (Discount)d;
                     di.setIsPartOfComplex(true);
                 }
             }
-           // DBDiscount.getInstance().addDiscount(composite);
+            //DBDiscount.getInstance().addDiscount(composite);
 
         }
-
 
 
         public void removeMaxAmountPolicy()
@@ -280,3 +279,14 @@ namespace workshop192.Domain
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+

@@ -266,21 +266,28 @@ namespace workshop192.Domain
             discountList.AddLast(d);
         }
 
-        public void removeDiscount(DiscountComponent d)
+        public void removeDiscount(int discountID)
         {
-            discountList.Remove(d);
+            foreach (DiscountComponent d in discountList)
+            {
+                if (d.getId() == discountID)
+                {
+                    discountList.Remove(d);
+                    break;
+                }
+            }
         }
 
 
-        public void removeDiscount(int discountID)
-        {
-            DiscountComponent discount = DBDiscount.getInstance().getDiscountByID(discountID);
+      //  public void removeDiscount(DiscountComponent discount)
+      //  {
+           /* DiscountComponent discount = DBDiscount.getInstance().getDiscountByID(discountID);
             if (discount==null)
             {
                 throw new DoesntExistException("Error: Discount does not exist so it cannot be removed");
-            }
-            discountList.Remove(discount);
-        }
+            }*/
+         //   discountList.Remove(discount);
+       // }
         /*
          private void checkValidityofPurchases(PurchasePolicy p1, PurchasePolicy p2)
          {

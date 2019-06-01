@@ -25,7 +25,7 @@ namespace workshop192.Domain
         private DBDiscount()
         {
             discounts = new Dictionary<int, DiscountComponent>();
-            nextID = 0;
+            nextID = 1;
         }
 
         public void init()
@@ -60,11 +60,11 @@ namespace workshop192.Domain
             nextID++;*/
         }
 
-        public void addDiscount(Discount d)
+        public void addDiscount(DiscountComponent d)
         {
             try
             {
-                connection.Open();
+                /*connection.Open();
 
                 string sql = "INSERT INTO [dbo].[Discount] (id, percentage, duration)" +
                                  " VALUES (@id, @percentage, @duration)";
@@ -75,13 +75,13 @@ namespace workshop192.Domain
                     duration = d.getDuration()
                 });
                 
-                connection.Close();
+                connection.Close();*/
                 discounts.Add(d.getId(), d);
             }
 
             catch (Exception e)
             {
-                connection.Close();
+                //connection.Close();
                 throw e;
             }
         }
@@ -93,15 +93,15 @@ namespace workshop192.Domain
             LinkedList<Product> result = new LinkedList<Product>();
             try
             {
-                connection.Open();
-                connection.Execute("DELETE FROM Discount WHERE id=@id ", new { id = d.getId() });
+              //  connection.Open();
+                //connection.Execute("DELETE FROM Discount WHERE id=@id ", new { id = d.getId() });
                 discounts.Remove(d.getId());
-                connection.Close();
+                //connection.Close();
             }
 
             catch (Exception e)
             {
-                connection.Close();
+                //connection.Close();
                 throw e;
             }
         }
@@ -122,7 +122,7 @@ namespace workshop192.Domain
         {
             try
             {
-                connection.Open();
+               /* connection.Open();
 
                 connection.Execute("UPDATE id = @id, " +
                                           "percentage = @percentage, " +
@@ -135,11 +135,11 @@ namespace workshop192.Domain
                           duration = discount.getDuration()
                       });
 
-                connection.Close();
+                connection.Close();*/
             }
             catch (Exception e)
             {
-                connection.Close();
+                //connection.Close();
                 throw e;
             }
         }
