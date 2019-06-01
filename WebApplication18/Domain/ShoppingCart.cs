@@ -32,6 +32,10 @@ namespace workshop192.Domain
         {
             return productList;
         }
+        public Boolean CartIsEmpty()
+        {
+            return productList.Count == 0;
+        }
         public int getStoreID()
         {
             return this.storeID;
