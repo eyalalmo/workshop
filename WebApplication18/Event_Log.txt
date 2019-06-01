@@ -240,3 +240,6 @@
    at workshop192.Bridge.DomainBridge.addToShoppingBasket(Int32 product, Int32 amount, Int32 sessionid)
    at workshop192.ServiceLayer.UserService.addToShoppingBasket(Int32 product, Int32 amount, Int32 session)
    at WebApplication18.Controllers.ProductsController.addToBasket(Int32 productID, String amount) Function: addToBasket
+2019-06-01 16:55:00,780 INFO EventLog: User yaelk has successfuly logged in.
+2019-06-01 16:55:34,405 INFO EventLog: User yaelk has logged out
+2019-06-01 16:55:38,458 INFO EventLog: User yaelk has successfuly logged in.

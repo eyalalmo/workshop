@@ -30,7 +30,7 @@ namespace workshop192.Domain
 
         public void init()
         {
-            try
+            /*try
             {
                 connection.Open();
                 var d = connection.Query<Discount>("SELECT * FROM [dbo].[Discount]");
@@ -57,7 +57,7 @@ namespace workshop192.Domain
                 throw e;
             }
 
-            nextID++;
+            nextID++;*/
         }
 
         public void addDiscount(Discount d)
