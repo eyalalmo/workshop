@@ -28,7 +28,7 @@ namespace workshop192.Domain
 
         public Store(string storeName, string description)
         {
-            this.storeId = DBStore.getNextStoreID();
+            this.storeId = DBStore.getInstance().getNextStoreID();
             this.name = storeName;
             this.description = description;
             productList = new LinkedList<Product>();
@@ -43,7 +43,7 @@ namespace workshop192.Domain
         }
         public Store(int storeId,string name, string description)
         {
-            this.storeId = DBStore.getNextStoreID();
+            this.storeId = storeId;
             this.name = name;
             this.description = description;
             productList = new LinkedList<Product>();

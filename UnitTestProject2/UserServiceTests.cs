@@ -122,39 +122,22 @@ namespace workshop192.ServiceLayer.Tests
             }
 
         }
-
-        //Assert.AreEqual(str, "");
-        //Assert.AreEqual(userService.login(session, "user", "user"), "");
-        //Assert.IsTrue(session.getSubscribedUser() != null);
-        //Assert.IsTrue(session.getState() is LoggedIn);
-
-        //Assert.AreNotEqual(userService.login(session, "user", "user"), "");
-        //Assert.IsTrue(session.getState() is LoggedIn);
-        //Assert.AreNotEqual(userService.login(session, "bbb", "aaaa"), "");
-        //Assert.AreNotEqual(userService.register(session, "user", "user"), "");
-        //2.5.1+2.5.2
+//2.5.1+2.5.2
        
         [TestMethod]
         public void searchByCategoryTest1()
         {
-            //registerSuccessTest();
             loginSuccessTest();
             string searchResult1 = userService.searchByCategory("kitchen");
             Assert.IsTrue(searchResult1.Equals("[{\"productID\":4,\"productName\":\"stove\",\"productCategory\":\"kitchen\",\"price\":200,\"rank\":3,\"quantityLeft\":2,\"storeID\":1,\"discount\":null},{\"productID\":3,\"productName\":\"pan\",\"productCategory\":\"kitchen\",\"price\":100,\"rank\":2,\"quantityLeft\":4,\"storeID\":1,\"discount\":null}]"));
-            //Assert.IsTrue(productExists("pan", searchResult1));
-            //Assert.IsTrue(productExists("stove", searchResult1));
         }
 
         [TestMethod]
         public void searchByCategoryTest2()
         {
-            //registerSuccessTest();
             loginSuccessTest();
             string searchResult2 = userService.searchByCategory("clothes");
             Assert.IsTrue(searchResult2.Equals("[{\"productID\":6,\"productName\":\"socks\",\"productCategory\":\"clothes\",\"price\":110,\"rank\":4,\"quantityLeft\":2,\"storeID\":2,\"discount\":null},{\"productID\":5,\"productName\":\"pants\",\"productCategory\":\"clothes\",\"price\":120,\"rank\":1,\"quantityLeft\":2,\"storeID\":2,\"discount\":null},{\"productID\":2,\"productName\":\"shirt\",\"productCategory\":\"clothes\",\"price\":20,\"rank\":5,\"quantityLeft\":2,\"storeID\":1,\"discount\":null}]"));
-            //Assert.IsTrue(productExists("shirt", searchResult2));
-            //Assert.IsTrue(productExists("pants", searchResult2));
-            //Assert.IsTrue(productExists("socks", searchResult2));
 
         }
         [TestMethod]
@@ -296,9 +279,6 @@ namespace workshop192.ServiceLayer.Tests
             try
             {
                 loginSuccessTest();
-                //userService.register(session, "anna", "banana");
-                //userService.login(session, "anna", "banana");
-                //SubscribedUser user = session.getSubscribedUser();
                 int store = userService.createStore(session2, "Apple", "apples");
                 Assert.IsTrue(true);
                
@@ -314,11 +294,7 @@ namespace workshop192.ServiceLayer.Tests
         {
             try
             {
-              //  registerSuccessTest();
                 loginSuccessTest();
-                //userService.register(session, "anna", "banana");
-                //userService.login(session, "anna", "banana");
-                //SubscribedUser user = session.getSubscribedUser();
                 int store = userService.createStore(session2, "", "apples");
                 Assert.Fail();
                
