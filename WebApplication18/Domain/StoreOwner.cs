@@ -206,7 +206,7 @@ namespace workshop192.Domain
             store.addDiscount(composite);
             foreach(DiscountComponent d in list)
             {
-                store.removeDiscount(d.getId());
+                store.removeDiscount(d);
                if(d is Discount)
                 {
                     Discount di = (Discount)d;

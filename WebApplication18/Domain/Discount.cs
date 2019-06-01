@@ -18,6 +18,7 @@ namespace workshop192.Domain
 
         public Discount(double percentage, string duration): base(percentage, duration)
         {
+            this.id = DBDiscount.getNextDiscountID();
             this.isPartOfComplex = false;
         }
 

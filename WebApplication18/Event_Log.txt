@@ -247,3 +247,13 @@
 2019-06-01 17:22:49,617 INFO EventLog: User yaelk has successfuly logged in.
 2019-06-01 17:26:13,528 ERROR EventLog: Error in adding to shopping cart : Error: The amount asked is larger than the quantity left
 2019-06-01 17:26:22,132 ERROR EventLog: Error in adding to shopping cart : Error: The amount asked is larger than the quantity left
+2019-06-01 18:20:57,020 ERROR EventLog: Login : Error: Username does not exist
+2019-06-01 18:21:12,057 INFO EventLog: User yaelk has successfuly registered
+2019-06-01 18:24:18,586 INFO EventLog: User yaelk has successfuly created a store
+2019-06-01 18:42:34,337 ERROR EventLog: Login : Error: Username does not exist
+2019-06-01 18:42:46,619 INFO EventLog: User yaelk has successfuly registered
+2019-06-01 18:43:24,199 INFO EventLog: User yaelk has successfuly created a store
+2019-06-01 18:51:16,460 ERROR EventLog: Login : Error: Username does not exist
+2019-06-01 18:51:25,105 INFO EventLog: User yaelk has successfuly registered
+2019-06-01 18:51:47,005 INFO EventLog: User yaelk has successfuly created a store
+2019-06-01 18:55:33,003 ERROR EventLog: Error in adding to shopping cart : Error: The amount asked is larger than the quantity left
