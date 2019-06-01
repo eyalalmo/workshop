@@ -68,7 +68,16 @@ namespace workshop192.Domain
                            }
                        }
                    }
-               }
+                    List<StoreRole> storeRoles = su.getStoreRoles();
+
+                    foreach (StoreRole sr in DBStore.getInstance().getAllStoreRoles())
+                    {
+                        if (sr.getUser().getUsername() == username)
+                        {
+                            storeRoles.Add(sr);
+                        }
+                    }
+                }
            }
            catch (Exception)
            {
@@ -223,9 +232,16 @@ namespace workshop192.Domain
                             }
                         }
                     }
-
                     SubscribedUser su = new SubscribedUser(username, password, sb);
-                    
+                    List<StoreRole> storeRoles = su.getStoreRoles();
+
+                    foreach (StoreRole sr in DBStore.getInstance().getAllStoreRoles())
+                    {
+                        if(sr.getUser().getUsername()==username)
+                        {
+                            storeRoles.Add(sr);
+                        }
+                    }
                     users.Add(username, su);
                     return su;
                 }
