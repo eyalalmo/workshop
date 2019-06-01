@@ -24,7 +24,7 @@ namespace workshop192.Domain
 
         private DBDiscount()
         {
-            discounts = new Dictionary<int, Discount>();
+            discounts = new Dictionary<int, DiscountComponent>();
             nextID = 0;
         }
 
@@ -87,8 +87,8 @@ namespace workshop192.Domain
         }
         public void removeDiscount(Discount d)
         {
-            if (!discounts.ContainsKey(d))
-                throw new DoesntExistException("Error: Discount does not exist");
+            //if (!discounts.ContainsKey(d))
+              //  throw new DoesntExistException("Error: Discount does not exist");
             
             LinkedList<Product> result = new LinkedList<Product>();
             try

@@ -7,18 +7,15 @@ using System.Threading.Tasks;
 namespace workshop192.Domain
 {
     public abstract class Discount : DiscountComponent
-
     {
         protected bool isPartOfComplex;
+        private int id;
 
-        internal Discount(int id, double percentage, string duration)
+        internal Discount(int id, double percentage, string duration) : base(percentage, duration)
         {
-            this.percentage = percentage;
-            this.duration = duration;
             this.id = id;
         }
 
-        public Discount(double percentage, string duration): base()
         public Discount(double percentage, string duration): base(percentage, duration)
         {
             this.isPartOfComplex = false;
@@ -37,5 +34,6 @@ namespace workshop192.Domain
                 this.complexCondition = checkCondition(productList, productsActualPrice);
             this.complexCondition = complexCondition;
         }
+     
     }
 }

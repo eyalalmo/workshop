@@ -25,7 +25,6 @@
                 success: function (response) {
                     
                     if (response !== "fail") {
-                        console.log(response);
                       var responsJ= JSON.parse(response);
                         var HTML = "";
                         for (i = 0; i < responsJ.length; i++) {    
@@ -148,8 +147,8 @@
                 success: function (response) {
           
                     if (response === true) {
-                        baseUrl + "/StoreDiscounts?storeID=" + id
-                         window.location.href =  baseUrl + "/StoreDiscounts?storeID=" + id
+                        baseUrl + "/StoreDiscouts?storeId=" + id
+                         window.location.href =  baseUrl + "/StoreDiscounts?storeId=" + id
                     }
                     else {
                         alert("you dont have the permissions to edit Discount");

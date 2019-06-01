@@ -20,13 +20,6 @@ namespace workshop192.Domain
         public ShoppingBasket()
         {
             this.shoppingCarts = new Dictionary<int, ShoppingCart>();
-            this.username = username;
-        }
-
-
-        public ShoppingBasket()
-        {
-            this.shoppingCarts = new Dictionary<int, ShoppingCart>();
             this.username = null;
         }
         public Dictionary<int,ShoppingCart> getShoppingCarts()
@@ -202,8 +195,6 @@ namespace workshop192.Domain
                 DBSubscribedUser.getInstance().updateAmountOnCartProductTable(storeID, p.getProductID(), newAmount);
             }
         }
-    }
-}
         internal void setUsername(string username)
         {
             this.username = username;

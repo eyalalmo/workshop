@@ -336,7 +336,7 @@ namespace workshop192.Bridge
             Store store = storeDB.getStore(storeID);
             Session session = DBSession.getInstance().getSession(sessionid);
             StoreRole sr = store.getStoreRole(session.getSubscribedUser());
-            Product product = new Product(productName, productCategory, price, rank, quantityLeft, store.getStoreID());
+            Product product = new Product(productName, productCategory, price, rank, quantityLeft, store);
 
             if (sr == null)
                 throw new RoleException("Error: You have no permission to add a product");

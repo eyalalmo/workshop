@@ -25,7 +25,7 @@ namespace workshop192.Domain
         private LinkedList<InvisibleDiscount> invisibleDiscountList;
         [JsonIgnore]
         public LinkedList<DiscountComponent> discountList;
-        public LinkedList<InvisibleDiscount> invisibleDiscountList;
+       // public LinkedList<InvisibleDiscount> invisibleDiscountList;
         public Dictionary<string, HashSet<string>> pendingOwners;
 
         public Store(string storeName, string description)
@@ -38,7 +38,7 @@ namespace workshop192.Domain
             numOfOwners = 0;
             active = true;
             discountList = new LinkedList<DiscountComponent>();
-            invisibleDiscountList = new LinkedList<InvisibleDiscount>();
+           // invisibleDiscountList = new LinkedList<InvisibleDiscount>();
             maxPurchasePolicy = null;
             minPurchasePolicy = null;
             pendingOwners = new Dictionary<string, HashSet<string>>();
@@ -62,6 +62,10 @@ namespace workshop192.Domain
         public void addProduct(Product p)
         {
             productList.AddFirst(p);
+        }
+        public LinkedList<DiscountComponent> getDiscounts()
+        {
+            return this.discountList;
         }
         public bool isActive()
         {

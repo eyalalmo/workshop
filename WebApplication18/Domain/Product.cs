@@ -34,7 +34,7 @@ namespace workshop192.Domain
             this.quantityLeft = quantityLeft;
             //this.numberOfRanking = 0;
             this.discount = null;
-            this.discountID = -1;
+            //this.discountID = -1;
         }
 
         //added
@@ -48,7 +48,20 @@ namespace workshop192.Domain
             this.storeID = storeID;
             this.quantityLeft = quantityLeft;
             this.discount = null;
-            this.discountID = discountID;
+           //this.discountID = discountID;
+        }
+
+        public Product(int productID, string productName, string productCategory, int price, int rank, int quantityLeft, int storeID)
+        {
+            this.productID = productID;
+            this.productName = productName;
+            this.productCategory = productCategory;
+            this.price = price;
+            this.rank = rank;
+            this.storeID = storeID;
+            this.quantityLeft = quantityLeft;
+            this.discount = null;
+            //this.discountID = discountID;
         }
 
 
@@ -147,9 +160,9 @@ namespace workshop192.Domain
         public void setDiscount(VisibleDiscount discount)
         {             
             this.discount = discount;
-            this.discountID = discount.getId();
-            DBProduct.getInstance().update(this);
-            store.addDiscount(discount);
+           // this.discountID = discount.getId();
+            //DBProduct.getInstance().update(this);
+            //store.addDiscount(discount);
         }
 
         public void removeDiscount()
@@ -188,8 +201,8 @@ namespace workshop192.Domain
             return DBStore.getInstance().getStore(storeID);
         }
 
-        internal int getDiscountID() {
+       /* internal int getDiscountID() {
             return this.discountID;
-        }
+        }*/
     }
 }

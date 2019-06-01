@@ -213,7 +213,7 @@ namespace workshop192.Domain
                     di.setIsPartOfComplex(true);
                 }
             }
-            DBDiscount.getInstance().addDiscount(composite);
+           // DBDiscount.getInstance().addDiscount(composite);
 
         }
 
