@@ -90,7 +90,6 @@ namespace workshop192.Domain
 
         public void register(string username, string password, Session session)
         {
-            String encrypted = DBSubscribedUser.getInstance().encryptPassword(password);
             SubscribedUser s = dbSubscribedUser.getSubscribedUser(username);
             if (s != null)
                throw new RegisterException("Error: Username already exists");
