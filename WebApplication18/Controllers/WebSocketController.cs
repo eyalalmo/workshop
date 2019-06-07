@@ -71,7 +71,7 @@ namespace WebApplication18.Controllers
                 sessionToSocket.Remove(session);
             sessionToSocket.Add(session, socket);
 
-            if (socket.State == WebSocketState.Open)
+            /*if (socket.State == WebSocketState.Open)
             {
                 LinkedList<String> messagesToSend;
                 string username;
@@ -94,7 +94,7 @@ namespace WebApplication18.Controllers
                     UserService.getInstance().clearMessagesFor(username);
                 }
             }
-        noSession:
+        noSession:*/
             while (sessionToSocket.ContainsValue(socket) && socket.State == WebSocketState.Open) {}
         }
 

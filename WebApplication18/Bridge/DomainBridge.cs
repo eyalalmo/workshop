@@ -46,6 +46,14 @@ namespace workshop192.Bridge
             Session s = DBSession.getInstance().getSession(sessionid);
             s.login(username, password);
             SystemLogger.getEventLog().Info("User " + username + " has successfuly logged in.");
+
+            LinkedList<string> waitingMessages = getMessagesFor(username);
+            if (waitingMessages != null)
+            {
+                foreach (string mess in waitingMessages)
+                    messager.message(username, mess);
+                clearMessagesFor(username);
+            }
         }
 
         //use case 2.2

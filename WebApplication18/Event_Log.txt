@@ -266,3 +266,31 @@
 2019-06-02 01:52:58,301 INFO EventLog: User u2 has successfuly created a store
 2019-06-02 01:55:08,743 INFO EventLog: User u2 has successfuly logged in.
 2019-06-02 02:11:42,807 INFO EventLog: User u2 has successfuly logged in.
+2019-06-07 18:46:15,222 INFO EventLog: User u1 has successfuly logged in.
+2019-06-07 18:46:27,267 INFO EventLog: User u1 has successfuly created a store
+2019-06-07 18:46:44,198 ERROR EventLog: Error in adding an owner : Error: No such username
+2019-06-07 18:47:18,825 INFO EventLog: User u4 has successfuly logged in.
+2019-06-07 18:47:24,427 INFO EventLog: User u4 has logged out
+2019-06-07 18:48:57,296 INFO EventLog: User u3 has successfuly logged in.
+2019-06-07 18:50:06,131 INFO EventLog: User u4 has successfuly logged in.
+2019-06-07 18:57:48,895 INFO EventLog: User u4 has logged out
+2019-06-07 18:57:54,024 INFO EventLog: User u1 has successfuly logged in.
+2019-06-07 18:58:18,745 INFO EventLog: User u1 has logged out
+2019-06-07 18:58:59,410 INFO EventLog: User u1 has successfuly logged in.
+2019-06-07 18:59:15,273 INFO EventLog: User u1 has logged out
+2019-06-07 18:59:21,063 INFO EventLog: User u1 has successfuly logged in.
+2019-06-07 19:05:17,540 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 19:05:28,264 INFO EventLog: User u2 has successfuly logged in.
+2019-06-07 19:06:08,093 INFO EventLog: User u3 has successfuly logged in.
+2019-06-07 19:16:17,121 INFO EventLog: User ey has successfuly registered
+2019-06-07 19:16:48,117 INFO EventLog: User ey has successfuly registered
+2019-06-07 19:17:16,206 ERROR EventLog: Register : Error: Username already exists
+2019-06-07 19:17:32,061 ERROR EventLog: Login : Error: Incorrect password
+2019-06-07 19:18:06,510 INFO EventLog: User ey has successfuly logged in.
+2019-06-07 19:18:32,604 INFO EventLog: User ey has logged out
+2019-06-07 19:18:50,365 ERROR EventLog: Login : Error: Incorrect password
+2019-06-07 19:18:59,652 INFO EventLog: User ey has successfuly logged in.
+2019-06-07 19:19:17,350 INFO EventLog: User ey has logged out
+2019-06-07 19:22:19,846 INFO EventLog: User ey has successfuly logged in.
+2019-06-07 19:23:51,422 INFO EventLog: User ey has logged out
+2019-06-07 19:24:28,835 INFO EventLog: User ey has successfuly logged in.

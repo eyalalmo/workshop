@@ -111,6 +111,8 @@
 
                   var ws = new WebSocket("ws://" + window.location.host + "/api/WebSocket/");
 
+                  alert("web socket");
+
                   ws.onopen = function () {
                       //alert("connected");
                   };
