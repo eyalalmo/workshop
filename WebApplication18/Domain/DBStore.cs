@@ -22,7 +22,7 @@ namespace workshop192.Domain
             if (IsTestsMode.isTest == false)
             {
                 storeRole = new LinkedList<StoreRole>();
-                stores = initStores();
+                stores = new LinkedList<Store>();
                 nextStoreID = getUpdatedId();
             }
             else
@@ -31,11 +31,7 @@ namespace workshop192.Domain
                 stores = new LinkedList<Store>();
 
             }
-        }
-            storeRole = new LinkedList<StoreRole>();
-            // stores = initStores();
-            stores = new LinkedList<Store>();
-            nextStoreID = getUpdatedId();
+
         }
         public static DBStore getInstance()
         {
@@ -253,6 +249,22 @@ namespace workshop192.Domain
             }
         }
 
+        public LinkedList<StoreRole> getAllStoreRoles(string username)
+        {
+            LinkedList<StoreRole> result = new LinkedList<StoreRole>();
+;            initStoresAndRolesForUserName(username);
+            foreach(StoreRole sr in storeRole)
+            {
+                if(sr.getUser().getUsername()== username)
+                {
+                    result.AddLast(sr);
+                }
+
+            }
+            return result;
+
+        }
+
         public void removeOwnerNumerByOne(int storeId, int numOfOwners)
         {
             connection.Open();
@@ -382,8 +394,8 @@ namespace workshop192.Domain
                     }
                     else if (element.getStoreId() == s.getStoreID() && element.getIsOwner() == 0)
                     {
-                        SubscribedUser appointedBy = DBSubscribedUser.getInstance().getSubscribedUser(element.getAppointedBy());
-                        SubscribedUser user = DBSubscribedUser.getInstance().getSubscribedUser(element.getUserName());
+                        SubscribedUser appointedBy = DBSubscribedUser.getInstance().getSubscribedUserForInitStore(element.getAppointedBy());
+                        SubscribedUser user = DBSubscribedUser.getInstance().getSubscribedUserForInitStore(element.getUserName());
                         Permissions p = new Permissions(false, false, false);
                         if (element.getEditDiscount() == 1)
                             p.setEditDiscount(true);
@@ -400,7 +412,7 @@ namespace workshop192.Domain
                 stores.AddLast(s);
                 return s;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 connection.Close();
                 throw new StoreException("cant return store");

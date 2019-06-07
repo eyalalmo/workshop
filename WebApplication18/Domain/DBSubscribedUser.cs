@@ -70,7 +70,7 @@ namespace workshop192.Domain
                    }
                     List<StoreRole> storeRoles = su.getStoreRoles();
 
-                    foreach (StoreRole sr in DBStore.getInstance().getAllStoreRoles())
+                    foreach (StoreRole sr in DBStore.getInstance().getAllStoreRoles(username))
                     {
                         if (sr.getUser().getUsername() == username)
                         {
@@ -238,8 +238,8 @@ namespace workshop192.Domain
                     }
                     SubscribedUser su = new SubscribedUser(username, password, sb);
                     List<StoreRole> storeRoles = su.getStoreRoles();
-
-                    foreach (StoreRole sr in DBStore.getInstance().getAllStoreRoles())
+                  
+                    foreach (StoreRole sr in DBStore.getInstance().getAllStoreRoles(username))
                     {
                         if(sr.getUser().getUsername()==username)
                         {
@@ -266,7 +266,7 @@ namespace workshop192.Domain
         public void updateStoreRole(SubscribedUser user)
         {
             string username = user.getUsername();
-            foreach (StoreRole sr in DBStore.getInstance().getRolesEntryByUserName(username))
+            foreach (StoreRole sr in DBStore.getInstance().getAllStoreRoles(username))
             {
                 user.addStoreRole(sr);
             }
