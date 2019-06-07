@@ -40,13 +40,14 @@ namespace workshop192.Domain
             try
             {
 
-                connection.Open();
+                
                 foreach (KeyValuePair<string, SubscribedUser> pair in users)
                 {
                     string username = pair.Key;
                     SubscribedUser su = pair.Value;
-
+                    connection.Open();
                     string sql = "SELECT * FROM BasketCart WHERE username=@username;";
+                    connection.Close();
                     var c2 = connection.Query<BasketCartEntry>(sql, new { username = username });
                     ShoppingBasket sb = su.getShoppingBasket();
                    if (Enumerable.Count(c2) > 0)
@@ -55,7 +56,8 @@ namespace workshop192.Domain
                        {
                            BasketCartEntry bc = c2.ElementAt(i);
                            int storeID = bc.getStoreID();
-                           sql = "SELECT * FROM CartProduct WHERE storeID=@storeID AND username=@username;";
+                            connection.Open();
+                            sql = "SELECT * FROM CartProduct WHERE storeID=@storeID AND username=@username;";
                            var c3 = connection.Query<CartProductEntry>(sql, new { storeID, username });
                            connection.Close();
                            for (int j = 0; j < Enumerable.Count(c3); j++)
@@ -79,7 +81,7 @@ namespace workshop192.Domain
                     }
                 }
            }
-           catch (Exception)
+           catch (Exception e)
            {
                connection.Close();
            }
@@ -137,16 +139,17 @@ namespace workshop192.Domain
            {
                connection.Open();
                var c = connection.Query("SELECT username, password FROM [dbo].[Register] WHERE username=@username ", new { username = username });
-
-               if (Enumerable.Count(c) == 0)
+                connection.Close();
+                if (Enumerable.Count(c) == 0)
                {
-
-                   string sql = "INSERT INTO [dbo].[Register] (username, password)" +
+                    connection.Open();
+                    string sql = "INSERT INTO [dbo].[Register] (username, password)" +
                                                     " VALUES (@username, @password)";
                    connection.Execute(sql, new { username, password });
-               }
+                    connection.Close();
+                }
 
-               connection.Close();
+              
            }
            catch (Exception e)
            {
@@ -281,16 +284,17 @@ namespace workshop192.Domain
             {
                 connection.Open();
                 var c = connection.Query("SELECT username, password FROM [dbo].[Register] WHERE username=@username ", new { username = username });
-
+                connection.Close();
                 if (Enumerable.Count(c) == 0)
                 {
-
+                    connection.Open();
                     string sql = "INSERT INTO [dbo].[Register] (username, password)" +
                                                      " VALUES (@username, @password)";
                     connection.Execute(sql, new { username, password });
-                    
+                    connection.Close();
+
                 }
-                connection.Close();
+               
             }
             catch (Exception)
             {
@@ -436,7 +440,8 @@ namespace workshop192.Domain
             {
                 connection.Open();
                 connection.Execute(sql1, new { username });
-                foreach(KeyValuePair<int, ShoppingCart> pair in shoppingCarts)
+                connection.Close();
+                foreach (KeyValuePair<int, ShoppingCart> pair in shoppingCarts)
                 {
                     int storeID = pair.Key;
                     connection.Execute(sql2, new { username, storeID });
