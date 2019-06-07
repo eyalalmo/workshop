@@ -267,9 +267,16 @@ namespace workshop192.Domain
 
         public void removeOwnerNumerByOne(int storeId, int numOfOwners)
         {
-            connection.Open();
-            connection.Execute("UPDATE [dbo].[Stores] SET numOfOwners = @newNumber WHERE storeId = @storeId", new { storeId = storeId, newNumber = numOfOwners });
-            connection.Close();
+            try
+            {
+                connection.Open();
+                connection.Execute("UPDATE [dbo].[Stores] SET numOfOwners = @newNumber WHERE storeId = @storeId", new { storeId = storeId, newNumber = numOfOwners });
+                connection.Close();
+            }
+            catch(Exception e)
+            {
+                connection.Close();
+            }
         }
 
         public void addownerNumerByOne(int storeId, int newNumber)
