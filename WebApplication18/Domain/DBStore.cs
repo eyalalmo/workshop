@@ -19,11 +19,6 @@ namespace workshop192.Domain
 
         private DBStore()
         {
-            storeRole = new LinkedList<StoreRole>();
-            // stores = initStores();
-            stores = new LinkedList<Store>();
-            nextStoreID = getUpdatedId();
-        }
             if (IsTestsMode.isTest == false)
             {
                 storeRole = new LinkedList<StoreRole>();
@@ -36,6 +31,11 @@ namespace workshop192.Domain
                 stores = new LinkedList<Store>();
 
             }
+        }
+            storeRole = new LinkedList<StoreRole>();
+            // stores = initStores();
+            stores = new LinkedList<Store>();
+            nextStoreID = getUpdatedId();
         }
         public static DBStore getInstance()
         {
