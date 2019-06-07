@@ -237,3 +237,19 @@
 2019-06-01 21:22:54,888 INFO EventLog: User eee1 has logged out
 2019-06-01 21:23:02,552 INFO EventLog: User u1 has successfuly logged in.
 2019-06-01 21:23:13,604 ERROR EventLog: Error in adding an owner : Error: No such username
+2019-06-07 12:19:11,481 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 12:19:16,355 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 12:19:23,215 INFO EventLog: User u3 has successfuly logged in.
+2019-06-07 12:19:30,314 INFO EventLog: User u3 has logged out
+2019-06-07 12:19:38,067 INFO EventLog: User u2 has successfuly logged in.
+2019-06-07 13:03:18,252 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 13:03:23,483 INFO EventLog: User u3 has successfuly logged in.
+2019-06-07 13:03:44,997 INFO EventLog: User u3 has logged out
+2019-06-07 13:03:51,385 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 13:04:32,508 INFO EventLog: User u3 has successfuly logged in.
+2019-06-07 13:12:41,954 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 13:12:46,503 INFO EventLog: User u3 has successfuly logged in.
+2019-06-07 13:14:10,282 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 13:14:14,141 INFO EventLog: User u3 has successfuly logged in.
+2019-06-07 13:19:58,767 INFO EventLog: User u2 has successfuly created a store
+2019-06-07 13:23:56,592 INFO EventLog: User u2 has successfuly created a store

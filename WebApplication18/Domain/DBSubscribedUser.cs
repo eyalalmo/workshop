@@ -241,7 +241,7 @@ namespace workshop192.Domain
         public void updateStoreRole(SubscribedUser user)
         {
             string username = user.getUsername();
-            foreach (StoreRole sr in DBStore.getInstance().getRolesByUserName(username))
+            foreach (StoreRole sr in DBStore.getInstance().getRolesEntryByUserName(username))
             {
                 user.addStoreRole(sr);
             }

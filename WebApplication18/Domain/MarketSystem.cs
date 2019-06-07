@@ -15,7 +15,7 @@ namespace workshop192.Domain
     {
         public static void init()
         {
-            int doIt = 1;
+            int doIt = 0;
             string filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
 
             string[] lines = File.ReadAllLines(filePath + "/input.txt");

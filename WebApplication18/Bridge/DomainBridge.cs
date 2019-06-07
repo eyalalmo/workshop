@@ -660,6 +660,8 @@ namespace workshop192.Bridge
         public string getAllStores(int session1)
         {
             Session session = DBSession.getInstance().getSession(session1);
+            string userName = session.getSubscribedUser().getUsername();
+            DBStore.getInstance().initStoresAndRolesForUserName(userName);
             List<StoreRole> lst = session.getSubscribedUser().getStoreRoles();
             LinkedList<Store> stores = new LinkedList<Store>();
             foreach (StoreRole element in lst)
