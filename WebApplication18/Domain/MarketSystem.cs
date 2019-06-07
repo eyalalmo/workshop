@@ -9,52 +9,89 @@ using WebApplication18.Domain;
 using WebApplication18.Logs;
 using workshop192.Bridge;
 using workshop192.ServiceLayer;
+using InitSettings;
 
 namespace workshop192.Domain
 {
     public class MarketSystem
     {
+
         public static void init()
         {
-            int doIt = 1;
+            
+            int addNewDataToDB = 0;
+            string[] linesConfig=null;
+            string filePathConfig = null;
+            string fileName = "";
 
-            //int sessionid =0;
-            //Session s=new Session();
-            // int sID = 0;
+           try  {
+                filePathConfig = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
+                linesConfig = File.ReadAllLines(filePathConfig + "/config.txt");
+                foreach (string line in linesConfig)
+                {
+                    string[] input = line.Split(' ');
+                    if (input[0] == "inputFile")
+                    {
+                        fileName = input[1];
+                    }
+                    if (input[0] == "isTestMode")
+                    {
+                        if(input[1]=="true")
+                        {
+                            IsTestsMode.isTest = true;
+                        }
+                        else
+                        {
+                            IsTestsMode.isTest = false;
+                        }
+                    }
+                    if (input[0] == "isFirstTime")
+                    {
+                        if (input[1] == "false")
+                        {
+                            addNewDataToDB = 0;
+                        }
+                        else
+                        {
+                            addNewDataToDB = 1;
+                        }
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                initWitOutRead();
+                return;
+            }
+
+
             if (IsTestsMode.isTest == true)
             {
-                SystemLogger.configureLogs();
-                DBProduct.getInstance().initTests();
-                DBSession.getInstance().initTests();
-                DBDiscount.getInstance().initTests();
-                DBSubscribedUser.getInstance().initTests();
-                DBStore.getInstance().initTests();
-                DBNotifications.getInstance().initTests();
-                PaymentService.getInstance().connectToSystem();
-                DeliveryService.getInstance().connectToSystem();
-                ConsistencySystem.getInstance().connectToSystem();
-                NotificationsBridge.getInstance().setObserver(DomainBridge.getInstance());
+                initTestWitOutRead();
                 return;
             }
-            string filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
 
-            string[] lines = File.ReadAllLines(filePath + "/input.txt");
 
-            if (doIt == 1)
+            if (addNewDataToDB == 0)
             {
-                DBProduct.getInstance().init();
-                DBSession.getInstance().init();
-                DBDiscount.getInstance().init();
-                DBSubscribedUser.getInstance().init();
-                DBStore.getInstance().init();
-                DBSubscribedUser.getInstance().updateShoppingBasket();
-                DBNotifications.getInstance().init();
-                PaymentService.getInstance().connectToSystem();
-                DeliveryService.getInstance().connectToSystem();
-                ConsistencySystem.getInstance().connectToSystem();
-                NotificationsBridge.getInstance().setObserver(DomainBridge.getInstance());
+                initWitOutRead();
                 return;
             }
+            else
+            {
+                string filePath = null;
+                string[] lines = null;
+                try
+                {
+                    filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
+                     lines = File.ReadAllLines(filePath + "/" + fileName);
+                }
+                catch(Exception e)
+                {
+                    initWitOutRead();
+                    return;
+                }
+        
                 foreach (string line in lines)
                 {
                     string[] input = line.Split(' ');
@@ -70,15 +107,7 @@ namespace workshop192.Domain
                     }
                     else if (input[0] == "init")
                     {
-                        DBProduct.getInstance().init();
-                        DBSession.getInstance().init();
-                        DBStore.getInstance().init();
-                        DBDiscount.getInstance().init();
-                        DBSubscribedUser.getInstance().init();
-                        DBNotifications.getInstance().init();
-                        PaymentService.getInstance().connectToSystem();
-                        DeliveryService.getInstance().connectToSystem();
-                        ConsistencySystem.getInstance().connectToSystem();
+                        initWitOutRead();
                     }
                     else if (input[0] == "login")
                     {
@@ -140,8 +169,38 @@ namespace workshop192.Domain
                     }
 
                 }
+            }
 
             
+
+        }
+        public static void initWitOutRead()
+        {
+            DBProduct.getInstance().init();
+            DBSession.getInstance().init();
+            DBDiscount.getInstance().init();
+            DBSubscribedUser.getInstance().init();
+            DBStore.getInstance().init();
+            DBSubscribedUser.getInstance().updateShoppingBasket();
+            DBNotifications.getInstance().init();
+            PaymentService.getInstance().connectToSystem();
+            DeliveryService.getInstance().connectToSystem();
+            ConsistencySystem.getInstance().connectToSystem();
+            NotificationsBridge.getInstance().setObserver(DomainBridge.getInstance());
+        }
+        public static void initTestWitOutRead()
+        {
+            SystemLogger.configureLogs();
+            DBProduct.getInstance().initTests();
+            DBSession.getInstance().initTests();
+            DBDiscount.getInstance().initTests();
+            DBSubscribedUser.getInstance().initTests();
+            DBStore.getInstance().initTests();
+            DBNotifications.getInstance().initTests();
+            PaymentService.getInstance().connectToSystem();
+            DeliveryService.getInstance().connectToSystem();
+            ConsistencySystem.getInstance().connectToSystem();
+            NotificationsBridge.getInstance().setObserver(DomainBridge.getInstance());
 
         }
 
