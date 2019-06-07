@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebApplication18.DAL;
 using Dapper;
+using WebApplication18.Domain;
 
 namespace workshop192.Domain
 {
@@ -22,6 +23,19 @@ namespace workshop192.Domain
             // stores = initStores();
             stores = new LinkedList<Store>();
             nextStoreID = getUpdatedId();
+        }
+            if (IsTestsMode.isTest == false)
+            {
+                storeRole = new LinkedList<StoreRole>();
+                stores = initStores();
+                nextStoreID = getUpdatedId();
+            }
+            else
+            {
+                storeRole = new LinkedList<StoreRole>();
+                stores = new LinkedList<Store>();
+
+            }
         }
         public static DBStore getInstance()
         {
@@ -493,6 +507,7 @@ namespace workshop192.Domain
         {
             return getStore(id).getRoles();
         }
+
         public int getUpdatedId()
         {
             try

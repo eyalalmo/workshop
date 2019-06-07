@@ -15,7 +15,6 @@
           var baseUrl = getUrl.protocol + "//" + getUrl.host
         $(document).ready(function () {
             var doc = document.getElementById('allStores');
-           
         
             jQuery.ajax({
                 type: "GET",
@@ -23,7 +22,6 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    
                     if (response !== "fail") {
                       var responsJ= JSON.parse(response);
                         var HTML = "";

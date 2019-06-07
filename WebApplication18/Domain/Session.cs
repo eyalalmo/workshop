@@ -104,9 +104,11 @@ namespace workshop192.Domain
             shoppingBasket.removeFromCart(productId);
         }
 
-        public void purchaseBasket(string address, string creditCard)
+        public void purchaseBasket(string address, string creditcard, string month, string year, string holder, string cvv)
+        
         {
-            shoppingBasket.purchaseBasket(address, creditCard);
+            shoppingBasket.purchaseBasket( address,  creditcard,  month,  year,  holder,  cvv)
+        ;
             shoppingBasket = new ShoppingBasket();
         }
 

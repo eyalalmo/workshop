@@ -171,7 +171,7 @@ namespace workshop192.Domain
                 throw new DoesntExistException("no such store ID in Shopping basket");
         }
 
-        public void purchaseBasket(string address, string creditCard)
+        public void purchaseBasket(string address, string creditcard, string month, string year, string holder, string cvv)
         {
             foreach (KeyValuePair<int, ShoppingCart> pair1 in shoppingCarts)
             {
@@ -190,10 +190,10 @@ namespace workshop192.Domain
                 }
 
             }
-            Boolean isOk = PaymentService.getInstance().checkOut(creditCard, getActualTotalPrice());
-            if (isOk)
+            int isOk = PaymentService.getInstance().checkOut( address,  creditcard,  month,  year,  holder,  cvv, getActualTotalPrice()).Result;
+            if (isOk !=-1)
             {
-                if (DeliveryService.getInstance().sendToUser(address) == false)
+                if (DeliveryService.getInstance().sendToUser(address, creditcard, month, year, holder, cvv).Result == -1)
                 {
                     throw new CartException("Delivery FAILED");
                 }

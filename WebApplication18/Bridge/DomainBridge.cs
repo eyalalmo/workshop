@@ -54,7 +54,7 @@ namespace workshop192.Bridge
             Session user = DBSession.getInstance().getSession(sessionid);
             user.register(username, password);
             //////
-            user.login(username,password);
+           // user.login(username,password);
             //////
             SystemLogger.getEventLog().Info("User " + username + " has successfuly registered");
         }
@@ -253,7 +253,7 @@ namespace workshop192.Bridge
             p.setQuantityLeft(setquantityLeft);
         }
 
-        public void purchaseBasket(int sessionid, string address, string creditCard)
+        public void purchaseBasket(int sessionid, string address, string creditcard, string month, string year, string holder, string cvv)
         {
             Session session = DBSession.getInstance().getSession(sessionid);
             LinkedList<Tuple<string, string>> messages = new LinkedList<Tuple<string, string>>();
@@ -273,7 +273,7 @@ namespace workshop192.Bridge
                 }
             }
 
-            session.purchaseBasket(address, creditCard);
+            session.purchaseBasket( address,  creditcard,  month,  year,  holder,  cvv);
 
             foreach (Tuple<string, string> t in messages)
                 messager.message(t.Item1, t.Item2);
@@ -650,11 +650,11 @@ namespace workshop192.Bridge
             user.getShoppingBasket().changeQuantityOfProduct(store.getStoreID(), p, newAmount);
         }
         
-        public void checkoutBasket(int sessionid, String address, String creditCard)
+        public void checkoutBasket(int sessionid, string address, string creditcard, string month, string year, string holder, string cvv)
         {
             Session user = DBSession.getInstance().getSession(sessionid);
 
-            user.getShoppingBasket().purchaseBasket(address, creditCard);
+            user.getShoppingBasket().purchaseBasket( address,  creditcard,  month,  year,  holder,  cvv);
         }
 
         public string getAllStores(int session1)
@@ -666,7 +666,8 @@ namespace workshop192.Bridge
             LinkedList<Store> stores = new LinkedList<Store>();
             foreach (StoreRole element in lst)
             {
-                stores.AddLast(element.getStore());
+                if(!stores.Contains(element.getStore()))
+                    stores.AddLast(element.getStore());
             }
             return JsonConvert.SerializeObject(stores); 
         }
