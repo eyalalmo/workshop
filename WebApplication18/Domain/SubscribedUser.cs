@@ -24,14 +24,14 @@ namespace workshop192.Domain
             storeRoles = new List<StoreRole>();
         }
 
-        public String getPassword()
-        {
-            return this.password;
-        }
-
         public String getUsername()
         {
             return this.username;
+        }
+
+        public string getPassword()
+        {
+            return password;
         }
 
         public String getPurchaseHistory()
@@ -48,12 +48,7 @@ namespace workshop192.Domain
         {
             purchaseHistory = purchaseHistory + purchaseDetails;
         }
-
-        public void setPassword(String pass)
-        {
-            this.password = pass;
-        }
-
+        
         public void addStoreRole(StoreRole role)
         {
             storeRoles.Add(role);

@@ -50,7 +50,6 @@ namespace workshop192.Domain
 
         public void login(String username, String password, Session session)
         {
-            String encrypted = DBSubscribedUser.getInstance().encryptPassword(password);
             SubscribedUser sub = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (sub == null)
                 throw new LoginException("Error: Username does not exist");
@@ -58,7 +57,7 @@ namespace workshop192.Domain
             SubscribedUser loggedIn = DBSubscribedUser.getInstance().getloggedInUser(username);
             if( loggedIn != null)
                 throw new LoginException("Error: Username already logged in");
-            if (!Equals(sub.getPassword(), encrypted))
+            if (!Equals(sub.getPassword(), password))
                 throw new LoginException("Error: Incorrect password");
             ////////////erase
 
@@ -90,12 +89,11 @@ namespace workshop192.Domain
 
         public void register(string username, string password, Session session)
         {
-            String encrypted = DBSubscribedUser.getInstance().encryptPassword(password);
             SubscribedUser s = dbSubscribedUser.getSubscribedUser(username);
             if (s != null)
                throw new RegisterException("Error: Username already exists");
             session.getShoppingBasket().setUsername(username);
-            SubscribedUser sub = new SubscribedUser(username, encrypted, session.getShoppingBasket());
+            SubscribedUser sub = new SubscribedUser(username, password, session.getShoppingBasket());
 
             //session.setSubscribedUser(sub);
             DBSubscribedUser.getInstance().register(sub);
