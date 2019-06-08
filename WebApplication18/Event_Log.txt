@@ -354,3 +354,4 @@
 2019-06-08 14:23:09,172 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
 2019-06-08 14:24:22,925 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
 2019-06-08 14:24:22,926 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-08 15:30:45,092 INFO EventLog: User ey has successfuly logged in.
