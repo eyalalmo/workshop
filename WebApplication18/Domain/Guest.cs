@@ -50,6 +50,7 @@ namespace workshop192.Domain
 
         public void login(String username, String password, Session session)
         {
+            String encrypted = DBSubscribedUser.getInstance().encryptPassword(password);
             SubscribedUser sub = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (sub == null)
                 throw new LoginException("Error: Username does not exist");
@@ -57,7 +58,7 @@ namespace workshop192.Domain
             SubscribedUser loggedIn = DBSubscribedUser.getInstance().getloggedInUser(username);
             if( loggedIn != null)
                 throw new LoginException("Error: Username already logged in");
-            if (!Equals(sub.getPassword(), password))
+            if (!Equals(sub.getPassword(), encrypted))
                 throw new LoginException("Error: Incorrect password");
             ////////////erase
 
