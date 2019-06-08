@@ -29,6 +29,11 @@ namespace workshop192.Domain
             return this.username;
         }
 
+        public string getPassword()
+        {
+            return password;
+        }
+
         public String getPurchaseHistory()
         {
             return this.purchaseHistory;

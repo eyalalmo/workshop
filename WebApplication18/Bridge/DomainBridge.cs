@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using WebApplication18.Domain;
 using WebApplication18.Logs;
 using workshop192.Domain;
+using System.Security.Cryptography;
+
 
 namespace workshop192.Bridge
 {
@@ -37,7 +39,7 @@ namespace workshop192.Bridge
         }
         public void addAdmin(string name,string pass)
         {
-            DBSubscribedUser.getInstance().addAdmin(name,pass);
+            DBSubscribedUser.getInstance().addAdmin(name,encryptPassword(pass));
         }
 
         //use case 2.3
@@ -1144,6 +1146,20 @@ namespace workshop192.Bridge
             }
             string s = JsonConvert.SerializeObject(myPendingOwners, Formatting.Indented);
             return s;
+        }
+
+        public string encryptPassword(string password)
+        {
+            MD5 md5 = MD5.Create();
+            byte[] inputBytes = Encoding.ASCII.GetBytes(password);
+            byte[] hash = md5.ComputeHash(inputBytes);
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("X2"));
+            }
+            return sb.ToString();
         }
 
     }

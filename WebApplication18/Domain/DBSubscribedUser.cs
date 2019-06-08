@@ -86,7 +86,7 @@ namespace workshop192.Domain
 
        public void addAdmin(string name, string pass)
        {
-           SubscribedUser admin = new SubscribedUser(name, encryptPassword(pass), new ShoppingBasket());
+           SubscribedUser admin = new SubscribedUser(name, pass, new ShoppingBasket());
            register(admin);
        }
 
