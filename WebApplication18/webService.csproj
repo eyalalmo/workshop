@@ -454,6 +454,7 @@
     <Compile Include="Exceptions\RegisterException.cs" />
     <Compile Include="Exceptions\RoleException.cs" />
     <Compile Include="Exceptions\StoreException.cs" />
+    <Compile Include="Exceptions\SuccessPaymentExeption.cs" />
     <Compile Include="Exceptions\UserException.cs" />
     <Compile Include="Exceptions\UserStateException.cs" />
     <Compile Include="Global.asax.cs">

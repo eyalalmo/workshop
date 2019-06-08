@@ -293,6 +293,20 @@ namespace workshop192.Domain
             }
         }
 
+        public void setMinPurchasePolicy(int storeId, int minPurchasePolicy)
+        {
+            try
+            {
+                connection.Open();
+                connection.Execute("UPDATE [dbo].[Stores] SET minPurchasePolicy = @minPurchasePolicy WHERE storeId = @storeId", new { storeId = storeId, minPurchasePolicy = minPurchasePolicy });
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                connection.Close();
+            }
+        }
+
         public int addStore(Store store)
         {
             try
@@ -350,6 +364,20 @@ namespace workshop192.Domain
             {
                 connection.Close();
                 throw new StoreException("faild to add store");
+            }
+        }
+
+        public void setMaxPurchasePolicy(int storeId, int maxPurchasePolicy)
+        {
+            try
+            {
+                connection.Open();
+                connection.Execute("UPDATE [dbo].[Stores] SET maxPurchasePolicy = @maxPurchasePolicy WHERE storeId = @storeId", new { storeId = storeId, maxPurchasePolicy = maxPurchasePolicy });
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                connection.Close();
             }
         }
 
@@ -493,7 +521,6 @@ namespace workshop192.Domain
                 connection.Close();
                 throw new StoreException("connection to db faild");
             }
-
         }
 
         //if owner -> close store and remove store role, if manager only removes store role

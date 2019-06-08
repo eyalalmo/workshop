@@ -322,7 +322,10 @@ namespace workshop192.Domain
         public void setMinPurchasePolicy(int MinAmount)
         {
             if (maxPurchasePolicy == null)
+            {
+                DBStore.getInstance().setMinPurchasePolicy(this.storeId, MinAmount);
                 minPurchasePolicy = new MinAmountPurchase(MinAmount);
+            }
             else
             {
                 if (maxPurchasePolicy.getAmount() < MinAmount)
@@ -330,8 +333,10 @@ namespace workshop192.Domain
                     throw new ArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
                 }
                 else
+                {
+                    DBStore.getInstance().setMinPurchasePolicy(this.storeId, MinAmount);
                     minPurchasePolicy = new MinAmountPurchase(MinAmount);
-
+                }
             }
 
         }
@@ -339,7 +344,10 @@ namespace workshop192.Domain
         public void setMaxPurchasePolicy(int maxAmount)
         {
             if (minPurchasePolicy == null)
+            {
                 maxPurchasePolicy = new MaxAmountPurchase(maxAmount);
+                DBStore.getInstance().setMaxPurchasePolicy(this.storeId, maxAmount);
+            }
             else
             {
                 if (minPurchasePolicy.getAmount() > maxAmount)
@@ -347,7 +355,10 @@ namespace workshop192.Domain
                     throw new ArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
                 }
                 else
+                {
+                    DBStore.getInstance().setMaxPurchasePolicy(this.storeId, maxAmount);
                     maxPurchasePolicy = new MaxAmountPurchase(maxAmount);
+                }
 
             }
         }

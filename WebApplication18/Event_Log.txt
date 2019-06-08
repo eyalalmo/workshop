@@ -325,3 +325,89 @@
 2019-06-07 19:02:04,647 ERROR EventLog: Login : Error: Username does not exist
 2019-06-07 19:02:07,499 ERROR EventLog: Login : Error: Username does not exist
 2019-06-07 22:06:05,736 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 12:38:54,924 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 12:38:57,924 INFO EventLog: User u3 has successfuly logged in.
+2019-06-08 12:41:50,669 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 12:41:52,940 INFO EventLog: User u3 has successfuly logged in.
+2019-06-08 12:59:54,834 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 12:59:56,779 ERROR EventLog: Login : Error: Incorrect password
+2019-06-08 12:59:58,494 ERROR EventLog: Login : Error: Incorrect password
+2019-06-08 13:00:01,508 INFO EventLog: User u3 has successfuly logged in.
+2019-06-08 13:03:40,473 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 13:03:43,042 INFO EventLog: User u3 has successfuly logged in.
+2019-06-08 13:06:54,179 ERROR EventLog: Checkout : Error: Cannot complete purchase- dsadsa does not have enough quantity left
+2019-06-08 13:07:44,897 ERROR EventLog: Checkout : Error: Cannot complete purchase- dsadsa does not have enough quantity left
+2019-06-08 13:08:23,686 ERROR EventLog: Checkout : Error: Cannot complete purchase- dsadsa does not have enough quantity left
+2019-06-08 13:08:31,399 ERROR EventLog: Checkout : Error: Cannot complete purchase- dsadsa does not have enough quantity left
+2019-06-08 13:08:59,702 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 13:09:01,704 INFO EventLog: User u3 has successfuly logged in.
+2019-06-08 13:16:47,441 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 13:16:49,632 INFO EventLog: User u3 has successfuly logged in.
+2019-06-08 13:17:34,143 ERROR EventLog: Checkout : Error: Cannot complete purchase- dsadsa does not have enough quantity left
+2019-06-08 13:29:21,458 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 13:29:23,428 INFO EventLog: User u3 has successfuly logged in.
+2019-06-08 13:30:36,661 ERROR EventLog: Checkout : Error: Cannot complete purchase- dsadsa does not have enough quantity left
+2019-06-08 13:31:33,739 ERROR EventLog: Checkout : Error: Cannot complete purchase- hdjsa does not have enough quantity left
+2019-06-08 13:34:48,118 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 13:34:49,973 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 13:37:01,447 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 13:37:03,528 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 13:38:56,602 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 13:38:58,717 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 13:42:41,076 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 13:42:43,935 INFO EventLog: User u3 has successfuly logged in.
+2019-06-08 13:47:29,199 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 13:47:32,484 INFO EventLog: User u3 has successfuly logged in.
+2019-06-08 13:53:04,455 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 13:53:06,143 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 13:53:37,478 INFO EventLog: A purchase has been made
+2019-06-08 13:55:18,841 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 13:55:21,008 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 13:58:06,092 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 13:58:08,344 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 14:00:42,207 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 14:00:43,976 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 14:01:04,091 INFO EventLog: A purchase has been made
+2019-06-08 14:03:12,387 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 14:03:14,269 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 14:03:28,657 INFO EventLog: A purchase has been made
+2019-06-08 14:07:15,638 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 14:07:17,825 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 14:07:38,770 INFO EventLog: A purchase has been made
+2019-06-08 14:08:43,455 INFO EventLog: A purchase has been made
+2019-06-08 14:09:09,963 INFO EventLog: A purchase has been made
+2019-06-08 14:21:04,555 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 14:21:06,079 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 14:21:25,551 INFO EventLog: A purchase has been made
+2019-06-08 14:24:45,817 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 14:24:47,857 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 14:25:10,693 INFO EventLog: A purchase has been made
+2019-06-08 14:26:28,056 ERROR EventLog: Error in adding to shopping cart : Error: Product already exists on Cart
+2019-06-08 14:26:41,003 INFO EventLog: A purchase has been made
+2019-06-08 14:28:58,565 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 14:29:00,866 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 14:29:21,148 INFO EventLog: A purchase has been made
+2019-06-08 14:34:42,848 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 14:34:44,945 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 14:35:03,178 INFO EventLog: A purchase has been made
+2019-06-08 14:35:33,294 INFO EventLog: A purchase has been made
+2019-06-08 14:36:42,780 INFO EventLog: A purchase has been made
+2019-06-08 14:38:33,717 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 14:38:36,168 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 14:39:25,806 INFO EventLog: A purchase has been made
+2019-06-08 14:42:04,687 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 14:42:06,647 INFO EventLog: User u3 has successfuly logged in.
+2019-06-08 14:42:13,472 ERROR EventLog: Error in adding to shopping cart : Error: The amount asked is larger than the quantity left
+2019-06-08 14:55:31,667 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 14:55:34,315 INFO EventLog: User u3 has successfuly logged in.
+2019-06-08 14:56:00,663 INFO EventLog: A purchase has been made
+2019-06-08 14:56:14,530 INFO EventLog: A purchase has been made
+2019-06-08 14:56:47,352 INFO EventLog: A purchase has been made
+2019-06-08 14:59:45,007 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 14:59:47,577 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 15:00:06,430 INFO EventLog: A purchase has been made
+2019-06-08 15:32:01,424 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 15:32:04,236 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 15:32:11,097 ERROR EventLog: Policy get :?????? ?????? ?? ???? ???? 'workshop192.Domain.DoesntExistException'.
+2019-06-08 15:32:11,124 ERROR EventLog: Policy get :?????? ?????? ?? ???? ???? 'workshop192.Domain.DoesntExistException'.
+2019-06-08 15:32:17,746 ERROR EventLog: Policy get :?????? ?????? ?? ???? ???? 'workshop192.Domain.DoesntExistException'.
