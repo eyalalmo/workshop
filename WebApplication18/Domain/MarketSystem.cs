@@ -146,115 +146,115 @@ namespace workshop192.Domain
                 }
                 else if (input[0] == "addSession")
                 {
-
+                    DomainBridge.getInstance().addSession(input[0], Int32.Parse(input[1]));
                 }
                 else if (input[0] == "addToShoppingBasket")
                 {
-
+                    DomainBridge.getInstance().addToShoppingBasket(Int32.Parse(input[0]), Int32.Parse(input[1]), Int32.Parse(input[2]));
                 }
                 else if (input[0] == "setProductRank")
                 {
-
+                    DomainBridge.getInstance().setProductRank(Int32.Parse(input[0]), Int32.Parse(input[1]), Int32.Parse(input[2]));
                 }
                 else if (input[0] == "removeProduct")
                 {
-
+                    DomainBridge.getInstance().removeProduct(Int32.Parse(input[0]), Int32.Parse(input[1]));
                 }
                 else if (input[0] == "setProductPrice")
                 {
-
+                    DomainBridge.getInstance().setProductPrice(Int32.Parse(input[0]), Int32.Parse(input[1]), Int32.Parse(input[2]));
                 }
                 else if (input[0] == "setProductName")
                 {
+                    DomainBridge.getInstance().setProductName(Int32.Parse(input[0]), input[1], Int32.Parse(input[2]));
 
                 }
                 else if (input[0] == "addToProductQuantity")
                 {
+                    DomainBridge.getInstance().addToProductQuantity(Int32.Parse(input[0]), Int32.Parse(input[1]), Int32.Parse(input[2]));
 
                 }
                 else if (input[0] == "decFromProductQuantity")
                 {
-
+                    DomainBridge.getInstance().decFromProductQuantity(Int32.Parse(input[0]), Int32.Parse(input[1]), Int32.Parse(input[2]));
                 }
                 else if (input[0] == "closeStore")
                 {
+                    DomainBridge.getInstance().closeStore(Int32.Parse(input[0]), Int32.Parse(input[1]));
 
                 }
                 else if (input[0] == "addManager")
                 {
-
+                    DomainBridge.getInstance().addManager(Int32.Parse(input[0]), input[1], Convert.ToBoolean(input[2]), Convert.ToBoolean(input[3]), Convert.ToBoolean(input[4]), Int32.Parse(input[5]));
                 }
                 else if (input[0] == "removeRole")
                 {
-
+                    DomainBridge.getInstance().removeRole(Int32.Parse(input[0]), input[1], Int32.Parse(input[2]));
                 }
                 else if (input[0] == "addToCart")
                 {
-
+                    DomainBridge.getInstance().addToCart(Int32.Parse(input[0]), Int32.Parse(input[1]), Int32.Parse(input[2]));
                 }
                 else if (input[0] == "removeFromCart")
                 {
-
+                    DomainBridge.getInstance().removeFromCart(Int32.Parse(input[0]), Int32.Parse(input[1]));
                 }
                 else if (input[0] == "changeQuantity")
                 {
-
+                    DomainBridge.getInstance().changeQuantity(Int32.Parse(input[0]), Int32.Parse(input[1]), Int32.Parse(input[2]));
                 }
                 else if (input[0] == "removeProductDiscount")
                 {
-
+                    DomainBridge.getInstance().removeProductDiscount(Int32.Parse(input[0]), Int32.Parse(input[1]));
                 }
                 else if (input[0] == "addStoreVisibleDiscount")
                 {
-
-                }
-                else if (input[0] == "addStoreVisibleDiscount")
-                {
-
+                    DomainBridge.getInstance().addStoreVisibleDiscount(Int32.Parse(input[0]), Double.Parse(input[1]), input[2], Int32.Parse(input[3]));
                 }
                 else if (input[0] == "addProductVisibleDiscount")
                 {
-
+                    DomainBridge.getInstance().addProductVisibleDiscount(Int32.Parse(input[0]), Double.Parse(input[1]), input[2], Int32.Parse(input[3]));
                 }
                 else if (input[0] == "addReliantdiscountSameProduct")
                 {
-
+                    DomainBridge.getInstance().addReliantdiscountSameProduct(Int32.Parse(input[0]), Int32.Parse(input[1]), Double.Parse(input[2]), Int32.Parse(input[3]), input[4], Int32.Parse(input[4]));
                 }
                 else if (input[0] == "addReliantdiscountTotalAmount")
                 {
-
+                    DomainBridge.getInstance().addReliantdiscountTotalAmount(Int32.Parse(input[0]), Double.Parse(input[1]), Int32.Parse(input[2]), input[3], Int32.Parse(input[4]));
                 }
                 else if (input[0] == "removeStoreDiscount")
                 {
-
+                    DomainBridge.getInstance().removeStoreDiscount(Int32.Parse(input[0]), Int32.Parse(input[1]), Int32.Parse(input[2]));
                 }
                 else if (input[0] == "setProductDiscount")
                 {
-
+                    DomainBridge.getInstance().setProductDiscount(Int32.Parse(input[0]), Int32.Parse(input[1]), Int32.Parse(input[2]));
                 }
                 else if (input[0] == "complexDiscount")
                 {
-
+                    DomainBridge.getInstance().complexDiscount(input[0], Int32.Parse(input[1]), input[2], Double.Parse(input[3]), input[4], Int32.Parse(input[5]));
                 }
                 else if (input[0] == "removeMaxAmountPolicy")
                 {
-
+                    DomainBridge.getInstance().removeMaxAmountPolicy(Int32.Parse(input[0]), Int32.Parse(input[1]));
                 }
                 else if (input[0] == "removeMinAmountPolicy")
                 {
-
+                    DomainBridge.getInstance().removeMinAmountPolicy(Int32.Parse(input[0]), Int32.Parse(input[1]));
                 }
                 else if (input[0] == "setMinAmountPolicy")
                 {
-
+                    DomainBridge.getInstance().setMinAmountPolicy(Int32.Parse(input[0]), Int32.Parse(input[1]), Int32.Parse(input[2]));
                 }
                 else if (input[0] == "setMaxAmountPolicy")
                 {
+                    DomainBridge.getInstance().setMaxAmountPolicy(Int32.Parse(input[0]), Int32.Parse(input[1]), Int32.Parse(input[2]));
 
                 }
                 else if (input[0] == "addPendingOwner")
                 {
-
+                    DomainBridge.getInstance().addPendingOwner(Int32.Parse(input[0]), input[1], Int32.Parse(input[2]));
                 }
 
             }
