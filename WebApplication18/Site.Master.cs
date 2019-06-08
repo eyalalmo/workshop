@@ -34,6 +34,20 @@ namespace WebApplication18
                     myAccount.Visible = true;
                 }
 
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                if (session == -1)
+                {
+                    Basket.InnerHtml = "<i class=\"fa fa-fw fa-shopping-cart\"></i>0";
+                    myAccount.InnerHtml = "< i class=\"fa fa-fw fa-user\"></i><i class=\"fa fa-fw fa-sort-down\"></i>";
+                }
+                else
+                {
+                    Basket.InnerHtml = "<i class=\"fa fa-fw fa-shopping-cart\"></i>" + 
+                        UserService.getInstance().getNumOfProductsInBasket(session).ToString();
+                    myAccount.InnerHtml = "<i class=\"fa fa-fw fa-user\"></i>" +
+                                UserService.getInstance().getUserNameBySession(session) +
+                                "<i class=\"fa fa-fw fa-sort-down\"></i>";
+                }
             }
         }
     }

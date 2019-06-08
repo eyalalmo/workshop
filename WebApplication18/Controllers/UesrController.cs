@@ -48,7 +48,7 @@ namespace WebApplication18.Controllers
                 return e.Message;
             }
         }
-
+        
         [Route("api/user/logout")]
         [HttpGet]
         public Object logout()
@@ -166,8 +166,7 @@ namespace WebApplication18.Controllers
                 return e.Message.ToString();
             }
         }
-
-
+        
         [Route("api/user/removeUser")]
         [HttpGet]
         public string removeUser(String username)

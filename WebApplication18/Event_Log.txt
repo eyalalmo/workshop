@@ -294,3 +294,63 @@
 2019-06-07 19:22:19,846 INFO EventLog: User ey has successfuly logged in.
 2019-06-07 19:23:51,422 INFO EventLog: User ey has logged out
 2019-06-07 19:24:28,835 INFO EventLog: User ey has successfuly logged in.
+2019-06-07 20:02:46,204 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 20:02:55,752 ERROR EventLog: Register : Error: Username already exists
+2019-06-07 20:03:07,511 INFO EventLog: User ey has successfuly logged in.
+2019-06-07 20:06:52,210 INFO EventLog: User eyal has successfuly registered
+2019-06-07 20:07:11,353 INFO EventLog: User etay has successfuly registered
+2019-06-07 20:07:58,806 INFO EventLog: User eyal has successfuly logged in.
+2019-06-07 20:08:11,893 INFO EventLog: User ey has successfuly logged in.
+2019-06-07 20:08:35,645 INFO EventLog: User eyal has successfuly created a store
+2019-06-07 20:10:27,330 INFO EventLog: User ey has successfuly logged in.
+2019-06-07 20:11:10,438 INFO EventLog: User u3 has successfuly logged in.
+2019-06-07 20:14:40,257 INFO EventLog: User u3 has logged out
+2019-06-07 20:14:44,271 ERROR EventLog: Login : Error: Username already logged in
+2019-06-07 20:14:49,587 INFO EventLog: User eyal has successfuly logged in.
+2019-06-07 20:21:44,788 ERROR EventLog: Checkout : Error: Cannot complete purchase- a product2 does not have enough quantity left
+2019-06-07 20:45:24,223 INFO EventLog: User u3 has successfuly logged in.
+2019-06-07 20:48:32,013 INFO EventLog: User ey has successfuly logged in.
+2019-06-07 20:49:00,734 INFO EventLog: User ey has logged out
+2019-06-07 20:49:13,826 INFO EventLog: User u3 has successfuly logged in.
+2019-06-07 20:56:13,506 INFO EventLog: User ey has successfuly logged in.
+2019-06-07 21:08:55,087 ERROR EventLog: Error in adding to shopping cart : Error: The amount asked is larger than the quantity left
+2019-06-08 01:45:29,545 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 01:45:50,710 ERROR EventLog: Add Product : error - rank must be a number between 1 to 5
+2019-06-08 02:18:11,924 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 02:34:32,665 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 02:40:26,104 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 02:40:30,944 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 02:43:51,942 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 02:47:37,598 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 02:52:21,862 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 02:53:24,144 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 02:54:06,107 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 02:58:06,305 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 03:18:49,360 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 03:25:32,585 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 03:44:06,480 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 03:53:36,105 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 03:55:46,433 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 03:58:29,445 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 03:58:37,544 ERROR EventLog: Error in adding to shopping cart : Error: Product already exists on Cart
+2019-06-08 03:59:42,378 INFO EventLog: User ey has logged out
+2019-06-08 03:59:46,731 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 04:05:17,735 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 04:12:01,112 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 12:38:40,855 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 12:45:01,906 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 12:45:28,854 ERROR EventLog: Error in adding to shopping cart : Error: Product already exists on Cart
+2019-06-08 12:56:27,017 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 13:07:07,910 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 13:07:45,569 INFO EventLog: User ey has logged out
+2019-06-08 13:08:13,142 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 13:10:54,641 INFO EventLog: User ey has logged out
+2019-06-08 13:12:02,615 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 13:30:07,418 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 13:34:10,569 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 13:53:36,574 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 14:07:46,339 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 14:23:09,172 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-08 14:23:09,172 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-08 14:24:22,925 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-08 14:24:22,926 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.

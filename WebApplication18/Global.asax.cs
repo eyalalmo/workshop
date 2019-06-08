@@ -39,7 +39,6 @@ namespace WebApplication18
                 UserService.getInstance().addUser(hash, session);
                 Response.Cookies[""]["HashCode"] = hash;
             }
-
         }
     }
 }

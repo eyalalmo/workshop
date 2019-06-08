@@ -215,6 +215,11 @@ namespace workshop192.ServiceLayer
         {
             db.addWaitingMessage(tuple);
         }
+
+        public int getNumOfProductsInBasket(int session)
+        {
+            return db.getNumOfProductsInBasket(session);
+        }
     }
 }
 

@@ -52,18 +52,16 @@ namespace WebApplication18.Controllers
             WebSocket socket = context.WebSocket;
             ArraySegment<byte> buffer = new ArraySegment<byte>(new byte[4096]);
             string hashSession = "";
-            if (context.CookieCollection[0].Name == "HashCode")
-            {
-                hashSession = context.CookieCollection[0].Value;
-            }
-            else if (context.CookieCollection.Count > 1 && context.CookieCollection[1].Name == "HashCode")
-            {
-                hashSession = context.CookieCollection[1].Value;
-            }
-            else
-            {
-                return;
-            }
+
+            for (int i = 0; i < context.CookieCollection.Count; i++)
+                if (context.CookieCollection[i].Name == "HashCode")
+                {
+                    hashSession = context.CookieCollection[i].Value;
+                    goto cont;
+                }
+            return;
+
+            cont:
 
             int session = UserService.getInstance().getUserByHash(hashSession);
 

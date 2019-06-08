@@ -1,7 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Basket.aspx.cs" Inherits="WebApplication18.Views.Pages.Basket" %>
+﻿<%@ Page Title="Shopping Basket" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Basket.aspx.cs" Inherits="WebApplication18.Views.Pages.Basket" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h2 ><%: Title %>
-    </h2>
+    <h3><i class="fa fa-shopping-cart" aria-hidden="true"> </i>  <%: Title %> 
+    </h3>
+    
 
     <!--
     <table class="table">
@@ -38,11 +39,6 @@
     <script src="https://use.fontawesome.com/c560c025cf.js"></script>
     <div class="container">
           <div class="card shopping-cart">
-            <div class="card-header bg-dark text-light">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                Shopping Cart
-                <div class="clearfix"></div><a></a>
-            </div>
             <div id="AllProductsInBasket" class ="col-md-12">
                 
             </div>

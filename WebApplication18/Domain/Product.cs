@@ -21,8 +21,7 @@ namespace workshop192.Domain
         public VisibleDiscount discount;
         [JsonIgnore]
         public ReliantDiscount sameProductDiscount;
-
-
+        
         public Product(string productName, string productCategory, int price, int rank, int quantityLeft, Store store)
         {
             this.productID = DBProduct.getNextProductID();
@@ -125,10 +124,12 @@ namespace workshop192.Domain
         public void addQuantityLeft( int amount)
         {
            quantityLeft = quantityLeft + amount;
+            DBProduct.getInstance().update(this);
         }
         public void decQuantityLeft(int amount)
         {
             quantityLeft = quantityLeft - amount;
+            DBProduct.getInstance().update(this);
         }
         public int getProductID()
         {

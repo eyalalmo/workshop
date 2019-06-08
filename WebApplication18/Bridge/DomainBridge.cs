@@ -52,7 +52,6 @@ namespace workshop192.Bridge
             {
                 foreach (string mess in waitingMessages)
                     messager.message(username, mess);
-                clearMessagesFor(username);
             }
         }
 
@@ -386,7 +385,9 @@ namespace workshop192.Bridge
         internal string getUserNameBySession(int session)
         {
             Session s = DBSession.getInstance().getSession(session);
-            return s.getSubscribedUser().getUsername();
+            if(s.getSubscribedUser() != null)
+                return s.getSubscribedUser().getUsername();
+            return "";
         }
 
         internal double getProductPrice(int productid)
@@ -1154,5 +1155,16 @@ namespace workshop192.Bridge
             return s;
         }
 
+        public int getNumOfProductsInBasket(int session) {
+            int counter = 0;
+            Session s = DBSession.getInstance().getSession(session);
+            Dictionary<int, ShoppingCart> d = s.getShoppingBasket().getShoppingCarts();
+            foreach (KeyValuePair<int, ShoppingCart> a in d) {
+                Dictionary<Product, int> d1 = a.Value.getProductsInCarts();
+                    foreach(KeyValuePair<Product, int> p in d1)
+                        counter++;
+            }
+            return counter;
+        }
     }
 }

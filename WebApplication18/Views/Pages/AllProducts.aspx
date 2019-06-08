@@ -1,12 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AllProducts.aspx.cs" Inherits="WebApplication18.Views.Pages.AllProducts" %>
+﻿<%@ Page Title="Products Catalog" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AllProducts.aspx.cs" Inherits="WebApplication18.Views.Pages.AllProducts" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
-    <div class="jumbotron d-flex align-items-center">
+<h3><span class="glyphicon glyphicon-barcode"></span>  <%: Title %></h3>
   <div class="container">
 
-    <h1>Products Catalog</h1>   
-    <h1> </h1>
-      <h1> </h1>
       <div class="container">
 
           <button name="showAll" id="showAll" class="btn btn-primary">Show All Products</button> &nbsp &nbsp &nbsp                 
@@ -61,7 +57,6 @@
 
     </div>
   </div>
-</div>
     <script type="text/javascript">
         function getProducts(response,baseUrl) {
             var doc = document.getElementById('allProducts');
@@ -116,7 +111,7 @@
                             alert(response);
                         } else
                             alert("Added succesfully to basket")
-                        
+                            location.reload();
                     },
                     error: function (response) {
                         console.log(response);

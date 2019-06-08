@@ -15,7 +15,6 @@ namespace workshop192.Domain
         private PaymentService()
         {
            
-
         }
 
         public static PaymentService getInstance()
@@ -27,27 +26,26 @@ namespace workshop192.Domain
             return instance;
         }
 
-        public  async Task<int> checkOut(string card, string month, string year, string holder, string ccv, string id, double price)
+        public async Task<int> checkOut(string card, string month, string year, string holder, string ccv, string id, double price)
         {
-           
-                var massage = new Dictionary<string, string>
+            var massage = new Dictionary<string, string>
             {
-             { "action_type", "pay" },
-             { "card_number", card },
-             { "month", month },
-             { "year", year },
-             { "holder", holder },
-             { "ccv", ccv },
-             { "id", id }
+                 { "action_type", "pay" },
+                 { "card_number", card },
+                 { "month", month },
+                 { "year", year },
+                 { "holder", holder },
+                 { "ccv", ccv },
+                 { "id", id }
             };
 
-                var massageToSend = new FormUrlEncodedContent(massage);
-                var responseFromServer = await client.PostAsync("https://cs-bgu-wsep.herokuapp.com/", massageToSend);
-                var responseToString = await responseFromServer.Content.ReadAsStringAsync();
+            var massageToSend = new FormUrlEncodedContent(massage);
+            var responseFromServer = await client.PostAsync("https://cs-bgu-wsep.herokuapp.com/", massageToSend);
+            var responseToString = await responseFromServer.Content.ReadAsStringAsync();
 
-                return int.Parse(responseToString);
+            return int.Parse(responseToString);
 
-            
+
         }
         public bool cancelPayment(String account, double money)
         {
@@ -73,6 +71,5 @@ namespace workshop192.Domain
                 return true;
             return false;
         }
-
     }
 }

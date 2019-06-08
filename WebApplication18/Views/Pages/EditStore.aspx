@@ -43,9 +43,7 @@
 			                    <p></p>`
                                 + "<form><a href =\"" + baseUrl + "/Store?storeId=" + storeId + "\"  id=\"manageProducts" + i + "\"  onclick=\"manageProducts(" + storeId + ");\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Manage Store Products</a></form>" 
                                  + "<p></p><form><a href=\"" + baseUrl + "/StoreDiscount?storeID=" + storeId + "\"  id=\"editStoreDiscount" + i + "\"  onclick=\"editStoreDiscount(" + storeId + ");\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Edit Store Discounts</a></form>" 
-                               + "<p></p><a href=\"" + baseUrl + "/ViewStore?storeId=" + storeId + "\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >View Store Products</a>" 
-                                + "<p></p><form><a href=\"" + baseUrl + "/ManageStaff?storeId=" + storeId + "\" id=\"manageStaff" + i + "\" onclick=\"manageStaff(" + storeId + ");\"  class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Staff Managment</a></form>"
-                                + "<p></p><form><a href=\"" + baseUrl + "/AddProduct?storeId=" + storeId + "\"   id=\"addProduct" + i + "\"  onclick=\"addProduct(" + storeId + ");\"  class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Add Product</a></form>" 
+                               + "<p></p><form><a href=\"" + baseUrl + "/ManageStaff?storeId=" + storeId + "\" id=\"manageStaff" + i + "\" onclick=\"manageStaff(" + storeId + ");\"  class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Staff Managment</a></form>"
                                 + "<p></p><form><a href=\"" + baseUrl + "/EditStorePolicy?storeId=" + storeId + "\"    id=\"manageStorePolicy" + i + "\"  onclick=\"manageStorePolicy(" + storeId + ");\" class=\"block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1\" >Edit Store Policy</a></form>"
 			                 +`   </div>
 		                    </div>
@@ -110,32 +108,9 @@
                 }
             });
           
-            }
+        }
 
-        function addProduct(id) {
-            event.preventDefault();
-            jQuery.ajax({
-                type: "GET",
-                url: baseUrl + "/api/store/IsEP?storeId=" + id,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-          
-                    if (response === true) {
-                         window.location.href = baseUrl + "/AddProduct?storeId=" + id;
-                    }
-                    else {
-                        alert("you dont have the permissions to edit Products");
-                    }
-                },
-                 error: function (response) {
-                    
-                    window.location.href = baseUrl + "/Default";
-                }
-            });
-          
-            }
-        function editStoreDiscount(id) {
+            function editStoreDiscount(id) {
             event.preventDefault();
             jQuery.ajax({
                 type: "GET",
@@ -159,7 +134,7 @@
             });
           
             }
-            function manageStorePolicy(id) {
+        function manageStorePolicy(id) {
             event.preventDefault();
             jQuery.ajax({
                 type: "GET",
@@ -167,21 +142,21 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-          
+
                     if (response === true) {
-                         window.location.href = baseUrl + "/EditStorePolicy?storeID=" + id;
+                        window.location.href = baseUrl + "/EditStorePolicy?storeID=" + id;
                     }
                     else {
                         alert("you dont have the permissions to edit Policy");
                     }
                 },
-                 error: function (response) {
-                     alert("dddd")
+                error: function (response) {
+                    alert("dddd")
                     window.location.href = baseUrl + "/Default";
                 }
             });
-          
-            }
+
+        }
     </script>
  </asp:Content>
 

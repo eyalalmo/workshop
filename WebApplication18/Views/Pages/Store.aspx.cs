@@ -11,7 +11,7 @@ namespace WebApplication18.Views.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+             
         }
     }
 }
