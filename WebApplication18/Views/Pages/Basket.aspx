@@ -228,10 +228,12 @@
                              
                                           }
                                           else {
+                                              location.reload();
                                               console.log(response);
                                           }
                                       },
-                                      error: function (response) {
+                                  error: function (response) {
+                                      location.reload();
                                           console.log(response);
                                       }
                                   });
@@ -262,10 +264,12 @@
                              
                           }
                           else {
+                              alert(response);
                               console.log(response);
                           }
                       },
                       error: function (response) {
+                          alert(response);
                           console.log(response);
                       }
                   });

@@ -161,13 +161,13 @@ namespace workshop192.ServiceLayer
         {
             db.clearMessagesFor(username);
         }
-        public List<int> checkBasket(int session)
+        public void checkBasket(int session)
         {
             if (session < 0)
             {
                 throw new NullReferenceException("error - bad session");
             }
-            return db.checkBasket(session);
+             db.checkBasket(session);
         }
         public void addToShoppingBasket(int product, int amount, int session)
         {

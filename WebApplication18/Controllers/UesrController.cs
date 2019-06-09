@@ -89,7 +89,8 @@ namespace WebApplication18.Controllers
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-                return UserService.getInstance().checkBasket(session);
+                UserService.getInstance().checkBasket(session);
+                return "";
             }
             catch (Exception e)
             {

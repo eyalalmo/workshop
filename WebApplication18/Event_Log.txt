@@ -385,3 +385,24 @@
 2019-06-09 09:41:59,000 INFO EventLog: User yael2 has successfuly registered
 2019-06-09 09:42:04,116 ERROR EventLog: Login : Error: Incorrect password
 2019-06-09 09:42:26,700 INFO EventLog: User u2 has successfuly logged in.
+2019-06-09 10:45:48,401 INFO EventLog: User u2 has successfuly logged in.
+2019-06-09 10:54:15,547 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 10:54:17,275 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 10:54:21,713 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 10:54:26,445 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 10:55:01,247 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 10:55:11,976 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 10:55:18,020 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 10:55:23,235 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 10:55:31,276 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 10:56:40,468 INFO EventLog: User yael6 has successfuly registered
+2019-06-09 10:56:47,452 ERROR EventLog: Login : Error: Incorrect password
+2019-06-09 10:56:53,287 ERROR EventLog: Login : Error: Incorrect password
+2019-06-09 10:57:11,698 ERROR EventLog: Register : Error: Username already exists
+2019-06-09 10:57:34,832 INFO EventLog: User yael123 has successfuly registered
+2019-06-09 10:57:45,069 ERROR EventLog: Login : Error: Incorrect password
+2019-06-09 10:58:16,660 ERROR EventLog: Login : Error: Incorrect password
+2019-06-09 10:59:16,140 ERROR EventLog: Login : Error: Incorrect password
+2019-06-09 10:59:43,667 INFO EventLog: User yaelk has successfuly registered
+2019-06-09 10:59:49,349 ERROR EventLog: Login : Error: Incorrect password
+2019-06-09 11:01:16,540 ERROR EventLog: Login : Error: Incorrect password
