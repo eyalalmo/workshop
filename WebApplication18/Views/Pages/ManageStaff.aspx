@@ -4,46 +4,14 @@
     <h3><%: Title %></h3>   
     Store id: <font style="color:red"><b><%: ViewData["storeId"] %></b></font>
 
-    <div class="row">
-        <div class="container col" id="owners"></div>
-        <div class="container col" id="managers"></div>
-    </div>
-	<div id="allPending">
-	</div>
-          
-<div class="modal" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title">Please Enter Username</h2>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-        <input class="form-control" type="text" placeholder="Manager Username" aria-label="manager" id="manager" name="manager">
-          <h3>Permissions:</h3>
-          <div class="checkbox">
-  <label><input type="checkbox" id="per1" checked="">Edit Products</label>
-</div>
-<div class="checkbox">
-  <label><input type="checkbox" id="per2" checked="">Edit Discounts</label>
-</div>
-<div class="checkbox">
-  <label><input type="checkbox" id="per3" checked="">Edit Policy</label>
-</div>
-
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onClick="addM()" id="addman" >Add Manager</button>
-      </div>
-
-    </div>
-  </div>
-    </div>
+    <table>
+        <tr>
+            <td style="vertical-align:top; width:300px" id="owners"></td>
+            <td style="vertical-align:top; width:300px" id="managers"></td>
+            <td style="vertical-align:top" id="pending"></td>
+        </tr>
+    </table>
+    
     <script type="text/javascript">
  
         function getRoles(response) {
@@ -51,24 +19,24 @@
             var i;
             var jsonList = JSON.parse(response);
             var OWNERS = "<h3><u>Owners: </u></h3>";
-            var MANAGERS="<h3><u>Managers: </u></h3>";
+            var MANAGERS= "<h3><u>Managers: </u></h3>";
             for (i = 0; i < jsonList.length; i++) {
 
                 if (jsonList[i].isOwner) {
-                    OWNERS += `<div class="container row">
+                    OWNERS += `<tr>
                                         <font style="font-size:16px"><b>` + jsonList[i].userName.username + `</b></font>
-		                       </div></br>`;
+		                       <tr></br>`;
                 }
                 else
                 {
-                    MANAGERS += `<div class="container row">
+                    MANAGERS += `<tr>
                                     <font style="font-size:16px"><b>` + jsonList[i].userName.username + `</b></font> (Appointed by ` + jsonList[i].appointedBy.username + `)
-                                    <button type="button" class="btn btn-danger" onClick="removeRole(\'` + jsonList[i].userName.username + `\' )"/> Remove
-                                </div></br>`;
+                                    <button type="button" class="btn btn-danger" onClick="removeRole(\'` + jsonList[i].userName.username + `\' )"> Remove</button>
+                                 </tr></br>`;
                 }
             }
-            OWNERS += `<input type="text" size="12" visible="false" placeholder="Username"  id="owner" name="owner"/>
-                       <button type="button" class="btn btn-primary" onClick="confirmOwner()" id="confirm" name="confirm"/>Add owner`
+            OWNERS += `<div clas="row"><input type="text" size="12" visible="false" placeholder="Username"  id="owner" name="owner"/>
+                       <button type="button" class="btn btn-primary" onClick="confirmOwner()" id="confirm" name="confirm"/>Add owner</div>`
             MANAGERS += `<button type="button"  name="addManager" id="addManager" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Manager</button>`
             document.getElementById('owners').innerHTML = OWNERS;
             document.getElementById('managers').innerHTML = MANAGERS;           
@@ -83,25 +51,21 @@
             var HTML = "";
             
             if (jsonList.length > 0) {
-                HTML+=`<h2>Pending Store Owners:</h2>`
+                HTML+="<h3><u>Owners: </u></h3>";
             }
             for (i = 0; i < jsonList.length; i++) {
-                HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		                   <div class="my-list">
-            <h5> Username:`+ jsonList[i] + `\n</h5>
-            <div class="clearfix">
-            <button type="button" class="btn btn-primary" onClick="signContract( \'`+ jsonList[i] +`\' )"/>
-             Sign Contract
-            </button>
-            <button type="button" class="btn btn-danger" onClick="declineContract( \'`+ jsonList[i] +`\' )"/>
-             declineContract
-            </button>
-        </div>
-		</div>
-		</div>`
+                HTML += `<tr>
+		                    <td>`+ jsonList[i] + `</td>
+                            <td><button type="button" class="btn btn-success" onClick="signContract( \'`+ jsonList[i] +`\' )"/>
+                             Sign Contract
+                            </button></td>
+                            <td><button type="button" class="btn btn-danger" onClick="declineContract( \'`+ jsonList[i] +`\' )"/>
+                             declineContract
+                            </button></td>
+                        </tr>`
         
             }
-            doc.innerHTML += HTML;
+            document.getElementById('pending').innerHTML += HTML;
 
             
         };
@@ -234,11 +198,6 @@
             });
             
             };
-        
-
-        
-    </script>
-<script type="text/javascript">
 
     $(document).ready(function () {
 
