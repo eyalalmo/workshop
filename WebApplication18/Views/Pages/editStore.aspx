@@ -199,7 +199,6 @@
 
 
         function add() {
-               alert("Dsadsadsadsa");
                event.preventDefault();
                var getUrl = window.location;
                var baseUrl = getUrl.protocol + "//" + getUrl.host
