@@ -217,7 +217,26 @@
                               event.preventDefault();
                               var getUrl = window.location;
                               var baseUrl = getUrl.protocol + "//" + getUrl.host
-                              window.location.href = baseUrl+"/Checkout/";
+                              jQuery.ajax({
+                                      type: "GET",
+                                      url: baseUrl + "/api/user/checkBasket",
+                                      contentType: "application/json; charset=utf-8",
+                                      dataType: "json",
+                                      success: function (response) {
+                                          if (response == "") {  
+                                            window.location.href = baseUrl+"/Checkout/";
+                             
+                                          }
+                                          else {
+                                              location.reload();
+                                              console.log(response);
+                                          }
+                                      },
+                                  error: function (response) {
+                                      location.reload();
+                                          console.log(response);
+                                      }
+                                  });
                           }
          /* $(".deleteRow").click(function() {
               console.log("11111");
@@ -245,10 +264,12 @@
                              
                           }
                           else {
+                              alert(response);
                               console.log(response);
                           }
                       },
                       error: function (response) {
+                          alert(response);
                           console.log(response);
                       }
                   });

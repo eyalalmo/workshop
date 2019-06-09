@@ -183,7 +183,7 @@ namespace workshop192.Domain
 
             return sum;
         }
-
+   
         public double getTotalPrice()
         {
            

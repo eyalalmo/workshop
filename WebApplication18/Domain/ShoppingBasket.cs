@@ -234,6 +234,42 @@ namespace workshop192.Domain
             //throw new SuccessPaymentExeption("OK");
             return resFromDelivery2;
         }
+        public void checkBasket()
+        {
+            Product productToRemove = null;
+            foreach (KeyValuePair<int, ShoppingCart> pair1 in shoppingCarts)
+            {
+                ShoppingCart cart = pair1.Value;
+                Store store = DBStore.getInstance().getStore(cart.getStoreID());
+                Dictionary<Product, int> productsInCart = cart.getProductsInCarts();
+                foreach (KeyValuePair<Product, int> pair2 in productsInCart)
+                {
+                    Product product = pair2.Key;
+                    int amount = pair2.Value;
+                    store.checkPolicy(product, amount);
+                    if (product.getQuantityLeft() == 0)
+                    {
+                        productToRemove = product;
+                        break;
+                    }
+                    if (product.getQuantityLeft() < amount)
+                    {
+                        cart.changeQuantityOfProduct(product, product.getQuantityLeft());
+                        throw new IllegalAmountException("Total quantity of product: "+product.getProductName()+" ID: "+product.getProductID()+"\n is larger than the quantity left in the store\nquantity has been set to maximum quantity left in store\nPlease checkout again");
+                    }
+                    product.decQuantityLeft(amount);
+                }
+                if (productToRemove != null)
+                {
+                    removeFromCart(productToRemove.getProductID());
+                    throw new IllegalAmountException("Prodcut: "+ productToRemove.getProductName() + " ID: "+productToRemove.getProductID()+" has ZERO quantity left\n Product has been removed from cart\nPlease checkout again");
+                }
+                   
+
+            }
+           
+               
+        }
 
         internal void changeQuantityOfProduct(int storeID, Product p, int newAmount)
         {

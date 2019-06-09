@@ -255,6 +255,11 @@ namespace workshop192.Bridge
             Session session = DBSession.getInstance().getSession(sessionid);
             session.addToShoppingBasket(toAdd, amount);
         }
+        public void checkBasket(int session)
+        {
+            Session user = DBSession.getInstance().getSession(session);
+             user.checkBasket();
+        }
 
         internal void setquantityLeft(int productID, int setquantityLeft, int session)
         {

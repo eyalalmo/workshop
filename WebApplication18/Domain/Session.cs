@@ -112,6 +112,10 @@ namespace workshop192.Domain
         
             shoppingBasket = new ShoppingBasket();
         }
+        public void checkBasket()
+        {
+            shoppingBasket.checkBasket();
+        }
 
 
     }

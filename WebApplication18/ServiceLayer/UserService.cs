@@ -162,7 +162,14 @@ namespace workshop192.ServiceLayer
         {
             db.clearMessagesFor(username);
         }
-
+        public void checkBasket(int session)
+        {
+            if (session < 0)
+            {
+                throw new NullReferenceException("error - bad session");
+            }
+             db.checkBasket(session);
+        }
         public void addToShoppingBasket(int product, int amount, int session)
         {
             if (product < 0)
