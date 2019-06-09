@@ -1093,18 +1093,6 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>1278</x>
-      <y>216</y>
-      <w>18</w>
-      <h>18</h>
-    </coordinates>
-    <panel_attributes>
-bg=blue</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
       <x>1233</x>
       <y>360</y>
       <w>18</w>
@@ -1165,20 +1153,8 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>450</x>
-      <y>612</y>
-      <w>18</w>
-      <h>18</h>
-    </coordinates>
-    <panel_attributes>
-bg=blue</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>657</x>
-      <y>612</y>
+      <x>630</x>
+      <y>495</y>
       <w>18</w>
       <h>18</h>
     </coordinates>
