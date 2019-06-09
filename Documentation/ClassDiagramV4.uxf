@@ -1210,16 +1210,4 @@ style=wordwrap</panel_attributes>
 bg=blue</panel_attributes>
     <additional_attributes/>
   </element>
-  <element>
-    <id>UMLNote</id>
-    <coordinates>
-      <x>900</x>
-      <y>333</y>
-      <w>18</w>
-      <h>18</h>
-    </coordinates>
-    <panel_attributes>
-bg=blue</panel_attributes>
-    <additional_attributes/>
-  </element>
 </diagram>
