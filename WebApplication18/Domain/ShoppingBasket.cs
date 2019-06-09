@@ -213,14 +213,16 @@ namespace workshop192.Domain
             foreach (KeyValuePair<int, ShoppingCart> pair1 in shoppingCarts)
             {
                 ShoppingCart cart = pair1.Value;
+                Store store = DBStore.getInstance().getStore(cart.getStoreID());
                 Dictionary<Product, int> productsInCart = cart.getProductsInCarts();
                 foreach (KeyValuePair<Product, int> pair2 in productsInCart)
                 {
                     Product product = pair2.Key;
                     int amount = pair2.Value;
+                    store.checkPolicy(product, amount);
                     if (product.getQuantityLeft() == 0)
                     {
-                        productToRemove = pair2.Key;
+                        productToRemove = product;
                         break;
                     }
                     if (product.getQuantityLeft() < amount)
