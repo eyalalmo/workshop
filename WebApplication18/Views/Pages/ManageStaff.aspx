@@ -1,46 +1,19 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ManageStaff.aspx.cs" Inherits="WebApplication18.Views.Pages.ManageStaff" %>
+﻿<%@ Page Title="Store Staff Panel" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ManageStaff.aspx.cs" Inherits="WebApplication18.Views.Pages.ManageStaff" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="jumbotron d-flex align-items-center">
-  <div class="container">
-    <h1><%: Title +"Store Staff Panel" %></h1>   
-    <h1> </h1>
-      <h1> </h1>
-      <div class="container ">
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <div class="clearfix">
-                  <div class="clearfix">
-    <button type="button"  name="addManager" id="addManager" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Manager</button>
-                  </div>
-                  </div>
-              </div>
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <h3>Add an Owner</h3>
-              <input class="form-control align-middle" type="text"  visible="false" placeholder="Username"  id="owner" name="owner"/>
-        <button type="button" class="btn btn-primary" onClick="confirmOwner()" id="confirm" name="confirm"/>
-             Confirm
-              </div>
-          </div>
-       </div>
-    
-    <div class="container">
-	<div id="allRoles" class="row">
-     <h2>Staff:</h2>
+    <h3><%: Title %></h3>   
+    Store id: <font style="color:red"><b><%: ViewData["storeId"] %></b></font>
+
+    <div class="row">
+        <div class="container col" id="owners"></div>
+        <div class="container col" id="managers"></div>
+    </div>
+	<div id="allPending">
 	</div>
-	</div>
-    
-         
-  </div>
-    <div class="container">
-	<div id="allPending" class="row">
-	</div>
-	</div>
- 
+          
 <div class="modal" id="myModal">
   <div class="modal-dialog">
     <div class="modal-content">
-
-     
       <div class="modal-header">
         <h2 class="modal-title">Please Enter Username</h2>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -70,39 +43,35 @@
 
     </div>
   </div>
-</div>
+    </div>
     <script type="text/javascript">
  
         function getRoles(response) {
             var doc = document.getElementById('allRoles');
             var i;
             var jsonList = JSON.parse(response);
-            var HTML="";
+            var OWNERS = "<h3><u>Owners: </u></h3>";
+            var MANAGERS="<h3><u>Managers: </u></h3>";
             for (i = 0; i < jsonList.length; i++) {
-                var appointed = ""
-                var buttons = "";
-                var role = "Store Owner"
-                    if (jsonList[i].isOwner===false) {
-                        role = "Store Manager"
-                        appointed = "Appointed By: " + jsonList[i].appointedBy.username;
-                        buttons = `<button type="button" class="btn btn-primary" onClick="removeRole( \'`+ jsonList[i].userName.username +`\' )"/>
-             Remove
-            </button>`
-                    }
-                HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-		                   <div class="my-list">
-			<h4>`+ role + `\n</h4>
-            <h5> Username:`+ jsonList[i].userName.username + `\n</h5>
-			<span> ` + appointed + `\n</span>
-            <div class="clearfix">
-            `+buttons+`
-        </div>
-		</div>
-		</div>`
-        
-            }
-            doc.innerHTML += HTML;
 
+                if (jsonList[i].isOwner) {
+                    OWNERS += `<div class="container row">
+                                        <font style="font-size:16px"><b>` + jsonList[i].userName.username + `</b></font>
+		                       </div></br>`;
+                }
+                else
+                {
+                    MANAGERS += `<div class="container row">
+                                    <font style="font-size:16px"><b>` + jsonList[i].userName.username + `</b></font> (Appointed by ` + jsonList[i].appointedBy.username + `)
+                                    <button type="button" class="btn btn-danger" onClick="removeRole(\'` + jsonList[i].userName.username + `\' )"/> Remove
+                                </div></br>`;
+                }
+            }
+            OWNERS += `<input type="text" size="12" visible="false" placeholder="Username"  id="owner" name="owner"/>
+                       <button type="button" class="btn btn-primary" onClick="confirmOwner()" id="confirm" name="confirm"/>Add owner`
+            MANAGERS += `<button type="button"  name="addManager" id="addManager" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Manager</button>`
+            document.getElementById('owners').innerHTML = OWNERS;
+            document.getElementById('managers').innerHTML = MANAGERS;           
             
         };
 
@@ -272,42 +241,42 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-            
-                  var storeId =<%=ViewData["storeId"]%>;
-                var getUrl = window.location;
-                var baseUrl = getUrl.protocol + "//" + getUrl.host
-                jQuery.ajax({
-                    type: "GET",
-                    url: baseUrl + "/api/store/getAllRoles?storeId="+ storeId,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        
-                        getRoles(response);
-                        
-                    },
-                    error: function (response) {
-                        console.log(response);
-                    }
+
+        var storeId =<%=ViewData["storeId"]%>;
+        var getUrl = window.location;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host
+        jQuery.ajax({
+            type: "GET",
+            url: baseUrl + "/api/store/getAllRoles?storeId=" + storeId,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+
+                getRoles(response);
+
+            },
+            error: function (response) {
+                console.log(response);
+            }
         });
-         jQuery.ajax({
-                    type: "GET",
-                    url: baseUrl + "/api/store/getAllPending?storeId="+ storeId,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        getPending(response);
-                        
-                    },
-                    error: function (response) {
-                        console.log(response);
-                    }
+        jQuery.ajax({
+            type: "GET",
+            url: baseUrl + "/api/store/getAllPending?storeId=" + storeId,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                getPending(response);
+
+            },
+            error: function (response) {
+                console.log(response);
+            }
         });
 
 
 
-           
-     });
+
+    });
 
     </script>
     </asp:Content>

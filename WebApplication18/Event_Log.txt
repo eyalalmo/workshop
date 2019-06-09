@@ -415,3 +415,19 @@
 2019-06-09 13:06:18,714 INFO EventLog: User u2 has logged out
 2019-06-09 13:07:30,991 ERROR EventLog: Login : Error: Username does not exist
 2019-06-09 13:07:36,798 INFO EventLog: User u2 has successfuly logged in.
+2019-06-09 15:47:08,977 INFO EventLog: User shaul has successfuly registered
+2019-06-09 15:47:25,798 INFO EventLog: User shaul has successfuly logged in.
+2019-06-09 15:47:49,311 INFO EventLog: User shaul has successfuly created a store
+2019-06-09 15:49:02,291 INFO EventLog: A purchase has been made
+2019-06-09 15:58:07,031 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 15:58:07,410 INFO EventLog: User u2 has successfuly logged in.
+2019-06-09 16:02:22,568 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 16:02:26,290 INFO EventLog: User u2 has successfuly logged in.
+2019-06-09 16:15:50,178 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 16:15:52,720 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 16:16:07,488 INFO EventLog: User ey has successfuly registered
+2019-06-09 16:16:12,629 INFO EventLog: User ey has successfuly logged in.
+2019-06-09 16:16:33,473 INFO EventLog: User ey has successfuly created a store
+2019-06-09 16:17:15,400 ERROR EventLog: Add Manager : Error: No such username
+2019-06-09 16:32:21,339 ERROR EventLog: Add Manager : Error: You have no permission to add a manager
+2019-06-09 16:32:34,694 INFO EventLog: User ey has successfuly logged in.
