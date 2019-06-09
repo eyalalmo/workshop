@@ -15,10 +15,8 @@ namespace workshop192.Domain
 {
     public class MarketSystem
     {
-
         public static void init()
-        {
-            
+        {       
             int addNewDataToDB = 0;
             string[] linesConfig=null;
             string filePathConfig = null;
@@ -64,19 +62,18 @@ namespace workshop192.Domain
                 return;
             }
 
-
             if (IsTestsMode.isTest == true)
             {
                 initTestWitOutRead();
                 return;
             }
-
-
+            
             if (addNewDataToDB == 0)
             {
                 initWitOutRead();
                 return;
             }
+
             else
             {
                 string filePath = null;
@@ -102,8 +99,9 @@ namespace workshop192.Domain
                     }
                     else if (input[0] == "register")
                     {
-                        Session s = DBSession.getInstance().getSession(Int32.Parse(input[3]));
-                        s.register(input[1], input[2]);
+                        //Session s = DBSession.getInstance().getSession(Int32.Parse(input[3]));
+                        //s.register(input[1], input[2]);
+                        UserService.getInstance().register(Int32.Parse(input[3]), input[1], input[2]);
                     }
                     else if (input[0] == "init")
                     {
@@ -111,8 +109,9 @@ namespace workshop192.Domain
                     }
                     else if (input[0] == "login")
                     {
-                        Session s = DBSession.getInstance().getSession(Int32.Parse(input[3]));
-                        s.login(input[1], input[2]);
+                        //Session s = DBSession.getInstance().getSession(Int32.Parse(input[3]));
+                        //s.login(input[1], input[2]);
+                        UserService.getInstance().login(Int32.Parse(input[3]), input[1], input[2]);
                     }
                     else if (input[0] == "createStore")
                     {
@@ -170,9 +169,7 @@ namespace workshop192.Domain
 
                 }
             }
-
             
-
         }
         public static void initWitOutRead()
         {
@@ -188,6 +185,7 @@ namespace workshop192.Domain
             ConsistencySystem.getInstance().connectToSystem();
             NotificationsBridge.getInstance().setObserver(DomainBridge.getInstance());
         }
+
         public static void initTestWitOutRead()
         {
             SystemLogger.configureLogs();
@@ -201,7 +199,6 @@ namespace workshop192.Domain
             DeliveryService.getInstance().connectToSystem();
             ConsistencySystem.getInstance().connectToSystem();
             NotificationsBridge.getInstance().setObserver(DomainBridge.getInstance());
-
         }
 
         //  int sessionid = DBSession.getInstance().generate();
@@ -220,6 +217,5 @@ namespace workshop192.Domain
         // PaymentService.getInstance().connectToSystem();
         // DeliveryService.getInstance().connectToSystem();
         // ConsistencySystem.getInstance().connectToSystem();
-
     }
 }

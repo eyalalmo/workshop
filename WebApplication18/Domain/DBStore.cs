@@ -15,8 +15,7 @@ namespace workshop192.Domain
         public LinkedList<Store> stores;
         public LinkedList<StoreRole> storeRole;
         public static int nextStoreID = 0;
-
-
+        
         private DBStore()
         {
             if (IsTestsMode.isTest == false)
@@ -33,6 +32,7 @@ namespace workshop192.Domain
             }
 
         }
+
         public static DBStore getInstance()
         {
             if (instance == null)
@@ -46,6 +46,9 @@ namespace workshop192.Domain
 
         public void init()
         {
+            stores = new LinkedList<Store>();
+            storeRole = new LinkedList<StoreRole>();
+            nextStoreID = getNextStoreID();
             //init both
             if (instance == null)
                 instance = new DBStore();
@@ -66,8 +69,7 @@ namespace workshop192.Domain
                 connection.Close();
             }
         }
-
-
+        
         //private LinkedList<Store> initStores()
         //{
         //try
@@ -138,8 +140,7 @@ namespace workshop192.Domain
         //}
 
         //}
-
-
+        
         public void cleanDB()
         {
             stores = new LinkedList<Store>();

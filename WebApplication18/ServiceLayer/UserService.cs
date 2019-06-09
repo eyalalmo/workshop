@@ -57,8 +57,9 @@ namespace workshop192.ServiceLayer
                 throw new ArgumentException("Error: Illegal username or password");
             }
             String encrypted = encryptPassword(password);
-            db.register(user, username, password);
+            db.register(user, username, encrypted);
         }
+
         public string encryptPassword(string password)
         {
             MD5 md5 = MD5.Create();
