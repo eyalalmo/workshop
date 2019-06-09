@@ -379,3 +379,19 @@
 2019-06-08 18:51:05,068 INFO EventLog: User U3 has successfuly created a store
 2019-06-08 18:51:09,018 INFO EventLog: User U3 has successfuly created a store
 2019-06-08 19:01:20,296 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 19:03:31,320 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 19:05:36,757 INFO EventLog: User ey has successfuly logged in.
+2019-06-08 19:06:03,587 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-08 19:06:03,659 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-08 19:06:20,738 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-08 19:06:26,960 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-08 19:06:27,020 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-08 19:07:30,743 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-08 19:07:30,772 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-09 01:24:35,656 INFO EventLog: User ey has successfuly logged in.
+2019-06-09 01:40:16,128 INFO EventLog: User ey has logged out
+2019-06-09 01:40:23,464 INFO EventLog: User ey has successfuly logged in.
+2019-06-09 01:41:11,408 INFO EventLog: User ey has logged out
+2019-06-09 01:41:19,361 INFO EventLog: User eyal has successfuly logged in.
+2019-06-09 02:06:54,662 ERROR EventLog: Error in adding an owner : Error: You don't have permissions to appoint an owner
+2019-06-09 11:15:11,947 ERROR EventLog: Login : Error: Username does not exist

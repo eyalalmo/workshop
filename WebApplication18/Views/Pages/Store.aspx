@@ -7,7 +7,7 @@
     
     Store id: <font style="color:red"><b> <%: ViewData["storeId"] %> </b></font><br><br>
     <div class="container">
-	    <div id="storeProduccts" class="row">
+	    <div id="storeProducts">
         </div>
 	</div>
 
@@ -15,7 +15,7 @@
         $(document).ready(function () {
             
             var storeId =<%=ViewData["storeId"]%>;
-            var doc = document.getElementById('storeProduccts');
+            var doc = document.getElementById('storeProducts');
             var getUrl = window.location;
             var baseUrl = getUrl.protocol + "//" + getUrl.host
             //////////////////////////////////////
