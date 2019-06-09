@@ -50,7 +50,13 @@ namespace workshop192.Domain
             return null;
         }
 
+        public void addToCartNoDBUpdate(Product product, int amount)
+        {
 
+            productList.Add(product, amount);
+            productsActualPrice.Add(product, product.getPrice());
+            
+        }
         public void addToCart(Product product, int amount)
         {
             store.checkPolicy(product, amount);

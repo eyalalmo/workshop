@@ -411,3 +411,20 @@
 2019-06-08 15:32:11,097 ERROR EventLog: Policy get :?????? ?????? ?? ???? ???? 'workshop192.Domain.DoesntExistException'.
 2019-06-08 15:32:11,124 ERROR EventLog: Policy get :?????? ?????? ?? ???? ???? 'workshop192.Domain.DoesntExistException'.
 2019-06-08 15:32:17,746 ERROR EventLog: Policy get :?????? ?????? ?? ???? ???? 'workshop192.Domain.DoesntExistException'.
+2019-06-09 00:48:33,896 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 00:48:38,764 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 00:48:42,475 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 00:48:46,089 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 00:49:26,201 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 00:49:35,178 INFO EventLog: User b has successfuly registered
+2019-06-09 00:49:44,391 INFO EventLog: User b has successfuly logged in.
+2019-06-09 00:49:51,802 INFO EventLog: User b has logged out
+2019-06-09 00:49:58,589 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 00:50:00,950 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 00:50:03,086 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 00:50:04,848 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 00:50:06,277 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 00:51:40,458 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 00:55:30,208 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 09:37:10,107 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 09:39:50,303 INFO EventLog: User u2 has successfuly logged in.

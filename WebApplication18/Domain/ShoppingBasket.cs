@@ -98,7 +98,7 @@ namespace workshop192.Domain
                 sc = new ShoppingCart(storeID);
                 shoppingCarts.Add(storeID, sc);
             }
-            sc.addToCart(product, amount);
+            sc.addToCartNoDBUpdate(product, amount);
 
         }
         public void removeFromCart(int productId)
