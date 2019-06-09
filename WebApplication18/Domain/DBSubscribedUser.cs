@@ -237,15 +237,17 @@ namespace workshop192.Domain
                     }
                     SubscribedUser su = new SubscribedUser(username, password, sb);
                     List<StoreRole> storeRoles = su.getStoreRoles();
-                  
-                    foreach (StoreRole sr in DBStore.getInstance().getAllStoreRoles(username))
-                    {
-                        if(sr.getUser().getUsername()==username)
-                        {
-                            storeRoles.Add(sr);
-                        }
-                    }
                     users.Add(username, su);
+                    DBStore.getInstance().getAllStoreRoles(username);
+
+                    //foreach (StoreRole sr in DBStore.getInstance().getAllStoreRoles(username))
+                    //{
+                    //    if(sr.getUser().getUsername()==username)
+                    //    {
+                    //        storeRoles.Add(sr);
+                    //    }
+                    //}
+                    //users.Add(username, su);
                     return su;
                 }
 

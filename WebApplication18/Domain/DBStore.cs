@@ -48,7 +48,7 @@ namespace workshop192.Domain
         {
             stores = new LinkedList<Store>();
             storeRole = new LinkedList<StoreRole>();
-            nextStoreID = getNextStoreID();
+            nextStoreID = 0;
             //init both
             if (instance == null)
                 instance = new DBStore();
@@ -69,7 +69,9 @@ namespace workshop192.Domain
                 connection.Close();
             }
         }
-        
+
+       
+
         //private LinkedList<Store> initStores()
         //{
         //try
@@ -140,7 +142,7 @@ namespace workshop192.Domain
         //}
 
         //}
-        
+
         public void cleanDB()
         {
             stores = new LinkedList<Store>();
@@ -600,6 +602,29 @@ namespace workshop192.Domain
             {
                 connection.Close();
                 throw new StoreException("cant get roles from db");
+            }
+        }
+        public void deleteAllTable()
+        {
+            try
+            {
+                connection.Open();
+                connection.Execute("DELETE FROM Stores \n"
+                                   + " DELETE FROM PendingOwners \n"
+                                  + "  DELETE FROM StoreRoles \n"
+                                   + " DELETE FROM Register \n"
+                                   + " DELETE FROM Product \n"
+                                   + " DELETE FROM BasketCart \n"
+                                   + " DELETE FROM CartProduct \n"
+                                   + " DELETE FROM Cookie \n"
+                                   + " DELETE FROM Notification \n"
+                                   + "UPDATE [dbo].[IDS] SET id = 0 WHERE type = 'store'"
+                                   );
+               connection.Close();
+            }
+            catch(Exception e)
+            {
+                connection.Close();
             }
         }
     }
