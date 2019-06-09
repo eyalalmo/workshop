@@ -415,3 +415,5 @@
 2019-06-09 13:06:18,714 INFO EventLog: User u2 has logged out
 2019-06-09 13:07:30,991 ERROR EventLog: Login : Error: Username does not exist
 2019-06-09 13:07:36,798 INFO EventLog: User u2 has successfuly logged in.
+2019-06-09 15:37:40,484 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 15:37:43,917 INFO EventLog: User u2 has successfuly logged in.
