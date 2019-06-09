@@ -1,3 +1,4 @@
+deleteDB
 init
 createSession
 createSession

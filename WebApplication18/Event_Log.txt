@@ -417,3 +417,60 @@
 2019-06-09 13:07:36,798 INFO EventLog: User u2 has successfuly logged in.
 2019-06-09 15:37:40,484 ERROR EventLog: Login : Error: Username does not exist
 2019-06-09 15:37:43,917 INFO EventLog: User u2 has successfuly logged in.
+2019-06-09 15:59:22,698 INFO EventLog: User u2 has successfuly registered
+2019-06-09 15:59:22,976 INFO EventLog: User u3 has successfuly registered
+2019-06-09 15:59:23,234 INFO EventLog: User u4 has successfuly registered
+2019-06-09 15:59:23,515 INFO EventLog: User u5 has successfuly registered
+2019-06-09 15:59:23,718 INFO EventLog: User u2 has successfuly logged in.
+2019-06-09 15:59:24,207 INFO EventLog: User u2 has successfuly created a store
+2019-06-09 16:00:59,839 INFO EventLog: User u2 has successfuly registered
+2019-06-09 16:01:00,143 INFO EventLog: User u3 has successfuly registered
+2019-06-09 16:01:00,411 INFO EventLog: User u4 has successfuly registered
+2019-06-09 16:01:00,681 INFO EventLog: User u5 has successfuly registered
+2019-06-09 16:01:00,880 INFO EventLog: User u2 has successfuly logged in.
+2019-06-09 16:01:01,398 INFO EventLog: User u2 has successfuly created a store
+2019-06-09 16:04:45,475 INFO EventLog: User u2 has successfuly registered
+2019-06-09 16:04:47,957 INFO EventLog: User u3 has successfuly registered
+2019-06-09 16:04:50,791 INFO EventLog: User u4 has successfuly registered
+2019-06-09 16:04:52,909 INFO EventLog: User u5 has successfuly registered
+2019-06-09 16:04:55,250 INFO EventLog: User u2 has successfuly logged in.
+2019-06-09 16:04:58,436 INFO EventLog: User u2 has successfuly created a store
+2019-06-09 16:06:05,646 INFO EventLog: User u2 has successfuly registered
+2019-06-09 16:06:05,944 INFO EventLog: User u3 has successfuly registered
+2019-06-09 16:06:06,221 INFO EventLog: User u4 has successfuly registered
+2019-06-09 16:06:06,498 INFO EventLog: User u5 has successfuly registered
+2019-06-09 16:06:06,686 INFO EventLog: User u2 has successfuly logged in.
+2019-06-09 16:06:17,719 INFO EventLog: User u2 has successfuly created a store
+2019-06-09 16:06:34,061 INFO EventLog: User u2 has successfuly registered
+2019-06-09 16:06:34,338 INFO EventLog: User u3 has successfuly registered
+2019-06-09 16:06:34,599 INFO EventLog: User u4 has successfuly registered
+2019-06-09 16:06:34,862 INFO EventLog: User u5 has successfuly registered
+2019-06-09 16:06:35,065 INFO EventLog: User u2 has successfuly logged in.
+2019-06-09 16:07:58,619 INFO EventLog: User u2 has successfuly registered
+2019-06-09 16:07:58,893 INFO EventLog: User u3 has successfuly registered
+2019-06-09 16:07:59,174 INFO EventLog: User u4 has successfuly registered
+2019-06-09 16:07:59,429 INFO EventLog: User u5 has successfuly registered
+2019-06-09 16:07:59,620 INFO EventLog: User u2 has successfuly logged in.
+2019-06-09 16:10:53,219 INFO EventLog: User u2 has successfuly registered
+2019-06-09 16:10:53,499 INFO EventLog: User u3 has successfuly registered
+2019-06-09 16:10:53,802 INFO EventLog: User u4 has successfuly registered
+2019-06-09 16:10:54,098 INFO EventLog: User u5 has successfuly registered
+2019-06-09 16:10:54,307 INFO EventLog: User u2 has successfuly logged in.
+2019-06-09 16:14:46,181 INFO EventLog: User u2 has successfuly registered
+2019-06-09 16:14:46,466 INFO EventLog: User u3 has successfuly registered
+2019-06-09 16:14:46,730 INFO EventLog: User u4 has successfuly registered
+2019-06-09 16:14:47,009 INFO EventLog: User u5 has successfuly registered
+2019-06-09 16:14:47,226 INFO EventLog: User u2 has successfuly logged in.
+2019-06-09 16:14:47,737 INFO EventLog: User u2 has successfuly created a store
+2019-06-09 16:15:24,755 INFO EventLog: User u2 has successfuly logged in.
+2019-06-09 16:15:33,181 INFO EventLog: User u2 has logged out
+2019-06-09 16:15:37,333 INFO EventLog: User u3 has successfuly logged in.
+2019-06-09 16:16:20,248 INFO EventLog: User u3 has logged out
+2019-06-09 16:16:45,266 INFO EventLog: User u3 has successfuly logged in.
+2019-06-09 16:16:47,350 INFO EventLog: User u3 has logged out
+2019-06-09 16:16:51,960 INFO EventLog: User u2 has successfuly logged in.
+2019-06-09 16:17:34,070 INFO EventLog: A purchase has been made
+2019-06-09 16:17:39,851 INFO EventLog: User u2 has logged out
+2019-06-09 16:17:53,516 INFO EventLog: User u2 has successfuly logged in.
+2019-06-09 16:17:56,552 INFO EventLog: User u2 has logged out
+2019-06-09 16:18:00,739 INFO EventLog: User u2 has successfuly logged in.

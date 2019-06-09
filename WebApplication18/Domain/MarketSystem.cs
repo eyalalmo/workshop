@@ -92,6 +92,7 @@ namespace workshop192.Domain
                 foreach (string line in lines)
                 {
                     string[] input = line.Split(' ');
+
                     if (input[0] == "createSession")
                     {
                         int sessionid = DBSession.getInstance().generate();
@@ -102,6 +103,11 @@ namespace workshop192.Domain
                         //Session s = DBSession.getInstance().getSession(Int32.Parse(input[3]));
                         //s.register(input[1], input[2]);
                         UserService.getInstance().register(Int32.Parse(input[3]), input[1], input[2]);
+                    }
+                    else if (input[0] == "deleteDB")
+                    {
+                        DBStore.getInstance().deleteAllTable();
+                       
                     }
                     else if (input[0] == "init")
                     {
