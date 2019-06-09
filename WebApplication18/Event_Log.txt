@@ -379,3 +379,9 @@
 2019-06-08 18:51:05,068 INFO EventLog: User U3 has successfuly created a store
 2019-06-08 18:51:09,018 INFO EventLog: User U3 has successfuly created a store
 2019-06-08 19:01:20,296 INFO EventLog: User u2 has successfuly logged in.
+2019-06-09 09:40:45,457 INFO EventLog: User yael has successfuly registered
+2019-06-09 09:41:45,553 ERROR EventLog: Login : Error: Incorrect password
+2019-06-09 09:41:50,462 ERROR EventLog: Login : Error: Incorrect password
+2019-06-09 09:41:59,000 INFO EventLog: User yael2 has successfuly registered
+2019-06-09 09:42:04,116 ERROR EventLog: Login : Error: Incorrect password
+2019-06-09 09:42:26,700 INFO EventLog: User u2 has successfuly logged in.

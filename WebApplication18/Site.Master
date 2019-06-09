@@ -57,22 +57,23 @@
                 </div>
                 <div class ="navi">
                     <ul class="nav navbar-nav">
-                        <li><a runat="server" href="/About"><i class="fa fa-fw fa-info-circle"></i> About</a></li>
+                        <li><a runat="server" href="/About"><span class="glyphicon glyphicon-info-sign"></span> About</a></li>
                         <li><a runat="server" href="/Contact"><i class="fa fa-fw fa-envelope"></i> Contact</a></li>
                         <li><a runat="server" id="AllProducts" name="AllProducts" href="/AllProducts" visible="true"><span class="glyphicon glyphicon-barcode"></span> Catalog</a></li>
                         <li><a runat="server" id="Admin" name="Admin" href="/AdminPan" visible="false">Admin Options</a></li>
                      </ul>
                     
                      <ul class="nav navbar-nav navbar-right">
-                        <li><a runat="server" id="Basket" name="Basket" href="/Basket" visible="true"> </a></li>
+                        <li><a runat="server" id="Basket" name="Basket" href="/Basket" visible="true"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
                         <li><a runat="server" id="login" name="login" href="/login" visible="true" ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                         <li><a runat="server" id="register" name="register" href="register" visible="true" style="text-align:right"><span class="glyphicon glyphicon-registration-mark"></span> Register</a></li>
                         <li class="nav-item dropdown">
-                            <a runat="server" class="nav-link dropdown-toggle" id="myAccount" name="myAccount" data-toggle="dropdown" visible="false">
-                               
+                            <a runat="server" href="#" class="nav-link dropdown-toggle" id="myAccount" name="myAccount" data-toggle="dropdown" visible="false">
+                                <i class="fa fa-fw fa-user"></i> My Account <i class="fa fa-fw fa-sort-down"></i>
                             </a>
                           <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#" id="editStore">Stores Managment</a>
+                            <a class="dropdown-item" href="#" id="AddStore">Add store</a>
+                            <a class="dropdown-item" href="#" id="editStore">Edit store</a>
                           </div>
                         </li>
                          <li><a runat="server" id="logout" name="logout" href="/logout" visible="false"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -92,8 +93,23 @@
  
         <script type="text/javascript">
               $(document).ready(function () {
+             $("#AddStore").click(function () {
+               event.preventDefault();
+               var getUrl = window.location;
+               var baseUrl = getUrl.protocol + "//" + getUrl.host
+               window.location.href = baseUrl+"/AddStore";
+            });
+            $("#editStore").click(function () {
+                event.preventDefault();
+                var getUrl = window.location;
+               var baseUrl = getUrl.protocol + "//" + getUrl.host
+               window.location.href = baseUrl+"/EditStore";
+              
+            });
 
-                  var ws = new WebSocket("wss://" + window.location.host + "/api/WebSocket/");
+                  //<script type="text/javascript">
+
+                  var ws = new WebSocket("ws://" + window.location.host + "/api/WebSocket/");
 
                   ws.onopen = function () {
                       //alert("connected");
@@ -108,20 +124,6 @@
                       //alert("disconnected");
                   };
 
-             $("#AddStore").click(function () {
-               event.preventDefault();
-               var getUrl = window.location;
-               var baseUrl = getUrl.protocol + "//" + getUrl.host
-               window.location.href = baseUrl+"/AddStore";
-            });
-            $("#editStore").click(function () {
-                event.preventDefault();
-                var getUrl = window.location;
-               var baseUrl = getUrl.protocol + "//" + getUrl.host
-               window.location.href = baseUrl+"/EditStore";
-              
-            });
-                  
                   //$("#btnLogin").click(function () {
                   //if (ws.readyState == WebSocket.OPEN) {
                   //    ws.send($("name5").val());
