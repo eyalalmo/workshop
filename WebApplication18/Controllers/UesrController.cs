@@ -157,9 +157,14 @@ namespace WebApplication18.Controllers
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
                 UserService.getInstance().purchaseBasket(session, address,  creditcard,  month,  year,  holder,  cvv);
-                return "";
+                return "OK";
 
             }
+            catch (SuccessPaymentExeption e)
+            {
+                return "OK";
+            }
+
             catch (ClientException e)
             {
                 SystemLogger.getEventLog().Error("Checkout : " + e.Message.ToString());

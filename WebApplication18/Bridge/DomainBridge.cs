@@ -262,7 +262,7 @@ namespace workshop192.Bridge
             p.setQuantityLeft(setquantityLeft);
         }
 
-        public void purchaseBasket(int sessionid, string address, string creditcard, string month, string year, string holder, string cvv)
+        public  void purchaseBasket(int sessionid, string address, string creditcard, string month, string year, string holder, string cvv)
         {
             Session session = DBSession.getInstance().getSession(sessionid);
             LinkedList<Tuple<string, string>> messages = new LinkedList<Tuple<string, string>>();
@@ -660,8 +660,8 @@ namespace workshop192.Bridge
             Session user = DBSession.getInstance().getSession(sessionid);
             user.getShoppingBasket().changeQuantityOfProduct(store.getStoreID(), p, newAmount);
         }
-        
-        public void checkoutBasket(int sessionid, string address, string creditcard, string month, string year, string holder, string cvv)
+
+        public  void checkoutBasket(int sessionid, string address, string creditcard, string month, string year, string holder, string cvv)
         {
             Session user = DBSession.getInstance().getSession(sessionid);
 
@@ -671,6 +671,8 @@ namespace workshop192.Bridge
         public string getAllStores(int session1)
         {
             Session session = DBSession.getInstance().getSession(session1);
+            string userName = session.getSubscribedUser().getUsername();
+            DBStore.getInstance().initStoresAndRolesForUserName(userName);
             List<StoreRole> lst = session.getSubscribedUser().getStoreRoles();
             LinkedList<Store> stores = new LinkedList<Store>();
             foreach (StoreRole element in lst)

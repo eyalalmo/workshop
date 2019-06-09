@@ -237,161 +237,194 @@
 2019-06-01 21:22:54,888 INFO EventLog: User eee1 has logged out
 2019-06-01 21:23:02,552 INFO EventLog: User u1 has successfuly logged in.
 2019-06-01 21:23:13,604 ERROR EventLog: Error in adding an owner : Error: No such username
-2019-06-01 23:11:10,111 INFO EventLog: User u3 has successfuly logged in.
-2019-06-01 23:11:20,700 ERROR EventLog: Error in adding to shopping cart : Error: The amount asked is larger than the quantity left
-2019-06-01 23:26:26,434 INFO EventLog: User u2 has successfuly created a store
-2019-06-01 23:35:21,918 INFO EventLog: User u2 has successfuly created a store
-2019-06-01 23:36:50,246 ERROR EventLog: Login : Error: Username does not exist
-2019-06-01 23:36:57,000 INFO EventLog: User u2 has successfuly logged in.
-2019-06-01 23:39:56,366 INFO EventLog: User u3 has successfuly logged in.
-2019-06-01 23:46:25,990 INFO EventLog: User u3 has successfuly logged in.
-2019-06-01 23:47:07,016 ERROR EventLog: Error in adding to shopping cart : Error: Product already exists on Cart
-2019-06-02 00:31:59,486 INFO EventLog: User u3 has successfuly logged in.
-2019-06-02 00:39:36,761 INFO EventLog: User u3 has successfuly logged in.
-2019-06-02 00:41:10,231 INFO EventLog: User u3 has successfuly logged in.
-2019-06-02 00:46:21,590 INFO EventLog: User u3 has successfuly logged in.
-2019-06-02 00:51:22,961 INFO EventLog: User u3 has successfuly logged in.
-2019-06-02 01:08:51,347 INFO EventLog: User u2 has successfuly created a store
-2019-06-02 01:11:54,725 INFO EventLog: User u2 has successfuly created a store
-2019-06-02 01:12:14,330 INFO EventLog: User u1 has successfuly logged in.
-2019-06-02 01:12:19,198 INFO EventLog: User u1 has logged out
-2019-06-02 01:12:23,878 INFO EventLog: User u2 has successfuly logged in.
-2019-06-02 01:17:41,964 INFO EventLog: User u2 has successfuly logged in.
-2019-06-02 01:27:27,143 INFO EventLog: User u2 has successfuly logged in.
-2019-06-02 01:27:38,835 ERROR EventLog: Remove Role Error: cant remove role
-2019-06-02 01:29:51,040 ERROR EventLog: Remove Role Error: cant remove role
-2019-06-02 01:30:37,217 ERROR EventLog: Remove Role Error: cant remove role
-2019-06-02 01:31:24,625 ERROR EventLog: Remove Role Error: cant remove role
-2019-06-02 01:42:17,005 INFO EventLog: User u2 has successfuly logged in.
-2019-06-02 01:52:58,301 INFO EventLog: User u2 has successfuly created a store
-2019-06-02 01:55:08,743 INFO EventLog: User u2 has successfuly logged in.
-2019-06-02 02:11:42,807 INFO EventLog: User u2 has successfuly logged in.
-2019-06-07 18:46:15,222 INFO EventLog: User u1 has successfuly logged in.
-2019-06-07 18:46:27,267 INFO EventLog: User u1 has successfuly created a store
-2019-06-07 18:46:44,198 ERROR EventLog: Error in adding an owner : Error: No such username
-2019-06-07 18:47:18,825 INFO EventLog: User u4 has successfuly logged in.
-2019-06-07 18:47:24,427 INFO EventLog: User u4 has logged out
-2019-06-07 18:48:57,296 INFO EventLog: User u3 has successfuly logged in.
-2019-06-07 18:50:06,131 INFO EventLog: User u4 has successfuly logged in.
-2019-06-07 18:57:48,895 INFO EventLog: User u4 has logged out
-2019-06-07 18:57:54,024 INFO EventLog: User u1 has successfuly logged in.
-2019-06-07 18:58:18,745 INFO EventLog: User u1 has logged out
-2019-06-07 18:58:59,410 INFO EventLog: User u1 has successfuly logged in.
-2019-06-07 18:59:15,273 INFO EventLog: User u1 has logged out
-2019-06-07 18:59:21,063 INFO EventLog: User u1 has successfuly logged in.
-2019-06-07 19:05:17,540 ERROR EventLog: Login : Error: Username does not exist
-2019-06-07 19:05:28,264 INFO EventLog: User u2 has successfuly logged in.
-2019-06-07 19:06:08,093 INFO EventLog: User u3 has successfuly logged in.
-2019-06-07 19:16:17,121 INFO EventLog: User ey has successfuly registered
-2019-06-07 19:16:48,117 INFO EventLog: User ey has successfuly registered
-2019-06-07 19:17:16,206 ERROR EventLog: Register : Error: Username already exists
-2019-06-07 19:17:32,061 ERROR EventLog: Login : Error: Incorrect password
-2019-06-07 19:18:06,510 INFO EventLog: User ey has successfuly logged in.
-2019-06-07 19:18:32,604 INFO EventLog: User ey has logged out
-2019-06-07 19:18:50,365 ERROR EventLog: Login : Error: Incorrect password
-2019-06-07 19:18:59,652 INFO EventLog: User ey has successfuly logged in.
-2019-06-07 19:19:17,350 INFO EventLog: User ey has logged out
-2019-06-07 19:22:19,846 INFO EventLog: User ey has successfuly logged in.
-2019-06-07 19:23:51,422 INFO EventLog: User ey has logged out
-2019-06-07 19:24:28,835 INFO EventLog: User ey has successfuly logged in.
-2019-06-07 20:02:46,204 ERROR EventLog: Login : Error: Username does not exist
-2019-06-07 20:02:55,752 ERROR EventLog: Register : Error: Username already exists
-2019-06-07 20:03:07,511 INFO EventLog: User ey has successfuly logged in.
-2019-06-07 20:06:52,210 INFO EventLog: User eyal has successfuly registered
-2019-06-07 20:07:11,353 INFO EventLog: User etay has successfuly registered
-2019-06-07 20:07:58,806 INFO EventLog: User eyal has successfuly logged in.
-2019-06-07 20:08:11,893 INFO EventLog: User ey has successfuly logged in.
-2019-06-07 20:08:35,645 INFO EventLog: User eyal has successfuly created a store
-2019-06-07 20:10:27,330 INFO EventLog: User ey has successfuly logged in.
-2019-06-07 20:11:10,438 INFO EventLog: User u3 has successfuly logged in.
-2019-06-07 20:14:40,257 INFO EventLog: User u3 has logged out
-2019-06-07 20:14:44,271 ERROR EventLog: Login : Error: Username already logged in
-2019-06-07 20:14:49,587 INFO EventLog: User eyal has successfuly logged in.
-2019-06-07 20:21:44,788 ERROR EventLog: Checkout : Error: Cannot complete purchase- a product2 does not have enough quantity left
-2019-06-07 20:45:24,223 INFO EventLog: User u3 has successfuly logged in.
-2019-06-07 20:48:32,013 INFO EventLog: User ey has successfuly logged in.
-2019-06-07 20:49:00,734 INFO EventLog: User ey has logged out
-2019-06-07 20:49:13,826 INFO EventLog: User u3 has successfuly logged in.
-2019-06-07 20:56:13,506 INFO EventLog: User ey has successfuly logged in.
-2019-06-07 21:08:55,087 ERROR EventLog: Error in adding to shopping cart : Error: The amount asked is larger than the quantity left
-2019-06-08 01:45:29,545 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 01:45:50,710 ERROR EventLog: Add Product : error - rank must be a number between 1 to 5
-2019-06-08 02:18:11,924 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 02:34:32,665 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 02:40:26,104 ERROR EventLog: Login : Error: Username does not exist
-2019-06-08 02:40:30,944 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 02:43:51,942 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 02:47:37,598 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 02:52:21,862 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 02:53:24,144 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 02:54:06,107 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 02:58:06,305 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 03:18:49,360 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 03:25:32,585 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 03:44:06,480 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 03:53:36,105 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 03:55:46,433 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 03:58:29,445 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 03:58:37,544 ERROR EventLog: Error in adding to shopping cart : Error: Product already exists on Cart
-2019-06-08 03:59:42,378 INFO EventLog: User ey has logged out
-2019-06-08 03:59:46,731 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 04:05:17,735 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 04:12:01,112 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 12:38:40,855 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 12:45:01,906 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 12:45:28,854 ERROR EventLog: Error in adding to shopping cart : Error: Product already exists on Cart
-2019-06-08 12:56:27,017 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 13:07:07,910 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 13:07:45,569 INFO EventLog: User ey has logged out
-2019-06-08 13:08:13,142 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 13:10:54,641 INFO EventLog: User ey has logged out
-2019-06-08 13:12:02,615 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 13:30:07,418 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 13:34:10,569 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 13:53:36,574 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 14:07:46,339 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 14:23:09,172 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
-2019-06-08 14:23:09,172 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
-2019-06-08 14:24:22,925 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
-2019-06-08 14:24:22,926 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
-2019-06-08 15:30:45,092 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 17:25:29,711 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 17:26:25,675 INFO EventLog: User ey has logged out
-2019-06-08 17:26:32,546 INFO EventLog: User u2 has successfuly logged in.
-2019-06-08 17:26:58,958 INFO EventLog: User u2 has successfuly logged in.
-2019-06-08 17:41:09,027 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 17:43:21,485 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 18:22:24,382 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 18:28:13,658 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 18:35:13,782 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 18:46:57,662 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 18:47:07,782 INFO EventLog: User ey has successfuly created a store
-2019-06-08 18:47:51,488 INFO EventLog: User ey has successfuly created a store
-2019-06-08 18:49:44,679 INFO EventLog: User ey has successfuly created a store
-2019-06-08 18:49:51,093 INFO EventLog: User ey has successfuly created a store
-2019-06-08 18:50:07,269 INFO EventLog: User ey has successfuly created a store
-2019-06-08 18:50:19,729 INFO EventLog: User ey has logged out
-2019-06-08 18:50:24,420 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 18:50:39,646 INFO EventLog: User ey has logged out
-2019-06-08 18:50:45,123 INFO EventLog: User U3 has successfuly logged in.
-2019-06-08 18:50:56,929 INFO EventLog: User U3 has successfuly created a store
-2019-06-08 18:51:00,902 INFO EventLog: User U3 has successfuly created a store
-2019-06-08 18:51:05,068 INFO EventLog: User U3 has successfuly created a store
-2019-06-08 18:51:09,018 INFO EventLog: User U3 has successfuly created a store
-2019-06-08 19:01:20,296 INFO EventLog: User u2 has successfuly logged in.
-2019-06-08 19:03:31,320 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 19:05:36,757 INFO EventLog: User ey has successfuly logged in.
-2019-06-08 19:06:03,587 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
-2019-06-08 19:06:03,659 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
-2019-06-08 19:06:20,738 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
-2019-06-08 19:06:26,960 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
-2019-06-08 19:06:27,020 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
-2019-06-08 19:07:30,743 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
-2019-06-08 19:07:30,772 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
-2019-06-09 01:24:35,656 INFO EventLog: User ey has successfuly logged in.
-2019-06-09 01:40:16,128 INFO EventLog: User ey has logged out
-2019-06-09 01:40:23,464 INFO EventLog: User ey has successfuly logged in.
-2019-06-09 01:41:11,408 INFO EventLog: User ey has logged out
-2019-06-09 01:41:19,361 INFO EventLog: User eyal has successfuly logged in.
-2019-06-09 02:06:54,662 ERROR EventLog: Error in adding an owner : Error: You don't have permissions to appoint an owner
-2019-06-09 11:15:11,947 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 12:19:11,481 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 12:19:16,355 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 12:19:23,215 INFO EventLog: User u3 has successfuly logged in.
+2019-06-07 12:19:30,314 INFO EventLog: User u3 has logged out
+2019-06-07 12:19:38,067 INFO EventLog: User u2 has successfuly logged in.
+2019-06-07 13:03:18,252 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 13:03:23,483 INFO EventLog: User u3 has successfuly logged in.
+2019-06-07 13:03:44,997 INFO EventLog: User u3 has logged out
+2019-06-07 13:03:51,385 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 13:04:32,508 INFO EventLog: User u3 has successfuly logged in.
+2019-06-07 13:12:41,954 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 13:12:46,503 INFO EventLog: User u3 has successfuly logged in.
+2019-06-07 13:14:10,282 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 13:14:14,141 INFO EventLog: User u3 has successfuly logged in.
+2019-06-07 13:19:58,767 INFO EventLog: User u2 has successfuly created a store
+2019-06-07 13:23:56,592 INFO EventLog: User u2 has successfuly created a store
+2019-06-07 13:51:35,033 INFO EventLog: User u2 has successfuly created a store
+2019-06-07 13:57:30,114 INFO EventLog: User u2 has successfuly created a store
+2019-06-07 14:00:47,880 INFO EventLog: User u2 has successfuly created a store
+2019-06-07 14:03:36,768 INFO EventLog: User u2 has successfuly logged in.
+2019-06-07 14:31:08,144 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 14:47:50,421 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 14:57:55,355 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 14:58:43,002 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 14:58:57,222 INFO EventLog: User u2 has successfuly logged in.
+2019-06-07 15:00:32,875 INFO EventLog: User u2 has logged out
+2019-06-07 15:00:44,303 INFO EventLog: User u3 has successfuly logged in.
+2019-06-07 15:00:47,807 INFO EventLog: User u3 has logged out
+2019-06-07 15:00:55,711 INFO EventLog: User u2 has successfuly logged in.
+2019-06-07 15:01:41,269 INFO EventLog: User u2 has logged out
+2019-06-07 15:01:47,291 INFO EventLog: User u3 has successfuly logged in.
+2019-06-07 15:02:11,441 INFO EventLog: User u3 has logged out
+2019-06-07 15:02:17,956 INFO EventLog: User u3 has successfuly logged in.
+2019-06-07 15:02:27,786 INFO EventLog: User u3 has successfuly created a store
+2019-06-07 15:02:41,241 INFO EventLog: User u3 has logged out
+2019-06-07 15:02:46,866 INFO EventLog: User u4 has successfuly logged in.
+2019-06-07 15:04:59,265 INFO EventLog: User u4 has logged out
+2019-06-07 15:05:09,673 INFO EventLog: User u3 has successfuly logged in.
+2019-06-07 15:05:21,943 INFO EventLog: User u3 has successfuly created a store
+2019-06-07 15:05:26,694 INFO EventLog: User u3 has logged out
+2019-06-07 15:05:31,180 INFO EventLog: User u2 has successfuly logged in.
+2019-06-07 15:05:34,662 INFO EventLog: User u2 has logged out
+2019-06-07 15:05:41,199 INFO EventLog: User u3 has successfuly logged in.
+2019-06-07 15:06:10,092 INFO EventLog: User u3 has logged out
+2019-06-07 15:06:16,131 INFO EventLog: User u5 has successfuly logged in.
+2019-06-07 15:06:24,033 INFO EventLog: User u5 has logged out
+2019-06-07 15:06:49,388 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 15:06:54,918 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 15:06:59,123 INFO EventLog: User u4 has successfuly logged in.
+2019-06-07 15:07:26,695 INFO EventLog: User u4 has logged out
+2019-06-07 15:07:32,128 INFO EventLog: User u4 has successfuly logged in.
+2019-06-07 15:07:37,832 INFO EventLog: User u4 has logged out
+2019-06-07 15:07:42,616 INFO EventLog: User u5 has successfuly logged in.
+2019-06-07 15:07:54,565 INFO EventLog: User u5 has logged out
+2019-06-07 15:08:00,039 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 15:08:04,558 INFO EventLog: User u1 has successfuly logged in.
+2019-06-07 15:08:08,967 INFO EventLog: User u1 has logged out
+2019-06-07 17:59:31,674 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 17:59:37,018 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 17:59:41,382 INFO EventLog: User u2 has successfuly logged in.
+2019-06-07 18:36:19,963 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 18:36:26,488 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 18:36:33,131 INFO EventLog: User u4 has successfuly logged in.
+2019-06-07 18:41:45,841 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 18:41:50,456 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 18:41:52,801 INFO EventLog: User u3 has successfuly logged in.
+2019-06-07 18:43:17,809 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 18:43:21,599 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 18:43:23,831 INFO EventLog: User u3 has successfuly logged in.
+2019-06-07 18:45:39,777 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 18:45:42,587 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 18:45:44,814 INFO EventLog: User u2 has successfuly logged in.
+2019-06-07 18:46:11,796 INFO EventLog: User u2 has logged out
+2019-06-07 18:46:16,935 INFO EventLog: User u2 has successfuly logged in.
+2019-06-07 18:46:49,022 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 18:46:51,710 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 18:46:51,891 INFO EventLog: User u2 has successfuly logged in.
+2019-06-07 18:49:45,225 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 18:49:53,082 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 18:49:58,701 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 19:00:43,481 INFO EventLog: User u2 has successfuly created a store
+2019-06-07 19:01:03,847 INFO EventLog: User u2 has successfuly logged in.
+2019-06-07 19:01:59,617 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 19:02:01,727 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 19:02:03,362 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 19:02:04,647 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 19:02:07,499 ERROR EventLog: Login : Error: Username does not exist
+2019-06-07 22:06:05,736 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 12:38:54,924 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 12:38:57,924 INFO EventLog: User u3 has successfuly logged in.
+2019-06-08 12:41:50,669 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 12:41:52,940 INFO EventLog: User u3 has successfuly logged in.
+2019-06-08 12:59:54,834 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 12:59:56,779 ERROR EventLog: Login : Error: Incorrect password
+2019-06-08 12:59:58,494 ERROR EventLog: Login : Error: Incorrect password
+2019-06-08 13:00:01,508 INFO EventLog: User u3 has successfuly logged in.
+2019-06-08 13:03:40,473 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 13:03:43,042 INFO EventLog: User u3 has successfuly logged in.
+2019-06-08 13:06:54,179 ERROR EventLog: Checkout : Error: Cannot complete purchase- dsadsa does not have enough quantity left
+2019-06-08 13:07:44,897 ERROR EventLog: Checkout : Error: Cannot complete purchase- dsadsa does not have enough quantity left
+2019-06-08 13:08:23,686 ERROR EventLog: Checkout : Error: Cannot complete purchase- dsadsa does not have enough quantity left
+2019-06-08 13:08:31,399 ERROR EventLog: Checkout : Error: Cannot complete purchase- dsadsa does not have enough quantity left
+2019-06-08 13:08:59,702 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 13:09:01,704 INFO EventLog: User u3 has successfuly logged in.
+2019-06-08 13:16:47,441 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 13:16:49,632 INFO EventLog: User u3 has successfuly logged in.
+2019-06-08 13:17:34,143 ERROR EventLog: Checkout : Error: Cannot complete purchase- dsadsa does not have enough quantity left
+2019-06-08 13:29:21,458 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 13:29:23,428 INFO EventLog: User u3 has successfuly logged in.
+2019-06-08 13:30:36,661 ERROR EventLog: Checkout : Error: Cannot complete purchase- dsadsa does not have enough quantity left
+2019-06-08 13:31:33,739 ERROR EventLog: Checkout : Error: Cannot complete purchase- hdjsa does not have enough quantity left
+2019-06-08 13:34:48,118 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 13:34:49,973 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 13:37:01,447 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 13:37:03,528 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 13:38:56,602 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 13:38:58,717 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 13:42:41,076 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 13:42:43,935 INFO EventLog: User u3 has successfuly logged in.
+2019-06-08 13:47:29,199 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 13:47:32,484 INFO EventLog: User u3 has successfuly logged in.
+2019-06-08 13:53:04,455 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 13:53:06,143 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 13:53:37,478 INFO EventLog: A purchase has been made
+2019-06-08 13:55:18,841 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 13:55:21,008 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 13:58:06,092 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 13:58:08,344 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 14:00:42,207 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 14:00:43,976 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 14:01:04,091 INFO EventLog: A purchase has been made
+2019-06-08 14:03:12,387 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 14:03:14,269 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 14:03:28,657 INFO EventLog: A purchase has been made
+2019-06-08 14:07:15,638 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 14:07:17,825 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 14:07:38,770 INFO EventLog: A purchase has been made
+2019-06-08 14:08:43,455 INFO EventLog: A purchase has been made
+2019-06-08 14:09:09,963 INFO EventLog: A purchase has been made
+2019-06-08 14:21:04,555 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 14:21:06,079 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 14:21:25,551 INFO EventLog: A purchase has been made
+2019-06-08 14:24:45,817 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 14:24:47,857 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 14:25:10,693 INFO EventLog: A purchase has been made
+2019-06-08 14:26:28,056 ERROR EventLog: Error in adding to shopping cart : Error: Product already exists on Cart
+2019-06-08 14:26:41,003 INFO EventLog: A purchase has been made
+2019-06-08 14:28:58,565 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 14:29:00,866 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 14:29:21,148 INFO EventLog: A purchase has been made
+2019-06-08 14:34:42,848 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 14:34:44,945 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 14:35:03,178 INFO EventLog: A purchase has been made
+2019-06-08 14:35:33,294 INFO EventLog: A purchase has been made
+2019-06-08 14:36:42,780 INFO EventLog: A purchase has been made
+2019-06-08 14:38:33,717 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 14:38:36,168 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 14:39:25,806 INFO EventLog: A purchase has been made
+2019-06-08 14:42:04,687 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 14:42:06,647 INFO EventLog: User u3 has successfuly logged in.
+2019-06-08 14:42:13,472 ERROR EventLog: Error in adding to shopping cart : Error: The amount asked is larger than the quantity left
+2019-06-08 14:55:31,667 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 14:55:34,315 INFO EventLog: User u3 has successfuly logged in.
+2019-06-08 14:56:00,663 INFO EventLog: A purchase has been made
+2019-06-08 14:56:14,530 INFO EventLog: A purchase has been made
+2019-06-08 14:56:47,352 INFO EventLog: A purchase has been made
+2019-06-08 14:59:45,007 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 14:59:47,577 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 15:00:06,430 INFO EventLog: A purchase has been made
+2019-06-08 15:32:01,424 ERROR EventLog: Login : Error: Username does not exist
+2019-06-08 15:32:04,236 INFO EventLog: User u2 has successfuly logged in.
+2019-06-08 15:32:11,097 ERROR EventLog: Policy get :?????? ?????? ?? ???? ???? 'workshop192.Domain.DoesntExistException'.
+2019-06-08 15:32:11,124 ERROR EventLog: Policy get :?????? ?????? ?? ???? ???? 'workshop192.Domain.DoesntExistException'.
+2019-06-08 15:32:17,746 ERROR EventLog: Policy get :?????? ?????? ?? ???? ???? 'workshop192.Domain.DoesntExistException'.
+2019-06-09 00:48:33,896 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 00:48:38,764 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 00:48:42,475 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 00:48:46,089 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 00:49:26,201 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 00:49:35,178 INFO EventLog: User b has successfuly registered
+2019-06-09 00:49:44,391 INFO EventLog: User b has successfuly logged in.
+2019-06-09 00:49:51,802 INFO EventLog: User b has logged out
+2019-06-09 00:49:58,589 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 00:50:00,950 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 00:50:03,086 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 00:50:04,848 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 00:50:06,277 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 00:51:40,458 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 00:55:30,208 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 09:37:10,107 ERROR EventLog: Login : Error: Username does not exist
+2019-06-09 09:39:50,303 INFO EventLog: User u2 has successfuly logged in.

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace workshop192.Domain
 {
     public class ShoppingBasket
@@ -97,7 +98,7 @@ namespace workshop192.Domain
                 sc = new ShoppingCart(storeID);
                 shoppingCarts.Add(storeID, sc);
             }
-            sc.addToCart(product, amount);
+            sc.addToCartNoDBUpdate(product, amount);
 
         }
         public void removeFromCart(int productId)
@@ -171,34 +172,58 @@ namespace workshop192.Domain
                 throw new DoesntExistException("no such store ID in Shopping basket");
         }
 
-        public void purchaseBasket(string address, string creditcard, string month, string year, string holder, string cvv)
+        public async Task<int> purchaseBasket(string address, string creditcard, string month, string year, string holder, string cvv)
         {
-            foreach (KeyValuePair<int, ShoppingCart> pair1 in shoppingCarts)
-            {
-                ShoppingCart cart = pair1.Value;
-                Dictionary<Product, int> productsInCart = cart.getProductsInCarts();
-                foreach (KeyValuePair<Product, int> pair2 in productsInCart)
-                {
-                    Product product = pair2.Key;
-                    int amount = pair2.Value;
-                    if (product.getQuantityLeft() < amount)
-                    {
+        //    foreach (KeyValuePair<int, ShoppingCart> pair1 in shoppingCarts)
+        //    {
+        //        ShoppingCart cart = pair1.Value;
+        //        Dictionary<Product, int> productsInCart = cart.getProductsInCarts();
+        //        foreach (KeyValuePair<Product, int> pair2 in productsInCart)
+        //        {
+        //            Product product = pair2.Key;
+        //            int amount = pair2.Value;
+        //            if (product.getQuantityLeft() < amount)
+        //            {
 
-                        throw new IllegalAmountException("Error: Cannot complete purchase- " + product.getProductName() + " does not have enough quantity left");
-                    }
-                    product.decQuantityLeft(amount);
-                }
+        //                throw new IllegalAmountException("Error: Cannot complete purchase- " + product.getProductName() + " does not have enough quantity left");
+        //            }
+        //            product.decQuantityLeft(amount);
+        //        }
 
-            }
-            int isOk = PaymentService.getInstance().checkOut( address,  creditcard,  month,  year,  holder,  cvv, getActualTotalPrice()).Result;
-            if (isOk !=-1)
+        //    }
+
+            Task<int> result =  PaymentService.getInstance().checkOut(address, creditcard, month, year, holder, cvv);
+            int res = await result;
+            int resFromDelivery2;
+            if (res != -1)
             {
-                if (DeliveryService.getInstance().sendToUser(address, creditcard, month, year, holder, cvv).Result == -1)
+                Task<int> resFromDelivery = DeliveryService.getInstance().sendToUser(address, creditcard, month, year, holder, cvv);
+                 resFromDelivery2 = await resFromDelivery;
+                if (resFromDelivery2==-1)
                 {
+                    Task<int> res3=PaymentService.getInstance().cancelPayment(res+"");
+                    int res3Ans = await res3;
                     throw new CartException("Delivery FAILED");
                 }
                 if (username != null)
                 {
+                    foreach (KeyValuePair<int, ShoppingCart> pair1 in shoppingCarts)
+                    {
+                        ShoppingCart cart = pair1.Value;
+                        Dictionary<Product, int> productsInCart = cart.getProductsInCarts();
+                        foreach (KeyValuePair<Product, int> pair2 in productsInCart)
+                        {
+                            Product product = pair2.Key;
+                            int amount = pair2.Value;
+                            if (product.getQuantityLeft() < amount)
+                            {
+
+                                throw new IllegalAmountException("Error: Cannot complete purchase- " + product.getProductName() + " does not have enough quantity left");
+                            }
+                            product.decQuantityLeft(amount);
+                        }
+
+                    }
                     DBSubscribedUser.getInstance().updateTablesAfterPurchase(username, shoppingCarts);
                 }
             }
@@ -206,6 +231,8 @@ namespace workshop192.Domain
             {
                 throw new CartException("Payment FAILED");
             }
+            //throw new SuccessPaymentExeption("OK");
+            return resFromDelivery2;
         }
 
         internal void changeQuantityOfProduct(int storeID, Product p, int newAmount)

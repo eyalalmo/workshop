@@ -26,7 +26,7 @@ namespace workshop192.Domain
             return instance;
         }
 
-        public async Task<int> checkOut(string card, string month, string year, string holder, string ccv, string id, double price)
+        public  async Task<int> checkOut(string card, string month, string year, string holder, string ccv, string id)
         {
             var massage = new Dictionary<string, string>
             {
@@ -54,6 +54,7 @@ namespace workshop192.Domain
 
         public bool connectToSystem()
         {
+            handShake();
             return true;
         }
         public async Task<bool> handShake()
@@ -67,9 +68,27 @@ namespace workshop192.Domain
             var response = await client.PostAsync("https://cs-bgu-wsep.herokuapp.com/", massageToSent);
             var responseToString = await response.Content.ReadAsStringAsync();
 
+        
             if (responseToString == "OK")
                 return true;
             return false;
+        }
+
+        public async Task<int> cancelPayment(string id)
+        {
+
+            var massage = new Dictionary<string, string>
+            {
+             { "action_type", " cancel_pay" },
+             { " transaction_id", id}
+       
+            };
+
+            var massageToSend = new FormUrlEncodedContent(massage);
+            var responseFromServer = await client.PostAsync("https://cs-bgu-wsep.herokuapp.com/", massageToSend);
+            var responseToString = await responseFromServer.Content.ReadAsStringAsync();
+
+            return int.Parse(responseToString);
         }
     }
 }
