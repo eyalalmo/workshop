@@ -228,6 +228,7 @@
                              
                                           }
                                           else {
+                                              alert(response);
                                               location.reload();
                                               console.log(response);
                                           }

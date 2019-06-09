@@ -4,9 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-
-
 namespace workshop192.Domain
 {
     public class ShoppingCart
@@ -52,11 +49,10 @@ namespace workshop192.Domain
 
         public void addToCartNoDBUpdate(Product product, int amount)
         {
-
             productList.Add(product, amount);
-            productsActualPrice.Add(product, product.getPrice());
-            
+            productsActualPrice.Add(product, product.getPrice());   
         }
+
         public void addToCart(Product product, int amount)
         {
             store.checkPolicy(product, amount);

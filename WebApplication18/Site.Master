@@ -72,8 +72,7 @@
                                 <i class="fa fa-fw fa-user"></i> My Account <i class="fa fa-fw fa-sort-down"></i>
                             </a>
                           <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#" id="AddStore">Add store</a>
-                            <a class="dropdown-item" href="#" id="editStore">Edit store</a>
+                            <a class="dropdown-item" href="#" id="editStore">Store Managment</a>
                           </div>
                         </li>
                          <li><a runat="server" id="logout" name="logout" href="/logout" visible="false"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>

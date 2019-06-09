@@ -11,8 +11,6 @@ namespace workshop192.Domain
 {
     public class DBSubscribedUser :Connector
     {
-
-
         Dictionary<string, SubscribedUser> users;
         Dictionary<string, SubscribedUser> loggedInUser;
         private static DBSubscribedUser instance = null;
@@ -38,9 +36,7 @@ namespace workshop192.Domain
         public void updateShoppingBasket()
         {
             try
-            {
-
-                
+            {    
                 foreach (KeyValuePair<string, SubscribedUser> pair in users)
                 {
                     string username = pair.Key;
