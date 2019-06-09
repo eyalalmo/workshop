@@ -77,7 +77,7 @@ removeUser(username)</panel_attributes>
     <coordinates>
       <x>387</x>
       <y>432</y>
-      <w>135</w>
+      <w>171</w>
       <h>153</h>
     </coordinates>
     <panel_attributes>Subscribed User
@@ -283,7 +283,7 @@ removeUser(username)</panel_attributes>
     <coordinates>
       <x>900</x>
       <y>333</y>
-      <w>108</w>
+      <w>126</w>
       <h>99</h>
     </coordinates>
     <panel_attributes>ProductInStore
@@ -380,13 +380,13 @@ m2=
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>513</x>
+      <x>549</x>
       <y>423</y>
-      <w>297</w>
+      <w>261</w>
       <h>36</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>10.0;20.0;310.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;270.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -866,13 +866,13 @@ m1=0..*
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>999</x>
+      <x>1017</x>
       <y>351</y>
-      <w>144</w>
+      <w>126</w>
       <h>36</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>10.0;20.0;140.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;120.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -1191,6 +1191,54 @@ bg=blue</panel_attributes>
     <coordinates>
       <x>1413</x>
       <y>0</y>
+      <w>18</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>18</x>
+      <y>18</y>
+      <w>72</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Text</id>
+    <coordinates>
+      <x>99</x>
+      <y>18</y>
+      <w>189</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>Blue sticker - Class in DB
+style=wordwrap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>738</x>
+      <y>459</y>
+      <w>18</w>
+      <h>18</h>
+    </coordinates>
+    <panel_attributes>
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>900</x>
+      <y>333</y>
       <w>18</w>
       <h>18</h>
     </coordinates>
