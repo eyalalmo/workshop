@@ -29,7 +29,7 @@ namespace WebApplication18.Controllers
             catch (Exception e)
             {
                 SystemLogger.getEventLog().Error("An Error has occured. Stack Trace: " + e.StackTrace +" Function: getAllProducts");
-                return "error";
+                throw e;
             }
 
         }
@@ -52,7 +52,7 @@ namespace WebApplication18.Controllers
             catch (Exception e)
             {
                 SystemLogger.getEventLog().Error("An Error has occured. Stack Trace: " + e.StackTrace + " Function: SearchByName , Params: " +param);
-                return "error";
+                throw e;
             }
         }
 
@@ -74,7 +74,7 @@ namespace WebApplication18.Controllers
             catch (Exception e)
             {
                 SystemLogger.getEventLog().Error("An Error has occured. Stack Trace: " + e.StackTrace + " Function: SearchByCat , Params: " + param);
-                return "error";
+                throw e;
             }
         }
 
@@ -95,7 +95,7 @@ namespace WebApplication18.Controllers
             catch (Exception e)
             {
                 SystemLogger.getEventLog().Error("An Error has occured. Stack Trace: " + e.StackTrace + " Function: Search , Params: " + param);
-                return "error";
+                throw e;
             }
         }
 
@@ -124,7 +124,7 @@ namespace WebApplication18.Controllers
             catch (Exception e)
             {
                 SystemLogger.getEventLog().Error("An Error has occured. Stack Trace: " + e.StackTrace + " Function: addToBasket");
-                return "error";
+                throw e;
             }
 
         }
@@ -148,7 +148,7 @@ namespace WebApplication18.Controllers
             catch (Exception e)
             {
                 SystemLogger.getEventLog().Error("An Error has occured. Stack Trace: " + e.StackTrace + " Function: addDiscount");
-                return "error";
+                throw e;
             }
         }
         

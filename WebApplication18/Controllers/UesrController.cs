@@ -29,6 +29,11 @@ namespace WebApplication18.Controllers
                 SystemLogger.getEventLog().Error("Register : " + e.Message.ToString());
                 return e.Message;
             }
+            catch (Exception e)
+            {
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: register; Stack Trace: " + e.StackTrace);
+                throw e;
+            }
 
         }
 
@@ -47,6 +52,11 @@ namespace WebApplication18.Controllers
                 SystemLogger.getEventLog().Error("Login : " + e.Message.ToString());
                 return e.Message;
             }
+            catch (Exception e)
+            {
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: login; Stack Trace: " + e.StackTrace);
+                throw e;
+            }
         }
         
         [Route("api/user/logout")]
@@ -64,6 +74,11 @@ namespace WebApplication18.Controllers
                 SystemLogger.getEventLog().Error("Logout : " + e.Message.ToString());
                 return e.Message;
             }
+            catch (Exception e)
+            {
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: logout; Stack Trace: " + e.StackTrace);
+                throw e;
+            }
         }
 
 
@@ -76,10 +91,17 @@ namespace WebApplication18.Controllers
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
                 return UserService.getInstance().getShoppingBasket(session);
             }
+            catch (ClientException e)
+            {
+                SystemLogger.getEventLog().Error("getShoppingBasket : " + e.Message.ToString());
+                return e.Message;
+            }
             catch (Exception e)
             {
-                return e.Message.ToString();
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: getShoppingBasket; Stack Trace: " + e.StackTrace);
+                throw e;
             }
+
 
         }
         [Route("api/user/checkBasket")]
@@ -92,9 +114,15 @@ namespace WebApplication18.Controllers
                 UserService.getInstance().checkBasket(session);
                 return "";
             }
+            catch (ClientException e)
+            {
+                SystemLogger.getEventLog().Error("checkBasket : " + e.Message.ToString());
+                return e.Message;
+            }
             catch (Exception e)
             {
-                return e.Message.ToString();
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: checkBasket; Stack Trace: " + e.StackTrace);
+                throw e;
             }
 
         }
@@ -108,9 +136,15 @@ namespace WebApplication18.Controllers
                 BasketService.getInstance().changeQuantity(session, product, quantity);
                 return "ok";
             }
+            catch (ClientException e)
+            {
+                SystemLogger.getEventLog().Error("setQuantity : " + e.Message.ToString());
+                return e.Message;
+            }
             catch (Exception e)
             {
-                return e.Message.ToString();
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: setQuantity; Stack Trace: " + e.StackTrace);
+                throw e;
             }
 
         }
@@ -124,10 +158,15 @@ namespace WebApplication18.Controllers
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
                 return "" + BasketService.getInstance().getActualTotalPrice(session)+","+BasketService.getInstance().getTotalPrice(session);
             }
+            catch (ClientException e)
+            {
+                SystemLogger.getEventLog().Error("BasketTotalPrice : " + e.Message.ToString());
+                return e.Message;
+            }
             catch (Exception e)
             {
-
-                return e.Message.ToString();
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: basketTotalPrice; Stack Trace: " + e.StackTrace);
+                throw e;
             }
         }
 
@@ -147,6 +186,11 @@ namespace WebApplication18.Controllers
                 SystemLogger.getEventLog().Error("Remove from Cart : " + e.Message.ToString());
                 return e.Message.ToString();
             }
+            catch (Exception e)
+            {
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: removeFromCart; Stack Trace: " + e.StackTrace);
+                throw e;
+            }
 
         }
         [Route("api/user/getAllStores")]
@@ -159,9 +203,15 @@ namespace WebApplication18.Controllers
                 return UserService.getInstance().getAllStores(session);
               
             }
+            catch (ClientException e)
+            {
+                SystemLogger.getEventLog().Error("getAllStores : " + e.Message.ToString());
+                return e.Message.ToString();
+            }
             catch (Exception e)
             {
-                return e.Message.ToString();
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: getAllStores; Stack Trace: " + e.StackTrace);
+                throw e;
             }
         }
 
@@ -186,6 +236,11 @@ namespace WebApplication18.Controllers
                 SystemLogger.getEventLog().Error("Checkout : " + e.Message.ToString());
                 return e.Message.ToString();
             }
+            catch (Exception e)
+            {
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: Checkout; Stack Trace: " + e.StackTrace);
+                throw e;
+            }
         }
         
         [Route("api/user/removeUser")]
@@ -200,7 +255,13 @@ namespace WebApplication18.Controllers
             }
             catch (ClientException e)
             {
+                SystemLogger.getEventLog().Error("removeUser : " + e.Message.ToString());
                 return e.Message;
+            }
+            catch (Exception e)
+            {
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: removeUser; Stack Trace: " + e.StackTrace);
+                throw e;
             }
         }
 
@@ -214,7 +275,8 @@ namespace WebApplication18.Controllers
             }
             catch (Exception e)
             {
-                return e.Message;
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: waitingMessages; Stack Trace: " + e.StackTrace);
+                throw e;
             }
         }
 

@@ -258,10 +258,10 @@ namespace workshop192.Domain
             store.addCoupon(couponCode, percentage, duration);
         }
 
-        public void signContract(string owner, SubscribedUser pending) {
+        public void signContract(SubscribedUser pending) {
             throw new RoleException("Error: A manager cannot sign a contract with an owner");
         }
-        public void declineContract(string owner, SubscribedUser pending) {
+        public void declineContract(SubscribedUser pending) {
             throw new RoleException("Error: A manager cannot decline a contract with" +
                 " an owner");
         }

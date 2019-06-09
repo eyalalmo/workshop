@@ -14,8 +14,9 @@ namespace workshop192.Domain
         public static DBStore instance;
         public LinkedList<Store> stores;
         public LinkedList<StoreRole> storeRole;
+
         public static int nextStoreID = 0;
-        
+
         private DBStore()
         {
             if (IsTestsMode.isTest == false)
@@ -70,7 +71,7 @@ namespace workshop192.Domain
             }
         }
 
-       
+
 
         //private LinkedList<Store> initStores()
         //{
@@ -255,10 +256,10 @@ namespace workshop192.Domain
         public LinkedList<StoreRole> getAllStoreRoles(string username)
         {
             LinkedList<StoreRole> result = new LinkedList<StoreRole>();
-;            initStoresAndRolesForUserName(username);
-            foreach(StoreRole sr in storeRole)
+            ; initStoresAndRolesForUserName(username);
+            foreach (StoreRole sr in storeRole)
             {
-                if(sr.getUser().getUsername()== username)
+                if (sr.getUser().getUsername() == username)
                 {
                     result.AddLast(sr);
                 }
@@ -276,7 +277,7 @@ namespace workshop192.Domain
                 connection.Execute("UPDATE [dbo].[Stores] SET numOfOwners = @newNumber WHERE storeId = @storeId", new { storeId = storeId, newNumber = numOfOwners });
                 connection.Close();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 connection.Close();
             }
@@ -399,10 +400,21 @@ namespace workshop192.Domain
                 LinkedList<Store> newStores = new LinkedList<Store>();
                 var StoreResult = connection.Query<StoreEntry>("SELECT * FROM [dbo].[Stores] WHERE storeId=@storeId ", new { storeId = storeId });
                 var StoreRoleResult = connection.Query<StoreRoleEntry>("SELECT * FROM [dbo].[StoreRoles] WHERE storeId=@storeId ", new { storeId = storeId });
+                var ContractResult = connection.Query<Contract>("SELECT * FROM [dbo].[Contracts] WHERE storeId = @storeId", new { storeId = storeId });
+                var pendingResult = connection.Query<string>("SELECT userName FROM [dbo].[PendingOwners] WHERE storeId = @storeId", new { storeId = storeId }).AsList();
                 connection.Close();
 
                 StoreEntry se = StoreResult.ElementAt(0);
                 Store s = new Store(se.getStoreId(), se.getName(), se.getDescription());
+                foreach (Contract c in ContractResult)
+                {
+                    s.getContracts().AddFirst(c);
+                }
+                foreach (string pending in pendingResult)
+                {
+                    s.getPending().AddFirst(pending);
+                }
+
                 LinkedList<Product> lst = DBProduct.getInstance().getAllProducts();
                 foreach (Product p in lst)
                 {
@@ -576,7 +588,7 @@ namespace workshop192.Domain
         public void initStoresAndRolesForUserName(string userName)
         {
             LinkedList<StoreRoleEntry> sr = getRolesEntryByUserName(userName);
-             
+
             foreach (StoreRoleEntry role in sr)
             {
                 int id = role.getStoreId();
@@ -598,7 +610,7 @@ namespace workshop192.Domain
                 }
                 return lst;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 connection.Close();
                 throw new StoreException("cant get roles from db");
@@ -620,12 +632,132 @@ namespace workshop192.Domain
                                    + " DELETE FROM Notification \n"
                                    + "UPDATE [dbo].[IDS] SET id = 0 WHERE type = 'store'"
                                    );
-               connection.Close();
+                connection.Close();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 connection.Close();
             }
         }
+        public void addPendingOwner(int storeId, string appointer, string pending)
+        {
+
+            try
+            {
+                connection.Open();
+                string sql = "INSERT INTO [dbo].[PendingOwners] (storeId,userName)" +
+                                   " VALUES (@storeId,@pending)";
+                connection.Execute(sql, new { storeId = storeId, pending = pending });
+                Store s = getStore(storeId);
+                s.getPending().AddFirst(pending);
+                connection.Close();
+
+            }
+            catch (Exception)
+            {
+                connection.Close();
+                throw new StoreException("cant add pending owner");
+            }
+        }
+
+
+        public void removePendingOwner(int storeId, string pending)
+        {
+            try
+            {
+                connection.Open();
+                string sql = "DELETE FROM [dbo].[PendingOwners]" +
+                                   "WHERE storeId=@storeId AND userName = @pending";
+                connection.Execute(sql, new { storeId = storeId, pending = pending });
+                Store s = getStore(storeId);
+                s.getPending().Remove(pending);
+                connection.Close();
+
+            }
+            catch (Exception)
+            {
+                connection.Close();
+                throw new StoreException("cant remove pending owner");
+            }
+        }
+
+        public void signContract(int storeId, string owner, string pending)
+        {
+            try
+            {
+                connection.Open();
+                string sql = "INSERT INTO [dbo].[Contracts] (storeId,userName,approvedBy)" +
+                                   " VALUES (@storeId,@userName,@appointedBy)";
+                Contract c = new Contract(storeId, pending, owner);
+                connection.Execute(sql, new { storeId = storeId, userName = pending, appointedBy = owner });
+                Store s = getStore(storeId);
+                s.getContracts().AddFirst(c);
+                connection.Close();
+            }
+            catch  ( Exception e)
+            {
+                connection.Close();
+                throw new StoreException("Error in signing a contract: " + e.Message.ToString());
+            }
+        }
+
+        public void removeAllUserContracts(int storeId, string userName)
+        {
+            try
+            {
+                Store s = getStore(storeId);
+                LinkedList<Contract> cont = s.getContracts();
+                for (int i = 0; i < cont.Count(); i++)
+                {
+                    if (cont.ElementAt(i).userName.Equals(userName))
+                    {
+                        cont.Remove(cont.ElementAt(i));
+                    }
+                }
+                connection.Open();
+                string sql = "DELETE FROM [dbo].[Contracts]" +
+                                   "WHERE storeId=@storeId AND userName = @userName";
+                connection.Execute(sql, new { storeId = storeId, userName = userName });
+                connection.Close();
+            }
+            catch (Exception e)
+            {
+                connection.Close();
+                throw new StoreException("Error in declining a contract: " + e.Message.ToString());
+            }
+
+}
+
+        public int getContractNum(int storeId,  string userName)
+        {
+
+            connection.Open();
+            int count = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM [dbo].[Contracts] WHERE storeId=@storeId AND userName = @userName", new { storeId = storeId, userName = userName });
+            connection.Close();
+            return count;
+
+        }
+
+        public bool hasContract(int storeId,string userName,string approved)
+        {
+            Store s = getStore(storeId);
+            LinkedList < Contract > cont = s.getContracts();
+            foreach(Contract c in cont)
+            {
+                if (c.userName.Equals(userName) && c.approvedBy.Equals(approved))
+                    return true;
+            }
+            return false;
+        }
+
+        //public HashSet<string> getApproved(int storeId, string pending)
+        //{
+        //    HashSet<string> output;
+        //    if (pendingOwners.TryGetValue(pending.getUsername(), out output))
+        //    {
+        //        return output;
+        //    }
+        //    throw new DoesntExistException("User is not a pending owner");
+        //}
     }
 }
