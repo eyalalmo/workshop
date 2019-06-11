@@ -533,3 +533,14 @@
 2019-06-09 19:13:37,218 ERROR EventLog: Register : Error: Username already exists
 2019-06-09 19:13:43,175 ERROR EventLog: Login : Error: Username does not exist
 2019-06-09 19:13:48,087 INFO EventLog: User u2 has successfuly logged in.
+2019-06-11 18:10:21,745 ERROR EventLog: Login : Error: Username does not exist
+2019-06-11 18:10:24,128 ERROR EventLog: Login : Error: Username does not exist
+2019-06-11 18:11:20,171 INFO EventLog: User u2 has successfuly registered
+2019-06-11 18:11:20,430 INFO EventLog: User u3 has successfuly registered
+2019-06-11 18:11:20,657 INFO EventLog: User u4 has successfuly registered
+2019-06-11 18:11:20,883 INFO EventLog: User u5 has successfuly registered
+2019-06-11 18:11:21,059 INFO EventLog: User u2 has successfuly logged in.
+2019-06-11 18:11:21,547 INFO EventLog: User u2 has successfuly created a store
+2019-06-11 18:11:30,782 INFO EventLog: User u2 has successfuly logged in.
+2019-06-11 18:11:47,547 INFO EventLog: User u2 has successfuly created a store
+2019-06-11 18:12:23,477 INFO EventLog: A purchase has been made

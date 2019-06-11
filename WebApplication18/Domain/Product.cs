@@ -38,7 +38,7 @@ namespace workshop192.Domain
         }
 
         //added
-        public Product(int productID, string productName, string productCategory, int price, int rank, int quantityLeft, int storeID, int discountID)
+        public Product(int productID, string productName, string productCategory, int price, int rank, int quantityLeft, int storeID)
         {
             this.productID = productID;
             this.productName = productName;
@@ -50,20 +50,6 @@ namespace workshop192.Domain
             this.discount = null;
            //this.discountID = discountID;
         }
-
-        public Product(int productID, string productName, string productCategory, int price, int rank, int quantityLeft, int storeID)
-        {
-            this.productID = productID;
-            this.productName = productName;
-            this.productCategory = productCategory;
-            this.price = price;
-            this.rank = rank;
-            this.storeID = storeID;
-            this.quantityLeft = quantityLeft;
-            this.discount = null;
-            //this.discountID = discountID;
-        }
-
 
         public double getActualPrice(int amountinBasket)
         {

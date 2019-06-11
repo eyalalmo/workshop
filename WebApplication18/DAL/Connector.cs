@@ -17,8 +17,8 @@ namespace WebApplication18.DAL
 
             public SqlConnection connection;
 
-            public string stringDB = "Server=tcp:ws192.database.windows.net,1433;Initial Catalog=ws192;Persist Security Info=False;User ID=etay;Password=ws192!!!!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            public string stringDBTest = "Server=tcp:ws192.database.windows.net,1433;Initial Catalog = ws192Tests; Persist Security Info=False;User ID =etay; Password=ws192!!!!; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30;";
+            public string stringDB = "Server=tcp:wsep192.database.windows.net,1433;Initial Catalog=wsep192;Persist Security Info=False;User ID=eilon532;Password=wsep192!!!!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            public string stringDBTest = "Server=tcp:wsep192.database.windows.net,1433;Initial Catalog=wsep192Tests;Persist Security Info=False;User ID=eilon532;Password=wsep192!!!!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
 
     public Connector()
