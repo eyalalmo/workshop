@@ -11,7 +11,7 @@ namespace workshop192.Domain
         public visibleType type;
         public Product product;
         public enum visibleType { productVisibleDiscount, storeVisibleDiscount }
-        public VisibleDiscount(double percentage, string duration, string t, int storeId): base (percentage, duration, storeId) {
+        public VisibleDiscount(double percentage,string duration, string t, int storeId): base (percentage, duration, storeId) {
             if (t.Equals("StoreVisibleDiscount"))
             {
                 type = visibleType.storeVisibleDiscount;   
@@ -25,7 +25,7 @@ namespace workshop192.Domain
                 throw new IllegalNameException();
             }
         }
-        public VisibleDiscount(int id, double percentage, string duration, string t, int storeId) : base(id, percentage, duration, storeId)
+        public VisibleDiscount(int id,bool isPartOfCompex, double percentage, string duration, string t, int storeId) : base(id, isPartOfCompex, percentage, duration, storeId)
         {
             if (t.Equals("StoreVisibleDiscount"))
             {

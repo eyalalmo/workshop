@@ -448,7 +448,7 @@ namespace workshop192.Domain
                     }
                 }
                 stores.AddLast(s);
-                LinkedList<DiscountComponent> discountList = DBDiscount.getInstance().getStoreDiscounts(s.getStoreID());
+                LinkedList<DiscountComponent> discountList = DBDiscount.getInstance().getStoreDiscountsList(s.getStoreID());
                 s.setDiscountList(discountList);
                 return s;
             }

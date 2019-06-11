@@ -13,7 +13,7 @@ namespace workshop192.Domain
         private Type type;
 
        
-        public DiscountComposite(List<DiscountComponent> children, string type, double percentage, string duration) : base(percentage, duration)
+        public DiscountComposite(List<DiscountComponent> children, string type, double percentage, string duration, int storeId) : base(percentage, duration, storeId)
         {
             if (children == null)
             {
@@ -36,7 +36,42 @@ namespace workshop192.Domain
             else
                 throw new IllegalNameException("Error: Wrong type name in discount composite");
         }
+        public DiscountComposite(int id, List<DiscountComponent> children, string type, double percentage, string duration, int storeId) : base(id, percentage, duration, storeId)
+        {
+            if (children == null)
+            {
+                throw new AlreadyExistException();
+            }
 
+            this.children = children;
+            if (type == "and")
+            {
+                this.type = Type.and;
+            }
+            else if (type == "or")
+            {
+                this.type = Type.or;
+            }
+            else if (type == "xor")
+            {
+                this.type = Type.xor;
+            }
+            else
+                throw new IllegalNameException("Error: Wrong type name in discount composite");
+        }
+        public string getType()
+        {
+            if(type == Type.or)
+            {
+                return "or";
+            }
+            if (type == Type.and)
+            {
+                return "and";
+            }
+            else
+                return "xor";
+        }
         public override string getDiscountType()
         {
             return "Complex";

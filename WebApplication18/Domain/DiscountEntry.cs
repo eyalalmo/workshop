@@ -15,11 +15,13 @@ namespace WebApplication18.Domain
         private int numOfProducts;
         private int totalAmount;
         private DiscountComponentEntry component;
+        private int isPartOfComplex;
 
-        public DiscountEntry(int id, string type, string reliantType, string visibleType, int productId, int numOfProducts, int totalAmount)
+        public DiscountEntry(int id, string type,int isPartOfComplex, string reliantType, string visibleType, int productId, int numOfProducts, int totalAmount)
         {
             this.id = id;
             this.type = type;
+            this.isPartOfComplex = isPartOfComplex;
             this.reliantType = reliantType;
             this.visibleType = visibleType;
             this.productId = productId;
@@ -57,6 +59,10 @@ namespace WebApplication18.Domain
         public int getId()
         {
             return this.id;
+        }
+        public int getIsPartOfComplex()
+        {
+            return this.isPartOfComplex;
         }
     }
 }

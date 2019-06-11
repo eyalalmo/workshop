@@ -156,10 +156,10 @@ namespace workshop192.Domain
 
         public void addProductVisibleDiscount(Product product, double percentage, string duration)
         {
-            VisibleDiscount discount = new VisibleDiscount(percentage, duration, "ProductVisibleDiscount");
+            Store store = product.getStore();
+            VisibleDiscount discount = new VisibleDiscount(percentage, duration, "ProductVisibleDiscount", store.getStoreID());
             discount.setProduct(product);
             product.setDiscount(discount);
-            Store store = product.getStore();
             //store.addDiscount(discount);
             DBDiscount.getInstance().addDiscount(discount);
 
@@ -172,7 +172,6 @@ namespace workshop192.Domain
         public void addStoreVisibleDiscount(double percentage, string duration)
         {
             VisibleDiscount v = new VisibleDiscount(percentage, duration, "StoreVisibleDiscount", store.getStoreID());
-            v.setStoreId(store.getStoreID());
             store.addDiscount(v);
             DBDiscount.getInstance().addDiscount(v);
 
@@ -197,8 +196,10 @@ namespace workshop192.Domain
 
         public void removeStoreDiscount(int discountID, Store store)
         {
-           // DBDiscount.getInstance().removeDiscount(discountID);
+            DiscountComponent d = DBDiscount.getInstance().getDiscountByID(discountID);
+            DBDiscount.getInstance().removeDiscount(d);
             store.removeDiscount(discountID);
+            
 
         }
         public void addComplexDiscount(List<DiscountComponent> list, string type, double percentage, string duration)

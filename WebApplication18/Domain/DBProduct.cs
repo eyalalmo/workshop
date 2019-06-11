@@ -58,7 +58,7 @@ namespace workshop192.Domain
                         ReliantDiscount r = (ReliantDiscount)d;
                         product.setReliantDiscountSameProduct(r);
                     }
-\                    if (product.getProductID() > nextProductID)
+                  if (product.getProductID() > nextProductID)
                         nextProductID = product.getProductID();
                 }
 
