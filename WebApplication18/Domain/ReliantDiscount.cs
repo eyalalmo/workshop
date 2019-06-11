@@ -16,14 +16,14 @@ namespace workshop192.Domain
 
         // Dictionary<Product, int> products;
 
-        public ReliantDiscount(double percentage, String duration, int numOfProducts, Product product) : base(percentage, duration)
+        public ReliantDiscount(double percentage, String duration, int numOfProducts, Product product, int storeId) : base(percentage, duration, storeId)
         {
             this.numOfProducts = numOfProducts;
             this.type = reliantType.sameProduct;
             this.product = product;
         }
 
-        public ReliantDiscount(double percentage, String duration, int amount) : base(percentage, duration)
+        public ReliantDiscount(double percentage, String duration, int amount, int storeId) : base(percentage, duration, storeId)
         {
             this.totalAmount = amount;
             this.type = reliantType.totalAmount;

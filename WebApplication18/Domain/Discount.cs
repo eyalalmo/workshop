@@ -10,11 +10,11 @@ namespace workshop192.Domain
     {
         protected bool isPartOfComplex;
 
-        internal Discount(int id, double percentage, string duration) : base(id, percentage, duration)
+        internal Discount(int id, double percentage, string duration, int storeId) : base(id, percentage, duration, storeId)
         {
         }
 
-        public Discount(double percentage, string duration): base(percentage, duration)
+        public Discount(double percentage, string duration, int storeId): base(percentage, duration, storeId)
         {
             this.isPartOfComplex = false;
         }

@@ -172,6 +172,7 @@ namespace workshop192.Domain
         public void addStoreVisibleDiscount(double percentage, string duration)
         {
             VisibleDiscount v = new VisibleDiscount(percentage, duration, "StoreVisibleDiscount");
+            v.setStoreId(store.getStoreID());
             store.addDiscount(v);
             DBDiscount.getInstance().addDiscount(v);
 
@@ -213,6 +214,7 @@ namespace workshop192.Domain
                     di.setIsPartOfComplex(true);
                 }
             }
+            DBDiscount.getInstance().addDiscount(composite);
             //DBDiscount.getInstance().addDiscount(composite);
 
         }

@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using WebApplication18.DAL;
+using WebApplication18.Domain;
+
 namespace workshop192.Domain
 {
     public class DBDiscount : Connector
@@ -65,12 +67,65 @@ namespace workshop192.Domain
             init();
         }
 
-        public void addDiscount(Discount d)
+        public void addDiscount(DiscountComponent d)
         {
             try
             {
-                /*connection.Open();
+                connection.Open();
+                string sql = "INSERT INTO [dbo].[DiscountComponent] (id, percentage, duration, type, storeId)" +
+                                " VALUES (@id,@percentage, @duration, @type, @storeId)";
+                if (d is Discount)
+                {
+                    connection.Execute(sql, new
+                    {
+                        id = d.getId(),
+                        percentage = d.getPercentage(),
+                        duration = d.getDuration(),
+                        type = "Discount",
+                        storeId = d.getStoreId()
+                    });
+                    if(d is VisibleDiscount)
+                    {
+                        VisibleDiscount v = (VisibleDiscount)d;
+                        addVisibleDiscount(v);
+                    }
+                    if(d is ReliantDiscount)
+                    {
+                        ReliantDiscount r = (ReliantDiscount)d;
+                        addReliantDiscount(r);
+                    }
+                }
+                if(d is DiscountComposite)
+                {
+                    DiscountComposite composite = (DiscountComposite)d;
+                    connection.Execute(sql, new
+                    {
+                        id = d.getId(),
+                        percentage = d.getPercentage(),
+                        duration = d.getDuration(),
+                        type = "Composite",
+                        storeId = d.getStoreId()
 
+                    });
+                    foreach(DiscountComponent child in composite.getChildren())
+                    {
+                        string sql2 = "INSERT INTO [dbo].[DiscountComposite] (id,childid,type)" +
+                                " VALUES (@id, @childid,@type)";
+                        string t;
+                        if (child is DiscountComposite)
+                            t = "Composite";
+                        else
+                            t = "Discount";
+
+                        connection.Execute(sql, new
+                        {
+                            id = d.getId(),
+                            childid = child.getId(),
+                            type = t
+                        });
+                    }
+                }
+                /*
                 string sql = "INSERT INTO [dbo].[Discount] (id, percentage, duration)" +
                                  " VALUES (@id, @percentage, @duration)";
                 connection.Execute(sql, new
@@ -79,18 +134,19 @@ namespace workshop192.Domain
                     percentage = d.getPercentage(),
                     duration = d.getDuration()
                 });
-                
-                connection.Close();*/
+                */
+                connection.Close();
                 discounts.Add(d.getId(), d);
+
             }
 
             catch (Exception e)
             {
-                //connection.Close();
+                connection.Close();
                 throw e;
             }
         }
-        public void removeDiscount(Discount d)
+        public void removeDiscount(DiscountComponent d)
         {
             //if (!discounts.ContainsKey(d))
               //  throw new DoesntExistException("Error: Discount does not exist");
@@ -117,7 +173,84 @@ namespace workshop192.Domain
             nextID++;
             return id;
         }
+        public void addVisibleDiscount(VisibleDiscount v)
+        {
+            int id = v.getId();
+            string type = "Visible";
+            bool isPartOfComplex = v.getIsPartOfComplex();
+            string reliantType = "";
+            string visibleType;
+            int productId;
+            int storeId = v.getStoreId();
+            if (v.getProduct() == null)
+            {
+                visibleType = "storeVisibleDiscount";
+                productId = -1;
+            }
+            else
+            {
+                visibleType = "productVisibleDiscount";
+                productId = v.getProduct().getProductID();
+            }
+            //not reliantdiscount
+            int numOfProducts = -1;
+            int totalAmount = -1;
+            string sql = "INSERT INTO [dbo].[Discount] (id, type, isPartOfComplex, reliantType, visibleType, productId, storeId, numOfProducts, totalAmount)" +
+                                " VALUES (@id, @type, @isPartOfComplex, @reliantType, @visibleType, @productId, @storeId, @numOfProducts, @totalAmount)";
+            connection.Execute(sql, new
+            {
+                id, 
+                type,
+                isPartOfComplex,
+                reliantType,
+                visibleType, 
+                productId,
+                storeId,
+                numOfProducts,
+                totalAmount
+            });
+        }
+        public void addReliantDiscount(ReliantDiscount r)
+        {
+            int id = r.getId();
+            string type = "Reliant";
+            bool isPartOfComplex = r.getIsPartOfComplex();
+            string reliantType;
+            string visibleType="";
+            int productId;
+            int storeId = r.getStoreId();
+            int numOfProducts;
+            int totalAmount;
 
+            if (r.getProduct() == null)
+            {
+                reliantType = "totalAmount";
+                productId = -1;
+                totalAmount = r.getTotalAmount();
+                numOfProducts = -1;
+            }
+            else
+            {
+                reliantType = "sameProduct";
+                productId = r.getProduct().getProductID();
+                totalAmount = -1;
+                numOfProducts = r.getMinNumOfProducts();
+            }
+            string sql = "INSERT INTO [dbo].[Discount] (id, type, isPartOfComplex, reliantType, visibleType, productId, numOfProducts, totalAmount)" +
+                                " VALUES (@id, @type, @isPartOfComplex, @reliantType, @visibleType, @productId, @numOfProducts, @totalAmount)";
+            connection.Execute(sql, new
+            {
+                id,
+                type,
+                isPartOfComplex,
+                reliantType,
+                visibleType,
+                productId,
+                storeId,
+                numOfProducts,
+                totalAmount
+            });
+        }
         internal VisibleDiscount getDiscount(int discountID)
         {
             return (VisibleDiscount)discounts[discountID];

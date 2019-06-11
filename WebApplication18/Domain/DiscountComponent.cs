@@ -13,26 +13,29 @@ namespace workshop192.Domain
 
         public double percentage;
         public DateTime duration;
+        public int storeId;
         public abstract string getDiscountType();
         public abstract string description();
         public abstract bool checkCondition(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice);
         public abstract  Dictionary<Product, double> updatePrice(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice);
         protected bool complexCondition;
 
-        public DiscountComponent(double percentage, string duration)
+        public DiscountComponent(double percentage, string duration, int storeId)
         {
             this.id = DBDiscount.getNextDiscountID();
             this.percentage = percentage;
             this.duration = stringToDate(duration);
             this.complexCondition = false;
+            this.storeId = storeId;
 
         }
-        public DiscountComponent(int id, double percentage, string duration)
+        public DiscountComponent(int id, double percentage, string duration, int storeId)
         {
             this.id = id;
             this.percentage = percentage;
             this.duration = stringToDate(duration);
             this.complexCondition = false;
+            this.storeId = storeId;
 
         }
 
@@ -51,6 +54,10 @@ namespace workshop192.Domain
         public double getPercentage()
         {
             return percentage;
+        }
+        public int getStoreId()
+        {
+            return this.storeId;
         }
         public void setPercentage(double percentage)
         {

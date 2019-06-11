@@ -57,7 +57,10 @@ namespace workshop192.Domain
             return str;
             
         }
-
+        public List<DiscountComponent> getChildren()
+        {
+            return this.children;
+        }
         public override bool checkCondition(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
         {
             if (type == Type.and)

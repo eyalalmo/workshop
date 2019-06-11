@@ -11,7 +11,7 @@ namespace workshop192.Domain
         public visibleType type;
         public Product product;
         public enum visibleType { productVisibleDiscount, storeVisibleDiscount }
-        public VisibleDiscount(double percentage, string duration, string t): base (percentage, duration) {
+        public VisibleDiscount(double percentage, string duration, string t, int storeId): base (percentage, duration, storeId) {
             if (t.Equals("StoreVisibleDiscount"))
             {
                 type = visibleType.storeVisibleDiscount;   
@@ -25,6 +25,7 @@ namespace workshop192.Domain
                 throw new IllegalNameException();
             }
         }
+       
 
         public override Dictionary<Product, double> updatePrice(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
         {
@@ -44,6 +45,7 @@ namespace workshop192.Domain
         {
             this.product = p;
         }
+    
         public override string description()
         {
             if (type == visibleType.productVisibleDiscount)
@@ -68,6 +70,10 @@ namespace workshop192.Domain
         public override string getDiscountType()
         {
             return "Visible Discount";
+        }
+        public Product getProduct()
+        {
+            return this.product;
         }
 
      
