@@ -25,7 +25,22 @@ namespace workshop192.Domain
                 throw new IllegalNameException();
             }
         }
-       
+        public VisibleDiscount(int id, double percentage, string duration, string t, int storeId) : base(id, percentage, duration, storeId)
+        {
+            if (t.Equals("StoreVisibleDiscount"))
+            {
+                type = visibleType.storeVisibleDiscount;
+            }
+            else if (t.Equals("ProductVisibleDiscount"))
+            {
+                type = visibleType.productVisibleDiscount;
+            }
+            else
+            {
+                throw new IllegalNameException();
+            }
+        }
+
 
         public override Dictionary<Product, double> updatePrice(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
         {

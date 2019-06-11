@@ -448,6 +448,8 @@ namespace workshop192.Domain
                     }
                 }
                 stores.AddLast(s);
+                LinkedList<DiscountComponent> discountList = DBDiscount.getInstance().getStoreDiscounts(s.getStoreID());
+                s.setDiscountList(discountList);
                 return s;
             }
             catch (Exception e)

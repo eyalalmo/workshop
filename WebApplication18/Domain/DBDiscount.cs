@@ -184,12 +184,12 @@ namespace workshop192.Domain
             int storeId = v.getStoreId();
             if (v.getProduct() == null)
             {
-                visibleType = "storeVisibleDiscount";
+                visibleType = "StoreVisibleDiscount";
                 productId = -1;
             }
             else
             {
-                visibleType = "productVisibleDiscount";
+                visibleType = "ProductVisibleDiscount";
                 productId = v.getProduct().getProductID();
             }
             //not reliantdiscount
@@ -287,6 +287,41 @@ namespace workshop192.Domain
             discounts.TryGetValue(id, out DiscountComponent value);
             return value;
         }
+        public LinkedList<DiscountComponent> getStoreDiscounts(int storeId)
+        {
+
+        }
+        public Discount getProductDiscount(int storeId, int productId)
+        {
+            var discountEntry = connection.Query<DiscountEntry>("SELECT * FROM [dbo].[Discounts] WHERE storeId=@storeId AND productId=@productId", new { storeId = storeId , productId = productId});
+            DiscountEntry d = (DiscountEntry)discountEntry;
+            int discountId = d.getId();
+            DiscountComponentEntry component = (DiscountComponentEntry)connection.Query <DiscountComponentEntry> ("SELECT * FROM [dbo].[DiscountComponent] WHERE id=@id", new { id = discountId });
+            if (d.getType() == "Visible")
+            {
+                VisibleDiscount v = new VisibleDiscount(component.getId(), component.getPercentage(), component.getDuration(), d.getVisibleType(), component.getStoreId());
+                if (d.getProductId() != -1)
+                {
+                    Product p = DBProduct.getInstance().getProductByID(d.getProductId());
+                    v.setProduct(p);
+                }
+                return v;
+
+            }
+            else
+            {
+                ReliantDiscount v = new ReliantDiscount(component.getId(), component.getPercentage(), component.getDuration(), d.getVisibleType(), component.getStoreId());
+                if (d.getProductId() != -1)
+                {
+                    Product p = DBProduct.getInstance().getProductByID(d.getProductId());
+                    v.setProduct(p);
+                }
+                return v;
+            }
+
+        }
+
+        
 
     }
 }

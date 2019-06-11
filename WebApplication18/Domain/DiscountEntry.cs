@@ -7,15 +7,18 @@ namespace WebApplication18.Domain
 {
     public class DiscountEntry
     {
+        private int id;
         private string type;
         private string reliantType;
         private string visibleType;
-        int productId;
-        int numOfProducts;
-        int totalAmount;
+        private int productId;
+        private int numOfProducts;
+        private int totalAmount;
+        private DiscountComponentEntry component;
 
-        public DiscountEntry(string type, string reliantType, string visibleType, int productId, int numOfProducts, int totalAmount)
+        public DiscountEntry(int id, string type, string reliantType, string visibleType, int productId, int numOfProducts, int totalAmount)
         {
+            this.id = id;
             this.type = type;
             this.reliantType = reliantType;
             this.visibleType = visibleType;
@@ -42,10 +45,18 @@ namespace WebApplication18.Domain
         public int getNumOfProducts()
         {
             return this.numOfProducts;
-        } 
+        }
         public int getTotalAmount()
         {
             return this.totalAmount;
+        }
+        public void setDiscountComponentEntry(DiscountComponentEntry component)
+        {
+            this.component = component;
+        }
+        public int getId()
+        {
+            return this.id;
         }
     }
 }
