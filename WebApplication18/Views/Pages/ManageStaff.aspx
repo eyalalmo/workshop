@@ -6,12 +6,45 @@
 
     <table>
         <tr>
-            <td style="vertical-align:top; width:300px" id="owners"></td>
-            <td style="vertical-align:top; width:300px" id="managers"></td>
+            <td style="vertical-align:top; width:350px" id="owners"></td>
+            <td style="vertical-align:top; width:350px" id="managers"></td>
             <td style="vertical-align:top" id="pending"></td>
         </tr>
     </table>
     
+    <div class="modal" id="myModal">
+	<div class="modal-dialog">
+    		<div class="modal-content">
+      			<div class="modal-header">
+        			<h3 class="modal-title">Manager appointment</h3>
+        			<button type="button" class="close" data-dismiss="modal">&times;</button>
+      			</div>
+
+      			<!-- Modal body -->
+      			<div class="modal-body">
+        			<input class="form-control" type="text" placeholder="Manager Username" aria-label="manager" id="manager" name="manager">
+        			<h4>Permissions:</h4>
+          			<div class="checkbox">
+  					<label><input type="checkbox" id="per1" checked="">Edit Products</label>
+				</div>
+				<div class="checkbox">
+  					<label><input type="checkbox" id="per2" checked="">Edit Discounts</label>
+				</div>
+				<div class="checkbox">
+  					<label><input type="checkbox" id="per3" checked="">Edit Policy</label>
+				</div>
+
+      			</div>
+
+  			<!-- Modal footer -->
+      			<div class="modal-footer">
+        			<button type="button" class="btn btn-success" onClick="addM()" id="addman" >Add Manager</button>
+         			<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      			</div>
+    		</div>
+	  </div>
+    </div>
+
     <script type="text/javascript">
  
         function getRoles(response) {
@@ -25,14 +58,14 @@
                 if (jsonList[i].isOwner) {
                     OWNERS += `<tr>
                                         <font style="font-size:16px"><b>` + jsonList[i].userName.username + `</b></font>
-		                       <tr></br>`;
+		                       <tr></br></br>`;
                 }
                 else
                 {
                     MANAGERS += `<tr>
                                     <font style="font-size:16px"><b>` + jsonList[i].userName.username + `</b></font> (Appointed by ` + jsonList[i].appointedBy.username + `)
                                     <button type="button" class="btn btn-danger" onClick="removeRole(\'` + jsonList[i].userName.username + `\' )"> Remove</button>
-                                 </tr></br>`;
+                                 </tr></br></br>`;
                 }
             }
             OWNERS += `<div clas="row"><input type="text" size="12" visible="false" placeholder="Username"  id="owner" name="owner"/>
@@ -44,25 +77,24 @@
         };
 
         function getPending(response) {
-            var doc = document.getElementById('allPending');
             var i;
             console.log(response);
             var jsonList = JSON.parse(response);
             var HTML = "";
             
             if (jsonList.length > 0) {
-                HTML+="<h3><u>Owners: </u></h3>";
+                HTML+="<h3><u>Pending ownership requests: </u></h3>";
             }
             for (i = 0; i < jsonList.length; i++) {
                 HTML += `<tr>
-		                    <td>`+ jsonList[i] + `</td>
-                            <td><button type="button" class="btn btn-success" onClick="signContract( \'`+ jsonList[i] +`\' )"/>
-                             Sign Contract
-                            </button></td>
-                            <td><button type="button" class="btn btn-danger" onClick="declineContract( \'`+ jsonList[i] +`\' )"/>
-                             declineContract
-                            </button></td>
-                        </tr>`
+		                    <font style="font-size:16px"><b>` + jsonList[i] + `</b></font>&nbsp&nbsp
+                            <button type="button" class="btn btn-success" onClick="signContract(\'`+ jsonList[i] +`\')"/>
+                             <i class="fa fa-check" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger" onClick="declineContract(\'`+ jsonList[i] +`\')"/>
+                             <i class="fa fa-ban" aria-hidden="true"></i>
+                            </button>
+                        </tr><br/><br/>`
         
             }
             document.getElementById('pending').innerHTML += HTML;
@@ -231,9 +263,6 @@
                 console.log(response);
             }
         });
-
-
-
 
     });
 
