@@ -323,64 +323,79 @@ namespace workshop192.Domain
 
         public void setMaxPurchasePolicy(int maxAmount)
         {
-            if (minPurchasePolicy == -1)
+            if (minPurchasePolicy == null)
             {
-                maxPurchasePolicy = maxAmount;
+                maxPurchasePolicy = new MaxAmountPurchase(maxAmount);
             }
             else
             {
-                if (minPurchasePolicy > maxAmount)
+                if (minPurchasePolicy.getAmount() > maxAmount)
                 {
                     throw new ArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
                 }
                 else
                 {
-                    maxPurchasePolicy = maxAmount;
+                    maxPurchasePolicy = new MaxAmountPurchase(maxAmount);
                 }
 
             }
         }
 
-        public void checkAmountPolicy(int amount)
+        public bool checkStorePolicy(int amount, int cartTotalPrice)
         {
-            if (maxPurchasePolicy != -1)
+            bool ans = true;
+            if (maxPurchasePolicy != null)
             {
-                if(maxPurchasePolicy< amount)
-                   throw new ArgumentException("Error: Cannot purchase more than " + maxPurchasePolicy + " products in store: " +storeId);
+                ans = ans & maxPurchasePolicy.checkPolicy(cartTotalPrice, amount);
             }
-
-            if (minPurchasePolicy != -1)
+            if (minPurchasePolicy != null)
             {
-                if(minPurchasePolicy>amount)
-                    throw new ArgumentException("Error: Cannot purchase less than " + maxPurchasePolicy + " products in store: " + storeId);
+                ans = ans & minPurchasePolicy.checkPolicy(cartTotalPrice, amount);
             }
+            if(minTotalprice != null)
+            {
+                ans = ans & minTotalprice.checkPolicy(cartTotalPrice, amount);
+            }
+            if(complexPurchase != null)
+            {
+                ans = ans & complexPurchase.checkPolicy(cartTotalPrice, amount);
+            }
+            return ans;
         }
 
         public void removeMaxAMountPolicy()
         {
-            maxPurchasePolicy = -1;
+            maxPurchasePolicy = null;
 
         }
 
         public void removeMinAmountPolicy()
         {
-            minPurchasePolicy = -1;
+            minPurchasePolicy = null;
         }
 
         public void removeTotalPricePolicy()
         {
-            m
+            minTotalprice = null;
         }
 
+        public void removeComplexPolicy()
+        {
+            complexPurchase = null;
+        }
         public bool hasMinPurchasePolicy()
         {
-            return (minPurchasePolicy != -1);
+            return (minPurchasePolicy != null);
         }
         public bool hasMaxPurchasePolicy()
         {
-            return (maxPurchasePolicy != -1);
+            return (maxPurchasePolicy != null);
         }
-      
+        
+        public addComplexPurchasePolicy(PurchasePolicy p1, PurchasePolicy p2, string type)
+        {
+            complexPurchase  = new ComplexPurchasePolicy()
+        }
 
     
         public VisibleDiscount getVisibleDiscount()

@@ -9,62 +9,26 @@ namespace WebApplication18.Domain
     public class ComplexPurchasePolicy :PurchasePolicy
     {
         enum Type { OR, XOR, AND };
-
-        private int minAmount;
-        private int maxAmount;
-        private int minTotalPrice;
-        private ComplexPurchasePolicy complexChild;
+        private PurchasePolicy p1;
+        private PurchasePolicy p2;
         private int storeID;
         private Type type;
 
-        public ComplexPurchasePolicy(string type, int minAmount, int maxAmount, int minTotalPrice, ComplexPurchasePolicy complexChild, int storeID)
-        {
+        public ComplexPurchasePolicy(string type,PurchasePolicy p1, PurchasePolicy p2, int storeID) { 
             if (type == "XOR")
                 this.type = Type.XOR;
             if (type == "OR")
                 this.type = Type.OR;
             else
                 this.type = Type.AND;
-
-            this.minAmount = minAmount;
-            this.maxAmount = maxAmount;
-            this.minTotalPrice = minTotalPrice;
-            this.complexChild = complexChild;
+            this.p1 = p1;
+            this.p2 = p2;
+            
             this.storeID = storeID;
 
         }
-        public string toString()
-        {
-            String ans = "";
-            bool first = true;
-            if (minAmount != -1)
-            {
-                ans += "Minimum products amount is: " + minAmount + " ";
-                ans += type + " ";
-                first = false;
-            }
-            if (maxAmount != -1)
-            {
-                ans += "Maximum products amount is: " + maxAmount + " ";
-                if (first)
-                    ans += type + " ";
-                first = false;
-            }
-
-            if (minTotalPrice != -1)
-            {
-                ans += "Minimum price for the cart is: " + minTotalPrice + " ";
-                if (first)
-                    ans += type + " ";
-                first = false;
-            }
-            if (complexChild != null)
-            {
-                ans += complexChild.toString();
-            }
-
-            return ans;
-
+        public string description()       {
+            return p1.description() +type.ToString() + p2.description();
         }
 
         public bool checkPolicy(int cartPrice, int amountofProd)
