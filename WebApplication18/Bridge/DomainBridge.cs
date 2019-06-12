@@ -894,7 +894,7 @@ namespace workshop192.Bridge
             }
             sr.addComplexDiscount(discounts, type, percentage, duration);
         }
-        public void removeMaxAmountPolicy(int storeID, int sessionID)
+        public void removePolicyByIndex(int index, int storeID, int sessionID)
         {
             Session user = DBSession.getInstance().getSession(sessionID);
             if (user == null)
@@ -906,41 +906,11 @@ namespace workshop192.Bridge
             StoreRole sr = subscribedUser.getStoreRole(store);
             if (sr == null)
                 throw new RoleException("no role for this user in this store");
-            sr.removeMaxAmountPolicy();
+            sr.removePolicy(index);
         }
-        public void removeMinAmountPolicy(int storeID, int sessionID)
-        {
-            Session user = DBSession.getInstance().getSession(sessionID);
-            if (user == null)
-                throw new DoesntExistException("user is not logged in");
-            Store store = DBStore.getInstance().getStore(storeID);
-            SubscribedUser subscribedUser = user.getSubscribedUser();
-            if (subscribedUser == null)
-                throw new DoesntExistException("not a subscribed user");
-            StoreRole sr = subscribedUser.getStoreRole(store);
-            if (sr == null)
-                throw new RoleException("no role for this user in this store");
-            sr.removeMinAmountPolicy();
-        }
-
-
-        public void setMinAmountPolicy(int storeID, int sessionID, int newMinAmount)
-        {
-            Session user = DBSession.getInstance().getSession(sessionID);
-            if (user == null)
-                throw new DoesntExistException("user is not logged in");
-            Store store = DBStore.getInstance().getStore(storeID);
-            SubscribedUser subscribedUser = user.getSubscribedUser();
-            if (subscribedUser == null)
-                throw new DoesntExistException("not a subscribed user");
-            StoreRole sr = subscribedUser.getStoreRole(store);
-            if (sr == null)
-                throw new RoleException("no role for this user in this store");
-            sr.setMinAmountPolicy(newMinAmount);
-        }
-
        
-        internal void setMaxAmountPolicy(int storeID, int sessionID, int newMinAmount)
+
+        public void PolicyByIndex(int index, int newAmount, int storeID, int sessionID)
         {
             Session user = DBSession.getInstance().getSession(sessionID);
             if (user == null)
@@ -952,7 +922,7 @@ namespace workshop192.Bridge
             StoreRole sr = subscribedUser.getStoreRole(store);
             if (sr == null)
                 throw new RoleException("no role for this user in this store");
-            sr.setMaxAmountPolicy(newMinAmount);
+            sr.setPolicyByIndex(newAmount, index);
         }
         
  
@@ -984,47 +954,53 @@ namespace workshop192.Bridge
             throw new RoleException("no role for this user in this store");
         return store.hasMinPurchasePolicy();
     }
-        /*
-            public MinAmountPurchase getMinAmountPolicy(int storeID, int sessionID)
-            {
-                Session user = DBSession.getInstance().getSession(sessionID);
-                if (user == null)
-                    throw new DoesntExistException("user is not logged in");
-                Store store = DBStore.getInstance().getStore(storeID);
-                SubscribedUser subscribedUser = user.getSubscribedUser();
-                if (subscribedUser == null)
-                    throw new DoesntExistException("not a subscribed user");
-                StoreRole sr = subscribedUser.getStoreRole(store);
-                if (sr == null)
-                    throw new RoleException("no role for this user in this store");
-                return store.getMinAmountPolicy();
-            }
 
-                public string getMinAmountPolicyString(int storeID, int sessionID)
-                {
-                    return getMinAmountPolicy(storeID, sessionID).getAmount()+"";
-                }
-                public string getMaxAmountPolicyString(int storeID, int sessionID)
-                {
-                    return getMaxAmountPolicy(storeID, sessionID).getAmount()+"";
-                }
+        public void addMinPurchasePolicy(int amount, int storeID, int sessionID)
+        {
+            Session user = DBSession.getInstance().getSession(sessionID);
+            if (user == null)
+                throw new DoesntExistException("user is not logged in");
+            Store store = DBStore.getInstance().getStore(storeID);
+            SubscribedUser subscribedUser = user.getSubscribedUser();
+            if (subscribedUser == null)
+                throw new DoesntExistException("not a subscribed user");
+            StoreRole sr = subscribedUser.getStoreRole(store);
+            if (sr == null)
+                throw new RoleException("no role for this user in this store");
+            sr.addMinPurchasePolicy(amount);
 
+        }
 
-                public MaxAmountPurchase getMaxAmountPolicy(int storeID, int sessionID)
-            {
-                Session user = DBSession.getInstance().getSession(sessionID);
-                if (user == null)
-                    throw new DoesntExistException("user is not logged in");
-                Store store = DBStore.getInstance().getStore(storeID);
-                SubscribedUser subscribedUser = user.getSubscribedUser();
-                if (subscribedUser == null)
-                    throw new DoesntExistException("not a subscribed user");
-                StoreRole sr = subscribedUser.getStoreRole(store);
-                if (sr == null)
-                    throw new RoleException("no role for this user in this store");
-                return store.getMaxAmountPolicy();
-            }
-            */
+        public void addMaxPurchasePolicy(int amount, int storeID, int sessionID)
+        {
+            Session user = DBSession.getInstance().getSession(sessionID);
+            if (user == null)
+                throw new DoesntExistException("user is not logged in");
+            Store store = DBStore.getInstance().getStore(storeID);
+            SubscribedUser subscribedUser = user.getSubscribedUser();
+            if (subscribedUser == null)
+                throw new DoesntExistException("not a subscribed user");
+            StoreRole sr = subscribedUser.getStoreRole(store);
+            if (sr == null)
+                throw new RoleException("no role for this user in this store");
+            sr.addMaxPurchasePolicy(amount);
+
+        }
+        public void addTotalPricePurchasePolicy(int amount, int storeID, int sessionID)
+        {
+            Session user = DBSession.getInstance().getSession(sessionID);
+            if (user == null)
+                throw new DoesntExistException("user is not logged in");
+            Store store = DBStore.getInstance().getStore(storeID);
+            SubscribedUser subscribedUser = user.getSubscribedUser();
+            if (subscribedUser == null)
+                throw new DoesntExistException("not a subscribed user");
+            StoreRole sr = subscribedUser.getStoreRole(store);
+            if (sr == null)
+                throw new RoleException("no role for this user in this store");
+            sr.addTotalPricePurchasePolicy(amount);
+
+        }
         public LinkedList<PurchasePolicy> getStorePolicies(int storeID, int sessionID)
         {
             Session user = DBSession.getInstance().getSession(sessionID);
@@ -1053,13 +1029,29 @@ namespace workshop192.Bridge
                 throw new RoleException("no role for this user in this store");
 
             string[] policyArray = policyString.Split(' ');
-            LinkedList<PurchasePolicy> policies = new LinkedList<PurchasePolicy>();
             int index1 = Int32.Parse(policyArray[0]);
             int index2 = Int32.Parse(policyArray[1]);
-            
+            sr.addComplexPolicy(index1, index2, type);
             
         }
+        public void removePolicy(string indexString, int storeID, int sessionID)
+        {
+            Session user = DBSession.getInstance().getSession(sessionID);
+            if (user == null)
+                throw new DoesntExistException("user is not logged in");
+            Store store = DBStore.getInstance().getStore(storeID);
+            SubscribedUser subscribedUser = user.getSubscribedUser();
+            if (subscribedUser == null)
+                throw new DoesntExistException("not a subscribed user");
+            StoreRole sr = subscribedUser.getStoreRole(store);
+            if (sr == null)
+                throw new RoleException("no role for this user in this store");
 
+            string[] indexArray = indexString.Split(' ');
+            int index = Int32.Parse(indexArray[0]);
+            sr.removePolicy(index);
+
+        }
 
 
 

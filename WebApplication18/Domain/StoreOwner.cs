@@ -217,29 +217,7 @@ namespace workshop192.Domain
 
         }
 
-
-        public void removeMaxAmountPolicy()
-        {
-            store.removeMaxAMountPolicy();
-        }
-        public void removeMinAmountPolicy()
-        {
-            store.removeMinAmountPolicy();
-        }
-
-        public void setMinAmountPolicy( int newMinAmount)
-        {
-            store.setMinPurchasePolicy(newMinAmount);
-        }
-
-       
-
-        public void setMaxAmountPolicy(int newMaxAmount)
-        {
-            store.setMaxPurchasePolicy(newMaxAmount);
-
-        }
-
+        
         public void removeCouponFromStore(string couponCode)
         {
             store.removeCoupon(couponCode);
@@ -276,6 +254,36 @@ namespace workshop192.Domain
         public Permissions GetPermissions()
         {
             return new Permissions(true, true, true);
+        }
+
+        public void addComplexPolicy(int index1, int index2, string type)
+        {
+
+            store.addComplexPurchasePolicy(index1, index2, type);
+        }
+
+        public void removePolicy(int index)
+        {
+            store.removePolicyByindex(index);
+        }
+
+        public void setPolicyByIndex(int newAmount, int index)
+        {
+            store.setPolicyByID(newAmount, index);
+        }
+        public void addMinPurchasePolicy(int amount)
+        {
+            store.addMinAmountPolicy(amount);
+        }
+
+        public void addMaxPurchasePolicy(int amount)
+        {
+            store.addMaxAmountPolicy(amount);
+        }
+
+        public void addTotalPricePurchasePolicy(int amount)
+        {
+            store.addTotalAmountPolicy(amount);
         }
     }
 }
