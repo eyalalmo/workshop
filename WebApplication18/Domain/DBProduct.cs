@@ -47,7 +47,7 @@ namespace workshop192.Domain
                    // if(product.discountID != -1)
                     //    product.discount = DBDiscount.getInstance().getDiscount(product.discountID);
                     productList.AddFirst(product);
-                  /*  Discount d = DBDiscount.getInstance().getProductDiscount(product.getStore().getStoreID(), product.getProductID());
+                    Discount d = DBDiscount.getInstance().getProductDiscount(product.getStore().getStoreID(), product.getProductID());
                     if (d != null)
                     {
                         if (d is VisibleDiscount)
@@ -60,7 +60,7 @@ namespace workshop192.Domain
                             ReliantDiscount r = (ReliantDiscount)d;
                             product.setReliantDiscountSameProduct(r);
                         }
-                    }*/
+                    }
                   if (product.getProductID() > nextProductID)
                         nextProductID = product.getProductID();
                 }

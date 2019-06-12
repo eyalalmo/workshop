@@ -158,10 +158,10 @@ namespace workshop192.Domain
         {
             Store store = product.getStore();
             VisibleDiscount discount = new VisibleDiscount(percentage, duration, "ProductVisibleDiscount", store.getStoreID());
+            DBDiscount.getInstance().addDiscount(discount);
             discount.setProduct(product);
             product.setDiscount(discount);
             //store.addDiscount(discount);
-            DBDiscount.getInstance().addDiscount(discount);
 
         }
         public void removeProductDiscount(Product product)
@@ -171,26 +171,27 @@ namespace workshop192.Domain
 
         public void addStoreVisibleDiscount(double percentage, string duration)
         {
-            VisibleDiscount v = new VisibleDiscount(percentage, duration, "StoreVisibleDiscount", store.getStoreID());
-            store.addDiscount(v);
+            VisibleDiscount v = new VisibleDiscount(percentage, duration, "StoreVisibleDiscount", store.getStoreID());       
             DBDiscount.getInstance().addDiscount(v);
+            store.addDiscount(v);
 
         }
 
         public void addReliantDiscountSameProduct(double percentage, String duration, int numOfProducts, Product product)
         {
             ReliantDiscount r = new ReliantDiscount(percentage, duration, numOfProducts, product, store.getStoreID());
+            DBDiscount.getInstance().addDiscount(r);
             store.addDiscount(r);
             product.setReliantDiscountSameProduct(r);
-            DBDiscount.getInstance().addDiscount(r);
 
         }
 
         public void addReliantDiscountTotalAmount(double percentage, String duration, int amount)
         {
             ReliantDiscount r = new ReliantDiscount(percentage, duration, amount, store.getStoreID());
-            store.addDiscount(r);
             DBDiscount.getInstance().addDiscount(r);
+            store.addDiscount(r);
+            
 
         }
 
@@ -205,7 +206,6 @@ namespace workshop192.Domain
         public void addComplexDiscount(List<DiscountComponent> list, string type, double percentage, string duration)
         {
             DiscountComposite composite = new DiscountComposite(list, type, percentage, duration, store.getStoreID());
-            store.addDiscount(composite);
             foreach (DiscountComponent d in list)
             {
                 store.removeDiscount(d.getId());
@@ -216,6 +216,8 @@ namespace workshop192.Domain
                 }
             }
             DBDiscount.getInstance().addDiscount(composite);
+            store.addDiscount(composite);
+
             //DBDiscount.getInstance().addDiscount(composite);
 
         }

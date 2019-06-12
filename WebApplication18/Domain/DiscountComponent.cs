@@ -9,7 +9,7 @@ namespace workshop192.Domain
 
     public abstract class DiscountComponent
     {
-        int id;
+        public int id;
 
         public double percentage;
         public DateTime duration;
@@ -22,7 +22,7 @@ namespace workshop192.Domain
 
         public DiscountComponent(double percentage, string duration, int storeId)
         {
-            this.id = DBDiscount.getNextDiscountID();
+            this.id = DBDiscount.getInstance().getNextDiscountID();
             this.percentage = percentage;
             this.duration = stringToDate(duration);
             this.complexCondition = false;
@@ -33,7 +33,7 @@ namespace workshop192.Domain
         {
             this.id = id;
             this.percentage = percentage;
-            this.duration = stringToDate(duration);
+            this.duration = stringToDate2(duration);
             this.complexCondition = false;
             this.storeId = storeId;
 
@@ -46,6 +46,14 @@ namespace workshop192.Domain
             int year = Int32.Parse(duration.Substring(6, 4));
             return new DateTime(year, month, day);
         }
+        private DateTime stringToDate2(string duration)
+        {
+            int day = Int32.Parse(duration.Substring(4, 2));
+            int month = Int32.Parse(duration.Substring(7, 2));
+            int year = Int32.Parse(duration.Substring(10, 4));
+            return new DateTime(year, month, day);
+        }
+
 
         public int getId()
         {

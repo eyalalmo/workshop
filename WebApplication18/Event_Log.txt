@@ -544,3 +544,26 @@
 2019-06-11 18:11:30,782 INFO EventLog: User u2 has successfuly logged in.
 2019-06-11 18:11:47,547 INFO EventLog: User u2 has successfuly created a store
 2019-06-11 18:12:23,477 INFO EventLog: A purchase has been made
+2019-06-12 14:42:05,160 ERROR EventLog: Register : Error: Username already exists
+2019-06-12 14:43:01,002 INFO EventLog: User y has successfuly registered
+2019-06-12 14:43:45,987 INFO EventLog: User y has successfuly logged in.
+2019-06-12 14:44:07,534 INFO EventLog: User y has successfuly created a store
+2019-06-12 15:10:51,191 INFO EventLog: User y has successfuly logged in.
+2019-06-12 15:13:17,548 INFO EventLog: User y has logged out
+2019-06-12 15:13:23,013 INFO EventLog: User y has successfuly logged in.
+2019-06-12 15:15:38,230 INFO EventLog: User y has logged out
+2019-06-12 15:15:42,321 INFO EventLog: User y has successfuly logged in.
+2019-06-12 15:34:03,839 INFO EventLog: User y has successfuly logged in.
+2019-06-12 15:34:33,914 INFO EventLog: User y has successfuly created a store
+2019-06-12 15:35:13,388 INFO EventLog: User y has logged out
+2019-06-12 15:35:35,433 INFO EventLog: User y has successfuly logged in.
+2019-06-12 15:35:48,779 INFO EventLog: User y has logged out
+2019-06-12 15:36:11,697 ERROR EventLog: Login : Error: Username does not exist
+2019-06-12 15:36:19,832 INFO EventLog: User yy has successfuly registered
+2019-06-12 15:36:33,336 INFO EventLog: User yy has successfuly logged in.
+2019-06-12 15:36:51,456 INFO EventLog: User yy has successfuly created a store
+2019-06-12 15:37:21,384 INFO EventLog: User yy has logged out
+2019-06-12 15:43:51,257 INFO EventLog: User yy has successfuly logged in.
+2019-06-12 15:47:54,326 INFO EventLog: User yy has logged out
+2019-06-12 15:48:07,638 INFO EventLog: User yy has successfuly logged in.
+2019-06-12 16:19:44,375 ERROR EventLog: Login : Error: Username does not exist
