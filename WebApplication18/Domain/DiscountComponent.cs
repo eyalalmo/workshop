@@ -14,6 +14,7 @@ namespace workshop192.Domain
         public double percentage;
         public DateTime duration;
         public int storeId;
+        public bool isPartOfComplex;
         public abstract string getDiscountType();
         public abstract string description();
         public abstract bool checkCondition(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice);
@@ -27,37 +28,37 @@ namespace workshop192.Domain
             this.duration = stringToDate(duration);
             this.complexCondition = false;
             this.storeId = storeId;
+            this.isPartOfComplex = false;
 
         }
-        public DiscountComponent(int id, double percentage, string duration, int storeId)
+        public DiscountComponent(int id, double percentage, string duration, int storeId, bool isPartOfComplex)
         {
             this.id = id;
             this.percentage = percentage;
-            this.duration = stringToDate2(duration);
+            this.duration = DateTime.Parse(duration);
             this.complexCondition = false;
             this.storeId = storeId;
+            this.isPartOfComplex = isPartOfComplex;
 
         }
 
         private DateTime stringToDate(string duration)
         {
+            
             int day = Int32.Parse(duration.Substring(0, 2));
             int month = Int32.Parse(duration.Substring(3, 2));
             int year = Int32.Parse(duration.Substring(6, 4));
             return new DateTime(year, month, day);
         }
-        private DateTime stringToDate2(string duration)
-        {
-            int day = Int32.Parse(duration.Substring(4, 2));
-            int month = Int32.Parse(duration.Substring(7, 2));
-            int year = Int32.Parse(duration.Substring(10, 4));
-            return new DateTime(year, month, day);
-        }
-
+       
 
         public int getId()
         {
             return this.id;
+        }
+        public bool getIsPartOfComplex()
+        {
+            return this.isPartOfComplex;
         }
         public double getPercentage()
         {
@@ -87,6 +88,10 @@ namespace workshop192.Domain
             if (DateTime.Compare(duration, now) < 0)
                 return false;
             return true;
+        }
+        public void setIsPartOfComplex(bool isPartOfComplex)
+        {
+            this.isPartOfComplex = isPartOfComplex;
         }
     }
 }

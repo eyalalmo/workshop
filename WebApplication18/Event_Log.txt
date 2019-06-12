@@ -567,3 +567,56 @@
 2019-06-12 15:47:54,326 INFO EventLog: User yy has logged out
 2019-06-12 15:48:07,638 INFO EventLog: User yy has successfuly logged in.
 2019-06-12 16:19:44,375 ERROR EventLog: Login : Error: Username does not exist
+2019-06-12 17:02:50,780 INFO EventLog: User yy has successfuly logged in.
+2019-06-12 17:18:07,586 ERROR EventLog: Login : Error: Username already logged in
+2019-06-12 17:18:07,675 INFO EventLog: User yy has successfuly logged in.
+2019-06-12 17:22:32,035 INFO EventLog: User yy has successfuly logged in.
+2019-06-12 17:36:16,295 ERROR EventLog: Login : Error: Username does not exist
+2019-06-12 17:36:21,520 ERROR EventLog: Login : Error: Username does not exist
+2019-06-12 17:36:41,995 INFO EventLog: User yael has successfuly registered
+2019-06-12 17:36:55,876 INFO EventLog: User yael has successfuly logged in.
+2019-06-12 17:37:21,943 INFO EventLog: User yael has successfuly created a store
+2019-06-12 17:47:19,027 INFO EventLog: User yael has successfuly logged in.
+2019-06-12 18:01:25,338 INFO EventLog: User yael has successfuly logged in.
+2019-06-12 18:14:43,271 INFO EventLog: User yael has successfuly logged in.
+2019-06-12 18:28:36,996 INFO EventLog: User yael has logged out
+2019-06-12 18:29:03,636 INFO EventLog: User bar has successfuly registered
+2019-06-12 18:29:21,089 INFO EventLog: User bar has successfuly logged in.
+2019-06-12 18:29:43,408 INFO EventLog: User bar has successfuly created a store
+2019-06-12 18:43:14,789 INFO EventLog: User bar has successfuly logged in.
+2019-06-12 18:52:31,087 INFO EventLog: User bar has successfuly logged in.
+2019-06-12 18:52:33,921 ERROR EventLog: Login : Error: User is already logged in
+2019-06-12 18:59:23,992 ERROR EventLog: Login : Error: Username does not exist
+2019-06-12 18:59:41,447 INFO EventLog: User bar has successfuly registered
+2019-06-12 18:59:52,017 INFO EventLog: User bar has successfuly logged in.
+2019-06-12 19:00:06,601 INFO EventLog: User bar has successfuly created a store
+2019-06-12 19:04:24,765 INFO EventLog: User bar has successfuly logged in.
+2019-06-12 19:20:25,789 INFO EventLog: User bar has successfuly registered
+2019-06-12 19:20:31,505 INFO EventLog: User bar has successfuly logged in.
+2019-06-12 19:20:46,961 INFO EventLog: User bar has successfuly created a store
+2019-06-12 21:02:42,012 INFO EventLog: User bary has successfuly registered
+2019-06-12 21:02:51,352 INFO EventLog: User bary has successfuly logged in.
+2019-06-12 21:03:11,371 INFO EventLog: User bary has successfuly created a store
+2019-06-12 21:35:56,248 INFO EventLog: User bary has successfuly logged in.
+2019-06-12 21:39:01,658 INFO EventLog: User bary has successfuly logged in.
+2019-06-12 22:05:35,657 INFO EventLog: User yaelk has successfuly registered
+2019-06-12 22:05:49,293 ERROR EventLog: Register : Error: Username already exists
+2019-06-12 22:05:58,067 INFO EventLog: User yaelk has successfuly logged in.
+2019-06-12 22:06:18,251 INFO EventLog: User yaelk has successfuly created a store
+2019-06-12 22:22:40,564 INFO EventLog: User u2 has successfuly logged in.
+2019-06-12 22:32:26,709 INFO EventLog: User u2 has successfuly logged in.
+2019-06-12 22:51:46,085 INFO EventLog: User u2 has successfuly logged in.
+2019-06-12 23:25:31,161 INFO EventLog: User u2 has successfuly logged in.
+2019-06-12 23:30:56,686 INFO EventLog: User u2 has logged out
+2019-06-12 23:31:11,709 INFO EventLog: User yaelkachlon has successfuly registered
+2019-06-12 23:36:21,150 INFO EventLog: User u2 has successfuly logged in.
+2019-06-12 23:44:30,686 INFO EventLog: User u2 has successfuly logged in.
+2019-06-13 00:15:20,520 INFO EventLog: User u2 has successfuly logged in.
+2019-06-13 00:19:28,830 INFO EventLog: User u2 has successfuly logged in.
+2019-06-13 00:19:30,682 ERROR EventLog: Login : Error: User is already logged in
+2019-06-13 00:22:01,699 INFO EventLog: User u2 has successfuly logged in.
+2019-06-13 00:25:29,421 INFO EventLog: User u2 has successfuly logged in.
+2019-06-13 00:37:16,076 INFO EventLog: User u2 has successfuly logged in.
+2019-06-13 00:42:42,041 INFO EventLog: User u2 has successfuly logged in.
+2019-06-13 00:50:49,529 INFO EventLog: User u2 has successfuly logged in.
+2019-06-13 00:50:52,245 ERROR EventLog: Login : Error: User is already logged in

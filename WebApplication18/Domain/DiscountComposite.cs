@@ -11,6 +11,7 @@ namespace workshop192.Domain
         enum Type { or, and, xor };
         private List<DiscountComponent> children;
         private Type type;
+        
 
        
         public DiscountComposite(List<DiscountComponent> children, string type, double percentage, string duration, int storeId) : base(percentage, duration, storeId)
@@ -36,7 +37,7 @@ namespace workshop192.Domain
             else
                 throw new IllegalNameException("Error: Wrong type name in discount composite");
         }
-        public DiscountComposite(int id, List<DiscountComponent> children, string type, double percentage, string duration, int storeId) : base(id, percentage, duration, storeId)
+        public DiscountComposite(int id, List<DiscountComponent> children, string type, double percentage, string duration, int storeId, bool isPartOfComplex) : base(id, percentage, duration, storeId, isPartOfComplex)
         {
             if (children == null)
             {

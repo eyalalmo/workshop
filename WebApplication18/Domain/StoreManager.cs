@@ -193,11 +193,8 @@ namespace workshop192.Domain
             foreach (DiscountComponent d in list)
             {
                 store.removeDiscount(d.getId());
-                if (d is Discount)
-                {
-                    Discount di = (Discount)d;
-                    di.setIsPartOfComplex(true);
-                }
+                DBDiscount.getInstance().setIsPartOfComplex(d.getId(), true);
+                d.setIsPartOfComplex(true);
             }
             DBDiscount.getInstance().addDiscount(composite);
             store.addDiscount(composite);

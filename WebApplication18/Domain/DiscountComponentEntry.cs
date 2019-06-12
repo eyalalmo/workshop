@@ -12,13 +12,15 @@ namespace WebApplication18.Domain
         private string duration;
         private string type;
         private int storeId;
-        public DiscountComponentEntry(int id, double percentage, string duration, string type, int storeId)
+        private int isPartOfCompex;
+        public DiscountComponentEntry(int id, double percentage, string duration, string type, int storeId, int isPartOfComplex)
         {
             this.id = id;
             this.percentage = percentage;
             this.duration = duration;
             this.type = type;
             this.storeId = storeId;
+            this.isPartOfCompex = isPartOfComplex;
         }
         public int getId()
         {
@@ -40,5 +42,10 @@ namespace WebApplication18.Domain
         {
             return this.storeId;
         }
+        public int getIsPartOfComplex()
+        {
+            return this.isPartOfCompex;
+        }
+    
     }
 }

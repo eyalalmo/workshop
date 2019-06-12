@@ -46,17 +46,25 @@ namespace workshop192.Domain
             {
                 
                // connection.Open();
-                string sql = "INSERT INTO [dbo].[DiscountComponent] (id, percentage, duration, type, storeId)" +
-                                " VALUES (@id,@percentage, @duration, @type, @storeId)";
+                string sql = "INSERT INTO [dbo].[DiscountComponent] (id, percentage, duration, type, storeId, isPartOfComplex)" +
+                                " VALUES (@id,@percentage, @duration, @type, @storeId, @isPartOfComplex)";
+                int isPartOfComplex;
+                if (d.getIsPartOfComplex())
+                    isPartOfComplex = 1;
+                else
+                    isPartOfComplex = 0;
                 if (d is Discount)
                 {
+                    
                     connection.Execute(sql, new
                     {
                         id = d.getId(),
                         percentage = d.getPercentage(),
                         duration = d.getDuration(),
                         type = "Discount",
-                        storeId = d.getStoreId()
+                        storeId = d.getStoreId(),
+                        isPartOfComplex
+
                     });
                     if (d is VisibleDiscount)
                     {
@@ -78,15 +86,16 @@ namespace workshop192.Domain
                         percentage = d.getPercentage(),
                         duration = d.getDuration(),
                         type = "Composite",
-                        storeId = d.getStoreId()
+                        storeId = d.getStoreId(),
+                        isPartOfComplex
 
                     });
                     foreach (DiscountComponent child in composite.getChildren())
                     {
-                        string sql2 = "INSERT INTO [dbo].[DiscountComposite] (id,childid,type)" +
-                                " VALUES (@id, @childid,@type)";
+                        string sql2 = "INSERT INTO [dbo].[DiscountComposite] (id, childid, type)" +
+                                " VALUES (@id, @childid, @type)";
 
-                        connection.Execute(sql, new
+                        connection.Execute(sql2, new
                         {
                             id = d.getId(),
                             childid = child.getId(),
@@ -120,9 +129,15 @@ namespace workshop192.Domain
                     connection.Execute("DELETE FROM Discount WHERE id=@id ", new { id = d.getId() });
                 }
                 else
+                {
                     connection.Execute("DELETE FROM DiscountComposite WHERE id=@id ", new { id = d.getId() });
+                    DiscountComposite composite = (DiscountComposite)d;
+                    foreach(DiscountComponent component in composite.getChildren())
+                    {
+                        removeDiscount(component);
+                    }
+                }
 
-                connection.Execute("DELETE FROM Discount WHERE childid=@childid ", new { childid = d.getId() });
                 discounts.Remove(d);
                 connection.Close();
             }
@@ -155,15 +170,6 @@ namespace workshop192.Domain
         {
             int id = v.getId();
             string type = "Visible";
-            int isPartOfComplex;
-            if (v.getIsPartOfComplex())
-            {
-                isPartOfComplex = 1;
-            }
-            else
-            {
-                isPartOfComplex = 0;
-            }
             string reliantType = "-1";
             string visibleType;
             int productId;
@@ -181,13 +187,12 @@ namespace workshop192.Domain
             //not reliantdiscount
             int numOfProducts = -1;
             int totalAmount = -1;
-            string sql = "INSERT INTO [dbo].[Discount] (id, type, isPartOfComplex, reliantType, visibleType, productId, storeId, numOfProducts, totalAmount)" +
-                                " VALUES (@id, @type, @isPartOfComplex, @reliantType, @visibleType, @productId, @storeId, @numOfProducts, @totalAmount)";
+            string sql = "INSERT INTO [dbo].[Discount] (id, type, reliantType, visibleType, productId, storeId, numOfProducts, totalAmount)" +
+                                " VALUES (@id, @type, @reliantType, @visibleType, @productId, @storeId, @numOfProducts, @totalAmount)";
             connection.Execute(sql, new
             {
                 id,
                 type,
-                isPartOfComplex,
                 reliantType,
                 visibleType,
                 productId,
@@ -222,13 +227,12 @@ namespace workshop192.Domain
                 totalAmount = -1;
                 numOfProducts = r.getMinNumOfProducts();
             }
-            string sql = "INSERT INTO [dbo].[Discount] (id, type, isPartOfComplex, reliantType, visibleType, productId, numOfProducts, totalAmount)" +
-                                " VALUES (@id, @type, @isPartOfComplex, @reliantType, @visibleType, @productId, @numOfProducts, @totalAmount)";
+            string sql = "INSERT INTO [dbo].[Discount] (id, type, reliantType, visibleType, productId, storeId, numOfProducts, totalAmount)" +
+                                " VALUES (@id, @type, @reliantType, @visibleType, @productId, @storeId, @numOfProducts, @totalAmount)";
             connection.Execute(sql, new
             {
                 id,
                 type,
-                isPartOfComplex,
                 reliantType,
                 visibleType,
                 productId,
@@ -257,6 +261,30 @@ namespace workshop192.Domain
                 connection.Close();
             }
         }
+        public void setIsPartOfComplex(int id,bool b)
+        {
+            int isPartOfComplex;
+            if (b)
+                isPartOfComplex = 1;
+            else
+                isPartOfComplex = 0;
+            try
+            {
+                connection.Open();
+                string sql = "UPDATE DiscountComponent SET isPartOfComplex=@isPartOfComplex" +
+                                " WHERE id=@id";
+                connection.Execute(sql, new
+                {
+                    isPartOfComplex,
+                    id
+                });
+                connection.Close();
+            }
+            catch (Exception)
+            {
+                connection.Close();
+            }
+        }
                 
         public DiscountComponent getDiscountByID(int id)
         {
@@ -267,17 +295,17 @@ namespace workshop192.Domain
             }
             return null;
         }
-        public Discount getStoreDiscount(int storeId)
+        public Discount getStoreDiscount(int id, int storeId)
         {
-           
-                var discountEntry = connection.Query<DiscountEntry>("SELECT * FROM [dbo].[Discount] WHERE storeId=@storeId", new { storeId = storeId }).First();
-                DiscountEntry d = (DiscountEntry)discountEntry;
-                int discountId = d.getId();
-                bool isPartOfComplex = false;
-                if (d.getIsPartOfComplex() == 1)
-                    isPartOfComplex = true;
-                DiscountComponentEntry component = (DiscountComponentEntry)connection.Query<DiscountComponentEntry>("SELECT * FROM [dbo].[DiscountComponent] WHERE id=@id", new { id = discountId }).First();
-                if (d.getType() == "Visible")
+            var discountEntry = connection.Query<DiscountEntry>("SELECT * FROM [dbo].[Discount] WHERE id=@id AND storeId=@storeId", new { id, storeId = storeId }).First();
+            DiscountEntry d = (DiscountEntry)discountEntry;
+            int discountId = d.getId();
+               
+            DiscountComponentEntry component = (DiscountComponentEntry)connection.Query<DiscountComponentEntry>("SELECT * FROM [dbo].[DiscountComponent] WHERE id=@id", new { id = discountId }).First();
+            bool isPartOfComplex = false;
+            if (component.getIsPartOfComplex() == 1)
+                isPartOfComplex = true;
+            if (d.getType() == "Visible")
                 {
 
                     VisibleDiscount v = new VisibleDiscount(component.getId(), isPartOfComplex, component.getPercentage(), component.getDuration(), d.getVisibleType(), component.getStoreId());
@@ -312,16 +340,18 @@ namespace workshop192.Domain
                          
                         if (de.getProductId()!=-1)//productDiscount
                         {
-                            Discount dis = getProductDiscount(d.getStoreId(), de.getProductId());
+                            Discount dis = getProductDiscount(de.getId(), de.getStoreId(), de.getProductId());
                             
                             if (dis.getIsPartOfComplex() == false) //add to store discounts only if it is not part of complex discount
                                 storeDiscounts.AddFirst(dis);
+                            discounts.AddFirst(dis);
                         }
                         else//StoreDiscount
                         {
-                            Discount dis = getStoreDiscount(d.getStoreId());
+                            Discount dis = getStoreDiscount(d.getId(), d.getStoreId());
                             if (dis.getIsPartOfComplex() == false)
                                 storeDiscounts.AddFirst(dis);
+                            discounts.AddFirst(dis);
                         }
                     }
                 var compositeEntryList= connection.Query<DiscountComponentEntry>("SELECT * FROM [dbo].[DiscountComponent] WHERE storeId=@storeId AND type=@type", new { storeId = storeId, type = "Composite" }).ToList<DiscountComponentEntry>();
@@ -347,16 +377,20 @@ namespace workshop192.Domain
                     {
                         foreach (DiscountCompositeEntry en in de)
                         {
-                            DiscountComponent disc = getDiscountByID(en.getId());
+                            DiscountComponent disc = getDiscountByID(en.getchildid());
                             children.Add(disc);
                         }
-                        DiscountComposite compos = new DiscountComposite(di.getId(), children, type, di.getPercentage(), di.getDuration(), di.getStoreId());
+                        bool isPartOfComplex = false;
+                        if (di.getIsPartOfComplex() == 1)
+                            isPartOfComplex = true;
+                        DiscountComposite compos = new DiscountComposite(di.getId(), children, type, di.getPercentage(), di.getDuration(), di.getStoreId(), isPartOfComplex);
                         discounts.AddFirst(compos);
                         storeDiscounts.AddFirst(compos);
                         compositeEntryL.Remove(di);
                         
                     }
-                    i = (i + 1) % compositeEntryL.Count;
+                    if(compositeEntryL.Count!=0)
+                        i = (i + 1) % compositeEntryL.Count;
                }
                 return storeDiscounts;
                 
@@ -370,18 +404,18 @@ namespace workshop192.Domain
         }
         public Discount getProductDiscount(int storeId, int productId)
         {
-
+            
             try
             {
                 connection.Open();
-                var discountEntry = connection.Query<DiscountEntry>("SELECT * FROM [dbo].[Discounts] WHERE storeId=@storeId AND productId=@productId", new { storeId = storeId, productId = productId }).First();
+                
+                var discountEntry = connection.Query<DiscountEntry>("SELECT * FROM [dbo].[Discount] WHERE storeId=@storeId AND productId=@productId", new { storeId = storeId, productId = productId }).First();
                 DiscountEntry d = (DiscountEntry)discountEntry;
-                bool isPartOfComplex = false;
-                if (d.getIsPartOfComplex() == 1)
-                    isPartOfComplex = true;
-
                 int discountId = d.getId();
                 DiscountComponentEntry component = (DiscountComponentEntry)connection.Query<DiscountComponentEntry>("SELECT * FROM [dbo].[DiscountComponent] WHERE id=@id", new { id = discountId }).First();
+                bool isPartOfComplex = false;
+                if (component.getIsPartOfComplex() == 1)
+                    isPartOfComplex = true;
                 if (d.getType() == "Visible")
                 {
                     VisibleDiscount v = new VisibleDiscount(component.getId(), isPartOfComplex,component.getPercentage(), component.getDuration(), d.getVisibleType(), component.getStoreId());
@@ -399,7 +433,7 @@ namespace workshop192.Domain
                     {
                         Product p = DBProduct.getInstance().getProductByID(productID);
                         bool isPartOfCompex = false;
-                        if (d.getIsPartOfComplex() == 1)
+                        if (component.getIsPartOfComplex() == 1)
                             isPartOfComplex = true;
                         r = new ReliantDiscount(component.getId(),isPartOfComplex, component.getPercentage(), component.getDuration(), d.getNumOfProducts(), p, component.getStoreId());
                     }
@@ -413,6 +447,14 @@ namespace workshop192.Domain
                 connection.Close();
                 return null;
             }
+        }
+        public Discount getProductDiscount(int id, int storeId, int productId)
+        {
+            DiscountComponent disc = getDiscountByID(id);
+            if (disc != null)
+                return (Discount)disc;
+            else
+                return getProductDiscount(storeId, productId);
         }
     }
 }
