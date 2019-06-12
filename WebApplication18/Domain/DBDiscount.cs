@@ -340,11 +340,10 @@ namespace workshop192.Domain
                          
                         if (de.getProductId()!=-1)//productDiscount
                         {
-                            Discount dis = getProductDiscount(de.getId(), de.getStoreId(), de.getProductId());
+                            Discount dis = getProductDiscount(d.getStoreId(), de.getProductId());
                             
                             if (dis.getIsPartOfComplex() == false) //add to store discounts only if it is not part of complex discount
                                 storeDiscounts.AddFirst(dis);
-                            discounts.AddFirst(dis);
                         }
                         else//StoreDiscount
                         {
@@ -411,6 +410,9 @@ namespace workshop192.Domain
                 
                 var discountEntry = connection.Query<DiscountEntry>("SELECT * FROM [dbo].[Discount] WHERE storeId=@storeId AND productId=@productId", new { storeId = storeId, productId = productId }).First();
                 DiscountEntry d = (DiscountEntry)discountEntry;
+                DiscountComponent dis = getDiscountByID(d.getId());
+                if (dis != null)
+                    return (Discount)dis;
                 int discountId = d.getId();
                 DiscountComponentEntry component = (DiscountComponentEntry)connection.Query<DiscountComponentEntry>("SELECT * FROM [dbo].[DiscountComponent] WHERE id=@id", new { id = discountId }).First();
                 bool isPartOfComplex = false;
@@ -421,6 +423,7 @@ namespace workshop192.Domain
                     VisibleDiscount v = new VisibleDiscount(component.getId(), isPartOfComplex,component.getPercentage(), component.getDuration(), d.getVisibleType(), component.getStoreId());
                     Product p = DBProduct.getInstance().getProductByID(d.getProductId());
                     v.setProduct(p);
+                    discounts.AddFirst(v);
                     connection.Close();
                     return v;
 
@@ -432,10 +435,8 @@ namespace workshop192.Domain
                     if (d.getReliantType() == "sameProduct")
                     {
                         Product p = DBProduct.getInstance().getProductByID(productID);
-                        bool isPartOfCompex = false;
-                        if (component.getIsPartOfComplex() == 1)
-                            isPartOfComplex = true;
-                        r = new ReliantDiscount(component.getId(),isPartOfComplex, component.getPercentage(), component.getDuration(), d.getNumOfProducts(), p, component.getStoreId());
+                        r = new ReliantDiscount(component.getId(), isPartOfComplex, component.getPercentage(), component.getDuration(), d.getNumOfProducts(), p, component.getStoreId());
+                        discounts.AddFirst(r);
                     }
                     connection.Close();
                     return r;
@@ -448,14 +449,7 @@ namespace workshop192.Domain
                 return null;
             }
         }
-        public Discount getProductDiscount(int id, int storeId, int productId)
-        {
-            DiscountComponent disc = getDiscountByID(id);
-            if (disc != null)
-                return (Discount)disc;
-            else
-                return getProductDiscount(storeId, productId);
-        }
+ 
     }
 }
 
