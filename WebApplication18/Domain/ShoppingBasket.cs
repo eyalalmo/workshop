@@ -174,24 +174,6 @@ namespace workshop192.Domain
 
         public async Task<int> purchaseBasket(string address, string creditcard, string month, string year, string holder, string cvv)
         {
-        //    foreach (KeyValuePair<int, ShoppingCart> pair1 in shoppingCarts)
-        //    {
-        //        ShoppingCart cart = pair1.Value;
-        //        Dictionary<Product, int> productsInCart = cart.getProductsInCarts();
-        //        foreach (KeyValuePair<Product, int> pair2 in productsInCart)
-        //        {
-        //            Product product = pair2.Key;
-        //            int amount = pair2.Value;
-        //            if (product.getQuantityLeft() < amount)
-        //            {
-
-        //                throw new IllegalAmountException("Error: Cannot complete purchase- " + product.getProductName() + " does not have enough quantity left");
-        //            }
-        //            product.decQuantityLeft(amount);
-        //        }
-
-        //    }
-
             Task<int> result =  PaymentService.getInstance().checkOut(address, creditcard, month, year, holder, cvv);
             int res = await result;
             int resFromDelivery2;
@@ -236,17 +218,20 @@ namespace workshop192.Domain
         }
         public void checkBasket()
         {
+            
             Product productToRemove = null;
             foreach (KeyValuePair<int, ShoppingCart> pair1 in shoppingCarts)
             {
                 ShoppingCart cart = pair1.Value;
+                cart.checkAmountPolicy();
+                cart.checkTotalPrice();
                 Store store = DBStore.getInstance().getStore(cart.getStoreID());
                 Dictionary<Product, int> productsInCart = cart.getProductsInCarts();
                 foreach (KeyValuePair<Product, int> pair2 in productsInCart)
                 {
                     Product product = pair2.Key;
                     int amount = pair2.Value;
-                    store.checkPolicy(product, amount);
+                    //store.checkPolicy(product, amount);
                     if (product.getQuantityLeft() == 0)
                     {
                         productToRemove = product;
@@ -259,6 +244,7 @@ namespace workshop192.Domain
                     }
                     product.decQuantityLeft(amount);
                 }
+
                 if (productToRemove != null)
                 {
                     removeFromCart(productToRemove.getProductID());

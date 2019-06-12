@@ -396,6 +396,7 @@
     <Compile Include="DAL\Connector.cs" />
     <Compile Include="Domain\BasketCartEntry.cs" />
     <Compile Include="Domain\CartProductEntry.cs" />
+    <Compile Include="Domain\ComplexPurchasePolicy.cs" />
     <Compile Include="Domain\Cookie.cs" />
     <Compile Include="Domain\DBNotifications.cs" />
     <Compile Include="Domain\IsTestsMode.cs" />

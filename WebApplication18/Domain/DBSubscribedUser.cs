@@ -77,7 +77,7 @@ namespace workshop192.Domain
                     }
                 }
            }
-           catch (Exception e)
+           catch (Exception)
            {
                connection.Close();
            }
@@ -107,7 +107,7 @@ namespace workshop192.Domain
                 {
                     connection.Close();
                 }
-            }
+        }
 
         
 
@@ -213,6 +213,8 @@ namespace workshop192.Domain
                     var c2 = connection.Query<BasketCartEntry>(sql, new { username= username });
                     connection.Close();
                     ShoppingBasket sb = new ShoppingBasket(username);
+                    SubscribedUser su = new SubscribedUser(username, password, sb);
+                    users.Add(username, su);
 
                     if (Enumerable.Count(c2) > 0)
                     {
@@ -235,9 +237,7 @@ namespace workshop192.Domain
                             }
                         }
                     }
-                    SubscribedUser su = new SubscribedUser(username, password, sb);
                     List<StoreRole> storeRoles = su.getStoreRoles();
-                    users.Add(username, su);
                     DBStore.getInstance().getAllStoreRoles(username);
 
                     //foreach (StoreRole sr in DBStore.getInstance().getAllStoreRoles(username))
@@ -263,7 +263,7 @@ namespace workshop192.Domain
                 connection.Close();
                 return null;
             }
-        }//
+        }
         public void updateStoreRole(SubscribedUser user)
         {
             string username = user.getUsername();
@@ -341,16 +341,19 @@ namespace workshop192.Domain
             if (loggedInUser.ContainsKey(username))
                 loggedInUser.Remove(username);
             users.Remove(username);
-            string sql1 = "DELETE * FROM Register WHERE username =@username";
-            string sql2 = "DELETE * FROM BasketCart WHERE username=@username";
-            string sql3 = "DELETE * FROM CartProduct WHERE username=@username";
-            
+            string sql1 = "DELETE * FROM Register WHERE username =@username \n";
+            string sql2 = "DELETE * FROM BasketCart WHERE username=@username \n";
+            string sql3 = "DELETE * FROM CartProduct WHERE username=@username \n";
+            string all = sql1 + sql2 + sql3;
             try
             {
                 connection.Open();
+                connection.Execute(all, new { username });
+                /*
                 connection.Execute(sql1, new { username });
                 connection.Execute(sql2, new { username });
                 connection.Execute(sql3, new { username });
+                */            
                 connection.Close();
             }
             catch (Exception)

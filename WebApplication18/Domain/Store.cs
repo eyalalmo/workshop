@@ -20,8 +20,9 @@ namespace workshop192.Domain
         public List<StoreRole> roles;
         public int numOfOwners;
         public bool active;
-        public MinAmountPurchase minPurchasePolicy;
-        public MaxAmountPurchase maxPurchasePolicy;
+        public int minPurchasePolicy;
+        public int maxPurchasePolicy;
+        public int minTotalprice;
         private LinkedList<InvisibleDiscount> invisibleDiscountList;
         [JsonIgnore]
         public LinkedList<DiscountComponent> discountList;
@@ -39,8 +40,9 @@ namespace workshop192.Domain
             active = true;
             discountList = new LinkedList<DiscountComponent>();
            // invisibleDiscountList = new LinkedList<InvisibleDiscount>();
-            maxPurchasePolicy = null;
-            minPurchasePolicy = null;
+            maxPurchasePolicy = -1;
+            minPurchasePolicy = -1;
+            minTotalprice = -1;
             pendingOwners = new Dictionary<string, HashSet<string>>();
         }
         public Store(int storeId,string name, string description)
@@ -55,8 +57,9 @@ namespace workshop192.Domain
             pendingOwners = new Dictionary<string, HashSet<string>>();
             discountList = new LinkedList<DiscountComponent>();
             invisibleDiscountList = new LinkedList<InvisibleDiscount>();
-            maxPurchasePolicy = null;
-            minPurchasePolicy = null;
+            maxPurchasePolicy = -1;
+            minPurchasePolicy = -1;
+            minTotalprice = -1;
         }
 
         public void addProduct(Product p)
@@ -263,6 +266,16 @@ namespace workshop192.Domain
             }
             return null;
         }
+
+        public void checkTotalPrice(double cartPrice)
+        {
+            if(minTotalprice!= -1)
+            {
+                if (minTotalprice > cartPrice)
+                    throw new ArgumentException("Total cart price must be above +" + minTotalprice + "in store " + storeId);
+            }
+        }
+
         public void removeStoreRole(StoreRole toRemove)
         {
             if (toRemove is StoreOwner)
@@ -292,50 +305,22 @@ namespace workshop192.Domain
                 }
             }
         }
-
-
-      //  public void removeDiscount(DiscountComponent discount)
-      //  {
-           /* DiscountComponent discount = DBDiscount.getInstance().getDiscountByID(discountID);
-            if (discount==null)
-            {
-                throw new DoesntExistException("Error: Discount does not exist so it cannot be removed");
-            }*/
-         //   discountList.Remove(discount);
-       // }
-        /*
-         private void checkValidityofPurchases(PurchasePolicy p1, PurchasePolicy p2)
-         {
-             if (p1!= null && p1.GetType() == typeof(MaxAmountPurchase))
-             {
-                 if (p1.getAmount() < p2.getAmount())
-                     throw new ArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
-             }
-             else if (p1.GetType() == typeof(MinAmountPurchase))
-             {
-                 if (p1.getAmount() > p2.getAmount())
-                     throw new ArgumentException("contradiction! minimum amount can not be larger than maximum amount Purchase Policy");
-             }
-
-        }
-       */ 
-        public void setMinPurchasePolicy(int MinAmount)
+ 
+        public void setMinPurchasePolicy(int minAmount)
         {
-            if (maxPurchasePolicy == null)
+            if (maxPurchasePolicy == -1)
             {
-                DBStore.getInstance().setMinPurchasePolicy(this.storeId, MinAmount);
-                minPurchasePolicy = new MinAmountPurchase(MinAmount);
+                minPurchasePolicy = minAmount;
             }
             else
             {
-                if (maxPurchasePolicy.getAmount() < MinAmount)
+                if (maxPurchasePolicy < minAmount)
                 {
                     throw new ArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
                 }
                 else
                 {
-                    DBStore.getInstance().setMinPurchasePolicy(this.storeId, MinAmount);
-                    minPurchasePolicy = new MinAmountPurchase(MinAmount);
+                    minPurchasePolicy = minAmount;
                 }
             }
 
@@ -343,70 +328,66 @@ namespace workshop192.Domain
 
         public void setMaxPurchasePolicy(int maxAmount)
         {
-            if (minPurchasePolicy == null)
+            if (minPurchasePolicy == -1)
             {
-                maxPurchasePolicy = new MaxAmountPurchase(maxAmount);
-                DBStore.getInstance().setMaxPurchasePolicy(this.storeId, maxAmount);
+                maxPurchasePolicy = maxAmount;
             }
             else
             {
-                if (minPurchasePolicy.getAmount() > maxAmount)
+                if (minPurchasePolicy > maxAmount)
                 {
                     throw new ArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
                 }
                 else
                 {
-                    DBStore.getInstance().setMaxPurchasePolicy(this.storeId, maxAmount);
-                    maxPurchasePolicy = new MaxAmountPurchase(maxAmount);
+                    maxPurchasePolicy = maxAmount;
                 }
 
             }
         }
 
-        public void checkPolicy(Product p, int amount)
+        public void checkAmountPolicy(int amount)
         {
-            if (maxPurchasePolicy != null)
-                maxPurchasePolicy.checkPolicy(p, amount);
-            if (minPurchasePolicy != null)
-                minPurchasePolicy.checkPolicy(p, amount);
+            if (maxPurchasePolicy != -1)
+            {
+                if(maxPurchasePolicy< amount)
+                   throw new ArgumentException("Error: Cannot purchase more than " + maxPurchasePolicy + " products in store: " +storeId);
+            }
+
+            if (minPurchasePolicy != -1)
+            {
+                if(minPurchasePolicy>amount)
+                    throw new ArgumentException("Error: Cannot purchase less than " + maxPurchasePolicy + " products in store: " + storeId);
+            }
         }
 
         public void removeMaxAMountPolicy()
         {
-            maxPurchasePolicy = null;
+            maxPurchasePolicy = -1;
 
         }
 
         public void removeMinAmountPolicy()
         {
-            minPurchasePolicy = null;
+            minPurchasePolicy = -1;
+        }
+
+        public void removeTotalPricePolicy()
+        {
+            m
         }
 
         public bool hasMinPurchasePolicy()
         {
-            return (minPurchasePolicy != null);
+            return (minPurchasePolicy != -1);
         }
         public bool hasMaxPurchasePolicy()
         {
-            return (maxPurchasePolicy != null);
+            return (maxPurchasePolicy != -1);
         }
       
 
-        public MinAmountPurchase getMinAmountPolicy()
-        {
-            if (minPurchasePolicy != null)
-                return minPurchasePolicy;
-            else
-                throw new DoesntExistException();
-        }
-        public MaxAmountPurchase getMaxAmountPolicy()
-        {
-            if (maxPurchasePolicy != null)
-                return maxPurchasePolicy;
-            else
-                throw new DoesntExistException();
-        }
-
+    
         public VisibleDiscount getVisibleDiscount()
         {
             foreach(Discount d in discountList)
