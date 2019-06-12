@@ -311,46 +311,62 @@ namespace workshop192.Domain
         public void setMinPurchasePolicy(int minAmount, int index)
         {
             PurchasePolicy p = policies.ElementAt(index);
-
-            if (getMaxPolicy() == null)
+            PurchasePolicy max = getMaxPolicy();
+            if (max == null)
             {
-                minPurchasePolicy = new MinAmountPurchase(minAmount);
+                p.setAmount(minAmount);
             }
             else
             {
-                if (maxPurchasePolicy.getAmount() < minAmount)
+                if (max.getAmount() < minAmount)
                 {
                     throw new ArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
                 }
                 else
                 {
-                    minPurchasePolicy = new MinAmountPurchase(minAmount);
+                    p.setAmount(minAmount);
                 }
             }
 
         }
 
-        private object getMaxPolicy()
+        private PurchasePolicy getMaxPolicy()
         {
-            foreach()
+            foreach(PurchasePolicy p in policies)
+            {
+                if (p is MaxAmountPurchase)
+                    return p;
+            }
+            return null;
 
         }
-
-        public void setMaxPurchasePolicy(int maxAmount)
+        private PurchasePolicy getMinPolicy()
         {
-            if (minPurchasePolicy == null)
+            foreach (PurchasePolicy p in policies)
             {
-                maxPurchasePolicy = new MaxAmountPurchase(maxAmount);
+                if (p is MinAmountPurchase)
+                    return p;
+            }
+            return null;
+
+        }
+        public void setMaxPurchasePolicy(int maxAmount, int index)
+        {
+            PurchasePolicy p = policies.ElementAt(index);
+            PurchasePolicy min = getMinPolicy();
+            if (min == null)
+            {
+                p.setAmount(maxAmount);
             }
             else
             {
-                if (minPurchasePolicy.getAmount() > maxAmount)
+                if (min.getAmount() > maxAmount)
                 {
                     throw new ArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
                 }
                 else
                 {
-                    maxPurchasePolicy = new MaxAmountPurchase(maxAmount);
+                    p.setAmount(maxAmount);
                 }
 
             }
@@ -359,59 +375,113 @@ namespace workshop192.Domain
         public bool checkStorePolicy(int amount, double cartTotalPrice)
         {
             bool ans = true;
-            if (maxPurchasePolicy != null)
+            foreach(PurchasePolicy p in policies)
             {
-                ans = ans & maxPurchasePolicy.checkPolicy(cartTotalPrice, amount);
-            }
-            if (minPurchasePolicy != null)
-            {
-                ans = ans & minPurchasePolicy.checkPolicy(cartTotalPrice, amount);
-            }
-            if(minTotalprice != null)
-            {
-                ans = ans & minTotalprice.checkPolicy(cartTotalPrice, amount);
-            }
-            if(complexPurchase != null)
-            {
-                ans = ans & complexPurchase.checkPolicy(cartTotalPrice, amount);
+                ans = ans & p.checkPolicy(cartTotalPrice, amount);
             }
             return ans;
         }
-
-        public void removeMaxAMountPolicy()
+        public void removePolicyByindex(int index)
         {
-            maxPurchasePolicy = null;
-
+            PurchasePolicy p = policies.ElementAt(index);
+            policies.Remove(p);
         }
+        /*  public void removeMaxAMountPolicy()
+           {
+               maxPurchasePolicy = null;
 
-        public void removeMinAmountPolicy()
-        {
-            minPurchasePolicy = null;
-        }
+           }
 
-        public void removeTotalPricePolicy()
-        {
-            minTotalprice = null;
-        }
+           public void removeMinAmountPolicy()
+           {
+               minPurchasePolicy = null;
+           }
 
-        public void removeComplexPolicy()
-        {
-            complexPurchase = null;
-        }
+           public void removeTotalPricePolicy()
+           {
+               minTotalprice = null;
+           }
+
+           public void removeComplexPolicy()
+           {
+               complexPurchase = null;
+           }
+        */
         public bool hasMinPurchasePolicy()
         {
-            return (minPurchasePolicy != null);
+            foreach (PurchasePolicy p in policies)
+            {
+                if (p is MinAmountPurchase)
+                    return true;
+            }
+            return false;
         }
         public bool hasMaxPurchasePolicy()
         {
-            return (maxPurchasePolicy != null);
-        }
-        
-        public addComplexPurchasePolicy(PurchasePolicy p1, PurchasePolicy p2, string type)
-        {
-            complexPurchase  = new ComplexPurchasePolicy()
+            foreach (PurchasePolicy p in policies)
+            {
+                if (p is MaxAmountPurchase)
+                    return true;
+            }
+            return false;
+
         }
 
+        public bool hasTotalPricePolicy()
+        {
+            foreach (PurchasePolicy p in policies)
+            {
+                if (p is TotalPricePolicy)
+                    return true;
+            }
+            return false;
+
+        }
+
+        public void addMinAmountPolicy(int minAmount)
+        {
+            if (hasMinPurchasePolicy())
+            {
+                throw new ArgumentException("Store can not have 2 minimum amount purchase policy.");
+            }
+            MinAmountPurchase p = new MinAmountPurchase(minAmount);
+            policies.AddLast(p);
+        }
+        public void addMaxAmountPolicy(int minAmount)
+        {
+            if (hasMaxPurchasePolicy())
+            {
+                throw new ArgumentException("Store can not have 2 maximum amount purchase policy.");
+            }
+            MaxAmountPurchase p = new MaxAmountPurchase(minAmount);
+            policies.AddLast(p);
+        }
+
+        public void addTotalAmountPolicy(int minPrice)
+        {
+            if (hasTotalPricePolicy())
+            {
+                throw new ArgumentException("Store can not have 2 total cart price - purchase policy.");
+            }
+            MaxAmountPurchase p = new MaxAmountPurchase(minPrice);
+            policies.AddLast(p);
+        }
+
+        public void addComplexPurchasePolicy(int index1, int index2, string type)
+        {
+            PurchasePolicy p1 = policies.ElementAt(index1);
+            PurchasePolicy p2 = policies.ElementAt(index2);
+
+            ComplexPurchasePolicy complexPurchase = new ComplexPurchasePolicy(type, p1, p2, storeId);
+            policies.Remove(p1);
+            policies.Remove(p2);
+            policies.AddLast(complexPurchase);
+        }
+         
+        public LinkedList<PurchasePolicy> getStorePolicyList()
+        {
+            return policies;
+        }
     
         public VisibleDiscount getVisibleDiscount()
         {
