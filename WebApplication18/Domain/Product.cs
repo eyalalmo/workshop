@@ -38,19 +38,6 @@ namespace workshop192.Domain
         }
 
         //added
-        public Product(int productID, string productName, string productCategory, int price, int rank, int quantityLeft, int storeID, int discountID)
-        {
-            this.productID = productID;
-            this.productName = productName;
-            this.productCategory = productCategory;
-            this.price = price;
-            this.rank = rank;
-            this.storeID = storeID;
-            this.quantityLeft = quantityLeft;
-            this.discount = null;
-           //this.discountID = discountID;
-        }
-
         public Product(int productID, string productName, string productCategory, int price, int rank, int quantityLeft, int storeID)
         {
             this.productID = productID;
@@ -61,7 +48,7 @@ namespace workshop192.Domain
             this.storeID = storeID;
             this.quantityLeft = quantityLeft;
             this.discount = null;
-            //this.discountID = discountID;
+           //this.discountID = discountID;
         }
 
         public void setVisibleDiscount(VisibleDiscount v)
