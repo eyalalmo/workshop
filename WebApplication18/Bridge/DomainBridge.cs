@@ -984,46 +984,92 @@ namespace workshop192.Bridge
             throw new RoleException("no role for this user in this store");
         return store.hasMinPurchasePolicy();
     }
+        /*
+            public MinAmountPurchase getMinAmountPolicy(int storeID, int sessionID)
+            {
+                Session user = DBSession.getInstance().getSession(sessionID);
+                if (user == null)
+                    throw new DoesntExistException("user is not logged in");
+                Store store = DBStore.getInstance().getStore(storeID);
+                SubscribedUser subscribedUser = user.getSubscribedUser();
+                if (subscribedUser == null)
+                    throw new DoesntExistException("not a subscribed user");
+                StoreRole sr = subscribedUser.getStoreRole(store);
+                if (sr == null)
+                    throw new RoleException("no role for this user in this store");
+                return store.getMinAmountPolicy();
+            }
 
-    public MinAmountPurchase getMinAmountPolicy(int storeID, int sessionID)
-    {
-        Session user = DBSession.getInstance().getSession(sessionID);
-        if (user == null)
-            throw new DoesntExistException("user is not logged in");
-        Store store = DBStore.getInstance().getStore(storeID);
-        SubscribedUser subscribedUser = user.getSubscribedUser();
-        if (subscribedUser == null)
-            throw new DoesntExistException("not a subscribed user");
-        StoreRole sr = subscribedUser.getStoreRole(store);
-        if (sr == null)
-            throw new RoleException("no role for this user in this store");
-        return store.getMinAmountPolicy();
-    }
+                public string getMinAmountPolicyString(int storeID, int sessionID)
+                {
+                    return getMinAmountPolicy(storeID, sessionID).getAmount()+"";
+                }
+                public string getMaxAmountPolicyString(int storeID, int sessionID)
+                {
+                    return getMaxAmountPolicy(storeID, sessionID).getAmount()+"";
+                }
 
-        public string getMinAmountPolicyString(int storeID, int sessionID)
+
+                public MaxAmountPurchase getMaxAmountPolicy(int storeID, int sessionID)
+            {
+                Session user = DBSession.getInstance().getSession(sessionID);
+                if (user == null)
+                    throw new DoesntExistException("user is not logged in");
+                Store store = DBStore.getInstance().getStore(storeID);
+                SubscribedUser subscribedUser = user.getSubscribedUser();
+                if (subscribedUser == null)
+                    throw new DoesntExistException("not a subscribed user");
+                StoreRole sr = subscribedUser.getStoreRole(store);
+                if (sr == null)
+                    throw new RoleException("no role for this user in this store");
+                return store.getMaxAmountPolicy();
+            }
+            */
+        public LinkedList<PurchasePolicy> getStorePolicies(int storeID, int sessionID)
         {
-            return getMinAmountPolicy(storeID, sessionID).getAmount()+"";
+            Session user = DBSession.getInstance().getSession(sessionID);
+            if (user == null)
+                throw new DoesntExistException("user is not logged in");
+            Store store = DBStore.getInstance().getStore(storeID);
+            SubscribedUser subscribedUser = user.getSubscribedUser();
+            if (subscribedUser == null)
+                throw new DoesntExistException("not a subscribed user");
+            StoreRole sr = subscribedUser.getStoreRole(store);
+            if (sr == null)
+                throw new RoleException("no role for this user in this store");
+            return store.getStorePolicyList();
         }
-        public string getMaxAmountPolicyString(int storeID, int sessionID)
+        public void complexPurchasePolicy(string policyString, int storeID, string type, int sessionID)
         {
-            return getMaxAmountPolicy(storeID, sessionID).getAmount()+"";
+            Session user = DBSession.getInstance().getSession(sessionID);
+            if (user == null)
+                throw new DoesntExistException("user is not logged in");
+            Store store = DBStore.getInstance().getStore(storeID);
+            SubscribedUser subscribedUser = user.getSubscribedUser();
+            if (subscribedUser == null)
+                throw new DoesntExistException("not a subscribed user");
+            StoreRole sr = subscribedUser.getStoreRole(store);
+            if (sr == null)
+                throw new RoleException("no role for this user in this store");
+
+            string[] policyArray = policyString.Split(' ');
+            LinkedList<PurchasePolicy> policies = new LinkedList<PurchasePolicy>();
+            int index1 = Int32.Parse(policyArray[0]);
+            int index2 = Int32.Parse(policyArray[1]);
+            
+            
         }
 
 
-        public MaxAmountPurchase getMaxAmountPolicy(int storeID, int sessionID)
-    {
-        Session user = DBSession.getInstance().getSession(sessionID);
-        if (user == null)
-            throw new DoesntExistException("user is not logged in");
-        Store store = DBStore.getInstance().getStore(storeID);
-        SubscribedUser subscribedUser = user.getSubscribedUser();
-        if (subscribedUser == null)
-            throw new DoesntExistException("not a subscribed user");
-        StoreRole sr = subscribedUser.getStoreRole(store);
-        if (sr == null)
-            throw new RoleException("no role for this user in this store");
-        return store.getMaxAmountPolicy();
-    }
+
+
+
+
+
+
+
+
+
 
         public double getAmountByCart(int storeID, int sessionID)
         {
