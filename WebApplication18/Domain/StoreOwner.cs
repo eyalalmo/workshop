@@ -257,21 +257,25 @@ namespace workshop192.Domain
 
         public void addPendingOwner(SubscribedUser pending)
         {
-            store.addPendingOwner(userName.getUsername(), pending);
+            DBStore.getInstance().addPendingOwner(store.getStoreID(),userName.getUsername(), pending.getUsername());
+            DBStore.getInstance().signContract(store.getStoreID(), userName.getUsername(), pending.getUsername());
         }
-        public void signContract(string owner, SubscribedUser pending)
+        public void signContract(SubscribedUser pending)
         {
-            store.signContract(owner, pending);
-            HashSet<string> approvedOwners = store.getApproved(pending);
-            if (approvedOwners.Count == store.getNumberOfOwners())
+            if (DBStore.getInstance().hasContract(store.getStoreID(), pending.getUsername(), userName.getUsername()))
+                throw new AlreadyExistException("You have already signed a contract with " + pending.getUsername());
+            DBStore.getInstance().signContract(store.getStoreID(),userName.getUsername(), pending.getUsername());
+            int approvedOwners = DBStore.getInstance().getContractNum(store.getStoreID(),pending.getUsername());
+            if (approvedOwners == store.getNumberOfOwners())
             {
-                store.removePendingOwner(pending);
+                DBStore.getInstance().removePendingOwner(store.getStoreID(),pending.getUsername());
                 addOwner(pending);
             }
         }
-        public void declineContract(string owner, SubscribedUser pending)
+        public void declineContract(SubscribedUser pending)
         {
-            store.removePendingOwner(pending);
+            DBStore.getInstance().removeAllUserContracts(store.getStoreID(), pending.getUsername());
+            DBStore.getInstance().removePendingOwner(store.getStoreID(), pending.getUsername());
         }
         public Permissions GetPermissions()
         {

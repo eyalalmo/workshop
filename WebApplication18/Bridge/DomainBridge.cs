@@ -1109,7 +1109,7 @@ namespace workshop192.Bridge
 
             if (sr.getStore() != store)
                 throw new RoleException("this user can't appoint to this store");
-                sr.signContract(session.getSubscribedUser().getUsername(), toAdd);
+                sr.signContract( toAdd);
 
         }
         public void declineContract(int storeid, string username, int sessionid)
@@ -1132,7 +1132,7 @@ namespace workshop192.Bridge
 
             if (sr.getStore() != store)
                 throw new RoleException("this user can't appoint to this store");
-            sr.declineContract(session.getSubscribedUser().getUsername(), toAdd);
+            sr.declineContract(toAdd);
 
         }
 
@@ -1154,11 +1154,11 @@ namespace workshop192.Bridge
             if (sr.getStore() != store)
                 throw new RoleException("this user can't appoint to this store");
             List<string> myPendingOwners = new List<string>();
-            Dictionary<string, HashSet<string>> pending = store.getPending();
-            foreach (KeyValuePair<string, HashSet<string>> entry in pending)
+            LinkedList<string> pending = store.getPending();
+            foreach (string pendingOwner in pending)
             {
-                if (!entry.Value.Contains(sr.getUser().getUsername()))
-                    myPendingOwners.Add(entry.Key);
+                if (!(DBStore.getInstance().hasContract(storeid,pendingOwner,sr.getUser().getUsername())))
+                    myPendingOwners.Add(pendingOwner);
             }
             string s = JsonConvert.SerializeObject(myPendingOwners, Formatting.Indented);
             return s;

@@ -27,7 +27,7 @@ namespace WebApplication18.Controllers
             catch (Exception e)
             {
                 SystemLogger.getErrorLog().Error("An Error has occured. Function: getStore; Stack Trace: " + e.StackTrace);
-                return "error";
+                throw e;
             }
         }
         [Route("api/store/addOwner")]
@@ -48,7 +48,7 @@ namespace WebApplication18.Controllers
             catch (Exception e)
             {
                 SystemLogger.getErrorLog().Error("An Error has occured. Function: addOwner; Stack Trace: " + e.StackTrace);
-                return "error";
+                throw e;
             }
         }
 
@@ -70,7 +70,7 @@ namespace WebApplication18.Controllers
             catch (Exception e)
             {
                 SystemLogger.getErrorLog().Error("An Error has occured. Function: getStoreProducts; Stack Trace: " + e.StackTrace);
-                return "error";
+                throw e;
             }
         }
 
@@ -96,7 +96,7 @@ namespace WebApplication18.Controllers
             catch (Exception e)
             {
                 SystemLogger.getErrorLog().Error("An Error has occured. Function: getStore; Stack Trace: " + e.StackTrace);
-                return "error";
+                throw e;
             }
         }
 
@@ -121,7 +121,7 @@ namespace WebApplication18.Controllers
             catch (Exception e)
             {
                 SystemLogger.getErrorLog().Error("An Error has occured. Function: Edit Product; Stack Trace: " + e.StackTrace);
-                return "error";
+                throw e;
             }
         }
 
@@ -141,7 +141,7 @@ namespace WebApplication18.Controllers
             catch (Exception e)
             {
                 SystemLogger.getErrorLog().Error("An Error has occured. Function: Get All Roles; Stack Trace: " + e.StackTrace);
-                return "error";
+                throw e;
             }
         }
 
@@ -162,7 +162,7 @@ namespace WebApplication18.Controllers
             catch (Exception e)
             {
                 SystemLogger.getErrorLog().Error("An Error has occured. Function: Get All Roles; Stack Trace: " + e.StackTrace);
-                return "error";
+                throw e;
             }
         }
 
@@ -184,7 +184,7 @@ namespace WebApplication18.Controllers
             catch (Exception e)
             {
                 SystemLogger.getErrorLog().Error("An Error has occured. Function: signContract; Stack Trace: " + e.StackTrace);
-                return "error";
+                throw e;
             }
         }
 
@@ -206,7 +206,7 @@ namespace WebApplication18.Controllers
             catch (Exception e)
             {
                 SystemLogger.getErrorLog().Error("An Error has occured. Function: declineContract; Stack Trace: " + e.StackTrace);
-                return "error";
+                throw e;
             }
         }
 
@@ -233,7 +233,7 @@ namespace WebApplication18.Controllers
             catch (Exception e)
             {
                 SystemLogger.getErrorLog().Error("An Error has occured. Function: Add Discount; Stack Trace: " + e.StackTrace);
-                return "error";
+                throw e;
             }
         }
 
@@ -257,7 +257,7 @@ namespace WebApplication18.Controllers
             catch (Exception e)
             {
                 SystemLogger.getErrorLog().Error("An Error has occured. Function: Add Discount; Stack Trace: " + e.StackTrace);
-                return "error";
+                throw e;
             }
         }
         [Route("api/store/addReliantDiscountSameProduct")]
@@ -280,7 +280,7 @@ namespace WebApplication18.Controllers
             catch (Exception e)
             {
                 SystemLogger.getErrorLog().Error("An Error has occured. Function: Add Discount; Stack Trace: " + e.StackTrace);
-                return "error";
+                throw e;
             }
         }
         
@@ -303,7 +303,7 @@ namespace WebApplication18.Controllers
             catch (Exception e)
             {
                 SystemLogger.getErrorLog().Error("An Error has occured. Function: Remove Role; Stack Trace: " + e.StackTrace);
-                return "error";
+                throw e;
             }
         }        
      

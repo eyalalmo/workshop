@@ -8,6 +8,7 @@ using WebApplication18;
 using Dapper.Contrib;
 using Dapper;
 using System.ComponentModel.DataAnnotations.Schema;
+using WebApplication18.Domain;
 
 namespace workshop192.Domain
 {
@@ -26,7 +27,8 @@ namespace workshop192.Domain
         [JsonIgnore]
         public LinkedList<DiscountComponent> discountList;
        // public LinkedList<InvisibleDiscount> invisibleDiscountList;
-        public Dictionary<string, HashSet<string>> pendingOwners;
+        public LinkedList<Contract> contracts;
+        public LinkedList<string> pendingOwners;
 
         public Store(string storeName, string description)
         {
@@ -41,7 +43,8 @@ namespace workshop192.Domain
            // invisibleDiscountList = new LinkedList<InvisibleDiscount>();
             maxPurchasePolicy = null;
             minPurchasePolicy = null;
-            pendingOwners = new Dictionary<string, HashSet<string>>();
+            contracts = new LinkedList<Contract>();
+            pendingOwners = new LinkedList<string>();
         }
         public Store(int storeId,string name, string description)
         {
@@ -52,7 +55,8 @@ namespace workshop192.Domain
             roles = new List<StoreRole>();
             numOfOwners = 0;
             active = true;
-            pendingOwners = new Dictionary<string, HashSet<string>>();
+            contracts = new LinkedList<Contract>();
+            pendingOwners = new LinkedList<string>();
             discountList = new LinkedList<DiscountComponent>();
             invisibleDiscountList = new LinkedList<InvisibleDiscount>();
             maxPurchasePolicy = null;
@@ -416,52 +420,18 @@ namespace workshop192.Domain
             }
             return null;
         }
-        public void addPendingOwner(string appointer,SubscribedUser pending)
-        {
-            if (pendingOwners.ContainsKey(pending.username))
-            {
-                throw new AlreadyExistException("Owner already waiting for approval");
-            }
-            HashSet<string> toAdd = new HashSet<string>();
-            toAdd.Add(appointer);
-            pendingOwners.Add(pending.getUsername(), toAdd);
 
-        }
-        public void removePendingOwner(SubscribedUser pending)
+
+        public LinkedList<Contract> getContracts()
         {
-            if (!pendingOwners.ContainsKey(pending.getUsername()))
-            {
-                throw new DoesntExistException("the username is not in the owners pending list");
-            }
-            pendingOwners.Remove(pending.getUsername());
+            return contracts;
         }
 
-        public void signContract(string owner,SubscribedUser pending)
-        {
-            if (!pendingOwners.ContainsKey(pending.getUsername()))
-            {
-                throw new DoesntExistException("the username is not in the owners pending list");
-            }
-            HashSet<string> temp = new HashSet<string>();
-            pendingOwners.TryGetValue(pending.getUsername(), out temp);
-            temp.Add(owner);
-            pendingOwners[pending.getUsername()] = temp;
-        }
-
-        public HashSet<string> getApproved(SubscribedUser pending)
-        {
-            HashSet<string> output;
-            if(pendingOwners.TryGetValue(pending.getUsername(), out output))
-            {
-                return output;
-            }
-            throw new DoesntExistException("User is not a pending owner");
-        }
-
-        public Dictionary<string,HashSet<string>> getPending()
+        public LinkedList<string> getPending()
         {
             return pendingOwners;
         }
+
 
     }
 
