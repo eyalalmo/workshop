@@ -55,6 +55,7 @@ namespace workshop192.Bridge
                 foreach (string mess in waitingMessages)
                     messager.message(username, mess);
             }
+            clearMessagesFor(username);
         }
 
         //use case 2.2

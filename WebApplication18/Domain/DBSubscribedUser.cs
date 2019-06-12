@@ -214,6 +214,11 @@ namespace workshop192.Domain
                     connection.Close();
                     ShoppingBasket sb = new ShoppingBasket(username);
 
+                    SubscribedUser su = new SubscribedUser(username, password, sb);
+                    List<StoreRole> storeRoles = su.getStoreRoles();
+                    users.Add(username, su);
+                    DBStore.getInstance().getAllStoreRoles(username);
+
                     if (Enumerable.Count(c2) > 0)
                     {
                         for (int i = 0; i < Enumerable.Count(c2); i++)
@@ -235,11 +240,7 @@ namespace workshop192.Domain
                             }
                         }
                     }
-                    SubscribedUser su = new SubscribedUser(username, password, sb);
-                    List<StoreRole> storeRoles = su.getStoreRoles();
-                    users.Add(username, su);
-                    DBStore.getInstance().getAllStoreRoles(username);
-
+                    
                     //foreach (StoreRole sr in DBStore.getInstance().getAllStoreRoles(username))
                     //{
                     //    if(sr.getUser().getUsername()==username)
