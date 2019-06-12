@@ -581,3 +581,9 @@ The statement has been terminated.
 2019-06-12 15:14:16,889 INFO EventLog: User u2 has successfuly logged in.
 2019-06-12 15:14:35,901 INFO EventLog: User u2 has logged out
 2019-06-12 15:14:39,870 INFO EventLog: User u1 has successfuly logged in.
+2019-06-12 15:21:55,092 INFO EventLog: User u2 has successfuly logged in.
+2019-06-12 15:22:13,264 INFO EventLog: User u2 has logged out
+2019-06-12 15:22:18,416 INFO EventLog: User u4 has successfuly logged in.
+2019-06-12 15:23:42,687 INFO EventLog: User u1 has successfuly logged in.
+2019-06-12 16:06:56,351 INFO EventLog: User u2 has successfuly logged in.
+2019-06-12 16:06:56,775 ERROR EventLog: Login : Error: User is already logged in

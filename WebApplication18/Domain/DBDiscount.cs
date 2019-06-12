@@ -7,7 +7,7 @@ using Dapper;
 using WebApplication18.DAL;
 namespace workshop192.Domain
 {
-    public class DBDiscount : Connector
+    public class DBDiscount
     {
         private static DBDiscount instance;
         private Dictionary<int, DiscountComponent> discounts;
