@@ -445,6 +445,7 @@
     <Compile Include="Domain\StoreRole.cs" />
     <Compile Include="Domain\StoreRoleEntry.cs" />
     <Compile Include="Domain\SubscribedUser.cs" />
+    <Compile Include="Domain\TotalPricePolicy.cs" />
     <Compile Include="Domain\UserState.cs" />
     <Compile Include="Domain\VisibleDiscount.cs" />
     <Compile Include="Exceptions\AlreadyExistException.cs" />

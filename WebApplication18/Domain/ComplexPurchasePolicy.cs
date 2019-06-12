@@ -6,7 +6,7 @@ using workshop192.Domain;
 
 namespace WebApplication18.Domain
 {
-    public class ComplexPurchasePolicy
+    public class ComplexPurchasePolicy :PurchasePolicy
     {
         enum Type { OR, XOR, AND };
 
@@ -14,9 +14,10 @@ namespace WebApplication18.Domain
         private int maxAmount;
         private int minTotalPrice;
         private ComplexPurchasePolicy complexChild;
+        private int storeID;
         private Type type;
 
-        public ComplexPurchasePolicy(string type, int minAmount, int maxAmount, int minTotalPrice, ComplexPurchasePolicy complexChild)
+        public ComplexPurchasePolicy(string type, int minAmount, int maxAmount, int minTotalPrice, ComplexPurchasePolicy complexChild, int storeID)
         {
             if (type == "XOR")
                 this.type = Type.XOR;
@@ -29,6 +30,7 @@ namespace WebApplication18.Domain
             this.maxAmount = maxAmount;
             this.minTotalPrice = minTotalPrice;
             this.complexChild = complexChild;
+            this.storeID = storeID;
 
         }
         public string toString()
@@ -65,7 +67,7 @@ namespace WebApplication18.Domain
 
         }
 
-        public bool checkCondition(int cartPrice, int amountofProd)
+        public bool checkPolicy(int cartPrice, int amountofProd)
         {
             if (type == Type.AND)
             {
@@ -83,32 +85,108 @@ namespace WebApplication18.Domain
 
         private bool checkXorType(int cartPrice, int amountofProd)
         {
-            throw new NotImplementedException();
+            int count = 0;
+            if (minAmount != -1)
+            {
+                if (minAmount < amountofProd)
+                    count += 1;
+
+            }
+
+            if (maxAmount != -1)
+            {
+                if (maxAmount > amountofProd)
+                    count += 1;
+            }
+            if (minTotalPrice != -1)
+            {
+                if (cartPrice < minTotalPrice)
+                    count += 1;
+            }
+
+            if (complexChild != null)
+            {
+                if (complexChild.checkCondition(cartPrice, amountofProd))
+                {
+                    count += 1;
+                }
+            }
+            if (count != 1)
+                return false;
+
+            return true;
         }
 
         private bool checkOrType(int cartPrice, int amountofProd)
         {
-            throw new NotImplementedException();
+            int count = 0;
+            if (minAmount != -1)
+            {
+                if (minAmount < amountofProd)
+                    count += 1;
+
+            }
+
+            if (maxAmount != -1)
+            {
+                if (maxAmount > amountofProd)
+                    count += 1;
+            }
+            if (minTotalPrice != -1)
+            {
+                if (cartPrice < minTotalPrice)
+                    count += 1;
+            }
+
+            if(complexChild != null)
+            {
+                if (complexChild.checkCondition(cartPrice, amountofProd))
+                {
+                    count += 1;
+                }
+            }
+            if (count == 0)
+                return false;
+
+            return true;
+
         }
 
         private bool checkTrueType(int cartPrice, int amountofProd)
         {
             if (minAmount != -1)
             {
-                if (minAmount < amountofProd)
-                    throw new ArgumentException("Error: Cannot purchase more than " + maxPurchasePolicy + " products in store: " + storeId);
+                if (minAmount > amountofProd)
+                    throw new ArgumentException("Error: Cannot purchase more than " + minAmount + " products in store: " + storeID);
             }
 
             if (maxAmount != -1)
             {
-                if (maxAmount > amountofProd)
-                    throw new ArgumentException("Error: Cannot purchase less than " + maxPurchasePolicy + " products in store: " + storeId);
+                if (maxAmount < amountofProd)
+                    throw new ArgumentException("Error: Cannot purchase less than " + maxAmount + " products in store: " + storeID);
             }
-            if(minTotalPrice != -1)
+            if (minTotalPrice != -1)
             {
                 if (cartPrice < minTotalPrice)
-                    throw new ArgumentException("Error: Cart total price must be above: " + minTotalPrice + " before checkout.");
+                    throw new ArgumentException("Error: Cart total price must be above: " + minTotalPrice + " before checkout, in store: " + storeID + ".");
             }
+            bool ans = true;
+            if(complexChild != null)
+            {
+                ans = complexChild.checkPolicy(cartPrice, amountofProd);
+            }
+            return ans;
+        }
+
+        
+        public override void setAmount(int newAmount)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override int getAmount()
+        {
+            throw new NotImplementedException();
         }
     }
 

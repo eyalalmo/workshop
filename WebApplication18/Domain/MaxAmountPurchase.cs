@@ -8,16 +8,17 @@ namespace workshop192.Domain
 {
     public class MaxAmountPurchase : PurchasePolicy
     {
-        public int maxAmount;
+        private int maxAmount;
         
         public MaxAmountPurchase(int maxAmount)
         {
             this.maxAmount = maxAmount;
         }
-        public override void checkPolicy(Product p, int amount)
+        public override bool checkPolicy(int cartPrice, int amountofProd)
         {
-            if (amount > maxAmount)
-                throw new AlreadyExistException("Error: Cannot purchase more than " + maxAmount + " of the same product");
+            if (amountofProd > maxAmount)
+                return false;
+            return true;
         }
         public override void setAmount(int newAmount)
         {

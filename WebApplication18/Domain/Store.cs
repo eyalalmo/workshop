@@ -8,25 +8,27 @@ using WebApplication18;
 using Dapper.Contrib;
 using Dapper;
 using System.ComponentModel.DataAnnotations.Schema;
+using WebApplication18.Domain;
 
 namespace workshop192.Domain
 {
     public class Store
     {
-        public int storeId;
-        public string name;
-        public string description;
-        public LinkedList<Product> productList;
-        public List<StoreRole> roles;
-        public int numOfOwners;
-        public bool active;
-        public int minPurchasePolicy;
-        public int maxPurchasePolicy;
-        public int minTotalprice;
+        private int storeId;
+        private string name;
+        private string description;
+        private LinkedList<Product> productList;
+        private List<StoreRole> roles;
+        private int numOfOwners;
+        private bool active;
+        private MinAmountPurchase minPurchasePolicy;
+        private MaxAmountPurchase maxPurchasePolicy;
+        private TotalPricePolicy minTotalprice;
+        private ComplexPurchasePolicy complexPurchase;
+
         private LinkedList<InvisibleDiscount> invisibleDiscountList;
         [JsonIgnore]
         public LinkedList<DiscountComponent> discountList;
-       // public LinkedList<InvisibleDiscount> invisibleDiscountList;
         public Dictionary<string, HashSet<string>> pendingOwners;
 
         public Store(string storeName, string description)
@@ -39,11 +41,11 @@ namespace workshop192.Domain
             numOfOwners = 0;
             active = true;
             discountList = new LinkedList<DiscountComponent>();
-           // invisibleDiscountList = new LinkedList<InvisibleDiscount>();
-            maxPurchasePolicy = -1;
-            minPurchasePolicy = -1;
-            minTotalprice = -1;
+            maxPurchasePolicy = null;
+            minPurchasePolicy = null;
+            minTotalprice = null;
             pendingOwners = new Dictionary<string, HashSet<string>>();
+            complexPurchase = null;
         }
         public Store(int storeId,string name, string description)
         {
@@ -57,9 +59,10 @@ namespace workshop192.Domain
             pendingOwners = new Dictionary<string, HashSet<string>>();
             discountList = new LinkedList<DiscountComponent>();
             invisibleDiscountList = new LinkedList<InvisibleDiscount>();
-            maxPurchasePolicy = -1;
-            minPurchasePolicy = -1;
-            minTotalprice = -1;
+            maxPurchasePolicy = null;
+            minPurchasePolicy = null;
+            minTotalprice = null;
+            complexPurchase = null;
         }
 
         public void addProduct(Product p)
@@ -267,15 +270,7 @@ namespace workshop192.Domain
             return null;
         }
 
-        public void checkTotalPrice(double cartPrice)
-        {
-            if(minTotalprice!= -1)
-            {
-                if (minTotalprice > cartPrice)
-                    throw new ArgumentException("Total cart price must be above +" + minTotalprice + "in store " + storeId);
-            }
-        }
-
+       
         public void removeStoreRole(StoreRole toRemove)
         {
             if (toRemove is StoreOwner)
@@ -308,19 +303,19 @@ namespace workshop192.Domain
  
         public void setMinPurchasePolicy(int minAmount)
         {
-            if (maxPurchasePolicy == -1)
+            if (maxPurchasePolicy == null)
             {
-                minPurchasePolicy = minAmount;
+                minPurchasePolicy = new MinAmountPurchase(minAmount);
             }
             else
             {
-                if (maxPurchasePolicy < minAmount)
+                if (maxPurchasePolicy.getAmount() < minAmount)
                 {
                     throw new ArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
                 }
                 else
                 {
-                    minPurchasePolicy = minAmount;
+                    minPurchasePolicy = new MinAmountPurchase(minAmount);
                 }
             }
 

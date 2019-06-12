@@ -8,16 +8,17 @@ namespace workshop192.Domain
 {
     public class MinAmountPurchase : PurchasePolicy
     {
-        public int minAmount;
+        private int minAmount;
 
         public MinAmountPurchase(int minAmount)
         {
             this.minAmount = minAmount;
         }
-        public override void checkPolicy(Product p, int amount)
+        public override bool checkPolicy(int cartPrice, int amountofProd)
         {
-            if (amount < minAmount)
-                throw new AlreadyExistException("Error: Cannot purchase less than " + minAmount + " of the same product");
+            if (minAmount > amountofProd)
+                return false;
+            return true;
         }
 
         public override int getAmount()
