@@ -21,10 +21,13 @@ namespace workshop192.Domain
         private List<StoreRole> roles;
         private int numOfOwners;
         private bool active;
-        private MinAmountPurchase minPurchasePolicy;
-        private MaxAmountPurchase maxPurchasePolicy;
-        private TotalPricePolicy minTotalprice;
+        /* private MinAmountPurchase minPurchasePolicy;
+         private MaxAmountPurchase maxPurchasePolicy;
+         private TotalPricePolicy minTotalprice;
         private ComplexPurchasePolicy complexPurchase;
+             * */
+        private LinkedList<PurchasePolicy> policies;
+        
 
         private LinkedList<InvisibleDiscount> invisibleDiscountList;
         [JsonIgnore]
@@ -41,11 +44,13 @@ namespace workshop192.Domain
             numOfOwners = 0;
             active = true;
             discountList = new LinkedList<DiscountComponent>();
-            maxPurchasePolicy = null;
+            policies = new LinkedList<PurchasePolicy>();
+           /* maxPurchasePolicy = null;
             minPurchasePolicy = null;
             minTotalprice = null;
             pendingOwners = new Dictionary<string, HashSet<string>>();
             complexPurchase = null;
+            */
         }
         public Store(int storeId,string name, string description)
         {
@@ -59,10 +64,12 @@ namespace workshop192.Domain
             pendingOwners = new Dictionary<string, HashSet<string>>();
             discountList = new LinkedList<DiscountComponent>();
             invisibleDiscountList = new LinkedList<InvisibleDiscount>();
+            /*
             maxPurchasePolicy = null;
             minPurchasePolicy = null;
             minTotalprice = null;
             complexPurchase = null;
+            */
         }
 
         public void addProduct(Product p)
@@ -301,9 +308,11 @@ namespace workshop192.Domain
             }
         }
  
-        public void setMinPurchasePolicy(int minAmount)
+        public void setMinPurchasePolicy(int minAmount, int index)
         {
-            if (maxPurchasePolicy == null)
+            PurchasePolicy p = policies.ElementAt(index);
+
+            if (getMaxPolicy() == null)
             {
                 minPurchasePolicy = new MinAmountPurchase(minAmount);
             }
@@ -318,6 +327,12 @@ namespace workshop192.Domain
                     minPurchasePolicy = new MinAmountPurchase(minAmount);
                 }
             }
+
+        }
+
+        private object getMaxPolicy()
+        {
+            foreach()
 
         }
 
@@ -341,7 +356,7 @@ namespace workshop192.Domain
             }
         }
 
-        public bool checkStorePolicy(int amount, int cartTotalPrice)
+        public bool checkStorePolicy(int amount, double cartTotalPrice)
         {
             bool ans = true;
             if (maxPurchasePolicy != null)

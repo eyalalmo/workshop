@@ -14,11 +14,16 @@ namespace workshop192.Domain
         {
             this.minAmount = minAmount;
         }
-        public override bool checkPolicy(int cartPrice, int amountofProd)
+        public override bool checkPolicy(double cartPrice, int amountofProd)
         {
             if (minAmount > amountofProd)
                 return false;
             return true;
+        }
+
+        public override string description()
+        {
+            return "Minimum amount of products is : " + minAmount + " "; 
         }
 
         public override int getAmount()

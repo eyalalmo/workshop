@@ -20,7 +20,12 @@ namespace WebApplication18.Domain
             this.totalPrice = totalPrice;
         }
 
-        public override bool checkPolicy(int cartPrice, int amountofProd)
+        public override string description()
+        {
+            return "Minimum price for this cart is :" + totalPrice + " ";
+        }
+
+        public override bool checkPolicy(double cartPrice, int amountofProd)
         {
             if (cartPrice < totalPrice)
                 return false;

@@ -238,17 +238,9 @@ namespace workshop192.Domain
             return amount;
         }
 
-        internal void checkAmountPolicy()
+        internal void checkStorePolicy()
         {
-            int cartAmount = getNumOfProductsInCart();
-            store.checkAmountPolicy(cartAmount);
+            store.checkStorePolicy(getNumOfProductsInCart(), getActualTotalPrice())
         }
-
-        public void checkTotalPrice()
-        {
-            double cartPrice = getActualTotalPrice();
-            store.checkTotalPrice(cartPrice);
-        }
-        
     }
 }

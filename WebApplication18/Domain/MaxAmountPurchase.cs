@@ -14,7 +14,7 @@ namespace workshop192.Domain
         {
             this.maxAmount = maxAmount;
         }
-        public override bool checkPolicy(int cartPrice, int amountofProd)
+        public override bool checkPolicy(double cartPrice, int amountofProd)
         {
             if (amountofProd > maxAmount)
                 return false;
@@ -31,6 +31,11 @@ namespace workshop192.Domain
         public  override int getAmount()
         {
             return maxAmount;
+        }
+
+        public override string description()
+        {
+            return "Maximum amount of product is: " + maxAmount + " ";
         }
     }
 }
