@@ -176,7 +176,7 @@ namespace workshop192.Domain
                     throw new AlreadyExistException("Error: A Store cannot have two identical coupons");
 
             }
-            InvisibleDiscount d = new InvisibleDiscount(percentage, coupon, duration);
+            InvisibleDiscount d = new InvisibleDiscount(percentage, coupon, duration, storeId);
             invisibleDiscountList.AddLast(d);
         }
 
