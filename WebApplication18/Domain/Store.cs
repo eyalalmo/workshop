@@ -67,6 +67,10 @@ namespace workshop192.Domain
         {
             productList.AddFirst(p);
         }
+        public void setDiscountList(LinkedList<DiscountComponent> discounts)
+        {
+            this.discountList = discounts;
+        }
         public LinkedList<DiscountComponent> getDiscounts()
         {
             return this.discountList;
