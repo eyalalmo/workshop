@@ -156,12 +156,12 @@ namespace workshop192.Domain
 
         public void addProductVisibleDiscount(Product product, double percentage, string duration)
         {
-            VisibleDiscount discount = new VisibleDiscount(percentage, duration, "ProductVisibleDiscount");
+            Store store = product.getStore();
+            VisibleDiscount discount = new VisibleDiscount(percentage, duration, "ProductVisibleDiscount", store.getStoreID());
+            DBDiscount.getInstance().addDiscount(discount);
             discount.setProduct(product);
             product.setDiscount(discount);
-            Store store = product.getStore();
             //store.addDiscount(discount);
-            DBDiscount.getInstance().addDiscount(discount);
 
         }
         public void removeProductDiscount(Product product)
@@ -171,48 +171,51 @@ namespace workshop192.Domain
 
         public void addStoreVisibleDiscount(double percentage, string duration)
         {
-            VisibleDiscount v = new VisibleDiscount(percentage, duration, "StoreVisibleDiscount");
-            store.addDiscount(v);
+            VisibleDiscount v = new VisibleDiscount(percentage, duration, "StoreVisibleDiscount", store.getStoreID());       
             DBDiscount.getInstance().addDiscount(v);
+            store.addDiscount(v);
 
         }
 
         public void addReliantDiscountSameProduct(double percentage, String duration, int numOfProducts, Product product)
         {
-            ReliantDiscount r = new ReliantDiscount(percentage, duration, numOfProducts, product);
+            ReliantDiscount r = new ReliantDiscount(percentage, duration, numOfProducts, product, store.getStoreID());
+            DBDiscount.getInstance().addDiscount(r);
             store.addDiscount(r);
             product.setReliantDiscountSameProduct(r);
-            DBDiscount.getInstance().addDiscount(r);
 
         }
 
         public void addReliantDiscountTotalAmount(double percentage, String duration, int amount)
         {
-            ReliantDiscount r = new ReliantDiscount(percentage, duration, amount);
-            store.addDiscount(r);
+            ReliantDiscount r = new ReliantDiscount(percentage, duration, amount, store.getStoreID());
             DBDiscount.getInstance().addDiscount(r);
+            store.addDiscount(r);
+            
 
         }
 
         public void removeStoreDiscount(int discountID, Store store)
         {
-           // DBDiscount.getInstance().removeDiscount(discountID);
+            DiscountComponent d = DBDiscount.getInstance().getDiscountByID(discountID);
+            DBDiscount.getInstance().removeDiscount(d);
             store.removeDiscount(discountID);
+            
 
         }
         public void addComplexDiscount(List<DiscountComponent> list, string type, double percentage, string duration)
         {
-            DiscountComposite composite = new DiscountComposite(list, type, percentage, duration);
-            store.addDiscount(composite);
+            DiscountComposite composite = new DiscountComposite(list, type, percentage, duration, store.getStoreID());
             foreach (DiscountComponent d in list)
             {
-                store.removeDiscount(d.getId());
-                if (d is Discount)
-                {
-                    Discount di = (Discount)d;
-                    di.setIsPartOfComplex(true);
-                }
+                store.removeDiscount(d.getId());   
+                DBDiscount.getInstance().setIsPartOfComplex(d.getId(), true);
+                d.setIsPartOfComplex(true);
+
             }
+            DBDiscount.getInstance().addDiscount(composite);
+            store.addDiscount(composite);
+
             //DBDiscount.getInstance().addDiscount(composite);
 
         }

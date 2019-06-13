@@ -67,6 +67,10 @@ namespace workshop192.Domain
         {
             productList.AddFirst(p);
         }
+        public void setDiscountList(LinkedList<DiscountComponent> discounts)
+        {
+            this.discountList = discounts;
+        }
         public LinkedList<DiscountComponent> getDiscounts()
         {
             return this.discountList;
@@ -176,7 +180,7 @@ namespace workshop192.Domain
                     throw new AlreadyExistException("Error: A Store cannot have two identical coupons");
 
             }
-            InvisibleDiscount d = new InvisibleDiscount(percentage, coupon, duration);
+            InvisibleDiscount d = new InvisibleDiscount(percentage, coupon, duration, storeId);
             invisibleDiscountList.AddLast(d);
         }
 

@@ -45,21 +45,19 @@
    at WebApplication18.Controllers.StoreController.addOwner(String username, Int32 storeId) in C:\Users\eyalb\source\repos\eyalalmo\workshop\WebApplication18\Controllers\StoreController.cs:line 40
 2019-06-09 16:08:19,038 ERROR ErrorLog: An Error has occured. Function: addOwner; Stack Trace:    at workshop192.ServiceLayer.StoreService.addOwner(Int32 store, String username, Int32 session) in C:\Users\eyalb\source\repos\eyalalmo\workshop\WebApplication18\ServiceLayer\StoreService.cs:line 200
    at WebApplication18.Controllers.StoreController.addOwner(String username, Int32 storeId) in C:\Users\eyalb\source\repos\eyalalmo\workshop\WebApplication18\Controllers\StoreController.cs:line 40
-2019-06-09 22:40:43,514 ERROR ErrorLog: An Error has occured. Function: signContract; Stack Trace:    at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
-   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
-   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
-   at System.Data.SqlClient.SqlDataReader.get_MetaData()
-   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
-   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
-   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
-   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
-   at System.Data.SqlClient.SqlCommand.ExecuteScalar()
-   at Dapper.SqlMapper.ExecuteScalarImpl[T](IDbConnection cnn, CommandDefinition& command)
-   at Dapper.SqlMapper.ExecuteScalar[T](IDbConnection cnn, String sql, Object param, IDbTransaction transaction, Nullable`1 commandTimeout, Nullable`1 commandType)
-   at workshop192.Domain.DBStore.getContractNum(Int32 storeId, String userName) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Domain\DBStore.cs:line 734
-   at workshop192.Domain.StoreOwner.signContract(String owner, SubscribedUser pending) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Domain\StoreOwner.cs:line 266
-   at workshop192.Bridge.DomainBridge.signContract(Int32 storeid, String username, Int32 sessionid) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Bridge\DomainBridge.cs:line 1112
-   at workshop192.ServiceLayer.StoreService.signContract(Int32 store, String username, Int32 sessionID) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\ServiceLayer\StoreService.cs:line 490
-   at WebApplication18.Controllers.StoreController.signContract(String username, Int32 storeId) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Controllers\StoreController.cs:line 176
+2019-06-09 18:35:19,488 ERROR ErrorLog: An Error has occured. Function: addOwner; Stack Trace:    at workshop192.ServiceLayer.StoreService.addOwner(Int32 store, String username, Int32 session) in C:\Users\eyalb\source\repos\eyalalmo\workshop\WebApplication18\ServiceLayer\StoreService.cs:line 200
+   at WebApplication18.Controllers.StoreController.addOwner(String username, Int32 storeId) in C:\Users\eyalb\source\repos\eyalalmo\workshop\WebApplication18\Controllers\StoreController.cs:line 40
+2019-06-12 14:47:40,761 ERROR ErrorLog: An Error has occured. Function: Add Discount; Stack Trace:    at workshop192.Domain.DBDiscount.addDiscount(DiscountComponent d)
+   at workshop192.Domain.StoreOwner.addStoreVisibleDiscount(Double percentage, String duration)
+   at workshop192.Bridge.DomainBridge.addStoreVisibleDiscount(Int32 storeID, Double percentage, String duration, Int32 session)
+   at workshop192.ServiceLayer.StoreService.addStoreVisibleDiscount(Int32 store, Double percentage, String duration, Int32 session)
+   at WebApplication18.Controllers.StoreController.addVisibleDiscount(Int32 storeID, String percentage, String duration)
+2019-06-12 22:06:55,612 ERROR ErrorLog: An Error has occured. Function: Add Discount; Stack Trace:    at workshop192.Domain.DBDiscount.addDiscount(DiscountComponent d) in C:\Users\asus\source\repos\eyalalmo\workshop\WebApplication18\Domain\DBDiscount.cs:line 113
+   at workshop192.Domain.StoreOwner.addStoreVisibleDiscount(Double percentage, String duration) in C:\Users\asus\source\repos\eyalalmo\workshop\WebApplication18\Domain\StoreOwner.cs:line 175
+   at workshop192.Bridge.DomainBridge.addStoreVisibleDiscount(Int32 storeID, Double percentage, String duration, Int32 session) in C:\Users\asus\source\repos\eyalalmo\workshop\WebApplication18\Bridge\DomainBridge.cs:line 746
+   at workshop192.ServiceLayer.StoreService.addStoreVisibleDiscount(Int32 store, Double percentage, String duration, Int32 session) in C:\Users\asus\source\repos\eyalalmo\workshop\WebApplication18\ServiceLayer\StoreService.cs:line 287
+   at WebApplication18.Controllers.StoreController.addVisibleDiscount(Int32 storeID, String percentage, String duration) in C:\Users\asus\source\repos\eyalalmo\workshop\WebApplication18\Controllers\StoreController.cs:line 224
+2019-06-13 00:37:53,910 ERROR ErrorLog: An Error has occured. Function: Add Discount; Stack Trace:    at workshop192.Bridge.DomainBridge.checkDiscoutDuration(String duration) in C:\Users\asus\source\repos\eyalalmo\workshop\WebApplication18\Bridge\DomainBridge.cs:line 754
+   at workshop192.Bridge.DomainBridge.addReliantdiscountSameProduct(Int32 storeID, Int32 product, Double percentage, Int32 numOfProducts, String duration, Int32 session) in C:\Users\asus\source\repos\eyalalmo\workshop\WebApplication18\Bridge\DomainBridge.cs:line 802
+   at workshop192.ServiceLayer.StoreService.addReliantDiscountSameProduct(Int32 store, Int32 session, Double percentage, String duration, Int32 numOfProducts, Int32 product) in C:\Users\asus\source\repos\eyalalmo\workshop\WebApplication18\ServiceLayer\StoreService.cs:line 303
+   at WebApplication18.Controllers.StoreController.addReliantDiscountSameProduct(Int32 storeID, String percentage, String duration, Int32 numOfProducts, Int32 productID) in C:\Users\asus\source\repos\eyalalmo\workshop\WebApplication18\Controllers\StoreController.cs:line 271

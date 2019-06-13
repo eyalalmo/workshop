@@ -399,6 +399,9 @@
     <Compile Include="Domain\Contract.cs" />
     <Compile Include="Domain\Cookie.cs" />
     <Compile Include="Domain\DBNotifications.cs" />
+    <Compile Include="Domain\DiscountComponentEntry.cs" />
+    <Compile Include="Domain\DiscountCompositeEntry.cs" />
+    <Compile Include="Domain\DiscountEntry.cs" />
     <Compile Include="Domain\IsTestsMode.cs" />
     <Compile Include="Domain\MarketSystem.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />

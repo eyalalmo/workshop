@@ -1040,7 +1040,8 @@ namespace workshop192.Bridge
             else
             {
                 DiscountComponent d = DBDiscount.getInstance().getDiscountByID(discountID);
-                if(d is Discount)
+                DBDiscount.getInstance().setPercentage(d.getId(), percentage);
+                if (d is Discount)
                     ((Discount)d).setPercentage(percentage);
             }
         }
