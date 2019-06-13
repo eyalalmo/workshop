@@ -22,9 +22,10 @@ namespace workshop192.Domain.Tests
         [TestInitialize()]
         public void init()
         {
-            storeDB.initTests();
-            productDB.initTests();
-            DBSubscribedUser.getInstance().initTests();
+            MarketSystem.initTestWitOutRead();
+            //storeDB.initTests();
+            //productDB.initTests();
+            //DBSubscribedUser.getInstance().initTests();
             session1 = new Session();
             session1.register("eyal", "123");
 

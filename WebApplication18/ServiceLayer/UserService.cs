@@ -28,6 +28,10 @@ namespace workshop192.ServiceLayer
 
         }
 
+        public void testSetup()
+        {
+            db.testSetup();
+        }
         public void setup()
         {
             db.setup();

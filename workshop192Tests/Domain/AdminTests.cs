@@ -8,11 +8,17 @@ using System.Threading.Tasks;
 
 namespace workshop192.Domain.Tests
 {
+    
     [TestClass()]
     public class AdminTests
     {
         private Session session = new Session();
 
+        [TestInitialize()]
+        public void init()
+        {
+            MarketSystem.initTestWitOutRead();
+        }
         [TestMethod()]
         public void createStoreTest()
         {
@@ -20,19 +26,7 @@ namespace workshop192.Domain.Tests
             state.createStore("ToyRUs", "lots of toys", new SubscribedUser("aa", "aa", null));
         }
 
-        [TestMethod()]
-        public void getPurchaseHistoryTest()
-        {
-            try
-            {
-                UserState state = new Admin();
-                state.getPurchaseHistory(null);
-                Assert.Fail();
-            }
-            catch (Exception) {
-                Assert.IsTrue(true);
-            }
-        }
+    
 
         [TestMethod()]
         public void loginTest()
@@ -40,26 +34,12 @@ namespace workshop192.Domain.Tests
             try
             {
                 Admin admin = new Admin();
-                admin.login("admin", "1234", session);
+                admin.login("u1", "123", session);
                 Assert.Fail();
             }
             catch (LoginException)
             {
                 Assert.IsTrue(true);
-            }
-
-            try
-            {
-                DBSubscribedUser dbsubscribedUser = DBSubscribedUser.getInstance();
-                session.login("admin", "1234");
-                UserState state = session.getState();
-                Assert.IsTrue(state is Admin);
-                state.logout(session.getSubscribedUser(), session);
-                Assert.IsTrue(session.getState() is Guest);
-            }
-            catch (Exception)
-            {
-                Assert.Fail();
             }
 
             try

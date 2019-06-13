@@ -20,6 +20,7 @@ namespace workshop192.Domain
         {
             if (instance == null)
                 instance = new DBProduct();
+
             return instance;
         }
 
@@ -67,6 +68,8 @@ namespace workshop192.Domain
         {
             try
             {
+                productList = new LinkedList<Product>();
+                nextProductID = 0;
                 connection.Open();
                 connection.Execute("DELETE FROM Product");
                 connection.Close();

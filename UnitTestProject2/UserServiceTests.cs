@@ -13,7 +13,7 @@ using workshop192.Domain;
 
 namespace workshop192.ServiceLayer.Tests
 {
-    
+
     [TestClass()]
     public class UserServiceTests
     {
@@ -21,32 +21,28 @@ namespace workshop192.ServiceLayer.Tests
         private StoreService storeService = StoreService.getInstance();
         private BasketService basketService = BasketService.getInstance();
         private int session1, session2; // session3;
-        
-        
+
+
         [TestInitialize()]
         public void Initialize()
         {
-                userService.setup();
+            userService.testSetup();
 
-                session1 = userService.startSession();
-                session2 = userService.startSession();
-                // session3 = userService.startSession();
+            session1 = userService.startSession();
+            session2 = userService.startSession();
 
-                userService.register(session1, "zubu", "mafu");
-                userService.login(session1, "zubu", "mafu");
+            userService.register(session1, "zubu", "mafu");
+            userService.login(session1, "zubu", "mafu");
 
-                int store1 = userService.createStore(session1, "Golf", "Clothes");
-                int store2 = userService.createStore(session1, "Shiomi", "Technology");
+            int store1 = userService.createStore(session1, "Golf", "Clothes");
+            int store2 = userService.createStore(session1, "Shiomi", "Technology");
+            storeService.addProduct("shirt", "clothes", 20, 5, 2, store1, session1);
+            storeService.addProduct("pan", "kitchen", 100, 2, 4, store1, session1);
+            storeService.addProduct("stove", "kitchen", 200, 3, 2, store1, session1);
+            storeService.addProduct("pants", "clothes", 120, 1, 2, store2, session1);
+            storeService.addProduct("socks", "clothes", 110, 4, 2, store2, session1);
 
-                //storeService.addManager(store1, "dani1", true, true, true, session);
-
-                storeService.addProduct("shirt", "clothes", 20, 5, 2, store1, session1);
-                storeService.addProduct("pan", "kitchen", 100, 2, 4, store1, session1);
-                storeService.addProduct("stove", "kitchen", 200, 3, 2, store1, session1);
-                storeService.addProduct("pants", "clothes", 120, 1, 2, store2, session1);
-                storeService.addProduct("socks", "clothes", 110, 4, 2, store2, session1);
-            
-                  }
+        }
         //2.2+2.3
         [TestMethod]
         public void registerSuccessTest()
@@ -54,12 +50,13 @@ namespace workshop192.ServiceLayer.Tests
             try
             {
                 userService.register(session2, "user", "user");
-            }catch(Exception)
+            }
+            catch (Exception)
             {
                 Assert.Fail();
             }
             Assert.IsTrue(true);
-          
+
 
         }
 
@@ -102,9 +99,9 @@ namespace workshop192.ServiceLayer.Tests
             catch (RegisterException)
             {
                 Assert.IsTrue(true);
-                
+
             }
-            
+
         }
 
         public void loginFail2Test()
@@ -121,20 +118,20 @@ namespace workshop192.ServiceLayer.Tests
             }
 
         }
-//2.5.1+2.5.2
-       
+        //2.5.1+2.5.2
+
         [TestMethod]
         public void searchByCategoryTest1()
         {
             loginSuccessTest();
             string searchResult1 = userService.searchByCategory("kitchen");
             int storeid = (DBStore.nextStoreID - 1);
-            Assert.IsTrue(searchResult1.Equals("[{\"productID\":2,\"productName" +
+            Assert.AreEqual(searchResult1, "[{\"productID\":2,\"productName" +
                 "\":\"stove\",\"productCategory\":\"kitchen\",\"price\":200,\"rank" +
                 "\":3,\"quantityLeft\":2,\"storeID\":" + storeid + "},{\"productID\":1," +
                 "\"productName\":\"pan\",\"productCategory\":\"kitchen\"," +
                 "\"price\":100,\"rank\":2,\"quantityLeft\":4,\"storeID" +
-                "\":" + storeid + "}]"));
+                "\":" + storeid + "}]");
         }
 
         [TestMethod]
@@ -143,19 +140,19 @@ namespace workshop192.ServiceLayer.Tests
             loginSuccessTest();
             string searchResult2 = userService.searchByCategory("clothes");
             int storeid = (DBStore.nextStoreID);
-            Assert.IsTrue(searchResult2.Equals("[{\"productID\":4,\"productName" +
+            Assert.AreEqual(searchResult2, "[{\"productID\":4,\"productName" +
                 "\":\"socks\",\"productCategory\":\"clothes\",\"price\":110," +
                 "\"rank\":4,\"quantityLeft\":2,\"storeID\":" + storeid + "},{\"productID" +
                 "\":3,\"productName\":\"pants\",\"productCategory\":\"clothes" +
                 "\",\"price\":120,\"rank\":1,\"quantityLeft\":2,\"storeID" +
                 "\":" + storeid + "},{\"productID\":0,\"productName\":\"shirt\"," +
                 "\"productCategory\":\"clothes\",\"price\":20,\"rank\":5," +
-                "\"quantityLeft\":2,\"storeID\":" + (storeid - 1) + "}]"));
+                "\"quantityLeft\":2,\"storeID\":" + (storeid - 1) + "}]");
         }
         [TestMethod]
         public void searchByCategoryFail()
         {
-         //   registerSuccessTest();
+            //   registerSuccessTest();
             loginSuccessTest();
             string searchResult3 = userService.searchByCategory("pets");
             Assert.IsTrue(searchResult3.Equals("[]"));
@@ -166,10 +163,10 @@ namespace workshop192.ServiceLayer.Tests
         {
             string searchResult1 = userService.searchByName("stove");
             int next = DBStore.nextStoreID;
-            Assert.IsTrue(searchResult1.Equals("[{\"productID\":2,\"productName\":" +
+            Assert.AreEqual(searchResult1, "[{\"productID\":2,\"productName\":" +
                 "\"stove\",\"productCategory\":\"kitchen\",\"price\":200,\"rank\":3" +
-                ",\"quantityLeft\":2,\"storeID\":" + 
-                (next - 1) +"}]"));
+                ",\"quantityLeft\":2,\"storeID\":" +
+                (next - 1) + "}]");
             //Assert.IsTrue(productExists("stove", searchResult1));
         }
 
@@ -211,11 +208,11 @@ namespace workshop192.ServiceLayer.Tests
                 basketService.addToCart(session2, product3, 1);
                 basketService.addToCart(session2, product4, 3);
 
-                userService.purchaseBasket(session2, "HaJelmonit 14", "234","","","","");
+                userService.purchaseBasket(session2, "HaJelmonit 14", "234", "", "", "", "");
                 Assert.IsTrue(true);
 
                 //???????????????do we need to check state
-               // Assert.IsTrue(product1.getQuantityLeft() == 2);
+                // Assert.IsTrue(product1.getQuantityLeft() == 2);
                 // Assert.IsTrue(product2.getQuantityLeft() == 7);
                 // Assert.IsTrue(product3.getQuantityLeft() == 0);
                 // Assert.IsTrue(product4.getQuantityLeft() == 1);
@@ -239,7 +236,7 @@ namespace workshop192.ServiceLayer.Tests
                 int product1 = storeService.addProduct("dogs", "big dogs", 80, 2, 4, store1, session2);
 
                 basketService.addToCart(session2, product1, 6);
-                userService.purchaseBasket(session2, "Neviot 22", "123","","","","");
+                userService.purchaseBasket(session2, "Neviot 22", "123", "", "", "", "");
                 Assert.Fail();
             }
             catch (Exception)
@@ -254,7 +251,7 @@ namespace workshop192.ServiceLayer.Tests
         {
             try
             {
-               // registerSuccessTest();
+                // registerSuccessTest();
                 loginSuccessTest();
 
                 userService.logout(session2);
@@ -296,7 +293,7 @@ namespace workshop192.ServiceLayer.Tests
                 loginSuccessTest();
                 int store = userService.createStore(session2, "Apple", "apples");
                 Assert.IsTrue(true);
-               
+
             }
             catch (Exception)
             {
@@ -312,7 +309,7 @@ namespace workshop192.ServiceLayer.Tests
                 loginSuccessTest();
                 int store = userService.createStore(session2, "", "apples");
                 Assert.Fail();
-               
+
 
             }
             catch (IllegalNameException)
@@ -347,7 +344,7 @@ namespace workshop192.ServiceLayer.Tests
             //Session sessionAdmin = userService.startSession();
             //Assert.AreEqual(userService.login(sessionAdmin, "admin", "1234"), "");
             //Assert.IsTrue(Equals(userService.removeUser(sessionAdmin, "rob"),""));
-            
+
             //Assert.IsTrue(sessionManager.getState() is Guest);
             //Assert.IsTrue(store1.getStoreRole(subscribedToDelete) == null);
             //Assert.IsTrue(store2.getStoreRole(subscribedToDelete) == null);
@@ -364,7 +361,7 @@ namespace workshop192.ServiceLayer.Tests
 
         }
     }
-    
+
 }
 
 

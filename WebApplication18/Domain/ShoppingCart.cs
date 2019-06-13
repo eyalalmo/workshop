@@ -71,19 +71,19 @@ namespace workshop192.Domain
             }
         }
 
-        public void addStoreCoupon(string couponCode)
-        {
-            if (coupon != "")
-                throw new AlreadyExistException("Error: Can not have more than one coupon in shopping cart");
-            store.checkCouponCode(couponCode);
-            coupon = couponCode;
-        }
+        //public void addStoreCoupon(string couponCode)
+        //{
+        //    if (coupon != "")
+        //        throw new AlreadyExistException("Error: Can not have more than one coupon in shopping cart");
+        //    store.checkCouponCode(couponCode);
+        //    coupon = couponCode;
+        //}
 
 
-        public void removeCoupon()
-        {
-            coupon = "";
-        }
+        //public void removeCoupon()
+        //{
+        //    coupon = "";
+        //}
 
 
         public void removeFromCart(Product p)

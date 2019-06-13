@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using workshop192.Domain;
-using workshop192.ServiceLayer;
 
 namespace UnitTestProject3
 {
@@ -12,15 +11,14 @@ namespace UnitTestProject3
         public Store store;
         public ShoppingCart cart;
         public int session;
-        public UserService userService = UserService.getInstance();
 
         [TestInitialize]
         public void initial()
         {
-            userService.setup();
-            DBProduct.getInstance().initTests();
-            DBProduct.getInstance().initTests();
-            DBStore.getInstance().initTests();
+            MarketSystem.initTestWitOutRead();
+            //DBProduct.getInstance().initTests();
+            //DBProduct.getInstance().initTests();
+            //DBStore.getInstance().initTests();
             store = new Store("store1", "games store");
             DBStore.getInstance().addStore(store);
 

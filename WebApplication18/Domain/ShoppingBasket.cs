@@ -154,23 +154,23 @@ namespace workshop192.Domain
             }
             return null;
         }
-        public void addCoupon(string coupon, int storeID)
-        {
-            ShoppingCart sc = getShoppingCartByID(storeID);
-            if (sc != null)
-                sc.addStoreCoupon(coupon);
-            else
-                throw new DoesntExistException("no such store ID in Shopping basket");
-        }
+        //public void addCoupon(string coupon, int storeID)
+        //{
+        //    ShoppingCart sc = getShoppingCartByID(storeID);
+        //    if (sc != null)
+        //        sc.addStoreCoupon(coupon);
+        //    else
+        //        throw new DoesntExistException("no such store ID in Shopping basket");
+        //}
 
-        public void removeCoupon(int storeID)
-        {
-            ShoppingCart sc = getShoppingCartByID(storeID);
-            if (sc != null)
-                sc.removeCoupon();
-            else
-                throw new DoesntExistException("no such store ID in Shopping basket");
-        }
+        //public void removeCoupon(int storeID)
+        //{
+        //    ShoppingCart sc = getShoppingCartByID(storeID);
+        //    if (sc != null)
+        //        sc.removeCoupon();
+        //    else
+        //        throw new DoesntExistException("no such store ID in Shopping basket");
+        //}
 
         public async Task<int> purchaseBasket(string address, string creditcard, string month, string year, string holder, string cvv)
         {

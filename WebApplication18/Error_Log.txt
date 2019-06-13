@@ -63,3 +63,21 @@
    at workshop192.Bridge.DomainBridge.signContract(Int32 storeid, String username, Int32 sessionid) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Bridge\DomainBridge.cs:line 1112
    at workshop192.ServiceLayer.StoreService.signContract(Int32 store, String username, Int32 sessionID) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\ServiceLayer\StoreService.cs:line 490
    at WebApplication18.Controllers.StoreController.signContract(String username, Int32 storeId) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Controllers\StoreController.cs:line 176
+2019-06-13 12:17:17,684 ERROR ErrorLog: An Error has occured. Function: login; Stack Trace:    at System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at workshop192.Domain.DBSubscribedUser.login(SubscribedUser user) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Domain\DBSubscribedUser.cs:line 278
+   at workshop192.Domain.Guest.login(String username, String password, Session session) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Domain\Guest.cs:line 83
+   at workshop192.Domain.Session.login(String username, String password) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Domain\Session.cs:line 56
+   at workshop192.Bridge.DomainBridge.login(Int32 sessionid, String username, String password) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Bridge\DomainBridge.cs:line 53
+   at workshop192.ServiceLayer.UserService.login(Int32 session, String username, String password) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\ServiceLayer\UserService.cs:line 49
+   at WebApplication18.Controllers.UesrController.login(String Username, String Password) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Controllers\UesrController.cs:line 47
+2019-06-13 12:21:50,000 ERROR ErrorLog: An Error has occured. Function: login; Stack Trace:    at System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at workshop192.Domain.DBSubscribedUser.login(SubscribedUser user) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Domain\DBSubscribedUser.cs:line 278
+   at workshop192.Domain.Guest.login(String username, String password, Session session) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Domain\Guest.cs:line 83
+   at workshop192.Domain.Session.login(String username, String password) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Domain\Session.cs:line 56
+   at workshop192.Bridge.DomainBridge.login(Int32 sessionid, String username, String password) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Bridge\DomainBridge.cs:line 53
+   at workshop192.ServiceLayer.UserService.login(Int32 session, String username, String password) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\ServiceLayer\UserService.cs:line 49
+   at WebApplication18.Controllers.UesrController.login(String Username, String Password) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Controllers\UesrController.cs:line 47

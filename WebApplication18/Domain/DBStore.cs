@@ -63,6 +63,7 @@ namespace workshop192.Domain
                 connection.Open();
                 connection.Execute("DELETE FROM Stores");
                 connection.Execute("DELETE FROM StoreRoles");
+                connection.Execute("UPDATE [dbo].[IDS] SET id = 0 WHERE type = 'store'");
                 connection.Close();
             }
             catch (Exception e)

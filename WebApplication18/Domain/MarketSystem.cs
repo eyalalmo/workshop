@@ -15,8 +15,10 @@ namespace workshop192.Domain
 {
     public class MarketSystem
     {
+        public static bool testsMode =false;
         public static void init()
         {       
+            
             int addNewDataToDB = 0;
             string[] linesConfig=null;
             string filePathConfig = null;
@@ -194,6 +196,7 @@ namespace workshop192.Domain
 
         public static void initTestWitOutRead()
         {
+            testsMode = true;
             SystemLogger.configureLogs();
             DBProduct.getInstance().initTests();
             DBSession.getInstance().initTests();

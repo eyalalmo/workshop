@@ -33,6 +33,10 @@ namespace workshop192.Bridge
             return DBSession.getInstance().generate();
         }
 
+        public void testSetup()
+        {
+            MarketSystem.initTestWitOutRead();
+        }
         public void setup()
         {
             MarketSystem.init();
@@ -301,21 +305,21 @@ namespace workshop192.Bridge
              p.setRank(rank);
         }
 
-        public void addcouponToCart(int sessionID, int storeID, string couponCode)
-        {
-            Session session = DBSession.getInstance().getSession(sessionID);
-            ShoppingBasket shoppingBasket=  session.getShoppingBasket();
-            shoppingBasket.addCoupon(couponCode, storeID);
+        //public void addcouponToCart(int sessionID, int storeID, string couponCode)
+        //{
+        //    Session session = DBSession.getInstance().getSession(sessionID);
+        //    ShoppingBasket shoppingBasket=  session.getShoppingBasket();
+        //    shoppingBasket.addCoupon(couponCode, storeID);
 
-        }
+        //}
 
 
-        public void removeCouponFromCart(int sessionID, int storeID)
-        {
-            Session session = DBSession.getInstance().getSession(sessionID);
-            ShoppingBasket shoppingBasket = session.getShoppingBasket();
-            shoppingBasket.removeCoupon(storeID);
-        }
+        //public void removeCouponFromCart(int sessionID, int storeID)
+        //{
+        //    Session session = DBSession.getInstance().getSession(sessionID);
+        //    ShoppingBasket shoppingBasket = session.getShoppingBasket();
+        //    shoppingBasket.removeCoupon(storeID);
+        //}
 
         public string getShoppingBasket(int sessionid)
         {
@@ -581,35 +585,35 @@ namespace workshop192.Bridge
             messager.message(username, "Your role in store " + storeid + " has been removed");
         }
 
-        internal void addCouponToStore(int sessionID, int storeID, string couponCode, double percentage, string duration)
-        {
-            Session user = DBSession.getInstance().getSession(sessionID);
-            if (user == null)
-                throw new DoesntExistException("Error: User is not logged in");
-            Store store = DBStore.getInstance().getStore(storeID);
-            SubscribedUser subscribedUser = user.getSubscribedUser();
-            if (subscribedUser == null)
-                throw new DoesntExistException("not a subscribed user");
-            StoreRole sr = subscribedUser.getStoreRole(store);
-            if (sr == null)
-                throw new RoleException("no role for this user in this store");
-            sr.addCouponToStore( couponCode, percentage, duration);
-        }
+        //internal void addCouponToStore(int sessionID, int storeID, string couponCode, double percentage, string duration)
+        //{
+        //    Session user = DBSession.getInstance().getSession(sessionID);
+        //    if (user == null)
+        //        throw new DoesntExistException("Error: User is not logged in");
+        //    Store store = DBStore.getInstance().getStore(storeID);
+        //    SubscribedUser subscribedUser = user.getSubscribedUser();
+        //    if (subscribedUser == null)
+        //        throw new DoesntExistException("not a subscribed user");
+        //    StoreRole sr = subscribedUser.getStoreRole(store);
+        //    if (sr == null)
+        //        throw new RoleException("no role for this user in this store");
+        //    sr.addCouponToStore( couponCode, percentage, duration);
+        //}
 
-        internal void removeCouponFromStore(int sessionID, int storeID, string couponCode)
-        {
-            Session user = DBSession.getInstance().getSession(sessionID);
-            if (user == null)
-                throw new DoesntExistException("user is not logged in");
-            Store store = DBStore.getInstance().getStore(storeID);
-            SubscribedUser subscribedUser = user.getSubscribedUser();
-            if (subscribedUser == null)
-                throw new DoesntExistException("not a subscribed user");
-            StoreRole sr = subscribedUser.getStoreRole(store);
-            if (sr == null)
-                throw new RoleException("no role for this user in this store");
-            sr.removeCouponFromStore(couponCode);
-        }
+        //internal void removeCouponFromStore(int sessionID, int storeID, string couponCode)
+        //{
+        //    Session user = DBSession.getInstance().getSession(sessionID);
+        //    if (user == null)
+        //        throw new DoesntExistException("user is not logged in");
+        //    Store store = DBStore.getInstance().getStore(storeID);
+        //    SubscribedUser subscribedUser = user.getSubscribedUser();
+        //    if (subscribedUser == null)
+        //        throw new DoesntExistException("not a subscribed user");
+        //    StoreRole sr = subscribedUser.getStoreRole(store);
+        //    if (sr == null)
+        //        throw new RoleException("no role for this user in this store");
+        //    sr.removeCouponFromStore(couponCode);
+        //}
 
         //use case 2.7
 

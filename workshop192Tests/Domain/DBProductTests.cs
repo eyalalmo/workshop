@@ -21,7 +21,7 @@ namespace workshop192.Domain.Tests
         [TestInitialize()]
         public void TestInitialize()
         {
-            UserService.getInstance().setup();
+            MarketSystem.initTestWitOutRead();
 
             session1 = userService.startSession();
             userService.register(session1, "anna", "banana"); //first owner
