@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,6 +30,7 @@ namespace workshop192.Domain
             sessions = new Dictionary<int, Session>();
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public int generate()
         {
             sessions.Add(sessionNum, new Session());

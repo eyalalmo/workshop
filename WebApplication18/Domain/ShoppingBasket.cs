@@ -172,7 +172,7 @@ namespace workshop192.Domain
         //        throw new DoesntExistException("no such store ID in Shopping basket");
         //}
 
-        public async Task<int> purchaseBasket(string address, string creditcard, string month, string year, string holder, string cvv)
+        public int purchaseBasket(string address, string creditcard, string month, string year, string holder, string cvv)
         {
         //    foreach (KeyValuePair<int, ShoppingCart> pair1 in shoppingCarts)
         //    {
@@ -192,17 +192,18 @@ namespace workshop192.Domain
 
         //    }
 
-            Task<int> result =  PaymentService.getInstance().checkOut(address, creditcard, month, year, holder, cvv);
-            int res = await result;
-            int resFromDelivery2;
-            if (res != -1)
+           int resultPay =  PaymentService.getInstance().checkOut(address, creditcard, month, year, holder, cvv);
+            int resultDeliver=-1;
+
+
+            if (resultPay != -1)
             {
-                Task<int> resFromDelivery = DeliveryService.getInstance().sendToUser(address, creditcard, month, year, holder, cvv);
-                 resFromDelivery2 = await resFromDelivery;
-                if (resFromDelivery2==-1)
+                 resultDeliver = DeliveryService.getInstance().sendToUser(address, creditcard, month, year, holder, cvv);
+               
+                if (resultDeliver == -1)
                 {
-                    Task<int> res3=PaymentService.getInstance().cancelPayment(res+"");
-                    int res3Ans = await res3;
+                    int res2=PaymentService.getInstance().cancelPayment(resultPay+"");
+                 
                     throw new CartException("Delivery FAILED");
                 }
                 if (username != null)
@@ -232,7 +233,7 @@ namespace workshop192.Domain
                 throw new CartException("Payment FAILED");
             }
             //throw new SuccessPaymentExeption("OK");
-            return resFromDelivery2;
+            return resultDeliver ;
         }
         public void checkBasket()
         {

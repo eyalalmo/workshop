@@ -92,7 +92,25 @@ namespace workshop192.ServiceLayer.Tests
             }
             Assert.IsTrue(true);
         }
-        
+        //4.1.3
+        [TestMethod()]
+        public void EditProduct()
+        {
+            addProductTest();
+
+            try
+            {
+                storeService.setProductName(productid, "the best", session1);
+                storeService.setProductPrice(productid, 4, session1);
+            }
+            catch (Exception)
+            {
+                Assert.Fail();
+            }
+            Assert.IsTrue(true);
+        }
+
+
         //4.5
         [TestMethod()]
         public void addMannagerByAnOwner1()
@@ -238,8 +256,6 @@ namespace workshop192.ServiceLayer.Tests
             try
             {
                 storeService.addOwner(storeid, "dani1", session1);
-                /********************************/
-                //  need to check if he is an owner now
                 Assert.IsTrue(true);
             }
             catch (Exception)

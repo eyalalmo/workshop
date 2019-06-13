@@ -108,7 +108,7 @@ namespace workshop192.ServiceLayer.Tests
 
 
         }
-
+        //2.7.1
         [TestMethod()]
         public void watchShoppingBasketSuccess()
         {
@@ -140,7 +140,7 @@ namespace workshop192.ServiceLayer.Tests
 
             }
         }
-        
+        //2.7.2
         [TestMethod()]
         public void removeFromShoppingCartsuccess()
         {

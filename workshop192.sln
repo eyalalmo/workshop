@@ -10,11 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "UnitTestProject3\IntegrationTests.csproj", "{41B931B9-A16A-46C1-8145-244F8BAC78C1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webService", "WebApplication18\webService.csproj", "{D2570AE7-74FB-4ABF-B63E-EA48AD079600}"
-	ProjectSection(ProjectDependencies) = postProject
-		{F47EA9F3-E64A-43F8-A136-81CF6934D9FB} = {F47EA9F3-E64A-43F8-A136-81CF6934D9FB}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InitSettings", "InitSettings\InitSettings.csproj", "{F47EA9F3-E64A-43F8-A136-81CF6934D9FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,10 +33,6 @@ Global
 		{D2570AE7-74FB-4ABF-B63E-EA48AD079600}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2570AE7-74FB-4ABF-B63E-EA48AD079600}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2570AE7-74FB-4ABF-B63E-EA48AD079600}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F47EA9F3-E64A-43F8-A136-81CF6934D9FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F47EA9F3-E64A-43F8-A136-81CF6934D9FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F47EA9F3-E64A-43F8-A136-81CF6934D9FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F47EA9F3-E64A-43F8-A136-81CF6934D9FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

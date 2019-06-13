@@ -207,11 +207,18 @@ namespace workshop192.ServiceLayer
 
         public void purchaseBasket(int session, string address, string creditcard, string month, string year, string  holder, string cvv)
         {
-            db.purchaseBasket(session,  address,  creditcard,  month,year,holder, cvv)
-;
+            db.purchaseBasket(session, address, creditcard, month, year, holder, cvv);
+        }
+        public bool handShakePay()
+        {
+           return db.handShakePay();
+        }
+        public bool handShakeDeliver()
+        {
+            return db.handShakeDeliver();
         }
 
-     
+
         /////////////////////////////////////////////////////////////////////////////////////
         public void addUser(string hash, int session)
         {
