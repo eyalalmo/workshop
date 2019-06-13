@@ -5,25 +5,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-
+using workshop192.Bridge;
 
 namespace workshop192.Domain.Tests
 {
     [TestClass()]
     public class DBSubscribedUserTests
     {
+        [TestInitialize()]
+        public void TestInitialize()
+        {
+            MarketSystem.initTestWitOutRead();
 
+        }
         [TestMethod()]
         public void logoutTest()
         {
-            
-            DBSubscribedUser db = DBSubscribedUser.getInstance();
-            db.initTests();
-            Session s = new Session();
 
-            s.register("etay", "etay");
-            s.login("etay", "etay");
+            DBSubscribedUser db = DBSubscribedUser.getInstance();
+            Session s = new Session();
+            string pass = DomainBridge.getInstance().encryptPassword("etay123");
+            s.register("etay", pass);
+            s.login("etay", "etay123");
             if (db.getSubscribedUser("etay") == null)
                 Assert.Fail();
             s.logout();
@@ -36,7 +39,8 @@ namespace workshop192.Domain.Tests
         {
             DBSubscribedUser db = DBSubscribedUser.getInstance();
             Session s = new Session();
-            s.register("etay123", "etay123");
+            string pass = DomainBridge.getInstance().encryptPassword("etay123");
+            s.register("etay123", pass);
             Assert.AreNotEqual(db.getSubscribedUser("etay"), null);            
         }
 
@@ -44,22 +48,22 @@ namespace workshop192.Domain.Tests
         public void getSubscribedUserTest()
         {
             DBSubscribedUser db = DBSubscribedUser.getInstance();
+            string pass = DomainBridge.getInstance().encryptPassword("etay123");
             Session s = new Session();
-            s.register("etay11", "etay11");
+            s.register("etay11", pass);
             Assert.AreNotEqual(db.getSubscribedUser("etay"), null);
-            db.initTests();
         }
 
         [TestMethod()]
         public void loginTest()
         {
             DBSubscribedUser db = DBSubscribedUser.getInstance();
-            db.initTests();
             Session s = new Session();
-            s.register("etay", "etay");
-            s.login("etay", "etay");
+            string pass = DomainBridge.getInstance().encryptPassword("etay123");
+            s.register("etay", pass);
+            s.login("etay", "etay123");
             Assert.AreEqual(db.getloggedInUser("etay"), s.getSubscribedUser());
-            db.initTests();
+
         }
     }
 }

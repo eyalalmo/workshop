@@ -21,7 +21,6 @@ namespace UnitTestProject3
             //DBStore.getInstance().initTests();
             store = new Store("store1", "games store");
             DBStore.getInstance().addStore(store);
-
             cart = new ShoppingCart(store.getStoreID());
 
         }

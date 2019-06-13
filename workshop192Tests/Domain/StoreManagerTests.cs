@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using workshop192.Bridge;
 
 namespace workshop192.Domain.Tests
 {
@@ -27,14 +28,15 @@ namespace workshop192.Domain.Tests
             //productDB.initTests();
             //DBSubscribedUser.getInstance().initTests();
             session1 = new Session();
-            session1.register("eyal", "123");
+            string pass = DomainBridge.getInstance().encryptPassword("123");
+            session1.register("eyal", pass);
 
             session2 = new Session();
-            session2.register("bar", "123");
+            session2.register("bar", pass);
 
             session3 = new Session();
-            session3.register("etay", "123");
-
+            session3.register("etay", pass);
+            
             session1.login("eyal", "123");
             session2.login("bar", "123");
             session3.login("etay", "123");

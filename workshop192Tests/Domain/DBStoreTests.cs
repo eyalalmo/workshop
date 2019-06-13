@@ -18,8 +18,8 @@ namespace workshop192.Domain.Tests
         public void TestInitialize()
         {
             MarketSystem.initTestWitOutRead();
-        DBStore.getInstance().init();
             s = new Store("store", "store");
+            DBStore.getInstance().addStore(s);
             su = new SubscribedUser("u", "u", new ShoppingBasket());
             sr = new StoreOwner(null, su, s);
 
@@ -45,33 +45,11 @@ namespace workshop192.Domain.Tests
         [TestMethod()]
         public void addStoreTest()
         {
-            int ID = DBStore.getInstance().addStore(s);
+            Store s1 = new Store("store", "store");
+            int ID = DBStore.getInstance().addStore(s1);
             Assert.AreNotEqual(DBStore.getInstance().getStore(ID), null);
         }
 
-        [TestMethod()]
-        public void removeStoreTest()
-        {
-            try
-            {
-                int ID = DBStore.getInstance().addStore(s);
-                DBStore.getInstance().removeStore(s);
-                Assert.AreEqual(DBStore.getInstance().getStore(ID), null);
-                DBStore.getInstance().removeStore(s);
-                Assert.Fail();
-            }
-            catch (DoesntExistException)
-            {
-                Assert.IsTrue(true);
-            }
-        }
-
-        [TestMethod()]
-        public void closeStoreTest()
-        {
-            int ID = DBStore.getInstance().addStore(s);
-            DBStore.getInstance().closeStore(s);
-            Assert.IsFalse(s.isActive());
-        }
+    
     }
 }
