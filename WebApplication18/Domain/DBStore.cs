@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using WebApplication18.DAL;
 using Dapper;
 using WebApplication18.Domain;
+using System.Data.SqlClient;
 
 namespace workshop192.Domain
 {
-    public class DBStore : Connector
+    public class DBStore
     {
         public static DBStore instance;
         public LinkedList<Store> stores;
@@ -60,14 +61,14 @@ namespace workshop192.Domain
         {
             try
             {
-                connection.Open();
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
                 connection.Execute("DELETE FROM Stores");
                 connection.Execute("DELETE FROM StoreRoles");
-                connection.Close();
+                //connection.Close();
             }
             catch (Exception e)
             {
-                connection.Close();
+                //connection.Close();
             }
         }
 
@@ -77,11 +78,11 @@ namespace workshop192.Domain
         //{
         //try
         //{
-        //    connection.Open();
+        //    SqlConnection connection = Connector.getInstance().getSQLConnection();
         //    LinkedList<Store> newStores = new LinkedList<Store>();
         //    var StoreResult = connection.Query<StoreEntry>("SELECT * FROM [dbo].[Stores] ");
         //    var StoreRoleResult = connection.Query<StoreRoleEntry>("SELECT * FROM [dbo].[StoreRoles] ");
-        //    connection.Close();
+        //    //connection.Close();
         //    for (int i = 0; i < StoreResult.Count(); i++)
         //    {
         //        StoreEntry se = StoreResult.ElementAt(i);
@@ -138,7 +139,7 @@ namespace workshop192.Domain
         //catch(Exception)
         //{
         //   // StackTrace = "   ב-  System.Collections.Generic.Dictionary`2.FindEntry(TKey key)\r\n   ב-  System.Collections.Generic.Dictionary`2.ContainsKey(TKey key)\r\n   ב-  workshop192.Domain.DBSubscribedUser.getSubscribedUser(String username) ב- C:\\Users\\etay2\\Desktop\\C#Work...
-        //    connection.Close();
+        //    //connection.Close();
         //    throw new StoreException("cant init");
         //}
 
@@ -169,16 +170,16 @@ namespace workshop192.Domain
         {
             try
             {
-                connection.Open();
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
                 int storeId = sr.getStore().getStoreID();
                 string userName = sr.getUser().getUsername();
                 connection.Execute("DELETE FROM StoreRoles WHERE  storeId=@storeId AND userName=@userName", new { storeId, userName });
                 storeRole.Remove(sr);
-                connection.Close();
+                //connection.Close();
             }
             catch (Exception)
             {
-                connection.Close();
+                //connection.Close();
                 throw new StoreException("cant remove role");
             }
 
@@ -223,7 +224,7 @@ namespace workshop192.Domain
                 //per.Add("editPolicy", editPolicy);
 
                 ////
-                connection.Open();
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
 
                 string sql = "INSERT INTO [dbo].[StoreRoles] (storeId, appointedBy,userName,isOwner,editProduct,editDiscount,editPolicy)" +
                                  " VALUES (@storeId, @appointedBy, @userName,@isOwner,@editProduct,@editDiscount,@editPolicy)";
@@ -244,11 +245,11 @@ namespace workshop192.Domain
                 }
                 connection.Execute(sql, new { storeId, appointedBy, userName, isOwner, editProduct, editDiscount, editPolicy });
                 storeRole.AddFirst(sr);
-                connection.Close();
+                //connection.Close();
             }
             catch (Exception)
             {
-                connection.Close();
+                //connection.Close();
                 throw new StoreException("cant add store roll");
             }
         }
@@ -273,13 +274,13 @@ namespace workshop192.Domain
         {
             try
             {
-                connection.Open();
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
                 connection.Execute("UPDATE [dbo].[Stores] SET numOfOwners = @newNumber WHERE storeId = @storeId", new { storeId = storeId, newNumber = numOfOwners });
-                connection.Close();
+                //connection.Close();
             }
             catch (Exception e)
             {
-                connection.Close();
+                //connection.Close();
             }
         }
 
@@ -287,13 +288,13 @@ namespace workshop192.Domain
         {
             try
             {
-                connection.Open();
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
                 connection.Execute("UPDATE [dbo].[Stores] SET numOfOwners = @newNumber WHERE storeId = @storeId", new { storeId = storeId, newNumber = newNumber });
-                connection.Close();
+                //connection.Close();
             }
             catch (Exception e)
             {
-                connection.Close();
+                //connection.Close();
             }
         }
 
@@ -301,13 +302,13 @@ namespace workshop192.Domain
         {
             try
             {
-                connection.Open();
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
                 connection.Execute("UPDATE [dbo].[Stores] SET minPurchasePolicy = @minPurchasePolicy WHERE storeId = @storeId", new { storeId = storeId, minPurchasePolicy = minPurchasePolicy });
-                connection.Close();
+                //connection.Close();
             }
             catch (Exception e)
             {
-                connection.Close();
+                //connection.Close();
             }
         }
 
@@ -331,7 +332,7 @@ namespace workshop192.Domain
 
 
                 ////////////////////////////////////////////////
-                connection.Open();
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
 
                 string sql = "INSERT INTO [dbo].[Stores] (storeId, name,description,numOfOwners,active,minPurchasePolicy,maxPurchasePolicy)" +
                                  " VALUES (@storeId, @name, @description,@numOfOwners,@active,@minPurchasePolicy,@maxPurchasePolicy)";
@@ -357,7 +358,7 @@ namespace workshop192.Domain
 
                 connection.Execute(sql, new { storeId, name, description, numOfOwners, active, minPurchasePolicy, maxPurchasePolicy });
 
-                connection.Close();
+                //connection.Close();
                 stores.AddFirst(store);
 
 
@@ -366,7 +367,7 @@ namespace workshop192.Domain
             }
             catch (Exception)
             {
-                connection.Close();
+                //connection.Close();
                 throw new StoreException("faild to add store");
             }
         }
@@ -375,13 +376,13 @@ namespace workshop192.Domain
         {
             try
             {
-                connection.Open();
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
                 connection.Execute("UPDATE [dbo].[Stores] SET maxPurchasePolicy = @maxPurchasePolicy WHERE storeId = @storeId", new { storeId = storeId, maxPurchasePolicy = maxPurchasePolicy });
-                connection.Close();
+                //connection.Close();
             }
             catch (Exception e)
             {
-                connection.Close();
+                //connection.Close();
             }
         }
 
@@ -396,13 +397,13 @@ namespace workshop192.Domain
             /////////////////////////////////////////////////////
             try
             {
-                connection.Open();
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
                 LinkedList<Store> newStores = new LinkedList<Store>();
                 var StoreResult = connection.Query<StoreEntry>("SELECT * FROM [dbo].[Stores] WHERE storeId=@storeId ", new { storeId = storeId });
                 var StoreRoleResult = connection.Query<StoreRoleEntry>("SELECT * FROM [dbo].[StoreRoles] WHERE storeId=@storeId ", new { storeId = storeId });
                 var ContractResult = connection.Query<Contract>("SELECT * FROM [dbo].[Contracts] WHERE storeId = @storeId", new { storeId = storeId });
                 var pendingResult = connection.Query<string>("SELECT userName FROM [dbo].[PendingOwners] WHERE storeId = @storeId", new { storeId = storeId }).AsList();
-                connection.Close();
+                //connection.Close();
 
                 StoreEntry se = StoreResult.ElementAt(0);
                 Store s = new Store(se.getStoreId(), se.getName(), se.getDescription());
@@ -466,7 +467,7 @@ namespace workshop192.Domain
             }
             catch (Exception e)
             {
-                connection.Close();
+                //connection.Close();
                 throw new StoreException("cant return store");
             }
 
@@ -484,11 +485,11 @@ namespace workshop192.Domain
                 }
 
                 ///////
-                connection.Open();
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
                 int storeId = store.getStoreID();
                 var affectedRows = connection.Execute("DELETE FROM Stores WHERE  storeId=@storeId ", new { hash = storeId });
 
-                connection.Close();
+                //connection.Close();
 
 
                 /////
@@ -501,7 +502,7 @@ namespace workshop192.Domain
             }
             catch (Exception)
             {
-                connection.Close();
+                //connection.Close();
                 throw new StoreException("cant delete store");
             }
         }
@@ -525,17 +526,17 @@ namespace workshop192.Domain
         {
             try
             {
-                connection.Open();
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
                 int idNum = connection.Query<int>("SELECT id FROM [dbo].[IDS] WHERE type=@type ", new { type = "store" }).First();
                 int next = idNum + 1;
                 connection.Execute("UPDATE [dbo].[IDS] SET id = @id WHERE type = @type", new { id = next, type = "store" });
                 nextStoreID = idNum;
-                connection.Close();
+                //connection.Close();
                 return idNum;
             }
             catch (Exception)
             {
-                connection.Close();
+                //connection.Close();
                 throw new StoreException("connection to db faild");
             }
         }
@@ -575,14 +576,14 @@ namespace workshop192.Domain
         {
             try
             {
-                connection.Open();
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
                 int idNum = connection.Query<int>("SELECT id FROM [dbo].[IDS] WHERE type=@type ", new { type = "store" }).First();
-                connection.Close();
+                //connection.Close();
                 return idNum;
             }
             catch (Exception e)
             {
-                connection.Close();
+                //connection.Close();
                 throw new StoreException("cant connect");
             }
         }
@@ -602,10 +603,10 @@ namespace workshop192.Domain
         {
             try
             {
-                connection.Open();
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
                 LinkedList<StoreRoleEntry> lst = new LinkedList<StoreRoleEntry>();
                 var StoreRoleResult = connection.Query<StoreRoleEntry>("SELECT * FROM [dbo].[StoreRoles] WHERE userName=@userName ", new { userName = userName });
-                connection.Close();
+                //connection.Close();
                 foreach (StoreRoleEntry element in StoreRoleResult)
                 {
                     lst.AddLast(element);
@@ -614,7 +615,7 @@ namespace workshop192.Domain
             }
             catch (Exception e)
             {
-                connection.Close();
+                //connection.Close();
                 throw new StoreException("cant get roles from db");
             }
         }
@@ -622,7 +623,7 @@ namespace workshop192.Domain
         {
             try
             {
-                connection.Open();
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
                 connection.Execute("DELETE FROM Stores \n"
                                    + " DELETE FROM PendingOwners \n"
                                   + "  DELETE FROM StoreRoles \n"
@@ -634,11 +635,11 @@ namespace workshop192.Domain
                                    + " DELETE FROM Notification \n"
                                    + "UPDATE [dbo].[IDS] SET id = 0 WHERE type = 'store'"
                                    );
-                connection.Close();
+                //connection.Close();
             }
             catch (Exception e)
             {
-                connection.Close();
+                //connection.Close();
             }
         }
         public void addPendingOwner(int storeId, string appointer, string pending)
@@ -646,18 +647,18 @@ namespace workshop192.Domain
 
             try
             {
-                connection.Open();
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
                 string sql = "INSERT INTO [dbo].[PendingOwners] (storeId,userName)" +
                                    " VALUES (@storeId,@pending)";
                 connection.Execute(sql, new { storeId = storeId, pending = pending });
                 Store s = getStore(storeId);
                 s.getPending().AddFirst(pending);
-                connection.Close();
+                //connection.Close();
 
             }
             catch (Exception)
             {
-                connection.Close();
+                //connection.Close();
                 throw new StoreException("cant add pending owner");
             }
         }
@@ -667,18 +668,18 @@ namespace workshop192.Domain
         {
             try
             {
-                connection.Open();
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
                 string sql = "DELETE FROM [dbo].[PendingOwners]" +
                                    "WHERE storeId=@storeId AND userName = @pending";
                 connection.Execute(sql, new { storeId = storeId, pending = pending });
                 Store s = getStore(storeId);
                 s.getPending().Remove(pending);
-                connection.Close();
+                //connection.Close();
 
             }
             catch (Exception)
             {
-                connection.Close();
+                //connection.Close();
                 throw new StoreException("cant remove pending owner");
             }
         }
@@ -687,18 +688,18 @@ namespace workshop192.Domain
         {
             try
             {
-                connection.Open();
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
                 string sql = "INSERT INTO [dbo].[Contracts] (storeId,userName,approvedBy)" +
                                    " VALUES (@storeId,@userName,@appointedBy)";
                 Contract c = new Contract(storeId, pending, owner);
                 connection.Execute(sql, new { storeId = storeId, userName = pending, appointedBy = owner });
                 Store s = getStore(storeId);
                 s.getContracts().AddFirst(c);
-                connection.Close();
+                //connection.Close();
             }
             catch  ( Exception e)
             {
-                connection.Close();
+                //connection.Close();
                 throw new StoreException("Error in signing a contract: " + e.Message.ToString());
             }
         }
@@ -716,15 +717,15 @@ namespace workshop192.Domain
                         cont.Remove(cont.ElementAt(i));
                     }
                 }
-                connection.Open();
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
                 string sql = "DELETE FROM [dbo].[Contracts]" +
                                    "WHERE storeId=@storeId AND userName = @userName";
                 connection.Execute(sql, new { storeId = storeId, userName = userName });
-                connection.Close();
+                //connection.Close();
             }
             catch (Exception e)
             {
-                connection.Close();
+                //connection.Close();
                 throw new StoreException("Error in declining a contract: " + e.Message.ToString());
             }
 
@@ -733,9 +734,9 @@ namespace workshop192.Domain
         public int getContractNum(int storeId,  string userName)
         {
 
-            connection.Open();
+            SqlConnection connection = Connector.getInstance().getSQLConnection();
             int count = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM [dbo].[Contracts] WHERE storeId=@storeId AND userName = @userName", new { storeId = storeId, userName = userName });
-            connection.Close();
+            //connection.Close();
             return count;
 
         }

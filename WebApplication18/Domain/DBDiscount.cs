@@ -9,7 +9,7 @@ using WebApplication18.Domain;
 
 namespace workshop192.Domain
 {
-    public class DBDiscount : Connector
+    public class DBDiscount
     {
         private static DBDiscount instance;
         private LinkedList<DiscountComponent> discounts;
