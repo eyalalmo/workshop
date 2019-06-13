@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,8 +45,8 @@ namespace workshop192.Domain
         {
             try
             {
-                
-               // connection.Open();
+
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
                 string sql = "INSERT INTO [dbo].[DiscountComponent] (id, percentage, duration, type, storeId, isPartOfComplex)" +
                                 " VALUES (@id,@percentage, @duration, @type, @storeId, @isPartOfComplex)";
                 int isPartOfComplex;
@@ -104,14 +105,14 @@ namespace workshop192.Domain
                     }
                 }
 
-                connection.Close();
+                //connection.Close();
                 discounts.AddFirst(d);
 
             }
 
             catch (Exception e)
             {
-                connection.Close();
+                //connection.Close();
                 throw e;
             }
         }
@@ -122,7 +123,7 @@ namespace workshop192.Domain
 
             try
             {
-                connection.Open();
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
                 connection.Execute("DELETE FROM DiscountComponent WHERE id=@id ", new { id = d.getId() });
                 if (d is Discount)
                 {
@@ -139,12 +140,12 @@ namespace workshop192.Domain
                 }
 
                 discounts.Remove(d);
-                connection.Close();
+                //connection.Close();
             }
 
             catch (Exception e)
             {
-                connection.Close();
+                //connection.Close();
                 throw e;
             }
         }
@@ -153,21 +154,22 @@ namespace workshop192.Domain
         {
             try
             {
-                connection.Open();
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
                 int idNum = connection.Query<int>("SELECT id FROM [dbo].[IDS] WHERE type=@type ", new { type = "discount" }).First();
                 int next = idNum + 1;
                 connection.Execute("UPDATE [dbo].[IDS] SET id = @id WHERE type = @type", new { id = next, type = "discount" });
-                connection.Close();
+                //connection.Close();
                 return idNum;
             }
             catch (Exception)
             {
-                connection.Close();
+                //connection.Close();
                 return -1;
             } 
         }
         private void addVisibleDiscount(VisibleDiscount v)
         {
+            SqlConnection connection = Connector.getInstance().getSQLConnection();
             int id = v.getId();
             string type = "Visible";
             string reliantType = "-1";
@@ -203,6 +205,7 @@ namespace workshop192.Domain
         }
         private void addReliantDiscount(ReliantDiscount r)
         {
+            SqlConnection connection = Connector.getInstance().getSQLConnection();
             int id = r.getId();
             string type = "Reliant";
             bool isPartOfComplex = r.getIsPartOfComplex();
@@ -246,7 +249,7 @@ namespace workshop192.Domain
         {
             try
             {
-                connection.Open();
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
                 string sql = "UPDATE DiscountComponent SET percentage=@percentage" +
                                 " WHERE id=@id";
                 connection.Execute(sql, new
@@ -254,11 +257,11 @@ namespace workshop192.Domain
                     percentage,
                     id
                 });
-                connection.Close();
+                //connection.Close();
             }
             catch (Exception)
             {
-                connection.Close();
+                //connection.Close();
             }
         }
         public void setIsPartOfComplex(int id,bool b)
@@ -270,7 +273,7 @@ namespace workshop192.Domain
                 isPartOfComplex = 0;
             try
             {
-                connection.Open();
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
                 string sql = "UPDATE DiscountComponent SET isPartOfComplex=@isPartOfComplex" +
                                 " WHERE id=@id";
                 connection.Execute(sql, new
@@ -278,11 +281,11 @@ namespace workshop192.Domain
                     isPartOfComplex,
                     id
                 });
-                connection.Close();
+                //connection.Close();
             }
             catch (Exception)
             {
-                connection.Close();
+                //connection.Close();
             }
         }
                 
@@ -297,6 +300,7 @@ namespace workshop192.Domain
         }
         public Discount getStoreDiscount(int id, int storeId)
         {
+            SqlConnection connection = Connector.getInstance().getSQLConnection();
             var discountEntry = connection.Query<DiscountEntry>("SELECT * FROM [dbo].[Discount] WHERE id=@id AND storeId=@storeId", new { id, storeId = storeId }).First();
             DiscountEntry d = (DiscountEntry)discountEntry;
             int discountId = d.getId();
@@ -329,7 +333,7 @@ namespace workshop192.Domain
         {
             try
             {
-                
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
                 LinkedList<DiscountComponent> storeDiscounts = new LinkedList<DiscountComponent>();
                 var c = connection.Query<DiscountComponentEntry>("SELECT * FROM [dbo].[DiscountComponent] WHERE storeId=@storeId AND type=@type", new { storeId = storeId, type = "Discount"}).ToList<DiscountComponentEntry>();
                 List<DiscountComponentEntry> discountList = (List<DiscountComponentEntry>)c;
@@ -396,7 +400,7 @@ namespace workshop192.Domain
             }
             catch (Exception)
             {
-                connection.Close();
+                //connection.Close();
                 return new LinkedList<DiscountComponent>();
 
             }
@@ -406,8 +410,8 @@ namespace workshop192.Domain
             
             try
             {
-                connection.Open();
-                
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
+
                 var discountEntry = connection.Query<DiscountEntry>("SELECT * FROM [dbo].[Discount] WHERE storeId=@storeId AND productId=@productId", new { storeId = storeId, productId = productId }).First();
                 DiscountEntry d = (DiscountEntry)discountEntry;
                 DiscountComponent dis = getDiscountByID(d.getId());
@@ -424,7 +428,7 @@ namespace workshop192.Domain
                     Product p = DBProduct.getInstance().getProductByID(d.getProductId());
                     v.setProduct(p);
                     discounts.AddFirst(v);
-                    connection.Close();
+                    //connection.Close();
                     return v;
 
                 }
@@ -438,14 +442,14 @@ namespace workshop192.Domain
                         r = new ReliantDiscount(component.getId(), isPartOfComplex, component.getPercentage(), component.getDuration(), d.getNumOfProducts(), p, component.getStoreId());
                         discounts.AddFirst(r);
                     }
-                    connection.Close();
+                    //connection.Close();
                     return r;
                 }
 
             }
             catch (Exception)
             {
-                connection.Close();
+                //connection.Close();
                 return null;
             }
         }
