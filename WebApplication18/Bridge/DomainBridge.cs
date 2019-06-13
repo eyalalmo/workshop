@@ -188,6 +188,16 @@ namespace workshop192.Bridge
             return false;
         }
 
+        public bool handShakeDeliver()
+        {
+            return DeliveryService.getInstance().handShake().Result;
+        }
+
+        public bool handShakePay()
+        {
+          return PaymentService.getInstance().handShake().Result;
+        }
+
         internal string generate()
         {
             return DBCookies.getInstance().generate();
@@ -680,7 +690,7 @@ namespace workshop192.Bridge
         {
             Session user = DBSession.getInstance().getSession(sessionid);
 
-            user.getShoppingBasket().purchaseBasket( address,  creditcard,  month,  year,  holder,  cvv);
+             user.getShoppingBasket().purchaseBasket(address, creditcard, month, year, holder, cvv);
         }
 
         public string getAllStores(int session1)
