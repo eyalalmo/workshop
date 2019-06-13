@@ -593,3 +593,23 @@ The statement has been terminated.
 2019-06-13 11:41:45,580 INFO EventLog: User ey has successfuly created a store
 2019-06-13 11:44:30,416 INFO EventLog: User ey has successfuly logged in.
 2019-06-13 11:48:48,725 INFO EventLog: User ey has logged out
+2019-06-13 13:59:51,855 INFO EventLog: User yael has successfuly logged in.
+2019-06-13 14:10:47,621 INFO EventLog: User yael has successfuly logged in.
+2019-06-13 14:33:56,601 INFO EventLog: User yael has successfuly logged in.
+2019-06-13 14:36:41,126 INFO EventLog: User yael has successfuly logged in.
+2019-06-13 14:36:41,604 ERROR EventLog: Login : Error: User is already logged in
+2019-06-13 14:54:19,494 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-13 14:54:19,507 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-13 15:06:17,477 INFO EventLog: User yael has successfuly logged in.
+2019-06-13 15:10:30,363 INFO EventLog: User yael has successfuly logged in.
+2019-06-13 15:14:24,399 INFO EventLog: User yael has successfuly logged in.
+2019-06-13 15:21:41,204 INFO EventLog: User yael has successfuly logged in.
+2019-06-13 15:29:18,371 INFO EventLog: User yael has successfuly logged in.
+2019-06-13 15:47:19,021 INFO EventLog: User yael has successfuly logged in.
+2019-06-13 15:48:07,969 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-13 15:48:08,071 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-13 15:49:55,052 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-13 15:49:55,097 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-13 18:18:14,600 INFO EventLog: User yael has successfuly logged in.
+2019-06-13 18:22:42,899 INFO EventLog: User yael has successfuly logged in.
+2019-06-13 18:25:43,480 INFO EventLog: User yael has successfuly logged in.

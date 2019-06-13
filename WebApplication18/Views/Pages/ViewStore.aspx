@@ -44,63 +44,14 @@
             var getUrl = window.location;
             var baseUrl = getUrl.protocol + "//" + getUrl.host
 
-///////////////////////////////
-
-            jQuery.ajax({
-                type: "GET",
-                url: baseUrl + "/api/store/getStoreById?storeId=" + storeId,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                   var HTML = "";
-                    var minPurchasePolicy;
-                     var maxPurchasePolicy;
-                    if (responsJ !== "fail") {
-                    var responsJ = JSON.parse(response);
-                      
-                      try{
-                            var minPurchasePolicy = responsJ.minPurchasePolicy.minAmount;
-                            }
-                        catch(error)
-                        {
-                        minPurchasePolicy= "none"
-                        }
-                        try{
-                            var maxPurchasePolicy = responsJ.maxPurchasePolicy.maxAmount;
-                            }
-                        catch(error)
-                        {
-                        maxPurchasePolicy= "none"
-                        }
-                           
-                            HTML += `
-		                   <div class="my-list">
-			                Min Purchase Policy :  `+ minPurchasePolicy + `<br>
-                            Max Purchase Policy :  `+ maxPurchasePolicy + `
-		                    </div>`
-
-                        doc.innerHTML += HTML;
-
-                    }
-                    else {
-                        alert("problem");
-                    }
-                },
-                error: function (response) {
-                  
-                    window.location.href = baseUrl + "/Default";
-                }
-            });
-          
-/////////////////////////
-
             jQuery.ajax({
                 type: "GET",
                 url: baseUrl + "/api/store/getStoreProducts?storeId=" + storeId,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    var HTML = "<p></p>";
+                    var HTML = `<p> <button type="button" class="btn btn-primary" onClick="storeDiscounts(`+storeId+`)"/>Store Discounts</button></p>
+                              <p><button type="button" class="btn btn-primary" onClick="storePolicies(`+storeId+`)"/>Store Policies</button></p>`;
                     var doc = document.getElementById('allStores');
                 
       
@@ -169,6 +120,18 @@
             });
             
         };
+               function storeDiscounts(storeId) {
+               event.preventDefault();
+               var getUrl = window.location;
+               var baseUrl = getUrl.protocol + "//" + getUrl.host
+               window.location.href = baseUrl+"/DiscountView?storeId=" + storeId;
+        }
+               function storePolicies(storeId) {
+               event.preventDefault(storeId);
+               var getUrl = window.location;
+               var baseUrl = getUrl.protocol + "//" + getUrl.host
+               window.location.href = baseUrl+"/PolicyView?storeId=" + storeId;
+          }
               
     </script>
     

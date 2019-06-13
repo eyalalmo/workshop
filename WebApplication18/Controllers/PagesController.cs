@@ -90,8 +90,18 @@ namespace WebApplication18.Controllers
             ViewData["storeID"] = storeId;
             return View();
         }
+        public ActionResult StorePolicy(int storeId)
+        {
+            ViewData["storeID"] = storeId;
+            return View();
+        }
 
         public ActionResult ComplexDiscount(int storeId)
+        {
+            ViewData["storeID"] = storeId;
+            return View();
+        }
+        public ActionResult ComplexPolicy(int storeId)
         {
             ViewData["storeID"] = storeId;
             return View();
@@ -108,7 +118,17 @@ namespace WebApplication18.Controllers
             ViewData["storeId"] = storeId;
             return View();
         }
-        
+        public ActionResult DiscountView(int storeID)
+        {
+            ViewData["storeID"] = storeID;
+            return View();
+        }
+        public ActionResult PolicyView(int storeID)
+        {
+            ViewData["storeID"] = storeID;
+            return View();
+        }
+
 
         public ActionResult EditStorePolicy(int storeId)
         {
