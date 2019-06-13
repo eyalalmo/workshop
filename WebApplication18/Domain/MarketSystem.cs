@@ -20,7 +20,7 @@ namespace workshop192.Domain
         {       
             
             int addNewDataToDB = 0;
-            string[] linesConfig=null;
+            string[] linesConfig = null;
             string filePathConfig = null;
             string fileName = "";
 
