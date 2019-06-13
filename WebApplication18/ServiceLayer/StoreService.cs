@@ -321,16 +321,22 @@ namespace workshop192.ServiceLayer
                 throw new ArgumentException("illegal store number");
             db.removeStoreDiscount(discountID, store, sessionID);
         }
+        public void removeStorePolicy(int policyID, int store, int sessionID)
+        {
+            if (store < 0)
+                throw new ArgumentException("illegal store number");
+            db.removeStorePolicy(policyID, store, sessionID);
+        }
         //public void addComplexDiscount(List<DiscountComponent> list, string type)
         //{
         //    throw new NotImplementedException();
         //}
 
-        
 
-        
-       
-      
+
+
+
+
 
         ///////////////////////////////////////////////////
 
@@ -365,7 +371,16 @@ namespace workshop192.ServiceLayer
 
             return db.getStoreDiscounts(storeID, sessionID);
         }
-       
+        public string getStorePolicies(int storeID, int sessionID)
+        {
+            if (sessionID < 0)
+                throw new NullReferenceException("session is a null reference");
+            if (storeID < 0)
+                throw new NullReferenceException("store is a null reference");
+
+            return db.getStorePolicies(storeID, sessionID);
+        }
+
         public string getStore(int id)
         {
             return db.getStore(id);
@@ -379,6 +394,10 @@ namespace workshop192.ServiceLayer
         {
             db.setDiscountPercentage(discountID, percentage);
         }
+        public void setPolicyAmount(int policyID, int amount)
+        {
+            db.setPolicyAmount(policyID, amount);
+        }
 
         public void complexDiscount(string discountArray, int storeID,string type, double percentage, string duration, int sessionID)
         {
@@ -388,6 +407,15 @@ namespace workshop192.ServiceLayer
             if (sessionID < 0)
                 throw new NullReferenceException("session is a null reference");
             db.complexDiscount(discountArray, storeID,type, percentage,duration, sessionID);
+        }
+        public void complexPolicy(string policyArray, int storeID, string type, int sessionID)
+        {
+            if (storeID < 0)
+                throw new ArgumentException("illegal store number");
+
+            if (sessionID < 0)
+                throw new NullReferenceException("session is a null reference");
+            db.complexPolicy(policyArray, storeID, type, sessionID);
         }
 
 
