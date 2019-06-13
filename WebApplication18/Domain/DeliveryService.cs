@@ -28,7 +28,7 @@ namespace workshop192.Domain
             return instance;
         }
 
-        public async Task<int> sendToUser(string name, string address, string city, string country, string zip, string cvv)
+        public int sendToUser(string name, string address, string city, string country, string zip, string cvv)
         {
             
             var massage = new Dictionary<string, string>
@@ -40,32 +40,51 @@ namespace workshop192.Domain
              { "country", country },
              { "zip", zip }
             };
-            var massageFromServer = new FormUrlEncodedContent(massage);
+            using (var client1 = new HttpClient())
+            {
+                var massageToSent = new FormUrlEncodedContent(massage);
+                var response = client1.PostAsync("https://cs-bgu-wsep.herokuapp.com/", massageToSent).Result;
 
-            var result = await client.PostAsync("https://cs-bgu-wsep.herokuapp.com/", massageFromServer);
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = response.Content;
+                    
+                    string responseString = responseContent.ReadAsStringAsync().Result;
+                    return int.Parse(responseString);
 
-            var responseToString = await result.Content.ReadAsStringAsync();
-            
-            return int.Parse(responseToString);
+                }
+            }
+            return -1;
         }
 
         public bool connectToSystem()
         {
             return true;
         }
-        public async Task<bool> handShake()
+        public bool handShake()
         {
             var massage = new Dictionary<string, string>
             {
                 { "action_type", "handshake" },
             };
 
-            var massageToSent = new FormUrlEncodedContent(massage);
-            var response = await client.PostAsync("https://cs-bgu-wsep.herokuapp.com/", massageToSent);
-            var responseToString = await response.Content.ReadAsStringAsync();
+            using (var client1 = new HttpClient())
+            {
+                var massageToSent = new FormUrlEncodedContent(massage);
+                var response = client1.PostAsync("https://cs-bgu-wsep.herokuapp.com/", massageToSent).Result;
 
-            if (responseToString == "OK")
-                return true;
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseContent = response.Content;
+
+                    string responseString = responseContent.ReadAsStringAsync().Result;
+                  if(responseString=="OK")
+                    {
+                        return true;
+                    }
+
+                }
+            }
             return false;
         }
     }

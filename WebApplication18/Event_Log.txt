@@ -668,3 +668,4 @@ The statement has been terminated.
 2019-06-13 16:58:58,835 ERROR EventLog: Login : Error: Username already logged in
 2019-06-13 17:10:52,482 ERROR EventLog: Error in adding to shopping cart : Error: The amount asked is larger than the quantity left
 2019-06-13 17:11:31,466 INFO EventLog: A purchase has been made
+2019-06-13 18:21:48,679 INFO EventLog: A purchase has been made

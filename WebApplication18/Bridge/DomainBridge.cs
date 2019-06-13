@@ -190,12 +190,12 @@ namespace workshop192.Bridge
 
         public bool handShakeDeliver()
         {
-            return DeliveryService.getInstance().handShake().Result;
+            return DeliveryService.getInstance().handShake();
         }
 
         public bool handShakePay()
         {
-          return PaymentService.getInstance().handShake().Result;
+          return PaymentService.getInstance().handShake();
         }
 
         internal string generate()

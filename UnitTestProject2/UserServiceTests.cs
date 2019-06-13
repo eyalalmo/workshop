@@ -80,8 +80,7 @@ namespace workshop192.ServiceLayer.Tests
                 Assert.Fail();
             }
             Assert.IsTrue(true);
-
-
+            
         }
 
         public void registerFailTest()
