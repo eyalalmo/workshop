@@ -280,7 +280,12 @@ namespace workshop192.Bridge
                 {
                     foreach (StoreRole sr in p.Key.getStore().getRoles())
                     {
-                        string message = session.getSubscribedUser().getUsername() +
+                        string username;
+                        if (session.getSubscribedUser() != null)
+                            username = session.getSubscribedUser().getUsername();
+                        else
+                            username = "A guest";
+                        string message = username +
                                          " bought " + p.Key.getProductName() + " from store " +
                                          p.Key.getStore().getStoreName();
                         messages.AddFirst(new Tuple<string, string>(sr.getUser().getUsername(), message));
