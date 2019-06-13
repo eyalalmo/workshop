@@ -47,6 +47,7 @@ namespace workshop192.ServiceLayer.Tests
         [TestMethod]
         public void initialTest()
         {
+         
             try
             {
               bool pay=  userService.handShakePay();
@@ -66,7 +67,7 @@ namespace workshop192.ServiceLayer.Tests
 
         }
 
-        //2.2+2.3
+        //2.2
         [TestMethod]
         public void registerSuccessTest()
         {
@@ -96,7 +97,7 @@ namespace workshop192.ServiceLayer.Tests
                 Assert.IsTrue(true);
             }
         }
-
+        //2.3
         public void loginSuccessTest()
         {
             try

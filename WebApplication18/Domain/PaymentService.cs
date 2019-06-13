@@ -40,7 +40,7 @@ namespace workshop192.Domain
             };
 
             var massageToSend = new FormUrlEncodedContent(massage);
-            var responseFromServer = await client.PostAsync("https://cs-bgu-wsep.herokuapp.com/", massageToSend);
+            var responseFromServer = await client.PostAsync("https://cs-bgu-wsep.herokuapp.com/", massageToSend)זזז;
             var responseToString = await responseFromServer.Content.ReadAsStringAsync();
 
             return int.Parse(responseToString);

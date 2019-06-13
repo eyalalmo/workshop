@@ -192,7 +192,7 @@ namespace workshop192.Domain
 
         //    }
 
-            Task<int> result =  PaymentService.getInstance().checkOut(address, creditcard, month, year, holder, cvv);
+            Task<int> result =  PaymentService.getInstance().checkOut(address, creditcard, month, year, holder, cvv)ז;
             int res = await result;
             int resFromDelivery2;
             if (res != -1)

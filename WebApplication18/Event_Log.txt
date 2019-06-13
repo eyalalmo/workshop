@@ -614,3 +614,57 @@ The statement has been terminated.
 2019-06-13 13:50:53,616 INFO EventLog: User u7 has successfuly logged in.
 2019-06-13 13:51:00,661 INFO EventLog: User u7 has logged out
 2019-06-13 13:51:48,966 INFO EventLog: User u8 has logged out
+2019-06-13 16:38:05,091 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:38:12,857 INFO EventLog: User u7 has successfuly logged in.
+2019-06-13 16:57:23,572 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:57:23,746 ERROR EventLog: Login : Error: Username already logged in
+2019-06-13 16:57:29,007 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:57:29,211 ERROR EventLog: Login : Error: Username already logged in
+2019-06-13 16:57:34,814 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:57:35,121 ERROR EventLog: Login : Error: Username already logged in
+2019-06-13 16:57:41,437 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:57:41,634 ERROR EventLog: Login : Error: Username already logged in
+2019-06-13 16:57:47,394 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:57:47,567 ERROR EventLog: Login : Error: Username already logged in
+2019-06-13 16:57:52,720 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:57:52,890 ERROR EventLog: Login : Error: Username already logged in
+2019-06-13 16:57:59,066 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:57:59,239 ERROR EventLog: Login : Error: Username already logged in
+2019-06-13 16:58:01,933 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:58:02,131 ERROR EventLog: Login : Error: Username already logged in
+2019-06-13 16:58:04,779 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:58:04,955 ERROR EventLog: Login : Error: Username already logged in
+2019-06-13 16:58:07,230 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:58:07,432 ERROR EventLog: Login : Error: Username already logged in
+2019-06-13 16:58:10,081 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:58:10,276 ERROR EventLog: Login : Error: Username already logged in
+2019-06-13 16:58:11,234 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:58:11,432 ERROR EventLog: Login : Error: Username already logged in
+2019-06-13 16:58:14,229 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:58:14,412 ERROR EventLog: Login : Error: Username already logged in
+2019-06-13 16:58:16,947 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:58:17,132 ERROR EventLog: Login : Error: Username already logged in
+2019-06-13 16:58:23,675 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:58:23,850 ERROR EventLog: Login : Error: Username already logged in
+2019-06-13 16:58:26,980 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:58:27,169 ERROR EventLog: Login : Error: Username already logged in
+2019-06-13 16:58:37,368 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:58:37,565 ERROR EventLog: Login : Error: Username already logged in
+2019-06-13 16:58:39,964 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:58:40,231 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:58:40,337 ERROR EventLog: Login : cant get roles from db
+2019-06-13 16:58:40,578 ERROR EventLog: Login : Error: Username already logged in
+2019-06-13 16:58:41,594 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:58:41,806 ERROR EventLog: Login : Error: Username already logged in
+2019-06-13 16:58:45,894 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:58:46,070 ERROR EventLog: Login : Error: Username already logged in
+2019-06-13 16:58:48,244 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:58:48,512 ERROR EventLog: Login : Error: Username already logged in
+2019-06-13 16:58:50,508 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:58:50,722 ERROR EventLog: Login : Error: Username already logged in
+2019-06-13 16:58:53,467 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:58:53,669 ERROR EventLog: Login : Error: Username already logged in
+2019-06-13 16:58:58,657 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 16:58:58,835 ERROR EventLog: Login : Error: Username already logged in
+2019-06-13 17:10:52,482 ERROR EventLog: Error in adding to shopping cart : Error: The amount asked is larger than the quantity left
+2019-06-13 17:11:31,466 INFO EventLog: A purchase has been made
