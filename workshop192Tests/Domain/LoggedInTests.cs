@@ -21,9 +21,10 @@ namespace workshop192.Domain.Tests
         [TestInitialize()]
         public void init()
         {
-            DBSubscribedUser dbsubscribedUser = DBSubscribedUser.getInstance();
-            dbsubscribedUser.initTests();
-            DBStore.getInstance().cleanDB();
+            MarketSystem.initTestWitOutRead();
+            //DBSubscribedUser dbsubscribedUser = DBSubscribedUser.getInstance();
+            //dbsubscribedUser.initTests();
+            //DBStore.getInstance().cleanDB();
         }
 
         [TestMethod()]

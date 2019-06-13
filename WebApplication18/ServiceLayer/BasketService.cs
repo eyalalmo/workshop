@@ -96,16 +96,16 @@ namespace workshop192.ServiceLayer
             return db.getProductPrice(productid);
         }
 
-        //costumer adds coupon to cart
-        public void addCouponToCart(int sessionID, int storeID, string couponCode)
-        {
-            db.addcouponToCart(sessionID, storeID, couponCode);
-        }
-        // costumer removes coupon from cart
-        public void removeCouponFromCart(int sessionID, int storeID)
-        {
-            db.removeCouponFromCart(sessionID, storeID);
-        }
+        ////costumer adds coupon to cart
+        //public void addCouponToCart(int sessionID, int storeID, string couponCode)
+        //{
+        //    db.addcouponToCart(sessionID, storeID, couponCode);
+        //}
+        //// costumer removes coupon from cart
+        //public void removeCouponFromCart(int sessionID, int storeID)
+        //{
+        //    db.removeCouponFromCart(sessionID, storeID);
+        //}
 
         public double getAmountOfCart(int storeID, int sessionID)
         {

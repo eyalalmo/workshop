@@ -12,7 +12,11 @@ namespace workshop192.Domain.Tests
     [TestClass()]
     public class DBSessionTests
     {
-
+        [TestInitialize()]
+        public void init()
+        {
+            MarketSystem.initTestWitOutRead();
+        }
         [TestMethod()]
         public void addSessionTest()
         {

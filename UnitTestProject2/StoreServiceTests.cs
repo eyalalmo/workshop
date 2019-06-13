@@ -21,7 +21,7 @@ namespace workshop192.ServiceLayer.Tests
         [TestInitialize()]
         public void TestInitialize()
         {
-            UserService.getInstance().setup();
+            userService.testSetup();
 
             session1 = userService.startSession();
             userService.register(session1, "anna", "banana"); //first owner
@@ -283,58 +283,5 @@ namespace workshop192.ServiceLayer.Tests
             }
         }
 
-        // 4.4
-        [TestMethod()]
-        public void removeOwnerSuccTest()
-        {
-            try
-            {
-                addOwnerByAnOwnerSuccTest();
-                storeService.removeRole(storeid, "dani1", session1);
-                /***********************************/
-                // check that is totaly removed
-                Assert.IsTrue(true);
-            }
-            catch (Exception)
-            {
-                Assert.Fail();
-            }
-        }
-
-        // 4.4
-        [TestMethod()]
-        public void removeOwnerFailTest()
-        {
-            try
-            {
-                removeOwnerSuccTest();
-                Assert.Fail();
-            }
-            catch (Exception)
-            {
-                Assert.IsTrue(true);
-            }
-        }
-
-        // 4.4
-        [TestMethod()]
-        public void removeOwnerFailTest2()
-        {
-            try
-            {
-                addOwnerByAnOwnerSuccTest();
-                storeService.addOwner(storeid, "eva2", session2);
-                storeService.removeRole(storeid, "eva2", session1);
-                Assert.Fail();
-            }
-            catch (RoleException)
-            {
-                Assert.IsTrue(true);
-            }
-            catch (Exception)
-            {
-                Assert.Fail();
-            }
-        }
     }
 }

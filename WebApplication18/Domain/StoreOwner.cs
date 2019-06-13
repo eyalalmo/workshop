@@ -111,7 +111,7 @@ namespace workshop192.Domain
         public void remove(SubscribedUser role)
         {
             StoreRole sr = role.getStoreRole(store);
-            DBStore.getInstance().removeStoreRole(sr);
+            
             if (sr == null)
                 throw new RoleException("user " + role.getUsername() + 
                     " doesn't have a role in store " 
@@ -120,6 +120,7 @@ namespace workshop192.Domain
                 throw new RoleException("Error: User " + userName.getUsername() + 
                     " didn't appoint " + 
                     role.getUsername());
+            DBStore.getInstance().removeStoreRole(sr);
             sr.removeAllAppointedBy();
             role.removeStoreRole(sr);
             store.removeStoreRole(sr);
@@ -243,20 +244,20 @@ namespace workshop192.Domain
 
         }
 
-        public void removeCouponFromStore(string couponCode)
-        {
-            store.removeCoupon(couponCode);
-        }
+        //public void removeCouponFromStore(string couponCode)
+        //{
+        //    store.removeCoupon(couponCode);
+        //}
 
         /* public void addCouponToStore(string couponCode, int percentage, string duration)
         {
             store.addCoupon(couponCode, percentage, duration);
         }
         */
-        public void addCouponToStore(string couponCode, double percentage, string duration)
-        {
-            store.addCoupon(couponCode, percentage, duration);
-        }
+        //public void addCouponToStore(string couponCode, double percentage, string duration)
+        //{
+        //    store.addCoupon(couponCode, percentage, duration);
+        //}
 
         public void addPendingOwner(SubscribedUser pending)
         {

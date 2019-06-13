@@ -17,7 +17,8 @@ namespace workshop192.Domain.Tests
        [TestInitialize()]
         public void TestInitialize()
         {
-            DBStore.getInstance().init();
+            MarketSystem.initTestWitOutRead();
+        DBStore.getInstance().init();
             s = new Store("store", "store");
             su = new SubscribedUser("u", "u", new ShoppingBasket());
             sr = new StoreOwner(null, su, s);

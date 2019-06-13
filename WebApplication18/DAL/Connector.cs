@@ -6,6 +6,7 @@ using System.Web;
 using MySql.Data.MySqlClient;
 using Dapper;
 using WebApplication18.Domain;
+using workshop192.Domain;
 
 namespace WebApplication18.DAL
 {

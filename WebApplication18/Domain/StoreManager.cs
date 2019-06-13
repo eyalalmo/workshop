@@ -245,20 +245,20 @@ namespace workshop192.Domain
 
         }
 
-        public void removeCouponFromStore(string couponCode)
-        {
-            store.removeCoupon(couponCode);
-        }
+        //public void removeCouponFromStore(string couponCode)
+        //{
+        //    store.removeCoupon(couponCode);
+        //}
         
        /* public void addCouponToStore(string couponCode, int percentage, string duration)
         {
             store.addCoupon(couponCode, percentage, duration);
         }
         */
-        public void addCouponToStore(string couponCode, double percentage, string duration)
-        {
-            store.addCoupon(couponCode, percentage, duration);
-        }
+        //public void addCouponToStore(string couponCode, double percentage, string duration)
+        //{
+        //    store.addCoupon(couponCode, percentage, duration);
+        //}
 
         public void signContract(SubscribedUser pending) {
             throw new RoleException("Error: A manager cannot sign a contract with an owner");

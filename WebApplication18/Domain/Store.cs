@@ -67,10 +67,6 @@ namespace workshop192.Domain
         {
             productList.AddFirst(p);
         }
-        public void setDiscountList(LinkedList<DiscountComponent> discounts)
-        {
-            this.discountList = discounts;
-        }
         public LinkedList<DiscountComponent> getDiscounts()
         {
             return this.discountList;
@@ -171,52 +167,52 @@ namespace workshop192.Domain
             roles.Add(toAdd);
         }
 
-        public void addCoupon(string coupon, double percentage, string duration)
-        {
-            foreach (InvisibleDiscount d1 in invisibleDiscountList)
-            {
-                string c = d1.getCoupon();
-                if (c == coupon)
-                    throw new AlreadyExistException("Error: A Store cannot have two identical coupons");
+        //public void addCoupon(string coupon, double percentage, string duration)
+        //{
+        //    foreach (InvisibleDiscount d1 in invisibleDiscountList)
+        //    {
+        //        string c = d1.getCoupon();
+        //        if (c == coupon)
+        //            throw new AlreadyExistException("Error: A Store cannot have two identical coupons");
 
-            }
-            InvisibleDiscount d = new InvisibleDiscount(percentage, coupon, duration, storeId);
-            invisibleDiscountList.AddLast(d);
-        }
+        //    }
+        //    InvisibleDiscount d = new InvisibleDiscount(percentage, coupon, duration);
+        //    invisibleDiscountList.AddLast(d);
+        //}
 
-        public void removeCoupon(string coupon)
-        {
-            bool found = false;
-            foreach (InvisibleDiscount d1 in invisibleDiscountList)
-            {
-                string c = d1.getCoupon();
-                if (c == coupon)
-                {
-                    found = true;
-                    invisibleDiscountList.Remove(d1);
-                    break;
-                }
-            }
+        //public void removeCoupon(string coupon)
+        //{
+        //    bool found = false;
+        //    foreach (InvisibleDiscount d1 in invisibleDiscountList)
+        //    {
+        //        string c = d1.getCoupon();
+        //        if (c == coupon)
+        //        {
+        //            found = true;
+        //            invisibleDiscountList.Remove(d1);
+        //            break;
+        //        }
+        //    }
 
-            if (!found)
-                throw new DoesntExistException("Error:Coupon does not exist");
-        }
+        //    if (!found)
+        //        throw new DoesntExistException("Error:Coupon does not exist");
+        //}
 
-        public void checkCouponCode(string coupon)
-        {
-            bool found = false;
-            foreach (InvisibleDiscount d in invisibleDiscountList)
-            {
-                string c = d.getCoupon();
-                if (c == coupon)
-                {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found)
-                throw new ArgumentException("Error:Coupon does not exist");
-        }
+        //public void checkCouponCode(string coupon)
+        //{
+        //    bool found = false;
+        //    foreach (InvisibleDiscount d in invisibleDiscountList)
+        //    {
+        //        string c = d.getCoupon();
+        //        if (c == coupon)
+        //        {
+        //            found = true;
+        //            break;
+        //        }
+        //    }
+        //    if (!found)
+        //        throw new ArgumentException("Error:Coupon does not exist");
+        //}
 
 
         public Dictionary<Product, double> updatePrice(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)

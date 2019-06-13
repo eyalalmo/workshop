@@ -41,7 +41,7 @@ namespace workshop192.ServiceLayer.Tests
         public void initial()
         {
 
-            userService.setup();
+            userService.testSetup();
 
             session1 = userService.startSession();
             userService.register(session1, "user1", "user1");

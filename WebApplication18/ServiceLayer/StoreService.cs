@@ -335,27 +335,27 @@ namespace workshop192.ServiceLayer
         ///////////////////////////////////////////////////
 
 
-        public void addCouponToStore(int sessionID, int storeID, string couponCode, double percentage, string duration)
-        {
-            if (sessionID < 0)
-                throw new NullReferenceException("session is a null reference");
-            if (storeID < 0)
-                throw new NullReferenceException("store is a null reference");
+        //public void addCouponToStore(int sessionID, int storeID, string couponCode, double percentage, string duration)
+        //{
+        //    if (sessionID < 0)
+        //        throw new NullReferenceException("session is a null reference");
+        //    if (storeID < 0)
+        //        throw new NullReferenceException("store is a null reference");
 
-            db.addCouponToStore(sessionID, storeID, couponCode, percentage, duration);
-        }
+        //    db.addCouponToStore(sessionID, storeID, couponCode, percentage, duration);
+        //}
 
       
 
-        public void removeCouponFromStore(int sessionID, int storeID, string couponCode)
-        {
-            if (sessionID < 0)
-                throw new NullReferenceException("session is a null reference");
-            if (storeID < 0)
-                throw new NullReferenceException("store is a null reference");
+        //public void removeCouponFromStore(int sessionID, int storeID, string couponCode)
+        //{
+        //    if (sessionID < 0)
+        //        throw new NullReferenceException("session is a null reference");
+        //    if (storeID < 0)
+        //        throw new NullReferenceException("store is a null reference");
 
-            db.removeCouponFromStore(sessionID, storeID, couponCode);
-        }
+        //    db.removeCouponFromStore(sessionID, storeID, couponCode);
+        //}
         public string getStoreDiscounts(int storeID, int sessionID)
         {
             if (sessionID < 0)

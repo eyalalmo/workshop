@@ -7,6 +7,6 @@ namespace WebApplication18.Domain
 {
     public static class IsTestsMode
     {
-        public static bool isTest = false;
+        public static bool isTest = true;
     }
 }
