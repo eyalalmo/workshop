@@ -405,12 +405,13 @@ namespace workshop192.Domain
 
                                 connection.Execute(sql, new { storeId, name, description, numOfOwners, active, minPurchasePolicy, maxPurchasePolicy }, transaction);
 
-                                connection.Close();
+                                
                                 stores.AddFirst(store);
 
                                 transaction.Commit();
-                                /////////////////////////
-                                return store.getStoreID();
+                            connection.Close();
+                            /////////////////////////
+                            return store.getStoreID();
                             }
                             catch (Exception)
                             {
