@@ -632,7 +632,7 @@ namespace workshop192.Domain
                                    + " DELETE FROM Product \n"
                                    + " DELETE FROM BasketCart \n"
                                    + " DELETE FROM CartProduct \n"
-                                   + " DELETE FROM Cookie \n"
+                                  
                                    + " DELETE FROM Notification \n"
                                    + "UPDATE [dbo].[IDS] SET id = 0 WHERE type = 'store'"
                                    );
