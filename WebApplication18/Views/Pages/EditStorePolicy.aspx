@@ -89,7 +89,7 @@
 
                         if (response === "ok") {
                             alert("store policy changed success")
-                            window.location.href = baseUrl + "/EditStorePolicy?storeId="+ storeID;
+                            window.location.href = baseUrl + "/StorePolicy?storeID="+ storeID;
                         }
                         else {
                             alert(response)    
@@ -119,7 +119,7 @@
 
                         if (response === "ok") {
                             alert("store policy changed success")
-                             window.location.href = baseUrl + "/EditStorePolicy?storeId="+ storeID;     
+                             window.location.href = baseUrl + "/StorePolicy?storeID="+ storeID;     
                         }
                         else {
                            alert(response)     
@@ -145,7 +145,7 @@
 
                         if (response === "ok") {
                             alert("store policy deleted success")
-                            window.location.href = baseUrl + "/EditStorePolicy?storeId="+ storeID;
+                            window.location.href = baseUrl + "/StorePolicy?storeID="+ storeID;
                         }
                         else {
                             alert(response)    
@@ -171,7 +171,7 @@
                     success: function (response) {
                         if (response === "ok") {
                             alert("store policy deleted success")
-                            window.location.href = baseUrl + "/EditStorePolicy?storeId="+ storeID;
+                            window.location.href = baseUrl + "/StorePolicy?storeID="+ storeID;
                         }
                         else {
                             alert(response)    

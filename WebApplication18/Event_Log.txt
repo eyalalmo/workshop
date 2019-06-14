@@ -613,3 +613,27 @@ The statement has been terminated.
 2019-06-13 18:18:14,600 INFO EventLog: User yael has successfuly logged in.
 2019-06-13 18:22:42,899 INFO EventLog: User yael has successfuly logged in.
 2019-06-13 18:25:43,480 INFO EventLog: User yael has successfuly logged in.
+2019-06-13 19:13:26,838 INFO EventLog: User yael has successfuly logged in.
+2019-06-13 19:15:39,031 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-13 19:15:39,109 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-13 19:15:45,397 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-13 19:17:30,522 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-13 19:17:44,724 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-13 19:17:53,770 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-13 19:18:01,997 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-13 19:19:08,473 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-13 19:19:17,089 ERROR EventLog: Policy get :Exception of type 'workshop192.Domain.DoesntExistException' was thrown.
+2019-06-13 19:26:14,389 ERROR EventLog: Login : Error: Username does not exist
+2019-06-13 19:26:56,298 INFO EventLog: User yael has successfuly registered
+2019-06-13 19:27:02,509 INFO EventLog: User yael has successfuly logged in.
+2019-06-13 19:27:02,810 ERROR EventLog: Login : Error: User is already logged in
+2019-06-13 19:27:10,377 INFO EventLog: User yael has successfuly created a store
+2019-06-13 19:29:16,172 INFO EventLog: User yael has successfuly logged in.
+2019-06-13 19:33:23,145 INFO EventLog: User yael has successfuly logged in.
+2019-06-13 20:12:11,484 INFO EventLog: User yael has successfuly registered
+2019-06-13 20:12:15,401 INFO EventLog: User yael has successfuly logged in.
+2019-06-13 20:12:22,696 INFO EventLog: User yael has successfuly created a store
+2019-06-14 00:52:57,363 INFO EventLog: User tomer has successfuly registered
+2019-06-14 00:53:06,141 INFO EventLog: User tomer has successfuly logged in.
+2019-06-14 00:53:37,721 INFO EventLog: User tomer has successfuly created a store
+2019-06-14 01:00:28,385 INFO EventLog: User tomer has logged out

@@ -26,8 +26,12 @@ namespace workshop192.ServiceLayer.Tests
             DBProduct.getInstance().initTests();
             DBStore.getInstance().initTests();
             session1 = userService.startSession();// login 
-            userService.register(session1, "user6", "user6");
-            userService.login(session1, "user6", "user6");
+            try
+            {
+                userService.register(session1, "user23", "user23");
+            }
+            catch (Exception) { }
+            userService.login(session1, "user23", "user23");
             store1 = storeService.addStore("Makolet", "groceryStore", session1);
 
             p1 = storeService.addProduct("shirt", "clothing", 50, 4, 4, store1, session1);
@@ -119,6 +123,36 @@ namespace workshop192.ServiceLayer.Tests
 
 
             }
+        [TestMethod]
+        public void addComplexSuccess()
+        {
+            try
+            {
+                ReliantDiscountSuccessOneProduct();
+                ReliantDiscountSuccessOneProduct();
+                storeService.complexDiscount("0 1", store1, "and", 0.3, "12/12/2020", session1);
+                Assert.IsTrue(true);
+            }
+            catch (Exception)
+            {
+                Assert.Fail();
+            } 
+        }
+        [TestMethod]
+        public void addComplex()
+        {
+            try
+            {
+                ReliantDiscountSuccessOneProduct();
+                ReliantDiscountSuccessOneProduct();
+                storeService.complexDiscount("0 1", store1, "and", 0.3, "12/12/2020", session1);
+                Assert.IsTrue(true);
+            }
+            catch (Exception)
+            {
+                Assert.Fail();
+            }
+        }
 
     }
 
