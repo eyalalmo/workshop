@@ -75,6 +75,7 @@ namespace workshop192.Domain
 
                         //connection.Close();
                     }
+                    int i = 0;
                 }
             }
             catch (Exception e)

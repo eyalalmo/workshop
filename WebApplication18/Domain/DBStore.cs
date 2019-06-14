@@ -25,7 +25,7 @@ namespace workshop192.Domain
             {
                 storeRole = new LinkedList<StoreRole>();
                 stores = new LinkedList<Store>();
-                nextStoreID = getUpdatedId();
+                //nextStoreID = getUpdatedId();
             }
             else
             {
