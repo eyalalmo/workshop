@@ -100,13 +100,16 @@ namespace workshop192.Domain
                 connection.Execute("DELETE FROM Register");
                 connection.Execute("DELETE FROM BasketCart");
                 connection.Execute("DELETE FROM CartProduct");
-                connection.Close();
+                //connection.Close();
+                users = new Dictionary<string, SubscribedUser>();
+                loggedInUser = new Dictionary<string, SubscribedUser>();
                 instance = new DBSubscribedUser();
 
             }
             catch (Exception e)
             {
-                //connection.Close();
+                throw e;
+                //connection.Close
             }
         }
 

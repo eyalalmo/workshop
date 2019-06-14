@@ -271,26 +271,6 @@ namespace workshop192.Domain.Tests
 
 
         [TestMethod()]
-        public void removeOwnerFailTest()
-        {
-            try
-            {
-                sr.addOwner(session2.getSubscribedUser());
-                sr.remove(session3.getSubscribedUser());
-                sr.remove(session1.getSubscribedUser());
-                Assert.Fail();
-            }
-            catch (RoleException)
-            {
-                Assert.IsTrue(true);
-            }
-            catch (Exception)
-            {
-                Assert.Fail();
-            }
-        }
-
-        [TestMethod()]
         public void closeStoreSuccTest()
         {
             Assert.IsTrue(true);

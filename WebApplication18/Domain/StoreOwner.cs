@@ -121,9 +121,9 @@ namespace workshop192.Domain
                     " didn't appoint " + 
                     role.getUsername());
             DBStore.getInstance().removeStoreRole(sr);
-            sr.removeAllAppointedBy();
             role.removeStoreRole(sr);
             store.removeStoreRole(sr);
+            role.removeStoreRole(sr);
         }
 
         public void closeStore()
