@@ -31,7 +31,7 @@ namespace WebApplication18.Domain
             return p1.description() + type.ToString() + p2.description();
         }
 
-        public override bool checkPolicy(int cartPrice, int amountofProd)
+        public override bool checkPolicy(double cartPrice, int amountofProd)
         {
             if (type == Type.AND)
             {
@@ -47,7 +47,7 @@ namespace WebApplication18.Domain
             }
         }
 
-        private bool checkXorType(int cartPrice, int amountofProd)
+        private bool checkXorType(double cartPrice, int amountofProd)
         {
             int count = 0;
             if (!p1.checkPolicy(cartPrice, amountofProd))
@@ -60,7 +60,7 @@ namespace WebApplication18.Domain
             return true;
         }
 
-        private bool checkOrType(int cartPrice, int amountofProd)
+        private bool checkOrType(double cartPrice, int amountofProd)
         {
 
             if (!p1.checkPolicy(cartPrice, amountofProd) && !p2.checkPolicy(cartPrice, amountofProd))
@@ -69,7 +69,7 @@ namespace WebApplication18.Domain
 
         }
 
-        private bool checkAndType(int cartPrice, int amountofProd)
+        private bool checkAndType(double cartPrice, int amountofProd)
         {
             if (!p1.checkPolicy(cartPrice, amountofProd) || !p2.checkPolicy(cartPrice, amountofProd))
                 return false;

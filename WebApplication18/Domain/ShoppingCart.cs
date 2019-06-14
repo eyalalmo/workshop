@@ -240,7 +240,7 @@ namespace workshop192.Domain
 
         internal void checkStorePolicy()
         {
-            store.checkStorePolicy(getNumOfProductsInCart(), getActualTotalPrice())
+            store.checkStorePolicy(getNumOfProductsInCart(), getActualTotalPrice());
         }
     }
 }
