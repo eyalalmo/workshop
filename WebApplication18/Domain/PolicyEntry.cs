@@ -30,7 +30,13 @@ namespace WebApplication18.Domain
         public int getStoreID() { return this.storeID; }
         public string getType() { return type; }
         public int getAmount() { return this.amount; }
-       
+        public int getPolicyID() { return this.policyID; }
+        public bool grtIsPartOfComp() { return this.isPartOfComplex; }
+        public string getCompType() { return compType; }
+        public int getSubID1() { return subID1; }
+        public int getSubID() { return subID2; }
+
+
 
     }
 }
