@@ -38,11 +38,11 @@ namespace workshop192.Domain
                     {
                         if(input[1]=="true")
                         {
-                            IsTestsMode.isTest = true;
+                            testsMode = true;
                         }
                         else
                         {
-                            IsTestsMode.isTest = false;
+                            testsMode = false;
                         }
                     }
                     if (input[0] == "isFirstTime")
@@ -64,7 +64,7 @@ namespace workshop192.Domain
                 return;
             }
 
-            if (IsTestsMode.isTest == true)
+            if (testsMode == true)
             {
                 initTestWitOutRead();
                 return;

@@ -17,7 +17,7 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44356</IISExpressSSLPort>
+    <IISExpressSSLPort>44306</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
@@ -458,6 +458,7 @@
     <Compile Include="Exceptions\AlreadyExistException.cs" />
     <Compile Include="Exceptions\CartException.cs" />
     <Compile Include="Exceptions\ClientException.cs" />
+    <Compile Include="Exceptions\ConnectionException.cs" />
     <Compile Include="Exceptions\DoesntExistException.cs" />
     <Compile Include="Exceptions\IllegalAmountException.cs" />
     <Compile Include="Exceptions\IllegalNameException.cs" />

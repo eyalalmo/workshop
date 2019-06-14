@@ -46,7 +46,7 @@ namespace WebApplication18.DAL
 
         public SqlConnection getSQLConnection()
         {
-            if (connection.State == System.Data.ConnectionState.Open)
+            if (connection.State != System.Data.ConnectionState.Open)
                 connection.Open();
             return connection;
         }

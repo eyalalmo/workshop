@@ -210,7 +210,7 @@ namespace workshop192.Domain.Tests
             }
             catch (RoleException)
             {
-                Assert.IsTrue(true);
+                Assert.Fail();
             }
         }
 
@@ -269,21 +269,6 @@ namespace workshop192.Domain.Tests
             }
         }
 
-        [TestMethod()]
-        public void removeOwnerSuccTest()
-        {
-            try
-            {
-                sr.addOwner(session2.getSubscribedUser());
-                sr.remove(session2.getSubscribedUser());
-                Assert.AreEqual(session2.getSubscribedUser().getStoreRoles().Count, 0);
-                Assert.AreEqual(store.getNumberOfOwners(), 1);
-            }
-            catch (Exception)
-            {
-                Assert.Fail();
-            }
-        }
 
         [TestMethod()]
         public void removeOwnerFailTest()

@@ -12,6 +12,7 @@ namespace workshop192.Domain
 {
     public class DBStore
     {
+        private SqlTransaction ownerTrans = null;
         public static DBStore instance;
         public LinkedList<Store> stores;
         public LinkedList<StoreRole> storeRole;
@@ -64,6 +65,8 @@ namespace workshop192.Domain
                 SqlConnection connection = Connector.getInstance().getSQLConnection();
                 connection.Execute("DELETE FROM Stores");
                 connection.Execute("DELETE FROM StoreRoles");
+                connection.Execute("DELETE FROM Contracts");
+                connection.Execute("DELETE FROM PendingOwners");
                 connection.Execute("UPDATE [dbo].[IDS] SET id = 0 WHERE type = 'store'");
                 //connection.Close();
             }
@@ -211,49 +214,74 @@ namespace workshop192.Domain
 
         public void addStoreRole(StoreRole sr)
         {
-            try
+           
+            SqlConnection connection = Connector.getInstance().getSQLConnection();
+            lock (connection)
             {
-                //         public SubscribedUser appointedBy;
-                //private Store store;
-                //public SubscribedUser user;
-                //public Permissions permissions;
-                //public bool isOwner = false;
-
-                ///
-                //per.Add("editProduct", editProduct);
-                //per.Add("editDiscount", editDiscount);
-                //per.Add("editPolicy", editPolicy);
-
-                ////
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-
-                string sql = "INSERT INTO [dbo].[StoreRoles] (storeId, appointedBy,userName,isOwner,editProduct,editDiscount,editPolicy)" +
-                                 " VALUES (@storeId, @appointedBy, @userName,@isOwner,@editProduct,@editDiscount,@editPolicy)";
-                int storeId = sr.getStore().getStoreID();
-                string appointedBy = null;
-                if (sr.getAppointedBy() != null)
-                    appointedBy = sr.getAppointedBy().getUsername();
-                string userName = sr.getUser().getUsername();
-                int isOwner = sr.getIsOwner();
-                int editProduct = 1;
-                int editDiscount = 1;
-                int editPolicy = 1;
-                if (isOwner == 0)
+                SqlTransaction transaction;
+                if (ownerTrans != null)
                 {
-                    editProduct = sr.GetPermissions().getPermission("editProduct");
-                    editDiscount = sr.GetPermissions().getPermission("editDiscount");
-                    editPolicy = sr.GetPermissions().getPermission("editPolicy");
+                    transaction = ownerTrans;
                 }
-                connection.Execute(sql, new { storeId, appointedBy, userName, isOwner, editProduct, editDiscount, editPolicy });
-                storeRole.AddFirst(sr);
-                //connection.Close();
-            }
-            catch (Exception)
-            {
-                //connection.Close();
-                throw new StoreException("cant add store roll");
+                else
+                    transaction = connection.BeginTransaction();
+
+                try
+                {
+
+                    //         public SubscribedUser appointedBy;
+                    //private Store store;
+                    //public SubscribedUser user;
+                    //public Permissions permissions;
+                    //public bool isOwner = false;
+
+                    ///
+                    //per.Add("editProduct", editProduct);
+                    //per.Add("editDiscount", editDiscount);
+                    //per.Add("editPolicy", editPolicy);
+
+                    ////
+
+
+                    string sql = "INSERT INTO [dbo].[StoreRoles] (storeId, appointedBy,userName,isOwner,editProduct,editDiscount,editPolicy)" +
+                                     " VALUES (@storeId, @appointedBy, @userName,@isOwner,@editProduct,@editDiscount,@editPolicy)";
+                    int storeId = sr.getStore().getStoreID();
+                    string appointedBy = null;
+                    if (sr.getAppointedBy() != null)
+                        appointedBy = sr.getAppointedBy().getUsername();
+                    string userName = sr.getUser().getUsername();
+                    int isOwner = sr.getIsOwner();
+                    int editProduct = 1;
+                    int editDiscount = 1;
+                    int editPolicy = 1;
+                    if (isOwner == 0)
+                    {
+                        editProduct = sr.GetPermissions().getPermission("editProduct");
+                        editDiscount = sr.GetPermissions().getPermission("editDiscount");
+                        editPolicy = sr.GetPermissions().getPermission("editPolicy");
+                    }
+                    connection.Execute(sql, new { storeId, appointedBy, userName, isOwner, editProduct, editDiscount, editPolicy }, transaction);
+                    storeRole.AddFirst(sr);
+                    if (ownerTrans == null)
+                    {
+                        transaction.Commit();
+                        transaction.Dispose();
+                    }
+                    //connection.Close();
+
+                }
+                catch (Exception)
+                {
+                    if (ownerTrans == null)
+                    {
+                        transaction.Dispose();
+                    }
+                    throw new StoreException("cant add store roll");
+                }
             }
         }
+
+       
 
         public LinkedList<StoreRole> getAllStoreRoles(string username)
         {
@@ -317,59 +345,70 @@ namespace workshop192.Domain
         {
             try
             {
-                //////////////////////////////////
-                //        public int storeId;
-                // string name;
-                // string description;
-                //public LinkedList<Product> productList;
-                //public List<StoreRole> roles;
-                //public int numOfOwners;
-                //public bool active;
-                //public LinkedList<DiscountComponent> discountList;
-                //public MinAmountPurchase minPurchasePolicy;
-                //public MaxAmountPurchase maxPurchasePolicy;
-                //public LinkedList<InvisibleDiscount> invisibleDiscountList;
-                //public Dictionary<string, HashSet<string>> pendingOwners;
-
-
-                ////////////////////////////////////////////////
                 SqlConnection connection = Connector.getInstance().getSQLConnection();
-
-                string sql = "INSERT INTO [dbo].[Stores] (storeId, name,description,numOfOwners,active,minPurchasePolicy,maxPurchasePolicy)" +
-                                 " VALUES (@storeId, @name, @description,@numOfOwners,@active,@minPurchasePolicy,@maxPurchasePolicy)";
-                int storeId = store.getStoreID();
-                string name = store.getStoreName();
-                string description = store.getDescription();
-                int numOfOwners = store.getNumberOfOwners();
-                int active = 0;
-                if (store.isActive() == true)
-                    active = 1;
-                int minPurchasePolicy = -1;
-                try
-                {
-                    minPurchasePolicy = store.getMinAmountPolicy().getAmount();
-                }
-                catch (Exception) { }
-                int maxPurchasePolicy = -1;
-                try
-                {
-                    maxPurchasePolicy = store.getMaxAmountPolicy().getAmount();
-                }
-                catch (Exception) { }
-
-                connection.Execute(sql, new { storeId, name, description, numOfOwners, active, minPurchasePolicy, maxPurchasePolicy });
-
-                //connection.Close();
-                stores.AddFirst(store);
-
-
-                /////////////////////////
-                return store.getStoreID();
-            }
-            catch (Exception)
+                //connection.Open();
+            using (var transaction = connection.BeginTransaction())
             {
-                //connection.Close();
-                throw new StoreException("faild to add store");
+                try
+                {
+                    //////////////////////////////////
+                    //        public int storeId;
+                    // string name;
+                    // string description;
+                    //public LinkedList<Product> productList;
+                    //public List<StoreRole> roles;
+                    //public int numOfOwners;
+                    //public bool active;
+                    //public LinkedList<DiscountComponent> discountList;
+                    //public MinAmountPurchase minPurchasePolicy;
+                    //public MaxAmountPurchase maxPurchasePolicy;
+                    //public LinkedList<InvisibleDiscount> invisibleDiscountList;
+                    //public Dictionary<string, HashSet<string>> pendingOwners;
+
+
+                    ////////////////////////////////////////////////
+                    string sql = "INSERT INTO [dbo].[Stores] (storeId, name,description,numOfOwners,active,minPurchasePolicy,maxPurchasePolicy)" +
+                                     " VALUES (@storeId, @name, @description,@numOfOwners,@active,@minPurchasePolicy,@maxPurchasePolicy)";
+                    int storeId = store.getStoreID();
+                    string name = store.getStoreName();
+                    string description = store.getDescription();
+                    int numOfOwners = store.getNumberOfOwners();
+                    int active = 0;
+                    if (store.isActive() == true)
+                        active = 1;
+                    int minPurchasePolicy = -1;
+                    try
+                    {
+                        minPurchasePolicy = store.getMinAmountPolicy().getAmount();
+                    }
+                    catch (Exception) { }
+                    int maxPurchasePolicy = -1;
+                    try
+                    {
+                        maxPurchasePolicy = store.getMaxAmountPolicy().getAmount();
+                    }
+                    catch (Exception) { }
+
+                    connection.Execute(sql, new { storeId, name, description, numOfOwners, active, minPurchasePolicy, maxPurchasePolicy },transaction);
+
+                    //connection.Close();
+                    stores.AddFirst(store);
+
+                    transaction.Commit();
+                    /////////////////////////
+                    return store.getStoreID();
+                }
+                catch (Exception)
+                {
+                    //connection.Close();
+                    transaction.Rollback();
+                    throw new StoreException("faild to add store");
+                }
+            }
+            }
+            catch (Exception e)
+            {
+                throw new ConnectionException("Bad connection to database");
             }
         }
 
@@ -538,7 +577,7 @@ namespace workshop192.Domain
             catch (Exception)
             {
                 //connection.Close();
-                throw new StoreException("connection to db faild");
+                throw new ConnectionException("Database error");
             }
         }
 
@@ -585,7 +624,7 @@ namespace workshop192.Domain
             catch (Exception e)
             {
                 //connection.Close();
-                throw new StoreException("cant connect");
+                throw new ConnectionException("Database error");
             }
         }
 
@@ -617,7 +656,7 @@ namespace workshop192.Domain
             catch (Exception e)
             {
                 //connection.Close();
-                throw new StoreException("cant get roles from db");
+                throw new ConnectionException("Database error - Getting store roles of user " + userName);
             }
         }
         public void deleteAllTable()
@@ -627,20 +666,23 @@ namespace workshop192.Domain
                 SqlConnection connection = Connector.getInstance().getSQLConnection();
                 connection.Execute("DELETE FROM Stores \n"
                                    + " DELETE FROM PendingOwners \n"
-                                  + "  DELETE FROM StoreRoles \n"
+                                   + " DELETE FROM StoreRoles \n"
                                    + " DELETE FROM Register \n"
                                    + " DELETE FROM Product \n"
                                    + " DELETE FROM BasketCart \n"
                                    + " DELETE FROM CartProduct \n"
                                    + " DELETE FROM Cookie \n"
                                    + " DELETE FROM Notification \n"
+                                   + " DELETE FROM Discount \n"
+                                   + " DELETE FROM DiscountComponent \n"
+                                   + " DELETE FROM DiscountComposite \n"
                                    + "UPDATE [dbo].[IDS] SET id = 0 WHERE type = 'store'"
                                    );
                 //connection.Close();
             }
             catch (Exception e)
             {
-                //connection.Close();
+                throw e;
             }
         }
         public void addPendingOwner(int storeId, string appointer, string pending)
@@ -649,18 +691,29 @@ namespace workshop192.Domain
             try
             {
                 SqlConnection connection = Connector.getInstance().getSQLConnection();
-                string sql = "INSERT INTO [dbo].[PendingOwners] (storeId,userName)" +
-                                   " VALUES (@storeId,@pending)";
-                connection.Execute(sql, new { storeId = storeId, pending = pending });
-                Store s = getStore(storeId);
-                s.getPending().AddFirst(pending);
-                //connection.Close();
+                lock (connection)
+                {
+                    using (var transaction = connection.BeginTransaction())
+                    {
+                        string sql = "INSERT INTO [dbo].[PendingOwners] (storeId,userName)" +
+                                           " VALUES (@storeId,@pending)";
+                        connection.Execute(sql, new { storeId = storeId, pending = pending },transaction);
+                        Store s = getStore(storeId);
+                        s.getPending().AddFirst(pending);
+                        sql = "INSERT INTO [dbo].[Contracts] (storeId,userName,approvedBy)" +
+                                          " VALUES (@storeId,@userName,@appointedBy)";
+                        Contract c = new Contract(storeId, pending, appointer);
+                        connection.Execute(sql, new { storeId = storeId, userName = pending, appointedBy = appointer },transaction);
+                        s = getStore(storeId);
+                        s.getContracts().AddFirst(c);
+                        transaction.Commit();
+                    }
+                }
 
             }
-            catch (Exception)
-            {
-                //connection.Close();
-                throw new StoreException("cant add pending owner");
+            catch (Exception e)
+            { 
+                throw new ConnectionException("Bad connection to database while adding a pending owner"); 
             }
         }
 
@@ -672,7 +725,8 @@ namespace workshop192.Domain
                 SqlConnection connection = Connector.getInstance().getSQLConnection();
                 string sql = "DELETE FROM [dbo].[PendingOwners]" +
                                    "WHERE storeId=@storeId AND userName = @pending";
-                connection.Execute(sql, new { storeId = storeId, pending = pending });
+
+                    connection.Execute(sql, new { storeId = storeId, pending = pending },ownerTrans);
                 Store s = getStore(storeId);
                 s.getPending().Remove(pending);
                 //connection.Close();
@@ -685,7 +739,7 @@ namespace workshop192.Domain
             }
         }
 
-        public void signContract(int storeId, string owner, string pending)
+        public void signContract(int storeId, string owner, string pending,bool saveTransaction)
         {
             try
             {
@@ -693,7 +747,22 @@ namespace workshop192.Domain
                 string sql = "INSERT INTO [dbo].[Contracts] (storeId,userName,approvedBy)" +
                                    " VALUES (@storeId,@userName,@appointedBy)";
                 Contract c = new Contract(storeId, pending, owner);
-                connection.Execute(sql, new { storeId = storeId, userName = pending, appointedBy = owner });
+                if (saveTransaction)
+                {
+                   
+                    try
+                    {
+                        connection.Execute(sql, new { storeId = storeId, userName = pending, appointedBy = owner }, ownerTrans);
+                    }
+                    catch(Exception e)
+                    {
+                        throw e;
+                    }
+                }
+                else
+                {
+                    connection.Execute(sql, new { storeId = storeId, userName = pending, appointedBy = owner });
+                }
                 Store s = getStore(storeId);
                 s.getContracts().AddFirst(c);
                 //connection.Close();
@@ -721,7 +790,7 @@ namespace workshop192.Domain
                 SqlConnection connection = Connector.getInstance().getSQLConnection();
                 string sql = "DELETE FROM [dbo].[Contracts]" +
                                    "WHERE storeId=@storeId AND userName = @userName";
-                connection.Execute(sql, new { storeId = storeId, userName = userName });
+                connection.Execute(sql, new { storeId = storeId, userName = userName },ownerTrans);
                 //connection.Close();
             }
             catch (Exception e)
@@ -763,5 +832,55 @@ namespace workshop192.Domain
         //    }
         //    throw new DoesntExistException("User is not a pending owner");
         //}
+
+        public void signAndAddOwner(int storeId, string owner, string pending,StoreRole toAdd)
+        {
+            SqlConnection connection = Connector.getInstance().getSQLConnection();
+            lock (connection)
+            {
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        ownerTrans = transaction;
+                        signContract(storeId, owner, pending, true);
+                        removePendingOwner(storeId, pending);
+                        addStoreRole(toAdd);
+                        transaction.Commit();
+                    }
+                    catch(Exception e)
+                    {
+                       
+                        ownerTrans = null;
+                        throw e;
+                    }
+                }
+                ownerTrans = null;
+            }
+        }
+        internal void declineContract(int storeId, string pending)
+        {
+            SqlConnection connection = Connector.getInstance().getSQLConnection();
+            lock (connection)
+            {
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        ownerTrans = transaction;
+                        removePendingOwner(storeId, pending);
+                        removeAllUserContracts(storeId, pending);
+                        transaction.Commit();
+                    }
+                    catch (Exception e)
+                    {
+
+                        ownerTrans = null;
+                        throw e;
+                    }
+                }
+                ownerTrans = null;
+            }
+        }
     }
 }
