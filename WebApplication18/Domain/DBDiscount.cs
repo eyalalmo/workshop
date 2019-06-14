@@ -49,11 +49,11 @@ namespace workshop192.Domain
                 SqlConnection connection = Connector.getInstance().getSQLConnection();
                 string sql = "INSERT INTO [dbo].[DiscountComponent] (id, percentage, duration, type, storeId, isPartOfComplex)" +
                                 " VALUES (@id,@percentage, @duration, @type, @storeId, @isPartOfComplex)";
-                int isPartOfComplex;
+                int complex;
                 if (d.getIsPartOfComplex())
-                    isPartOfComplex = 1;
+                    complex = 1;
                 else
-                    isPartOfComplex = 0;
+                    complex = 0;
                 if (d is Discount)
                 {
                     
@@ -64,7 +64,7 @@ namespace workshop192.Domain
                         duration = d.getDuration(),
                         type = "Discount",
                         storeId = d.getStoreId(),
-                        isPartOfComplex
+                        isPartOfComplex = complex,
 
                     });
                     if (d is VisibleDiscount)
@@ -88,7 +88,7 @@ namespace workshop192.Domain
                         duration = d.getDuration(),
                         type = "Composite",
                         storeId = d.getStoreId(),
-                        isPartOfComplex
+                        isPartOfComplex = complex
 
                     });
                     foreach (DiscountComponent child in composite.getChildren())
