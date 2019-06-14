@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using workshop192.Domain;
 
 namespace workshop192.Domain
-{ 
+{
     public class StoreOwner : StoreRole
 
     {
@@ -40,8 +40,8 @@ namespace workshop192.Domain
         public void removeProduct(Product product)
         {
             if (product.getStore() != store || !store.getProductList().Contains(product))
-                throw new StoreException("product " 
-                    + product.getProductName() + " doesn't belong to store " 
+                throw new StoreException("product "
+                    + product.getProductName() + " doesn't belong to store "
                     + store.getStoreName());
             store.removeProduct(product);
             DBProduct.getInstance().removeProduct(product);
@@ -87,14 +87,14 @@ namespace workshop192.Domain
             StoreRole newManager = new StoreManager(this.userName, store, manager, permissions);
             DBStore.getInstance().addStoreRole(newManager);
             if (store.getStoreRole(manager) != null)
-                throw new RoleException("Error: Username "  + manager.getUsername() + 
-                    " already has a role in store " + 
+                throw new RoleException("Error: Username " + manager.getUsername() +
+                    " already has a role in store " +
                     store.getStoreName());
             store.addStoreRoleFromInitOwner(newManager);
             manager.addStoreRole(newManager);
             appointedByMe.Add(newManager);
         }
-        
+
         public void addOwner(SubscribedUser owner)
         {
             StoreRole newOwner = new StoreOwner(this.userName, owner, store);
@@ -111,16 +111,15 @@ namespace workshop192.Domain
         public void remove(SubscribedUser role)
         {
             StoreRole sr = role.getStoreRole(store);
-            
+            DBStore.getInstance().removeStoreRole(sr);
             if (sr == null)
-                throw new RoleException("user " + role.getUsername() + 
-                    " doesn't have a role in store " 
+                throw new RoleException("user " + role.getUsername() +
+                    " doesn't have a role in store "
                     + store.getStoreName());
             if (sr.getAppointedBy() != this.userName)
-                throw new RoleException("Error: User " + userName.getUsername() + 
-                    " didn't appoint " + 
+                throw new RoleException("Error: User " + userName.getUsername() +
+                    " didn't appoint " +
                     role.getUsername());
-            DBStore.getInstance().removeStoreRole(sr);
             sr.removeAllAppointedBy();
             role.removeStoreRole(sr);
             store.removeStoreRole(sr);
@@ -153,16 +152,16 @@ namespace workshop192.Domain
                 remove(sr.getUser());
         }
 
-        
+
 
         public void addProductVisibleDiscount(Product product, double percentage, string duration)
         {
-            Store store = product.getStore();
-            VisibleDiscount discount = new VisibleDiscount(percentage, duration, "ProductVisibleDiscount", store.getStoreID());
-            DBDiscount.getInstance().addDiscount(discount);
+            VisibleDiscount discount = new VisibleDiscount(percentage, duration, "ProductVisibleDiscount");
             discount.setProduct(product);
             product.setDiscount(discount);
+            Store store = product.getStore();
             //store.addDiscount(discount);
+            DBDiscount.getInstance().addDiscount(discount);
 
         }
         public void removeProductDiscount(Product product)
@@ -172,118 +171,119 @@ namespace workshop192.Domain
 
         public void addStoreVisibleDiscount(double percentage, string duration)
         {
-            VisibleDiscount v = new VisibleDiscount(percentage, duration, "StoreVisibleDiscount", store.getStoreID());       
-            DBDiscount.getInstance().addDiscount(v);
+            VisibleDiscount v = new VisibleDiscount(percentage, duration, "StoreVisibleDiscount");
             store.addDiscount(v);
+            DBDiscount.getInstance().addDiscount(v);
 
         }
 
         public void addReliantDiscountSameProduct(double percentage, String duration, int numOfProducts, Product product)
         {
-            ReliantDiscount r = new ReliantDiscount(percentage, duration, numOfProducts, product, store.getStoreID());
-            DBDiscount.getInstance().addDiscount(r);
+            ReliantDiscount r = new ReliantDiscount(percentage, duration, numOfProducts, product);
             store.addDiscount(r);
             product.setReliantDiscountSameProduct(r);
+            DBDiscount.getInstance().addDiscount(r);
 
         }
 
         public void addReliantDiscountTotalAmount(double percentage, String duration, int amount)
         {
-            ReliantDiscount r = new ReliantDiscount(percentage, duration, amount, store.getStoreID());
-            DBDiscount.getInstance().addDiscount(r);
+            ReliantDiscount r = new ReliantDiscount(percentage, duration, amount);
             store.addDiscount(r);
-            
+            DBDiscount.getInstance().addDiscount(r);
 
         }
 
         public void removeStoreDiscount(int discountID, Store store)
         {
-            DiscountComponent d = DBDiscount.getInstance().getDiscountByID(discountID);
-            DBDiscount.getInstance().removeDiscount(d);
+            // DBDiscount.getInstance().removeDiscount(discountID);
             store.removeDiscount(discountID);
-            
 
         }
         public void addComplexDiscount(List<DiscountComponent> list, string type, double percentage, string duration)
         {
-            DiscountComposite composite = new DiscountComposite(list, type, percentage, duration, store.getStoreID());
+            DiscountComposite composite = new DiscountComposite(list, type, percentage, duration);
+            store.addDiscount(composite);
             foreach (DiscountComponent d in list)
             {
-                store.removeDiscount(d.getId());   
-                DBDiscount.getInstance().setIsPartOfComplex(d.getId(), true);
-                d.setIsPartOfComplex(true);
-
+                store.removeDiscount(d.getId());
+                if (d is Discount)
+                {
+                    Discount di = (Discount)d;
+                    di.setIsPartOfComplex(true);
+                }
             }
-            DBDiscount.getInstance().addDiscount(composite);
-            store.addDiscount(composite);
-
             //DBDiscount.getInstance().addDiscount(composite);
 
         }
 
 
-        public void removeMaxAmountPolicy()
+        public void removeCouponFromStore(string couponCode)
         {
-            store.removeMaxAMountPolicy();
+            store.removeCoupon(couponCode);
         }
-        public void removeMinAmountPolicy()
-        {
-            store.removeMinAmountPolicy();
-        }
-
-        public void setMinAmountPolicy( int newMinAmount)
-        {
-            store.setMinPurchasePolicy(newMinAmount);
-        }
-
-       
-
-        public void setMaxAmountPolicy(int newMaxAmount)
-        {
-            store.setMaxPurchasePolicy(newMaxAmount);
-
-        }
-
-        //public void removeCouponFromStore(string couponCode)
-        //{
-        //    store.removeCoupon(couponCode);
-        //}
 
         /* public void addCouponToStore(string couponCode, int percentage, string duration)
         {
             store.addCoupon(couponCode, percentage, duration);
         }
         */
-        //public void addCouponToStore(string couponCode, double percentage, string duration)
-        //{
-        //    store.addCoupon(couponCode, percentage, duration);
-        //}
+        public void addCouponToStore(string couponCode, double percentage, string duration)
+        {
+            store.addCoupon(couponCode, percentage, duration);
+        }
 
         public void addPendingOwner(SubscribedUser pending)
         {
-            DBStore.getInstance().addPendingOwner(store.getStoreID(),userName.getUsername(), pending.getUsername());
-            DBStore.getInstance().signContract(store.getStoreID(), userName.getUsername(), pending.getUsername());
+            store.addPendingOwner(userName.getUsername(), pending);
         }
-        public void signContract(SubscribedUser pending)
+        public void signContract(string owner, SubscribedUser pending)
         {
-            if (DBStore.getInstance().hasContract(store.getStoreID(), pending.getUsername(), userName.getUsername()))
-                throw new AlreadyExistException("You have already signed a contract with " + pending.getUsername());
-            DBStore.getInstance().signContract(store.getStoreID(),userName.getUsername(), pending.getUsername());
-            int approvedOwners = DBStore.getInstance().getContractNum(store.getStoreID(),pending.getUsername());
-            if (approvedOwners == store.getNumberOfOwners())
+            store.signContract(owner, pending);
+            HashSet<string> approvedOwners = store.getApproved(pending);
+            if (approvedOwners.Count == store.getNumberOfOwners())
             {
-                DBStore.getInstance().removePendingOwner(store.getStoreID(),pending.getUsername());
+                store.removePendingOwner(pending);
                 addOwner(pending);
             }
         }
-        public void declineContract(SubscribedUser pending)
+        public void declineContract(string owner, SubscribedUser pending)
         {
-            DBStore.getInstance().removeAllUserContracts(store.getStoreID(), pending.getUsername());
-            DBStore.getInstance().removePendingOwner(store.getStoreID(), pending.getUsername());
+            store.removePendingOwner(pending);
         }
         public Permissions GetPermissions()
         {
             return new Permissions(true, true, true);
+        }
+
+        public void addComplexPolicy(int index1, int index2, string type)
+        {
+
+            store.addComplexPurchasePolicy(index1, index2, type);
+        }
+
+        public void removePolicy(int index)
+        {
+            store.removePolicyByindex(index);
+        }
+
+        public void setPolicyByIndex(int newAmount, int index)
+        {
+            store.setPolicyByID(newAmount, index);
+        }
+        public void addMinPurchasePolicy(int amount)
+        {
+            store.addMinAmountPolicy(amount);
+        }
+
+        public void addMaxPurchasePolicy(int amount)
+        {
+            store.addMaxAmountPolicy(amount);
+        }
+
+        public void addTotalPricePurchasePolicy(int amount)
+        {
+            store.addTotalAmountPolicy(amount);
         }
     }
 }

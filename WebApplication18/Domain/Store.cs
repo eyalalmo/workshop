@@ -14,21 +14,25 @@ namespace workshop192.Domain
 {
     public class Store
     {
-        public int storeId;
-        public string name;
-        public string description;
-        public LinkedList<Product> productList;
-        public List<StoreRole> roles;
-        public int numOfOwners;
-        public bool active;
-        public MinAmountPurchase minPurchasePolicy;
-        public MaxAmountPurchase maxPurchasePolicy;
+        private int storeId;
+        private string name;
+        private string description;
+        private LinkedList<Product> productList;
+        private List<StoreRole> roles;
+        private int numOfOwners;
+        private bool active;
+        /* private MinAmountPurchase minPurchasePolicy;
+         private MaxAmountPurchase maxPurchasePolicy;
+         private TotalPricePolicy minTotalprice;
+        private ComplexPurchasePolicy complexPurchase;
+             * */
+        private LinkedList<PurchasePolicy> policies;
+
+
         private LinkedList<InvisibleDiscount> invisibleDiscountList;
         [JsonIgnore]
         public LinkedList<DiscountComponent> discountList;
-       // public LinkedList<InvisibleDiscount> invisibleDiscountList;
-        public LinkedList<Contract> contracts;
-        public LinkedList<string> pendingOwners;
+        public Dictionary<string, HashSet<string>> pendingOwners;
 
         public Store(string storeName, string description)
         {
@@ -40,13 +44,15 @@ namespace workshop192.Domain
             numOfOwners = 0;
             active = true;
             discountList = new LinkedList<DiscountComponent>();
-           // invisibleDiscountList = new LinkedList<InvisibleDiscount>();
-            maxPurchasePolicy = null;
-            minPurchasePolicy = null;
-            contracts = new LinkedList<Contract>();
-            pendingOwners = new LinkedList<string>();
+            policies = new LinkedList<PurchasePolicy>();
+            /* maxPurchasePolicy = null;
+             minPurchasePolicy = null;
+             minTotalprice = null;
+             pendingOwners = new Dictionary<string, HashSet<string>>();
+             complexPurchase = null;
+             */
         }
-        public Store(int storeId,string name, string description)
+        public Store(int storeId, string name, string description)
         {
             this.storeId = storeId;
             this.name = name;
@@ -55,21 +61,20 @@ namespace workshop192.Domain
             roles = new List<StoreRole>();
             numOfOwners = 0;
             active = true;
-            contracts = new LinkedList<Contract>();
-            pendingOwners = new LinkedList<string>();
+            pendingOwners = new Dictionary<string, HashSet<string>>();
             discountList = new LinkedList<DiscountComponent>();
             invisibleDiscountList = new LinkedList<InvisibleDiscount>();
+            /*
             maxPurchasePolicy = null;
             minPurchasePolicy = null;
+            minTotalprice = null;
+            complexPurchase = null;
+            */
         }
 
         public void addProduct(Product p)
         {
             productList.AddFirst(p);
-        }
-        public void setDiscountList(LinkedList<DiscountComponent> discounts)
-        {
-            this.discountList = discounts;
         }
         public LinkedList<DiscountComponent> getDiscounts()
         {
@@ -171,52 +176,52 @@ namespace workshop192.Domain
             roles.Add(toAdd);
         }
 
-        //public void addCoupon(string coupon, double percentage, string duration)
-        //{
-        //    foreach (InvisibleDiscount d1 in invisibleDiscountList)
-        //    {
-        //        string c = d1.getCoupon();
-        //        if (c == coupon)
-        //            throw new AlreadyExistException("Error: A Store cannot have two identical coupons");
+        public void addCoupon(string coupon, double percentage, string duration)
+        {
+            foreach (InvisibleDiscount d1 in invisibleDiscountList)
+            {
+                string c = d1.getCoupon();
+                if (c == coupon)
+                    throw new AlreadyExistException("Error: A Store cannot have two identical coupons");
 
-        //    }
-        //    InvisibleDiscount d = new InvisibleDiscount(percentage, coupon, duration);
-        //    invisibleDiscountList.AddLast(d);
-        //}
+            }
+            InvisibleDiscount d = new InvisibleDiscount(percentage, coupon, duration);
+            invisibleDiscountList.AddLast(d);
+        }
 
-        //public void removeCoupon(string coupon)
-        //{
-        //    bool found = false;
-        //    foreach (InvisibleDiscount d1 in invisibleDiscountList)
-        //    {
-        //        string c = d1.getCoupon();
-        //        if (c == coupon)
-        //        {
-        //            found = true;
-        //            invisibleDiscountList.Remove(d1);
-        //            break;
-        //        }
-        //    }
+        public void removeCoupon(string coupon)
+        {
+            bool found = false;
+            foreach (InvisibleDiscount d1 in invisibleDiscountList)
+            {
+                string c = d1.getCoupon();
+                if (c == coupon)
+                {
+                    found = true;
+                    invisibleDiscountList.Remove(d1);
+                    break;
+                }
+            }
 
-        //    if (!found)
-        //        throw new DoesntExistException("Error:Coupon does not exist");
-        //}
+            if (!found)
+                throw new DoesntExistException("Error:Coupon does not exist");
+        }
 
-        //public void checkCouponCode(string coupon)
-        //{
-        //    bool found = false;
-        //    foreach (InvisibleDiscount d in invisibleDiscountList)
-        //    {
-        //        string c = d.getCoupon();
-        //        if (c == coupon)
-        //        {
-        //            found = true;
-        //            break;
-        //        }
-        //    }
-        //    if (!found)
-        //        throw new ArgumentException("Error:Coupon does not exist");
-        //}
+        public void checkCouponCode(string coupon)
+        {
+            bool found = false;
+            foreach (InvisibleDiscount d in invisibleDiscountList)
+            {
+                string c = d.getCoupon();
+                if (c == coupon)
+                {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
+                throw new ArgumentException("Error:Coupon does not exist");
+        }
 
 
         public Dictionary<Product, double> updatePrice(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
@@ -271,6 +276,8 @@ namespace workshop192.Domain
             }
             return null;
         }
+
+
         public void removeStoreRole(StoreRole toRemove)
         {
             if (toRemove is StoreOwner)
@@ -301,141 +308,237 @@ namespace workshop192.Domain
             }
         }
 
-
-      //  public void removeDiscount(DiscountComponent discount)
-      //  {
-           /* DiscountComponent discount = DBDiscount.getInstance().getDiscountByID(discountID);
-            if (discount==null)
-            {
-                throw new DoesntExistException("Error: Discount does not exist so it cannot be removed");
-            }*/
-         //   discountList.Remove(discount);
-       // }
-        /*
-         private void checkValidityofPurchases(PurchasePolicy p1, PurchasePolicy p2)
-         {
-             if (p1!= null && p1.GetType() == typeof(MaxAmountPurchase))
-             {
-                 if (p1.getAmount() < p2.getAmount())
-                     throw new ArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
-             }
-             else if (p1.GetType() == typeof(MinAmountPurchase))
-             {
-                 if (p1.getAmount() > p2.getAmount())
-                     throw new ArgumentException("contradiction! minimum amount can not be larger than maximum amount Purchase Policy");
-             }
-
-        }
-       */ 
-        public void setMinPurchasePolicy(int MinAmount)
+        public void setMinPurchasePolicy(int minAmount, int index)
         {
-            if (maxPurchasePolicy == null)
+            PurchasePolicy p = policies.ElementAt(index);
+            PurchasePolicy max = getMaxPolicy();
+            if (max == null)
             {
-                DBStore.getInstance().setMinPurchasePolicy(this.storeId, MinAmount);
-                minPurchasePolicy = new MinAmountPurchase(MinAmount);
+                p.setAmount(minAmount);
             }
             else
             {
-                if (maxPurchasePolicy.getAmount() < MinAmount)
+                if (max.getAmount() < minAmount)
                 {
                     throw new ArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
                 }
                 else
                 {
-                    DBStore.getInstance().setMinPurchasePolicy(this.storeId, MinAmount);
-                    minPurchasePolicy = new MinAmountPurchase(MinAmount);
+                    p.setAmount(minAmount);
                 }
             }
 
         }
 
-        public void setMaxPurchasePolicy(int maxAmount)
+        internal void setPolicyByID(int newAmount, int index)
         {
-            if (minPurchasePolicy == null)
+            PurchasePolicy p = policies.ElementAt(index);
+            if (p is ComplexPurchasePolicy)
+                throw new ArgumentException("Can not set complex policy.");
+            if (p is MaxAmountPurchase)
+                setMaxPurchasePolicy(newAmount, index);
+            if (p is MinAmountPurchase)
+                setMinPurchasePolicy(newAmount, index);
+            if (p is TotalPricePolicy)
+                setTotalPolicy(newAmount, index);
+        }
+
+        private void setTotalPolicy(int newAmount, int index)
+        {
+            PurchasePolicy p = policies.ElementAt(index);
+            if (newAmount < 0)
+                throw new ArgumentException("Total cart price can not be a negative number.");
+            p.setAmount(newAmount);
+
+        }
+
+        private PurchasePolicy getMaxPolicy()
+        {
+            foreach (PurchasePolicy p in policies)
             {
-                maxPurchasePolicy = new MaxAmountPurchase(maxAmount);
-                DBStore.getInstance().setMaxPurchasePolicy(this.storeId, maxAmount);
+                if (p is MaxAmountPurchase)
+                    return p;
+            }
+            return null;
+
+        }
+        private PurchasePolicy getMinPolicy()
+        {
+            foreach (PurchasePolicy p in policies)
+            {
+                if (p is MinAmountPurchase)
+                    return p;
+            }
+            return null;
+
+        }
+        public void setMaxPurchasePolicy(int maxAmount, int index)
+        {
+            PurchasePolicy p = policies.ElementAt(index);
+            PurchasePolicy min = getMinPolicy();
+            if (min == null)
+            {
+                p.setAmount(maxAmount);
             }
             else
             {
-                if (minPurchasePolicy.getAmount() > maxAmount)
+                if (min.getAmount() > maxAmount)
                 {
                     throw new ArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
                 }
                 else
                 {
-                    DBStore.getInstance().setMaxPurchasePolicy(this.storeId, maxAmount);
-                    maxPurchasePolicy = new MaxAmountPurchase(maxAmount);
+                    p.setAmount(maxAmount);
                 }
 
             }
         }
 
-        public void checkPolicy(Product p, int amount)
+        public bool checkStorePolicy(int amount, double cartTotalPrice)
         {
-            if (maxPurchasePolicy != null)
-                maxPurchasePolicy.checkPolicy(p, amount);
-            if (minPurchasePolicy != null)
-                minPurchasePolicy.checkPolicy(p, amount);
+            bool ans = true;
+            foreach (PurchasePolicy p in policies)
+            {
+                ans = ans & p.checkPolicy(cartTotalPrice, amount);
+            }
+            return ans;
         }
-
-        public void removeMaxAMountPolicy()
+        public void removePolicyByindex(int index)
         {
-            maxPurchasePolicy = null;
-
+            PurchasePolicy p = policies.ElementAt(index);
+            policies.Remove(p);
         }
-
-        public void removeMinAmountPolicy()
-        {
-            minPurchasePolicy = null;
-        }
-
         public bool hasMinPurchasePolicy()
         {
-            return (minPurchasePolicy != null);
+            foreach (PurchasePolicy p in policies)
+            {
+                if (p is MinAmountPurchase)
+                    return true;
+            }
+            return false;
         }
         public bool hasMaxPurchasePolicy()
         {
-            return (maxPurchasePolicy != null);
-        }
-      
+            foreach (PurchasePolicy p in policies)
+            {
+                if (p is MaxAmountPurchase)
+                    return true;
+            }
+            return false;
 
-        public MinAmountPurchase getMinAmountPolicy()
-        {
-            if (minPurchasePolicy != null)
-                return minPurchasePolicy;
-            else
-                throw new DoesntExistException();
         }
-        public MaxAmountPurchase getMaxAmountPolicy()
+
+        public bool hasTotalPricePolicy()
         {
-            if (maxPurchasePolicy != null)
-                return maxPurchasePolicy;
-            else
-                throw new DoesntExistException();
+            foreach (PurchasePolicy p in policies)
+            {
+                if (p is TotalPricePolicy)
+                    return true;
+            }
+            return false;
+
+        }
+
+        public void addMinAmountPolicy(int minAmount)
+        {
+            if (hasMinPurchasePolicy())
+            {
+                throw new ArgumentException("Store can not have 2 minimum amount purchase policy.");
+            }
+            MinAmountPurchase p = new MinAmountPurchase(minAmount);
+            policies.AddLast(p);
+        }
+        public void addMaxAmountPolicy(int minAmount)
+        {
+            if (hasMaxPurchasePolicy())
+            {
+                throw new ArgumentException("Store can not have 2 maximum amount purchase policy.");
+            }
+            MaxAmountPurchase p = new MaxAmountPurchase(minAmount);
+            policies.AddLast(p);
+        }
+
+        public void addTotalAmountPolicy(int minPrice)
+        {
+            if (hasTotalPricePolicy())
+            {
+                throw new ArgumentException("Store can not have 2 total cart price - purchase policy.");
+            }
+            MaxAmountPurchase p = new MaxAmountPurchase(minPrice);
+            policies.AddLast(p);
+        }
+
+        public void addComplexPurchasePolicy(int index1, int index2, string type)
+        {
+            PurchasePolicy p1 = policies.ElementAt(index1);
+            PurchasePolicy p2 = policies.ElementAt(index2);
+
+            ComplexPurchasePolicy complexPurchase = new ComplexPurchasePolicy(type, p1, p2, storeId);
+            policies.Remove(p1);
+            policies.Remove(p2);
+            policies.AddLast(complexPurchase);
+        }
+
+        public LinkedList<PurchasePolicy> getStorePolicyList()
+        {
+            return policies;
         }
 
         public VisibleDiscount getVisibleDiscount()
         {
-            foreach(Discount d in discountList)
+            foreach (Discount d in discountList)
             {
                 if (d is VisibleDiscount)
                     return (VisibleDiscount)d;
             }
             return null;
         }
-
-
-        public LinkedList<Contract> getContracts()
+        public void addPendingOwner(string appointer, SubscribedUser pending)
         {
-            return contracts;
+            if (pendingOwners.ContainsKey(pending.username))
+            {
+                throw new AlreadyExistException("Owner already waiting for approval");
+            }
+            HashSet<string> toAdd = new HashSet<string>();
+            toAdd.Add(appointer);
+            pendingOwners.Add(pending.getUsername(), toAdd);
+
+        }
+        public void removePendingOwner(SubscribedUser pending)
+        {
+            if (!pendingOwners.ContainsKey(pending.getUsername()))
+            {
+                throw new DoesntExistException("the username is not in the owners pending list");
+            }
+            pendingOwners.Remove(pending.getUsername());
         }
 
-        public LinkedList<string> getPending()
+        public void signContract(string owner, SubscribedUser pending)
+        {
+            if (!pendingOwners.ContainsKey(pending.getUsername()))
+            {
+                throw new DoesntExistException("the username is not in the owners pending list");
+            }
+            HashSet<string> temp = new HashSet<string>();
+            pendingOwners.TryGetValue(pending.getUsername(), out temp);
+            temp.Add(owner);
+            pendingOwners[pending.getUsername()] = temp;
+        }
+
+        public HashSet<string> getApproved(SubscribedUser pending)
+        {
+            HashSet<string> output;
+            if (pendingOwners.TryGetValue(pending.getUsername(), out output))
+            {
+                return output;
+            }
+            throw new DoesntExistException("User is not a pending owner");
+        }
+
+        public Dictionary<string, HashSet<string>> getPending()
         {
             return pendingOwners;
         }
-
 
     }
 

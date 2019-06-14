@@ -31,15 +31,18 @@ namespace workshop192.Domain
         void addReliantDiscountTotalAmount(double percentage, String duration, int amount);
         void removeStoreDiscount(int discountID, Store store);
         void addComplexDiscount(List<DiscountComponent> list, string type, double percentage, string duration);
-        void removeMaxAmountPolicy();
-        void removeMinAmountPolicy();
-        void setMinAmountPolicy(int newMinAmount);
-        void setMaxAmountPolicy(int newMinAmount);
+        void removeCouponFromStore(string couponCode);
+        void addCouponToStore(string couponCode, double percentage, string duration);
         void addPendingOwner(SubscribedUser pending);
-        void signContract(SubscribedUser pending);
-        void declineContract(SubscribedUser pending);
-         int getIsOwner();
+        void signContract(string owner, SubscribedUser pending);
+        void declineContract(string owner, SubscribedUser pending);
+        int getIsOwner();
+        void addComplexPolicy(int index1, int index2, string type);
         Permissions GetPermissions();
-        
+        void removePolicy(int index);
+        void setPolicyByIndex(int newAmount, int index);
+        void addMinPurchasePolicy(int amount);
+        void addMaxPurchasePolicy(int amount);
+        void addTotalPricePurchasePolicy(int amount);
     }
 }

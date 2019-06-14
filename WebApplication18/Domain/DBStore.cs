@@ -345,7 +345,7 @@ namespace workshop192.Domain
                 if (store.isActive() == true)
                     active = 1;
                 int minPurchasePolicy = -1;
-                try
+                /*try
                 {
                     minPurchasePolicy = store.getMinAmountPolicy().getAmount();
                 }
@@ -356,8 +356,8 @@ namespace workshop192.Domain
                     maxPurchasePolicy = store.getMaxAmountPolicy().getAmount();
                 }
                 catch (Exception) { }
-
-                connection.Execute(sql, new { storeId, name, description, numOfOwners, active, minPurchasePolicy, maxPurchasePolicy });
+                */
+                connection.Execute(sql, new { storeId, name, description, numOfOwners, active});
 
                 //connection.Close();
                 stores.AddFirst(store);
@@ -423,10 +423,11 @@ namespace workshop192.Domain
                     if (p.getStoreID() == s.getStoreID())
                         s.addProduct(p);
                 }
-                if (se.getMaxPurchasePolicy() != -1)
+                /*if (se.getMaxPurchasePolicy() != -1)
                     s.setMaxPurchasePolicy(se.getMaxPurchasePolicy());
                 if (se.getMinPurchasePolicy() != -1)
                     s.setMinPurchasePolicy(se.getMinPurchasePolicy());
+                */
                 foreach (StoreRoleEntry element in StoreRoleResult)
                 {
                     if (element.getStoreId() == s.getStoreID() && element.getIsOwner() == 1)

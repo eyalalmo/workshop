@@ -141,14 +141,6 @@ namespace workshop192.Domain
                     {
                         DomainBridge.getInstance().addOwner(Int32.Parse(input[1]), input[2], Int32.Parse(input[3]));
                     }
-                    else if (input[0] == "setMaxAmountPolicy")
-                    {
-                        DomainBridge.getInstance().setMaxAmountPolicy(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
-                    }
-                    else if (input[0] == "setMinAmountPolicy")
-                    {
-                        DomainBridge.getInstance().setMinAmountPolicy(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
-                    }
                     else if (input[0] == "setProductDiscount")
                     {
                         DomainBridge.getInstance().setProductDiscount(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));

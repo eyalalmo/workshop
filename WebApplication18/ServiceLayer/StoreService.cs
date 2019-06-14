@@ -448,7 +448,7 @@ namespace workshop192.ServiceLayer
 
 
         }
-        
+        /*
         public void setMaxAmountPolicy(int storeID, int sessionID, int newMaxAmount)
         {
             if (storeID < 0)
@@ -480,7 +480,7 @@ namespace workshop192.ServiceLayer
         {
             return db.hasMaxPurchasePolicy(storeID, sessionID);
         }
-
+        
         public string getMinAmountPolicy(int storeID, int sessionID)
         {
             return db.getMinAmountPolicyString(storeID, sessionID);
@@ -497,7 +497,7 @@ namespace workshop192.ServiceLayer
         {
             return db.getMaxAmountPolicyString(storeID, sessionID);
         }
-
+        */
         public void signContract(int store, string username,int sessionID)
         {
            

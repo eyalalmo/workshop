@@ -50,12 +50,12 @@ namespace workshop192.Domain
         public void addToCartNoDBUpdate(Product product, int amount)
         {
             productList.Add(product, amount);
-            productsActualPrice.Add(product, product.getPrice());   
+            productsActualPrice.Add(product, product.getPrice());
         }
 
         public void addToCart(Product product, int amount)
         {
-            store.checkPolicy(product, amount);
+            // store.checkPolicy(product, amount);
 
             int quantityLeft = product.getQuantityLeft();
             if (quantityLeft - amount >= 0)
@@ -71,19 +71,19 @@ namespace workshop192.Domain
             }
         }
 
-        //public void addStoreCoupon(string couponCode)
-        //{
-        //    if (coupon != "")
-        //        throw new AlreadyExistException("Error: Can not have more than one coupon in shopping cart");
-        //    store.checkCouponCode(couponCode);
-        //    coupon = couponCode;
-        //}
+        public void addStoreCoupon(string couponCode)
+        {
+            if (coupon != "")
+                throw new AlreadyExistException("Error: Can not have more than one coupon in shopping cart");
+            store.checkCouponCode(couponCode);
+            coupon = couponCode;
+        }
 
 
-        //public void removeCoupon()
-        //{
-        //    coupon = "";
-        //}
+        public void removeCoupon()
+        {
+            coupon = "";
+        }
 
 
         public void removeFromCart(Product p)
@@ -92,16 +92,16 @@ namespace workshop192.Domain
                 throw new CartException("error- product does not exist");
             productList.Remove(p);
             productsActualPrice.Remove(p);
-          
+
         }
 
-       
+
 
         public void changeQuantityOfProduct(Product p, int newAmount)
         {
             if (!productList.ContainsKey(p))
                 throw new CartException("error - cart does not contains product");
-            store.checkPolicy(p, newAmount);
+            //   store.checkPolicy(p, newAmount);
 
             int oldAmount = productList[p];
             int quantity = p.getQuantityLeft();
@@ -130,7 +130,7 @@ namespace workshop192.Domain
                     }
                     else
                     {
-                        if(! dis.checkDate())
+                        if (!dis.checkDate())
                         {
                             // discount is invalid - date has passed
                             store.removeDiscount(dis.getId());
@@ -142,11 +142,11 @@ namespace workshop192.Domain
             }
             foreach (KeyValuePair<Product, int> entry in productList)
             {
-                    Product p = entry.Key;
-                    double actualPrice = p.getActualPrice(entry.Value);
-                    sum += (entry.Value * actualPrice);
+                Product p = entry.Key;
+                double actualPrice = p.getActualPrice(entry.Value);
+                sum += (entry.Value * actualPrice);
             }
-         
+
             foreach (DiscountComponent dis in discounts)
             {
                 if (dis is ReliantDiscount)
@@ -158,7 +158,7 @@ namespace workshop192.Domain
                             sum = sum * (1 - r.getPercentage());
                     }
                 }
-          
+
 
 
             }
@@ -168,7 +168,7 @@ namespace workshop192.Domain
                 if (dis is VisibleDiscount)
                 {
                     VisibleDiscount v = (VisibleDiscount)dis;
-                    if (!v.getIsPartOfComplex()&&v.isStoreVisibleDiscount())
+                    if (!v.getIsPartOfComplex() && v.isStoreVisibleDiscount())
                     {
                         if (v.isStoreVisibleDiscount())
                             sum = sum * (1 - v.getPercentage());
@@ -179,10 +179,10 @@ namespace workshop192.Domain
 
             return sum;
         }
-   
+
         public double getTotalPrice()
         {
-           
+
             double sum = 0;
             foreach (KeyValuePair<Product, int> entry in productList)
             {
@@ -195,7 +195,7 @@ namespace workshop192.Domain
 
         private void fillActualPriceDic()
         {
-            foreach(KeyValuePair<Product,int> entry in productList)
+            foreach (KeyValuePair<Product, int> entry in productList)
             {
                 Product p = entry.Key;
                 productsActualPrice.Add(p, entry.Value);
@@ -215,7 +215,7 @@ namespace workshop192.Domain
 
         private void updateActualProductPrice()
         {
-            
+
             foreach (KeyValuePair<Product, int> entry in productList)
             {
                 Product p = entry.Key;
@@ -227,37 +227,20 @@ namespace workshop192.Domain
             }
         }
 
-       /* public void checkout(String address,String creditCard) {
-           // String res = "";
-            int sum = 0;
+        public int getNumOfProductsInCart()
+        {
+            int amount = 0;
             foreach (KeyValuePair<Product, int> entry in productList)
             {
-                if (entry.Key.getQuantityLeft() > entry.Value)
-                {
-                    
-                    sum = entry.Key.getPrice() * entry.Value;
-                    Boolean isOk = PaymentService.getInstance().checkOut(creditCard,sum);
-                    if (isOk)
-                    {
-                        entry.Key.setQuantityLeft(entry.Key.getQuantityLeft() - entry.Value);
-
-                        if (DeliveryService.getInstance().sendToUser(address, entry.Key) == false)
-                        {
-                            entry.Key.setQuantityLeft(entry.Key.getQuantityLeft() + entry.Value);
-                            throw new CartException("Cannot deliver " + entry.Key.getProductName());
-                        }
-                    }
-                    else
-                    {
-                        throw new CartException("Payment for " + entry.Key.getProductName());
-                    }
-                }
-                else
-                {
-                    throw new CartException("Not enough quantity of " + entry.Key.getProductName() );
-                }
-
+                int a = entry.Value;
+                amount += a;
             }
-        } */
+            return amount;
+        }
+
+        internal void checkStorePolicy()
+        {
+            store.checkStorePolicy(getNumOfProductsInCart(), getActualTotalPrice());
+        }
     }
 }
