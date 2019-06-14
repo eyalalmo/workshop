@@ -41,7 +41,7 @@ namespace workshop192.Domain.Tests
             Session s = new Session();
             string pass = DomainBridge.getInstance().encryptPassword("etay123");
             s.register("etay123", pass);
-            Assert.AreNotEqual(db.getSubscribedUser("etay"), null);            
+            Assert.AreNotEqual(db.getSubscribedUser("etay123"), null);            
         }
 
         [TestMethod()]
@@ -51,7 +51,7 @@ namespace workshop192.Domain.Tests
             string pass = DomainBridge.getInstance().encryptPassword("etay123");
             Session s = new Session();
             s.register("etay11", pass);
-            Assert.AreNotEqual(db.getSubscribedUser("etay"), null);
+            Assert.AreNotEqual(db.getSubscribedUser("etay11"), null);
         }
 
         [TestMethod()]

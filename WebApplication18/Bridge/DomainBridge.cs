@@ -426,7 +426,13 @@ namespace workshop192.Bridge
 
             return product.getPrice();
         }
-
+        public void setProductInformation(int storeId,int productid,int price,String name,int rank,int quantityLeft,int sessionid)
+        {
+            Product product = DBProduct.getInstance().getProductByID(productid);
+            if (product == null)
+                throw new DoesntExistException("no such product");
+            DBProduct.getInstance().update(product);
+        }
         public void setProductPrice(int productid, int price, int sessionid)
         {
             Product product = DBProduct.getInstance().getProductByID(productid);
@@ -1175,6 +1181,10 @@ namespace workshop192.Bridge
 
             if (sr.getStore() != store)
                 throw new RoleException("this user can't appoint to this store");
+            if (store.getStoreRole(toAdd) != null || store.getPending().Contains(username))
+                throw new RoleException("Error: Username " + toAdd.getUsername() +
+                    " already has a role in store " +
+                    store.getStoreName());
             if (store.getNumberOfOwners() == 1)
             {
                 sr.addOwner(toAdd);

@@ -81,7 +81,7 @@ namespace workshop192.ServiceLayer
             string oldName = db.getProductName(productID);
             int oldRank = db.getProductRank(productID);
             int oldQuantityLeft = db.getProductQuantityLeft(productID);
-
+            
             try
             {
                 setProductName(productID, productName, session);
@@ -99,6 +99,7 @@ namespace workshop192.ServiceLayer
                 setquantityLeft(productID, oldQuantityLeft, session);
                 throw e;
             }
+            db.setProductInformation(storeID, productID, price, productName, rank, quantityLeft, session);
         }
 
         public bool isAllowedToEditProduct(int storeId, int session)
