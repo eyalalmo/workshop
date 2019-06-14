@@ -15,15 +15,22 @@ namespace workshop192.Domain
         Dictionary<string, SubscribedUser> users;
         Dictionary<string, SubscribedUser> loggedInUser;
         private static DBSubscribedUser instance = null;
-        private int id;
-        
         private DBSubscribedUser()
         {
             users = new Dictionary<string, SubscribedUser>();
             loggedInUser = new Dictionary<string, SubscribedUser>();
             //SubscribedUser admin = new SubscribedUser("admin", encryptPassword("1234"), new ShoppingBasket("admin"));
             //register(admin);
-        } 
+        }
+
+        public static DBSubscribedUser getInstance()
+        {
+            if (instance == null)
+            {
+                instance = new DBSubscribedUser();
+            }
+            return instance;
+        }
 
         public void init()
         {
@@ -78,7 +85,7 @@ namespace workshop192.Domain
                     }
                 }
            }
-           catch (Exception e)
+           catch (Exception)
            {
                //connection.Close();
            }
@@ -104,23 +111,11 @@ namespace workshop192.Domain
                 instance = new DBSubscribedUser();
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //connection.Close();
             }
         }
-
-        
-
-
-       public static DBSubscribedUser getInstance()
-       {
-           if (instance == null)
-           {
-               instance = new DBSubscribedUser();
-           }
-           return instance;
-       }
 
        public void logout(SubscribedUser sub)
        {
@@ -310,7 +305,7 @@ namespace workshop192.Domain
                 //connection.Close();
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //connection.Close();
             }

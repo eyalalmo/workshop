@@ -40,7 +40,7 @@
 
        $(document).ready(function () {
            var getUrl = window.location;
-           var baseUrl = getUrl.protocol + "//" + getUrl.host;
+           var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18";
            var storeID =<%=ViewData["storeID"]%>;
             $("#btnVisibleDiscount").click(function () {
                 event.preventDefault();

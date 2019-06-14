@@ -98,7 +98,7 @@
         };
         function confirmBasket() {
              var getUrl = window.location;
-            var baseUrl = getUrl.protocol + "//" + getUrl.host
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
             var amount = $("#quantity").val();
                 console.log(baseUrl);
                 jQuery.ajax({
@@ -134,7 +134,7 @@
                 event.preventDefault();
                 
                 var getUrl = window.location;
-                var baseUrl = getUrl.protocol + "//" + getUrl.host
+                var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                 console.log(baseUrl);
                 jQuery.ajax({
                     type: "GET",
@@ -158,7 +158,7 @@
                  search = $("#searchI").val();
                 var doc = document.getElementById('allProducts')
                 var getUrl = window.location;
-                var baseUrl = getUrl.protocol + "//" + getUrl.host
+                var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                 console.log(baseUrl);
                 jQuery.ajax({
                     type: "GET",
@@ -180,7 +180,7 @@
                  search = $("#searchI").val();
                 var doc = document.getElementById('allProducts')
                 var getUrl = window.location;
-                var baseUrl = getUrl.protocol + "//" + getUrl.host
+                var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                 console.log(baseUrl);
                 jQuery.ajax({
                     type: "GET",
@@ -202,7 +202,7 @@
                  search = $("#searchI").val();
                 var doc = document.getElementById('allProducts')
                 var getUrl = window.location;
-                var baseUrl = getUrl.protocol + "//" + getUrl.host
+                var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                 console.log(baseUrl);
                 jQuery.ajax({
                     type: "GET",

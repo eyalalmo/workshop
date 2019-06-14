@@ -17,7 +17,7 @@
             var storeId =<%=ViewData["storeId"]%>;
             var doc = document.getElementById('storeProducts');
             var getUrl = window.location;
-            var baseUrl = getUrl.protocol + "//" + getUrl.host
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
             //////////////////////////////////////
          
             jQuery.ajax({
@@ -214,7 +214,7 @@
             else {
                 event.preventDefault();
                 var getUrl = window.location;
-                var baseUrl = getUrl.protocol + "//" + getUrl.host
+                var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
 
                 jQuery.ajax({
                     type: "GET",
@@ -247,7 +247,7 @@
 
                 event.preventDefault();
                 var getUrl = window.location;
-                var baseUrl = getUrl.protocol + "//" + getUrl.host
+                var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                 //console.log(price + "  " + rank + "  " + quantityLeft)
                 var price = document.getElementById("inPrice" + i).value;
                 var rank = document.getElementById("inRank" + i).value;
@@ -279,14 +279,14 @@
             console.log("productID " + productID);
             event.preventDefault();
             var getUrl = window.location;
-             var baseUrl = getUrl.protocol + "//" + getUrl.host;
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18";
              window.location.href = baseUrl + "/Discounts?productID="+productID;
         }  
 
         function add() {
             event.preventDefault();
             var getUrl = window.location;
-            var baseUrl = getUrl.protocol + "//" + getUrl.host
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
             var storeID =<%=ViewData["storeId"]%>;
             productName = $("#productName").val();
             productCategory = $("#productCategory").val();

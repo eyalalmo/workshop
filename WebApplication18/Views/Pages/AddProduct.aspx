@@ -38,7 +38,8 @@
             $("#btnAdd").click(function () {
                 event.preventDefault();
                var getUrl = window.location;
-               var baseUrl = getUrl.protocol + "//" + getUrl.host
+                var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
+
               var storeID  =<%=ViewData["storeId"]%>;
                 productName = $("#productName").val();
                 productCategory = $("#productCategory").val();

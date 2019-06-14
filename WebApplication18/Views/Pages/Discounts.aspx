@@ -23,7 +23,7 @@
                 percentage = $("#percentage").val();
                 duration = $("#duration").val();    
                 var getUrl = window.location;
-                var baseUrl = getUrl.protocol + "//" + getUrl.host;
+                var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18";
                 jQuery.ajax({
                     type: "GET",
                     url: baseUrl+"/api/products/addVisibleDiscount?productID=" + productID + "&percentage=" + percentage+"&duration=" + duration,

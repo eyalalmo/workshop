@@ -22,7 +22,7 @@
 
                
                var getUrl = window.location;
-                var baseUrl = getUrl.protocol + "//" + getUrl.host
+                var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                 var storeID =<%=ViewData["storeID"]%>;
               
                 console.log("before jquery");
@@ -79,7 +79,7 @@
               console.log(id);
               var plusAmount = amount + 1;
               var getUrl = window.location;
-              var baseUrl = getUrl.protocol + "//" + getUrl.host
+              var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                jQuery.ajax({
                     type: "GET",
                     url: baseUrl+"/api/store/setPolicyAmount?policyID=" + id+"&amount="+plusAmount,
@@ -106,7 +106,7 @@
               console.log(id);
               var minusAmount = amount - 1;
               var getUrl = window.location;
-              var baseUrl = getUrl.protocol + "//" + getUrl.host
+              var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                jQuery.ajax({
                     type: "GET",
                     url: baseUrl+"/api/store/setPolicyAmount?policyID=" + id+"&amount="+minusAmount,
@@ -132,7 +132,7 @@
               event.preventDefault();
                 var getUrl = window.location;
                 var storeID =<%=ViewData["storeID"]%>;
-              var baseUrl = getUrl.protocol + "//" + getUrl.host
+              var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                jQuery.ajax({
                    type: "GET",
                     url: baseUrl+"/api/store/removePolicy?policyID=" + id +"&storeID=" + storeID,
@@ -169,7 +169,7 @@
                   });
               console.log("type::::" + type);
              console.log("Make COMPLEX!!!!");
-              var baseUrl = getUrl.protocol + "//" + getUrl.host
+              var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                jQuery.ajax({
                    type: "GET",
                    url: baseUrl + "/api/store/complexPolicy?policies=" + s + "&storeID=" + storeID + "&type=" + type ,
@@ -180,7 +180,7 @@
                         if (response == "ok") {
                             event.preventDefault();
                             var getUrl = window.location;
-                            var baseUrl = getUrl.protocol + "//" + getUrl.host
+                            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                             window.location.href = baseUrl+"/Store?storeId=" + storeID;
                         }
                         else {

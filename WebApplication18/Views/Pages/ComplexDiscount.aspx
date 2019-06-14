@@ -23,7 +23,7 @@
 
                
                var getUrl = window.location;
-                var baseUrl = getUrl.protocol + "//" + getUrl.host
+                var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                 var storeID =<%=ViewData["storeID"]%>;
               
                 console.log("before jquery");
@@ -81,7 +81,7 @@
               console.log(id);
               var plusPercentage = percentage + 1;
               var getUrl = window.location;
-              var baseUrl = getUrl.protocol + "//" + getUrl.host
+              var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                jQuery.ajax({
                     type: "GET",
                     url: baseUrl+"/api/store/setDiscountPercentage?discountID=" + id+"&percentage="+plusPercentage,
@@ -108,7 +108,7 @@
               console.log(id);
               var minusPercentage = percentage - 1;
               var getUrl = window.location;
-              var baseUrl = getUrl.protocol + "//" + getUrl.host
+              var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                jQuery.ajax({
                     type: "GET",
                     url: baseUrl+"/api/store/setDiscountPercentage?discountID=" + id+"&percentage="+minusPercentage,
@@ -134,7 +134,7 @@
               event.preventDefault();
                 var getUrl = window.location;
                 var storeID =<%=ViewData["storeID"]%>;
-              var baseUrl = getUrl.protocol + "//" + getUrl.host
+              var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                jQuery.ajax({
                    type: "GET",
                     url: baseUrl+"/api/store/removeDiscount?discountID=" + id +"&storeID=" + storeID,
@@ -172,7 +172,7 @@
                   });
               console.log("type::::" + type);
              console.log("Make COMPLEX!!!!");
-              var baseUrl = getUrl.protocol + "//" + getUrl.host
+              var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                jQuery.ajax({
                    type: "GET",
                    url: baseUrl + "/api/store/complexDiscount?discounts=" + s + "&storeID=" + storeID + "&type=" + type + "&percentage=0.01&duration=" + duration,
@@ -183,7 +183,7 @@
                         if (response == "ok") {
                             event.preventDefault();
                             var getUrl = window.location;
-                            var baseUrl = getUrl.protocol + "//" + getUrl.host
+                            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                             window.location.href = baseUrl+"/StoreDiscounts?storeId=" + storeID;
                         }
                         else {

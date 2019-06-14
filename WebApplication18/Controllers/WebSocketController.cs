@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.WebSockets;
+using WebApplication18.Logs;
 using workshop192.ServiceLayer;
 
 namespace WebApplication18.Controllers
@@ -17,27 +18,29 @@ namespace WebApplication18.Controllers
     {
         public static Dictionary<int, WebSocket> sessionToSocket = new Dictionary<int, WebSocket>();
 
-/*      public static Dictionary<string, LinkedList<String>> waitingMessages = takeWaitingMessages();
+        /*      public static Dictionary<string, LinkedList<String>> waitingMessages = takeWaitingMessages();
 
-        public static Dictionary<string, LinkedList<String>> takeWaitingMessages()
-        {
-            Dictionary<string, LinkedList<String>> waitings = new Dictionary<string, LinkedList<String>>();
-            LinkedList<Tuple<string, string>> oldWaitingMessages = UserService.getInstance().getWaitingMessages();
-            LinkedList<Tuple<string, string>> remains = new LinkedList<Tuple<string, string>>();
+                public static Dictionary<string, LinkedList<String>> takeWaitingMessages()
+                {
+                    Dictionary<string, LinkedList<String>> waitings = new Dictionary<string, LinkedList<String>>();
+                    LinkedList<Tuple<string, string>> oldWaitingMessages = UserService.getInstance().getWaitingMessages();
+                    LinkedList<Tuple<string, string>> remains = new LinkedList<Tuple<string, string>>();
 
-            foreach (Tuple<string, string> newMessage in oldWaitingMessages)
-            {
-                if (!waitings.ContainsKey(newMessage.Item1))
-                    waitings.Add(newMessage.Item1, new LinkedList<string>());
-                else
-                    remains.AddLast(newMessage);
-                waitings[newMessage.Item1].AddFirst(newMessage.Item2);
+                    foreach (Tuple<string, string> newMessage in oldWaitingMessages)
+                    {
+                        if (!waitings.ContainsKey(newMessage.Item1))
+                            waitings.Add(newMessage.Item1, new LinkedList<string>());
+                        else
+                            remains.AddLast(newMessage);
+                        waitings[newMessage.Item1].AddFirst(newMessage.Item2);
 
-            }
-            UserService.getInstance().setWaitingMessages(remains);
-            return waitings;
-        }
-*/
+                    }
+                    UserService.getInstance().setWaitingMessages(remains);
+                    return waitings;
+                }
+        */
+
+        [Route("api/WebSocket/get")]
         public HttpResponseMessage Get()
         {
             if (System.Web.HttpContext.Current.IsWebSocketRequest)
@@ -59,6 +62,7 @@ namespace WebApplication18.Controllers
                     hashSession = context.CookieCollection[i].Value;
                     goto cont;
                 }
+
             return;
 
             cont:
@@ -93,7 +97,9 @@ namespace WebApplication18.Controllers
                 }
             }
         noSession:*/
-            while (sessionToSocket.ContainsValue(socket) && socket.State == WebSocketState.Open) {}
+            while (sessionToSocket.ContainsValue(socket) && socket.State == WebSocketState.Open) {
+                //await socket.ReceiveAsync(buffer, new CancellationToken());
+            }
         }
 
         public static void message(string username, string message)
@@ -171,5 +177,6 @@ namespace WebApplication18.Controllers
                     messagesToSend.AddLast(message);
                 }*/
         }
+
     }
 }

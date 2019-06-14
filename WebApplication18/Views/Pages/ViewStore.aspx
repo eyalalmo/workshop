@@ -42,7 +42,7 @@
             var storeId =<%=ViewData["storeId"]%>;
             var doc = document.getElementById('allStores');
             var getUrl = window.location;
-            var baseUrl = getUrl.protocol + "//" + getUrl.host
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
 
             jQuery.ajax({
                 type: "GET",
@@ -99,7 +99,7 @@
         };
         function confirmBasket() {
             var getUrl = window.location;
-            var baseUrl = getUrl.protocol + "//" + getUrl.host
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
             var amount = $("#quantity").val();
             console.log(baseUrl);
             jQuery.ajax({
@@ -123,13 +123,13 @@
                function storeDiscounts(storeId) {
                event.preventDefault();
                var getUrl = window.location;
-               var baseUrl = getUrl.protocol + "//" + getUrl.host
+                   var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                window.location.href = baseUrl+"/DiscountView?storeId=" + storeId;
         }
                function storePolicies(storeId) {
                event.preventDefault(storeId);
                var getUrl = window.location;
-               var baseUrl = getUrl.protocol + "//" + getUrl.host
+                   var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                window.location.href = baseUrl+"/PolicyView?storeId=" + storeId;
           }
               

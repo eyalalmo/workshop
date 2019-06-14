@@ -21,7 +21,7 @@
             var complex = document.getElementById('complex');
                
                var getUrl = window.location;
-                var baseUrl = getUrl.protocol + "//" + getUrl.host
+                var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                 var storeID =<%=ViewData["storeID"]%>;
               
                 console.log("before jquery");
@@ -32,12 +32,10 @@
                     dataType: "json",
                     success:
                         function (response) {
-                            console.log("111111111111111111\n");
                             if (response != "") {
                                 console.log(response);
 
                                 var str = "<table class =\"table table-bordered text-center\">"
-                                console.log("str:::::" + str + "\n");
                                 str = str + "<tbody>";
                                 var discounts = response.split(";");
                                 for (i = 0; i < discounts.length - 1; i++) {

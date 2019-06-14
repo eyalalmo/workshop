@@ -103,7 +103,7 @@
         };
         function addM() {
                     var getUrl = window.location;
-            var baseUrl = getUrl.protocol + "//" + getUrl.host
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
             var storeId =<%=ViewData["storeId"]%>;
             var username = $("#manager").val();
             var prod = $("#per1").is(':checked'); 
@@ -134,7 +134,7 @@
         function removeRole(username) {
 
             var getUrl = window.location;
-            var baseUrl = getUrl.protocol + "//" + getUrl.host
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
             var storeId =<%=ViewData["storeId"]%>;
 
             jQuery.ajax({
@@ -159,7 +159,7 @@
         function signContract(username) {
 
             var getUrl = window.location;
-            var baseUrl = getUrl.protocol + "//" + getUrl.host
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
             var storeId =<%=ViewData["storeId"]%>;
 
             jQuery.ajax({
@@ -184,7 +184,7 @@
         function declineContract(username) {
 
             var getUrl = window.location;
-            var baseUrl = getUrl.protocol + "//" + getUrl.host
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
             var storeId =<%=ViewData["storeId"]%>;
 
             jQuery.ajax({
@@ -207,7 +207,7 @@
         }
         function confirmOwner() {
             var getUrl = window.location;
-            var baseUrl = getUrl.protocol + "//" + getUrl.host
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
             var username = $("#owner").val();
             var storeId =<%=ViewData["storeId"]%>;
                 
@@ -235,7 +235,7 @@
 
         var storeId =<%=ViewData["storeId"]%>;
         var getUrl = window.location;
-        var baseUrl = getUrl.protocol + "//" + getUrl.host
+        var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
         jQuery.ajax({
             type: "GET",
             url: baseUrl + "/api/store/getAllRoles?storeId=" + storeId,

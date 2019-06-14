@@ -9,4 +9,4 @@ namespace workshop192.Domain
     public interface PurchaseType
     {
     }
-}
+}   

@@ -9,7 +9,7 @@
         $(document).ready(function () {
              var doc = document.getElementById('allStores');
          var getUrl = window.location;
-               var baseUrl = getUrl.protocol + "//" + getUrl.host
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
             jQuery.ajax({
                 type: "GET",
                 url: baseUrl+"/api/store/getAllStores",

@@ -60,7 +60,7 @@ namespace WebApplication18.Domain
                 connection.Execute("DELETE FROM Notification");
                 //connection.Close();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //connection.Close();
             }

@@ -57,7 +57,7 @@
                var checkoutDiv = document.getElementById('checkout');
                
                var getUrl = window.location;
-               var baseUrl = getUrl.protocol + "//" + getUrl.host
+               var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                console.log(baseUrl);
               totalPrice();
 
@@ -137,7 +137,7 @@
               console.log(id);
               var plusQuantity = quantity + 1;
               var getUrl = window.location;
-              var baseUrl = getUrl.protocol + "//" + getUrl.host
+              var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                jQuery.ajax({
                     type: "GET",
                     url: baseUrl+"/api/user/setProductQuantity?product=" + id+"&quantity="+plusQuantity,
@@ -164,7 +164,7 @@
               console.log(id);
               var minusQuantity = quantity - 1;
               var getUrl = window.location;
-              var baseUrl = getUrl.protocol + "//" + getUrl.host
+              var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                jQuery.ajax({
                     type: "GET",
                     url: baseUrl+"/api/user/setProductQuantity?product=" + id+"&quantity="+minusQuantity,
@@ -190,7 +190,7 @@
               event.preventDefault();
               console.log(id);
               var getUrl = window.location;
-              var baseUrl = getUrl.protocol + "//" + getUrl.host
+              var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                jQuery.ajax({
                    type: "GET",
                     url: baseUrl+"/api/user/removeProductFromCart?productId=" + id,
@@ -216,7 +216,7 @@
                                 
                               event.preventDefault();
                               var getUrl = window.location;
-                              var baseUrl = getUrl.protocol + "//" + getUrl.host
+                              var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                               jQuery.ajax({
                                       type: "GET",
                                       url: baseUrl + "/api/user/checkBasket",
@@ -244,7 +244,7 @@
             });*/
           function totalPrice() {
                   var getUrl = window.location;
-                  var baseUrl = getUrl.protocol + "//" + getUrl.host
+                  var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
               var mainDiv2 = document.getElementById('totalPrice');
               console.log("total price");
                   jQuery.ajax({

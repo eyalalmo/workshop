@@ -14,8 +14,7 @@ namespace workshop192.Domain
     {
         private static DBDiscount instance;
         private LinkedList<DiscountComponent> discounts;
-        private static int nextID;
-
+        //private static int nextID;
         public static DBDiscount getInstance()
         {
             if (instance == null)
@@ -28,7 +27,7 @@ namespace workshop192.Domain
         private DBDiscount()
         {
             discounts = new LinkedList<DiscountComponent>();
-            nextID = 1;
+            //DBDiscount.nextID = 1;
         }
 
         public void init()

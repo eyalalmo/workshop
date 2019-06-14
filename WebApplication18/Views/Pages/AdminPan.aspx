@@ -16,7 +16,7 @@
             $("#userDelete").click(function () {
                 event.preventDefault();
                 var getUrl = window.location;
-                var baseUrl = getUrl.protocol + "//" + getUrl.host
+                var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                 console.log(baseUrl);
                 username = $("#username").val();
 
@@ -54,7 +54,7 @@
            $("#del1").click(function () {
                 event.preventDefault();
                 var getUrl = window.location;
-                var baseUrl = getUrl.protocol + "//" + getUrl.host
+                var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                 if (confirm("Are you sure you want to delete ____ ?")) {
                     jQuery.ajax({
                     type: "GET",
@@ -77,7 +77,7 @@
                     ////////
                 }
                var getUrl = window.location;
-               var baseUrl = getUrl.protocol + "//" + getUrl.host
+               var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
             });
         });
 

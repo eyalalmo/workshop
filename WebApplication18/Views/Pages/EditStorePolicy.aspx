@@ -29,7 +29,7 @@
        $(document).ready(function () {
             var storeID  =<%=ViewData["storeId"]%>;
             var getUrl = window.location;
-            var baseUrl = getUrl.protocol + "//" + getUrl.host
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
            var maxCon = document.getElementById('oldMax');
            var minCon = document.getElementById('oldMin');
                 jQuery.ajax({
@@ -77,7 +77,7 @@
                event.preventDefault();
              var storeID  =<%=ViewData["storeId"]%>;
               var getUrl = window.location;
-               var baseUrl = getUrl.protocol + "//" + getUrl.host
+               var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
              
                 maxVal = $("#max").val();
                 jQuery.ajax({
@@ -106,7 +106,7 @@
              event.preventDefault();
              var storeID  =<%=ViewData["storeId"]%>;
              var getUrl = window.location;
-             var baseUrl = getUrl.protocol + "//" + getUrl.host
+             var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
               
               minVal = $("#min").val();
 
@@ -134,7 +134,7 @@
                event.preventDefault();
              var storeID  =<%=ViewData["storeId"]%>;
              var getUrl = window.location;
-             var baseUrl = getUrl.protocol + "//" + getUrl.host
+             var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
              
                 jQuery.ajax({
                     type: "GET",
@@ -161,7 +161,7 @@
                event.preventDefault();
              var storeID  =<%=ViewData["storeId"]%>;
              var getUrl = window.location;
-             var baseUrl = getUrl.protocol + "//" + getUrl.host
+             var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
              
                 jQuery.ajax({
                     type: "GET",

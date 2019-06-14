@@ -14,7 +14,6 @@ namespace WebApplication18.DAL
     {
         private static Connector instance;
 
-        private MySqlConnection con;
         private SqlConnection connection;
 
         public string stringDB = "Server=tcp:wsep192.database.windows.net,1433;Initial Catalog=wsep192;Persist Security Info=False;User ID=eilon532;Password=wsep192!!!!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";

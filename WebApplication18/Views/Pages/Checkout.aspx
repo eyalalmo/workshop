@@ -59,7 +59,7 @@
 
            var mainDiv = document.getElementById('totalPrice');
            var getUrl = window.location;
-           var baseUrl = getUrl.protocol + "//" + getUrl.host
+           var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                   jQuery.ajax({
                       type: "GET",
 

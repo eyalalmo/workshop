@@ -18,7 +18,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var getUrl = window.location;
-               var baseUrl = getUrl.protocol + "//" + getUrl.host
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
             $("#AddStore").click(function () {
                event.preventDefault();
                var getUrl = window.location;

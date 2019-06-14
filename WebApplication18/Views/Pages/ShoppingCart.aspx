@@ -172,7 +172,7 @@
                var checkoutDiv = document.getElementById('checkout');
                
                var getUrl = window.location;
-               var baseUrl = getUrl.protocol + "//" + getUrl.host
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                console.log(baseUrl);
   
                 console.log("before jquery");
@@ -235,7 +235,7 @@
               event.preventDefault();
               console.log(id);
               var getUrl = window.location;
-              var baseUrl = getUrl.protocol + "//" + getUrl.host
+              var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                jQuery.ajax({
                     type: "GET",
                     url: baseUrl+"/api/user/removeProductFromCart?productId=" + id,

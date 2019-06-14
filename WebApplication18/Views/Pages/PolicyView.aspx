@@ -21,7 +21,7 @@
             var complex = document.getElementById('complex');
                
                var getUrl = window.location;
-                var baseUrl = getUrl.protocol + "//" + getUrl.host
+            var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                 var storeID =<%=ViewData["storeID"]%>;
               
                 console.log("before jquery");

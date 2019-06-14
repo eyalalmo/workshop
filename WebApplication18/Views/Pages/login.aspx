@@ -24,7 +24,7 @@
             $("#btnLogin").click(function () {
                 event.preventDefault();
                var getUrl = window.location;
-               var baseUrl = getUrl.protocol + "//" + getUrl.host
+                var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                
                 username = $("#name").val();
                 pass = $("#pass").val();

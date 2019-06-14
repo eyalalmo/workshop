@@ -57,7 +57,7 @@ namespace workshop192.Domain
                     }
                 }
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 initWitOutRead();
                 return;
@@ -84,7 +84,7 @@ namespace workshop192.Domain
                     filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
                      lines = File.ReadAllLines(filePath + "/" + fileName);
                 }
-                catch(Exception e)
+                catch(Exception)
                 {
                     initWitOutRead();
                     return;

@@ -67,7 +67,7 @@ namespace workshop192.Domain
                 connection.Execute("UPDATE [dbo].[IDS] SET id = 0 WHERE type = 'store'");
                 //connection.Close();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //connection.Close();
             }
@@ -279,7 +279,7 @@ namespace workshop192.Domain
                 connection.Execute("UPDATE [dbo].[Stores] SET numOfOwners = @newNumber WHERE storeId = @storeId", new { storeId = storeId, newNumber = numOfOwners });
                 //connection.Close();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //connection.Close();
             }
@@ -293,7 +293,7 @@ namespace workshop192.Domain
                 connection.Execute("UPDATE [dbo].[Stores] SET numOfOwners = @newNumber WHERE storeId = @storeId", new { storeId = storeId, newNumber = newNumber });
                 //connection.Close();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //connection.Close();
             }
@@ -307,7 +307,7 @@ namespace workshop192.Domain
                 connection.Execute("UPDATE [dbo].[Stores] SET minPurchasePolicy = @minPurchasePolicy WHERE storeId = @storeId", new { storeId = storeId, minPurchasePolicy = minPurchasePolicy });
                 //connection.Close();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //connection.Close();
             }
@@ -381,7 +381,7 @@ namespace workshop192.Domain
                 connection.Execute("UPDATE [dbo].[Stores] SET maxPurchasePolicy = @maxPurchasePolicy WHERE storeId = @storeId", new { storeId = storeId, maxPurchasePolicy = maxPurchasePolicy });
                 //connection.Close();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //connection.Close();
             }
@@ -466,7 +466,7 @@ namespace workshop192.Domain
                 s.setDiscountList(discountList);
                 return s;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //connection.Close();
                 throw new StoreException("cant return store");
@@ -582,7 +582,7 @@ namespace workshop192.Domain
                 //connection.Close();
                 return idNum;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //connection.Close();
                 throw new StoreException("cant connect");
@@ -614,7 +614,7 @@ namespace workshop192.Domain
                 }
                 return lst;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //connection.Close();
                 throw new StoreException("cant get roles from db");
@@ -638,7 +638,7 @@ namespace workshop192.Domain
                                    );
                 //connection.Close();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //connection.Close();
             }

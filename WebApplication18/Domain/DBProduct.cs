@@ -89,7 +89,7 @@ namespace workshop192.Domain
                 connection.Execute("DELETE FROM Product");
                 //connection.Close();
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 //connection.Close();
             }
