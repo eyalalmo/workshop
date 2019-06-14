@@ -446,7 +446,7 @@ namespace WebApplication18.Controllers
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-                StoreService.getInstance().setMaxAmountPolicy(storeID, session, maxVal);
+              //  StoreService.getInstance().setMaxAmountPolicy(storeID, session, maxVal);
                  return "ok";
             }
             catch (ClientException e)
@@ -463,7 +463,7 @@ namespace WebApplication18.Controllers
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-                StoreService.getInstance().setMinAmountPolicy(storeID, session, minVal);
+              //  StoreService.getInstance().setMinAmountPolicy(storeID, session, minVal);
                 return "ok";
             }
             catch (ClientException e)
@@ -472,14 +472,14 @@ namespace WebApplication18.Controllers
                 return e.Message;
             }
         }
-        [Route("api/store/GetMaxPolicy")]
+       /* [Route("api/store/GetMaxPolicy")]
         [HttpGet]
         public string GetMaxPolicy(int storeID)
         {
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-               return StoreService.getInstance().getMaxAmountPolicy(storeID,session);
+           //    return StoreService.getInstance().getMaxAmountPolicy(storeID,session);
                
             }
             catch (ClientException e)
@@ -513,7 +513,7 @@ namespace WebApplication18.Controllers
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-                 StoreService.getInstance().removeMaxAmountPolicy(storeID, session);
+          //       StoreService.getInstance().removeMaxAmountPolicy(storeID, session);
                  return "ok";
 
             }
@@ -531,7 +531,7 @@ namespace WebApplication18.Controllers
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-                StoreService.getInstance().removeMinAmountPolicy(storeID, session);
+         //       StoreService.getInstance().removeMinAmountPolicy(storeID, session);
                 return "ok";
 
             }
@@ -541,7 +541,7 @@ namespace WebApplication18.Controllers
                 return e.Message;
             }
         }
-
+        */
         [Route("api/store/StoreDiscounts")]
         [HttpGet]
         public string StoreDiscounts(int storeID)

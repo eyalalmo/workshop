@@ -242,6 +242,7 @@ namespace workshop192.Domain
             foreach (KeyValuePair<int, ShoppingCart> pair1 in shoppingCarts)
             {
                 ShoppingCart cart = pair1.Value;
+                cart.checkStorePolicy();
                 Store store = DBStore.getInstance().getStore(cart.getStoreID());
                 Dictionary<Product, int> productsInCart = cart.getProductsInCarts();
                 foreach (KeyValuePair<Product, int> pair2 in productsInCart)
@@ -249,7 +250,7 @@ namespace workshop192.Domain
                     numOfProducts++;
                     Product product = pair2.Key;
                     int amount = pair2.Value;
-                    store.checkPolicy(product, amount);
+                   // store.checkPolicy(product, amount);
                     if (product.getQuantityLeft() == 0)
                     {
                         productToRemove = product;
