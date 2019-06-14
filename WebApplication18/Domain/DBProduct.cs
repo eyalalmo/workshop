@@ -38,15 +38,14 @@ namespace workshop192.Domain
                 //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
                 {
-                    using (connection)
-                    {
+                    
                         connection.Open();
                         var products = connection.Query<Product>("SELECT * FROM [dbo].[Product]");
 
 
                         if (products.Count() == 0)
                         {
-                            //connection.Close();
+                            connection.Close();
                             return;
                         }
 
@@ -73,14 +72,14 @@ namespace workshop192.Domain
                                 nextProductID = product.getProductID();
                         }
 
-                        //connection.Close();
+                        connection.Close();
                     }
-                    int i = 0;
-                }
+                   
+                
             }
             catch (Exception e)
             {
-                //connection.Close();
+                connection.Close();
                 throw e;
             }
 
@@ -96,17 +95,16 @@ namespace workshop192.Domain
                 //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
                 {
-                    using (connection)
-                    {
+                    
                         connection.Open();
                         connection.Execute("DELETE FROM Product");
-                    }
+                         connection.Close();
                 }
-                //connection.Close();
+              
             }
             catch(Exception e)
             {
-                //connection.Close();
+                connection.Close();
             }
         }
 
@@ -123,8 +121,7 @@ namespace workshop192.Domain
                                  " @price, @rank, @quantityLeft, @storeID)";
                 lock (connection)
                 {
-                    using (connection)
-                    {
+                    
                         connection.Open();
                         connection.Execute(sql, new
                         {
@@ -136,7 +133,7 @@ namespace workshop192.Domain
                             quantityLeft = p.getQuantityLeft(),
                             storeID = p.getStoreID(),
                         });
-                    }
+                    connection.Close();
                 }
                 
                 //if(p.discount != null)
@@ -157,7 +154,7 @@ namespace workshop192.Domain
 
             catch (Exception e)
             {
-                //connection.Close();
+                connection.Close();
                 throw e;
             }
         }
@@ -219,21 +216,20 @@ namespace workshop192.Domain
                 // SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
                 {
-                    using (connection)
-                    {
+                    
                         connection.Open();
                         connection.Execute("DELETE FROM Product WHERE productID=@productID ", new { productID = p.getProductID() });
                         //if(p.discount != null)
                         //  DBDiscount.getInstance().removeDiscount(p.discount);
                         productList.Remove(p);
-                        //connection.Close();
-                    }
+                        connection.Close();
+                    
                 }
             }
 
             catch (Exception e)
             {
-                //connection.Close();
+                connection.Close();
                 throw e;
             }
         }
@@ -249,18 +245,17 @@ namespace workshop192.Domain
                 // SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
                 {
-                    using (connection)
-                    {
+                   
                         connection.Open();
                         var c = connection.Query<Product>("SELECT * FROM [dbo].[Product] WHERE productID=" +
                                                   "@product ", new { product = id });
                         if (c.Count() == 0)
                         {
-                            //connection.Close();
+                            connection.Close();
                             return null;
                         }
 
-                        //connection.Close();
+                        connection.Close();
 
                         Product product = c.First();
                         //  if(product.discountID != -1)
@@ -268,11 +263,11 @@ namespace workshop192.Domain
                         productList.AddFirst(product);
                         return product;
                     }
-                }
+                
             }
             catch (Exception e)
             {
-                //connection.Close();
+                connection.Close();
                 throw e;
             }
         }
@@ -385,9 +380,7 @@ namespace workshop192.Domain
             {
                 //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
-                {
-                    using (connection)
-                    {
+                {  
                         connection.Open();
                         connection.Execute("UPDATE Product SET " +
                                           "productID=@productID, " +
@@ -409,15 +402,15 @@ namespace workshop192.Domain
                           storeID = p.getStoreID()
                       });
                     }
-                }
+                
                 
                 //if(p.discount != null)
                   //  DBDiscount.getInstance().update(p.discount);
-                //connection.Close();
+                connection.Close();
             }
             catch (Exception e)
             {
-                //connection.Close();
+                connection.Close();
                 throw e;
             }
         }

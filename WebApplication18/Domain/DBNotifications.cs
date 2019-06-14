@@ -37,8 +37,6 @@ namespace WebApplication18.Domain
             {
                 lock (connection)
                 {
-                    using (connection)
-                    {
                         connection.Open();
                         //SqlConnection connection = Connector.getInstance().getSQLConnection();
                         foreach (Tuple<string, string> message in remains)
@@ -48,13 +46,13 @@ namespace WebApplication18.Domain
                             connection.Execute(sql, new { message.Item1, message.Item2 });
                         }
                     }
-                }
-                //connection.Close();
+                
+                connection.Close();
             }
 
             catch (Exception)
             {
-                //connection.Close();
+                connection.Close();
             }
         }
 
@@ -64,18 +62,17 @@ namespace WebApplication18.Domain
             {
                 lock (connection)
                 {
-                    using (connection)
-                    {
+                   
                         connection.Open();
                         // SqlConnection connection = Connector.getInstance().getSQLConnection();
                         connection.Execute("DELETE FROM Notification");
-                        //connection.Close();
+                        connection.Close();
                     }
-                }
+                
             }
             catch (Exception e)
             {
-                //connection.Close();
+                connection.Close();
             }
         }
 
@@ -92,18 +89,17 @@ namespace WebApplication18.Domain
                              " VALUES (@username, @message)";
                 lock (connection)
                 {
-                    using (connection)
-                    {
+                   
                         connection.Open();
                         connection.Execute(sql, new { username, message });
-                    }
+                         connection.Close();
                 }
-                //connection.Close();
+     
             }
 
             catch (Exception)
             {
-                //connection.Close();
+                connection.Close();
             }
         }
 
@@ -113,19 +109,18 @@ namespace WebApplication18.Domain
             {
                 lock (connection)
                 {
-                    using (connection)
-                    {
+                    
                         connection.Open();
                         //SqlConnection connection = Connector.getInstance().getSQLConnection();
                         connection.Execute("DELETE FROM Notification WHERE username=@username ", new { username });
-                        //connection.Close();
-                    }
+                        connection.Close();
+                    
                 }
             }
 
             catch (Exception)
             {
-                //connection.Close();
+                connection.Close();
             }
             
             /*
@@ -146,13 +141,12 @@ namespace WebApplication18.Domain
                 //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
                 {
-                    using (connection)
-                    {
+                    
                         connection.Open();
                         var c = connection.Query<Notification>("SELECT username, message FROM [dbo].[Notification] WHERE username=@username ", new { username });
                         if (c.Count() == 0)
                         {
-                            //connection.Close();
+                            connection.Close();
                             return result;
                         }
 
@@ -161,15 +155,15 @@ namespace WebApplication18.Domain
                             result.AddFirst(message.message);
                         }
 
-                        //connection.Close();
+                        connection.Close();
                         return result;
                     }
-                }
+                
             }
 
             catch (Exception)
             {
-                //connection.Close();
+                connection.Close();
                 return result;
             }
 
@@ -191,18 +185,17 @@ namespace WebApplication18.Domain
                                  " VALUES (@username, @message)";
                 lock (connection)
                 {
-                    using (connection)
-                    {
+                    
                         connection.Open();
                         connection.Execute(sql, new { username = tuple.Item1, message = tuple.Item2 });
-                        //connection.Close();
-                    }
+                        connection.Close();
+                    
                 }
             }
 
             catch (Exception)
             {
-                //connection.Close();
+                connection.Close();
             }
         }
     }
