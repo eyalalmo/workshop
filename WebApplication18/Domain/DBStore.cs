@@ -21,7 +21,7 @@ namespace workshop192.Domain
 
         private DBStore()
         {
-            if (IsTestsMode.isTest == false)
+            if (MarketSystem.testsMode == false)
             {
                 storeRole = new LinkedList<StoreRole>();
                 stores = new LinkedList<Store>();
@@ -671,8 +671,8 @@ namespace workshop192.Domain
                                    + " DELETE FROM Product \n"
                                    + " DELETE FROM BasketCart \n"
                                    + " DELETE FROM CartProduct \n"
-                                   + " DELETE FROM Cookie \n"
                                    + " DELETE FROM Notification \n"
+                                   + " DELETE FROM Contracts \n"
                                    + " DELETE FROM Discount \n"
                                    + " DELETE FROM DiscountComponent \n"
                                    + " DELETE FROM DiscountComposite \n"
