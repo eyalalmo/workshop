@@ -237,6 +237,7 @@ namespace workshop192.Domain
         }
         public void checkBasket()
         {
+            int numOfProducts = 0;
             Product productToRemove = null;
             foreach (KeyValuePair<int, ShoppingCart> pair1 in shoppingCarts)
             {
@@ -245,6 +246,7 @@ namespace workshop192.Domain
                 Dictionary<Product, int> productsInCart = cart.getProductsInCarts();
                 foreach (KeyValuePair<Product, int> pair2 in productsInCart)
                 {
+                    numOfProducts++;
                     Product product = pair2.Key;
                     int amount = pair2.Value;
                     store.checkPolicy(product, amount);
@@ -267,6 +269,10 @@ namespace workshop192.Domain
                 }
                    
 
+            }
+            if (numOfProducts == 0)
+            {
+                throw new DoesntExistException("Checkout failed. there are no items in the basket for purchase.");
             }
            
                

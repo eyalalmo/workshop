@@ -261,7 +261,7 @@
                     success: function (response) {
                         console.log(response);
                         if (response === "ok") {
-                            alert("sucsses!");
+                            alert("Successfuly Updated details");
                             window.location.href = baseUrl + "/Store?storeId=" + storeID;
                         }
                         else {

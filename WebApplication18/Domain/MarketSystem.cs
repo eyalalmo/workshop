@@ -19,7 +19,7 @@ namespace workshop192.Domain
         {       
             
             int addNewDataToDB = 0;
-            string[] linesConfig=null;
+            string[] linesConfig = null;
             string filePathConfig = null;
             string fileName = "";
 
@@ -37,11 +37,11 @@ namespace workshop192.Domain
                     {
                         if(input[1]=="true")
                         {
-                            IsTestsMode.isTest = true;
+                            testsMode = true;
                         }
                         else
                         {
-                            IsTestsMode.isTest = false;
+                            testsMode = false;
                         }
                     }
                     if (input[0] == "isFirstTime")
@@ -63,7 +63,7 @@ namespace workshop192.Domain
                 return;
             }
 
-            if (IsTestsMode.isTest == true)
+            if (testsMode == true)
             {
                 initTestWitOutRead();
                 return;

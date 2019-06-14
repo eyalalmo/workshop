@@ -426,7 +426,13 @@ namespace workshop192.Bridge
 
             return product.getPrice();
         }
-
+        public void setProductInformation(int storeId,int productid,int price,String name,int rank,int quantityLeft,int sessionid)
+        {
+            Product product = DBProduct.getInstance().getProductByID(productid);
+            if (product == null)
+                throw new DoesntExistException("no such product");
+            DBProduct.getInstance().update(product);
+        }
         public void setProductPrice(int productid, int price, int sessionid)
         {
             Product product = DBProduct.getInstance().getProductByID(productid);
@@ -732,6 +738,31 @@ namespace workshop192.Bridge
             }
             return str;
         }
+        public string getStorePolicies(int storeID, int sessionID)
+        {
+            Session user = DBSession.getInstance().getSession(sessionID);
+            if (user == null)
+                throw new DoesntExistException("user is not logged in");
+            Store store = DBStore.getInstance().getStore(storeID);
+            //bar
+            //go over purchase policy
+            LinkedList<DiscountComponent> discounts = store.getDiscounts();
+            string str = "";
+            foreach (DiscountComponent dis in discounts)
+            {
+
+                //bar instead of sending percentage, send amount
+                str += dis.getDiscountType() + "," + dis.description() + "," + dis.getPercentage() * 100  + "," + dis.getId() + ";";
+
+                /* if(dis is DiscountComposite)
+                 {
+                     DiscountComposite d = (DiscountComposite)dis;
+                     str += dis.getDiscountType() + "," + dis.description() + "," + 100 + "," + 12 + "," + d.getId() + ";";
+                 }*/
+
+            }
+            return str;
+        }
         internal void removeProductDiscount(int product, int session)
         {
             Session user = DBSession.getInstance().getSession(session);
@@ -868,6 +899,24 @@ namespace workshop192.Bridge
             sr.removeStoreDiscount(discountID, store);
 
         }
+        internal void removeStorePolicy(int policyID, int storeID, int session)
+        {
+            //bar
+            //delete policy from store
+            Session user = DBSession.getInstance().getSession(session);
+            if (user == null)
+                throw new DoesntExistException("user is not logged in");
+            Store store = DBStore.getInstance().getStore(storeID);
+            SubscribedUser subscribedUser = user.getSubscribedUser();
+            if (subscribedUser == null)
+                throw new DoesntExistException("not a subscribed user");
+            StoreRole sr = subscribedUser.getStoreRole(store);
+            if (sr == null)
+                throw new RoleException("no role for this user in this store");
+
+            sr.removeStoreDiscount(policyID, store);
+
+        }
 
         public void setProductDiscount(int productid, int discount, int sessionid)
         {
@@ -914,6 +963,32 @@ namespace workshop192.Bridge
             }
             sr.addComplexDiscount(discounts, type, percentage, duration);
         }
+        public void complexPolicy(string policyString, int storeID, string type, int sessionID)
+        {
+            //bar
+            //change to complex policies
+            //checkDiscoutDuration(duration);
+            Session user = DBSession.getInstance().getSession(sessionID);
+            if (user == null)
+                throw new DoesntExistException("user is not logged in");
+            Store store = DBStore.getInstance().getStore(storeID);
+            SubscribedUser subscribedUser = user.getSubscribedUser();
+            if (subscribedUser == null)
+                throw new DoesntExistException("not a subscribed user");
+            StoreRole sr = subscribedUser.getStoreRole(store);
+            if (sr == null)
+                throw new RoleException("no role for this user in this store");
+            string[] discountArray = policyString.Split(' ');
+            List<DiscountComponent> discounts = new List<DiscountComponent>();
+            LinkedList<DiscountComponent> storediscounts = store.getDiscounts();
+            for (int i = 0; i < discountArray.Length - 1; i++)
+            {
+                int index = Int32.Parse(discountArray[i]);
+                discounts.Add(storediscounts.ElementAt(index));
+            }
+            sr.addComplexDiscount(discounts, type, 0.01, "12/12/2020");
+        }
+
         public void removeMaxAmountPolicy(int storeID, int sessionID)
         {
             Session user = DBSession.getInstance().getSession(sessionID);
@@ -1064,6 +1139,22 @@ namespace workshop192.Bridge
                     ((Discount)d).setPercentage(percentage);
             }
         }
+        public void setPolicyAmount(int policyID, int amount)
+        {
+            if (amount<=0)
+            {
+            }
+            else
+            {
+                //bar
+                //change amount of policy
+                double p = amount / 100.0; //delete 
+                DiscountComponent d = DBDiscount.getInstance().getDiscountByID(policyID);
+                DBDiscount.getInstance().setPercentage(d.getId(), p);
+                if (d is Discount)
+                    ((Discount)d).setPercentage(p);
+            }
+        }
 
         public void observe(Messager m)
         {
@@ -1090,6 +1181,10 @@ namespace workshop192.Bridge
 
             if (sr.getStore() != store)
                 throw new RoleException("this user can't appoint to this store");
+            if (store.getStoreRole(toAdd) != null || store.getPending().Contains(username))
+                throw new RoleException("Error: Username " + toAdd.getUsername() +
+                    " already has a role in store " +
+                    store.getStoreName());
             if (store.getNumberOfOwners() == 1)
             {
                 sr.addOwner(toAdd);

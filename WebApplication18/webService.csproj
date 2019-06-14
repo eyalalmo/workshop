@@ -16,9 +16,8 @@
     <AssemblyName>WebApplication18</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress>true</Use64BitIISExpress>
-    <IISExpressSSLPort>
-    </IISExpressSSLPort>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44306</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
@@ -271,6 +270,7 @@
     <Content Include="Images\new_corner.png" />
     <Content Include="Images\nodiscount_2.png" />
     <Content Include="Images\NoImageAvailabe.jpg" />
+    <Content Include="Images\Policy.png" />
     <Content Include="Images\trash.png" />
     <Content Include="input.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -329,6 +329,7 @@
       <BrowseToURL>~/Checkout</BrowseToURL>
     </Content>
     <Content Include="Views\Pages\ComplexDiscount.aspx" />
+    <Content Include="Views\Pages\ComplexPolicy.aspx" />
     <Content Include="Views\Pages\Contact.aspx">
       <BrowseToURL>~/Contact</BrowseToURL>
     </Content>
@@ -338,6 +339,7 @@
     <Content Include="Views\Pages\Discounts.aspx">
       <BrowseToURL>~/Discounts</BrowseToURL>
     </Content>
+    <Content Include="Views\Pages\DiscountView.aspx" />
     <Content Include="Views\Pages\EditStore.aspx">
       <BrowseToURL>~/EditStore</BrowseToURL>
     </Content>
@@ -356,6 +358,7 @@
     <Content Include="Views\Pages\MyAccount.aspx">
       <BrowseToURL>~/MyAccount</BrowseToURL>
     </Content>
+    <Content Include="Views\Pages\PolicyView.aspx" />
     <Content Include="Views\Pages\Products.aspx">
       <BrowseToURL>~/Products</BrowseToURL>
     </Content>
@@ -373,6 +376,7 @@
       <BrowseToURL>~/StoreDiscount</BrowseToURL>
     </Content>
     <Content Include="Views\Pages\StoreDiscounts.aspx" />
+    <Content Include="Views\Pages\StorePolicy.aspx" />
     <Content Include="Views\Pages\ViewStore.aspx">
       <BrowseToURL>~/ViewStore</BrowseToURL>
     </Content>
@@ -454,6 +458,7 @@
     <Compile Include="Exceptions\AlreadyExistException.cs" />
     <Compile Include="Exceptions\CartException.cs" />
     <Compile Include="Exceptions\ClientException.cs" />
+    <Compile Include="Exceptions\ConnectionException.cs" />
     <Compile Include="Exceptions\DoesntExistException.cs" />
     <Compile Include="Exceptions\IllegalAmountException.cs" />
     <Compile Include="Exceptions\IllegalNameException.cs" />
@@ -550,6 +555,13 @@
     <Compile Include="Views\Pages\ComplexDiscount.aspx.designer.cs">
       <DependentUpon>ComplexDiscount.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\ComplexPolicy.aspx.cs">
+      <DependentUpon>ComplexPolicy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Pages\ComplexPolicy.aspx.designer.cs">
+      <DependentUpon>ComplexPolicy.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -570,6 +582,13 @@
     </Compile>
     <Compile Include="Views\Pages\Discounts.aspx.designer.cs">
       <DependentUpon>Discounts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\DiscountView.aspx.cs">
+      <DependentUpon>DiscountView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Pages\DiscountView.aspx.designer.cs">
+      <DependentUpon>DiscountView.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\EditStore.aspx.cs">
       <DependentUpon>EditStore.aspx</DependentUpon>
@@ -612,6 +631,13 @@
     </Compile>
     <Compile Include="Views\Pages\MyAccount.aspx.designer.cs">
       <DependentUpon>MyAccount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\PolicyView.aspx.cs">
+      <DependentUpon>PolicyView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Pages\PolicyView.aspx.designer.cs">
+      <DependentUpon>PolicyView.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\Products.aspx.cs">
       <DependentUpon>Products.aspx</DependentUpon>
@@ -662,6 +688,13 @@
     <Compile Include="Views\Pages\StoreDiscounts.aspx.designer.cs">
       <DependentUpon>StoreDiscounts.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\StorePolicy.aspx.cs">
+      <DependentUpon>StorePolicy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\Pages\StorePolicy.aspx.designer.cs">
+      <DependentUpon>StorePolicy.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\ViewStore.aspx.cs">
       <DependentUpon>ViewStore.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -703,6 +736,12 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InitSettings\InitSettings.csproj">
+      <Project>{f47ea9f3-e64a-43f8-a136-81cf6934d9fb}</Project>
+      <Name>InitSettings</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -721,13 +760,13 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>59005</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:44356/</IISUrl>
+          <IISUrl>https://localhost:44356/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
           </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
-          <servers defaultServer="">
+          <servers defaultServer="SelfHostServer">
             <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:59005/" workingDir="" />
           </servers>
         </WebProjectProperties>

@@ -556,6 +556,20 @@ namespace WebApplication18.Controllers
                 return e.Message;
             }
         }
+        [Route("api/store/StorePolicies")]
+        [HttpGet]
+        public string StorePolicies(int storeID)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                return StoreService.getInstance().getStorePolicies(storeID, session);
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
 
 
         [Route("api/store/setDiscountPercentage")]
@@ -575,6 +589,22 @@ namespace WebApplication18.Controllers
             }
         }
 
+        [Route("api/store/setPolicyAmount")]
+        [HttpGet]
+        public Object setPolicyAmount(int policyID, int amount)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().setPolicyAmount(policyID, amount);
+                return "ok";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
         [Route("api/store/removeDiscount")]
         [HttpGet]
         public Object removeDiscount(int discountID,int storeID)
@@ -583,6 +613,21 @@ namespace WebApplication18.Controllers
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
                 StoreService.getInstance().removeStoreDiscount(discountID,storeID, session);
+                return "ok";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+        [Route("api/store/removePolicy")]
+        [HttpGet]
+        public Object removePolicy(int policyID, int storeID)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().removeStorePolicy(policyID, storeID, session);
                 return "ok";
             }
             catch (Exception e)
@@ -607,8 +652,22 @@ namespace WebApplication18.Controllers
             }
         }
         //url: baseUrl+"/api/store/payAndSend?address=" + address + "&creditcard=" + creditcard + "&month=" + month + "&year=" + year + "&holder=" + holder + "&cvv=" + cvv + "&creditcard=" + creditcard,
+        [Route("api/store/complexPolicy")]
+        [HttpGet]
+        public Object complexPolicy(string policies, int storeID, string type)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().complexPolicy(policies, storeID, type, session);
+                return "ok";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
 
-        
 
 
     }

@@ -85,11 +85,11 @@ namespace workshop192.Domain
         public void addManager(SubscribedUser manager, Permissions permissions)
         {
             StoreRole newManager = new StoreManager(this.userName, store, manager, permissions);
-            DBStore.getInstance().addStoreRole(newManager);
             if (store.getStoreRole(manager) != null)
                 throw new RoleException("Error: Username "  + manager.getUsername() + 
                     " already has a role in store " + 
                     store.getStoreName());
+            DBStore.getInstance().addStoreRole(newManager);
             store.addStoreRoleFromInitOwner(newManager);
             manager.addStoreRole(newManager);
             appointedByMe.Add(newManager);
@@ -260,26 +260,37 @@ namespace workshop192.Domain
         //}
 
         public void addPendingOwner(SubscribedUser pending)
-        {
+        { 
             DBStore.getInstance().addPendingOwner(store.getStoreID(),userName.getUsername(), pending.getUsername());
-            DBStore.getInstance().signContract(store.getStoreID(), userName.getUsername(), pending.getUsername());
+
         }
         public void signContract(SubscribedUser pending)
         {
             if (DBStore.getInstance().hasContract(store.getStoreID(), pending.getUsername(), userName.getUsername()))
                 throw new AlreadyExistException("You have already signed a contract with " + pending.getUsername());
-            DBStore.getInstance().signContract(store.getStoreID(),userName.getUsername(), pending.getUsername());
             int approvedOwners = DBStore.getInstance().getContractNum(store.getStoreID(),pending.getUsername());
-            if (approvedOwners == store.getNumberOfOwners())
+            if (approvedOwners == store.getNumberOfOwners()-1)
             {
-                DBStore.getInstance().removePendingOwner(store.getStoreID(),pending.getUsername());
-                addOwner(pending);
+                StoreRole newOwner = new StoreOwner(this.userName, pending, store);
+                //DBStore.getInstance().signContract(store.getStoreID(), userName.getUsername(), pending.getUsername(),true);
+                //DBStore.getInstance().removePendingOwner(store.getStoreID(),pending.getUsername());
+                //DBStore.getInstance().addStoreRole(newOwner);
+                store.addStoreRoleFromInitOwner(newOwner);
+                pending.addStoreRole(newOwner);
+                appointedByMe.Add(newOwner);
+                DBStore.getInstance().signAndAddOwner(store.getStoreID(), userName.getUsername(), pending.getUsername(), newOwner);
+
+            }
+            else
+            {
+                DBStore.getInstance().signContract(store.getStoreID(), userName.getUsername(), pending.getUsername(), false);
             }
         }
         public void declineContract(SubscribedUser pending)
         {
-            DBStore.getInstance().removeAllUserContracts(store.getStoreID(), pending.getUsername());
-            DBStore.getInstance().removePendingOwner(store.getStoreID(), pending.getUsername());
+            DBStore.getInstance().declineContract(store.getStoreID(), pending.getUsername());
+            //DBStore.getInstance().removeAllUserContracts(store.getStoreID(), pending.getUsername());
+            //DBStore.getInstance().removePendingOwner(store.getStoreID(), pending.getUsername());
         }
         public Permissions GetPermissions()
         {

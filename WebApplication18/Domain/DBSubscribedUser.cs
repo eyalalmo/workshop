@@ -275,7 +275,7 @@ namespace workshop192.Domain
 
         public void login(SubscribedUser user)
         {
-             loggedInUser.Add(user.getUsername(), user);
+            loggedInUser[user.getUsername()]= user;
             string username = user.getUsername();
             string password = user.getPassword();
             try
