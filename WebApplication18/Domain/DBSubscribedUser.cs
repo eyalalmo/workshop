@@ -41,54 +41,51 @@ namespace workshop192.Domain
                 //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
                 {
-                    using (connection)
+                    connection.Open();
+                    foreach (KeyValuePair<string, SubscribedUser> pair in users)
                     {
-                        connection.Open();
-                        foreach (KeyValuePair<string, SubscribedUser> pair in users)
+                        string username = pair.Key;
+                        SubscribedUser su = pair.Value;
+
+                        string sql = "SELECT * FROM BasketCart WHERE username=@username;";
+                        var c2 = connection.Query<BasketCartEntry>(sql, new { username = username });
+                        ShoppingBasket sb = su.getShoppingBasket();
+                        if (Enumerable.Count(c2) > 0)
                         {
-                            string username = pair.Key;
-                            SubscribedUser su = pair.Value;
-
-                            string sql = "SELECT * FROM BasketCart WHERE username=@username;";
-                            var c2 = connection.Query<BasketCartEntry>(sql, new { username = username });
-                            ShoppingBasket sb = su.getShoppingBasket();
-                            if (Enumerable.Count(c2) > 0)
+                            for (int i = 0; i < Enumerable.Count(c2); i++)
                             {
-                                for (int i = 0; i < Enumerable.Count(c2); i++)
-                                {
-                                    BasketCartEntry bc = c2.ElementAt(i);
-                                    int storeID = bc.getStoreID();
-                                    sql = "SELECT * FROM CartProduct WHERE storeID=@storeID AND username=@username;";
-                                    var c3 = connection.Query<CartProductEntry>(sql, new { storeID, username });
+                                BasketCartEntry bc = c2.ElementAt(i);
+                                int storeID = bc.getStoreID();
+                                sql = "SELECT * FROM CartProduct WHERE storeID=@storeID AND username=@username;";
+                                var c3 = connection.Query<CartProductEntry>(sql, new { storeID, username });
 
-                                    for (int j = 0; j < Enumerable.Count(c3); j++)
-                                    {
-                                        CartProductEntry cp = c3.ElementAt(j);
-                                        int productID = cp.getProductID();
-                                        int amount = cp.getAmount();
-                                        Product p = DBProduct.getInstance().getProductByID(productID);
-                                        sb.addToCartNoDBUpdate(p, amount, storeID);
-                                    }
-                                }
-                            }
-                            List<StoreRole> storeRoles = su.getStoreRoles();
-
-                            foreach (StoreRole sr in DBStore.getInstance().getAllStoreRoles(username))
-                            {
-                                if (sr.getUser().getUsername() == username)
+                                for (int j = 0; j < Enumerable.Count(c3); j++)
                                 {
-                                    storeRoles.Add(sr);
+                                    CartProductEntry cp = c3.ElementAt(j);
+                                    int productID = cp.getProductID();
+                                    int amount = cp.getAmount();
+                                    Product p = DBProduct.getInstance().getProductByID(productID);
+                                    sb.addToCartNoDBUpdate(p, amount, storeID);
                                 }
                             }
                         }
+                        List<StoreRole> storeRoles = su.getStoreRoles();
+
+                        foreach (StoreRole sr in DBStore.getInstance().getAllStoreRoles(username))
+                        {
+                            if (sr.getUser().getUsername() == username)
+                            {
+                                storeRoles.Add(sr);
+                            }
+                        }
                     }
+                    connection.Close();
                 }
             }
             catch (Exception e)
             {
-                //connection.Close();
+                connection.Close();
             }
-
        }
 
        public void addAdmin(string name, string pass)
@@ -99,26 +96,24 @@ namespace workshop192.Domain
 
         public void initTests()
         {
-
             try
             {
                 //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
                 {
-                    using (connection)
-                    {
-                        connection.Open();
-                        connection.Execute("DELETE FROM Register");
-                        connection.Execute("DELETE FROM BasketCart");
-                        connection.Execute("DELETE FROM CartProduct");
+                    connection.Open();
+                    connection.Execute("DELETE FROM Register");
+                    connection.Execute("DELETE FROM BasketCart");
+                    connection.Execute("DELETE FROM CartProduct");
 
-                        instance = new DBSubscribedUser();
-                    }
+                    instance = new DBSubscribedUser();
+                    connection.Close();
                 }
+
             }
             catch (Exception e)
             {
-                //connection.Close();
+                connection.Close();
             }
         }
 
@@ -148,27 +143,23 @@ namespace workshop192.Domain
            {
                 lock (connection)
                 {
-                    using (connection)
+                    connection.Open();
+                    //SqlConnection connection = Connector.getInstance().getSQLConnection();
+                    var c = connection.Query("SELECT username, password FROM [dbo].[Register] WHERE username=@username ", new { username = username });
+                    //connection.Close();
+                    if (Enumerable.Count(c) == 0)
                     {
-                        connection.Open();
-                        //SqlConnection connection = Connector.getInstance().getSQLConnection();
-                        var c = connection.Query("SELECT username, password FROM [dbo].[Register] WHERE username=@username ", new { username = username });
-                        //connection.Close();
-                        if (Enumerable.Count(c) == 0)
-                        {
-                            string sql = "INSERT INTO [dbo].[Register] (username, password)" +
-                                                            " VALUES (@username, @password)";
-                            connection.Execute(sql, new { username, password });
-                            //connection.Close();
-                        }
+                        string sql = "INSERT INTO [dbo].[Register] (username, password)" +
+                                                        " VALUES (@username, @password)";
+                        connection.Execute(sql, new { username, password });
                     }
+                    connection.Close();
                 }
               
            }
            catch (Exception e)
            {
-               Console.WriteLine(e);
-               //connection.Close();
+               connection.Close();
            }
        }
 
@@ -178,40 +169,36 @@ namespace workshop192.Domain
            {
                return users[username];
            }
-           try
-           {
+            try
+            {
                 lock (connection)
                 {
-                    using (connection)
+                    connection.Open();
+                    //SqlConnection connection = Connector.getInstance().getSQLConnection();
+                    var c1 = connection.Query<RegisterEntry>("SELECT username, password FROM [dbo].[Register] WHERE username=@username ", new { username = username });
+                    connection.Close();
+                    if (Enumerable.Count(c1) == 1)
                     {
-                        connection.Open();
-                        //SqlConnection connection = Connector.getInstance().getSQLConnection();
-                        var c1 = connection.Query<RegisterEntry>("SELECT username, password FROM [dbo].[Register] WHERE username=@username ", new { username = username });
-                        //connection.Close();
-                        if (Enumerable.Count(c1) == 1)
-                        {
-                            RegisterEntry re = c1.ElementAt(0);
-                            string password = re.getPassword();
+                        RegisterEntry re = c1.ElementAt(0);
+                        string password = re.getPassword();
 
-                            ShoppingBasket sb = new ShoppingBasket(username);
-                            SubscribedUser su = new SubscribedUser(username, password, sb);
+                        ShoppingBasket sb = new ShoppingBasket(username);
+                        SubscribedUser su = new SubscribedUser(username, password, sb);
 
-                            users.Add(username, su);
-                            return su;
-                        }
+                        users.Add(username, su);
+                        return su;
+                    }
 
-                        else
-                        {
-
-                            return null;
-                        }
+                    else
+                    {
+                        return null;
                     }
                 }
+
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                //connection.Close();
+                connection.Close();
                 return null;
             }
         }
@@ -229,69 +216,64 @@ namespace workshop192.Domain
                 //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
                 {
-                    using (connection)
+                    connection.Open();
+                    var c1 = connection.Query<RegisterEntry>("SELECT username, password FROM [dbo].[Register] WHERE username=@username ", new { username = username });
+                    
+                    if (Enumerable.Count(c1) == 1)
                     {
-                        connection.Open();
-                        var c1 = connection.Query<RegisterEntry>("SELECT username, password FROM [dbo].[Register] WHERE username=@username ", new { username = username });
-                        connection.Close();
-                        if (Enumerable.Count(c1) == 1)
+                        RegisterEntry re = c1.ElementAt(0);
+                        string password = re.getPassword();
+                        string sql = "SELECT * FROM BasketCart WHERE username=@username;";
+                        var c2 = connection.Query<BasketCartEntry>(sql, new { username = username });
+                        ShoppingBasket sb = new ShoppingBasket(username);
+
+                        SubscribedUser su = new SubscribedUser(username, password, sb);
+                        List<StoreRole> storeRoles = su.getStoreRoles();
+                        users.Add(username, su);
+                        DBStore.getInstance().getAllStoreRoles(username);
+
+                        if (Enumerable.Count(c2) > 0)
                         {
-                            RegisterEntry re = c1.ElementAt(0);
-                            string password = re.getPassword();
-                            string sql = "SELECT * FROM BasketCart WHERE username=@username;";
-                            var c2 = connection.Query<BasketCartEntry>(sql, new { username = username });
-                            //connection.Close();
-                            ShoppingBasket sb = new ShoppingBasket(username);
-
-                            SubscribedUser su = new SubscribedUser(username, password, sb);
-                            List<StoreRole> storeRoles = su.getStoreRoles();
-                            users.Add(username, su);
-                            DBStore.getInstance().getAllStoreRoles(username);
-
-                            if (Enumerable.Count(c2) > 0)
+                            for (int i = 0; i < Enumerable.Count(c2); i++)
                             {
-                                for (int i = 0; i < Enumerable.Count(c2); i++)
-                                {
-                                    BasketCartEntry bc = c2.ElementAt(i);
-                                    int storeID = bc.getStoreID();
-                                    sql = "SELECT * FROM CartProduct WHERE storeID=@storeID AND username=@username;";
+                                BasketCartEntry bc = c2.ElementAt(i);
+                                int storeID = bc.getStoreID();
+                                sql = "SELECT * FROM CartProduct WHERE storeID=@storeID AND username=@username;";
 
-                                    var c3 = connection.Query<CartProductEntry>(sql, new { storeID, username });
-                                    //connection.Close();
-                                    for (int j = 0; j < Enumerable.Count(c3); j++)
-                                    {
-                                        CartProductEntry cp = c3.ElementAt(j);
-                                        int productID = cp.getProductID();
-                                        int amount = cp.getAmount();
-                                        Product p = DBProduct.getInstance().getProductByID(productID);
-                                        sb.addToCartNoDBUpdate(p, amount, storeID);
-                                    }
+                                var c3 = connection.Query<CartProductEntry>(sql, new { storeID, username });
+                                for (int j = 0; j < Enumerable.Count(c3); j++)
+                                {
+                                    CartProductEntry cp = c3.ElementAt(j);
+                                    int productID = cp.getProductID();
+                                    int amount = cp.getAmount();
+                                    Product p = DBProduct.getInstance().getProductByID(productID);
+                                    sb.addToCartNoDBUpdate(p, amount, storeID);
                                 }
                             }
-
-                            //foreach (StoreRole sr in DBStore.getInstance().getAllStoreRoles(username))
-                            //{
-                            //    if(sr.getUser().getUsername()==username)
-                            //    {
-                            //        storeRoles.Add(sr);
-                            //    }
-                            //}
-                            //users.Add(username, su);
-                            return su;
                         }
 
-                        else
-                        {
-                            //connection.Close();
-                            return null;
-                        }
+                        //foreach (StoreRole sr in DBStore.getInstance().getAllStoreRoles(username))
+                        //{
+                        //    if(sr.getUser().getUsername()==username)
+                        //    {
+                        //        storeRoles.Add(sr);
+                        //    }
+                        //}
+                        //users.Add(username, su);
+                        connection.Close();
+                        return su;
+                    }
+
+                    else
+                    {
+                        connection.Close();
+                        return null;
                     }
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                //connection.Close();
+                connection.Close();
                 return null;
             }
         }
@@ -314,25 +296,23 @@ namespace workshop192.Domain
             {
                 lock (connection)
                 {
-                    using (connection)
+                    connection.Open();
+                    //SqlConnection connection = Connector.getInstance().getSQLConnection();
+                    var c = connection.Query("SELECT username, password FROM [dbo].[Register] WHERE username=@username ", new { username = username });
+                    //connection.Close();
+                    if (Enumerable.Count(c) == 0)
                     {
-                        connection.Open();
-                        //SqlConnection connection = Connector.getInstance().getSQLConnection();
-                        var c = connection.Query("SELECT username, password FROM [dbo].[Register] WHERE username=@username ", new { username = username });
+                        string sql = "INSERT INTO [dbo].[Register] (username, password)" +
+                                                         " VALUES (@username, @password)";
+                        connection.Execute(sql, new { username, password });
                         //connection.Close();
-                        if (Enumerable.Count(c) == 0)
-                        {
-                            string sql = "INSERT INTO [dbo].[Register] (username, password)" +
-                                                             " VALUES (@username, @password)";
-                            connection.Execute(sql, new { username, password });
-                            //connection.Close();
-                        }
                     }
+                    connection.Close();
                 }
             }
             catch (Exception)
             {
-                //connection.Close();
+                connection.Close();
             }
 
         }
@@ -345,19 +325,15 @@ namespace workshop192.Domain
             {
                 lock (connection)
                 {
-                    using (connection)
-                    {
-                        connection.Open();
-                        //SqlConnection connection = Connector.getInstance().getSQLConnection();
-                        connection.Execute(sql, new { username, storeID });
-                        //connection.Close();
-                    }
+                    connection.Open();
+                    //SqlConnection connection = Connector.getInstance().getSQLConnection();
+                    connection.Execute(sql, new { username, storeID });
+                    connection.Close();
                 }
-
             }
             catch (Exception e)
             {
-                //connection.Close();
+                connection.Close();
             }
         }
 
@@ -370,18 +346,16 @@ namespace workshop192.Domain
                 // SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
                 {
-                    using (connection)
-                    {
-                        connection.Open();
-                        connection.Execute(sql, new { username, productID, storeID, amount });
-                    }
+                    connection.Open();
+                    connection.Execute(sql, new { username, productID, storeID, amount });
+                    connection.Close();
                 }
                 //connection.Close();
 
             }
             catch (Exception)
             {
-                //connection.Close();
+                connection.Close();
             }
         }
 
@@ -400,19 +374,17 @@ namespace workshop192.Domain
                 //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
                 {
-                    using (connection)
-                    {
-                        connection.Open();
-                        connection.Execute(sql1, new { username });
-                        connection.Execute(sql2, new { username });
-                        connection.Execute(sql3, new { username });
-                    }
+                    connection.Open();
+                    connection.Execute(sql1, new { username });
+                    connection.Execute(sql2, new { username });
+                    connection.Execute(sql3, new { username });
+                    connection.Close();
                 }
                 //connection.Close();
             }
             catch (Exception)
             {
-                //connection.Close();
+                connection.Close();
             }
 
         }
@@ -432,18 +404,16 @@ namespace workshop192.Domain
                 //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
                 {
-                    using (connection)
-                    {
-                        connection.Open();
-                        connection.Execute(sql, new { username, productId, storeID });
-                    }
+                    connection.Open();
+                    connection.Execute(sql, new { username, productId, storeID });
+                    connection.Close();
                 }
                 //connection.Close();
 
             }
             catch (Exception)
             {
-                //connection.Close();
+                connection.Close();
             }
         }
 
@@ -469,18 +439,16 @@ namespace workshop192.Domain
                 //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
                 {
-                    using (connection)
-                    {
-                        connection.Open();
-                        connection.Execute(sql, new { username, storeID });
-                    }
+                    connection.Open();
+                    connection.Execute(sql, new { username, storeID });
+                    connection.Close();
                 }
                 //connection.Close();
 
             }
             catch (Exception)
             {
-                //connection.Close();
+                connection.Close();
             }
         }
 
@@ -492,11 +460,9 @@ namespace workshop192.Domain
                 //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
                 {
-                    using (connection)
-                    {
-                        connection.Open();
-                        connection.Execute(sql, new { newAmount, username, productID, storeID });
-                    }
+                    connection.Open();
+                    connection.Execute(sql, new { newAmount, username, productID, storeID });
+                    connection.Close();
                 }
                 //connection.Close();
 
@@ -517,25 +483,22 @@ namespace workshop192.Domain
                 //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
                 {
-                    using (connection)
+                    connection.Open();
+                    connection.Execute(sql1, new { username });
+
+                    //connection.Close();
+                    foreach (KeyValuePair<int, ShoppingCart> pair in shoppingCarts)
                     {
-                        connection.Open();
-                        connection.Execute(sql1, new { username });
-
-                        //connection.Close();
-                        foreach (KeyValuePair<int, ShoppingCart> pair in shoppingCarts)
-                        {
-                            int storeID = pair.Key;
-                            connection.Execute(sql2, new { username, storeID });
-                        }
-
-                        //connection.Close();
+                        int storeID = pair.Key;
+                        connection.Execute(sql2, new { username, storeID });
                     }
+
+                    connection.Close();
                 }
             }
             catch (Exception)
             {
-                //connection.Close();
+                connection.Close();
             }
             
         }
