@@ -9,6 +9,8 @@ namespace WebApplication18.Domain
     public class TotalPricePolicy : PurchasePolicy
     {
         private int totalPrice;
+        private int policyID;
+
         public TotalPricePolicy(int totalPrice)
         {
 
@@ -18,6 +20,8 @@ namespace WebApplication18.Domain
             }
 
             this.totalPrice = totalPrice;
+
+            this.policyID = DBStore.getInstance().getNextPolicyID();
         }
 
         public override string description()

@@ -124,7 +124,8 @@ namespace workshop192.ServiceLayer
         }
         public string getAllStores(int session)
         {
-           return db.getAllStores(session);
+
+            return db.getAllStores(session);
         }
 
         //use case 2.5

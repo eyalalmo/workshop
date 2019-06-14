@@ -9,10 +9,12 @@ namespace workshop192.Domain
     public class MaxAmountPurchase : PurchasePolicy
     {
         private int maxAmount;
+        private int policyID;
 
         public MaxAmountPurchase(int maxAmount)
         {
             this.maxAmount = maxAmount;
+            this.policyID = DBStore.getInstance().getNextPolicyID();
         }
         public override bool checkPolicy(double cartPrice, int amountofProd)
         {

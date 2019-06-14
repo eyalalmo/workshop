@@ -502,7 +502,10 @@ namespace workshop192.Domain
             return policies;
         }
 
-
+        public void setPolicyList(LinkedList<PurchasePolicy> policyList)
+        {
+            this.policies = policyList;
+        }
     }
 
 }

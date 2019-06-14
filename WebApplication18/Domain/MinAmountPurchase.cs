@@ -9,10 +9,12 @@ namespace workshop192.Domain
     public class MinAmountPurchase : PurchasePolicy
     {
         private int minAmount;
+        private int policyID;
 
         public MinAmountPurchase(int minAmount)
         {
             this.minAmount = minAmount;
+            this.policyID = DBStore.getInstance().getNextPolicyID();
         }
         public override bool checkPolicy(double cartPrice, int amountofProd)
         {

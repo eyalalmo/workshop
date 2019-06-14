@@ -16,7 +16,10 @@ namespace workshop192.Domain
         public LinkedList<Store> stores;
         public LinkedList<StoreRole> storeRole;
 
+        
+
         public static int nextStoreID = 0;
+        public static int nextPolicyID = 0;
 
         private DBStore()
         {
@@ -25,6 +28,7 @@ namespace workshop192.Domain
                 storeRole = new LinkedList<StoreRole>();
                 stores = new LinkedList<Store>();
                 nextStoreID = getUpdatedId();
+                nextPolicyID = getUpdatedPolicyID();
             }
             else
             {
@@ -65,6 +69,7 @@ namespace workshop192.Domain
                 connection.Execute("DELETE FROM Stores");
                 connection.Execute("DELETE FROM StoreRoles");
                 connection.Execute("UPDATE [dbo].[IDS] SET id = 0 WHERE type = 'store'");
+                connection.Execute("UPDATE [dbo].[IDS] SET id = 0 WHERE type = 'policy'");
                 //connection.Close();
             }
             catch (Exception e)
@@ -151,6 +156,7 @@ namespace workshop192.Domain
             stores = new LinkedList<Store>();
             storeRole = new LinkedList<StoreRole>();
             nextStoreID = 0;
+            nextPolicyID = 0;
         }
 
         public LinkedList<StoreRole> getRolesByUserName(string username)
@@ -299,19 +305,7 @@ namespace workshop192.Domain
             }
         }
 
-        public void setMinPurchasePolicy(int storeId, int minPurchasePolicy)
-        {
-            try
-            {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                connection.Execute("UPDATE [dbo].[Stores] SET minPurchasePolicy = @minPurchasePolicy WHERE storeId = @storeId", new { storeId = storeId, minPurchasePolicy = minPurchasePolicy });
-                //connection.Close();
-            }
-            catch (Exception e)
-            {
-                //connection.Close();
-            }
-        }
+       
 
         public int addStore(Store store)
         {
@@ -335,8 +329,8 @@ namespace workshop192.Domain
                 ////////////////////////////////////////////////
                 SqlConnection connection = Connector.getInstance().getSQLConnection();
 
-                string sql = "INSERT INTO [dbo].[Stores] (storeId, name,description,numOfOwners,active,minPurchasePolicy,maxPurchasePolicy)" +
-                                 " VALUES (@storeId, @name, @description,@numOfOwners,@active,@minPurchasePolicy,@maxPurchasePolicy)";
+                string sql = "INSERT INTO [dbo].[Stores] (storeId, name,description,numOfOwners,active)" +
+                                 " VALUES (@storeId, @name, @description,@numOfOwners,@active)";
                 int storeId = store.getStoreID();
                 string name = store.getStoreName();
                 string description = store.getDescription();
@@ -344,19 +338,12 @@ namespace workshop192.Domain
                 int active = 0;
                 if (store.isActive() == true)
                     active = 1;
-                int minPurchasePolicy = -1;
-                /*try
+                LinkedList<PurchasePolicy> policies = store.getStorePolicyList();
+                foreach(PurchasePolicy p in policies)
                 {
-                    minPurchasePolicy = store.getMinAmountPolicy().getAmount();
+                    addPolicyToDB(p);
                 }
-                catch (Exception) { }
-                int maxPurchasePolicy = -1;
-                try
-                {
-                    maxPurchasePolicy = store.getMaxAmountPolicy().getAmount();
-                }
-                catch (Exception) { }
-                */
+                
                 connection.Execute(sql, new { storeId, name, description, numOfOwners, active });
 
                 //connection.Close();
@@ -373,19 +360,7 @@ namespace workshop192.Domain
             }
         }
 
-        public void setMaxPurchasePolicy(int storeId, int maxPurchasePolicy)
-        {
-            try
-            {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                connection.Execute("UPDATE [dbo].[Stores] SET maxPurchasePolicy = @maxPurchasePolicy WHERE storeId = @storeId", new { storeId = storeId, maxPurchasePolicy = maxPurchasePolicy });
-                //connection.Close();
-            }
-            catch (Exception e)
-            {
-                //connection.Close();
-            }
-        }
+       
 
         public Store getStore(int storeId)
         {
@@ -404,6 +379,8 @@ namespace workshop192.Domain
                 var StoreRoleResult = connection.Query<StoreRoleEntry>("SELECT * FROM [dbo].[StoreRoles] WHERE storeId=@storeId ", new { storeId = storeId });
                 var ContractResult = connection.Query<Contract>("SELECT * FROM [dbo].[Contracts] WHERE storeId = @storeId", new { storeId = storeId });
                 var pendingResult = connection.Query<string>("SELECT userName FROM [dbo].[PendingOwners] WHERE storeId = @storeId", new { storeId = storeId }).AsList();
+                var policyEntries = connection.Query<PolicyEntry>("SELECT * FROM PurchasePolicy WHERE storeID=@storeID;", new { storeId });
+
                 //connection.Close();
 
                 StoreEntry se = StoreResult.ElementAt(0);
@@ -423,11 +400,7 @@ namespace workshop192.Domain
                     if (p.getStoreID() == s.getStoreID())
                         s.addProduct(p);
                 }
-                /*    if (se.getMaxPurchasePolicy() != -1)
-                        s.setMaxPurchasePolicy(se.getMaxPurchasePolicy());
-                    if (se.getMinPurchasePolicy() != -1)
-                        s.setMinPurchasePolicy(se.getMinPurchasePolicy());
-                  */
+                s.setPolicyList(parsePolicy(policyEntries));
                 foreach (StoreRoleEntry element in StoreRoleResult)
                 {
                     if (element.getStoreId() == s.getStoreID() && element.getIsOwner() == 1)
@@ -477,6 +450,17 @@ namespace workshop192.Domain
             ///////////////////////////////////////////////////
 
         }
+
+        private LinkedList<PurchasePolicy> parsePolicy(IEnumerable<PolicyEntry> policyEntries)
+        {
+            LinkedList<PurchasePolicy> policyList = new LinkedList<PurchasePolicy>();
+            foreach(PolicyEntry p in policyEntries)
+            {
+                if(p.)
+            }
+
+        }
+
         public void removeStore(Store store)
         {
             try
@@ -542,7 +526,25 @@ namespace workshop192.Domain
                 throw new StoreException("connection to db faild");
             }
         }
+        internal int getNextPolicyID()
+        {
+            try
+            {
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
+                int idNum = connection.Query<int>("SELECT id FROM [dbo].[IDS] WHERE type=@type ", new { type = "policy" }).First();
+                int next = idNum + 1;
+                connection.Execute("UPDATE [dbo].[IDS] SET id = @id WHERE type = @type", new { id = next, type = "policy" });
+                nextStoreID = idNum;
+                //connection.Close();
+                return idNum;
+            }
+            catch (Exception)
+            {
+                //connection.Close();
+                throw new StoreException("connection to db faild");
+            }
 
+        }
         //if owner -> close store and remove store role, if manager only removes store role
         public void removeStoreByUser(SubscribedUser user)
         {
@@ -580,6 +582,21 @@ namespace workshop192.Domain
             {
                 SqlConnection connection = Connector.getInstance().getSQLConnection();
                 int idNum = connection.Query<int>("SELECT id FROM [dbo].[IDS] WHERE type=@type ", new { type = "store" }).First();
+                //connection.Close();
+                return idNum;
+            }
+            catch (Exception e)
+            {
+                //connection.Close();
+                throw new StoreException("cant connect");
+            }
+        }
+        public int getUpdatedPolicyID()
+        {
+            try
+            {
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
+                int idNum = connection.Query<int>("SELECT id FROM [dbo].[IDS] WHERE type=@type ", new { type = "policy" }).First();
                 //connection.Close();
                 return idNum;
             }
@@ -635,7 +652,8 @@ namespace workshop192.Domain
                                    + " DELETE FROM CartProduct \n"
                                    + " DELETE FROM Cookie \n"
                                    + " DELETE FROM Notification \n"
-                                   + "UPDATE [dbo].[IDS] SET id = 0 WHERE type = 'store'"
+                                   + "UPDATE [dbo].[IDS] SET id = 0 WHERE type = 'store'" 
+                                   + "UPDATE [dbo].[IDS] SET id = 0 WHERE type = 'policy'"
                                    );
                 //connection.Close();
             }
