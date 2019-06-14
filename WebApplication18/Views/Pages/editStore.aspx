@@ -53,7 +53,7 @@
 
     <script type="text/javascript">
          var getUrl = window.location;
-          var baseUrl = getUrl.protocol + "//" + getUrl.host
+          var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
         $(document).ready(function () {
             var doc = document.getElementById('allStores');
         
@@ -171,7 +171,6 @@
                 }
             });
             
-
         });
         function manageProducts(id) {
             event.preventDefault();
@@ -201,7 +200,7 @@
         function add() {
                event.preventDefault();
                var getUrl = window.location;
-               var baseUrl = getUrl.protocol + "//" + getUrl.host
+               var baseUrl = getUrl.protocol + "//" + getUrl.host + "/WebApplication18"
                 
                 name = $("#name").val();
                 des = $("#des").val();
