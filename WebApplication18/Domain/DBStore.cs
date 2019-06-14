@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 
 namespace workshop192.Domain
 {
-    public class DBStore
+    public class DBStore:Connector
     {
         private SqlTransaction ownerTrans = null;
         public static DBStore instance;
@@ -49,6 +49,7 @@ namespace workshop192.Domain
 
         public void init()
         {
+          
             stores = new LinkedList<Store>();
             storeRole = new LinkedList<StoreRole>();
             nextStoreID = 0;
@@ -62,17 +63,22 @@ namespace workshop192.Domain
         {
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                connection.Execute("DELETE FROM Stores");
-                connection.Execute("DELETE FROM StoreRoles");
-                connection.Execute("DELETE FROM Contracts");
-                connection.Execute("DELETE FROM PendingOwners");
-                connection.Execute("UPDATE [dbo].[IDS] SET id = 0 WHERE type = 'store'");
+                lock (connection)
+                {
+                    connection.Open();
+                    //SqlConnection connection = Connector.getInstance().getSQLConnection();
+                    connection.Execute("DELETE FROM Stores");
+                    connection.Execute("DELETE FROM StoreRoles");
+                    connection.Execute("DELETE FROM Contracts");
+                    connection.Execute("DELETE FROM PendingOwners");
+                    connection.Execute("UPDATE [dbo].[IDS] SET id = 0 WHERE type = 'store'");
+                    connection.Close();
+                }
                 //connection.Close();
             }
             catch (Exception e)
             {
-                //connection.Close();
+                connection.Close();
             }
         }
 
@@ -174,16 +180,20 @@ namespace workshop192.Domain
         {
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
+                //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 int storeId = sr.getStore().getStoreID();
                 string userName = sr.getUser().getUsername();
-                connection.Execute("DELETE FROM StoreRoles WHERE  storeId=@storeId AND userName=@userName", new { storeId, userName });
-                storeRole.Remove(sr);
-                //connection.Close();
+                lock (connection)
+                {
+                    connection.Open();
+                    connection.Execute("DELETE FROM StoreRoles WHERE  storeId=@storeId AND userName=@userName", new { storeId, userName });
+                    storeRole.Remove(sr);
+                    connection.Close();
+                }
             }
             catch (Exception)
             {
-                //connection.Close();
+                connection.Close();
                 throw new StoreException("cant remove role");
             }
 
@@ -215,68 +225,63 @@ namespace workshop192.Domain
         public void addStoreRole(StoreRole sr)
         {
            
-            SqlConnection connection = Connector.getInstance().getSQLConnection();
+            //SqlConnection connection = Connector.getInstance().getSQLConnection();
             lock (connection)
             {
-                SqlTransaction transaction;
-                if (ownerTrans != null)
+
+                using (connection)
                 {
-                    transaction = ownerTrans;
-                }
-                else
-                    transaction = connection.BeginTransaction();
+                    connection.Open();
 
-                try
-                {
-
-                    //         public SubscribedUser appointedBy;
-                    //private Store store;
-                    //public SubscribedUser user;
-                    //public Permissions permissions;
-                    //public bool isOwner = false;
-
-                    ///
-                    //per.Add("editProduct", editProduct);
-                    //per.Add("editDiscount", editDiscount);
-                    //per.Add("editPolicy", editPolicy);
-
-                    ////
-
-
-                    string sql = "INSERT INTO [dbo].[StoreRoles] (storeId, appointedBy,userName,isOwner,editProduct,editDiscount,editPolicy)" +
-                                     " VALUES (@storeId, @appointedBy, @userName,@isOwner,@editProduct,@editDiscount,@editPolicy)";
-                    int storeId = sr.getStore().getStoreID();
-                    string appointedBy = null;
-                    if (sr.getAppointedBy() != null)
-                        appointedBy = sr.getAppointedBy().getUsername();
-                    string userName = sr.getUser().getUsername();
-                    int isOwner = sr.getIsOwner();
-                    int editProduct = 1;
-                    int editDiscount = 1;
-                    int editPolicy = 1;
-                    if (isOwner == 0)
+                    SqlTransaction transaction;
+                    if (ownerTrans != null)
                     {
-                        editProduct = sr.GetPermissions().getPermission("editProduct");
-                        editDiscount = sr.GetPermissions().getPermission("editDiscount");
-                        editPolicy = sr.GetPermissions().getPermission("editPolicy");
+                        transaction = ownerTrans;
                     }
-                    connection.Execute(sql, new { storeId, appointedBy, userName, isOwner, editProduct, editDiscount, editPolicy }, transaction);
-                    storeRole.AddFirst(sr);
-                    if (ownerTrans == null)
-                    {
-                        transaction.Commit();
-                        transaction.Dispose();
-                    }
-                    //connection.Close();
+                    else
+                        transaction = connection.BeginTransaction();
 
-                }
-                catch (Exception)
-                {
-                    if (ownerTrans == null)
+                    try
                     {
-                        transaction.Dispose();
+
+
+
+                        string sql = "INSERT INTO [dbo].[StoreRoles] (storeId, appointedBy,userName,isOwner,editProduct,editDiscount,editPolicy)" +
+                                         " VALUES (@storeId, @appointedBy, @userName,@isOwner,@editProduct,@editDiscount,@editPolicy)";
+                        int storeId = sr.getStore().getStoreID();
+                        string appointedBy = null;
+                        if (sr.getAppointedBy() != null)
+                            appointedBy = sr.getAppointedBy().getUsername();
+                        string userName = sr.getUser().getUsername();
+                        int isOwner = sr.getIsOwner();
+                        int editProduct = 1;
+                        int editDiscount = 1;
+                        int editPolicy = 1;
+                        if (isOwner == 0)
+                        {
+                            editProduct = sr.GetPermissions().getPermission("editProduct");
+                            editDiscount = sr.GetPermissions().getPermission("editDiscount");
+                            editPolicy = sr.GetPermissions().getPermission("editPolicy");
+                        }
+                        connection.Execute(sql, new { storeId, appointedBy, userName, isOwner, editProduct, editDiscount, editPolicy }, transaction);
+                        storeRole.AddFirst(sr);
+                        if (ownerTrans == null)
+                        {
+                            transaction.Commit();
+                            transaction.Dispose();
+                        }
+                        connection.Close();
+
                     }
-                    throw new StoreException("cant add store roll");
+                    catch (Exception e)
+                    {
+
+                        if (ownerTrans == null)
+                        {
+                            transaction.Dispose();
+                        }
+                        throw new StoreException("cant add store roll");
+                    }
                 }
             }
         }
@@ -286,7 +291,7 @@ namespace workshop192.Domain
         public LinkedList<StoreRole> getAllStoreRoles(string username)
         {
             LinkedList<StoreRole> result = new LinkedList<StoreRole>();
-            ; initStoresAndRolesForUserName(username);
+             initStoresAndRolesForUserName(username);
             foreach (StoreRole sr in storeRole)
             {
                 if (sr.getUser().getUsername() == username)
@@ -303,9 +308,17 @@ namespace workshop192.Domain
         {
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                connection.Execute("UPDATE [dbo].[Stores] SET numOfOwners = @newNumber WHERE storeId = @storeId", new { storeId = storeId, newNumber = numOfOwners });
-                //connection.Close();
+                lock (connection)
+                {
+                    using (connection)
+                    {
+                        connection.Open();
+
+                        //SqlConnection connection = Connector.getInstance().getSQLConnection();
+                        connection.Execute("UPDATE [dbo].[Stores] SET numOfOwners = @newNumber WHERE storeId = @storeId", new { storeId = storeId, newNumber = numOfOwners });
+                        //connection.Close();
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -317,9 +330,16 @@ namespace workshop192.Domain
         {
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                connection.Execute("UPDATE [dbo].[Stores] SET numOfOwners = @newNumber WHERE storeId = @storeId", new { storeId = storeId, newNumber = newNumber });
-                //connection.Close();
+                lock (connection)
+                {
+                    using (connection)
+                    {
+                        connection.Open();
+                        //SqlConnection connection = Connector.getInstance().getSQLConnection();
+                        connection.Execute("UPDATE [dbo].[Stores] SET numOfOwners = @newNumber WHERE storeId = @storeId", new { storeId = storeId, newNumber = newNumber });
+                        //connection.Close();
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -331,9 +351,16 @@ namespace workshop192.Domain
         {
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                connection.Execute("UPDATE [dbo].[Stores] SET minPurchasePolicy = @minPurchasePolicy WHERE storeId = @storeId", new { storeId = storeId, minPurchasePolicy = minPurchasePolicy });
-                //connection.Close();
+                lock (connection)
+                {
+                    using (connection)
+                    {
+                        connection.Open();
+                        //SqlConnection connection = Connector.getInstance().getSQLConnection();
+                        connection.Execute("UPDATE [dbo].[Stores] SET minPurchasePolicy = @minPurchasePolicy WHERE storeId = @storeId", new { storeId = storeId, minPurchasePolicy = minPurchasePolicy });
+                        //connection.Close();
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -345,66 +372,61 @@ namespace workshop192.Domain
         {
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
+                //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 //connection.Open();
-            using (var transaction = connection.BeginTransaction())
-            {
-                try
+                lock (connection)
                 {
-                    //////////////////////////////////
-                    //        public int storeId;
-                    // string name;
-                    // string description;
-                    //public LinkedList<Product> productList;
-                    //public List<StoreRole> roles;
-                    //public int numOfOwners;
-                    //public bool active;
-                    //public LinkedList<DiscountComponent> discountList;
-                    //public MinAmountPurchase minPurchasePolicy;
-                    //public MaxAmountPurchase maxPurchasePolicy;
-                    //public LinkedList<InvisibleDiscount> invisibleDiscountList;
-                    //public Dictionary<string, HashSet<string>> pendingOwners;
-
-
-                    ////////////////////////////////////////////////
-                    string sql = "INSERT INTO [dbo].[Stores] (storeId, name,description,numOfOwners,active,minPurchasePolicy,maxPurchasePolicy)" +
-                                     " VALUES (@storeId, @name, @description,@numOfOwners,@active,@minPurchasePolicy,@maxPurchasePolicy)";
-                    int storeId = store.getStoreID();
-                    string name = store.getStoreName();
-                    string description = store.getDescription();
-                    int numOfOwners = store.getNumberOfOwners();
-                    int active = 0;
-                    if (store.isActive() == true)
-                        active = 1;
-                    int minPurchasePolicy = -1;
-                    try
+                    using (connection)
                     {
-                        minPurchasePolicy = store.getMinAmountPolicy().getAmount();
+                        connection.Open();
+
+                        using (var transaction = connection.BeginTransaction())
+                        {
+                            try
+                            {
+
+
+                                ////////////////////////////////////////////////
+                                string sql = "INSERT INTO [dbo].[Stores] (storeId, name,description,numOfOwners,active,minPurchasePolicy,maxPurchasePolicy)" +
+                                                 " VALUES (@storeId, @name, @description,@numOfOwners,@active,@minPurchasePolicy,@maxPurchasePolicy)";
+                                int storeId = store.getStoreID();
+                                string name = store.getStoreName();
+                                string description = store.getDescription();
+                                int numOfOwners = store.getNumberOfOwners();
+                                int active = 0;
+                                if (store.isActive() == true)
+                                    active = 1;
+                                int minPurchasePolicy = -1;
+                                try
+                                {
+                                    minPurchasePolicy = store.getMinAmountPolicy().getAmount();
+                                }
+                                catch (Exception) { }
+                                int maxPurchasePolicy = -1;
+                                try
+                                {
+                                    maxPurchasePolicy = store.getMaxAmountPolicy().getAmount();
+                                }
+                                catch (Exception) { }
+
+                                connection.Execute(sql, new { storeId, name, description, numOfOwners, active, minPurchasePolicy, maxPurchasePolicy }, transaction);
+
+                                //connection.Close();
+                                stores.AddFirst(store);
+
+                                transaction.Commit();
+                                /////////////////////////
+                                return store.getStoreID();
+                            }
+                            catch (Exception)
+                            {
+                                //connection.Close();
+                                transaction.Rollback();
+                                throw new StoreException("faild to add store");
+                            }
+                        }
                     }
-                    catch (Exception) { }
-                    int maxPurchasePolicy = -1;
-                    try
-                    {
-                        maxPurchasePolicy = store.getMaxAmountPolicy().getAmount();
-                    }
-                    catch (Exception) { }
-
-                    connection.Execute(sql, new { storeId, name, description, numOfOwners, active, minPurchasePolicy, maxPurchasePolicy },transaction);
-
-                    //connection.Close();
-                    stores.AddFirst(store);
-
-                    transaction.Commit();
-                    /////////////////////////
-                    return store.getStoreID();
                 }
-                catch (Exception)
-                {
-                    //connection.Close();
-                    transaction.Rollback();
-                    throw new StoreException("faild to add store");
-                }
-            }
             }
             catch (Exception e)
             {
@@ -416,9 +438,16 @@ namespace workshop192.Domain
         {
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                connection.Execute("UPDATE [dbo].[Stores] SET maxPurchasePolicy = @maxPurchasePolicy WHERE storeId = @storeId", new { storeId = storeId, maxPurchasePolicy = maxPurchasePolicy });
-                //connection.Close();
+                // SqlConnection connection = Connector.getInstance().getSQLConnection();
+                lock (connection)
+                {
+                    using (connection)
+                    {
+                        connection.Open();
+                        connection.Execute("UPDATE [dbo].[Stores] SET maxPurchasePolicy = @maxPurchasePolicy WHERE storeId = @storeId", new { storeId = storeId, maxPurchasePolicy = maxPurchasePolicy });
+                        //connection.Close();
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -437,73 +466,80 @@ namespace workshop192.Domain
             /////////////////////////////////////////////////////
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                LinkedList<Store> newStores = new LinkedList<Store>();
-                var StoreResult = connection.Query<StoreEntry>("SELECT * FROM [dbo].[Stores] WHERE storeId=@storeId ", new { storeId = storeId });
-                var StoreRoleResult = connection.Query<StoreRoleEntry>("SELECT * FROM [dbo].[StoreRoles] WHERE storeId=@storeId ", new { storeId = storeId });
-                var ContractResult = connection.Query<Contract>("SELECT * FROM [dbo].[Contracts] WHERE storeId = @storeId", new { storeId = storeId });
-                var pendingResult = connection.Query<string>("SELECT userName FROM [dbo].[PendingOwners] WHERE storeId = @storeId", new { storeId = storeId }).AsList();
-                //connection.Close();
-
-                StoreEntry se = StoreResult.ElementAt(0);
-                Store s = new Store(se.getStoreId(), se.getName(), se.getDescription());
-                foreach (Contract c in ContractResult)
+                // SqlConnection connection = Connector.getInstance().getSQLConnection();
+                lock (connection)
                 {
-                    s.getContracts().AddFirst(c);
-                }
-                foreach (string pending in pendingResult)
-                {
-                    s.getPending().AddFirst(pending);
-                }
-
-                LinkedList<Product> lst = DBProduct.getInstance().getAllProducts();
-                foreach (Product p in lst)
-                {
-                    if (p.getStoreID() == s.getStoreID())
-                        s.addProduct(p);
-                }
-                if (se.getMaxPurchasePolicy() != -1)
-                    s.setMaxPurchasePolicy(se.getMaxPurchasePolicy());
-                if (se.getMinPurchasePolicy() != -1)
-                    s.setMinPurchasePolicy(se.getMinPurchasePolicy());
-                foreach (StoreRoleEntry element in StoreRoleResult)
-                {
-                    if (element.getStoreId() == s.getStoreID() && element.getIsOwner() == 1)
+                    using (connection)
                     {
-                        SubscribedUser appointedBy = null;
-                        try
+                        connection.Open();
+                        LinkedList<Store> newStores = new LinkedList<Store>();
+                        var StoreResult = connection.Query<StoreEntry>("SELECT * FROM [dbo].[Stores] WHERE storeId=@storeId ", new { storeId = storeId });
+                        var StoreRoleResult = connection.Query<StoreRoleEntry>("SELECT * FROM [dbo].[StoreRoles] WHERE storeId=@storeId ", new { storeId = storeId });
+                        var ContractResult = connection.Query<Contract>("SELECT * FROM [dbo].[Contracts] WHERE storeId = @storeId", new { storeId = storeId });
+                        var pendingResult = connection.Query<string>("SELECT userName FROM [dbo].[PendingOwners] WHERE storeId = @storeId", new { storeId = storeId }).AsList();
+                        //connection.Close();
+
+                        StoreEntry se = StoreResult.ElementAt(0);
+                        Store s = new Store(se.getStoreId(), se.getName(), se.getDescription());
+                        foreach (Contract c in ContractResult)
                         {
-                            appointedBy = DBSubscribedUser.getInstance().getSubscribedUserForInitStore(element.getAppointedBy());
+                            s.getContracts().AddFirst(c);
                         }
-                        catch (Exception) { }
-                        SubscribedUser user = DBSubscribedUser.getInstance().getSubscribedUserForInitStore(element.getUserName());
-                        StoreOwner so = new StoreOwner(appointedBy, user, s);
-                        s.addStoreRoleFromInitOwner(so);
-                        storeRole.AddLast(so);
+                        foreach (string pending in pendingResult)
+                        {
+                            s.getPending().AddFirst(pending);
+                        }
+
+                        LinkedList<Product> lst = DBProduct.getInstance().getAllProducts();
+                        foreach (Product p in lst)
+                        {
+                            if (p.getStoreID() == s.getStoreID())
+                                s.addProduct(p);
+                        }
+                        if (se.getMaxPurchasePolicy() != -1)
+                            s.setMaxPurchasePolicy(se.getMaxPurchasePolicy());
+                        if (se.getMinPurchasePolicy() != -1)
+                            s.setMinPurchasePolicy(se.getMinPurchasePolicy());
+                        foreach (StoreRoleEntry element in StoreRoleResult)
+                        {
+                            if (element.getStoreId() == s.getStoreID() && element.getIsOwner() == 1)
+                            {
+                                SubscribedUser appointedBy = null;
+                                try
+                                {
+                                    appointedBy = DBSubscribedUser.getInstance().getSubscribedUserForInitStore(element.getAppointedBy());
+                                }
+                                catch (Exception) { }
+                                SubscribedUser user = DBSubscribedUser.getInstance().getSubscribedUserForInitStore(element.getUserName());
+                                StoreOwner so = new StoreOwner(appointedBy, user, s);
+                                s.addStoreRoleFromInitOwner(so);
+                                storeRole.AddLast(so);
 
 
-                    }
-                    else if (element.getStoreId() == s.getStoreID() && element.getIsOwner() == 0)
-                    {
-                        SubscribedUser appointedBy = DBSubscribedUser.getInstance().getSubscribedUserForInitStore(element.getAppointedBy());
-                        SubscribedUser user = DBSubscribedUser.getInstance().getSubscribedUserForInitStore(element.getUserName());
-                        Permissions p = new Permissions(false, false, false);
-                        if (element.getEditDiscount() == 1)
-                            p.setEditDiscount(true);
-                        if (element.getEditPolicy() == 1)
-                            p.setEditPolicy(true);
-                        if (element.getEditProduct() == 1)
-                            p.setEditProduct(true);
-                        StoreManager sm = new StoreManager(appointedBy, s, user, p);
-                        s.addStoreRoleFromInitManager(sm);
-                        storeRole.AddLast(sm);
+                            }
+                            else if (element.getStoreId() == s.getStoreID() && element.getIsOwner() == 0)
+                            {
+                                SubscribedUser appointedBy = DBSubscribedUser.getInstance().getSubscribedUserForInitStore(element.getAppointedBy());
+                                SubscribedUser user = DBSubscribedUser.getInstance().getSubscribedUserForInitStore(element.getUserName());
+                                Permissions p = new Permissions(false, false, false);
+                                if (element.getEditDiscount() == 1)
+                                    p.setEditDiscount(true);
+                                if (element.getEditPolicy() == 1)
+                                    p.setEditPolicy(true);
+                                if (element.getEditProduct() == 1)
+                                    p.setEditProduct(true);
+                                StoreManager sm = new StoreManager(appointedBy, s, user, p);
+                                s.addStoreRoleFromInitManager(sm);
+                                storeRole.AddLast(sm);
 
+                            }
+                        }
+                        stores.AddLast(s);
+                        LinkedList<DiscountComponent> discountList = DBDiscount.getInstance().getStoreDiscountsList(storeId);
+                        s.setDiscountList(discountList);
+                        return s;
                     }
                 }
-                stores.AddLast(s);
-                LinkedList<DiscountComponent> discountList = DBDiscount.getInstance().getStoreDiscountsList(storeId);
-                s.setDiscountList(discountList);
-                return s;
             }
             catch (Exception e)
             {
@@ -525,10 +561,16 @@ namespace workshop192.Domain
                 }
 
                 ///////
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
+                //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 int storeId = store.getStoreID();
-                var affectedRows = connection.Execute("DELETE FROM Stores WHERE  storeId=@storeId ", new { hash = storeId });
-
+                lock (connection)
+                {
+                    using (connection)
+                    {
+                        connection.Open();
+                        var affectedRows = connection.Execute("DELETE FROM Stores WHERE  storeId=@storeId ", new { hash = storeId });
+                    }
+                }
                 //connection.Close();
 
 
@@ -566,13 +608,20 @@ namespace workshop192.Domain
         {
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                int idNum = connection.Query<int>("SELECT id FROM [dbo].[IDS] WHERE type=@type ", new { type = "store" }).First();
-                int next = idNum + 1;
-                connection.Execute("UPDATE [dbo].[IDS] SET id = @id WHERE type = @type", new { id = next, type = "store" });
-                nextStoreID = idNum;
-                //connection.Close();
-                return idNum;
+                //SqlConnection connection = Connector.getInstance().getSQLConnection();
+                lock (connection)
+                {
+                    using (connection)
+                    {
+                        connection.Open();
+                        int idNum = connection.Query<int>("SELECT id FROM [dbo].[IDS] WHERE type=@type ", new { type = "store" }).First();
+                        int next = idNum + 1;
+                        connection.Execute("UPDATE [dbo].[IDS] SET id = @id WHERE type = @type", new { id = next, type = "store" });
+                        nextStoreID = idNum;
+                        //connection.Close();
+                        return idNum;
+                    }
+                }
             }
             catch (Exception)
             {
@@ -616,10 +665,17 @@ namespace workshop192.Domain
         {
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                int idNum = connection.Query<int>("SELECT id FROM [dbo].[IDS] WHERE type=@type ", new { type = "store" }).First();
-                //connection.Close();
-                return idNum;
+                //SqlConnection connection = Connector.getInstance().getSQLConnection();
+                lock (connection)
+                {
+                    using (connection)
+                    {
+                        connection.Open();
+                        int idNum = connection.Query<int>("SELECT id FROM [dbo].[IDS] WHERE type=@type ", new { type = "store" }).First();
+                        //connection.Close();
+                        return idNum;
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -643,15 +699,24 @@ namespace workshop192.Domain
         {
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
+               // SqlConnection connection = Connector.getInstance().getSQLConnection();
                 LinkedList<StoreRoleEntry> lst = new LinkedList<StoreRoleEntry>();
-                var StoreRoleResult = connection.Query<StoreRoleEntry>("SELECT * FROM [dbo].[StoreRoles] WHERE userName=@userName ", new { userName = userName });
-                //connection.Close();
-                foreach (StoreRoleEntry element in StoreRoleResult)
+                lock (connection)
                 {
-                    lst.AddLast(element);
+                    using (connection)
+                    {
+                        connection.Open();
+                        var StoreRoleResult = connection.Query<StoreRoleEntry>("SELECT * FROM [dbo].[StoreRoles] WHERE userName=@userName ", new { userName = userName });
+                        //connection.Close();
+
+
+                        foreach (StoreRoleEntry element in StoreRoleResult)
+                        {
+                            lst.AddLast(element);
+                        }
+                        return lst;
+                    }
                 }
-                return lst;
             }
             catch (Exception e)
             {
@@ -659,57 +724,34 @@ namespace workshop192.Domain
                 throw new ConnectionException("Database error - Getting store roles of user " + userName);
             }
         }
-        public void deleteAllTable()
-        {
-            try
-            {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                connection.Execute("DELETE FROM Stores \n"
-                                   + " DELETE FROM PendingOwners \n"
-                                   + " DELETE FROM StoreRoles \n"
-                                   + " DELETE FROM Register \n"
-                                   + " DELETE FROM Product \n"
-                                   + " DELETE FROM BasketCart \n"
-                                   + " DELETE FROM CartProduct \n"
-                                   + " DELETE FROM Cookie \n"
-                                   + " DELETE FROM Notification \n"
-                                   + " DELETE FROM Contracts \n"
-                                   + " DELETE FROM Discount \n"
-                                   + " DELETE FROM DiscountComponent \n"
-                                   + " DELETE FROM DiscountComposite \n"
-                                   + "UPDATE [dbo].[IDS] SET id = 0 WHERE type = 'store'"
-                                   );
-                //connection.Close();
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
+      
         public void addPendingOwner(int storeId, string appointer, string pending)
         {
 
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
+                //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
                 {
+                    using (connection) {
+                        connection.Open();
                     using (var transaction = connection.BeginTransaction())
                     {
                         string sql = "INSERT INTO [dbo].[PendingOwners] (storeId,userName)" +
                                            " VALUES (@storeId,@pending)";
-                        connection.Execute(sql, new { storeId = storeId, pending = pending },transaction);
+                        connection.Execute(sql, new { storeId = storeId, pending = pending }, transaction);
                         Store s = getStore(storeId);
                         s.getPending().AddFirst(pending);
                         sql = "INSERT INTO [dbo].[Contracts] (storeId,userName,approvedBy)" +
                                           " VALUES (@storeId,@userName,@appointedBy)";
                         Contract c = new Contract(storeId, pending, appointer);
-                        connection.Execute(sql, new { storeId = storeId, userName = pending, appointedBy = appointer },transaction);
+                        connection.Execute(sql, new { storeId = storeId, userName = pending, appointedBy = appointer }, transaction);
                         s = getStore(storeId);
                         s.getContracts().AddFirst(c);
                         transaction.Commit();
                     }
                 }
+            }
 
             }
             catch (Exception e)
@@ -723,15 +765,21 @@ namespace workshop192.Domain
         {
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                string sql = "DELETE FROM [dbo].[PendingOwners]" +
+                lock (connection)
+                {
+                    using (connection)
+                    {
+                        connection.Open();
+                        //SqlConnection connection = Connector.getInstance().getSQLConnection();
+                        string sql = "DELETE FROM [dbo].[PendingOwners]" +
                                    "WHERE storeId=@storeId AND userName = @pending";
 
-                    connection.Execute(sql, new { storeId = storeId, pending = pending },ownerTrans);
-                Store s = getStore(storeId);
-                s.getPending().Remove(pending);
-                //connection.Close();
-
+                        connection.Execute(sql, new { storeId = storeId, pending = pending }, ownerTrans);
+                        Store s = getStore(storeId);
+                        s.getPending().Remove(pending);
+                        //connection.Close();
+                    }
+                }
             }
             catch (Exception)
             {
@@ -744,31 +792,40 @@ namespace workshop192.Domain
         {
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                string sql = "INSERT INTO [dbo].[Contracts] (storeId,userName,approvedBy)" +
+
+                //SqlConnection connection = Connector.getInstance().getSQLConnection();
+                lock (connection)
+                {
+                    using (connection)
+                    {
+                        connection.Open();
+                        string sql = "INSERT INTO [dbo].[Contracts] (storeId,userName,approvedBy)" +
                                    " VALUES (@storeId,@userName,@appointedBy)";
-                Contract c = new Contract(storeId, pending, owner);
-                if (saveTransaction)
-                {
-                   
-                    try
-                    {
-                        connection.Execute(sql, new { storeId = storeId, userName = pending, appointedBy = owner }, ownerTrans);
-                    }
-                    catch(Exception e)
-                    {
-                        throw e;
+
+                        Contract c = new Contract(storeId, pending, owner);
+                        if (saveTransaction)
+                        {
+
+                            try
+                            {
+                                connection.Execute(sql, new { storeId = storeId, userName = pending, appointedBy = owner }, ownerTrans);
+                            }
+                            catch (Exception e)
+                            {
+                                throw e;
+                            }
+                        }
+                        else
+                        {
+                            connection.Execute(sql, new { storeId = storeId, userName = pending, appointedBy = owner });
+                        }
+                        Store s = getStore(storeId);
+                        s.getContracts().AddFirst(c);
+                        //connection.Close();
                     }
                 }
-                else
-                {
-                    connection.Execute(sql, new { storeId = storeId, userName = pending, appointedBy = owner });
-                }
-                Store s = getStore(storeId);
-                s.getContracts().AddFirst(c);
-                //connection.Close();
             }
-            catch  ( Exception e)
+            catch (Exception e)
             {
                 //connection.Close();
                 throw new StoreException("Error in signing a contract: " + e.Message.ToString());
@@ -788,11 +845,18 @@ namespace workshop192.Domain
                         cont.Remove(cont.ElementAt(i));
                     }
                 }
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                string sql = "DELETE FROM [dbo].[Contracts]" +
+                //SqlConnection connection = Connector.getInstance().getSQLConnection();
+                lock (connection)
+                {
+                    using (connection)
+                    {
+                        connection.Open();
+                        string sql = "DELETE FROM [dbo].[Contracts]" +
                                    "WHERE storeId=@storeId AND userName = @userName";
-                connection.Execute(sql, new { storeId = storeId, userName = userName },ownerTrans);
-                //connection.Close();
+                        connection.Execute(sql, new { storeId = storeId, userName = userName }, ownerTrans);
+                        //connection.Close();
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -804,11 +868,25 @@ namespace workshop192.Domain
 
         public int getContractNum(int storeId,  string userName)
         {
-
-            SqlConnection connection = Connector.getInstance().getSQLConnection();
-            int count = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM [dbo].[Contracts] WHERE storeId=@storeId AND userName = @userName", new { storeId = storeId, userName = userName });
-            //connection.Close();
-            return count;
+            try
+            {
+                //SqlConnection connection = Connector.getInstance().getSQLConnection();
+                lock (connection)
+                {
+                    using (connection)
+                    {
+                        connection.Open();
+                        int count = connection.ExecuteScalar<int>("SELECT COUNT(*) FROM [dbo].[Contracts] WHERE storeId=@storeId AND userName = @userName", new { storeId = storeId, userName = userName });
+                        //connection.Close();
+                        return count;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                throw new StoreException("cant get contact");
+            }
+            
 
         }
 
@@ -836,51 +914,61 @@ namespace workshop192.Domain
 
         public void signAndAddOwner(int storeId, string owner, string pending,StoreRole toAdd)
         {
-            SqlConnection connection = Connector.getInstance().getSQLConnection();
+            //SqlConnection connection = Connector.getInstance().getSQLConnection();
             lock (connection)
             {
-                using (var transaction = connection.BeginTransaction())
+
+                using (connection)
                 {
-                    try
+                    connection.Open();
+                    using (var transaction = connection.BeginTransaction())
                     {
-                        ownerTrans = transaction;
-                        signContract(storeId, owner, pending, true);
-                        removePendingOwner(storeId, pending);
-                        addStoreRole(toAdd);
-                        transaction.Commit();
+                        try
+                        {
+                            ownerTrans = transaction;
+                            signContract(storeId, owner, pending, true);
+                            removePendingOwner(storeId, pending);
+                            addStoreRole(toAdd);
+                            transaction.Commit();
+                        }
+                        catch (Exception e)
+                        {
+
+                            ownerTrans = null;
+                            throw e;
+                        }
                     }
-                    catch(Exception e)
-                    {
-                       
-                        ownerTrans = null;
-                        throw e;
-                    }
+                    ownerTrans = null;
                 }
-                ownerTrans = null;
             }
         }
-        internal void declineContract(int storeId, string pending)
+
+        public void declineContract(int storeId, string pending)
         {
-            SqlConnection connection = Connector.getInstance().getSQLConnection();
+            //SqlConnection connection = Connector.getInstance().getSQLConnection();
             lock (connection)
             {
-                using (var transaction = connection.BeginTransaction())
+                using (connection)
                 {
-                    try
+                    connection.Open();
+                    using (var transaction = connection.BeginTransaction())
                     {
-                        ownerTrans = transaction;
-                        removePendingOwner(storeId, pending);
-                        removeAllUserContracts(storeId, pending);
-                        transaction.Commit();
-                    }
-                    catch (Exception e)
-                    {
+                        try
+                        {
+                            ownerTrans = transaction;
+                            removePendingOwner(storeId, pending);
+                            removeAllUserContracts(storeId, pending);
+                            transaction.Commit();
+                        }
+                        catch (Exception e)
+                        {
 
-                        ownerTrans = null;
-                        throw e;
+                            ownerTrans = null;
+                            throw e;
+                        }
                     }
+                    ownerTrans = null;
                 }
-                ownerTrans = null;
             }
         }
     }

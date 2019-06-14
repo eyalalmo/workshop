@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 
 namespace workshop192.Domain
 {
-    public class DBProduct
+    public class DBProduct : Connector
     {
         private static DBProduct instance;
 
@@ -35,41 +35,48 @@ namespace workshop192.Domain
         {
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                var products = connection.Query<Product>("SELECT * FROM [dbo].[Product]");
-
-                if (products.Count() == 0)
+                //SqlConnection connection = Connector.getInstance().getSQLConnection();
+                lock (connection)
                 {
-                    //connection.Close();
-                    return;
-                }
-
-                foreach (Product product in products)
-                {
-                   // if(product.discountID != -1)
-                    //    product.discount = DBDiscount.getInstance().getDiscount(product.discountID);
-                    productList.AddFirst(product);
-                    Discount d = DBDiscount.getInstance().getProductDiscount(product.getStore().getStoreID(), product.getProductID());
-                    if (d != null)
+                    using (connection)
                     {
-                        if (d is VisibleDiscount)
+                        connection.Open();
+                        var products = connection.Query<Product>("SELECT * FROM [dbo].[Product]");
+
+
+                        if (products.Count() == 0)
                         {
-                            VisibleDiscount v = (VisibleDiscount)d;
-                            product.setDiscount(v);
+                            //connection.Close();
+                            return;
                         }
-                        if (d is ReliantDiscount)
+
+                        foreach (Product product in products)
                         {
-                            ReliantDiscount r = (ReliantDiscount)d;
-                            product.setReliantDiscountSameProduct(r);
+                            // if(product.discountID != -1)
+                            //    product.discount = DBDiscount.getInstance().getDiscount(product.discountID);
+                            productList.AddFirst(product);
+                            Discount d = DBDiscount.getInstance().getProductDiscount(product.getStore().getStoreID(), product.getProductID());
+                            if (d != null)
+                            {
+                                if (d is VisibleDiscount)
+                                {
+                                    VisibleDiscount v = (VisibleDiscount)d;
+                                    product.setDiscount(v);
+                                }
+                                if (d is ReliantDiscount)
+                                {
+                                    ReliantDiscount r = (ReliantDiscount)d;
+                                    product.setReliantDiscountSameProduct(r);
+                                }
+                            }
+                            if (product.getProductID() > nextProductID)
+                                nextProductID = product.getProductID();
                         }
+
+                        //connection.Close();
                     }
-                  if (product.getProductID() > nextProductID)
-                        nextProductID = product.getProductID();
                 }
-
-                //connection.Close();
             }
-
             catch (Exception e)
             {
                 //connection.Close();
@@ -85,8 +92,15 @@ namespace workshop192.Domain
             {
                 productList = new LinkedList<Product>();
                 nextProductID = 0;
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                connection.Execute("DELETE FROM Product");
+                //SqlConnection connection = Connector.getInstance().getSQLConnection();
+                lock (connection)
+                {
+                    using (connection)
+                    {
+                        connection.Open();
+                        connection.Execute("DELETE FROM Product");
+                    }
+                }
                 //connection.Close();
             }
             catch(Exception e)
@@ -99,23 +113,30 @@ namespace workshop192.Domain
         {
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
+               // SqlConnection connection = Connector.getInstance().getSQLConnection();
 
                 string sql = "INSERT INTO [dbo].[Product] (productID, productName, " +
                                                           "productCategory, price, rank, " +
                                                           "quantityLeft, storeID)" +
                                  " VALUES (@productID, @productName, @productCategory," +
                                  " @price, @rank, @quantityLeft, @storeID)";
-                connection.Execute(sql, new
+                lock (connection)
                 {
-                    productID = p.getProductID(),
-                    productName = p.getProductName(),
-                    productCategory = p.getProductCategory(),
-                    price = p.getPrice(),
-                    rank = p.getRank(),
-                    quantityLeft = p.getQuantityLeft(),
-                    storeID = p.getStoreID(),
-                });
+                    using (connection)
+                    {
+                        connection.Open();
+                        connection.Execute(sql, new
+                        {
+                            productID = p.getProductID(),
+                            productName = p.getProductName(),
+                            productCategory = p.getProductCategory(),
+                            price = p.getPrice(),
+                            rank = p.getRank(),
+                            quantityLeft = p.getQuantityLeft(),
+                            storeID = p.getStoreID(),
+                        });
+                    }
+                }
                 
                 //if(p.discount != null)
                   //  DBDiscount.getInstance().addDiscount(p.discount);
@@ -194,12 +215,19 @@ namespace workshop192.Domain
             LinkedList<Product> result = new LinkedList<Product>();
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                connection.Execute("DELETE FROM Product WHERE productID=@productID ", new { productID = p.getProductID() });
-                //if(p.discount != null)
-                  //  DBDiscount.getInstance().removeDiscount(p.discount);
-                productList.Remove(p);
-                //connection.Close();
+                // SqlConnection connection = Connector.getInstance().getSQLConnection();
+                lock (connection)
+                {
+                    using (connection)
+                    {
+                        connection.Open();
+                        connection.Execute("DELETE FROM Product WHERE productID=@productID ", new { productID = p.getProductID() });
+                        //if(p.discount != null)
+                        //  DBDiscount.getInstance().removeDiscount(p.discount);
+                        productList.Remove(p);
+                        //connection.Close();
+                    }
+                }
             }
 
             catch (Exception e)
@@ -217,22 +245,29 @@ namespace workshop192.Domain
                 foreach (Product p in productList)
                     if (p.getProductID() == id)
                         return p;
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                var c = connection.Query<Product>("SELECT * FROM [dbo].[Product] WHERE productID=" +
-                                                  "@product ", new { product = id });
-                if (c.Count() == 0)
+                // SqlConnection connection = Connector.getInstance().getSQLConnection();
+                lock (connection)
                 {
-                    //connection.Close();
-                    return null;
+                    using (connection)
+                    {
+                        connection.Open();
+                        var c = connection.Query<Product>("SELECT * FROM [dbo].[Product] WHERE productID=" +
+                                                  "@product ", new { product = id });
+                        if (c.Count() == 0)
+                        {
+                            //connection.Close();
+                            return null;
+                        }
+
+                        //connection.Close();
+
+                        Product product = c.First();
+                        //  if(product.discountID != -1)
+                        //   product.discount = DBDiscount.getInstance().getDiscount(product.discountID);
+                        productList.AddFirst(product);
+                        return product;
+                    }
                 }
-
-                //connection.Close();
-
-                Product product = c.First();
-                //  if(product.discountID != -1)
-                 //   product.discount = DBDiscount.getInstance().getDiscount(product.discountID);
-                productList.AddFirst(product);
-                return product;
             }
             catch (Exception e)
             {
@@ -347,9 +382,13 @@ namespace workshop192.Domain
         {
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-
-                connection.Execute("UPDATE Product SET " +
+                //SqlConnection connection = Connector.getInstance().getSQLConnection();
+                lock (connection)
+                {
+                    using (connection)
+                    {
+                        connection.Open();
+                        connection.Execute("UPDATE Product SET " +
                                           "productID=@productID, " +
                                           "productName=@productName, " +
                                           "productCategory=@productCategory, " +
@@ -368,6 +407,8 @@ namespace workshop192.Domain
                           quantityLeft = p.getQuantityLeft(),
                           storeID = p.getStoreID()
                       });
+                    }
+                }
                 
                 //if(p.discount != null)
                   //  DBDiscount.getInstance().update(p.discount);

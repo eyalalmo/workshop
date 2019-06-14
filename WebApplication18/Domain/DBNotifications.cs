@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace WebApplication18.Domain
 {
-    public class DBNotifications
+    public class DBNotifications :Connector
     {
         private static DBNotifications instance;
         private LinkedList<Tuple<String, String>> waitingNotifications;
@@ -35,14 +35,20 @@ namespace WebApplication18.Domain
             //waitingNotifications = remains;
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                foreach (Tuple<string, string> message in remains)
+                lock (connection)
                 {
-                    string sql = "INSERT INTO [dbo].[Notification] (username, message)" +
-                                 " VALUES (@username, @message)";
-                    connection.Execute(sql, new { message.Item1, message.Item2 });
+                    using (connection)
+                    {
+                        connection.Open();
+                        //SqlConnection connection = Connector.getInstance().getSQLConnection();
+                        foreach (Tuple<string, string> message in remains)
+                        {
+                            string sql = "INSERT INTO [dbo].[Notification] (username, message)" +
+                                         " VALUES (@username, @message)";
+                            connection.Execute(sql, new { message.Item1, message.Item2 });
+                        }
+                    }
                 }
-
                 //connection.Close();
             }
 
@@ -56,9 +62,16 @@ namespace WebApplication18.Domain
         {
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                connection.Execute("DELETE FROM Notification");
-                //connection.Close();
+                lock (connection)
+                {
+                    using (connection)
+                    {
+                        connection.Open();
+                        // SqlConnection connection = Connector.getInstance().getSQLConnection();
+                        connection.Execute("DELETE FROM Notification");
+                        //connection.Close();
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -74,10 +87,17 @@ namespace WebApplication18.Domain
             {
                 string username = "ey";
                 string message = "an old message to ey";
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
+              //  SqlConnection connection = Connector.getInstance().getSQLConnection();
                 string sql = "INSERT INTO [dbo].[Notification] (username, message)" +
                              " VALUES (@username, @message)";
-                connection.Execute(sql, new {username , message});
+                lock (connection)
+                {
+                    using (connection)
+                    {
+                        connection.Open();
+                        connection.Execute(sql, new { username, message });
+                    }
+                }
                 //connection.Close();
             }
 
@@ -91,9 +111,16 @@ namespace WebApplication18.Domain
         {
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                connection.Execute("DELETE FROM Notification WHERE username=@username ", new { username });
-                //connection.Close();
+                lock (connection)
+                {
+                    using (connection)
+                    {
+                        connection.Open();
+                        //SqlConnection connection = Connector.getInstance().getSQLConnection();
+                        connection.Execute("DELETE FROM Notification WHERE username=@username ", new { username });
+                        //connection.Close();
+                    }
+                }
             }
 
             catch (Exception)
@@ -116,20 +143,28 @@ namespace WebApplication18.Domain
             LinkedList<string> result = new LinkedList<string>();
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                var c = connection.Query<Notification>("SELECT username, message FROM [dbo].[Notification] WHERE username=@username ", new { username });
-                if (c.Count() == 0)
+                //SqlConnection connection = Connector.getInstance().getSQLConnection();
+                lock (connection)
                 {
-                    //connection.Close();
-                    return result;
-                }
+                    using (connection)
+                    {
+                        connection.Open();
+                        var c = connection.Query<Notification>("SELECT username, message FROM [dbo].[Notification] WHERE username=@username ", new { username });
+                        if (c.Count() == 0)
+                        {
+                            //connection.Close();
+                            return result;
+                        }
 
-                foreach (Notification message in c) {
-                    result.AddFirst(message.message);
-                }
+                        foreach (Notification message in c)
+                        {
+                            result.AddFirst(message.message);
+                        }
 
-                //connection.Close();
-                return result;
+                        //connection.Close();
+                        return result;
+                    }
+                }
             }
 
             catch (Exception)
@@ -151,11 +186,18 @@ namespace WebApplication18.Domain
             //waitingNotifications.AddFirst(tuple);
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
+                //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 string sql = "INSERT INTO [dbo].[Notification] (username, message)" +
                                  " VALUES (@username, @message)";
-                connection.Execute(sql, new { username = tuple.Item1, message = tuple.Item2 });
-                //connection.Close();
+                lock (connection)
+                {
+                    using (connection)
+                    {
+                        connection.Open();
+                        connection.Execute(sql, new { username = tuple.Item1, message = tuple.Item2 });
+                        //connection.Close();
+                    }
+                }
             }
 
             catch (Exception)
