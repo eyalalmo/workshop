@@ -51,14 +51,6 @@ namespace workshop192.Domain
            //this.discountID = discountID;
         }
 
-        public void setVisibleDiscount(VisibleDiscount v)
-        {
-            this.discount = v;
-        }
-        public void setReliantDiscount(ReliantDiscount r)
-        {
-            this.sameProductDiscount = r;
-        }
         public double getActualPrice(int amountinBasket)
         {
             double actualPrice = price;

@@ -155,62 +155,60 @@ namespace workshop192.Domain
 
         public void addStoreVisibleDiscount(double percentage, string duration)
         {
-            VisibleDiscount v = new VisibleDiscount(percentage, duration, "StoreVisibleDiscount", store.getStoreID());
-            DBDiscount.getInstance().addDiscount(v);
+            VisibleDiscount v = new VisibleDiscount(percentage, duration, "StoreVisibleDiscount");
             store.addDiscount(v);
+            DBDiscount.getInstance().addDiscount(v);
 
         }
 
         public void addReliantDiscountSameProduct(double percentage, String duration, int numOfProducts, Product product)
         {
-            ReliantDiscount r = new ReliantDiscount(percentage, duration, numOfProducts, product, store.getStoreID());
-            DBDiscount.getInstance().addDiscount(r);
+            ReliantDiscount r = new ReliantDiscount(percentage, duration, numOfProducts, product);
             store.addDiscount(r);
             product.setReliantDiscountSameProduct(r);
+            DBDiscount.getInstance().addDiscount(r);
 
 
         }
 
         public void addReliantDiscountTotalAmount(double percentage, String duration, int amount)
         {
-            ReliantDiscount r = new ReliantDiscount(percentage, duration, amount, store.getStoreID());
-            DBDiscount.getInstance().addDiscount(r);
+            ReliantDiscount r = new ReliantDiscount(percentage, duration, amount);
             store.addDiscount(r);
+            DBDiscount.getInstance().addDiscount(r);
 
         }
 
         public void removeStoreDiscount(int discountID, Store store)
         {
-            DiscountComponent d = DBDiscount.getInstance().getDiscountByID(discountID);
-            DBDiscount.getInstance().removeDiscount(d);
+           // DBDiscount.getInstance().removeDiscount(discountID);
             store.removeDiscount(discountID);
 
         }
 
         public void addComplexDiscount(List<DiscountComponent> list, string type, double percentage, string duration)
         {
-            DiscountComposite composite = new DiscountComposite(list, type, percentage, duration, store.getStoreID());
+            DiscountComposite composite = new DiscountComposite(list, type, percentage, duration);
+            store.addDiscount(composite);
             foreach (DiscountComponent d in list)
             {
                 store.removeDiscount(d.getId());
-                DBDiscount.getInstance().setIsPartOfComplex(d.getId(), true);
-                d.setIsPartOfComplex(true);
+                if (d is Discount)
+                {
+                    Discount di = (Discount)d;
+                    di.setIsPartOfComplex(true);
+                }
             }
-            DBDiscount.getInstance().addDiscount(composite);
-            store.addDiscount(composite);
-
-
-            //DBDiscount.getInstance().addDiscount(composite);
+           //DBDiscount.getInstance().addDiscount(composite);
 
         }
 
         public void addProductVisibleDiscount(Product product, double percentage, string duration)
         {
-            Store store = product.getStore();
-            VisibleDiscount discount = new VisibleDiscount(percentage, duration, "ProductVisibleDiscount",store.getStoreID() );
-            DBDiscount.getInstance().addDiscount(discount);
+            VisibleDiscount discount = new VisibleDiscount(percentage, duration, "ProductVisibleDiscount");
             discount.setProduct(product);
             product.setDiscount(discount);
+            Store store = product.getStore();
             store.addDiscount(discount);
         }
 
@@ -222,55 +220,62 @@ namespace workshop192.Domain
         //////
 
         
-
-        public void removeMaxAmountPolicy()
+            
+        public void removeCouponFromStore(string couponCode)
         {
-            store.removeMaxAMountPolicy();
+            store.removeCoupon(couponCode);
         }
-        public void removeMinAmountPolicy()
-        {
-            store.removeMinAmountPolicy();
-        }
-
-        public void setMinAmountPolicy( int newMinAmount)
-        {
-            store.setMinPurchasePolicy(newMinAmount);
-        }
-
-       
-
-        public void setMaxAmountPolicy( int newMaxAmount)
-        {
-            store.setMaxPurchasePolicy(newMaxAmount);
-
-        }
-
-        //public void removeCouponFromStore(string couponCode)
-        //{
-        //    store.removeCoupon(couponCode);
-        //}
         
        /* public void addCouponToStore(string couponCode, int percentage, string duration)
         {
             store.addCoupon(couponCode, percentage, duration);
         }
         */
-        //public void addCouponToStore(string couponCode, double percentage, string duration)
-        //{
-        //    store.addCoupon(couponCode, percentage, duration);
-        //}
+        public void addCouponToStore(string couponCode, double percentage, string duration)
+        {
+            store.addCoupon(couponCode, percentage, duration);
+        }
 
-        public void signContract(SubscribedUser pending) {
+        public void signContract(string owner, SubscribedUser pending) {
             throw new RoleException("Error: A manager cannot sign a contract with an owner");
         }
-        public void declineContract(SubscribedUser pending) {
-            throw new RoleException("Error: A manager cannot decline a contract with" +
-                " an owner");
+        public void declineContract(string owner, SubscribedUser pending) {
+            throw new RoleException("Error: A manager cannot decline a contract with an owner");
         }
 
         public Permissions GetPermissions()
         {
             return permissions;
+        }
+
+        public void addComplexPolicy(int index1, int index2, string type)
+        {
+            store.addComplexPurchasePolicy(index1, index2, type);
+        }
+
+        public void removePolicy(int index)
+        {
+            store.removePolicyByindex(index);
+        }
+
+        public void setPolicyByIndex(int newAmount, int index)
+        {
+            store.setPolicyByID(newAmount, index);
+        }
+
+        public void addMinPurchasePolicy(int amount)
+        {
+            store.addMinAmountPolicy(amount);
+        }
+
+        public void addMaxPurchasePolicy(int amount)
+        {
+            store.addMaxAmountPolicy(amount);
+        }
+
+        public void addTotalPricePurchasePolicy(int amount)
+        {
+            store.addTotalAmountPolicy(amount);
         }
     }
 }

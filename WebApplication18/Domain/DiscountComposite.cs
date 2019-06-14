@@ -11,10 +11,9 @@ namespace workshop192.Domain
         enum Type { or, and, xor };
         private List<DiscountComponent> children;
         private Type type;
-        
 
        
-        public DiscountComposite(List<DiscountComponent> children, string type, double percentage, string duration, int storeId) : base(percentage, duration, storeId)
+        public DiscountComposite(List<DiscountComponent> children, string type, double percentage, string duration) : base(percentage, duration)
         {
             if (children == null)
             {
@@ -37,42 +36,7 @@ namespace workshop192.Domain
             else
                 throw new IllegalNameException("Error: Wrong type name in discount composite");
         }
-        public DiscountComposite(int id, List<DiscountComponent> children, string type, double percentage, string duration, int storeId, bool isPartOfComplex) : base(id, percentage, duration, storeId, isPartOfComplex)
-        {
-            if (children == null)
-            {
-                throw new AlreadyExistException();
-            }
 
-            this.children = children;
-            if (type == "and")
-            {
-                this.type = Type.and;
-            }
-            else if (type == "or")
-            {
-                this.type = Type.or;
-            }
-            else if (type == "xor")
-            {
-                this.type = Type.xor;
-            }
-            else
-                throw new IllegalNameException("Error: Wrong type name in discount composite");
-        }
-        public string getType()
-        {
-            if(type == Type.or)
-            {
-                return "or";
-            }
-            if (type == Type.and)
-            {
-                return "and";
-            }
-            else
-                return "xor";
-        }
         public override string getDiscountType()
         {
             return "Complex";
@@ -93,10 +57,7 @@ namespace workshop192.Domain
             return str;
             
         }
-        public List<DiscountComponent> getChildren()
-        {
-            return this.children;
-        }
+
         public override bool checkCondition(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
         {
             if (type == Type.and)

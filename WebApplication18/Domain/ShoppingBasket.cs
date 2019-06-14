@@ -154,56 +154,37 @@ namespace workshop192.Domain
             }
             return null;
         }
-        //public void addCoupon(string coupon, int storeID)
-        //{
-        //    ShoppingCart sc = getShoppingCartByID(storeID);
-        //    if (sc != null)
-        //        sc.addStoreCoupon(coupon);
-        //    else
-        //        throw new DoesntExistException("no such store ID in Shopping basket");
-        //}
-
-        //public void removeCoupon(int storeID)
-        //{
-        //    ShoppingCart sc = getShoppingCartByID(storeID);
-        //    if (sc != null)
-        //        sc.removeCoupon();
-        //    else
-        //        throw new DoesntExistException("no such store ID in Shopping basket");
-        //}
-
-        public int purchaseBasket(string address, string creditcard, string month, string year, string holder, string cvv)
+        public void addCoupon(string coupon, int storeID)
         {
-        //    foreach (KeyValuePair<int, ShoppingCart> pair1 in shoppingCarts)
-        //    {
-        //        ShoppingCart cart = pair1.Value;
-        //        Dictionary<Product, int> productsInCart = cart.getProductsInCarts();
-        //        foreach (KeyValuePair<Product, int> pair2 in productsInCart)
-        //        {
-        //            Product product = pair2.Key;
-        //            int amount = pair2.Value;
-        //            if (product.getQuantityLeft() < amount)
-        //            {
+            ShoppingCart sc = getShoppingCartByID(storeID);
+            if (sc != null)
+                sc.addStoreCoupon(coupon);
+            else
+                throw new DoesntExistException("no such store ID in Shopping basket");
+        }
 
-        //                throw new IllegalAmountException("Error: Cannot complete purchase- " + product.getProductName() + " does not have enough quantity left");
-        //            }
-        //            product.decQuantityLeft(amount);
-        //        }
+        public void removeCoupon(int storeID)
+        {
+            ShoppingCart sc = getShoppingCartByID(storeID);
+            if (sc != null)
+                sc.removeCoupon();
+            else
+                throw new DoesntExistException("no such store ID in Shopping basket");
+        }
 
-        //    }
-
-           int resultPay =  PaymentService.getInstance().checkOut(address, creditcard, month, year, holder, cvv);
-            int resultDeliver=-1;
-
-
-            if (resultPay != -1)
+        public async Task<int> purchaseBasket(string address, string creditcard, string month, string year, string holder, string cvv)
+        {
+            Task<int> result =  PaymentService.getInstance().checkOut(address, creditcard, month, year, holder, cvv);
+            int res = await result;
+            int resFromDelivery2;
+            if (res != -1)
             {
-                 resultDeliver = DeliveryService.getInstance().sendToUser(address, creditcard, month, year, holder, cvv);
-               
-                if (resultDeliver == -1)
+                Task<int> resFromDelivery = DeliveryService.getInstance().sendToUser(address, creditcard, month, year, holder, cvv);
+                 resFromDelivery2 = await resFromDelivery;
+                if (resFromDelivery2==-1)
                 {
-                    int res2=PaymentService.getInstance().cancelPayment(resultPay+"");
-                 
+                    Task<int> res3=PaymentService.getInstance().cancelPayment(res+"");
+                    int res3Ans = await res3;
                     throw new CartException("Delivery FAILED");
                 }
                 if (username != null)
@@ -233,23 +214,23 @@ namespace workshop192.Domain
                 throw new CartException("Payment FAILED");
             }
             //throw new SuccessPaymentExeption("OK");
-            return resultDeliver ;
+            return resFromDelivery2;
         }
         public void checkBasket()
         {
-            int numOfProducts = 0;
+            
             Product productToRemove = null;
             foreach (KeyValuePair<int, ShoppingCart> pair1 in shoppingCarts)
             {
                 ShoppingCart cart = pair1.Value;
+                cart.checkStorePolicy();
                 Store store = DBStore.getInstance().getStore(cart.getStoreID());
                 Dictionary<Product, int> productsInCart = cart.getProductsInCarts();
                 foreach (KeyValuePair<Product, int> pair2 in productsInCart)
                 {
-                    numOfProducts++;
                     Product product = pair2.Key;
                     int amount = pair2.Value;
-                    store.checkPolicy(product, amount);
+                    //store.checkPolicy(product, amount);
                     if (product.getQuantityLeft() == 0)
                     {
                         productToRemove = product;
@@ -262,6 +243,7 @@ namespace workshop192.Domain
                     }
                     product.decQuantityLeft(amount);
                 }
+
                 if (productToRemove != null)
                 {
                     removeFromCart(productToRemove.getProductID());
@@ -269,10 +251,6 @@ namespace workshop192.Domain
                 }
                    
 
-            }
-            if (numOfProducts == 0)
-            {
-                throw new DoesntExistException("Checkout failed. there are no items in the basket for purchase.");
             }
            
                

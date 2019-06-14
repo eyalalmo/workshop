@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using WebApplication18.DAL;
 using Dapper;
-using System.Data.SqlClient;
 
 namespace workshop192.Domain
 {
-    public class DBProduct
+    public class DBProduct : Connector
     {
         private static DBProduct instance;
 
@@ -21,7 +20,6 @@ namespace workshop192.Domain
         {
             if (instance == null)
                 instance = new DBProduct();
-
             return instance;
         }
 
@@ -35,12 +33,12 @@ namespace workshop192.Domain
         {
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
+                connection.Open();
                 var products = connection.Query<Product>("SELECT * FROM [dbo].[Product]");
 
                 if (products.Count() == 0)
                 {
-                    //connection.Close();
+                    connection.Close();
                     return;
                 }
 
@@ -49,30 +47,16 @@ namespace workshop192.Domain
                    // if(product.discountID != -1)
                     //    product.discount = DBDiscount.getInstance().getDiscount(product.discountID);
                     productList.AddFirst(product);
-                    Discount d = DBDiscount.getInstance().getProductDiscount(product.getStore().getStoreID(), product.getProductID());
-                    if (d != null)
-                    {
-                        if (d is VisibleDiscount)
-                        {
-                            VisibleDiscount v = (VisibleDiscount)d;
-                            product.setDiscount(v);
-                        }
-                        if (d is ReliantDiscount)
-                        {
-                            ReliantDiscount r = (ReliantDiscount)d;
-                            product.setReliantDiscountSameProduct(r);
-                        }
-                    }
-                  if (product.getProductID() > nextProductID)
+                    if (product.getProductID() > nextProductID)
                         nextProductID = product.getProductID();
                 }
 
-                //connection.Close();
+                connection.Close();
             }
 
             catch (Exception e)
             {
-                //connection.Close();
+                connection.Close();
                 throw e;
             }
 
@@ -83,15 +67,13 @@ namespace workshop192.Domain
         {
             try
             {
-                productList = new LinkedList<Product>();
-                nextProductID = 0;
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
+                connection.Open();
                 connection.Execute("DELETE FROM Product");
-                //connection.Close();
+                connection.Close();
             }
             catch(Exception e)
             {
-                //connection.Close();
+                connection.Close();
             }
         }
 
@@ -99,7 +81,7 @@ namespace workshop192.Domain
         {
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
+                connection.Open();
 
                 string sql = "INSERT INTO [dbo].[Product] (productID, productName, " +
                                                           "productCategory, price, rank, " +
@@ -128,14 +110,14 @@ namespace workshop192.Domain
                     duration = p.discount.getDuration()
                 });*/
 
-                //connection.Close();
+                connection.Close();
                 productList.AddFirst(p);
                 return p.getProductID();
             }
 
             catch (Exception e)
             {
-                //connection.Close();
+                connection.Close();
                 throw e;
             }
         }
@@ -148,12 +130,12 @@ namespace workshop192.Domain
             /*LinkedList<Product> result = new LinkedList<Product>();
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
+                connection.Open();
                 var products = connection.Query<Product>("SELECT * FROM [dbo].[Product]");
                 //var discounts = connection.Query<VisibleDiscount>("SELECT * FROM [dbo].[Discount]");
                 if (products.Count() == 0)
                 {
-                    //connection.Close();
+                    connection.Close();
                     return JsonConvert.SerializeObject(result);
                 }
 
@@ -168,13 +150,13 @@ namespace workshop192.Domain
                     result.AddFirst(product);
                 }
 
-                //connection.Close();
+                connection.Close();
                 return JsonConvert.SerializeObject(result);
             }
 
             catch (Exception e)
             {
-                //connection.Close();
+                connection.Close();
                 throw e;
             }
             */
@@ -194,17 +176,17 @@ namespace workshop192.Domain
             LinkedList<Product> result = new LinkedList<Product>();
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
+                connection.Open();
                 connection.Execute("DELETE FROM Product WHERE productID=@productID ", new { productID = p.getProductID() });
                 //if(p.discount != null)
                   //  DBDiscount.getInstance().removeDiscount(p.discount);
                 productList.Remove(p);
-                //connection.Close();
+                connection.Close();
             }
 
             catch (Exception e)
             {
-                //connection.Close();
+                connection.Close();
                 throw e;
             }
         }
@@ -217,16 +199,16 @@ namespace workshop192.Domain
                 foreach (Product p in productList)
                     if (p.getProductID() == id)
                         return p;
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
+                connection.Open();
                 var c = connection.Query<Product>("SELECT * FROM [dbo].[Product] WHERE productID=" +
                                                   "@product ", new { product = id });
                 if (c.Count() == 0)
                 {
-                    //connection.Close();
+                    connection.Close();
                     return null;
                 }
 
-                //connection.Close();
+                connection.Close();
 
                 Product product = c.First();
                 //  if(product.discountID != -1)
@@ -236,7 +218,7 @@ namespace workshop192.Domain
             }
             catch (Exception e)
             {
-                //connection.Close();
+                connection.Close();
                 throw e;
             }
         }
@@ -246,10 +228,10 @@ namespace workshop192.Domain
             /*LinkedList<Product> result = new LinkedList<Product>();
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
+                connection.Open();
                 var c = connection.Query<Product>("SELECT * FROM [dbo].[Product]");
 
-                //connection.Close();
+                connection.Close();
                 foreach (Product product in c)
                 {
                     Product p = product;
@@ -262,7 +244,7 @@ namespace workshop192.Domain
 
             catch (Exception e)
             {
-                //connection.Close();
+                connection.Close();
                 throw e;
             }*/
 
@@ -274,13 +256,13 @@ namespace workshop192.Domain
             /*List<Product> result = new List<Product>();
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
+                connection.Open();
                 var c = connection.Query<Product>("SELECT * FROM [dbo].[Product] WHERE " +
                                                   "productName=@product name OR " +
                                                   "productCategory=@productCategory OR " +
                                                   "CONTAINS (productName, @keywords) OR " +
                                                   "CONTAINS (productCategory, @keywords)");
-                //connection.Close();
+                connection.Close();
                 foreach (Product product in c)
                 {
                     Product p = product;
@@ -293,7 +275,7 @@ namespace workshop192.Domain
 
             catch (Exception e)
             {
-                //connection.Close();
+                connection.Close();
                 throw e;
             }*/
 
@@ -347,7 +329,7 @@ namespace workshop192.Domain
         {
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
+                connection.Open();
 
                 connection.Execute("UPDATE Product SET " +
                                           "productID=@productID, " +
@@ -371,11 +353,11 @@ namespace workshop192.Domain
                 
                 //if(p.discount != null)
                   //  DBDiscount.getInstance().update(p.discount);
-                //connection.Close();
+                connection.Close();
             }
             catch (Exception e)
             {
-                //connection.Close();
+                connection.Close();
                 throw e;
             }
         }

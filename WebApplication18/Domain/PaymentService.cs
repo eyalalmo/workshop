@@ -26,7 +26,7 @@ namespace workshop192.Domain
             return instance;
         }
 
-        public  int checkOut(string card, string month, string year, string holder, string ccv, string id)
+        public  async Task<int> checkOut(string card, string month, string year, string holder, string ccv, string id)
         {
             var massage = new Dictionary<string, string>
             {
@@ -39,21 +39,11 @@ namespace workshop192.Domain
                  { "id", id }
             };
 
-            using (var client1 = new HttpClient())
-            {
-                var massageToSent = new FormUrlEncodedContent(massage);
-                var response = client1.PostAsync("https://cs-bgu-wsep.herokuapp.com/", massageToSent).Result;
+            var massageToSend = new FormUrlEncodedContent(massage);
+            var responseFromServer = await client.PostAsync("https://cs-bgu-wsep.herokuapp.com/", massageToSend);
+            var responseToString = await responseFromServer.Content.ReadAsStringAsync();
 
-                if (response.IsSuccessStatusCode)
-                {
-                    var responseContent = response.Content;
-
-                    string responseString = responseContent.ReadAsStringAsync().Result;
-                    return int.Parse(responseString);
-                  
-                }
-            }
-            return -1;
+            return int.Parse(responseToString);
 
 
         }
@@ -67,35 +57,24 @@ namespace workshop192.Domain
             handShake();
             return true;
         }
-        public bool handShake()
+        public async Task<bool> handShake()
         {
             var massage = new Dictionary<string, string>
             {
                 { "action_type", "handshake" },
             };
 
-           using (var client1 = new HttpClient())
-            {
-                var massageToSent = new FormUrlEncodedContent(massage);
-                var response = client1.PostAsync("https://cs-bgu-wsep.herokuapp.com/", massageToSent).Result;
+            var massageToSent = new FormUrlEncodedContent(massage);
+            var response = await client.PostAsync("https://cs-bgu-wsep.herokuapp.com/", massageToSent);
+            var responseToString = await response.Content.ReadAsStringAsync();
 
-                if (response.IsSuccessStatusCode)
-                {
-                    var responseContent = response.Content;
-
-                    // by calling .Result you are synchronously reading the result
-                    string responseString = responseContent.ReadAsStringAsync().Result;
-                 if(responseString == "OK")
-                    {
-                        return true;
-                    }
-                  
-                }
-            }
+        
+            if (responseToString == "OK")
+                return true;
             return false;
         }
 
-        public  int cancelPayment(string id)
+        public async Task<int> cancelPayment(string id)
         {
 
             var massage = new Dictionary<string, string>
@@ -105,21 +84,11 @@ namespace workshop192.Domain
        
             };
 
-            using (var client1 = new HttpClient())
-            {
-                var massageToSent = new FormUrlEncodedContent(massage);
-                var response = client1.PostAsync("https://cs-bgu-wsep.herokuapp.com/", massageToSent).Result;
+            var massageToSend = new FormUrlEncodedContent(massage);
+            var responseFromServer = await client.PostAsync("https://cs-bgu-wsep.herokuapp.com/", massageToSend);
+            var responseToString = await responseFromServer.Content.ReadAsStringAsync();
 
-                if (response.IsSuccessStatusCode)
-                {
-                    var responseContent = response.Content;
-                   
-                    string responseString = responseContent.ReadAsStringAsync().Result;
-                    return int.Parse(responseString);
-
-                }
-            }
-            return -1;
+            return int.Parse(responseToString);
         }
     }
 }

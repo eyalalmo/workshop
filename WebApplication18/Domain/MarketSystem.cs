@@ -9,17 +9,16 @@ using WebApplication18.Domain;
 using WebApplication18.Logs;
 using workshop192.Bridge;
 using workshop192.ServiceLayer;
+using InitSettings;
 
 namespace workshop192.Domain
 {
     public class MarketSystem
     {
-        public static bool testsMode =false;
         public static void init()
         {       
-            
             int addNewDataToDB = 0;
-            string[] linesConfig = null;
+            string[] linesConfig=null;
             string filePathConfig = null;
             string fileName = "";
 
@@ -195,7 +194,6 @@ namespace workshop192.Domain
 
         public static void initTestWitOutRead()
         {
-            testsMode = true;
             SystemLogger.configureLogs();
             DBProduct.getInstance().initTests();
             DBSession.getInstance().initTests();

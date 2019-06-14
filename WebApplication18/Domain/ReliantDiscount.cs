@@ -16,31 +16,19 @@ namespace workshop192.Domain
 
         // Dictionary<Product, int> products;
 
-        public ReliantDiscount(double percentage, String duration, int numOfProducts, Product product, int storeId) : base(percentage, duration, storeId)
-        {
-            this.numOfProducts = numOfProducts;
-            this.type = reliantType.sameProduct;
-            this.product = product;
-        }
-        public ReliantDiscount(int id,bool isPartOfComplex, double percentage, String duration, int numOfProducts, Product product, int storeId) : base(id,isPartOfComplex, percentage, duration, storeId)
+        public ReliantDiscount(double percentage, String duration, int numOfProducts, Product product) : base(percentage, duration)
         {
             this.numOfProducts = numOfProducts;
             this.type = reliantType.sameProduct;
             this.product = product;
         }
 
-        public ReliantDiscount(double percentage, String duration, int amount, int storeId) : base(percentage, duration, storeId)
+        public ReliantDiscount(double percentage, String duration, int amount) : base(percentage, duration)
         {
             this.totalAmount = amount;
             this.type = reliantType.totalAmount;
         }
-        public ReliantDiscount(int id, bool isPartOfComplex, double percentage, String duration, int amount, int storeId) : base(id,isPartOfComplex, percentage, duration, storeId)
-        {
-            this.totalAmount = amount;
-            this.type = reliantType.totalAmount;
-        }
-
-
+        
         public override bool checkCondition(Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
         {
             if (type == reliantType.sameProduct)
