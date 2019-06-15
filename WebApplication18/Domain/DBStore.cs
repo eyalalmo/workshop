@@ -7,6 +7,7 @@ using WebApplication18.DAL;
 using Dapper;
 using WebApplication18.Domain;
 using System.Data.SqlClient;
+using WebApplication18.Logs;
 
 namespace workshop192.Domain
 {
@@ -194,7 +195,8 @@ namespace workshop192.Domain
             catch (Exception)
             {
                 connection.Close();
-                throw new StoreException("cant remove role");
+                SystemLogger.getErrorLog().Error("Connection error in function remove role in DB Store while removing " + sr.getUser().getUsername());
+                throw new ConnectionException();
             }
 
         }
@@ -277,8 +279,12 @@ namespace workshop192.Domain
                         transaction.Dispose();
                         connection.Close();
                     }
-                    throw new StoreException("cant add store roll");
-                }
+
+
+                    SystemLogger.getErrorLog().Error("Connection error in function add role in DB Store while adding " + sr.getUser().getUsername());
+                    throw new ConnectionException();
+               
+            }
             }
         }
 
@@ -316,9 +322,11 @@ namespace workshop192.Domain
                 }
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 connection.Close();
+                SystemLogger.getErrorLog().Error("Connection error in function removeOwnerNumerByOne in DB Store store id " + storeId);
+                throw new ConnectionException();
             }
         }
 
@@ -335,9 +343,11 @@ namespace workshop192.Domain
 
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 connection.Close();
+                SystemLogger.getErrorLog().Error("Connection error in function addOwnerNumerByOne in DB Store store id " + storeId);
+                throw new ConnectionException();
             }
         }
 
@@ -363,6 +373,7 @@ namespace workshop192.Domain
 
         public int addStore(Store store)
         {
+            int storeId = -1;
             try
             {
                 //SqlConnection connection = Connector.getInstance().getSQLConnection();
@@ -374,14 +385,12 @@ namespace workshop192.Domain
 
                     using (var transaction = connection.BeginTransaction())
                     {
-                        try
-                        {
 
-
+       
                             ////////////////////////////////////////////////
                             string sql = "INSERT INTO [dbo].[Stores] (storeId, name,description,numOfOwners,active)" +
                                              " VALUES (@storeId, @name, @description,@numOfOwners,@active)";
-                            int storeId = store.getStoreID();
+                            storeId = store.getStoreID();
                             string name = store.getStoreName();
                             string description = store.getDescription();
                             int numOfOwners = store.getNumberOfOwners();
@@ -410,20 +419,17 @@ namespace workshop192.Domain
                             connection.Close();
                             /////////////////////////
                             return store.getStoreID();
-                        }
-                        catch (Exception)
-                        {
-                            connection.Close();
-                            //transaction.Rollback();
-                            throw new StoreException("faild to add store");
-                        }
+                        
+                       
                     }
                 }
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw new ConnectionException("Bad connection to database");
+                connection.Close();
+                SystemLogger.getErrorLog().Error("Connection error in function Addstore in DB Store store id " + storeId);
+                throw new ConnectionException();
             }
         }
 
@@ -533,10 +539,11 @@ namespace workshop192.Domain
                 }
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 connection.Close();
-                throw new StoreException("cant return store");
+                SystemLogger.getErrorLog().Error("Connection error in function getStore in DB Store store id " + storeId);
+                throw new ConnectionException();
             }
 
 
@@ -576,7 +583,8 @@ namespace workshop192.Domain
             catch (Exception)
             {
                 connection.Close();
-                throw new StoreException("cant delete store");
+                SystemLogger.getErrorLog().Error("Connection error in function removeStore in DB Store store id " + store.getStoreID());
+                throw new ConnectionException();
             }
         }
 
@@ -616,7 +624,8 @@ namespace workshop192.Domain
             catch (Exception)
             {
                 connection.Close();
-                throw new ConnectionException("Database error");
+                SystemLogger.getErrorLog().Error("Connection error in function getNextStoreID in DB Store");
+                throw new ConnectionException();
             }
         }
 
@@ -666,10 +675,11 @@ namespace workshop192.Domain
 
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 connection.Close();
-                throw new ConnectionException("Database error");
+                SystemLogger.getErrorLog().Error("Connection error in function getUpdatedId in DB Store store id ");
+                throw new ConnectionException();
             }
         }
 
@@ -705,10 +715,11 @@ namespace workshop192.Domain
                 }
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 connection.Close();
-                throw new ConnectionException("Database error - Getting store roles of user " + userName);
+                SystemLogger.getErrorLog().Error("Connection error in function getRolesEntryByUserName in DB Store username" + userName);
+                throw new ConnectionException();
             }
         }
 
@@ -743,7 +754,8 @@ namespace workshop192.Domain
             catch (Exception e)
             {
                 connection.Close();
-                throw new ConnectionException("Bad connection to database while adding a pending owner");
+                SystemLogger.getErrorLog().Error("Connection error in function addPendingOwner("+ storeId+","+ appointer+","+ pending+") in DB Store ");
+                throw new ConnectionException();
             }
         }
 
@@ -764,9 +776,11 @@ namespace workshop192.Domain
                 }
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw new StoreException("cant remove pending owner");
+                connection.Close();
+                SystemLogger.getErrorLog().Error("Connection error in function removePendingOwner(" + storeId + "," + pending + ") in DB Store ");
+                throw new ConnectionException();
             }
         }
 
@@ -811,7 +825,8 @@ namespace workshop192.Domain
             {
                 if (ownerTrans == null)
                     connection.Close();
-                throw new StoreException("Error in signing a contract: " + e.Message.ToString());
+                SystemLogger.getErrorLog().Error("Connection error in function signContract(" + storeId + "," +owner + "," + pending + ") in DB Store ");
+                throw new ConnectionException();
             }
         }
 
@@ -840,7 +855,9 @@ namespace workshop192.Domain
             }
             catch (Exception e)
             {
-                throw new StoreException("Error in declining a contract: " + e.Message.ToString());
+                connection.Close();
+                SystemLogger.getErrorLog().Error("Connection error in function removeAllUserContract(" + storeId + "," + userName + ") in DB Store ");
+                throw new ConnectionException();
             }
 
         }
@@ -863,7 +880,8 @@ namespace workshop192.Domain
             catch (Exception e)
             {
                 connection.Close();
-                throw new StoreException("cant get contact");
+                SystemLogger.getErrorLog().Error("Connection error in function getContractNum(" + storeId + "," + userName + ") in DB Store ");
+                throw new ConnectionException();
             }
 
 

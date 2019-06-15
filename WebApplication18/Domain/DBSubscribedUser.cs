@@ -7,6 +7,7 @@ using System.Text;
 using Dapper;
 using WebApplication18.DAL;
 using WebApplication18.Domain;
+using WebApplication18.Logs;
 
 namespace workshop192.Domain
 {
@@ -102,12 +103,15 @@ namespace workshop192.Domain
                 lock (connection)
                 {
                     connection.Open();
-                    connection.Execute("DELETE FROM Register");
-                    connection.Execute("DELETE FROM BasketCart");
-                    connection.Execute("DELETE FROM CartProduct");
-
-                    instance = new DBSubscribedUser();
-                    connection.Close();
+                    using (var transaction = connection.BeginTransaction())
+                    {
+                        connection.Execute("DELETE FROM Register", transaction);
+                        connection.Execute("DELETE FROM BasketCart", transaction);
+                        connection.Execute("DELETE FROM CartProduct", transaction);
+                        transaction.Commit();
+                        instance = new DBSubscribedUser();
+                        connection.Close();
+                    }
                 }
 
             }
@@ -159,8 +163,10 @@ namespace workshop192.Domain
            }
            catch (Exception e)
            {
-               connection.Close();
-           }
+                connection.Close();
+                SystemLogger.getErrorLog().Error("Connection error in function register in db subscribed user while removing " + user.getUsername());
+                throw new ConnectionException();
+            }
        }
 
        public SubscribedUser getSubscribedUserForInitStore(string username)
@@ -302,17 +308,21 @@ namespace workshop192.Domain
                     //connection.Close();
                     if (Enumerable.Count(c) == 0)
                     {
-                        string sql = "INSERT INTO [dbo].[Register] (username, password)" +
-                                                         " VALUES (@username, @password)";
-                        connection.Execute(sql, new { username, password });
-                        //connection.Close();
+                        throw new LoginException("Username " + user.getUsername() + "does not exist");
                     }
                     connection.Close();
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                connection.Close();
+                if (e is ClientException)
+                    throw e;
+                else
+                {
+                    connection.Close();
+                    SystemLogger.getErrorLog().Error("Connection error in function login in db subscribed user while removing " + user.getUsername());
+                    throw new ConnectionException();
+                }
             }
 
         }
@@ -331,9 +341,11 @@ namespace workshop192.Domain
                     connection.Close();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 connection.Close();
+                SystemLogger.getErrorLog().Error("Connection error in function add cart to basket cart table in db subscribed user while removing " + user.getUsername());
+                throw new ConnectionException();
             }
         }
 
@@ -356,6 +368,8 @@ namespace workshop192.Domain
             catch (Exception)
             {
                 connection.Close();
+                SystemLogger.getErrorLog().Error("Connection error in function add product to cart product table in db subscribed user while removing " + user.getUsername());
+                throw new ConnectionException();
             }
         }
 
@@ -375,19 +389,23 @@ namespace workshop192.Domain
                 lock (connection)
                 {
                     connection.Open();
-                    connection.Execute(sql1, new { username });
-                    connection.Execute(sql2, new { username });
-                    connection.Execute(sql3, new { username });
+                    using (var transaction = connection.BeginTransaction())
+                    {
+                        connection.Execute(sql1, new { username },transaction);
+                        connection.Execute(sql2, new { username },transaction);
+                        connection.Execute(sql3, new { username },transaction);
+                        transaction.Commit();
+                    }
                     connection.Close();
                 }
                 //connection.Close();
             }
-            catch (Exception)
+            catch(Exception)
             {
-                throw new ConnectionException("An error has occured with removing a user");
                 connection.Close();
+                SystemLogger.getErrorLog().Error("Connection error in function remove in db subscribed user while removing " + user.getUsername());
+                throw new ConnectionException();
             }
-
         }
         public SubscribedUser getloggedInUser(string name)
         {
@@ -415,10 +433,12 @@ namespace workshop192.Domain
             catch (Exception)
             {
                 connection.Close();
+                SystemLogger.getErrorLog().Error("Connection error in function remove product from cart product table in dbsubscribed user ");
+                throw new ConnectionException();
             }
         }
 
-        public string encryptPassword(string password)
+            public string encryptPassword(string password)
         {
             MD5 md5 = MD5.Create();
             byte[] inputBytes = Encoding.ASCII.GetBytes(password);
@@ -450,6 +470,8 @@ namespace workshop192.Domain
             catch (Exception)
             {
                 connection.Close();
+                SystemLogger.getErrorLog().Error("Connection error in function deleteCartFromBasket in dbsubscribed user ");
+                throw new ConnectionException();
             }
         }
 
@@ -466,11 +488,13 @@ namespace workshop192.Domain
                     connection.Close();
                 }
                 //connection.Close();
-
             }
+
             catch (Exception)
             {
-                //connection.Close();
+                connection.Close();
+                SystemLogger.getErrorLog().Error("Connection error in function updateAmountOnCartProductTable in dbsubscribed user ");
+                throw new ConnectionException();
             }
 
         }
@@ -484,24 +508,30 @@ namespace workshop192.Domain
                 //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
                 {
-                    connection.Open();
-                    connection.Execute(sql1, new { username });
-
-                    //connection.Close();
-                    foreach (KeyValuePair<int, ShoppingCart> pair in shoppingCarts)
+                    using (var transaction = connection.BeginTransaction())
                     {
-                        int storeID = pair.Key;
-                        connection.Execute(sql2, new { username, storeID });
-                    }
+                        connection.Open();
+                        connection.Execute(sql1, new { username }, transaction);
 
+                        //connection.Close();
+                        foreach (KeyValuePair<int, ShoppingCart> pair in shoppingCarts)
+                        {
+                            int storeID = pair.Key;
+                            connection.Execute(sql2, new { username, storeID }, transaction);
+                        }
+                        transaction.Commit();
+                    }
                     connection.Close();
                 }
             }
             catch (Exception)
             {
                 connection.Close();
+                SystemLogger.getErrorLog().Error("Connection error in function updateTablesAfterPurchase in DBSubscribed user ");
+                throw new ConnectionException();
+
             }
-            
+
         }
     }
 }

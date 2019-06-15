@@ -198,6 +198,7 @@ namespace workshop192.Domain
 
             if (resultPay != -1)
             {
+
                  resultDeliver = DeliveryService.getInstance().sendToUser(address, creditcard, month, year, holder, cvv);
                
                 if (resultDeliver == -1)
@@ -218,7 +219,7 @@ namespace workshop192.Domain
                             int amount = pair2.Value;
                             if (product.getQuantityLeft() < amount)
                             {
-
+                                int res2 = PaymentService.getInstance().cancelPayment(resultPay + "");
                                 throw new IllegalAmountException("Error: Cannot complete purchase- " + product.getProductName() + " does not have enough quantity left");
                             }
                             product.decQuantityLeft(amount);

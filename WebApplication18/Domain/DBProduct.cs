@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using WebApplication18.DAL;
 using Dapper;
 using System.Data.SqlClient;
+using WebApplication18.Logs;
 
 namespace workshop192.Domain
 {
@@ -155,7 +156,8 @@ namespace workshop192.Domain
             catch (Exception e)
             {
                 connection.Close();
-                throw e;
+                SystemLogger.getErrorLog().Error("Connection error in function AddProduct in DB Product, store ID =  " + p.storeID);
+                throw new ConnectionException();
             }
         }
 
@@ -230,7 +232,8 @@ namespace workshop192.Domain
             catch (Exception e)
             {
                 connection.Close();
-                throw e;
+                SystemLogger.getErrorLog().Error("Connection error in function removeProduct in DB Product, store ID =  " + p.storeID);
+                throw new ConnectionException();
             }
         }
 
@@ -268,7 +271,8 @@ namespace workshop192.Domain
             catch (Exception e)
             {
                 connection.Close();
-                throw e;
+                SystemLogger.getErrorLog().Error("Connection error in function getProduct in DB Product, ID =  " + id);
+                throw new ConnectionException();
             }
         }
 
@@ -411,7 +415,8 @@ namespace workshop192.Domain
             catch (Exception e)
             {
                 connection.Close();
-                throw e;
+                SystemLogger.getErrorLog().Error("Connection error in function updateProduct in DB Product, store ID =  " + p.storeID);
+                throw new ConnectionException();
             }
         }
     }
