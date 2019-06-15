@@ -87,7 +87,7 @@ namespace WebApplication18.DAL
                         "policyID int,\n" +
                         "type varchar(255) NOT NULL,\n" +
                         "amount int,\n" +
-                        "isPartOfComplex boolean,\n" +
+                        "isPartOfComplex int,\n" +
                         "subtypeID1 int,\n" +
                         "subtypeID2 int,\n" +
                         "compType varchar(255),\n" +
