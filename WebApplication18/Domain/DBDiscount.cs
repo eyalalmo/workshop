@@ -125,8 +125,6 @@ namespace workshop192.Domain
                 lock (connection)
                 {
                     connection.Open();
-                    using (var transaction = connection.BeginTransaction())
-                    {
                         connection.Execute("DELETE FROM DiscountComponent WHERE id=@id ", new { id = d.getId() });
                         if (d is Discount)
                         {
@@ -136,21 +134,20 @@ namespace workshop192.Domain
                         {
                             connection.Execute("DELETE FROM DiscountComposite WHERE id=@id ", new { id = d.getId() });
                             DiscountComposite composite = (DiscountComposite)d;
+                            connection.Close();
                             foreach (DiscountComponent component in composite.getChildren())
                             {
                                 removeDiscount(component);
                             }
-                        }
-
-                        discounts.Remove(d);
-                        transaction.Commit();
+                        
                     }
-                    connection.Close();
+                    discounts.Remove(d);
                 }
             }
             catch (Exception e)
             {
-                connection.Close();
+                if(connection.State == ConnectionState.Open)
+                     connection.Close();
                 throw e;
             }
         }

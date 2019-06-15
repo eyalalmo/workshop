@@ -101,8 +101,6 @@ namespace WebApplication18.Controllers
                 StoreService.getInstance().addStore(name, description, session);
 
                 return "ok";
-
-
             }
             catch (ClientException e)
             {
