@@ -127,3 +127,35 @@
 2019-06-15 12:34:51,664 INFO EventLog: User u2 has successfuly logged in.
 2019-06-15 12:34:52,590 INFO EventLog: User u2 has successfuly created a store
 2019-06-15 12:35:12,229 INFO EventLog: User u2 has successfuly logged in.
+2019-06-15 12:49:00,683 INFO EventLog: User u2 has successfuly registered
+2019-06-15 12:49:00,912 INFO EventLog: User u3 has successfuly registered
+2019-06-15 12:49:01,136 INFO EventLog: User u4 has successfuly registered
+2019-06-15 12:49:01,362 INFO EventLog: User u5 has successfuly registered
+2019-06-15 12:49:01,523 INFO EventLog: User u2 has successfuly logged in.
+2019-06-15 12:49:54,608 INFO EventLog: User u2 has successfuly registered
+2019-06-15 12:49:54,856 INFO EventLog: User u3 has successfuly registered
+2019-06-15 12:49:55,096 INFO EventLog: User u4 has successfuly registered
+2019-06-15 12:49:55,351 INFO EventLog: User u5 has successfuly registered
+2019-06-15 12:49:55,524 INFO EventLog: User u2 has successfuly logged in.
+2019-06-15 12:55:07,831 INFO EventLog: User u2 has successfuly registered
+2019-06-15 12:55:08,084 INFO EventLog: User u3 has successfuly registered
+2019-06-15 12:55:08,323 INFO EventLog: User u4 has successfuly registered
+2019-06-15 12:55:08,580 INFO EventLog: User u5 has successfuly registered
+2019-06-15 12:55:08,745 INFO EventLog: User u2 has successfuly logged in.
+2019-06-15 12:55:09,564 INFO EventLog: User u2 has successfuly created a store
+2019-06-15 14:29:54,749 INFO EventLog: User et has successfuly registered
+2019-06-15 14:29:59,478 INFO EventLog: User et has successfuly logged in.
+2019-06-15 14:31:10,442 INFO EventLog: User et has successfuly created a store
+2019-06-15 14:31:26,487 INFO EventLog: User et has logged out
+2019-06-15 14:31:32,192 INFO EventLog: User eq has successfuly registered
+2019-06-15 14:31:43,056 INFO EventLog: User ee has successfuly registered
+2019-06-15 14:31:49,106 INFO EventLog: User et has successfuly logged in.
+2019-06-15 14:32:02,234 INFO EventLog: User et has logged out
+2019-06-15 14:32:05,949 INFO EventLog: User eq has successfuly logged in.
+2019-06-15 14:32:23,707 INFO EventLog: User eq has logged out
+2019-06-15 14:34:36,692 INFO EventLog: User ey has successfuly registered
+2019-06-15 14:34:41,381 INFO EventLog: User ey has successfuly logged in.
+2019-06-15 14:36:04,323 ERROR EventLog: Register : Error: Username already exists
+2019-06-15 14:36:08,418 INFO EventLog: User ey has successfuly logged in.
+2019-06-15 14:39:34,258 ERROR EventLog: Register : Error: Username already exists
+2019-06-15 14:39:38,740 INFO EventLog: User ey has successfuly logged in.

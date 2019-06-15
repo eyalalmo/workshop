@@ -43,7 +43,6 @@ namespace workshop192.ServiceLayer.Tests
             userService.register(session5, "u16", "123");
             userService.login(session5, "u16", "123");
 
-
             storeid = storeService.addStore("myStore", "the best store ever", session1);
 
         }

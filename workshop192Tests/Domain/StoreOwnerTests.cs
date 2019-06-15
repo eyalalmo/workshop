@@ -203,10 +203,10 @@ namespace workshop192.Domain.Tests
         {
             try
             {
-                sr.addManager(session2.getSubscribedUser(), per);
-                sr.remove(session2.getSubscribedUser());
-                Assert.AreEqual(store.getStoreRole(session2.getSubscribedUser()), null);
-                Assert.AreEqual(session2.getSubscribedUser().getStoreRoles().Count, 0);
+                sr.addManager(session3.getSubscribedUser(), per);
+                sr.remove(session3.getSubscribedUser());
+                Assert.AreEqual(store.getStoreRole(session3.getSubscribedUser()), null);
+                Assert.AreEqual(session3.getSubscribedUser().getStoreRoles().Count, 0);
             }
             catch (RoleException)
             {
