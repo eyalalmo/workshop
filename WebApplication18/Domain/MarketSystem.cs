@@ -15,11 +15,12 @@ namespace workshop192.Domain
 {
     public class MarketSystem
     {
-        public static bool testsMode =false;
+        public static bool testsMode = false;
         public static void init()
         {       
             
             int addNewDataToDB = 0;
+            int createTables = 0;
             string[] linesConfig = null;
             string filePathConfig = null;
             string fileName = "";
@@ -56,6 +57,17 @@ namespace workshop192.Domain
                             addNewDataToDB = 1;
                         }
                     }
+                    if (input[0] == "CreateTables")
+                    {
+                        if (input[1] == "false")
+                        {
+                            createTables = 0;
+                        }
+                        else
+                        {
+                            createTables = 1;
+                        }
+                    }
                 }
             }
             catch(Exception e)
@@ -64,12 +76,18 @@ namespace workshop192.Domain
                 return;
             }
 
+            if (createTables == 1)
+            {
+                Connector c = new Connector();
+                c.createAllTables();
+            }
+
             if (testsMode == true)
             {
                 initTestWitOutRead();
                 return;
             }
-            
+
             if (addNewDataToDB == 0)
             {
                 initWitOutRead();

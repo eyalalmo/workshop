@@ -10,6 +10,7 @@ namespace workshop192.Domain
     public interface UserState
     {
         void login(String username, String password, Session session);
+        void loginAfterRegister(String username, String password, Session session);
         void register(String username, String password, Session session);
         void logout(SubscribedUser sub, Session session);
         String getPurchaseHistory(SubscribedUser sub);

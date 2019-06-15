@@ -1,3 +1,4 @@
 inputFile input.txt
 isTestMode false
 isFirstTime false
+CreateTables false

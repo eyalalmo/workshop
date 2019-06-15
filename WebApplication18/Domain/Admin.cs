@@ -84,6 +84,11 @@ namespace workshop192.Domain
             throw new LoginException("Admin already logged in");
         }
 
+        public void loginAfterRegister(string username, string password, Session session)
+        {
+            throw new LoginException("Admin already logged in");
+        }
+
         public void logout(SubscribedUser sub, Session session)
         {
             dbSubscribedUser.logout(sub);

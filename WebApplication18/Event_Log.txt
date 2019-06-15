@@ -167,3 +167,24 @@
 2019-06-15 15:59:56,743 INFO EventLog: User ey has successfuly registered
 2019-06-15 16:00:02,079 INFO EventLog: User ey has successfuly logged in.
 2019-06-15 16:04:04,147 INFO EventLog: User ey has successfuly logged in.
+2019-06-15 17:36:38,113 ERROR EventLog: Register : Error: Username already exists
+2019-06-15 17:36:42,532 ERROR EventLog: Login : Error: Incorrect password
+2019-06-15 17:36:46,944 INFO EventLog: User ey has successfuly logged in.
+2019-06-15 17:39:09,212 INFO EventLog: User u2 has successfuly registered
+2019-06-15 17:39:09,563 INFO EventLog: User u3 has successfuly registered
+2019-06-15 17:39:09,820 INFO EventLog: User u4 has successfuly registered
+2019-06-15 17:39:10,091 INFO EventLog: User u5 has successfuly registered
+2019-06-15 17:39:10,272 INFO EventLog: User u2 has successfuly logged in.
+2019-06-15 17:39:11,129 INFO EventLog: User u2 has successfuly created a store
+2019-06-15 17:39:23,159 ERROR EventLog: Login : Error: Username does not exist
+2019-06-15 17:39:27,783 INFO EventLog: User ey has successfuly registered
+2019-06-15 17:39:32,397 INFO EventLog: User ey has successfuly logged in.
+2019-06-15 17:39:34,717 INFO EventLog: User ey has logged out
+2019-06-15 17:39:40,125 INFO EventLog: User u2 has successfuly logged in.
+2019-06-15 17:39:45,808 INFO EventLog: User u2 has logged out
+2019-06-15 17:41:43,419 ERROR EventLog: Register : Error: Username already exists
+2019-06-15 17:41:47,511 ERROR EventLog: Register : Error: Incorrect password
+2019-06-15 17:41:59,680 ERROR EventLog: Register : Error: Username already exists
+2019-06-15 17:42:08,383 ERROR EventLog: Register : Error: Incorrect password
+2019-06-15 17:48:13,936 ERROR EventLog: Register : Error: Incorrect password
+2019-06-15 17:53:12,961 INFO EventLog: User eilon has successfuly registered
