@@ -45,30 +45,7 @@ namespace workshop192.ServiceLayer.Tests
             storeService.addProduct("socks", "clothes", 110, 4, 2, store2, session1);
 
         }
-        //1
-        [TestMethod]
-        public void initialTest()
-        {
-         
-            try
-            {
-              bool pay=  userService.handShakePay();
-              bool deliver = userService.handShakeDeliver();
-                if(pay==false || deliver == false)
-                {
-                    Assert.Fail();
-                }
-                Assert.AreEqual(true, true);
-            }
-            catch (Exception)
-            {
-                Assert.Fail();
-            }
-            Assert.IsTrue(true);
-
-
-        }
-
+       
         //2.2
         [TestMethod]
         public void registerSuccessTest()

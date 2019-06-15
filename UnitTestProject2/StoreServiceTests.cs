@@ -14,7 +14,7 @@ namespace workshop192.ServiceLayer.Tests
     {
         private StoreService storeService = StoreService.getInstance();
         private UserService userService = UserService.getInstance();
-        int session1, session2 ,session3, session4, session5;
+        int session1, session2, session3, session4, session5;
         int storeid;
         int productid;
 
@@ -83,7 +83,7 @@ namespace workshop192.ServiceLayer.Tests
             Assert.IsTrue(true);
 
         }
-        
+
         //4.1.2
         [TestMethod()]
         public void RemoveProductTest1()
@@ -206,7 +206,7 @@ namespace workshop192.ServiceLayer.Tests
                 addOwnerByAnOwnerSuccTest();
                 storeService.addOwner(storeid, "u15", session2);
                 storeService.signContract(storeid, "u15", session1);
-                
+
             }
             catch (RoleException)
             {
@@ -328,7 +328,7 @@ namespace workshop192.ServiceLayer.Tests
                 Assert.Fail();
             }
         }
-        
+
         //4.5
         [TestMethod()]
         public void addMannagerByAnOwner2()
@@ -420,8 +420,7 @@ namespace workshop192.ServiceLayer.Tests
                 Assert.IsTrue(true);
             }
         }
-        
-       
 
+      
     }
 }
