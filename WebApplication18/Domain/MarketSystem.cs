@@ -70,7 +70,7 @@ namespace workshop192.Domain
                     }
                 }
             }
-            catch(Exception)
+            catch(Exception e)
             {
                 initWitOutRead();
                 SystemLogger.getErrorLog().Error("Cant open config file " + e.StackTrace);
@@ -104,7 +104,7 @@ namespace workshop192.Domain
                     filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
                      lines = File.ReadAllLines(filePath + "/" + fileName);
                 }
-                catch(Exception)
+                catch (Exception e)
                 {
                     initWitOutRead();
                     SystemLogger.getErrorLog().Error("Cant open input file " + e.StackTrace);
