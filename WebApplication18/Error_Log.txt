@@ -106,3 +106,74 @@
    ?-  workshop192.Bridge.DomainBridge.login(Int32 sessionid, String username, String password) ?- C:\Users\User\Documents\workshop\WebApplication18\Bridge\DomainBridge.cs:???? 53
    ?-  workshop192.ServiceLayer.UserService.login(Int32 session, String username, String password) ?- C:\Users\User\Documents\workshop\WebApplication18\ServiceLayer\UserService.cs:???? 49
    ?-  WebApplication18.Controllers.UesrController.login(String Username, String Password) ?- C:\Users\User\Documents\workshop\WebApplication18\Controllers\UesrController.cs:???? 47
+2019-06-15 23:19:50,927 ERROR ErrorLog: An Error has occured. Function: getStore; Stack Trace:    ?-  workshop192.ServiceLayer.StoreService.addStore(String storeName, String storeDescription, Int32 session) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\ServiceLayer\StoreService.cs:???? 158
+   ?-  WebApplication18.Controllers.StoreController.addStore(String name, String description) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Controllers\StoreController.cs:???? 101
+2019-06-15 23:22:06,102 ERROR ErrorLog: An Error has occured. Function: getStore; Stack Trace:    ?-  workshop192.ServiceLayer.StoreService.addStore(String storeName, String storeDescription, Int32 session)
+   ?-  WebApplication18.Controllers.StoreController.addStore(String name, String description)
+2019-06-15 23:23:08,391 ERROR ErrorLog: An Error has occured. Function: getStore; Stack Trace:    ?-  workshop192.ServiceLayer.StoreService.addStore(String storeName, String storeDescription, Int32 session)
+   ?-  WebApplication18.Controllers.StoreController.addStore(String name, String description)
+2019-06-15 23:23:22,532 ERROR ErrorLog: An Error has occured. Function: getStore; Stack Trace:    ?-  workshop192.ServiceLayer.StoreService.addStore(String storeName, String storeDescription, Int32 session)
+   ?-  WebApplication18.Controllers.StoreController.addStore(String name, String description)
+2019-06-16 00:12:20,957 ERROR ErrorLog: Connection error in function removeStore in DB Store store id 13
+2019-06-16 00:12:21,099 ERROR ErrorLog: An Error has occured. Function: removeUser; Stack Trace:    ?-  workshop192.Domain.DBStore.removeStore(Store store)
+   ?-  workshop192.Domain.Admin.closeStore(Store store)
+   ?-  workshop192.Domain.Admin.removeUser(String user)
+   ?-  workshop192.Domain.Session.removeUser(String user)
+   ?-  workshop192.Bridge.DomainBridge.removeUser(Int32 sessionid, String username)
+   ?-  workshop192.ServiceLayer.UserService.removeUser(Int32 admin, String username)
+   ?-  WebApplication18.Controllers.UesrController.removeUser(String username)
+2019-06-16 00:12:59,147 ERROR ErrorLog: Connection error in function AddProduct in DB Product, store ID =  15
+2019-06-16 00:13:47,360 ERROR ErrorLog: Connection error in function removeStore in DB Store store id 15
+2019-06-16 00:13:47,506 ERROR ErrorLog: An Error has occured. Function: removeUser; Stack Trace:    ?-  workshop192.Domain.DBStore.removeStore(Store store)
+   ?-  workshop192.Domain.Admin.closeStore(Store store)
+   ?-  workshop192.Domain.Admin.removeUser(String user)
+   ?-  workshop192.Domain.Session.removeUser(String user)
+   ?-  workshop192.Bridge.DomainBridge.removeUser(Int32 sessionid, String username)
+   ?-  workshop192.ServiceLayer.UserService.removeUser(Int32 admin, String username)
+   ?-  WebApplication18.Controllers.UesrController.removeUser(String username)
+2019-06-16 00:16:36,239 ERROR ErrorLog: Connection error in function removeStore in DB Store store id 16
+2019-06-16 00:16:36,421 ERROR ErrorLog: An Error has occured. Function: removeUser; Stack Trace:    ?-  workshop192.Domain.DBStore.removeStore(Store store)
+   ?-  workshop192.Domain.Admin.closeStore(Store store)
+   ?-  workshop192.Domain.Admin.removeUser(String user)
+   ?-  workshop192.Domain.Session.removeUser(String user)
+   ?-  workshop192.Bridge.DomainBridge.removeUser(Int32 sessionid, String username)
+   ?-  workshop192.ServiceLayer.UserService.removeUser(Int32 admin, String username)
+   ?-  WebApplication18.Controllers.UesrController.removeUser(String username)
+2019-06-16 00:17:31,752 ERROR ErrorLog: Connection error in function removeStore in DB Store store id 17
+2019-06-16 00:17:31,884 ERROR ErrorLog: An Error has occured. Function: removeUser; Stack Trace:    ?-  workshop192.Domain.DBStore.removeStore(Store store)
+   ?-  workshop192.Domain.Admin.closeStore(Store store)
+   ?-  workshop192.Domain.Admin.removeUser(String user)
+   ?-  workshop192.Domain.Session.removeUser(String user)
+   ?-  workshop192.Bridge.DomainBridge.removeUser(Int32 sessionid, String username)
+   ?-  workshop192.ServiceLayer.UserService.removeUser(Int32 admin, String username)
+   ?-  WebApplication18.Controllers.UesrController.removeUser(String username)
+2019-06-16 00:18:53,634 ERROR ErrorLog: Connection error in function getStore in DB Store store id 17
+2019-06-16 00:19:34,293 ERROR ErrorLog: Connection error in function getStore in DB Store store id 17
+2019-06-16 00:20:56,628 ERROR ErrorLog: Connection error in function getStore in DB Store store id 17
+2019-06-16 00:23:28,596 ERROR ErrorLog: Connection error in function getStore in DB Store store id 17
+2019-06-16 00:25:49,494 ERROR ErrorLog: Connection error in function removeStore in DB Store store id 1
+2019-06-16 00:25:49,639 ERROR ErrorLog: An Error has occured. Function: removeUser; Stack Trace:    ?-  workshop192.Domain.DBStore.removeStore(Store store) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Domain\DBStore.cs:???? 696
+   ?-  workshop192.Domain.Admin.closeStore(Store store) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Domain\Admin.cs:???? 35
+   ?-  workshop192.Domain.Admin.removeUser(String user) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Domain\Admin.cs:???? 137
+   ?-  workshop192.Domain.Session.removeUser(String user) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Domain\Session.cs:???? 91
+   ?-  workshop192.Bridge.DomainBridge.removeUser(Int32 sessionid, String username) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Bridge\DomainBridge.cs:???? 133
+   ?-  workshop192.ServiceLayer.UserService.removeUser(Int32 admin, String username) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\ServiceLayer\UserService.cs:???? 114
+   ?-  WebApplication18.Controllers.UesrController.removeUser(String username) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Controllers\UesrController.cs:???? 248
+2019-06-16 00:51:54,576 ERROR ErrorLog: Connection error in function AddProduct in DB Product, store ID =  1
+2019-06-16 00:54:27,848 ERROR ErrorLog: Connection error in function AddProduct in DB Product, store ID =  4
+2019-06-16 00:55:11,912 ERROR ErrorLog: Connection error in function AddProduct in DB Product, store ID =  5
+2019-06-16 01:07:40,675 ERROR ErrorLog: An Error has occured. Function: removeUser; Stack Trace:    ?-  System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+   ?-  System.Collections.Generic.List`1.Enumerator.MoveNextRare()
+   ?-  workshop192.Domain.Admin.removeUser(String user) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Domain\Admin.cs:???? 124
+   ?-  workshop192.Domain.Session.removeUser(String user) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Domain\Session.cs:???? 91
+   ?-  workshop192.Bridge.DomainBridge.removeUser(Int32 sessionid, String username) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Bridge\DomainBridge.cs:???? 133
+   ?-  workshop192.ServiceLayer.UserService.removeUser(Int32 admin, String username) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\ServiceLayer\UserService.cs:???? 114
+   ?-  WebApplication18.Controllers.UesrController.removeUser(String username) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Controllers\UesrController.cs:???? 248
+2019-06-16 01:25:43,010 ERROR ErrorLog: An Error has occured. Function: removeUser; Stack Trace:    ?-  System.ThrowHelper.ThrowInvalidOperationException(ExceptionResource resource)
+   ?-  System.Collections.Generic.List`1.Enumerator.MoveNextRare()
+   ?-  workshop192.Domain.Admin.removeUser(String user)
+   ?-  workshop192.Domain.Session.removeUser(String user)
+   ?-  workshop192.Bridge.DomainBridge.removeUser(Int32 sessionid, String username)
+   ?-  workshop192.ServiceLayer.UserService.removeUser(Int32 admin, String username)
+   ?-  WebApplication18.Controllers.UesrController.removeUser(String username)
+2019-06-16 01:26:15,841 ERROR ErrorLog: Connection error in function AddProduct in DB Product, store ID =  4

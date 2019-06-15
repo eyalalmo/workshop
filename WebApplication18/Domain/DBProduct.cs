@@ -87,6 +87,19 @@ namespace workshop192.Domain
             nextProductID++;
         }
 
+        public void removeAllProductsFromStore(Store store)
+        {
+            LinkedList<Product> toRemove = new LinkedList<Product>();
+            foreach (Product p in store.getProductList())
+            {
+                toRemove.AddFirst(p);
+                // removeProduct(p);
+            }
+            foreach (Product p in toRemove)
+            {
+                removeProduct(p);
+            }
+        }
         public void initTests()
         {
             try
@@ -210,7 +223,15 @@ namespace workshop192.Domain
 
         public void removeProduct(Product p)
         {
-            if (!productList.Contains(p))
+            bool exist = false;
+            foreach(Product p1 in productList)
+            {
+                if(p1.getProductID()==p.getProductID())
+                {
+                    exist = true;
+                }
+            }
+            if (exist==false)
                 throw new DoesntExistException("Product " + p.getProductName() + " Doesn't exist");
 
             LinkedList<Product> result = new LinkedList<Product>();

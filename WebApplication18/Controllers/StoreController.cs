@@ -114,6 +114,10 @@ namespace WebApplication18.Controllers
                 SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
                 return "There has been a problem with the connection to the database. Please try again.";
             }
+            catch(ArgumentException e)
+            {
+                return "cant open store with no name";
+            }
             catch (Exception e)
             {
                 SystemLogger.getErrorLog().Error("An Error has occured. Function: getStore; Stack Trace: " + e.StackTrace);

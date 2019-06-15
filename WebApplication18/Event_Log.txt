@@ -213,3 +213,414 @@
 2019-06-15 23:11:16,615 INFO EventLog: User u2 has successfuly created a store
 2019-06-15 23:11:16,725 INFO EventLog: New product:  0 has successfuly added to store with id: 0
 2019-06-15 23:11:16,737 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
+2019-06-15 23:19:44,167 INFO EventLog: User u2 has successfuly logged in.
+2019-06-15 23:24:25,854 ERROR EventLog: Login : Error: Username does not exist
+2019-06-15 23:24:32,305 ERROR EventLog: Login : Error: Username does not exist
+2019-06-15 23:24:52,596 ERROR EventLog: Login : Error: Username does not exist
+2019-06-15 23:24:56,631 ERROR EventLog: Login : Error: Username does not exist
+2019-06-15 23:26:14,120 INFO EventLog: User u2 has successfuly registered
+2019-06-15 23:26:14,505 INFO EventLog: User u3 has successfuly registered
+2019-06-15 23:26:14,874 INFO EventLog: User u4 has successfuly registered
+2019-06-15 23:26:15,250 INFO EventLog: User u5 has successfuly registered
+2019-06-15 23:26:15,869 INFO EventLog: User u2 has successfuly created a store
+2019-06-15 23:26:15,963 INFO EventLog: New product:  0 has successfuly added to store with id: 0
+2019-06-15 23:26:15,980 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
+2019-06-15 23:26:31,224 ERROR EventLog: Login : Error: Incorrect password
+2019-06-15 23:26:35,640 INFO EventLog: User u2 has successfuly logged in.
+2019-06-15 23:28:48,752 INFO EventLog: User u2 has successfuly logged in.
+2019-06-15 23:56:25,420 INFO EventLog: User t1 has successfuly registered
+2019-06-15 23:56:27,769 INFO EventLog: User t1 has logged out
+2019-06-15 23:56:32,039 INFO EventLog: User t2 has successfuly registered
+2019-06-15 23:56:50,859 INFO EventLog: User t2 has successfuly created a store
+2019-06-15 23:57:03,359 INFO EventLog: New product:  7 has successfuly added to store with id: 5
+2019-06-15 23:57:17,966 INFO EventLog: User t2 has logged out
+2019-06-15 23:57:34,806 INFO EventLog: User t2 has successfuly logged in.
+2019-06-15 23:57:44,342 INFO EventLog: User t2 has logged out
+2019-06-15 23:57:50,780 INFO EventLog: User u1 has successfuly logged in.
+2019-06-15 23:57:59,861 INFO EventLog: User t2 has been successfuly removed
+2019-06-15 23:58:02,327 INFO EventLog: User u1 has logged out
+2019-06-15 23:59:03,452 ERROR EventLog: Login : Error: Username does not exist
+2019-06-15 23:59:07,996 INFO EventLog: User t3 has successfuly registered
+2019-06-15 23:59:15,038 INFO EventLog: User t3 has successfuly created a store
+2019-06-15 23:59:25,845 INFO EventLog: New product:  8 has successfuly added to store with id: 8
+2019-06-15 23:59:29,124 INFO EventLog: User t3 has logged out
+2019-06-15 23:59:37,346 INFO EventLog: User u1 has successfuly logged in.
+2019-06-15 23:59:45,316 INFO EventLog: User t3 has been successfuly removed
+2019-06-16 00:00:14,889 INFO EventLog: User u1 has logged out
+2019-06-16 00:00:19,608 INFO EventLog: User f has successfuly registered
+2019-06-16 00:00:24,623 INFO EventLog: User f has successfuly created a store
+2019-06-16 00:00:31,674 INFO EventLog: New product:  9 has successfuly added to store with id: 10
+2019-06-16 00:00:34,635 INFO EventLog: User f has logged out
+2019-06-16 00:00:39,191 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 00:00:45,228 INFO EventLog: User f has been successfuly removed
+2019-06-16 00:01:23,910 INFO EventLog: User u1 has logged out
+2019-06-16 00:01:29,230 INFO EventLog: User r has successfuly registered
+2019-06-16 00:01:34,894 ERROR EventLog: Login : Error: User is already logged in
+2019-06-16 00:01:48,199 INFO EventLog: User r has successfuly created a store
+2019-06-16 00:01:58,327 INFO EventLog: New product:  10 has successfuly added to store with id: 11
+2019-06-16 00:02:02,965 INFO EventLog: User r has logged out
+2019-06-16 00:02:08,517 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 00:02:12,761 INFO EventLog: User u1 has logged out
+2019-06-16 00:02:19,706 INFO EventLog: User t1 has successfuly logged in.
+2019-06-16 00:02:31,689 INFO EventLog: User t1 has successfuly created a store
+2019-06-16 00:02:42,403 INFO EventLog: New product:  11 has successfuly added to store with id: 12
+2019-06-16 00:02:45,770 INFO EventLog: User t1 has logged out
+2019-06-16 00:02:53,062 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 00:05:53,291 INFO EventLog: User t1 has been successfuly removed
+2019-06-16 00:05:57,146 INFO EventLog: User u1 has logged out
+2019-06-16 00:06:05,575 INFO EventLog: User r1 has successfuly registered
+2019-06-16 00:06:15,926 INFO EventLog: User r1 has successfuly created a store
+2019-06-16 00:06:24,059 ERROR EventLog: Add Product Error : error - rank must be a number between 1 to 5
+2019-06-16 00:06:29,590 INFO EventLog: New product:  12 has successfuly added to store with id: 13
+2019-06-16 00:06:31,994 INFO EventLog: User r1 has logged out
+2019-06-16 00:06:37,452 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 00:12:30,112 INFO EventLog: User u1 has logged out
+2019-06-16 00:12:39,397 INFO EventLog: User c has successfuly registered
+2019-06-16 00:12:46,844 INFO EventLog: User c has successfuly created a store
+2019-06-16 00:12:59,271 ERROR EventLog: Database Error : ?????? ?????? ?? ???? ???? 'workshop192.Domain.ConnectionException'.
+2019-06-16 00:13:18,076 INFO EventLog: New product:  14 has successfuly added to store with id: 15
+2019-06-16 00:13:28,426 INFO EventLog: User c has logged out
+2019-06-16 00:13:34,369 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 00:14:02,922 INFO EventLog: User u1 has logged out
+2019-06-16 00:14:09,210 INFO EventLog: User x has successfuly registered
+2019-06-16 00:14:16,589 INFO EventLog: User x has successfuly created a store
+2019-06-16 00:14:24,941 INFO EventLog: New product:  15 has successfuly added to store with id: 16
+2019-06-16 00:14:35,155 INFO EventLog: User x has logged out
+2019-06-16 00:14:40,666 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 00:16:42,726 INFO EventLog: User u1 has logged out
+2019-06-16 00:16:48,661 INFO EventLog: User z has successfuly registered
+2019-06-16 00:16:54,185 INFO EventLog: User z has logged out
+2019-06-16 00:16:57,691 INFO EventLog: User z has successfuly logged in.
+2019-06-16 00:17:05,590 INFO EventLog: User z has successfuly created a store
+2019-06-16 00:17:13,861 INFO EventLog: New product:  16 has successfuly added to store with id: 17
+2019-06-16 00:17:16,530 INFO EventLog: User z has logged out
+2019-06-16 00:17:22,049 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 00:24:45,462 INFO EventLog: User u2 has successfuly registered
+2019-06-16 00:24:45,856 INFO EventLog: User u3 has successfuly registered
+2019-06-16 00:24:46,220 INFO EventLog: User u4 has successfuly registered
+2019-06-16 00:24:46,592 INFO EventLog: User u5 has successfuly registered
+2019-06-16 00:24:47,199 INFO EventLog: User u2 has successfuly created a store
+2019-06-16 00:24:47,296 INFO EventLog: New product:  0 has successfuly added to store with id: 0
+2019-06-16 00:24:47,311 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
+2019-06-16 00:25:12,460 INFO EventLog: User t has successfuly registered
+2019-06-16 00:25:20,570 INFO EventLog: User t has successfuly created a store
+2019-06-16 00:25:30,351 INFO EventLog: New product:  1 has successfuly added to store with id: 1
+2019-06-16 00:25:34,393 INFO EventLog: User t has logged out
+2019-06-16 00:25:40,575 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 00:26:21,433 INFO EventLog: User u1 has logged out
+2019-06-16 00:26:28,943 INFO EventLog: User e has successfuly registered
+2019-06-16 00:26:35,854 INFO EventLog: User e has successfuly created a store
+2019-06-16 00:26:56,646 INFO EventLog: User e has logged out
+2019-06-16 00:27:20,583 INFO EventLog: User u2 has successfuly registered
+2019-06-16 00:27:21,013 INFO EventLog: User u3 has successfuly registered
+2019-06-16 00:27:21,413 INFO EventLog: User u4 has successfuly registered
+2019-06-16 00:27:21,814 INFO EventLog: User u5 has successfuly registered
+2019-06-16 00:27:22,480 INFO EventLog: User u2 has successfuly created a store
+2019-06-16 00:27:22,587 INFO EventLog: New product:  0 has successfuly added to store with id: 0
+2019-06-16 00:27:22,596 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
+2019-06-16 00:27:32,859 INFO EventLog: User t has successfuly registered
+2019-06-16 00:27:41,978 INFO EventLog: User t has successfuly created a store
+2019-06-16 00:27:55,296 INFO EventLog: New product:  1 has successfuly added to store with id: 1
+2019-06-16 00:27:58,507 INFO EventLog: User t has logged out
+2019-06-16 00:28:06,032 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 00:33:56,568 INFO EventLog: User u2 has successfuly registered
+2019-06-16 00:33:56,953 INFO EventLog: User u3 has successfuly registered
+2019-06-16 00:33:57,318 INFO EventLog: User u4 has successfuly registered
+2019-06-16 00:33:57,691 INFO EventLog: User u5 has successfuly registered
+2019-06-16 00:33:58,305 INFO EventLog: User u2 has successfuly created a store
+2019-06-16 00:33:58,400 INFO EventLog: New product:  0 has successfuly added to store with id: 0
+2019-06-16 00:33:58,410 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
+2019-06-16 00:34:12,789 INFO EventLog: User t has successfuly registered
+2019-06-16 00:34:20,825 INFO EventLog: User t has successfuly created a store
+2019-06-16 00:34:30,439 INFO EventLog: New product:  1 has successfuly added to store with id: 1
+2019-06-16 00:34:32,993 INFO EventLog: User t has logged out
+2019-06-16 00:34:41,542 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 00:39:36,199 INFO EventLog: User u2 has successfuly registered
+2019-06-16 00:39:36,587 INFO EventLog: User u3 has successfuly registered
+2019-06-16 00:39:36,953 INFO EventLog: User u4 has successfuly registered
+2019-06-16 00:39:37,342 INFO EventLog: User u5 has successfuly registered
+2019-06-16 00:39:37,939 INFO EventLog: User u2 has successfuly created a store
+2019-06-16 00:39:38,068 INFO EventLog: New product:  0 has successfuly added to store with id: 0
+2019-06-16 00:39:38,079 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
+2019-06-16 00:39:52,582 INFO EventLog: User y has successfuly registered
+2019-06-16 00:39:59,739 INFO EventLog: User y has successfuly created a store
+2019-06-16 00:40:07,982 INFO EventLog: New product:  1 has successfuly added to store with id: 1
+2019-06-16 00:40:10,515 INFO EventLog: User y has logged out
+2019-06-16 00:40:16,541 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 00:45:41,233 INFO EventLog: User u2 has successfuly registered
+2019-06-16 00:45:41,651 INFO EventLog: User u3 has successfuly registered
+2019-06-16 00:45:42,072 INFO EventLog: User u4 has successfuly registered
+2019-06-16 00:45:42,473 INFO EventLog: User u5 has successfuly registered
+2019-06-16 00:45:43,130 INFO EventLog: User u2 has successfuly created a store
+2019-06-16 00:45:43,236 INFO EventLog: New product:  0 has successfuly added to store with id: 0
+2019-06-16 00:45:43,247 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
+2019-06-16 00:46:36,431 INFO EventLog: User d has successfuly registered
+2019-06-16 00:46:43,284 INFO EventLog: User d has successfuly created a store
+2019-06-16 00:46:50,704 INFO EventLog: New product:  1 has successfuly added to store with id: 1
+2019-06-16 00:46:54,033 INFO EventLog: User d has logged out
+2019-06-16 00:46:59,380 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 00:50:57,826 INFO EventLog: User u2 has successfuly registered
+2019-06-16 00:50:58,241 INFO EventLog: User u3 has successfuly registered
+2019-06-16 00:50:58,666 INFO EventLog: User u4 has successfuly registered
+2019-06-16 00:50:59,069 INFO EventLog: User u5 has successfuly registered
+2019-06-16 00:50:59,723 INFO EventLog: User u2 has successfuly created a store
+2019-06-16 00:50:59,826 INFO EventLog: New product:  0 has successfuly added to store with id: 0
+2019-06-16 00:50:59,835 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
+2019-06-16 00:51:28,712 INFO EventLog: User t has successfuly registered
+2019-06-16 00:51:43,085 INFO EventLog: User t has successfuly created a store
+2019-06-16 00:51:54,693 ERROR EventLog: Database Error : ?????? ?????? ?? ???? ???? 'workshop192.Domain.ConnectionException'.
+2019-06-16 00:52:16,884 INFO EventLog: User t has logged out
+2019-06-16 00:52:21,861 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 00:53:40,584 ERROR EventLog: removeUser : Product ttttt Doesn't exist
+2019-06-16 00:53:56,176 INFO EventLog: User u1 has logged out
+2019-06-16 00:54:11,798 INFO EventLog: User e has successfuly registered
+2019-06-16 00:54:18,221 INFO EventLog: User e has successfuly created a store
+2019-06-16 00:54:27,960 ERROR EventLog: Database Error : ?????? ?????? ?? ???? ???? 'workshop192.Domain.ConnectionException'.
+2019-06-16 00:54:46,690 INFO EventLog: User e has logged out
+2019-06-16 00:54:53,706 INFO EventLog: User y has successfuly registered
+2019-06-16 00:55:03,707 INFO EventLog: User y has successfuly created a store
+2019-06-16 00:55:12,034 ERROR EventLog: Database Error : ?????? ?????? ?? ???? ???? 'workshop192.Domain.ConnectionException'.
+2019-06-16 00:56:24,146 INFO EventLog: User u2 has successfuly registered
+2019-06-16 00:56:24,562 INFO EventLog: User u3 has successfuly registered
+2019-06-16 00:56:24,980 INFO EventLog: User u4 has successfuly registered
+2019-06-16 00:56:25,392 INFO EventLog: User u5 has successfuly registered
+2019-06-16 00:56:26,064 INFO EventLog: User u2 has successfuly created a store
+2019-06-16 00:56:26,167 INFO EventLog: New product:  0 has successfuly added to store with id: 0
+2019-06-16 00:56:26,200 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
+2019-06-16 00:56:38,101 INFO EventLog: User e has successfuly registered
+2019-06-16 00:56:46,592 INFO EventLog: User e has successfuly created a store
+2019-06-16 00:56:54,307 INFO EventLog: New product:  1 has successfuly added to store with id: 1
+2019-06-16 00:56:56,908 INFO EventLog: User e has logged out
+2019-06-16 00:57:02,980 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 01:05:15,927 INFO EventLog: User u2 has successfuly registered
+2019-06-16 01:05:16,346 INFO EventLog: User u3 has successfuly registered
+2019-06-16 01:05:16,761 INFO EventLog: User u4 has successfuly registered
+2019-06-16 01:05:17,167 INFO EventLog: User u5 has successfuly registered
+2019-06-16 01:05:17,830 INFO EventLog: User u2 has successfuly created a store
+2019-06-16 01:05:17,931 INFO EventLog: New product:  0 has successfuly added to store with id: 0
+2019-06-16 01:05:17,939 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
+2019-06-16 01:06:50,705 INFO EventLog: User e has successfuly registered
+2019-06-16 01:06:58,228 INFO EventLog: User e has successfuly created a store
+2019-06-16 01:07:07,385 INFO EventLog: New product:  1 has successfuly added to store with id: 2
+2019-06-16 01:07:10,818 INFO EventLog: User e has logged out
+2019-06-16 01:07:15,816 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 01:08:45,332 INFO EventLog: User u2 has successfuly registered
+2019-06-16 01:08:45,716 INFO EventLog: User u3 has successfuly registered
+2019-06-16 01:08:46,096 INFO EventLog: User u4 has successfuly registered
+2019-06-16 01:08:46,465 INFO EventLog: User u5 has successfuly registered
+2019-06-16 01:08:47,067 INFO EventLog: User u2 has successfuly created a store
+2019-06-16 01:08:47,169 INFO EventLog: New product:  0 has successfuly added to store with id: 0
+2019-06-16 01:08:47,177 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
+2019-06-16 01:09:14,941 INFO EventLog: User e has successfuly registered
+2019-06-16 01:09:21,775 INFO EventLog: User e has successfuly created a store
+2019-06-16 01:09:30,330 INFO EventLog: New product:  1 has successfuly added to store with id: 1
+2019-06-16 01:09:36,602 INFO EventLog: User e has logged out
+2019-06-16 01:09:42,991 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 01:17:16,192 INFO EventLog: User u2 has successfuly registered
+2019-06-16 01:17:16,613 INFO EventLog: User u3 has successfuly registered
+2019-06-16 01:17:17,022 INFO EventLog: User u4 has successfuly registered
+2019-06-16 01:17:17,425 INFO EventLog: User u5 has successfuly registered
+2019-06-16 01:17:18,081 INFO EventLog: User u2 has successfuly created a store
+2019-06-16 01:17:18,188 INFO EventLog: New product:  0 has successfuly added to store with id: 0
+2019-06-16 01:17:18,197 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
+2019-06-16 01:17:35,703 INFO EventLog: User t has successfuly registered
+2019-06-16 01:17:41,063 ERROR EventLog: Login : Error: User is already logged in
+2019-06-16 01:17:49,528 INFO EventLog: User t has successfuly created a store
+2019-06-16 01:17:58,800 INFO EventLog: New product:  1 has successfuly added to store with id: 3
+2019-06-16 01:18:02,186 INFO EventLog: User t has logged out
+2019-06-16 01:18:10,055 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 01:22:14,972 INFO EventLog: User u2 has successfuly registered
+2019-06-16 01:22:15,386 INFO EventLog: User u3 has successfuly registered
+2019-06-16 01:22:15,758 INFO EventLog: User u4 has successfuly registered
+2019-06-16 01:22:16,129 INFO EventLog: User u5 has successfuly registered
+2019-06-16 01:22:16,769 INFO EventLog: User u2 has successfuly created a store
+2019-06-16 01:22:16,865 INFO EventLog: New product:  0 has successfuly added to store with id: 0
+2019-06-16 01:22:16,874 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
+2019-06-16 01:22:35,962 INFO EventLog: User t has successfuly registered
+2019-06-16 01:22:43,728 INFO EventLog: User t has successfuly created a store
+2019-06-16 01:22:52,610 INFO EventLog: New product:  1 has successfuly added to store with id: 1
+2019-06-16 01:22:56,346 INFO EventLog: User t has logged out
+2019-06-16 01:23:02,255 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 01:25:53,556 INFO EventLog: User u1 has logged out
+2019-06-16 01:25:59,923 INFO EventLog: User g has successfuly registered
+2019-06-16 01:26:06,769 INFO EventLog: User g has successfuly created a store
+2019-06-16 01:26:15,961 ERROR EventLog: Database Error : ?????? ?????? ?? ???? ???? 'workshop192.Domain.ConnectionException'.
+2019-06-16 01:26:20,007 INFO EventLog: New product:  3 has successfuly added to store with id: 4
+2019-06-16 01:26:34,695 INFO EventLog: User g has logged out
+2019-06-16 01:26:41,765 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 01:26:54,659 ERROR EventLog: removeUser : Product g Doesn't exist
+2019-06-16 01:29:36,037 INFO EventLog: User u2 has successfuly registered
+2019-06-16 01:29:36,452 INFO EventLog: User u3 has successfuly registered
+2019-06-16 01:29:36,883 INFO EventLog: User u4 has successfuly registered
+2019-06-16 01:29:37,294 INFO EventLog: User u5 has successfuly registered
+2019-06-16 01:29:37,956 INFO EventLog: User u2 has successfuly created a store
+2019-06-16 01:29:38,060 INFO EventLog: New product:  0 has successfuly added to store with id: 0
+2019-06-16 01:29:38,071 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
+2019-06-16 01:29:51,733 INFO EventLog: User t has successfuly registered
+2019-06-16 01:29:55,612 ERROR EventLog: Login : Error: User is already logged in
+2019-06-16 01:30:01,654 INFO EventLog: User t has successfuly created a store
+2019-06-16 01:30:10,689 INFO EventLog: New product:  1 has successfuly added to store with id: 1
+2019-06-16 01:30:14,586 INFO EventLog: User t has logged out
+2019-06-16 01:30:20,095 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 01:31:02,567 INFO EventLog: User t has been successfuly removed
+2019-06-16 01:31:13,656 INFO EventLog: User u1 has logged out
+2019-06-16 01:31:23,401 ERROR EventLog: Login : Error: Username does not exist
+2019-06-16 01:31:32,232 ERROR EventLog: Login : Error: Username does not exist
+2019-06-16 01:31:37,031 ERROR EventLog: Login : Error: Username does not exist
+2019-06-16 01:32:19,913 INFO EventLog: User e1 has successfuly registered
+2019-06-16 01:32:22,803 INFO EventLog: User e1 has logged out
+2019-06-16 01:32:27,797 INFO EventLog: User e2 has successfuly registered
+2019-06-16 01:32:38,223 INFO EventLog: User e2 has successfuly created a store
+2019-06-16 01:32:58,183 INFO EventLog: User e2 has logged out
+2019-06-16 01:33:08,889 ERROR EventLog: Register : Error: Username already exists
+2019-06-16 01:33:14,747 INFO EventLog: User e1 has successfuly logged in.
+2019-06-16 01:33:26,384 INFO EventLog: New product:  2 has successfuly added to store with id: 2
+2019-06-16 01:33:32,962 INFO EventLog: User e1 has logged out
+2019-06-16 01:33:42,332 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 01:33:57,383 INFO EventLog: User e2 has been successfuly removed
+2019-06-16 01:33:59,884 INFO EventLog: User u1 has logged out
+2019-06-16 01:34:06,527 ERROR EventLog: Login : Error: Username does not exist
+2019-06-16 01:34:12,483 INFO EventLog: User e1 has successfuly logged in.
+2019-06-16 01:45:36,478 INFO EventLog: User u2 has successfuly registered
+2019-06-16 01:45:36,900 INFO EventLog: User u3 has successfuly registered
+2019-06-16 01:45:37,270 INFO EventLog: User u4 has successfuly registered
+2019-06-16 01:45:37,641 INFO EventLog: User u5 has successfuly registered
+2019-06-16 01:45:38,243 INFO EventLog: User u2 has successfuly created a store
+2019-06-16 01:45:38,350 INFO EventLog: New product:  0 has successfuly added to store with id: 0
+2019-06-16 01:45:38,359 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
+2019-06-16 01:45:52,572 INFO EventLog: User t has successfuly registered
+2019-06-16 01:45:57,123 ERROR EventLog: Login : Error: User is already logged in
+2019-06-16 01:46:08,637 INFO EventLog: User t has successfuly created a store
+2019-06-16 01:46:18,183 INFO EventLog: New product:  1 has successfuly added to store with id: 1
+2019-06-16 01:46:57,656 INFO EventLog: User t has logged out
+2019-06-16 01:47:03,514 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 01:47:14,016 INFO EventLog: User t has been successfuly removed
+2019-06-16 01:47:17,620 INFO EventLog: User u1 has logged out
+2019-06-16 01:47:26,400 ERROR EventLog: Login : Error: Username does not exist
+2019-06-16 01:47:32,935 ERROR EventLog: Login : Error: Incorrect password
+2019-06-16 01:47:35,793 INFO EventLog: User u3 has successfuly logged in.
+2019-06-16 01:47:42,730 INFO EventLog: User u3 has logged out
+2019-06-16 01:47:53,919 INFO EventLog: User u4 has successfuly logged in.
+2019-06-16 01:47:58,264 INFO EventLog: User u4 has logged out
+2019-06-16 01:48:05,689 INFO EventLog: User u2 has successfuly logged in.
+2019-06-16 01:48:56,024 INFO EventLog: User u2 has logged out
+2019-06-16 01:49:03,343 INFO EventLog: User u5 has successfuly logged in.
+2019-06-16 01:49:57,285 INFO EventLog: User u5 has logged out
+2019-06-16 01:50:12,315 INFO EventLog: User u5 has successfuly logged in.
+2019-06-16 01:51:52,583 INFO EventLog: User u5 has logged out
+2019-06-16 01:51:58,939 INFO EventLog: User y has successfuly registered
+2019-06-16 01:55:43,632 INFO EventLog: User u2 has successfuly registered
+2019-06-16 01:55:44,079 INFO EventLog: User u3 has successfuly registered
+2019-06-16 01:55:44,491 INFO EventLog: User u4 has successfuly registered
+2019-06-16 01:55:44,908 INFO EventLog: User u5 has successfuly registered
+2019-06-16 01:55:45,599 INFO EventLog: User u2 has successfuly created a store
+2019-06-16 01:55:45,706 INFO EventLog: New product:  0 has successfuly added to store with id: 0
+2019-06-16 01:55:45,718 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
+2019-06-16 01:56:12,174 INFO EventLog: User r has successfuly registered
+2019-06-16 01:56:19,719 INFO EventLog: User r has successfuly created a store
+2019-06-16 01:56:47,420 INFO EventLog: New product:  1 has successfuly added to store with id: 1
+2019-06-16 01:56:52,285 INFO EventLog: User r has logged out
+2019-06-16 01:56:57,443 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 01:57:12,095 ERROR EventLog: removeUser : user to be removed does not exist
+2019-06-16 01:57:42,834 INFO EventLog: User r has been successfuly removed
+2019-06-16 01:57:47,114 INFO EventLog: User u1 has logged out
+2019-06-16 01:57:53,008 ERROR EventLog: Login : Error: Username does not exist
+2019-06-16 01:58:02,171 INFO EventLog: User u5 has successfuly logged in.
+2019-06-16 01:58:20,066 INFO EventLog: User u5 has logged out
+2019-06-16 02:04:27,684 INFO EventLog: User u2 has successfuly registered
+2019-06-16 02:04:28,106 INFO EventLog: User u3 has successfuly registered
+2019-06-16 02:04:28,508 INFO EventLog: User u4 has successfuly registered
+2019-06-16 02:04:28,913 INFO EventLog: User u5 has successfuly registered
+2019-06-16 02:04:29,576 INFO EventLog: User u2 has successfuly created a store
+2019-06-16 02:04:29,683 INFO EventLog: New product:  0 has successfuly added to store with id: 0
+2019-06-16 02:04:29,695 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
+2019-06-16 02:04:39,872 INFO EventLog: User r has successfuly registered
+2019-06-16 02:04:46,813 INFO EventLog: User r has successfuly created a store
+2019-06-16 02:04:55,879 INFO EventLog: New product:  1 has successfuly added to store with id: 1
+2019-06-16 02:05:07,944 INFO EventLog: User r has logged out
+2019-06-16 02:05:13,548 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 02:05:27,014 INFO EventLog: User r has been successfuly removed
+2019-06-16 02:05:30,916 INFO EventLog: User u1 has logged out
+2019-06-16 02:05:37,749 ERROR EventLog: Login : Error: Username does not exist
+2019-06-16 02:07:46,030 INFO EventLog: User u2 has successfuly registered
+2019-06-16 02:07:46,433 INFO EventLog: User u3 has successfuly registered
+2019-06-16 02:07:46,804 INFO EventLog: User u4 has successfuly registered
+2019-06-16 02:07:47,190 INFO EventLog: User u5 has successfuly registered
+2019-06-16 02:07:47,794 INFO EventLog: User u2 has successfuly created a store
+2019-06-16 02:07:47,889 INFO EventLog: New product:  0 has successfuly added to store with id: 0
+2019-06-16 02:07:47,902 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
+2019-06-16 02:08:00,681 INFO EventLog: User w1 has successfuly registered
+2019-06-16 02:08:03,864 INFO EventLog: User w1 has logged out
+2019-06-16 02:08:09,650 INFO EventLog: User w2 has successfuly registered
+2019-06-16 02:08:16,535 INFO EventLog: User w2 has successfuly created a store
+2019-06-16 02:08:25,578 INFO EventLog: New product:  1 has successfuly added to store with id: 1
+2019-06-16 02:08:43,917 INFO EventLog: User w2 has logged out
+2019-06-16 02:08:50,506 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 02:11:26,798 INFO EventLog: User u2 has successfuly registered
+2019-06-16 02:11:27,204 INFO EventLog: User u3 has successfuly registered
+2019-06-16 02:11:27,579 INFO EventLog: User u4 has successfuly registered
+2019-06-16 02:11:27,950 INFO EventLog: User u5 has successfuly registered
+2019-06-16 02:11:28,590 INFO EventLog: User u2 has successfuly created a store
+2019-06-16 02:11:28,687 INFO EventLog: New product:  0 has successfuly added to store with id: 0
+2019-06-16 02:11:28,702 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
+2019-06-16 02:11:39,018 INFO EventLog: User e1 has successfuly registered
+2019-06-16 02:11:41,629 INFO EventLog: User e1 has logged out
+2019-06-16 02:11:45,709 INFO EventLog: User e2 has successfuly registered
+2019-06-16 02:11:57,312 INFO EventLog: User e2 has successfuly created a store
+2019-06-16 02:12:08,580 INFO EventLog: User e2 has logged out
+2019-06-16 02:12:14,336 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 02:12:19,304 ERROR EventLog: removeUser : user to be removed does not exist
+2019-06-16 02:18:21,619 INFO EventLog: User u2 has successfuly registered
+2019-06-16 02:18:22,047 INFO EventLog: User u3 has successfuly registered
+2019-06-16 02:18:22,454 INFO EventLog: User u4 has successfuly registered
+2019-06-16 02:18:22,856 INFO EventLog: User u5 has successfuly registered
+2019-06-16 02:18:23,525 INFO EventLog: User u2 has successfuly created a store
+2019-06-16 02:18:23,655 INFO EventLog: New product:  0 has successfuly added to store with id: 0
+2019-06-16 02:18:23,665 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
+2019-06-16 02:18:40,634 INFO EventLog: User d1 has successfuly registered
+2019-06-16 02:18:43,259 INFO EventLog: User d1 has logged out
+2019-06-16 02:18:48,955 INFO EventLog: User d2 has successfuly registered
+2019-06-16 02:18:55,295 INFO EventLog: User d2 has successfuly created a store
+2019-06-16 02:19:03,865 INFO EventLog: User d2 has logged out
+2019-06-16 02:19:10,183 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 02:19:54,683 INFO EventLog: User u2 has successfuly registered
+2019-06-16 02:19:55,074 INFO EventLog: User u3 has successfuly registered
+2019-06-16 02:19:55,440 INFO EventLog: User u4 has successfuly registered
+2019-06-16 02:19:55,820 INFO EventLog: User u5 has successfuly registered
+2019-06-16 02:19:56,427 INFO EventLog: User u2 has successfuly created a store
+2019-06-16 02:19:56,530 INFO EventLog: New product:  0 has successfuly added to store with id: 0
+2019-06-16 02:19:56,543 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
+2019-06-16 02:20:22,346 INFO EventLog: User r1 has successfuly registered
+2019-06-16 02:20:24,857 INFO EventLog: User r1 has logged out
+2019-06-16 02:20:30,044 INFO EventLog: User r2 has successfuly registered
+2019-06-16 02:20:36,769 INFO EventLog: User r2 has successfuly created a store
+2019-06-16 02:22:06,628 INFO EventLog: User r2 has logged out
+2019-06-16 02:22:12,336 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 02:22:12,667 ERROR EventLog: Login : Admin already logged in
+2019-06-16 02:28:23,443 INFO EventLog: User u2 has successfuly registered
+2019-06-16 02:28:23,828 INFO EventLog: User u3 has successfuly registered
+2019-06-16 02:28:24,199 INFO EventLog: User u4 has successfuly registered
+2019-06-16 02:28:24,568 INFO EventLog: User u5 has successfuly registered
+2019-06-16 02:28:25,176 INFO EventLog: User u2 has successfuly created a store
+2019-06-16 02:28:25,293 INFO EventLog: New product:  0 has successfuly added to store with id: 0
+2019-06-16 02:28:25,303 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
+2019-06-16 02:28:37,583 INFO EventLog: User s1 has successfuly registered
+2019-06-16 02:28:39,731 INFO EventLog: User s1 has logged out
+2019-06-16 02:28:44,205 INFO EventLog: User s2 has successfuly registered
+2019-06-16 02:28:46,783 INFO EventLog: User s2 has logged out
+2019-06-16 02:28:51,317 INFO EventLog: User s2 has successfuly logged in.
+2019-06-16 02:28:57,955 INFO EventLog: User s2 has successfuly created a store
+2019-06-16 02:29:10,674 INFO EventLog: User s2 has logged out
+2019-06-16 02:29:15,431 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 02:29:37,858 INFO EventLog: User s1 has been successfuly removed
+2019-06-16 02:29:40,310 INFO EventLog: User u1 has logged out
+2019-06-16 02:29:46,393 INFO EventLog: User s2 has successfuly logged in.
+2019-06-16 02:30:17,967 INFO EventLog: User s2 has logged out
+2019-06-16 02:30:24,748 ERROR EventLog: Login : Error: Username does not exist
+2019-06-16 02:30:31,296 INFO EventLog: User g has successfuly registered
+2019-06-16 02:30:37,588 INFO EventLog: User g has successfuly created a store
+2019-06-16 02:30:41,095 INFO EventLog: User g has logged out
+2019-06-16 02:30:48,508 INFO EventLog: User u1 has successfuly logged in.
+2019-06-16 02:30:59,678 INFO EventLog: User g has been successfuly removed
+2019-06-16 02:31:17,844 INFO EventLog: User u1 has logged out
+2019-06-16 02:31:22,547 ERROR EventLog: Login : Error: Username does not exist

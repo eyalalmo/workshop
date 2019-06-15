@@ -155,9 +155,17 @@ namespace workshop192.ServiceLayer
 
         public int addStore(string storeName, string storeDescription, int session)
         {
-            if (storeName.Length == 0)
+            try
+            {
+                if (storeName.Length == 0 || storeName == null)
+                {
+                    throw new ArgumentException("Error: A store name cannot be empty");
+                }
+            }
+            catch (Exception)
             {
                 throw new ArgumentException("Error: A store name cannot be empty");
+
             }
             return db.createStore(session, storeName, storeDescription);
         }
