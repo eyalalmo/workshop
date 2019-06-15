@@ -452,6 +452,28 @@ namespace workshop192.Domain
             {
                 if (p is MinAmountPurchase)
                     return true;
+                if (p is ComplexPurchasePolicy)
+                {
+                    if ((((ComplexPurchasePolicy)p).getFirstPolicyChild() is MinAmountPurchase) || ((ComplexPurchasePolicy)p).getSecondPolicyChild() is MinAmountPurchase)
+                        return true;
+                    if (((ComplexPurchasePolicy)p).getFirstPolicyChild() is ComplexPurchasePolicy)
+                    {
+                        ComplexPurchasePolicy c = (ComplexPurchasePolicy)(((ComplexPurchasePolicy)p).getFirstPolicyChild());
+                        if (c.getFirstPolicyChild() is MinAmountPurchase || c.getSecondPolicyChild() is MinAmountPurchase)
+                        {
+                            return true;
+                        }
+                    }
+                    else if(((ComplexPurchasePolicy)p).getSecondPolicyChild() is ComplexPurchasePolicy)
+                    {
+                        ComplexPurchasePolicy c = (ComplexPurchasePolicy)(((ComplexPurchasePolicy)p).getSecondPolicyChild());
+                        if (c.getFirstPolicyChild() is MinAmountPurchase || c.getSecondPolicyChild() is MinAmountPurchase)
+                        {
+                            return true;
+                        }
+                    }
+                }
+
             }
             return false;
         }
@@ -461,6 +483,28 @@ namespace workshop192.Domain
             {
                 if (p is MaxAmountPurchase)
                     return true;
+                if (p is ComplexPurchasePolicy)
+                {
+                    if ((((ComplexPurchasePolicy)p).getFirstPolicyChild() is MaxAmountPurchase) || ((ComplexPurchasePolicy)p).getSecondPolicyChild() is MaxAmountPurchase)
+                        return true;
+                    if (((ComplexPurchasePolicy)p).getFirstPolicyChild() is ComplexPurchasePolicy)
+                    {
+                        ComplexPurchasePolicy c = (ComplexPurchasePolicy)(((ComplexPurchasePolicy)p).getFirstPolicyChild());
+                        if (c.getFirstPolicyChild() is MaxAmountPurchase || c.getSecondPolicyChild() is MaxAmountPurchase)
+                        {
+                            return true;
+                        }
+                    }
+                    else if (((ComplexPurchasePolicy)p).getSecondPolicyChild() is ComplexPurchasePolicy)
+                    {
+                        ComplexPurchasePolicy c = (ComplexPurchasePolicy)(((ComplexPurchasePolicy)p).getSecondPolicyChild());
+                        if (c.getFirstPolicyChild() is MaxAmountPurchase || c.getSecondPolicyChild() is MaxAmountPurchase)
+                        {
+                            return true;
+                        }
+                    }
+                }
+
             }
             return false;
 
@@ -472,6 +516,28 @@ namespace workshop192.Domain
             {
                 if (p is TotalPricePolicy)
                     return true;
+                if (p is ComplexPurchasePolicy)
+                {
+                    if ((((ComplexPurchasePolicy)p).getFirstPolicyChild() is TotalPricePolicy) || ((ComplexPurchasePolicy)p).getSecondPolicyChild() is TotalPricePolicy)
+                        return true;
+                    if (((ComplexPurchasePolicy)p).getFirstPolicyChild() is ComplexPurchasePolicy)
+                    {
+                        ComplexPurchasePolicy c = (ComplexPurchasePolicy)(((ComplexPurchasePolicy)p).getFirstPolicyChild());
+                        if (c.getFirstPolicyChild() is TotalPricePolicy || c.getSecondPolicyChild() is TotalPricePolicy)
+                        {
+                            return true;
+                        }
+                    }
+                    else if (((ComplexPurchasePolicy)p).getSecondPolicyChild() is ComplexPurchasePolicy)
+                    {
+                        ComplexPurchasePolicy c = (ComplexPurchasePolicy)(((ComplexPurchasePolicy)p).getSecondPolicyChild());
+                        if (c.getFirstPolicyChild() is TotalPricePolicy || c.getSecondPolicyChild() is TotalPricePolicy)
+                        {
+                            return true;
+                        }
+                    }
+                }
+
             }
             return false;
 
@@ -481,7 +547,7 @@ namespace workshop192.Domain
         {
             if (hasMinPurchasePolicy())
             {
-                throw new ArgumentException("Store can not have 2 minimum amount purchase policy.");
+                throw new AlreadyExistException("Store can not have 2 minimum amount purchase policy.");
             }
             MinAmountPurchase p = new MinAmountPurchase(minAmount);
             policies.AddLast(p);
@@ -491,7 +557,7 @@ namespace workshop192.Domain
         {
             if (hasMaxPurchasePolicy())
             {
-                throw new ArgumentException("Store can not have 2 maximum amount purchase policy.");
+                throw new AlreadyExistException("Store can not have 2 maximum amount purchase policy.");
             }
             MaxAmountPurchase p = new MaxAmountPurchase(minAmount);
             policies.AddLast(p);
@@ -502,7 +568,7 @@ namespace workshop192.Domain
         {
             if (hasTotalPricePolicy())
             {
-                throw new ArgumentException("Store can not have 2 total cart price - purchase policy.");
+                throw new AlreadyExistException("Store can not have 2 total cart price - purchase policy.");
             }
             TotalPricePolicy p = new TotalPricePolicy(minPrice);
             policies.AddLast(p);

@@ -242,7 +242,8 @@ namespace workshop192.Domain
             foreach (KeyValuePair<int, ShoppingCart> pair1 in shoppingCarts)
             {
                 ShoppingCart cart = pair1.Value;
-                cart.checkStorePolicy();
+                if (cart.checkStorePolicy())
+                    throw new IllegalAmountException("The cart does not stand with store policies.");
                 Store store = DBStore.getInstance().getStore(cart.getStoreID());
                 Dictionary<Product, int> productsInCart = cart.getProductsInCarts();
                 foreach (KeyValuePair<Product, int> pair2 in productsInCart)

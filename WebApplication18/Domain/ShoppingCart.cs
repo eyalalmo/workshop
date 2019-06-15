@@ -224,9 +224,9 @@ namespace workshop192.Domain
             return amount;
         }
 
-        internal void checkStorePolicy()
+        internal bool checkStorePolicy()
         {
-            store.checkStorePolicy(getNumOfProductsInCart(), getActualTotalPrice());
+           return store.checkStorePolicy(getNumOfProductsInCart(), getActualTotalPrice());
         }
     }
 }

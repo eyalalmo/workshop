@@ -4318,3 +4318,19 @@ The statement has been terminated.
 2019-06-15 17:45:36,508 ERROR EventLog: Login : Error: Username does not exist
 2019-06-15 17:45:42,648 INFO EventLog: User x has successfuly registered
 2019-06-15 17:45:49,197 INFO EventLog: User x has successfuly logged in.
+2019-06-15 17:48:41,494 INFO EventLog: User cc has successfuly registered
+2019-06-15 17:48:48,576 INFO EventLog: User cc has successfuly logged in.
+2019-06-15 17:48:55,104 INFO EventLog: User cc has successfuly created a store
+2019-06-15 17:59:43,116 INFO EventLog: User cc has successfuly logged in.
+2019-06-15 18:09:12,335 INFO EventLog: User cc has successfuly logged in.
+2019-06-15 18:11:03,908 ERROR EventLog: Policy edit :Store can not have 2 maximum amount purchase policy.
+2019-06-15 18:11:07,534 ERROR EventLog: Policy edit :Store can not have 2 maximum amount purchase policy.
+2019-06-15 18:12:04,686 INFO EventLog: User cc has logged out
+2019-06-15 18:12:13,601 INFO EventLog: User cc has successfuly logged in.
+2019-06-15 18:13:19,574 INFO EventLog: User cc has logged out
+2019-06-15 18:13:24,781 INFO EventLog: User v has successfuly registered
+2019-06-15 18:13:29,242 INFO EventLog: User v has successfuly logged in.
+2019-06-15 18:14:02,412 ERROR EventLog: Checkout : Error: Cannot complete purchase- y does not have enough quantity left
+2019-06-15 18:23:33,456 INFO EventLog: User cc has successfuly logged in.
+2019-06-15 18:23:51,171 ERROR EventLog: Error in adding to shopping cart : Error: The amount asked is larger than the quantity left
+2019-06-15 18:24:28,224 ERROR EventLog: checkBasket : The cart does not stand with store policies.
