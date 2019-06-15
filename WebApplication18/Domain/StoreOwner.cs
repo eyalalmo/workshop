@@ -18,7 +18,7 @@ namespace workshop192.Domain
 
         public StoreOwner(SubscribedUser appointedBy, SubscribedUser user, Store store)
         {
-            this.appointedBy = appointedBy;
+            this.appointedBy = null;
             this.userName = user;
             this.store = store;
             appointedByMe = new List<StoreRole>();
@@ -104,7 +104,7 @@ namespace workshop192.Domain
                     store.getStoreName());
             store.addStoreRoleFromInitOwner(newOwner);
             owner.addStoreRole(newOwner);
-            appointedByMe.Add(newOwner);
+            //appointedByMe.Add(newOwner);
             DBStore.getInstance().addStoreRole(newOwner);
         }
 
