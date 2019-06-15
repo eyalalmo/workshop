@@ -8,7 +8,7 @@ namespace WebApplication18.Domain
 {
     public class ComplexPurchasePolicy : PurchasePolicy
     {
-        enum Type { OR, XOR, AND };
+        enum Type { or, xor, and };
         private PurchasePolicy p1;
         private PurchasePolicy p2;
 //        private int storeID;
@@ -17,12 +17,12 @@ namespace WebApplication18.Domain
 
         public ComplexPurchasePolicy(string type, PurchasePolicy p1, PurchasePolicy p2)
         {
-            if (type == "XOR")
-                this.type = Type.XOR;
-            if (type == "OR")
-                this.type = Type.OR;
+            if (type == "xor")
+                this.type = Type.xor;
+            else if (type == "or")
+                this.type = Type.or;
             else
-                this.type = Type.AND;
+                this.type = Type.and;
             this.p1 = p1;
             this.p2 = p2;
             this.policyID = DBStore.getInstance().getNextPolicyID();
@@ -30,12 +30,12 @@ namespace WebApplication18.Domain
         }
         public ComplexPurchasePolicy(string type, PurchasePolicy p1, PurchasePolicy p2, int policyID)
         {
-            if (type == "XOR")
-                this.type = Type.XOR;
-            if (type == "OR")
-                this.type = Type.OR;
+            if (type == "xor")
+                this.type = Type.xor;
+            if (type == "or")
+                this.type = Type.or;
             else
-                this.type = Type.AND;
+                this.type = Type.and;
             this.p1 = p1;
             this.p2 = p2;
             this.policyID = policyID;
@@ -48,11 +48,11 @@ namespace WebApplication18.Domain
 
         public override bool checkPolicy(double cartPrice, int amountofProd)
         {
-            if (type == Type.AND)
+            if (type == Type.and)
             {
                 return checkAndType(cartPrice, amountofProd);
             }
-            else if (type == Type.OR)
+            else if (type == Type.or)
             {
                 return checkOrType(cartPrice, amountofProd);
             }
@@ -109,9 +109,9 @@ namespace WebApplication18.Domain
         public int getSecondChildID() { return p2.getPolicyID(); }
         public string getCompType()
         {
-            if (type == Type.OR)
+            if (type == Type.or)
                 return "or";
-            else if (type == Type.XOR)
+            else if (type == Type.xor)
                 return "xor";
             else
                 return "and";
