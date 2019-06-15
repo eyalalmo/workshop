@@ -70,18 +70,18 @@
                                     <input type="number" id="minRank" min="0" max="5" value="0" step="0.1">
                                   </div>
                                     <button class="btn btn-primary" id="clearFilters">clear</button>
-                                  <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                  <button id="search1" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                                 </form>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        <button id="search2" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                     </div>
                 </div>
             </div>
           </div>
         </div>
 	</div>
-</div>
+
 
   <div class="container">
 
@@ -92,13 +92,6 @@
           <button  name="searchC" id="searchC" class="btn btn-primary">Search By Category</button>&nbsp &nbsp &nbsp
           <button  name="searchC" id="searchK" class="btn btn-primary">Search By Keyword</button>
 
-          <p></p><p></p> 
-          <h3> Filters  <button class="btn btn-primary" id="clearFilters">clear</button> </h3>
-          <p></p><p></p>
-          Min price: <input type="number" aria-label="Minimum Price" id="minPrice" name="minPrice" min="0" max="1000000" value="0">&nbsp &nbsp &nbsp
-          Max price: <input type="number" aria-label="Maximum Price" id="maxPrice" name="maxPrice" min="0" max="1000000" value="1000000"> <p></p> <p></p>
-          Min rank:  <input type="number" id="minRank" min="0" max="5" value="0" step="0.1">
-         
       </div>
   </div>
     <div class="container">

@@ -109,3 +109,4 @@
 2019-06-16 00:36:30,557 ERROR ErrorLog: Connection error in function getStore in DB Store store id 1
 2019-06-16 01:44:34,279 ERROR ErrorLog: Connection error in function getProduct in DB Product, ID =  5
 2019-06-16 01:44:36,758 ERROR ErrorLog: Connection error in function getStore in DB Store store id 3
+2019-06-16 01:58:35,311 ERROR ErrorLog: Connection error in function getProduct in DB Product, ID =  5

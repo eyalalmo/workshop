@@ -7,9 +7,9 @@
 
  <div class="form-group">
   <h4>Add Visible Discount:</h4>
-  <label for="per">Percentage:</label>
+  <label for="per">Percentage: (Format: 0.x)</label>
   <input type="number" min="0" max="1" class="form-control" id="percentage" name="percentage">
-  <label for="per">Duration:</label>
+  <label for="per">Duration (Format: DD/MM/YYYY)</label>
   <input type="text" class="form-control" id="duration" name="duration">
 </div>
     <button type="submit" name="btnVisibleDiscount" id="btnVisibleDiscount" class="btn btn-default">Submit</button>
