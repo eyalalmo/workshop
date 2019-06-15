@@ -531,17 +531,17 @@ namespace workshop192.Domain
         {
             if (p.getType() == "min")
             {
-                MinAmountPurchase policy = new MinAmountPurchase(p.getAmount());
+                MinAmountPurchase policy = new MinAmountPurchase(p.getAmount(), p.getPolicyID());
                 return policy;
             }
             else if (p.getType() == "max")
             {
-                MaxAmountPurchase policy = new MaxAmountPurchase(p.getAmount());
+                MaxAmountPurchase policy = new MaxAmountPurchase(p.getAmount(), p.getPolicyID());
                 return policy;
             }
             else
             {
-                TotalPricePolicy policy = new TotalPricePolicy(p.getAmount());
+                TotalPricePolicy policy = new TotalPricePolicy(p.getAmount(), p.getPolicyID());
                 return policy;
             }
         }
@@ -586,9 +586,9 @@ namespace workshop192.Domain
                     idRegularChild = i;
             }
 
-            compChild = new ComplexPurchasePolicy(policyEntries.ElementAt(compChildPos).getCompType(), child1, child2);
+            compChild = new ComplexPurchasePolicy(policyEntries.ElementAt(compChildPos).getCompType(), child1, child2, policyEntries.ElementAt(compChildPos).getPolicyID());
             PurchasePolicy regularChild = parseRegular(policyEntries.ElementAt(idRegularChild));
-            compParent = new ComplexPurchasePolicy(policyEntries.ElementAt(compParentPos).getCompType(), compChild, regularChild);
+            compParent = new ComplexPurchasePolicy(policyEntries.ElementAt(compParentPos).getCompType(), compChild, regularChild, policyEntries.ElementAt(compParentPos).getPolicyID());
 
             policyList.AddLast(compParent);
             return policyList;
@@ -996,7 +996,7 @@ namespace workshop192.Domain
         {
             SqlConnection connection = Connector.getInstance().getSQLConnection();
             int policyID = p.getPolicyID();
-            string sql = "UPDATE[dbo].[PurchasePolicy] SET amount=@newAmount WHERE storeID = @storeID AND policyID=@policyID";
+            string sql = "UPDATE[dbo].[PurchasePolicy] SET amount=@newAmount WHERE storeID=@storeID AND policyID=@policyID";
             connection.Execute(sql, new { newAmount, storeID, policyID });
 
         }

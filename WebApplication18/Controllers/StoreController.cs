@@ -667,7 +667,21 @@ namespace WebApplication18.Controllers
                 return e.Message;
             }
         }
-
+        [Route("api/store/AddTotalPolicy")]
+        [HttpGet]
+        public Object AddTotalPolicy(int storeID, int totalVal)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().addTotalPolicy(storeID,totalVal,session);
+                return "ok";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
 
 
     }

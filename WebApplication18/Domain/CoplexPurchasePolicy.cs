@@ -28,6 +28,19 @@ namespace WebApplication18.Domain
             this.policyID = DBStore.getInstance().getNextPolicyID();
 
         }
+        public ComplexPurchasePolicy(string type, PurchasePolicy p1, PurchasePolicy p2, int policyID)
+        {
+            if (type == "XOR")
+                this.type = Type.XOR;
+            if (type == "OR")
+                this.type = Type.OR;
+            else
+                this.type = Type.AND;
+            this.p1 = p1;
+            this.p2 = p2;
+            this.policyID = policyID;
+
+        }
         public override string description()
         {
             return p1.description() + type.ToString()+" " + p2.description();

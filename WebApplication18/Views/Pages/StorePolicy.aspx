@@ -98,10 +98,13 @@
                             location.reload();
                         }
                         else {
+                            alert(response);
                             console.log(response);   
                         }
                     },
                     error: function (response) {
+                        alert(response);
+
                         console.log(response);
                     }
                 });
@@ -151,10 +154,13 @@
                     success: function (response) {
 
                         if (response == "ok") {
+                            alert(response);
 
                             location.reload();
                         }
                         else {
+                            alert(response);
+
                             console.log(response);   
                         }
                     },

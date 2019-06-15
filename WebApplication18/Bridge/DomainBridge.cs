@@ -553,7 +553,23 @@ namespace workshop192.Bridge
             sr.addManager(toAdd, permissions);
         }
 
-        public void addOwner(int storeid, string username, int sessionid)
+
+        internal void addTotalPricePolicy(int minPrice, int storeID, int session)
+        {
+            Session user = DBSession.getInstance().getSession(session);
+            if (user == null)
+                throw new DoesntExistException("user is not logged in");
+            Store store = DBStore.getInstance().getStore(storeID);
+            SubscribedUser subscribedUser = user.getSubscribedUser();
+            if (subscribedUser == null)
+                throw new DoesntExistException("not a subscribed user");
+            StoreRole sr = subscribedUser.getStoreRole(store);
+            if (sr == null)
+                throw new RoleException("no role for this user in this store");
+            sr.addTotalPricePurchasePolicy(minPrice);
+        }
+
+            public void addOwner(int storeid, string username, int sessionid)
         {
             SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (toAdd == null)

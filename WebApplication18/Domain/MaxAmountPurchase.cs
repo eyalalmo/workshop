@@ -16,6 +16,11 @@ namespace workshop192.Domain
             this.maxAmount = maxAmount;
             this.policyID = DBStore.getInstance().getNextPolicyID();
         }
+        public MaxAmountPurchase(int maxAmount, int policyID)
+        {
+            this.maxAmount = maxAmount;
+            this.policyID = policyID;
+        }
         public override bool checkPolicy(double cartPrice, int amountofProd)
         {
             if (amountofProd > maxAmount)

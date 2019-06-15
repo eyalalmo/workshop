@@ -517,5 +517,22 @@ namespace workshop192.ServiceLayer
             }
             db.declineContract(store, username, sessionID);
         }
+
+
+        public void addTotalPolicy(int storeID, int minPrice, int session)
+        {
+            if (storeID < 0)
+            {
+                throw new ArgumentException("illegal store number");
+            }
+            if (minPrice < 0)
+            {
+                throw new ArgumentException("illegal total value");
+
+            }
+            db.addTotalPricePolicy(minPrice, storeID, session);
+
+            
+        }
     }
 }

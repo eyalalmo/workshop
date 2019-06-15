@@ -16,6 +16,11 @@ namespace workshop192.Domain
             this.minAmount = minAmount;
             this.policyID = DBStore.getInstance().getNextPolicyID();
         }
+        public MinAmountPurchase(int minAmount, int policyID)
+        {
+            this.minAmount = minAmount;
+            this.policyID = policyID;
+        }
         public override bool checkPolicy(double cartPrice, int amountofProd)
         {
             if (minAmount > amountofProd)

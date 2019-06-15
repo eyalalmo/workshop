@@ -23,6 +23,18 @@ namespace WebApplication18.Domain
 
             this.policyID = DBStore.getInstance().getNextPolicyID();
         }
+        public TotalPricePolicy(int totalPrice, int policyID)
+        {
+
+            if (totalPrice < 0)
+            {
+                throw new ArgumentException("total price can not be a negative number.");
+            }
+
+            this.totalPrice = totalPrice;
+
+            this.policyID = policyID;
+        }
 
         public override string description()
         {
