@@ -154,7 +154,7 @@
                     success: function (response) {
 
                         if (response == "ok") {
-                            alert(response);
+                            alert("Policy removed seccessfully");
 
                             location.reload();
                         }

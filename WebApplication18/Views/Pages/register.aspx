@@ -46,7 +46,7 @@
                     success: function (response) {          
                         if (response == "ok") {
                             alert("Registered Successfuly")
-                            window.location.href = baseUrl+"/login";
+                            window.location.href = baseUrl +"/";
                         }
                         else {
                        alert("register failed "+response);  
