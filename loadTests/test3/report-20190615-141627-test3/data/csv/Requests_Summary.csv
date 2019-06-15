@@ -1,0 +1,11 @@
+Label,# Samples,Average,Median,90% Line,95% Line,99% Line,Min,Max,Error %,Throughput,Received KB/sec,Std. Dev.
+001_Home Page - My ASP.NET Application,49,256,5,88,2080,3549,3,3549,0.00%,.5,4.2,784.05
+002_Register - My ASP.NET Application,49,581,265,786,1798,6635,235,6635,0.00%,.5,5.3,1077.90
+003_Login - My ASP.NET Application,49,1015,337,2695,6226,8373,297,8373,0.00%,.5,5.1,1865.71
+004_Home Page - My ASP.NET Application,49,198,5,37,1403,4316,2,4316,0.00%,.5,4.3,804.62
+005_Products Catalog - My ASP.NET Application,49,382,204,481,1383,3462,160,3462,0.00%,.5,9.6,579.54
+006_Products Catalog - My ASP.NET Application,49,228,4,17,3221,3939,3,3939,0.00%,.5,8.9,869.98
+007_Shopping Basket - My ASP.NET Application,49,297,22,265,2624,4731,9,4731,0.00%,.5,11.9,926.78
+008_Checkout - My ASP.NET Application,49,2387,1759,2480,8521,9437,1682,9437,0.00%,.5,6.8,1806.49
+009_Home Page - My ASP.NET Application,49,5,4,6,8,44,3,44,0.00%,.5,4.6,5.73
+TOTAL,441,594,72,1784,2695,6807,2,9437,0.00%,3.1,41.9,1307.98

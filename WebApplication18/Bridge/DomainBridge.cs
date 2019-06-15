@@ -62,6 +62,21 @@ namespace workshop192.Bridge
             clearMessagesFor(username);
         }
 
+        public int payToExternal(string card, string month, string year, string holder, string ccv, string id)
+        {
+           return PaymentService.getInstance().checkOut(card, month, year, holder, ccv, id);
+        }
+
+        public int cancelPay(int result)
+        {
+            return PaymentService.getInstance().cancelPayment(result+""); 
+        }
+
+        public int deliverToExternal(string name, string address, string city, string country, string zip, string cvv)
+        {
+            return DeliveryService.getInstance().sendToUser(name, address, city, country, zip, cvv);
+        }
+
         //use case 2.2
         public void register(int sessionid, String username, String password)
         {

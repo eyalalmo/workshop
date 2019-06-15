@@ -5,13 +5,91 @@ createSession
 createSession
 createSession
 createSession
+createSession
+createSession
+createSession
+createSession
+createSession
+createSession
+createSession
+createSession
+createSession
+createSession
+createSession
+createSession
+createSession
+createSession
+createSession
+createSession
+createSession
+createSession
+createSession
+createSession
+createSession
+createSession
+createSession
+createSession
+createSession
 addAdmin u1 123 1
 register u2 123 2
 register u3 123 3
 register u4 123 4
 register u5 123 5
+register u6 123 6
+register u7 123 7
+register u8 123 8
+register u9 123 9
+register u10 123 10
+register u11 123 11
+register u12 123 12
+register u13 123 13
+register u14 123 14
+register u15 123 15
+register u16 123 16
+register u17 123 17
+register u18 123 18
+register u19 123 19
+register u20 123 20
+register u21 123 21
+register u22 123 22
+register u23 123 23
+register u24 123 24
+register u25 123 25
+register u26 123 26
+register u27 123 27
+register u28 123 28
+register u29 123 29
+register u30 123 30
 login u2 123 2
 createStore s1 This_is_the_startup_Store! 2
 addProduct diapers pros1 30 5 20 0 2
-addManager 0 u3 true false false 2
+addManager 0 u1 true true true 2
+addManager 0 u3 true true true 2
+addManager 0 u4 true true true 2
+addManager 0 u5 true true true 2
+addManager 0 u6 true true true 2
+addManager 0 u7 true true true 2
+addManager 0 u8 true true true 2
+addManager 0 u9 true true true 2
+addManager 0 u10 true true true 2
+addManager 0 u11 true true true 2
+addManager 0 u12 true true true 2
+addManager 0 u13 true true true 2
+addManager 0 u14 true true true 2
+addManager 0 u15 true true true 2
+addManager 0 u16 true true true 2
+addManager 0 u17 true true true 2
+addManager 0 u18 true true true 2
+addManager 0 u19 true true true 2
+addManager 0 u20 true true true 2
+addManager 0 u21 true true true 2
+addManager 0 u22 true true true 2
+addManager 0 u23 true true true 2
+addManager 0 u24 true true true 2
+addManager 0 u25 true true true 2
+addManager 0 u26 true true true 2
+addManager 0 u27 true true true 2
+addManager 0 u28 true true true 2
+addManager 0 u29 true true true 2
+addManager 0 u30 true true true 2
 logout 2

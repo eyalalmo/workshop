@@ -720,8 +720,8 @@ namespace workshop192.Domain
             {
                 //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 
-                    using (connection) {
-                        connection.Open();
+                   
+                     connection.Open();
                     using (var transaction = connection.BeginTransaction())
                     {
                         string sql = "INSERT INTO [dbo].[PendingOwners] (storeId,userName)" +
@@ -739,7 +739,7 @@ namespace workshop192.Domain
                         connection.Close();
                     }
                 
-            }
+            
 
             }
             catch (Exception e)

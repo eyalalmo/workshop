@@ -590,7 +590,7 @@
               <idleTime>true</idleTime>
             </value>
           </objProp>
-          <stringProp name="filename">results/20190614-160317-test1.1-report.jtl</stringProp>
+          <stringProp name="filename">results/20190615-144709-test1.1-report.jtl</stringProp>
         </cz.etnetera.jmeter.listener.ControllerResultCollector>
         <hashTree/>
         <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">

@@ -1,129 +1,108 @@
-﻿2019-06-15 11:57:29,081 INFO EventLog: User 1y has successfuly registered
-2019-06-15 11:57:30,751 INFO EventLog: User 2y has successfuly registered
-2019-06-15 11:57:32,010 INFO EventLog: User 1y has successfuly logged in.
-2019-06-15 11:57:32,786 INFO EventLog: User 3y has successfuly registered
-2019-06-15 11:57:33,906 INFO EventLog: User 2y has successfuly logged in.
-2019-06-15 11:57:34,833 INFO EventLog: User 4y has successfuly registered
-2019-06-15 11:57:35,759 INFO EventLog: User 3y has successfuly logged in.
-2019-06-15 11:57:36,371 INFO EventLog: User 5y has successfuly registered
-2019-06-15 11:57:37,706 INFO EventLog: User 4y has successfuly logged in.
-2019-06-15 11:57:39,156 INFO EventLog: User 6y has successfuly registered
-2019-06-15 11:57:40,252 INFO EventLog: User 5y has successfuly logged in.
-2019-06-15 11:57:40,492 INFO EventLog: User 7y has successfuly registered
-2019-06-15 11:57:41,973 INFO EventLog: User 6y has successfuly logged in.
-2019-06-15 11:57:43,054 INFO EventLog: User 7y has successfuly logged in.
-2019-06-15 11:57:43,337 INFO EventLog: User 8y has successfuly registered
-2019-06-15 11:57:44,848 INFO EventLog: User 9y has successfuly registered
-2019-06-15 11:57:46,749 INFO EventLog: User 8y has successfuly logged in.
-2019-06-15 11:57:47,497 INFO EventLog: User 10y has successfuly registered
-2019-06-15 11:57:47,574 INFO EventLog: User 9y has successfuly logged in.
-2019-06-15 11:57:49,046 INFO EventLog: User 11y has successfuly registered
-2019-06-15 11:57:50,006 INFO EventLog: User 10y has successfuly logged in.
-2019-06-15 11:57:51,168 INFO EventLog: User 12y has successfuly registered
-2019-06-15 11:57:51,876 INFO EventLog: User 11y has successfuly logged in.
-2019-06-15 11:57:53,445 INFO EventLog: User 13y has successfuly registered
-2019-06-15 11:57:54,625 INFO EventLog: User 12y has successfuly logged in.
-2019-06-15 11:57:55,355 INFO EventLog: User 14y has successfuly registered
-2019-06-15 11:57:56,683 INFO EventLog: User 13y has successfuly logged in.
-2019-06-15 11:57:56,841 INFO EventLog: User 15y has successfuly registered
-2019-06-15 11:57:58,160 INFO EventLog: A purchase has been made
-2019-06-15 11:57:58,198 INFO EventLog: User 14y has successfuly logged in.
-2019-06-15 11:57:59,322 INFO EventLog: A purchase has been made
-2019-06-15 11:57:59,563 INFO EventLog: User 16y has successfuly registered
-2019-06-15 11:58:00,875 INFO EventLog: User 15y has successfuly logged in.
-2019-06-15 11:58:01,313 INFO EventLog: User 17y has successfuly registered
-2019-06-15 11:58:01,732 INFO EventLog: A purchase has been made
-2019-06-15 11:58:02,326 INFO EventLog: User 16y has successfuly logged in.
-2019-06-15 11:58:03,516 INFO EventLog: User 18y has successfuly registered
-2019-06-15 11:58:04,167 INFO EventLog: A purchase has been made
-2019-06-15 11:58:04,706 INFO EventLog: User 17y has successfuly logged in.
-2019-06-15 11:58:05,739 INFO EventLog: User 19y has successfuly registered
-2019-06-15 11:58:06,095 INFO EventLog: A purchase has been made
-2019-06-15 11:58:06,643 INFO EventLog: User 18y has successfuly logged in.
-2019-06-15 11:58:07,696 INFO EventLog: User 20y has successfuly registered
-2019-06-15 11:58:08,956 INFO EventLog: User 19y has successfuly logged in.
-2019-06-15 11:58:09,234 INFO EventLog: User 21y has successfuly registered
-2019-06-15 11:58:09,777 INFO EventLog: A purchase has been made
-2019-06-15 11:58:10,101 INFO EventLog: A purchase has been made
-2019-06-15 11:58:10,856 INFO EventLog: A purchase has been made
-2019-06-15 11:58:11,381 INFO EventLog: User 22y has successfuly registered
-2019-06-15 11:58:11,621 INFO EventLog: User 20y has successfuly logged in.
-2019-06-15 11:58:12,111 INFO EventLog: User 21y has successfuly logged in.
-2019-06-15 11:58:13,727 INFO EventLog: User 23y has successfuly registered
-2019-06-15 11:58:14,250 INFO EventLog: User 22y has successfuly logged in.
-2019-06-15 11:58:14,837 INFO EventLog: A purchase has been made
-2019-06-15 11:58:15,777 INFO EventLog: User 24y has successfuly registered
-2019-06-15 11:58:17,360 INFO EventLog: User 25y has successfuly registered
-2019-06-15 11:58:17,508 INFO EventLog: User 23y has successfuly logged in.
-2019-06-15 11:58:19,247 INFO EventLog: User 24y has successfuly logged in.
-2019-06-15 11:58:19,621 INFO EventLog: A purchase has been made
-2019-06-15 11:58:19,916 INFO EventLog: User 26y has successfuly registered
-2019-06-15 11:58:19,991 INFO EventLog: User 25y has successfuly logged in.
-2019-06-15 11:58:20,387 INFO EventLog: A purchase has been made
-2019-06-15 11:58:21,189 INFO EventLog: User 27y has successfuly registered
-2019-06-15 11:58:21,965 INFO EventLog: A purchase has been made
-2019-06-15 11:59:29,184 INFO EventLog: User 28y has successfuly registered
-2019-06-15 11:59:29,346 INFO EventLog: User 26y has successfuly logged in.
-2019-06-15 11:59:29,594 INFO EventLog: A purchase has been made
-2019-06-15 11:59:29,789 INFO EventLog: User 27y has successfuly logged in.
-2019-06-15 11:59:35,752 INFO EventLog: User 29y has successfuly registered
-2019-06-15 11:59:36,225 INFO EventLog: User 33y has successfuly registered
-2019-06-15 11:59:36,385 INFO EventLog: User 30y has successfuly registered
-2019-06-15 11:59:36,543 INFO EventLog: User 35y has successfuly registered
-2019-06-15 11:59:36,795 INFO EventLog: A purchase has been made
-2019-06-15 11:59:37,026 INFO EventLog: User 36y has successfuly registered
-2019-06-15 11:59:37,267 INFO EventLog: User 31y has successfuly registered
-2019-06-15 11:59:37,523 INFO EventLog: User 42y has successfuly registered
-2019-06-15 11:59:37,760 INFO EventLog: User 32y has successfuly registered
-2019-06-15 11:59:38,005 INFO EventLog: User 41y has successfuly registered
-2019-06-15 11:59:38,246 INFO EventLog: User 48y has successfuly registered
-2019-06-15 11:59:38,407 INFO EventLog: User 44y has successfuly registered
-2019-06-15 11:59:38,735 INFO EventLog: User 34y has successfuly registered
-2019-06-15 11:59:39,052 INFO EventLog: User 45y has successfuly registered
-2019-06-15 11:59:39,212 INFO EventLog: User 47y has successfuly registered
-2019-06-15 11:59:39,450 INFO EventLog: User 40y has successfuly registered
-2019-06-15 11:59:39,612 INFO EventLog: User 38y has successfuly registered
-2019-06-15 11:59:39,931 INFO EventLog: User 39y has successfuly registered
-2019-06-15 11:59:40,247 INFO EventLog: User 49y has successfuly registered
-2019-06-15 11:59:40,407 INFO EventLog: User 43y has successfuly registered
-2019-06-15 11:59:40,566 INFO EventLog: User 37y has successfuly registered
-2019-06-15 11:59:40,643 INFO EventLog: User 28y has successfuly logged in.
-2019-06-15 11:59:40,806 INFO EventLog: User 46y has successfuly registered
-2019-06-15 11:59:43,960 INFO EventLog: User 29y has successfuly logged in.
-2019-06-15 11:59:44,305 INFO EventLog: User 30y has successfuly logged in.
-2019-06-15 11:59:49,191 INFO EventLog: A purchase has been made
-2019-06-15 11:59:49,264 INFO EventLog: User 33y has successfuly logged in.
-2019-06-15 11:59:49,386 INFO EventLog: User 35y has successfuly logged in.
-2019-06-15 11:59:49,463 INFO EventLog: User 32y has successfuly logged in.
-2019-06-15 11:59:49,596 INFO EventLog: User 31y has successfuly logged in.
-2019-06-15 11:59:49,828 INFO EventLog: User 36y has successfuly logged in.
-2019-06-15 11:59:50,079 INFO EventLog: User 41y has successfuly logged in.
-2019-06-15 11:59:50,165 INFO EventLog: A purchase has been made
-2019-06-15 11:59:50,591 INFO EventLog: User 34y has successfuly logged in.
-2019-06-15 11:59:50,668 INFO EventLog: User 48y has successfuly logged in.
-2019-06-15 11:59:50,747 INFO EventLog: User 44y has successfuly logged in.
-2019-06-15 11:59:50,824 INFO EventLog: User 42y has successfuly logged in.
-2019-06-15 11:59:50,901 INFO EventLog: User 47y has successfuly logged in.
-2019-06-15 11:59:50,979 INFO EventLog: User 38y has successfuly logged in.
-2019-06-15 11:59:51,056 INFO EventLog: User 45y has successfuly logged in.
-2019-06-15 11:59:51,251 INFO EventLog: User 43y has successfuly logged in.
-2019-06-15 11:59:51,375 INFO EventLog: User 37y has successfuly logged in.
-2019-06-15 11:59:51,465 INFO EventLog: User 40y has successfuly logged in.
-2019-06-15 11:59:51,704 INFO EventLog: User 49y has successfuly logged in.
-2019-06-15 11:59:51,833 INFO EventLog: User 39y has successfuly logged in.
-2019-06-15 11:59:52,105 INFO EventLog: User 46y has successfuly logged in.
-2019-06-15 11:59:52,391 INFO EventLog: A purchase has been made
-2019-06-15 11:59:54,023 INFO EventLog: A purchase has been made
-2019-06-15 11:59:54,455 INFO EventLog: A purchase has been made
-2019-06-15 11:59:54,897 INFO EventLog: A purchase has been made
-2019-06-15 11:59:56,422 INFO EventLog: A purchase has been made
-2019-06-15 11:59:58,290 ERROR EventLog: Error in adding to shopping cart : Error: The amount asked is larger than the quantity left
-2019-06-15 11:59:58,622 INFO EventLog: A purchase has been made
-2019-06-15 11:59:58,699 ERROR EventLog: Error in adding to shopping cart : Error: The amount asked is larger than the quantity left
-2019-06-15 12:34:50,706 INFO EventLog: User u2 has successfuly registered
-2019-06-15 12:34:50,985 INFO EventLog: User u3 has successfuly registered
-2019-06-15 12:34:51,236 INFO EventLog: User u4 has successfuly registered
-2019-06-15 12:34:51,489 INFO EventLog: User u5 has successfuly registered
-2019-06-15 12:34:51,664 INFO EventLog: User u2 has successfuly logged in.
-2019-06-15 12:34:52,590 INFO EventLog: User u2 has successfuly created a store
-2019-06-15 12:35:12,229 INFO EventLog: User u2 has successfuly logged in.
+﻿2019-06-15 15:02:02,753 INFO EventLog: User u2 has successfuly registered
+2019-06-15 15:02:03,049 INFO EventLog: User u3 has successfuly registered
+2019-06-15 15:02:03,323 INFO EventLog: User u4 has successfuly registered
+2019-06-15 15:02:03,584 INFO EventLog: User u5 has successfuly registered
+2019-06-15 15:02:03,791 INFO EventLog: User u2 has successfuly logged in.
+2019-06-15 15:02:04,772 INFO EventLog: User u2 has successfuly created a store
+2019-06-15 15:02:21,666 INFO EventLog: User u2 has successfuly logged in.
+2019-06-15 15:25:40,488 INFO EventLog: User u2 has successfuly registered
+2019-06-15 15:25:40,746 INFO EventLog: User u3 has successfuly registered
+2019-06-15 15:25:40,980 INFO EventLog: User u4 has successfuly registered
+2019-06-15 15:25:41,230 INFO EventLog: User u5 has successfuly registered
+2019-06-15 15:25:41,468 INFO EventLog: User u6 has successfuly registered
+2019-06-15 15:25:41,746 INFO EventLog: User u7 has successfuly registered
+2019-06-15 15:25:41,980 INFO EventLog: User u8 has successfuly registered
+2019-06-15 15:25:42,208 INFO EventLog: User u9 has successfuly registered
+2019-06-15 15:25:42,473 INFO EventLog: User u10 has successfuly registered
+2019-06-15 15:25:42,708 INFO EventLog: User u11 has successfuly registered
+2019-06-15 15:25:42,955 INFO EventLog: User u12 has successfuly registered
+2019-06-15 15:25:43,187 INFO EventLog: User u13 has successfuly registered
+2019-06-15 15:25:43,422 INFO EventLog: User u14 has successfuly registered
+2019-06-15 15:25:43,654 INFO EventLog: User u15 has successfuly registered
+2019-06-15 15:25:43,888 INFO EventLog: User u16 has successfuly registered
+2019-06-15 15:25:44,114 INFO EventLog: User u17 has successfuly registered
+2019-06-15 15:25:44,341 INFO EventLog: User u18 has successfuly registered
+2019-06-15 15:25:44,568 INFO EventLog: User u19 has successfuly registered
+2019-06-15 15:25:44,814 INFO EventLog: User u20 has successfuly registered
+2019-06-15 15:25:45,055 INFO EventLog: User u21 has successfuly registered
+2019-06-15 15:25:45,284 INFO EventLog: User u22 has successfuly registered
+2019-06-15 15:25:45,515 INFO EventLog: User u23 has successfuly registered
+2019-06-15 15:25:45,765 INFO EventLog: User u24 has successfuly registered
+2019-06-15 15:25:46,000 INFO EventLog: User u25 has successfuly registered
+2019-06-15 15:25:46,240 INFO EventLog: User u26 has successfuly registered
+2019-06-15 15:25:46,468 INFO EventLog: User u27 has successfuly registered
+2019-06-15 15:25:46,700 INFO EventLog: User u28 has successfuly registered
+2019-06-15 15:25:46,939 INFO EventLog: User u29 has successfuly registered
+2019-06-15 15:25:47,166 INFO EventLog: User u30 has successfuly registered
+2019-06-15 15:25:47,329 INFO EventLog: User u2 has successfuly logged in.
+2019-06-15 15:25:48,161 INFO EventLog: User u2 has successfuly created a store
+2019-06-15 15:27:58,039 INFO EventLog: User u20 has successfuly logged in.
+2019-06-15 15:28:22,374 INFO EventLog: User u20 has logged out
+2019-06-15 15:36:47,140 INFO EventLog: User u2 has successfuly registered
+2019-06-15 15:36:47,404 INFO EventLog: User u3 has successfuly registered
+2019-06-15 15:36:47,636 INFO EventLog: User u4 has successfuly registered
+2019-06-15 15:36:47,866 INFO EventLog: User u5 has successfuly registered
+2019-06-15 15:36:48,102 INFO EventLog: User u6 has successfuly registered
+2019-06-15 15:36:48,329 INFO EventLog: User u7 has successfuly registered
+2019-06-15 15:36:48,564 INFO EventLog: User u8 has successfuly registered
+2019-06-15 15:36:48,803 INFO EventLog: User u9 has successfuly registered
+2019-06-15 15:36:49,048 INFO EventLog: User u10 has successfuly registered
+2019-06-15 15:36:49,285 INFO EventLog: User u11 has successfuly registered
+2019-06-15 15:36:49,515 INFO EventLog: User u12 has successfuly registered
+2019-06-15 15:36:49,742 INFO EventLog: User u13 has successfuly registered
+2019-06-15 15:36:49,970 INFO EventLog: User u14 has successfuly registered
+2019-06-15 15:36:50,208 INFO EventLog: User u15 has successfuly registered
+2019-06-15 15:36:50,443 INFO EventLog: User u16 has successfuly registered
+2019-06-15 15:36:50,705 INFO EventLog: User u17 has successfuly registered
+2019-06-15 15:36:50,934 INFO EventLog: User u18 has successfuly registered
+2019-06-15 15:36:51,182 INFO EventLog: User u19 has successfuly registered
+2019-06-15 15:36:51,479 INFO EventLog: User u20 has successfuly registered
+2019-06-15 15:36:51,735 INFO EventLog: User u21 has successfuly registered
+2019-06-15 15:36:51,969 INFO EventLog: User u22 has successfuly registered
+2019-06-15 15:36:52,195 INFO EventLog: User u23 has successfuly registered
+2019-06-15 15:36:52,424 INFO EventLog: User u24 has successfuly registered
+2019-06-15 15:36:52,648 INFO EventLog: User u25 has successfuly registered
+2019-06-15 15:36:52,886 INFO EventLog: User u26 has successfuly registered
+2019-06-15 15:36:53,120 INFO EventLog: User u27 has successfuly registered
+2019-06-15 15:36:53,347 INFO EventLog: User u28 has successfuly registered
+2019-06-15 15:36:53,573 INFO EventLog: User u29 has successfuly registered
+2019-06-15 15:36:53,805 INFO EventLog: User u30 has successfuly registered
+2019-06-15 15:36:53,966 INFO EventLog: User u2 has successfuly logged in.
+2019-06-15 15:36:54,943 INFO EventLog: User u2 has successfuly created a store
+2019-06-15 15:37:25,307 INFO EventLog: User t has successfuly registered
+2019-06-15 15:37:36,508 INFO EventLog: User t has successfuly logged in.
+2019-06-15 15:37:51,345 INFO EventLog: User t has logged out
+2019-06-15 15:38:19,150 INFO EventLog: User u3 has successfuly logged in.
+2019-06-15 15:38:47,602 INFO EventLog: User u3 has logged out
+2019-06-15 15:39:22,081 INFO EventLog: User u1 has successfuly logged in.
+2019-06-15 15:43:11,026 INFO EventLog: User u2 has successfuly registered
+2019-06-15 15:43:11,304 INFO EventLog: User u3 has successfuly registered
+2019-06-15 15:43:11,555 INFO EventLog: User u4 has successfuly registered
+2019-06-15 15:43:11,807 INFO EventLog: User u5 has successfuly registered
+2019-06-15 15:43:12,064 INFO EventLog: User u6 has successfuly registered
+2019-06-15 15:43:12,317 INFO EventLog: User u7 has successfuly registered
+2019-06-15 15:43:12,568 INFO EventLog: User u8 has successfuly registered
+2019-06-15 15:43:12,821 INFO EventLog: User u9 has successfuly registered
+2019-06-15 15:43:13,090 INFO EventLog: User u10 has successfuly registered
+2019-06-15 15:43:13,377 INFO EventLog: User u11 has successfuly registered
+2019-06-15 15:43:13,642 INFO EventLog: User u12 has successfuly registered
+2019-06-15 15:43:13,906 INFO EventLog: User u13 has successfuly registered
+2019-06-15 15:43:14,171 INFO EventLog: User u14 has successfuly registered
+2019-06-15 15:43:14,438 INFO EventLog: User u15 has successfuly registered
+2019-06-15 15:43:14,701 INFO EventLog: User u16 has successfuly registered
+2019-06-15 15:43:14,966 INFO EventLog: User u17 has successfuly registered
+2019-06-15 15:43:15,233 INFO EventLog: User u18 has successfuly registered
+2019-06-15 15:43:15,507 INFO EventLog: User u19 has successfuly registered
+2019-06-15 15:43:15,772 INFO EventLog: User u20 has successfuly registered
+2019-06-15 15:43:16,038 INFO EventLog: User u21 has successfuly registered
+2019-06-15 15:43:16,309 INFO EventLog: User u22 has successfuly registered
+2019-06-15 15:43:16,571 INFO EventLog: User u23 has successfuly registered
+2019-06-15 15:43:16,833 INFO EventLog: User u24 has successfuly registered
+2019-06-15 15:43:17,104 INFO EventLog: User u25 has successfuly registered
+2019-06-15 15:43:17,356 INFO EventLog: User u26 has successfuly registered
+2019-06-15 15:43:17,611 INFO EventLog: User u27 has successfuly registered
+2019-06-15 15:43:17,866 INFO EventLog: User u28 has successfuly registered
+2019-06-15 15:43:18,126 INFO EventLog: User u29 has successfuly registered
+2019-06-15 15:43:18,381 INFO EventLog: User u30 has successfuly registered
+2019-06-15 15:43:18,567 INFO EventLog: User u2 has successfuly logged in.
+2019-06-15 15:43:19,511 INFO EventLog: User u2 has successfuly created a store

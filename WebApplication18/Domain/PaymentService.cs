@@ -12,6 +12,8 @@ namespace workshop192.Domain
         
         private static PaymentService instance = null;
         private readonly HttpClient client = new HttpClient();
+        public int toLock = 0;
+
         private PaymentService()
         {
            
@@ -28,7 +30,9 @@ namespace workshop192.Domain
 
         public  int checkOut(string card, string month, string year, string holder, string ccv, string id)
         {
-            var massage = new Dictionary<string, string>
+            lock (client)
+            {
+                var massage = new Dictionary<string, string>
             {
                  { "action_type", "pay" },
                  { "card_number", card },
@@ -39,28 +43,27 @@ namespace workshop192.Domain
                  { "id", id }
             };
 
-            using (var client1 = new HttpClient())
-            {
-                var massageToSent = new FormUrlEncodedContent(massage);
-                var response = client1.PostAsync("https://cs-bgu-wsep.herokuapp.com/", massageToSent).Result;
-
-                if (response.IsSuccessStatusCode)
+                using (var client1 = new HttpClient())
                 {
-                    var responseContent = response.Content;
+                    var massageToSent = new FormUrlEncodedContent(massage);
+                    var response = client1.PostAsync("https://cs-bgu-wsep.herokuapp.com/", massageToSent).Result;
 
-                    string responseString = responseContent.ReadAsStringAsync().Result;
-                    return int.Parse(responseString);
-                  
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseContent = response.Content;
+
+                        string responseString = responseContent.ReadAsStringAsync().Result;
+                        return int.Parse(responseString);
+
+                    }
                 }
+
+                return -1;
             }
-            return -1;
 
 
         }
-        public bool cancelPayment(String account, double money)
-        {
-            return true;
-        }
+    
 
         public bool connectToSystem()
         {
@@ -69,57 +72,62 @@ namespace workshop192.Domain
         }
         public bool handShake()
         {
-            var massage = new Dictionary<string, string>
+            lock (client)
+            {
+                var massage = new Dictionary<string, string>
             {
                 { "action_type", "handshake" },
             };
 
-           using (var client1 = new HttpClient())
-            {
-                var massageToSent = new FormUrlEncodedContent(massage);
-                var response = client1.PostAsync("https://cs-bgu-wsep.herokuapp.com/", massageToSent).Result;
-
-                if (response.IsSuccessStatusCode)
+                using (var client1 = new HttpClient())
                 {
-                    var responseContent = response.Content;
+                    var massageToSent = new FormUrlEncodedContent(massage);
+                    var response = client1.PostAsync("https://cs-bgu-wsep.herokuapp.com/", massageToSent).Result;
 
-                    // by calling .Result you are synchronously reading the result
-                    string responseString = responseContent.ReadAsStringAsync().Result;
-                 if(responseString == "OK")
+                    if (response.IsSuccessStatusCode)
                     {
-                        return true;
+                        var responseContent = response.Content;
+
+                        // by calling .Result you are synchronously reading the result
+                        string responseString = responseContent.ReadAsStringAsync().Result;
+                        if (responseString == "OK")
+                        {
+                            return true;
+                        }
+
                     }
-                  
                 }
+                return false;
             }
-            return false;
         }
 
         public  int cancelPayment(string id)
         {
-
-            var massage = new Dictionary<string, string>
+            lock (client)
             {
-             { "action_type", " cancel_pay" },
-             { " transaction_id", id}
-       
+                var massage = new Dictionary<string, string>
+            {
+             { "action_type", "cancel_pay" },
+             { "transaction_id", id}
+
             };
 
-            using (var client1 = new HttpClient())
-            {
-                var massageToSent = new FormUrlEncodedContent(massage);
-                var response = client1.PostAsync("https://cs-bgu-wsep.herokuapp.com/", massageToSent).Result;
-
-                if (response.IsSuccessStatusCode)
+                using (var client1 = new HttpClient())
                 {
-                    var responseContent = response.Content;
-                   
-                    string responseString = responseContent.ReadAsStringAsync().Result;
-                    return int.Parse(responseString);
+                    var massageToSent = new FormUrlEncodedContent(massage);
+                    var response = client1.PostAsync("https://cs-bgu-wsep.herokuapp.com/", massageToSent).Result;
 
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseContent = response.Content;
+
+                        string responseString = responseContent.ReadAsStringAsync().Result;
+                        return int.Parse(responseString);
+
+                    }
                 }
+                return -1;
             }
-            return -1;
         }
     }
 }

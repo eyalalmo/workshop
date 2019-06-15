@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Result Analysis test4 | SmartMeter</title>
+
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <link href="data:image/x-icon;base64,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"
+          rel="icon" type="image/x-icon"/>
+
+    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+</head>
+
+<body class="charts-m">
+<header>
+    <img src="img/logo.png" width="301" height="53" id="logo" alt="SmartMeter"/>
+    <h1>Result Analysis: test4</h1>
+    <h2>14:42:05 15/06/2019 - 14:43:32 15/06/2019</h2>
+</header>
+
+<nav id="main-nav">
+    <ul>
+        <li class="active"><a href="index.html">Result Analysis</a></li>
+        <li><a href="trends.html">Trend Analysis</a></li>
+    </ul>
+</nav>
+
+<article>
+
+    <h2>Quick Summary</h2>
+
+    <table class="v-list">
+        <tr>
+            <th>Maximum virtual users:</th>
+            <td>60</td>
+        </tr>
+        <tr>
+            <th>Duration:</th>
+            <td>1 min, 27 s   </td>
+        </tr>
+        <tr>
+            <th>Total hits:</th>
+            <td>1,080</td>
+        </tr>
+        <tr>
+            <th>Average hits per second:</th>
+            <td>12.41</td>
+        </tr>
+        <tr>
+            <th>Total errors:</th>
+            <td>0</td>
+        </tr>
+    </table>
+
+    <table class="v-list">
+        <tr>
+            <th>Test plan comment:</th>
+            <td></td>
+        </tr>
+        <tr>
+            <th>Test script:</th>
+            <td>                test4.jmx (<a href="backups/test4.jmx" target="_blank">view</a> | <a href="backups/test4.jmx" download>download</a>)
+            </td>
+        </tr>
+        <tr>
+            <th>Results backup:</th>
+            <td><a href="backups/results.zip">results.zip</a></td>
+        </tr>
+        <tr>
+            <th>JMeter properties matching sm.* pattern:</th>
+            <td></td>
+        </tr>
+    </table>
+
+
+    <h2>Active Thread Groups</h2>
+
+    <table class="h-list">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Implementation</th>
+            <th>Max. VU</th>
+            <th>Ramp-up</th>
+            <th>Duration</th>
+        </tr>
+        </thead>
+        <tbody>
+                        <tr>
+                <td>Thread Group</td>
+                <td>ThreadGroup</td>
+                <td>60</td>
+                <td> 20 s</td>
+                <td></td>
+            </tr>
+                    </tbody>
+    </table>
+
+
+    <h2>Detailed Summary</h2>
+
+    <h3>Requests Summary</h3><table class="h-list table-sort"><thead><tr><th>Label</th><th>#Samples</th><th>Average [ms]</th><th>Median [ms]</th><th>90% line [ms]</th><th>95% line [ms]</th><th>99% line [ms]</th><th>Minimum [ms]</th><th>Maximum [ms]</th><th>Error Rate</th><th>Rate / sec</th><th>Avg. Bandwidth [KB/s]</th><th>Std. Deviation</th></tr></thead><tbody><tr><th>001_Home Page - My ASP.NET Application</th><td>60</td><td>95</td><td>23</td><td>377</td><td>451</td><td>600</td><td>3</td><td>657</td><td>0.00%</td><td>3.0</td><td>25.4</td><td>154.63</td></tr><tr><th>002_Register - My ASP.NET Application</th><td>60</td><td>1422</td><td>859</td><td>3153</td><td>3830</td><td>4253</td><td>255</td><td>4254</td><td>0.00%</td><td>2.5</td><td>26.2</td><td>1212.89</td></tr><tr><th>003_Login - My ASP.NET Application</th><td>60</td><td>1307</td><td>1243</td><td>2125</td><td>2466</td><td>3074</td><td>350</td><td>3117</td><td>0.00%</td><td>2.4</td><td>24.6</td><td>713.62</td></tr><tr><th>004_Home Page - My ASP.NET Application</th><td>60</td><td>153</td><td>42</td><td>484</td><td>634</td><td>700</td><td>3</td><td>1015</td><td>0.00%</td><td>2.5</td><td>21.3</td><td>216.72</td></tr><tr><th>005_Products Catalog - My ASP.NET Application</th><td>60</td><td>1687</td><td>1308</td><td>3469</td><td>4299</td><td>4391</td><td>160</td><td>4510</td><td>0.00%</td><td>2.5</td><td>47.3</td><td>1366.63</td></tr><tr><th>006_Products Catalog - My ASP.NET Application</th><td>60</td><td>268</td><td>7</td><td>1117</td><td>1831</td><td>1991</td><td>2</td><td>2022</td><td>0.00%</td><td>2.4</td><td>42.6</td><td>568.60</td></tr><tr><th>007_Shopping Basket - My ASP.NET Application</th><td>60</td><td>786</td><td>21</td><td>2929</td><td>4204</td><td>4687</td><td>8</td><td>4867</td><td>0.00%</td><td>2.2</td><td>51.0</td><td>1434.23</td></tr><tr><th>008_Checkout - My ASP.NET Application</th><td>60</td><td>10626</td><td>5898</td><td>29070</td><td>30170</td><td>36140</td><td>1712</td><td>36159</td><td>0.00%</td><td>1.3</td><td>16.9</td><td>10215.16</td></tr><tr><th>009_Home Page - My ASP.NET Application</th><td>60</td><td>364</td><td>7</td><td>1548</td><td>1863</td><td>1879</td><td>3</td><td>2397</td><td>0.00%</td><td>1.3</td><td>10.7</td><td>634.71</td></tr></tbody><tfoot><tr><th>TOTAL</th><td>540</td><td>1856</td><td>372</td><td>3550</td><td>6526</td><td>29466</td><td>2</td><td>36159</td><td>0.00%</td><td>6.2</td><td>82.3</td><td>4718.54</td></tr></tfoot></table><h3>Successful Requests Summary</h3><table class="h-list table-sort"><thead><tr><th>Label</th><th>#Samples</th><th>Average [ms]</th><th>Median [ms]</th><th>90% line [ms]</th><th>95% line [ms]</th><th>99% line [ms]</th><th>Minimum [ms]</th><th>Maximum [ms]</th><th>Error Rate</th><th>Rate / sec</th><th>Avg. Bandwidth [KB/s]</th><th>Std. Deviation</th></tr></thead><tbody><tr><th>001_Home Page - My ASP.NET Application</th><td>60</td><td>95</td><td>23</td><td>377</td><td>451</td><td>600</td><td>3</td><td>657</td><td>0.00%</td><td>3.0</td><td>25.4</td><td>154.63</td></tr><tr><th>002_Register - My ASP.NET Application</th><td>60</td><td>1422</td><td>859</td><td>3153</td><td>3830</td><td>4253</td><td>255</td><td>4254</td><td>0.00%</td><td>2.5</td><td>26.2</td><td>1212.89</td></tr><tr><th>003_Login - My ASP.NET Application</th><td>60</td><td>1307</td><td>1243</td><td>2125</td><td>2466</td><td>3074</td><td>350</td><td>3117</td><td>0.00%</td><td>2.4</td><td>24.6</td><td>713.62</td></tr><tr><th>004_Home Page - My ASP.NET Application</th><td>60</td><td>153</td><td>42</td><td>484</td><td>634</td><td>700</td><td>3</td><td>1015</td><td>0.00%</td><td>2.5</td><td>21.3</td><td>216.72</td></tr><tr><th>005_Products Catalog - My ASP.NET Application</th><td>60</td><td>1687</td><td>1308</td><td>3469</td><td>4299</td><td>4391</td><td>160</td><td>4510</td><td>0.00%</td><td>2.5</td><td>47.3</td><td>1366.63</td></tr><tr><th>006_Products Catalog - My ASP.NET Application</th><td>60</td><td>268</td><td>7</td><td>1117</td><td>1831</td><td>1991</td><td>2</td><td>2022</td><td>0.00%</td><td>2.4</td><td>42.6</td><td>568.60</td></tr><tr><th>007_Shopping Basket - My ASP.NET Application</th><td>60</td><td>786</td><td>21</td><td>2929</td><td>4204</td><td>4687</td><td>8</td><td>4867</td><td>0.00%</td><td>2.2</td><td>51.0</td><td>1434.23</td></tr><tr><th>008_Checkout - My ASP.NET Application</th><td>60</td><td>10626</td><td>5898</td><td>29070</td><td>30170</td><td>36140</td><td>1712</td><td>36159</td><td>0.00%</td><td>1.3</td><td>16.9</td><td>10215.16</td></tr><tr><th>009_Home Page - My ASP.NET Application</th><td>60</td><td>364</td><td>7</td><td>1548</td><td>1863</td><td>1879</td><td>3</td><td>2397</td><td>0.00%</td><td>1.3</td><td>10.7</td><td>634.71</td></tr></tbody><tfoot><tr><th>TOTAL</th><td>540</td><td>1856</td><td>372</td><td>3550</td><td>6526</td><td>29466</td><td>2</td><td>36159</td><td>0.00%</td><td>6.2</td><td>82.3</td><td>4718.54</td></tr></tfoot></table><h3>Failed Requests Summary</h3><p>&lt;&lt; NO DATA &gt;&gt;</p>
+
+    <h3>Responses Summary</h3><table class="h-list table-sort"><thead><tr><th>Request ID</th><th>Response code</th><th>Total</th></tr></thead><tbody><tr><th>008_Checkout - My ASP.NET Application</th><td>200</td><td>60</td></tr><tr><th>004_Home Page - My ASP.NET Application</th><td>200</td><td>60</td></tr><tr><th>001_Home Page - My ASP.NET Application</th><td>200</td><td>60</td></tr><tr><th>002_Register - My ASP.NET Application</th><td>200</td><td>60</td></tr><tr><th>005_Products Catalog - My ASP.NET Application</th><td>200</td><td>60</td></tr><tr><th>009_Home Page - My ASP.NET Application</th><td>200</td><td>60</td></tr><tr><th>003_Login - My ASP.NET Application</th><td>200</td><td>60</td></tr><tr><th>007_Shopping Basket - My ASP.NET Application</th><td>200</td><td>60</td></tr><tr><th>006_Products Catalog - My ASP.NET Application</th><td>200</td><td>60</td></tr></tbody></table>
+
+    <h3>Errors Summary</h3>
+
+    <table class="h-list table-sort">
+        <thead>
+        <tr>
+            <th>Label</th>
+            <th>Is static resource?</th>
+            <th>Response Code</th>
+            <th>Assertion</th>
+            <th>Total</th>
+        </tr>
+        </thead>
+        <tbody>
+                    </tbody>
+    </table>
+
+
+
+            <h2 class="has-failed">Acceptance Criteria</h2>
+                <h3 class="has-failed">EXAMPLE Criterion CPU < 75</h3>
+
+        <table class="v-list">
+            <tr>
+                <th>Key</th>
+                <td>PERFMON-CPU-LocalPerfMon</td>
+            </tr>
+            <tr>
+                <th>Group samples by labels?</th>
+                <td>NO</td>
+            </tr>
+            <tr>
+                <th>Group samples by time frames (in seconds)</th>
+                <td> 10 </td>
+            </tr>
+            <tr>
+                <th>Filter</th>
+                <td>All</td>
+            </tr>
+            <tr>
+                <th>Aggregation</th>
+                <td>AVG</td>
+            </tr>
+            <tr>
+                <th>Comparison</th>
+                <td>Value is <= 75.0 OR Value IS NULL</td>
+            </tr>
+        </table>
+
+        <h3>Results</h3>
+        <table class="h-list table-sort criterions-list">
+            <thead>
+            <tr>
+                <th>Group</th>
+                <th>Number of Samples</th>
+                <th>Interval</th>
+                <th>Failed/Pass</th>
+                <th>Value</th>
+                <th>Percent Deviation (%)</th>
+            </tr>
+            </thead>
+            <tbody>
+                        <tr class="has-passed">
+                <th>ALL</th>
+                <td>8</td>
+                <td>14:42:05,372 - 14:42:15,371</td>
+                <td>PASS</td>
+                <td>67.34</td>
+                <td>
+                                            -10.22
+                                    </td>
+            </tr>
+                        <tr class="has-failed">
+                <th>ALL</th>
+                <td>10</td>
+                <td>14:42:15,372 - 14:42:25,371</td>
+                <td>FAIL</td>
+                <td>91.10</td>
+                <td>
+                                            +21.46
+                                    </td>
+            </tr>
+                        <tr class="has-failed">
+                <th>ALL</th>
+                <td>10</td>
+                <td>14:42:25,372 - 14:42:35,371</td>
+                <td>FAIL</td>
+                <td>82.52</td>
+                <td>
+                                            +10.03
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>ALL</th>
+                <td>10</td>
+                <td>14:42:35,372 - 14:42:45,371</td>
+                <td>PASS</td>
+                <td>68.62</td>
+                <td>
+                                            -8.50
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>ALL</th>
+                <td>10</td>
+                <td>14:42:45,372 - 14:42:55,371</td>
+                <td>PASS</td>
+                <td>66.61</td>
+                <td>
+                                            -11.18
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>ALL</th>
+                <td>10</td>
+                <td>14:42:55,372 - 14:43:05,371</td>
+                <td>PASS</td>
+                <td>68.55</td>
+                <td>
+                                            -8.61
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>ALL</th>
+                <td>10</td>
+                <td>14:43:05,372 - 14:43:15,371</td>
+                <td>PASS</td>
+                <td>64.64</td>
+                <td>
+                                            -13.81
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>ALL</th>
+                <td>10</td>
+                <td>14:43:15,372 - 14:43:25,371</td>
+                <td>PASS</td>
+                <td>62.53</td>
+                <td>
+                                            -16.62
+                                    </td>
+            </tr>
+                        </tbody>
+        </table>
+            <h3 class="has-passed">EXAMPLE Criterion No Errors</h3>
+
+        <table class="v-list">
+            <tr>
+                <th>Key</th>
+                <td>TRANSACTIONS-ERRORS</td>
+            </tr>
+            <tr>
+                <th>Group samples by labels?</th>
+                <td>NO</td>
+            </tr>
+            <tr>
+                <th>Group samples by time frames (in seconds)</th>
+                <td>NOT SET</td>
+            </tr>
+            <tr>
+                <th>Filter</th>
+                <td>All</td>
+            </tr>
+            <tr>
+                <th>Aggregation</th>
+                <td>SUM</td>
+            </tr>
+            <tr>
+                <th>Comparison</th>
+                <td>Value is = 0.0 OR Value IS NULL</td>
+            </tr>
+        </table>
+
+        <h3>Results</h3>
+        <table class="h-list table-sort criterions-list">
+            <thead>
+            <tr>
+                <th>Group</th>
+                <th>Number of Samples</th>
+                <th>Interval</th>
+                <th>Failed/Pass</th>
+                <th>Value</th>
+                <th>Percent Deviation (%)</th>
+            </tr>
+            </thead>
+            <tbody>
+                        <tr class="has-passed">
+                <th>ALL</th>
+                <td>540</td>
+                <td>14:42:05,372 - 14:43:32,822</td>
+                <td>PASS</td>
+                <td>0.00</td>
+                <td>
+                                            NaN
+                                    </td>
+            </tr>
+                        </tbody>
+        </table>
+            <h3 class="has-failed">EXAMPLE Criterion Response < 2 sec</h3>
+
+        <table class="v-list">
+            <tr>
+                <th>Key</th>
+                <td>TRANSACTIONS-RESPONSE_TIME</td>
+            </tr>
+            <tr>
+                <th>Group samples by labels?</th>
+                <td>YES</td>
+            </tr>
+            <tr>
+                <th>Group samples by time frames (in seconds)</th>
+                <td> 10 </td>
+            </tr>
+            <tr>
+                <th>Filter</th>
+                <td>All</td>
+            </tr>
+            <tr>
+                <th>Aggregation</th>
+                <td>AVG</td>
+            </tr>
+            <tr>
+                <th>Comparison</th>
+                <td>Value is <= 2000.0 OR Value IS NULL</td>
+            </tr>
+        </table>
+
+        <h3>Results</h3>
+        <table class="h-list table-sort criterions-list">
+            <thead>
+            <tr>
+                <th>Group</th>
+                <th>Number of Samples</th>
+                <th>Interval</th>
+                <th>Failed/Pass</th>
+                <th>Value</th>
+                <th>Percent Deviation (%)</th>
+            </tr>
+            </thead>
+            <tbody>
+                        <tr class="has-passed">
+                <th>001_Home Page - My ASP.NET Application</th>
+                <td>30</td>
+                <td>14:42:05,372 - 14:42:15,371</td>
+                <td>PASS</td>
+                <td>41.70</td>
+                <td>
+                                            -97.91
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>001_Home Page - My ASP.NET Application</th>
+                <td>30</td>
+                <td>14:42:15,372 - 14:42:25,371</td>
+                <td>PASS</td>
+                <td>150.00</td>
+                <td>
+                                            -92.50
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>001_Home Page - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:25,372 - 14:42:35,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>001_Home Page - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:35,372 - 14:42:45,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>001_Home Page - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:45,372 - 14:42:55,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>001_Home Page - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:55,372 - 14:43:05,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>001_Home Page - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:43:05,372 - 14:43:15,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>001_Home Page - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:43:15,372 - 14:43:25,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>002_Register - My ASP.NET Application</th>
+                <td>24</td>
+                <td>14:42:05,372 - 14:42:15,371</td>
+                <td>PASS</td>
+                <td>473.75</td>
+                <td>
+                                            -76.31
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>002_Register - My ASP.NET Application</th>
+                <td>30</td>
+                <td>14:42:15,372 - 14:42:25,371</td>
+                <td>PASS</td>
+                <td>1,768.17</td>
+                <td>
+                                            -11.59
+                                    </td>
+            </tr>
+                        <tr class="has-failed">
+                <th>002_Register - My ASP.NET Application</th>
+                <td>6</td>
+                <td>14:42:25,372 - 14:42:35,371</td>
+                <td>FAIL</td>
+                <td>3,488.00</td>
+                <td>
+                                            +74.40
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>002_Register - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:35,372 - 14:42:45,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>002_Register - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:45,372 - 14:42:55,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>002_Register - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:55,372 - 14:43:05,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>002_Register - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:43:05,372 - 14:43:15,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>002_Register - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:43:15,372 - 14:43:25,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>003_Login - My ASP.NET Application</th>
+                <td>13</td>
+                <td>14:42:05,372 - 14:42:15,371</td>
+                <td>PASS</td>
+                <td>685.62</td>
+                <td>
+                                            -65.72
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>003_Login - My ASP.NET Application</th>
+                <td>27</td>
+                <td>14:42:15,372 - 14:42:25,371</td>
+                <td>PASS</td>
+                <td>1,209.22</td>
+                <td>
+                                            -39.54
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>003_Login - My ASP.NET Application</th>
+                <td>20</td>
+                <td>14:42:25,372 - 14:42:35,371</td>
+                <td>PASS</td>
+                <td>1,844.70</td>
+                <td>
+                                            -7.76
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>003_Login - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:35,372 - 14:42:45,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>003_Login - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:45,372 - 14:42:55,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>003_Login - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:55,372 - 14:43:05,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>003_Login - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:43:05,372 - 14:43:15,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>003_Login - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:43:15,372 - 14:43:25,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>004_Home Page - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:05,372 - 14:42:15,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>004_Home Page - My ASP.NET Application</th>
+                <td>27</td>
+                <td>14:42:15,372 - 14:42:25,371</td>
+                <td>PASS</td>
+                <td>117.89</td>
+                <td>
+                                            -94.11
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>004_Home Page - My ASP.NET Application</th>
+                <td>22</td>
+                <td>14:42:25,372 - 14:42:35,371</td>
+                <td>PASS</td>
+                <td>267.82</td>
+                <td>
+                                            -86.61
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>004_Home Page - My ASP.NET Application</th>
+                <td>11</td>
+                <td>14:42:35,372 - 14:42:45,371</td>
+                <td>PASS</td>
+                <td>9.91</td>
+                <td>
+                                            -99.50
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>004_Home Page - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:45,372 - 14:42:55,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>004_Home Page - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:55,372 - 14:43:05,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>004_Home Page - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:43:05,372 - 14:43:15,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>004_Home Page - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:43:15,372 - 14:43:25,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>005_Products Catalog - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:05,372 - 14:42:15,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-failed">
+                <th>005_Products Catalog - My ASP.NET Application</th>
+                <td>21</td>
+                <td>14:42:15,372 - 14:42:25,371</td>
+                <td>FAIL</td>
+                <td>2,244.48</td>
+                <td>
+                                            +12.22
+                                    </td>
+            </tr>
+                        <tr class="has-failed">
+                <th>005_Products Catalog - My ASP.NET Application</th>
+                <td>20</td>
+                <td>14:42:25,372 - 14:42:35,371</td>
+                <td>FAIL</td>
+                <td>2,474.20</td>
+                <td>
+                                            +23.71
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>005_Products Catalog - My ASP.NET Application</th>
+                <td>19</td>
+                <td>14:42:35,372 - 14:42:45,371</td>
+                <td>PASS</td>
+                <td>244.21</td>
+                <td>
+                                            -87.79
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>005_Products Catalog - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:45,372 - 14:42:55,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>005_Products Catalog - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:55,372 - 14:43:05,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>005_Products Catalog - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:43:05,372 - 14:43:15,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>005_Products Catalog - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:43:15,372 - 14:43:25,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>006_Products Catalog - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:05,372 - 14:42:15,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>006_Products Catalog - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:15,372 - 14:42:25,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>006_Products Catalog - My ASP.NET Application</th>
+                <td>16</td>
+                <td>14:42:25,372 - 14:42:35,371</td>
+                <td>PASS</td>
+                <td>147.56</td>
+                <td>
+                                            -92.62
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>006_Products Catalog - My ASP.NET Application</th>
+                <td>24</td>
+                <td>14:42:35,372 - 14:42:45,371</td>
+                <td>PASS</td>
+                <td>7.08</td>
+                <td>
+                                            -99.65
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>006_Products Catalog - My ASP.NET Application</th>
+                <td>20</td>
+                <td>14:42:45,372 - 14:42:55,371</td>
+                <td>PASS</td>
+                <td>679.15</td>
+                <td>
+                                            -66.04
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>006_Products Catalog - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:55,372 - 14:43:05,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>006_Products Catalog - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:43:05,372 - 14:43:15,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>006_Products Catalog - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:43:15,372 - 14:43:25,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>007_Shopping Basket - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:05,372 - 14:42:15,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>007_Shopping Basket - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:15,372 - 14:42:25,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>007_Shopping Basket - My ASP.NET Application</th>
+                <td>8</td>
+                <td>14:42:25,372 - 14:42:35,371</td>
+                <td>PASS</td>
+                <td>224.62</td>
+                <td>
+                                            -88.77
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>007_Shopping Basket - My ASP.NET Application</th>
+                <td>22</td>
+                <td>14:42:35,372 - 14:42:45,371</td>
+                <td>PASS</td>
+                <td>22.23</td>
+                <td>
+                                            -98.89
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>007_Shopping Basket - My ASP.NET Application</th>
+                <td>22</td>
+                <td>14:42:45,372 - 14:42:55,371</td>
+                <td>PASS</td>
+                <td>1,057.45</td>
+                <td>
+                                            -47.13
+                                    </td>
+            </tr>
+                        <tr class="has-failed">
+                <th>007_Shopping Basket - My ASP.NET Application</th>
+                <td>8</td>
+                <td>14:42:55,372 - 14:43:05,371</td>
+                <td>FAIL</td>
+                <td>2,706.00</td>
+                <td>
+                                            +35.30
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>007_Shopping Basket - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:43:05,372 - 14:43:15,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>007_Shopping Basket - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:43:15,372 - 14:43:25,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>008_Checkout - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:05,372 - 14:42:15,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>008_Checkout - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:15,372 - 14:42:25,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>008_Checkout - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:25,372 - 14:42:35,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-failed">
+                <th>008_Checkout - My ASP.NET Application</th>
+                <td>18</td>
+                <td>14:42:35,372 - 14:42:45,371</td>
+                <td>FAIL</td>
+                <td>7,947.50</td>
+                <td>
+                                            +297.38
+                                    </td>
+            </tr>
+                        <tr class="has-failed">
+                <th>008_Checkout - My ASP.NET Application</th>
+                <td>29</td>
+                <td>14:42:45,372 - 14:42:55,371</td>
+                <td>FAIL</td>
+                <td>12,822.83</td>
+                <td>
+                                            +541.14
+                                    </td>
+            </tr>
+                        <tr class="has-failed">
+                <th>008_Checkout - My ASP.NET Application</th>
+                <td>13</td>
+                <td>14:42:55,372 - 14:43:05,371</td>
+                <td>FAIL</td>
+                <td>9,437.46</td>
+                <td>
+                                            +371.87
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>008_Checkout - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:43:05,372 - 14:43:15,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>008_Checkout - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:43:15,372 - 14:43:25,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>009_Home Page - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:05,372 - 14:42:15,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>009_Home Page - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:15,372 - 14:42:25,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>009_Home Page - My ASP.NET Application</th>
+                <td>0</td>
+                <td>14:42:25,372 - 14:42:35,371</td>
+                <td>PASS</td>
+                <td>EMPTY</td>
+                <td>
+                                            
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>009_Home Page - My ASP.NET Application</th>
+                <td>2</td>
+                <td>14:42:35,372 - 14:42:45,371</td>
+                <td>PASS</td>
+                <td>30.50</td>
+                <td>
+                                            -98.47
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>009_Home Page - My ASP.NET Application</th>
+                <td>10</td>
+                <td>14:42:45,372 - 14:42:55,371</td>
+                <td>PASS</td>
+                <td>659.00</td>
+                <td>
+                                            -67.05
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>009_Home Page - My ASP.NET Application</th>
+                <td>12</td>
+                <td>14:42:55,372 - 14:43:05,371</td>
+                <td>PASS</td>
+                <td>914.75</td>
+                <td>
+                                            -54.26
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>009_Home Page - My ASP.NET Application</th>
+                <td>11</td>
+                <td>14:43:05,372 - 14:43:15,371</td>
+                <td>PASS</td>
+                <td>355.64</td>
+                <td>
+                                            -82.22
+                                    </td>
+            </tr>
+                        <tr class="has-passed">
+                <th>009_Home Page - My ASP.NET Application</th>
+                <td>14</td>
+                <td>14:43:15,372 - 14:43:25,371</td>
+                <td>PASS</td>
+                <td>19.14</td>
+                <td>
+                                            -99.04
+                                    </td>
+            </tr>
+                        </tbody>
+        </table>
+    
+
+    <h2>Graphs</h2>
+    <div class="chart">
+<h3>HitsPerSecond</h3>
+<img src="data/graphs/HitsPerSecond.png" alt="HitsPerSecond"/>
+</div>
+<div class="chart">
+<h3>ResponseCodesPerSecond</h3>
+<img src="data/graphs/ResponseCodesPerSecond.png" alt="ResponseCodesPerSecond"/>
+</div>
+<div class="chart">
+<h3>ResponseTimesOverTime</h3>
+<img src="data/graphs/ResponseTimesOverTime.png" alt="ResponseTimesOverTime"/>
+</div>
+<div class="chart">
+<h3>ThreadsStateOverTime</h3>
+<img src="data/graphs/ThreadsStateOverTime.png" alt="ThreadsStateOverTime"/>
+</div>
+<div class="chart">
+<h3>TransactionsPerSecond</h3>
+<img src="data/graphs/TransactionsPerSecond.png" alt="TransactionsPerSecond"/>
+</div>
+<div class="chart">
+<h3>ResponseTimesOverTimeAggregate</h3>
+<img src="data/graphs/ResponseTimesOverTimeAggregate.png" alt="ResponseTimesOverTimeAggregate"/>
+</div>
+<div class="chart">
+<h3>ThreadsStateOverTimeAggregate</h3>
+<img src="data/graphs/ThreadsStateOverTimeAggregate.png" alt="ThreadsStateOverTimeAggregate"/>
+</div>
+<div class="chart">
+<h3>TransactionsPerSecondAggregate</h3>
+<img src="data/graphs/TransactionsPerSecondAggregate.png" alt="TransactionsPerSecondAggregate"/>
+</div>
+<div class="chart">
+<h3>ControllerBytesThroughputOverTime</h3>
+<img src="data/graphs/ControllerBytesThroughputOverTime.png" alt="ControllerBytesThroughputOverTime"/>
+</div>
+<div class="chart">
+<h3>ResponseTimesPercentiles</h3>
+<img src="data/graphs/ResponseTimesPercentiles.png" alt="ResponseTimesPercentiles"/>
+</div>
+<div class="chart">
+<h3>ResponseTimesPercentilesAggregate</h3>
+<img src="data/graphs/ResponseTimesPercentilesAggregate.png" alt="ResponseTimesPercentilesAggregate"/>
+</div>
+<div class="chart">
+<h3>LocalPerfMon</h3>
+<img src="data/graphs/LocalPerfMon.png" alt="LocalPerfMon"/>
+</div>
+
+
+</article>
+
+<div id="chart-line-x" class="not-for-print"></div>
+<div id="chart-line-y" class="not-for-print"></div>
+
+<div id="settings-toolbar" class="clearfix not-for-print">
+    <ul>
+        <li><a href="javascript:void(0);" data-chart-size="charts-l"><span class="icon-chart"></span></a></li>
+        <li><a href="javascript:void(0);" data-chart-size="charts-m"><span class="icon-chart"></span></a></li>
+        <li><a href="javascript:void(0);" data-chart-size="charts-s"><span class="icon-chart"></span></a></li>
+        <li id="btn-ruler">
+            <a href="javascript:void(0);"><span class="icon-target"></span></a>
+        </li>
+    </ul>
+</div>
+
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
+<script src="js/vendor/jquery.tablesorter.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
