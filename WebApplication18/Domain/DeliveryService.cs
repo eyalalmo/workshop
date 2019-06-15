@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplication18.Exceptions;
 
 namespace workshop192.Domain
 {
@@ -55,8 +56,9 @@ namespace workshop192.Domain
                         return int.Parse(responseString);
 
                     }
+                    else
+                        throw new ExternalConnectionException("Delivery system connection error");
                 }
-                return -1;
             }
         }
 
@@ -90,6 +92,8 @@ namespace workshop192.Domain
                         }
 
                     }
+                    else
+                        throw new ExternalConnectionException("Delivery system connection error");
                 }
                 return false;
             }
@@ -118,8 +122,9 @@ namespace workshop192.Domain
                         string responseString = responseContent.ReadAsStringAsync().Result;
                         return int.Parse(responseString);
                     }
+                    else
+                        throw new ExternalConnectionException("Delivery system connection error");
                 }
-                return -1;
             }
         }
     }

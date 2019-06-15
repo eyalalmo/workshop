@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplication18.Exceptions;
 
 namespace workshop192.Domain
 {
@@ -56,14 +57,11 @@ namespace workshop192.Domain
                         return int.Parse(responseString);
 
                     }
+                    else
+                        throw new ExternalConnectionException("Payment system connection error");
                 }
-
-                return -1;
             }
-
-
         }
-    
 
         public bool connectToSystem()
         {
@@ -96,6 +94,9 @@ namespace workshop192.Domain
                         }
 
                     }
+                    else
+                        throw new ExternalConnectionException("Payment system connection error");
+
                 }
                 return false;
             }
@@ -125,8 +126,9 @@ namespace workshop192.Domain
                         return int.Parse(responseString);
 
                     }
+                    else
+                        throw new ExternalConnectionException("Payment system connection error");
                 }
-                return -1;
             }
         }
     }
