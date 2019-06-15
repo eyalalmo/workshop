@@ -1,4 +1,4 @@
 inputFile input.txt
 isTestMode false
-isFirstTime true
+isFirstTime false
 CreateTables false
