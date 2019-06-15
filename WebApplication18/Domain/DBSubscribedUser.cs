@@ -130,18 +130,6 @@ namespace workshop192.Domain
             }
         }
 
-
-
-
-        public static DBSubscribedUser getInstance()
-        {
-            if (instance == null)
-            {
-                instance = new DBSubscribedUser();
-            }
-            return instance;
-        }
-
         public void logout(SubscribedUser sub)
         {
             loggedInUser.Remove(sub.getUsername());

@@ -82,7 +82,7 @@ namespace workshop192.Domain
                 }
                 //connection.Close();
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 connection.Close();
                 throw e;
