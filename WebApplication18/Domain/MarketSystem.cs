@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplication18.DAL;
 using WebApplication18.Domain;
 using WebApplication18.Logs;
 using workshop192.Bridge;
@@ -107,7 +108,9 @@ namespace workshop192.Domain
                     }
                     else if (input[0] == "deleteDB")
                     {
-                        DBStore.getInstance().deleteAllTable();
+                        Connector c = new Connector();
+                        c.deleteAllTable();
+                        //DBStore.getInstance().deleteAllTable();
                        
                     }
                     else if (input[0] == "init")

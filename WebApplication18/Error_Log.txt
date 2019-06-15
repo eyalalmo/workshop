@@ -63,3 +63,37 @@
    at WebApplication18.Controllers.StoreController.addReliantDiscountSameProduct(Int32 storeID, String percentage, String duration, Int32 numOfProducts, Int32 productID) in C:\Users\asus\source\repos\eyalalmo\workshop\WebApplication18\Controllers\StoreController.cs:line 271
 2019-06-13 19:26:58,553 ERROR ErrorLog: An Error has occured. Function: register; Stack Trace:    ?-  workshop192.ServiceLayer.UserService.register(Int32 user, String username, String password) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\ServiceLayer\UserService.cs:???? 59
    ?-  WebApplication18.Controllers.UesrController.register(String Username, String Password) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Controllers\UesrController.cs:???? 24
+2019-06-14 15:57:22,052 ERROR ErrorLog: An Error has occured. Function: getAllStores; Stack Trace:    ?-  workshop192.Bridge.DomainBridge.getAllStores(Int32 session1) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Bridge\DomainBridge.cs:???? 699
+   ?-  workshop192.ServiceLayer.UserService.getAllStores(Int32 session) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\ServiceLayer\UserService.cs:???? 127
+   ?-  WebApplication18.Controllers.UesrController.getAllStores() ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Controllers\UesrController.cs:???? 203
+2019-06-14 15:57:54,970 ERROR ErrorLog: An Error has occured. Function: getAllStores; Stack Trace:    ?-  workshop192.Bridge.DomainBridge.getAllStores(Int32 session1) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Bridge\DomainBridge.cs:???? 699
+   ?-  workshop192.ServiceLayer.UserService.getAllStores(Int32 session) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\ServiceLayer\UserService.cs:???? 127
+   ?-  WebApplication18.Controllers.UesrController.getAllStores() ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Controllers\UesrController.cs:???? 203
+2019-06-14 15:58:03,063 ERROR ErrorLog: An Error has occured. Function: getAllStores; Stack Trace:    ?-  workshop192.Bridge.DomainBridge.getAllStores(Int32 session1) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Bridge\DomainBridge.cs:???? 699
+   ?-  workshop192.ServiceLayer.UserService.getAllStores(Int32 session) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\ServiceLayer\UserService.cs:???? 127
+   ?-  WebApplication18.Controllers.UesrController.getAllStores() ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Controllers\UesrController.cs:???? 203
+2019-06-14 15:58:03,063 ERROR ErrorLog: An Error has occured. Function: getAllStores; Stack Trace:    ?-  workshop192.Bridge.DomainBridge.getAllStores(Int32 session1) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Bridge\DomainBridge.cs:???? 699
+   ?-  workshop192.ServiceLayer.UserService.getAllStores(Int32 session) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\ServiceLayer\UserService.cs:???? 127
+   ?-  WebApplication18.Controllers.UesrController.getAllStores() ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Controllers\UesrController.cs:???? 203
+2019-06-14 16:29:26,821 ERROR ErrorLog: An Error has occured. Function: login; Stack Trace:    ?-  WebApplication18.Controllers.UesrController.login(String Username, String Password) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Controllers\UesrController.cs:???? 46
+2019-06-15 11:58:21,908 ERROR ErrorLog: An Error has occured. Function: checkBasket; Stack Trace:    ?-  workshop192.Domain.DBProduct.update(Product p) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Domain\DBProduct.cs:???? 414
+   ?-  workshop192.Domain.Product.decQuantityLeft(Int32 amount) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Domain\Product.cs:???? 126
+   ?-  workshop192.Domain.ShoppingBasket.checkBasket() ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Domain\ShoppingBasket.cs:???? 263
+   ?-  workshop192.Domain.Session.checkBasket() ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Domain\Session.cs:???? 117
+   ?-  workshop192.Bridge.DomainBridge.checkBasket(Int32 session) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Bridge\DomainBridge.cs:???? 276
+   ?-  workshop192.ServiceLayer.UserService.checkBasket(Int32 session) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\ServiceLayer\UserService.cs:???? 175
+   ?-  WebApplication18.Controllers.UesrController.checkBasket() ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Controllers\UesrController.cs:???? 114
+2019-06-15 11:59:30,309 ERROR ErrorLog: An Error has occured. Function: checkBasket; Stack Trace:    ?-  workshop192.Domain.DBProduct.update(Product p) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Domain\DBProduct.cs:???? 414
+   ?-  workshop192.Domain.Product.decQuantityLeft(Int32 amount) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Domain\Product.cs:???? 126
+   ?-  workshop192.Domain.ShoppingBasket.checkBasket() ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Domain\ShoppingBasket.cs:???? 263
+   ?-  workshop192.Domain.Session.checkBasket() ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Domain\Session.cs:???? 117
+   ?-  workshop192.Bridge.DomainBridge.checkBasket(Int32 session) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Bridge\DomainBridge.cs:???? 276
+   ?-  workshop192.ServiceLayer.UserService.checkBasket(Int32 session) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\ServiceLayer\UserService.cs:???? 175
+   ?-  WebApplication18.Controllers.UesrController.checkBasket() ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Controllers\UesrController.cs:???? 114
+2019-06-15 11:59:44,680 ERROR ErrorLog: An Error has occured. Function: Checkout; Stack Trace:    ?-  workshop192.Domain.DBProduct.update(Product p) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Domain\DBProduct.cs:???? 414
+   ?-  workshop192.Domain.Product.decQuantityLeft(Int32 amount) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Domain\Product.cs:???? 126
+   ?-  workshop192.Domain.ShoppingBasket.purchaseBasket(String address, String creditcard, String month, String year, String holder, String cvv) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Domain\ShoppingBasket.cs:???? 224
+   ?-  workshop192.Domain.Session.purchaseBasket(String address, String creditcard, String month, String year, String holder, String cvv) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Domain\Session.cs:???? 111
+   ?-  workshop192.Bridge.DomainBridge.purchaseBasket(Int32 sessionid, String address, String creditcard, String month, String year, String holder, String cvv) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Bridge\DomainBridge.cs:???? 310
+   ?-  workshop192.ServiceLayer.UserService.purchaseBasket(Int32 session, String address, String creditcard, String month, String year, String holder, String cvv) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\ServiceLayer\UserService.cs:???? 210
+   ?-  WebApplication18.Controllers.UesrController.Checkout(String address, String creditcard, String month, String year, String holder, String cvv) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Controllers\UesrController.cs:???? 225
