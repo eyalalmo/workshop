@@ -398,6 +398,8 @@ namespace workshop192.ServiceLayer
         {
             db.setDiscountPercentage(discountID, percentage);
         }
+
+        //4.2
         public void setPolicyAmount(int policyID, int amount,int sessionID,int storeID)
         {
             db.setPolicyAmount(policyID, amount,sessionID, storeID);
