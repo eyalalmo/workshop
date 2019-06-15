@@ -16,7 +16,7 @@
     <AssemblyName>WebApplication18</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress />
+    <Use64BitIISExpress>false</Use64BitIISExpress>
     <IISExpressSSLPort>44356</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
@@ -403,7 +403,7 @@
     <Compile Include="Domain\CartProductEntry.cs" />
     <Compile Include="Domain\Contract.cs" />
     <Compile Include="Domain\Cookie.cs" />
-    <Compile Include="Domain\CoplexPurchasePolicy.cs" />
+    <Compile Include="Domain\ComplexPurchasePolicy.cs" />
     <Compile Include="Domain\DBNotifications.cs" />
     <Compile Include="Domain\DiscountComponentEntry.cs" />
     <Compile Include="Domain\DiscountCompositeEntry.cs" />
