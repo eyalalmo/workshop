@@ -27,9 +27,9 @@ namespace workshop192.ServiceLayer.Tests
 
             try
             {
-                bool pay = userService.handShakePay();
-                bool deliver = userService.handShakeDeliver();
-                if (pay == false || deliver == false)
+                bool res = userService.handShake();
+              
+                if (res == false )
                 {
                     Assert.Fail();
                 }
