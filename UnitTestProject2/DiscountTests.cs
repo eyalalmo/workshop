@@ -31,7 +31,7 @@ namespace workshop192.ServiceLayer.Tests
                 userService.register(session1, "user23", "user23");
             }
             catch (Exception) { }
-            userService.login(session1, "user23", "user23");
+            //userService.login(session1, "user23", "user23");
             store1 = storeService.addStore("Makolet", "groceryStore", session1);
 
             p1 = storeService.addProduct("shirt", "clothing", 50, 4, 4, store1, session1);
@@ -39,7 +39,7 @@ namespace workshop192.ServiceLayer.Tests
             bisli = storeService.addProduct("bisli", "food", 20, 4, 50, store1, session1);
             session2 = userService.startSession();// login 
             userService.register(session2, "user7", "user7");
-            userService.login(session2, "user7", "user7");
+            //userService.login(session2, "user7", "user7");
         }
         [TestMethod]
         public void AddVisibleDiscount()
@@ -101,11 +101,11 @@ namespace workshop192.ServiceLayer.Tests
                 storeService.complexDiscount("0 1", store1, "and", 0.3, "12/12/2020", session1);
                 double actualPrice = basketService.getAmountOfCart(store1, session1);
                 double expected = ((4 * 15)*0.75 + (4 * 20)*0.75);
-                Assert.IsTrue(expected == actualPrice);
+                Assert.AreEqual(expected,actualPrice);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Assert.Fail();
+                Assert.Fail(e.Message);
             }
         }
         [TestMethod]
