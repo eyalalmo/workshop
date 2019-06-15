@@ -338,11 +338,11 @@ namespace workshop192.Domain
                 int active = 0;
                 if (store.isActive() == true)
                     active = 1;
-                LinkedList<PurchasePolicy> policies = store.getStorePolicyList();
+              /*  LinkedList<PurchasePolicy> policies = store.getStorePolicyList();
                 foreach(PurchasePolicy p in policies)
                 {
                     addPolicyToDB(p, storeId);
-                }
+                }*/
                 
                 connection.Execute(sql, new { storeId, name, description, numOfOwners, active });
 
@@ -389,7 +389,7 @@ namespace workshop192.Domain
                 var StoreRoleResult = connection.Query<StoreRoleEntry>("SELECT * FROM [dbo].[StoreRoles] WHERE storeId=@storeId ", new { storeId = storeId });
                 var ContractResult = connection.Query<Contract>("SELECT * FROM [dbo].[Contracts] WHERE storeId = @storeId", new { storeId = storeId });
                 var pendingResult = connection.Query<string>("SELECT userName FROM [dbo].[PendingOwners] WHERE storeId = @storeId", new { storeId = storeId }).AsList();
-                var policyEntries = connection.Query<PolicyEntry>("SELECT * FROM PurchasePolicy WHERE storeID=@storeID;", new { storeId });
+               // var policyEntries = connection.Query<PolicyEntry>("SELECT * FROM PurchasePolicy WHERE storeID=@storeID;", new { storeId });
 
                 //connection.Close();
 
@@ -410,7 +410,7 @@ namespace workshop192.Domain
                     if (p.getStoreID() == s.getStoreID())
                         s.addProduct(p);
                 }
-                s.setPolicyList(parsePolicy(policyEntries));
+               // s.setPolicyList(parsePolicy(policyEntries));
                 foreach (StoreRoleEntry element in StoreRoleResult)
                 {
                     if (element.getStoreId() == s.getStoreID() && element.getIsOwner() == 1)
