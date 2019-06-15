@@ -83,6 +83,41 @@ namespace workshop192.Domain
             DBSubscribedUser.getInstance().login(sub);
         }
 
+        public void loginAfterRegister(String username, String password, Session session)
+        {
+            String encrypted = password;
+            SubscribedUser sub = DBSubscribedUser.getInstance().getSubscribedUser(username);
+            if (sub == null)
+                throw new LoginException("Error: Username does not exist");
+            DBSubscribedUser.getInstance().updateStoreRole(sub);
+            //SubscribedUser loggedIn = DBSubscribedUser.getInstance().getloggedInUser(username);
+            //if( loggedIn != null)
+            //    throw new LoginException("Error: Username already logged in");
+            if (!Equals(sub.getPassword(), encrypted))
+                throw new LoginException("Error: Incorrect password");
+            ////////////erase
+
+            // Store st = new Store("bb", "cc");
+            //DBStore.getInstance().addStore(st);
+
+
+
+            ////////erase
+            session.setSubscribedUser(sub);
+
+            if (Equals(username, "u1"))
+            {
+                session.setState(new Admin());
+            }
+            else
+            {
+                session.setState(new LoggedIn());
+            }
+            session.setShoppingBasket(new ShoppingBasket(sub.getUsername()));
+            session.setShoppingBasket(sub.getShoppingBasket());
+            DBSubscribedUser.getInstance().login(sub);
+        }
+
         public void logout(SubscribedUser sub, Session session)
         {
             throw new UserStateException("Error: You're not logged in");

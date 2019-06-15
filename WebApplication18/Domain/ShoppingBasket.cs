@@ -242,6 +242,8 @@ namespace workshop192.Domain
             foreach (KeyValuePair<int, ShoppingCart> pair1 in shoppingCarts)
             {
                 ShoppingCart cart = pair1.Value;
+                if (cart.checkStorePolicy())
+                    throw new IllegalAmountException("The cart does not stand with store policies.");
                 Store store = DBStore.getInstance().getStore(cart.getStoreID());
                 Dictionary<Product, int> productsInCart = cart.getProductsInCarts();
                 foreach (KeyValuePair<Product, int> pair2 in productsInCart)
@@ -249,7 +251,7 @@ namespace workshop192.Domain
                     numOfProducts++;
                     Product product = pair2.Key;
                     int amount = pair2.Value;
-                    store.checkPolicy(product, amount);
+                   // store.checkPolicy(product, amount);
                     if (product.getQuantityLeft() == 0)
                     {
                         productToRemove = product;
@@ -260,7 +262,7 @@ namespace workshop192.Domain
                         cart.changeQuantityOfProduct(product, product.getQuantityLeft());
                         throw new IllegalAmountException("Total quantity of product: "+product.getProductName()+" ID: "+product.getProductID()+"\n is larger than the quantity left in the store\nquantity has been set to maximum quantity left in store\nPlease checkout again");
                     }
-                    product.decQuantityLeft(amount);
+                    //product.decQuantityLeft(amount);
                 }
                 if (productToRemove != null)
                 {

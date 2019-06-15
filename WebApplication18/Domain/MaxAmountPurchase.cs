@@ -8,16 +8,24 @@ namespace workshop192.Domain
 {
     public class MaxAmountPurchase : PurchasePolicy
     {
-        public int maxAmount;
-        
+        private int maxAmount;
+        private int policyID;
+
         public MaxAmountPurchase(int maxAmount)
         {
             this.maxAmount = maxAmount;
+            this.policyID = DBStore.getInstance().getNextPolicyID();
         }
-        public override void checkPolicy(Product p, int amount)
+        public MaxAmountPurchase(int maxAmount, int policyID)
         {
-            if (amount > maxAmount)
-                throw new AlreadyExistException("Error: Cannot purchase more than " + maxAmount + " of the same product");
+            this.maxAmount = maxAmount;
+            this.policyID = policyID;
+        }
+        public override bool checkPolicy(double cartPrice, int amountofProd)
+        {
+            if (amountofProd > maxAmount)
+                return false;
+            return true;
         }
         public override void setAmount(int newAmount)
         {
@@ -27,9 +35,24 @@ namespace workshop192.Domain
             }
             maxAmount = newAmount;
         }
-        public  override int getAmount()
+        public override int getAmount()
         {
             return maxAmount;
+        }
+
+        public override string description()
+        {
+            return "Maximum amount of product is: " + maxAmount + " ";
+        }
+
+        public override int getPolicyID()
+        {
+            return policyID;
+        }
+
+        public override string getTypeString()
+        {
+            return "Max Amount";
         }
     }
 }

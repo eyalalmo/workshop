@@ -86,11 +86,15 @@ namespace workshop192.Domain
         {
             return "Visible Discount";
         }
-        public Product getProduct()
+        public override Product getProduct()
         {
             return this.product;
         }
+        public override void removeProduct()
+        {
+            this.product = null;
+        }
 
-     
+
     }
 }

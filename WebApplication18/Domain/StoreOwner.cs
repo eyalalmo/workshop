@@ -121,9 +121,9 @@ namespace workshop192.Domain
                     " didn't appoint " + 
                     role.getUsername());
             DBStore.getInstance().removeStoreRole(sr);
-            sr.removeAllAppointedBy();
             role.removeStoreRole(sr);
             store.removeStoreRole(sr);
+            role.removeStoreRole(sr);
         }
 
         public void closeStore()
@@ -159,11 +159,10 @@ namespace workshop192.Domain
         {
             Store store = product.getStore();
             VisibleDiscount discount = new VisibleDiscount(percentage, duration, "ProductVisibleDiscount", store.getStoreID());
-            DBDiscount.getInstance().addDiscount(discount);
+            store.addDiscount(discount);
             discount.setProduct(product);
             product.setDiscount(discount);
-            //store.addDiscount(discount);
-
+            DBDiscount.getInstance().addDiscount(discount);
         }
         public void removeProductDiscount(Product product)
         {
@@ -209,7 +208,7 @@ namespace workshop192.Domain
             DiscountComposite composite = new DiscountComposite(list, type, percentage, duration, store.getStoreID());
             foreach (DiscountComponent d in list)
             {
-                store.removeDiscount(d.getId());   
+                store.removeDiscoutFromList(d.getId());   
                 DBDiscount.getInstance().setIsPartOfComplex(d.getId(), true);
                 d.setIsPartOfComplex(true);
 
@@ -221,29 +220,7 @@ namespace workshop192.Domain
 
         }
 
-
-        public void removeMaxAmountPolicy()
-        {
-            store.removeMaxAMountPolicy();
-        }
-        public void removeMinAmountPolicy()
-        {
-            store.removeMinAmountPolicy();
-        }
-
-        public void setMinAmountPolicy( int newMinAmount)
-        {
-            store.setMinPurchasePolicy(newMinAmount);
-        }
-
-       
-
-        public void setMaxAmountPolicy(int newMaxAmount)
-        {
-            store.setMaxPurchasePolicy(newMaxAmount);
-
-        }
-
+        
         //public void removeCouponFromStore(string couponCode)
         //{
         //    store.removeCoupon(couponCode);
@@ -296,6 +273,39 @@ namespace workshop192.Domain
         {
             return new Permissions(true, true, true);
         }
+
+
+
+        public void removePolicy(int index)
+        {
+            store.removePolicyByID(index);
+        }
+
+        public void setPolicyByID(int newAmount, int policyID)
+        {
+            store.setPolicyByID(newAmount, policyID);
+        }
+        public void addMinPurchasePolicy(int amount)
+        {
+            store.addMinAmountPolicy(amount);
+        }
+
+        public void addMaxPurchasePolicy(int amount)
+        {
+            store.addMaxAmountPolicy(amount);
+        }
+
+        public void addTotalPricePurchasePolicy(int amount)
+        {
+            store.addTotalAmountPolicy(amount);
+        }
+
+        public void addComplexPolicy(int index1, int index2, string type)
+        {
+
+            store.addComplexPurchasePolicy(index1, index2, type);
+        }
+
     }
 }
 

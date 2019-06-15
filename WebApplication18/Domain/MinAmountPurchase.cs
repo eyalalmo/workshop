@@ -8,16 +8,29 @@ namespace workshop192.Domain
 {
     public class MinAmountPurchase : PurchasePolicy
     {
-        public int minAmount;
+        private int minAmount;
+        private int policyID;
 
         public MinAmountPurchase(int minAmount)
         {
             this.minAmount = minAmount;
+            this.policyID = DBStore.getInstance().getNextPolicyID();
         }
-        public override void checkPolicy(Product p, int amount)
+        public MinAmountPurchase(int minAmount, int policyID)
         {
-            if (amount < minAmount)
-                throw new AlreadyExistException("Error: Cannot purchase less than " + minAmount + " of the same product");
+            this.minAmount = minAmount;
+            this.policyID = policyID;
+        }
+        public override bool checkPolicy(double cartPrice, int amountofProd)
+        {
+            if (minAmount > amountofProd)
+                return false;
+            return true;
+        }
+        public override int getPolicyID() { return policyID; }
+        public override string description()
+        {
+            return "Minimum amount of products is : " + minAmount + " ";
         }
 
         public override int getAmount()
@@ -32,6 +45,11 @@ namespace workshop192.Domain
                 throw new ArgumentOutOfRangeException("Error: Minimum amount can not be negative or 0");
             }
             minAmount = newAmount;
+        }
+
+        public override string getTypeString()
+        {
+            return "Min Amount";
         }
     }
 }

@@ -108,7 +108,7 @@
 
                   //<script type="text/javascript">
 
-                  var ws = new WebSocket("ws://" + window.location.host + "/api/WebSocket/");
+                  var ws = new WebSocket("wss://" + window.location.host + "/api/WebSocket/");
 
                   ws.onopen = function () {
                       //alert("connected");
@@ -117,7 +117,8 @@
                       alert(evt.data);
                   };
                   ws.onerror = function (evt) {
-                      alert(evt.data);
+                      alert("An error using the web socket :(");
+                      
                   };
                   ws.onclose = function () {
                       //alert("disconnected");

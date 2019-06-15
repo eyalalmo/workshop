@@ -27,7 +27,6 @@ namespace workshop192.Domain.Tests
             userService.register(session1, "anna", "banana"); //first owner
             userService.login(session1, "anna", "banana");
 
-            DBProduct.getInstance().initTests();
 
             storeID = storeService.addStore("myStore", "the best store ever", session1);
             p = storeService.addProduct("pizza", "food", 40, 0, 10, storeID, session1);

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplication18.DAL;
 using WebApplication18.Domain;
 using WebApplication18.Logs;
 using workshop192.Bridge;
@@ -14,11 +15,12 @@ namespace workshop192.Domain
 {
     public class MarketSystem
     {
-        public static bool testsMode =false;
+        public static bool testsMode = false;
         public static void init()
         {       
             
             int addNewDataToDB = 0;
+            int createTables = 0;
             string[] linesConfig = null;
             string filePathConfig = null;
             string fileName = "";
@@ -55,12 +57,30 @@ namespace workshop192.Domain
                             addNewDataToDB = 1;
                         }
                     }
+                    if (input[0] == "CreateTables")
+                    {
+                        if (input[1] == "false")
+                        {
+                            createTables = 0;
+                        }
+                        else
+                        {
+                            createTables = 1;
+                        }
+                    }
                 }
             }
             catch(Exception e)
             {
                 initWitOutRead();
+                SystemLogger.getErrorLog().Error("Cant open config file " + e.StackTrace);
                 return;
+            }
+
+            if (createTables == 1)
+            {
+                Connector c = new Connector();
+                c.createAllTables();
             }
 
             if (testsMode == true)
@@ -68,7 +88,7 @@ namespace workshop192.Domain
                 initTestWitOutRead();
                 return;
             }
-            
+
             if (addNewDataToDB == 0)
             {
                 initWitOutRead();
@@ -87,6 +107,7 @@ namespace workshop192.Domain
                 catch(Exception e)
                 {
                     initWitOutRead();
+                    SystemLogger.getErrorLog().Error("Cant open input file " + e.StackTrace);
                     return;
                 }
         
@@ -107,7 +128,9 @@ namespace workshop192.Domain
                     }
                     else if (input[0] == "deleteDB")
                     {
-                        DBStore.getInstance().deleteAllTable();
+                        Connector c = new Connector();
+                        c.deleteAllTable();
+                        //DBStore.getInstance().deleteAllTable();
                        
                     }
                     else if (input[0] == "init")
@@ -141,14 +164,6 @@ namespace workshop192.Domain
                     {
                         DomainBridge.getInstance().addOwner(Int32.Parse(input[1]), input[2], Int32.Parse(input[3]));
                     }
-                    else if (input[0] == "setMaxAmountPolicy")
-                    {
-                        DomainBridge.getInstance().setMaxAmountPolicy(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
-                    }
-                    else if (input[0] == "setMinAmountPolicy")
-                    {
-                        DomainBridge.getInstance().setMinAmountPolicy(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
-                    }
                     else if (input[0] == "setProductDiscount")
                     {
                         DomainBridge.getInstance().setProductDiscount(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
@@ -173,7 +188,58 @@ namespace workshop192.Domain
                     {
                         DomainBridge.getInstance().addAdmin(input[1], input[2]);
                     }
-
+                    else if(input[0] == "ReliantdiscountSameProduct")
+                    {
+                        DomainBridge.getInstance().addReliantdiscountSameProduct(Int32.Parse(input[1]), Int32.Parse(input[2]), Double.Parse(input[3]), Int32.Parse(input[4]), input[5], Int32.Parse(input[6]));
+                    }
+                    else if (input[0] == "ReliantdiscountTotalAmount")
+                    {
+                        DomainBridge.getInstance().addReliantdiscountTotalAmount(Int32.Parse(input[1]), Double.Parse(input[2]), Int32.Parse(input[3]), input[4], Int32.Parse(input[5]));
+                    }
+                    else if (input[0] == "complexDiscount")
+                    {
+                        DomainBridge.getInstance().complexDiscount(input[1], Int32.Parse(input[2]), input[3], Double.Parse(input[4]), input[5], Int32.Parse(input[6]));
+                    }
+                     else if (input[0] == "getStoreDiscounts")
+                    {
+                        DomainBridge.getInstance().getStoreDiscounts(Int32.Parse(input[1]), Int32.Parse(input[2]));
+                    }
+                    else if (input[0] == "removeProductDiscount")
+                    {
+                        DomainBridge.getInstance().removeProductDiscount(Int32.Parse(input[1]), Int32.Parse(input[2]));
+                    }
+                    else if (input[0] == "removeStoreDiscount")
+                    {
+                        DomainBridge.getInstance().removeStoreDiscount(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+                    }
+                    else if (input[0] == "removeStorePolicy")
+                    {
+                        DomainBridge.getInstance().removeStorePolicy(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+                    }
+                    else if (input[0] == "complexPolicy")
+                    {
+                        DomainBridge.getInstance().complexPolicy(input[1], Int32.Parse(input[2]), input[3], Int32.Parse(input[2]));
+                    }
+                    else if (input[0] == "addMaxPurchasePolicy")
+                    {
+                        DomainBridge.getInstance().addMinPurchasePolicy(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+                    }
+                    else if (input[0] == "addMaxPurchasePolicy")
+                    {
+                        DomainBridge.getInstance().addMinPurchasePolicy(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+                    }
+                    else if (input[0] == "removePolicy")
+                    {
+                        DomainBridge.getInstance().removePolicy(input[1], Int32.Parse(input[2]), Int32.Parse(input[3]));
+                    }
+                    /* else if (input[0] == "setPolicyAmount")
+                    {
+                        DomainBridge.getInstance().setPolicyAmount(Int32.Parse(input[1]), Int32.Parse(input[2]));
+                    }*/
+                     else if (input[0] == "getStorePolicies")
+                    {
+                        DomainBridge.getInstance().getStorePolicies(Int32.Parse(input[1]), Int32.Parse(input[2]));
+                    }
                 }
             }
             
@@ -207,6 +273,7 @@ namespace workshop192.Domain
             DeliveryService.getInstance().connectToSystem();
             ConsistencySystem.getInstance().connectToSystem();
             NotificationsBridge.getInstance().setObserver(DomainBridge.getInstance());
+            DomainBridge.getInstance().addAdmin("u1", "123");
         }
 
         //  int sessionid = DBSession.getInstance().generate();

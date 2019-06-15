@@ -74,7 +74,10 @@ namespace workshop192.ServiceLayer
                 throw new ArgumentException("Error: A product's name cannot be empty");
             db.setProductName(product, name, session);
         }
-
+        public int getProductQuantityLeft(int productId)
+        {
+            return db.getProductQuantityLeft(productId);
+        }
         public void SetProductInformation(int storeID, int productID, int price, int rank, int quantityLeft, string productName, int session)
         {
             double oldPrice = db.getProductPrice(productID);
@@ -395,9 +398,9 @@ namespace workshop192.ServiceLayer
         {
             db.setDiscountPercentage(discountID, percentage);
         }
-        public void setPolicyAmount(int policyID, int amount)
+        public void setPolicyAmount(int policyID, int amount,int sessionID,int storeID)
         {
-            db.setPolicyAmount(policyID, amount);
+            db.setPolicyAmount(policyID, amount,sessionID, storeID);
         }
 
         public void complexDiscount(string discountArray, int storeID,string type, double percentage, string duration, int sessionID)
@@ -426,53 +429,7 @@ namespace workshop192.ServiceLayer
             return db.getAllPending(id,sessionId);
         }
 
-
-
-        public void setMinAmountPolicy(int storeID, int sessionID, int newMinAmount)
-        {
-            if (storeID < 0)
-                throw new ArgumentException("illegal store number");
-
-            if (sessionID < 0)
-                throw new NullReferenceException("session is a null reference");
-            db.setMinAmountPolicy(storeID, sessionID, newMinAmount);
-
-        }
-        public void removeMinAmountPolicy(int storeID, int sessionID)
-        {
-            if (storeID < 0)
-                throw new ArgumentException("illegal store number");
-
-            if (sessionID < 0)
-                throw new NullReferenceException("session is a null reference");
-            db.removeMinAmountPolicy(storeID, sessionID);
-
-
-        }
         
-        public void setMaxAmountPolicy(int storeID, int sessionID, int newMaxAmount)
-        {
-            if (storeID < 0)
-                throw new ArgumentException("illegal store number");
-
-            if (sessionID < 0)
-                throw new NullReferenceException("session is a null reference");
-            db.setMaxAmountPolicy(storeID, sessionID, newMaxAmount);
-
-        }
-        public void removeMaxAmountPolicy(int storeID, int sessionID)
-        {
-            if (storeID < 0)
-                throw new ArgumentException("illegal store number");
-
-            if (sessionID < 0)
-                throw new NullReferenceException("session is a null reference");
-            db.removeMaxAmountPolicy(storeID, sessionID);
-
-
-        }
-
-
         public bool hasMinPurchasePolicy(int storeID, int sessionID)
         {
             return db.hasMinPurchasePolicy(storeID, sessionID);
@@ -481,24 +438,50 @@ namespace workshop192.ServiceLayer
         {
             return db.hasMaxPurchasePolicy(storeID, sessionID);
         }
+        public void addMinAmountPolicy(int storeId, int session, int amount)
+        {
+            if (storeId < 0)
+                throw new ArgumentException("illegal store number");
 
-        public string getMinAmountPolicy(int storeID, int sessionID)
-        {
-            return db.getMinAmountPolicyString(storeID, sessionID);
+            if (session< 0)
+                throw new NullReferenceException("session is a null reference");
+            if(amount < 0)
+            {
+                throw new ArgumentException("illegal amount");
+            }
+            db.addMinPurchasePolicy(amount, storeId, session);
         }
-        public string getMaxAmountPolicy(int storeID, int sessionID)
+        public void addMaxAmountPolicy(int storeId, int session, int amount)
         {
-            return db.getMaxAmountPolicyString(storeID, sessionID);
-        }
-        public string getMinAmountPolicyString(int storeID, int sessionID)
-        {
-            return db.getMinAmountPolicyString(storeID, sessionID);
-        }
-        public string getMaxAmountPolicyString(int storeID, int sessionID)
-        {
-            return db.getMaxAmountPolicyString(storeID, sessionID);
+            if (storeId < 0)
+                throw new ArgumentException("illegal store number");
+
+            if (session < 0)
+                throw new NullReferenceException("session is a null reference");
+            if (amount < 0)
+            {
+                throw new ArgumentException("illegal amount");
+            }
+            db.addMaxPurchasePolicy(amount, storeId, session);
         }
 
+        /*    public string getMinAmountPolicy(int storeID, int sessionID)
+            {
+                return db.getMinAmountPolicyString(storeID, sessionID);
+            }
+            public string getMaxAmountPolicy(int storeID, int sessionID)
+            {
+                return db.getMaxAmountPolicyString(storeID, sessionID);
+            }
+            public string getMinAmountPolicyString(int storeID, int sessionID)
+            {
+                return db.getMinAmountPolicyString(storeID, sessionID);
+            }
+            public string getMaxAmountPolicyString(int storeID, int sessionID)
+            {
+                return db.getMaxAmountPolicyString(storeID, sessionID);
+            }
+            */
         public void signContract(int store, string username,int sessionID)
         {
            
@@ -537,6 +520,23 @@ namespace workshop192.ServiceLayer
                 throw new ArgumentException("illegal username");
             }
             db.declineContract(store, username, sessionID);
+        }
+
+
+        public void addTotalPolicy(int storeID, int minPrice, int session)
+        {
+            if (storeID < 0)
+            {
+                throw new ArgumentException("illegal store number");
+            }
+            if (minPrice < 0)
+            {
+                throw new ArgumentException("illegal total value");
+
+            }
+            db.addTotalPricePolicy(minPrice, storeID, session);
+
+            
         }
     }
 }
