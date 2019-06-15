@@ -13,4 +13,8 @@ register u5 123 5
 createStore s1 This_is_the_startup_Store! 2
 addProduct diapers pros1 30 5 20 0 2
 addManager 0 u3 true false false 2
+logout 1
 logout 2
+logout 3
+logout 4
+logout 5

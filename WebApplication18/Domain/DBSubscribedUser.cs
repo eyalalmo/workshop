@@ -121,9 +121,6 @@ namespace workshop192.Domain
             }
         }
 
-
-
-
         public static DBSubscribedUser getInstance()
         {
             if (instance == null)
@@ -382,6 +379,8 @@ namespace workshop192.Domain
             string sql1 = "DELETE FROM Register WHERE username=@username";
             string sql2 = "DELETE FROM BasketCart WHERE username=@username";
             string sql3 = "DELETE FROM CartProduct WHERE username=@username";
+            string sql4 = "DELETE FROM PendingOwners WHERE username=@username";
+            string sql5 = "DELETE FROM Contracts WHERE username=@username";
 
             try
             {
@@ -394,6 +393,8 @@ namespace workshop192.Domain
                         connection.Execute(sql1, new { username }, transaction);
                         connection.Execute(sql2, new { username }, transaction);
                         connection.Execute(sql3, new { username }, transaction);
+                        connection.Execute(sql4, new { username }, transaction);
+                        connection.Execute(sql5, new { username }, transaction);
                         transaction.Commit();
                     }
                     connection.Close();

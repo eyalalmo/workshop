@@ -123,7 +123,7 @@ namespace workshop192.Domain
             DBStore.getInstance().removeStoreRole(sr);
             role.removeStoreRole(sr);
             store.removeStoreRole(sr);
-            role.removeStoreRole(sr);
+           
         }
 
         public void closeStore()
@@ -150,7 +150,10 @@ namespace workshop192.Domain
         public void removeAllAppointedBy()
         {
             foreach (StoreRole sr in appointedByMe)
-                remove(sr.getUser());
+            {
+                if(sr is StoreManager)
+                    remove(sr.getUser());
+            }
         }
 
         
