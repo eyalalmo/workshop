@@ -453,12 +453,100 @@ namespace workshop192.Domain
 
         private LinkedList<PurchasePolicy> parsePolicy(IEnumerable<PolicyEntry> policyEntries)
         {
-            LinkedList<PurchasePolicy> policyList = new LinkedList<PurchasePolicy>();
-            foreach(PolicyEntry p in policyEntries)
+            int count = howManyComplex(policyEntries);
+            if (count == 1)
             {
-                if(p.)
+                return parseOneComplex(policyEntries);
+            }
+            else if (count == 2)
+                return parseTwoComplex(policyEntries);
+            else
+                return parseNoComplex(policyEntries);
+
+        }
+
+        private LinkedList<PurchasePolicy> parseNoComplex(IEnumerable<PolicyEntry> policyEntries)
+        {
+            LinkedList<PurchasePolicy> policyList = new LinkedList<PurchasePolicy>();
+            foreach (PolicyEntry p in policyEntries)
+            {
+                policyList.AddLast(parseRegular(p));
             }
 
+                return policyList;
+
+        }
+
+        private LinkedList<PurchasePolicy> parseTwoComplex(IEnumerable<PolicyEntry> policyEntries)
+        {
+            LinkedList<PurchasePolicy> policyList = new LinkedList<PurchasePolicy>();
+            ComplexPurchasePolicy comp = null;
+            int compPos = -1;
+            int id1 = -1;
+            int id2 = -1;
+            for(int i =0; i<policyEntries.Count(); i++)
+            {
+                if (policyEntries.ElementAt(i).getType() == "complex")
+                {
+                    compPos = i;
+                    id1 = policyEntries.ElementAt(i).getSubID1();
+                    id2 = policyEntries.ElementAt(i).getSubID2();
+                }
+            }
+            PurchasePolicy child1 = null;
+            PurchasePolicy child2 = null;
+            for (int i = 0; i < policyEntries.Count(); i++)
+            {
+                if (policyEntries.ElementAt(i).getPolicyID() == id1)
+                {
+                    child1 = parseRegular(policyEntries.ElementAt(i));   
+                }
+                else if (policyEntries.ElementAt(i).getPolicyID() == id2)
+                {
+                    child2 = parseRegular(policyEntries.ElementAt(i));
+                }
+                else
+                {
+                    policyList.AddLast(parseRegular(policyEntries.ElementAt(i)));
+                }
+            }
+            comp= new ComplexPurchasePolicy(policyEntries.ElementAt(compPos).getCompType(),child1,child2, )
+
+
+        }
+
+        public PurchasePolicy parseRegular(PolicyEntry p)
+        {
+            if (p.getType() == "min")
+            {
+                MinAmountPurchase policy = new MinAmountPurchase(p.getAmount());
+                return policy;
+            }
+            else if (p.getType() == "max")
+            {
+                MaxAmountPurchase policy = new MaxAmountPurchase(p.getAmount());
+                return policy;
+            }
+            else
+            {
+                TotalPricePolicy policy = new TotalPricePolicy(p.getAmount());
+                return policy;
+            }
+        }
+        private LinkedList<PurchasePolicy> parseOneComplex(IEnumerable<PolicyEntry> policyEntries)
+        {
+        }
+
+        private int howManyComplex(IEnumerable<PolicyEntry> policyEntries)
+        {
+            int count = 0;
+           for(int i=0; i<policyEntries.Count(); i++)
+            {
+                PolicyEntry p = policyEntries.ElementAt(i);
+                if (p.getIsPartOfComp())
+                    count++;
+            }
+            return count;
         }
 
         public void removeStore(Store store)

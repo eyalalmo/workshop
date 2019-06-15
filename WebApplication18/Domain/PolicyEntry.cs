@@ -31,10 +31,10 @@ namespace WebApplication18.Domain
         public string getType() { return type; }
         public int getAmount() { return this.amount; }
         public int getPolicyID() { return this.policyID; }
-        public bool grtIsPartOfComp() { return this.isPartOfComplex; }
+        public bool getIsPartOfComp() { return this.isPartOfComplex; }
         public string getCompType() { return compType; }
         public int getSubID1() { return subID1; }
-        public int getSubID() { return subID2; }
+        public int getSubID2() { return subID2; }
 
 
 
