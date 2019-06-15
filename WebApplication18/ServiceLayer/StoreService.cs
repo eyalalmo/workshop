@@ -403,6 +403,7 @@ namespace workshop192.ServiceLayer
         public void setPolicyAmount(int policyID, int amount,int sessionID,int storeID)
         {
             db.setPolicyAmount(policyID, amount,sessionID, storeID);
+
         }
 
         public void complexDiscount(string discountArray, int storeID,string type, double percentage, string duration, int sessionID)
