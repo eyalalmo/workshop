@@ -162,6 +162,7 @@ namespace workshop192.ServiceLayer
             if (storeName == null || storeName.Length == 0)
             {
                 throw new ArgumentException("Error: A store name cannot be empty");
+
             }
 
             return db.createStore(session, storeName, storeDescription);
@@ -285,6 +286,7 @@ namespace workshop192.ServiceLayer
 
         public void addStoreVisibleDiscount(int store, double percentage, string duration, int session)
         {
+            
             if (store < 0)
                 throw new ArgumentException("illegal store number");
             if (percentage <= 0 || percentage >= 1)

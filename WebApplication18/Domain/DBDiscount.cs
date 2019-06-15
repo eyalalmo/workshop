@@ -129,6 +129,7 @@ namespace workshop192.Domain
                         if (d is Discount)
                         {
                             connection.Execute("DELETE FROM Discount WHERE id=@id ", new { id = d.getId() });
+                            connection.Close();
                         }
                         else
                         {

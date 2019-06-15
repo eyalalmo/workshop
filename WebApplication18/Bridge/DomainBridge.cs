@@ -840,6 +840,10 @@ namespace workshop192.Bridge
 
         private void checkDiscoutDuration(string duration)
         {
+            if(duration == null)
+            {
+                throw new ArgumentException("Discount duration is not in the required foramt DD/MM/YYYY");
+            }
             if (duration.Length != 10)
                 throw new ArgumentException("Discount duration is not in the required foramt DD/MM/YYYY");
             char[] arr = duration.ToCharArray();

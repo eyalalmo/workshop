@@ -109,3 +109,14 @@
 2019-06-16 00:23:19,431 ERROR ErrorLog: Connection error in function getStore in DB Store store id 17
 2019-06-16 00:26:11,073 ERROR ErrorLog: An Error has occured. Function: getStore; Stack Trace:    at workshop192.ServiceLayer.StoreService.addStore(String storeName, String storeDescription, Int32 session) in C:\Users\eyalb\Source\Repos\eyalalmo\workshop\WebApplication18\ServiceLayer\StoreService.cs:line 160
    at WebApplication18.Controllers.StoreController.addStore(String name, String description) in C:\Users\eyalb\Source\Repos\eyalalmo\workshop\WebApplication18\Controllers\StoreController.cs:line 101
+2019-06-16 01:56:41,450 ERROR ErrorLog: Connection error in function getProduct in DB Product, ID =  3
+2019-06-16 01:57:35,515 ERROR ErrorLog: An Error has occured. Function: Add Discount; Stack Trace:    at System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   at System.Double.Parse(String s)
+   at WebApplication18.Controllers.StoreController.addVisibleDiscount(Int32 storeID, String percentage, String duration) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Controllers\StoreController.cs:line 266
+2019-06-16 02:06:52,993 ERROR ErrorLog: An Error has occured. Function: Remove Discount; Stack Trace:    at workshop192.Domain.DBDiscount.removeDiscount(DiscountComponent d) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Domain\DBDiscount.cs:line 152
+   at workshop192.Domain.StoreOwner.removeStoreDiscount(Int32 discountID, Store store) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Domain\StoreOwner.cs:line 204
+   at workshop192.Bridge.DomainBridge.removeStoreDiscount(Int32 discountID, Int32 storeID, Int32 session) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Bridge\DomainBridge.cs:line 948
+   at workshop192.ServiceLayer.StoreService.removeStoreDiscount(Int32 discountID, Int32 store, Int32 sessionID) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\ServiceLayer\StoreService.cs:line 332
+   at WebApplication18.Controllers.StoreController.removeDiscount(Int32 discountID, Int32 storeID) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Controllers\StoreController.cs:line 759
+2019-06-16 02:08:30,133 ERROR ErrorLog: Connection error in function getProduct in DB Product, ID =  1
+2019-06-16 02:10:54,721 ERROR ErrorLog: Connection error in function add product to cart product table in db subscribed user

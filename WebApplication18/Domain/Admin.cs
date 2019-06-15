@@ -29,14 +29,25 @@ namespace workshop192.Domain
             List<StoreRole> roles = store.getRoles();
             foreach (StoreRole role in roles)
             {
+                //SubscribedUser sub = role.getUser();
+                //sub.removeStoreRole(role);
+            }
+            dbStore.removeStore(store);
+            DBProduct.getInstance().removeAllProductsFromStore(store);
+
+        }
+        public void closeStoreRoles(Store store)
+        {
+            List<StoreRole> roles = store.getRoles();
+            foreach (StoreRole role in roles)
+            {
                 SubscribedUser sub = role.getUser();
                 sub.removeStoreRole(role);
             }
-            dbStore.removeStore(store);
 
         }
 
-        public void complain(string description, SubscribedUser subscribedUser)
+            public void complain(string description, SubscribedUser subscribedUser)
         {
             Complaint complaint = new Complaint(subscribedUser.getUsername(), description);
             dbComplaint.addComplaint(complaint);
@@ -120,26 +131,36 @@ namespace workshop192.Domain
                 }
             }
             catch (DoesntExistException) { }
+            LinkedList<StoreRole> toDelete = new LinkedList<StoreRole>();
+            LinkedList<Store> toDeleteStore = new LinkedList<Store>();
             foreach (StoreRole role in subscribedUser.getStoreRoles())
             {
                 role.removeAllAppointedBy();
                 Store store = role.getStore();
                 SubscribedUser appointedBySubscribedUser = role.getAppointedBy();
+                toDelete.AddFirst(role);
                 if (appointedBySubscribedUser != null)
                 {
                     StoreRole appointedByStoreRole = store.getStoreRole(role.getAppointedBy());
                     store.removeStoreRole(role);
                     appointedByStoreRole.removeRoleAppointedByMe(role);
                 }
-                if (role is StoreOwner && role.getStore().getNumberOfOwners() == 0)
+                if (role is StoreOwner && role.getStore().getNumberOfOwners() == 1)
                 {
                     closeStore(role.getStore());
+
                 }
-                DBStore.getInstance().removeStoreRole(role);
+                //DBStore.getInstance().removeStoreRole(role);
 
             }
+            foreach( StoreRole sr in toDelete)
+            {
+                DBStore.getInstance().removeStoreRole(sr);
+                subscribedUser.removeStoreRole(sr);
+                sr.getStore().removeStoreRole(sr);
+            }
+            
             dbSubscribedUser.remove(subscribedUser);
-
         }
     }
 }
