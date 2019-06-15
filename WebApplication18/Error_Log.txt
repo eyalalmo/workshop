@@ -99,3 +99,4 @@
    ?-  WebApplication18.Controllers.UesrController.Checkout(String address, String creditcard, String month, String year, String holder, String cvv) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Controllers\UesrController.cs:???? 225
 2019-06-15 14:30:03,724 ERROR ErrorLog: An Error has occured. Function: getStore; Stack Trace:    at workshop192.ServiceLayer.StoreService.addStore(String storeName, String storeDescription, Int32 session) in C:\Users\eyalb\Source\Repos\eyalalmo\workshop\WebApplication18\ServiceLayer\StoreService.cs:line 155
    at WebApplication18.Controllers.StoreController.addStore(String name, String description) in C:\Users\eyalb\Source\Repos\eyalalmo\workshop\WebApplication18\Controllers\StoreController.cs:line 85
+2019-06-16 01:01:36,325 ERROR ErrorLog: Connection error in function getStore in DB Store store id 1
