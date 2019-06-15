@@ -83,7 +83,8 @@ namespace workshop192.Bridge
             Session user = DBSession.getInstance().getSession(sessionid);
             user.register(username, password);
             //////
-            user.loginAfterRegister(username,password);
+            if(!MarketSystem.testsMode)
+                user.loginAfterRegister(username,password);
             //////
             SystemLogger.getEventLog().Info("User " + username + " has successfuly registered");
         }

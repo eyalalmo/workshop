@@ -22,8 +22,6 @@ namespace workshop192.ServiceLayer.Tests
         public void initial()
         {
             userService.testSetup();
-            //DBProduct.getInstance().initTests();
-            //DBStore.getInstance().initTests();
             session1 = userService.startSession();// login 
             userService.register(session1, "user1", "user1");
             userService.login(session1, "user1", "user1");
@@ -37,16 +35,16 @@ namespace workshop192.ServiceLayer.Tests
             userService.register(session2, "user2", "user2");
             userService.login(session2, "user2", "user2");
         }
-        /*[TestMethod]
+        [TestMethod]
         public void conflictionPurchasePolicy()
         {
             try
             {
-                storeService.setMaxAmountPolicy(store1, session1, 4);
-                storeService.setMinAmountPolicy(store1, session1, 6);
+                storeService.addMaxAmountPolicy(store1, session1, 4);
+                storeService.addMinAmountPolicy(store1, session1, 6);
                 Assert.Fail();
             }
-            catch (ArgumentException)
+            catch (Exception)
             {
                 Assert.IsTrue(true);
             }
@@ -89,10 +87,13 @@ namespace workshop192.ServiceLayer.Tests
         {
             try
             {
-                storeService.setMaxAmountPolicy(store1, session1, 4);
-                storeService.setMinAmountPolicy(store1, session1, 3);
+                storeService.addMaxAmountPolicy(store1, session1, 4);
+                storeService.addMinAmountPolicy(store1, session1, 3);
+
                 basketService.addToCart(session2, bamba, 2);
                 basketService.addToCart(session2, bisli, 2);
+                userService.checkBasket(session2);
+                userService.purchaseBasket(session2,"1","1","1","1","1","1");
                 Assert.Fail();
             }
             catch (Exception)
@@ -100,7 +101,7 @@ namespace workshop192.ServiceLayer.Tests
                 Assert.IsTrue(true);
             }
         }
-        */
+        
 
     }
    
