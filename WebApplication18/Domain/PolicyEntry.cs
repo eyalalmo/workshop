@@ -16,15 +16,16 @@ namespace WebApplication18.Domain
         private int subID2;
         private int isPartOfComplex;
 
-       public PolicyEntry(int storeID, int policyID, string type, int amount, int subID1, int subID2,int isPartOfComplex)
+       public PolicyEntry(int storeID, int policyID, string type, int amount, int isPartOfComplex, int subtypeID1, int subtypeID2, string compType)
         {
             this.storeID = storeID;
             this.type = type;
             this.amount = amount;
             this.policyID = policyID;
-            this.subID1 = 1;
-            this.subID2 = 2;
+            this.subID1 = subtypeID1;
+            this.subID2 = subtypeID2;
             this.isPartOfComplex = isPartOfComplex;
+            this.compType = compType;
         }
 
         public int getStoreID() { return this.storeID; }

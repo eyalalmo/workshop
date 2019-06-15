@@ -389,7 +389,7 @@ namespace workshop192.Domain
                 var StoreRoleResult = connection.Query<StoreRoleEntry>("SELECT * FROM [dbo].[StoreRoles] WHERE storeId=@storeId ", new { storeId = storeId });
                 var ContractResult = connection.Query<Contract>("SELECT * FROM [dbo].[Contracts] WHERE storeId = @storeId", new { storeId = storeId });
                 var pendingResult = connection.Query<string>("SELECT userName FROM [dbo].[PendingOwners] WHERE storeId = @storeId", new { storeId = storeId }).AsList();
-                var policyEntries = connection.Query<PolicyEntry>("SELECT * FROM PurchasePolicy WHERE storeID=@storeID;", new { storeId });
+                var policyEntries = connection.Query<PolicyEntry>("SELECT * FROM [dbo].[PurchasePolicy] WHERE storeID=@storeId", new { storeID =storeId });
 
                 //connection.Close();
 

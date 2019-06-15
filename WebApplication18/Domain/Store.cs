@@ -14,24 +14,27 @@ namespace workshop192.Domain
 {
     public class Store
     {
-        private int storeId;
-        private string name;
-        private string description;
-        private LinkedList<Product> productList;
-        private List<StoreRole> roles;
-        private int numOfOwners;
-        private bool active;
+        public int storeId;
+        public string name;
+        public string description;
+        public LinkedList<Product> productList;
+        public List<StoreRole> roles;
+        public int numOfOwners;
+        public bool active;
         /* private MinAmountPurchase minPurchasePolicy;
          private MaxAmountPurchase maxPurchasePolicy;
          private TotalPricePolicy minTotalprice;
         private ComplexPurchasePolicy complexPurchase;
              * */
-        private LinkedList<PurchasePolicy> policies;
-        private LinkedList<InvisibleDiscount> invisibleDiscountList;
+        public LinkedList<InvisibleDiscount> invisibleDiscountList;
         [JsonIgnore]
         public LinkedList<DiscountComponent> discountList;
-       // public LinkedList<InvisibleDiscount> invisibleDiscountList;
+        // public LinkedList<InvisibleDiscount> invisibleDiscountList;
+        [JsonIgnore]
+        public LinkedList<PurchasePolicy> policies;
+        [JsonIgnore]
         public LinkedList<Contract> contracts;
+        [JsonIgnore]
         public LinkedList<string> pendingOwners;
 
         public Store(string storeName, string description)

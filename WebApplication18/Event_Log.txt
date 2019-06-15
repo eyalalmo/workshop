@@ -4249,3 +4249,16 @@ The statement has been terminated.
 2019-06-13 19:59:13,322 ERROR EventLog: Register : Error: Username already exists
 2019-06-13 19:59:13,434 ERROR EventLog: Register : Error: Username already exists
 2019-06-13 19:59:13,435 ERROR EventLog: Register : Error: Username already exists
+2019-06-15 13:27:30,168 ERROR EventLog: Login : Error: Username does not exist
+2019-06-15 13:27:35,086 ERROR EventLog: Login : Error: Username does not exist
+2019-06-15 13:27:47,184 ERROR EventLog: Login : Error: Username does not exist
+2019-06-15 13:28:08,755 INFO EventLog: User b has successfuly registered
+2019-06-15 13:28:16,617 INFO EventLog: User b has successfuly logged in.
+2019-06-15 13:28:30,694 INFO EventLog: User b has successfuly created a store
+2019-06-15 13:39:51,090 INFO EventLog: User b has successfuly logged in.
+2019-06-15 14:16:22,154 INFO EventLog: User b has successfuly logged in.
+2019-06-15 14:18:48,760 INFO EventLog: User b has successfuly logged in.
+2019-06-15 14:19:18,909 INFO EventLog: User b has successfuly logged in.
+2019-06-15 14:22:27,626 INFO EventLog: User b has successfuly logged in.
+2019-06-15 14:26:58,223 INFO EventLog: User b has successfuly logged in.
+2019-06-15 14:27:22,130 INFO EventLog: User b has successfuly created a store
