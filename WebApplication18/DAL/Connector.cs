@@ -56,6 +56,7 @@ namespace WebApplication18.DAL
                            + " DELETE FROM DiscountComponent \n"
                            + " DELETE FROM DiscountComposite \n"
                            + " DELETE FROM IDS \n"
+                           + " DELETE FROM PurchasePolicy \n"
                            + "INSERT INTO IDS(type, id)\n" +
                              "VALUES ('store', 0)\n" +
                             "INSERT INTO IDS (type, id)\n" +
