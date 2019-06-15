@@ -106,3 +106,8 @@
    ?-  workshop192.Bridge.DomainBridge.login(Int32 sessionid, String username, String password) ?- C:\Users\User\Documents\workshop\WebApplication18\Bridge\DomainBridge.cs:???? 53
    ?-  workshop192.ServiceLayer.UserService.login(Int32 session, String username, String password) ?- C:\Users\User\Documents\workshop\WebApplication18\ServiceLayer\UserService.cs:???? 49
    ?-  WebApplication18.Controllers.UesrController.login(String Username, String Password) ?- C:\Users\User\Documents\workshop\WebApplication18\Controllers\UesrController.cs:???? 47
+2019-06-16 01:38:09,102 ERROR ErrorLog: Connection error in function getProduct in DB Product, ID =  5
+2019-06-16 01:39:34,936 ERROR ErrorLog: Connection error in function getProduct in DB Product, ID =  5
+2019-06-16 01:39:37,204 ERROR ErrorLog: Connection error in function getStore in DB Store store id 3
+2019-06-16 01:43:59,536 ERROR ErrorLog: Connection error in function getProduct in DB Product, ID =  5
+2019-06-16 01:44:02,015 ERROR ErrorLog: Connection error in function getStore in DB Store store id 3
