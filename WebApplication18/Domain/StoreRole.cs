@@ -39,7 +39,7 @@ namespace workshop192.Domain
 
         void addComplexPolicy(int index1, int index2, string type);
         void removePolicy(int index);
-        void setPolicyByIndex(int newAmount, int index);
+        void setPolicyByID(int newAmount, int policyID);
         void addMinPurchasePolicy(int amount);
         void addMaxPurchasePolicy(int amount);
         void addTotalPricePurchasePolicy(int amount);

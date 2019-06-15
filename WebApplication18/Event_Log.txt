@@ -4298,3 +4298,13 @@ The statement has been terminated.
 2019-06-15 16:04:33,719 INFO EventLog: User x has successfuly registered
 2019-06-15 16:04:39,896 INFO EventLog: User x has successfuly logged in.
 2019-06-15 16:04:46,465 INFO EventLog: User x has successfuly created a store
+2019-06-15 16:14:41,104 INFO EventLog: User x has successfuly logged in.
+2019-06-15 16:14:50,386 INFO EventLog: User x has successfuly created a store
+2019-06-15 16:18:47,275 INFO EventLog: User x has successfuly logged in.
+2019-06-15 16:21:49,276 INFO EventLog: User x has successfuly created a store
+2019-06-15 16:25:12,966 INFO EventLog: User x has successfuly logged in.
+2019-06-15 16:30:05,541 INFO EventLog: User x has successfuly logged in.
+2019-06-15 16:47:24,345 INFO EventLog: User x has successfuly logged in.
+2019-06-15 16:53:42,973 INFO EventLog: User p has successfuly registered
+2019-06-15 16:53:50,189 INFO EventLog: User p has successfuly logged in.
+2019-06-15 16:53:57,667 INFO EventLog: User p has successfuly created a store

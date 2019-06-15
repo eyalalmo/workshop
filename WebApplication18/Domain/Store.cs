@@ -329,9 +329,8 @@ namespace workshop192.Domain
         }
 
 
-        public void setMinPurchasePolicy(int minAmount, int index)
+        public void setMinPurchasePolicy(int minAmount, PurchasePolicy p)
         {
-            PurchasePolicy p = policies.ElementAt(index);
             PurchasePolicy max = getMaxPolicy();
             if (max == null)
             {
@@ -353,22 +352,21 @@ namespace workshop192.Domain
 
         }
 
-        internal void setPolicyByID(int newAmount, int index)
+        internal void setPolicyByID(int newAmount, int policyID)
         {
-            PurchasePolicy p = policies.ElementAt(index);
+            PurchasePolicy p = findPolicyByID(policyID);
             if (p is ComplexPurchasePolicy)
                 throw new ArgumentException("Can not set complex policy.");
             if (p is MaxAmountPurchase)
-                setMaxPurchasePolicy(newAmount, index);
+                setMaxPurchasePolicy(newAmount, p);
             if (p is MinAmountPurchase)
-                setMinPurchasePolicy(newAmount, index);
+                setMinPurchasePolicy(newAmount, p);
             if (p is TotalPricePolicy)
-                setTotalPolicy(newAmount, index);
+                setTotalPolicy(newAmount, p);
         }
 
-        private void setTotalPolicy(int newAmount, int index)
+        private void setTotalPolicy(int newAmount, PurchasePolicy p)
         {
-            PurchasePolicy p = policies.ElementAt(index);
             if (newAmount < 0)
                 throw new ArgumentException("Total cart price can not be a negative number.");
             p.setAmount(newAmount);
@@ -396,9 +394,9 @@ namespace workshop192.Domain
             return null;
 
         }
-        public void setMaxPurchasePolicy(int maxAmount, int index)
+        public void setMaxPurchasePolicy(int maxAmount,PurchasePolicy p)
         {
-            PurchasePolicy p = policies.ElementAt(index);
+            
             PurchasePolicy min = getMinPolicy();
             if (min == null)
             {

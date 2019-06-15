@@ -743,7 +743,14 @@ namespace workshop192.Bridge
             string str = "";
             foreach (PurchasePolicy p in policies)
             {
-                str += p.getTypeString()+ ","+ p.description() + "," + p.getAmount() +","+ p.getPolicyID() +";";
+                if (!(p is ComplexPurchasePolicy))
+                {
+                    str += p.getTypeString() + "," + p.description() + "," + p.getAmount() + "," + p.getPolicyID() + ";";
+                }
+                else
+                {
+                    str += p.getTypeString() + "," + p.description()  + ",2," + p.getPolicyID() + ";";
+                }
             }
             return str;
         }
@@ -1082,20 +1089,26 @@ namespace workshop192.Bridge
                     ((Discount)d).setPercentage(percentage);
             }
         }
-        public void setPolicyAmount(int policyID, int amount)
+        public void setPolicyAmount(int policyID, int amount, int sessionID, int storeID)
         {
             if (amount<=0)
             {
+                throw new ArgumentException("Store Policy can not be a negative number");
             }
             else
             {
-                //bar
-                //change amount of policy
-                double p = amount / 100.0; //delete 
-                DiscountComponent d = DBDiscount.getInstance().getDiscountByID(policyID);
-                DBDiscount.getInstance().setPercentage(d.getId(), p);
-                if (d is Discount)
-                    ((Discount)d).setPercentage(p);
+                Session user = DBSession.getInstance().getSession(sessionID);
+                if (user == null)
+                    throw new DoesntExistException("user is not logged in");
+                Store store = DBStore.getInstance().getStore(storeID);
+                SubscribedUser subscribedUser = user.getSubscribedUser();
+                if (subscribedUser == null)
+                    throw new DoesntExistException("not a subscribed user");
+                StoreRole sr = subscribedUser.getStoreRole(store);
+                if (sr == null)
+                    throw new RoleException("no role for this user in this store");
+                sr.setPolicyByID(amount, policyID);
+
             }
         }
 

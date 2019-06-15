@@ -271,9 +271,9 @@ namespace workshop192.Domain
             store.removePolicyByID(index);
         }
 
-        public void setPolicyByIndex(int newAmount, int index)
+        public void setPolicyByID(int newAmount, int policyID)
         {
-            store.setPolicyByID(newAmount, index);
+            store.setPolicyByID(newAmount, policyID);
         }
         public void addMinPurchasePolicy(int amount)
         {

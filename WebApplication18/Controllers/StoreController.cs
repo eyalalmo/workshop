@@ -591,12 +591,12 @@ namespace WebApplication18.Controllers
 
         [Route("api/store/setPolicyAmount")]
         [HttpGet]
-        public Object setPolicyAmount(int policyID, int amount)
+        public Object setPolicyAmount(int policyID, int amount, int storeID)
         {
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-                StoreService.getInstance().setPolicyAmount(policyID, amount);
+                StoreService.getInstance().setPolicyAmount(policyID, amount, session, storeID);
                 return "ok";
             }
             catch (Exception e)

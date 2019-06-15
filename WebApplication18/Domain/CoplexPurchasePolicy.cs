@@ -30,7 +30,7 @@ namespace WebApplication18.Domain
         }
         public override string description()
         {
-            return p1.description() + type.ToString() + p2.description();
+            return p1.description() + type.ToString()+" " + p2.description();
         }
 
         public override bool checkPolicy(double cartPrice, int amountofProd)

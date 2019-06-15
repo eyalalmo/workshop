@@ -45,7 +45,7 @@
                                     var description = policyfields[1];
                                     var amount = policyfields[2];
                                     var policyID = policyfields[3];
-                                    if (type == "Complex") {
+                                    if (type == "Complex Policy") {
                                         str +=
                                             "<tr>" +
                                             "<td style = \"width:450px\" align=\"left\"> <h4 class=\"discount\"><strong>" + type + "</strong></h4><h4><small>" + description + "</small></h4></td><td style = \"width:50px\"><div></div></td><td style = \"width:50px\" align=\"center\"> <button type=\"button\" class=\"btn btn-danger\" onclick=\"deleteRow(" + policyID + ");\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></td></tr>";
@@ -82,12 +82,13 @@
           function plusAmount(id, amount) {
               event.preventDefault();
               console.log(id);
+              var storeID =<%=ViewData["storeID"]%>;
               var plusAmount = amount + 1;
               var getUrl = window.location;
               var baseUrl = getUrl.protocol + "//" + getUrl.host
                jQuery.ajax({
                     type: "GET",
-                    url: baseUrl+"/api/store/setPolicyAmount?policyID=" + id+"&amount="+plusAmount,
+                    url: baseUrl + "/api/store/setPolicyAmount?policyID=" + id + "&amount=" + plusAmount + "&storeID=" + storeID,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
@@ -109,12 +110,13 @@
           function minusAmount(id, amount) {
               event.preventDefault();
               console.log(id);
+              var storeID =<%=ViewData["storeID"]%>;
               var minusAmount = amount - 1;
               var getUrl = window.location;
               var baseUrl = getUrl.protocol + "//" + getUrl.host
                jQuery.ajax({
                     type: "GET",
-                    url: baseUrl+"/api/store/setPolicyAmount?policyID=" + id+"&amount="+minusAmount,
+                    url: baseUrl + "/api/store/setPolicyAmount?policyID=" + id + "&amount=" + minusAmount + "&storeID=" + storeID,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
