@@ -37,16 +37,16 @@ namespace workshop192.ServiceLayer.Tests
             userService.register(session2, "user2", "user2");
             userService.login(session2, "user2", "user2");
         }
-        /*[TestMethod]
+        [TestMethod]
         public void conflictionPurchasePolicy()
         {
             try
             {
-                storeService.setMaxAmountPolicy(store1, session1, 4);
-                storeService.setMinAmountPolicy(store1, session1, 6);
+                storeService.addMaxAmountPolicy(store1, session1, 4);
+                storeService.addMinAmountPolicy(store1, session1, 6);
                 Assert.Fail();
             }
-            catch (ArgumentException)
+            catch (Exception)
             {
                 Assert.IsTrue(true);
             }
@@ -89,10 +89,13 @@ namespace workshop192.ServiceLayer.Tests
         {
             try
             {
-                storeService.setMaxAmountPolicy(store1, session1, 4);
-                storeService.setMinAmountPolicy(store1, session1, 3);
+                storeService.addMaxAmountPolicy(store1, session1, 4);
+                storeService.addMinAmountPolicy(store1, session1, 3);
+
                 basketService.addToCart(session2, bamba, 2);
                 basketService.addToCart(session2, bisli, 2);
+                userService.checkBasket(session2);
+                userService.purchaseBasket(session2,"1","1","1","1","1","1");
                 Assert.Fail();
             }
             catch (Exception)
@@ -100,7 +103,7 @@ namespace workshop192.ServiceLayer.Tests
                 Assert.IsTrue(true);
             }
         }
-        */
+        
 
     }
    
