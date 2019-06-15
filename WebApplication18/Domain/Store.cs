@@ -490,7 +490,7 @@ namespace workshop192.Domain
             {
                 throw new ArgumentException("Store can not have 2 total cart price - purchase policy.");
             }
-            MaxAmountPurchase p = new MaxAmountPurchase(minPrice);
+            TotalPricePolicy p = new TotalPricePolicy(minPrice);
             policies.AddLast(p);
             DBStore.getInstance().addTotalPrice(p, storeId);
         }
@@ -504,7 +504,7 @@ namespace workshop192.Domain
             policies.Remove(p1);
             policies.Remove(p2);
             policies.AddLast(complexPurchase);
-            DBStore.getInstance().addComplexPolicy(p, storeId);
+            DBStore.getInstance().addComplexPolicy(complexPurchase, storeId);
         }
 
         public LinkedList<PurchasePolicy> getStorePolicyList()
