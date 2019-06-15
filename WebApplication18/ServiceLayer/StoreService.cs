@@ -162,6 +162,7 @@ namespace workshop192.ServiceLayer
             if (storeName == null || storeName.Length == 0)
             {
                 throw new ArgumentException("Error: A store name cannot be empty");
+
             }
 
             return db.createStore(session, storeName, storeDescription);

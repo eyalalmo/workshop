@@ -676,8 +676,8 @@ namespace workshop192.Domain
                 {
 
                     connection.Open();
-                    var affectedRows = connection.Execute("DELETE FROM Stores WHERE  storeId=@storeId ", new { hash = storeId });
-                    var affectedRowsPolicy = connection.Execute("DELETE FROM PurchasePolicy WHERE storeID=@storeId", new { hash = storeId });
+                    var affectedRows = connection.Execute("DELETE FROM Stores WHERE  storeId=@storeId ", new { storeId = storeId });
+                    var affectedRowsPolicy = connection.Execute("DELETE FROM PurchasePolicy WHERE storeID=@storeId", new { storeId = storeId });
                     connection.Close();
                 }
 
@@ -685,10 +685,16 @@ namespace workshop192.Domain
 
                 /////
                 stores.Remove(store);
+                LinkedList<StoreRole> toRemove = new LinkedList<StoreRole>();
                 foreach (StoreRole st in storeRole)
                 {
                     if (st.getStore().getStoreID() == store.getStoreID())
-                        storeRole.Remove(st);
+                        //storeRole.Remove(st);
+                        toRemove.AddFirst(st);
+                }
+                foreach(StoreRole st in toRemove)
+                {
+                    storeRole.Remove(st);
                 }
             }
             catch (Exception)
