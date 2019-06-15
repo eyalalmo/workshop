@@ -22,7 +22,13 @@ namespace WebApplication18.Controllers
             }
             catch (ClientException e)
             {
+                SystemLogger.getEventLog().Error("getStoreByID Error: " + e.Message.ToString());
                 return e.Message.ToString();
+            }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
             }
             catch (Exception e)
             {
@@ -45,6 +51,11 @@ namespace WebApplication18.Controllers
                 SystemLogger.getEventLog().Error("Error in adding an owner : " + e.Message.ToString());
                 return e.Message.ToString();
             }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
+            }
             catch (Exception e)
             {
                 SystemLogger.getErrorLog().Error("An Error has occured. Function: addOwner; Stack Trace: " + e.StackTrace);
@@ -66,6 +77,11 @@ namespace WebApplication18.Controllers
             {
                 SystemLogger.getEventLog().Error("Error in store display : " + e.Message.ToString());
                 return e.Message.ToString();
+            }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
             }
             catch (Exception e)
             {
@@ -93,6 +109,11 @@ namespace WebApplication18.Controllers
                 SystemLogger.getEventLog().Error("Error in adding a store : " + e.Message.ToString());
                 return e.Message.ToString();
             }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
+            }
             catch (Exception e)
             {
                 SystemLogger.getErrorLog().Error("An Error has occured. Function: getStore; Stack Trace: " + e.StackTrace);
@@ -112,6 +133,11 @@ namespace WebApplication18.Controllers
                 StoreService.getInstance().SetProductInformation(storeID, productID, price, rank, quantityLeft, productName, session);
                 return "ok";
 
+            }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
             }
             catch (ClientException e)
             {
@@ -138,6 +164,11 @@ namespace WebApplication18.Controllers
             {
                 return e.Message.ToString();
             }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
+            }
             catch (Exception e)
             {
                 SystemLogger.getErrorLog().Error("An Error has occured. Function: Get All Roles; Stack Trace: " + e.StackTrace);
@@ -158,6 +189,11 @@ namespace WebApplication18.Controllers
             catch (ClientException e)
             {
                 return e.Message.ToString();
+            }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
             }
             catch (Exception e)
             {
@@ -181,6 +217,11 @@ namespace WebApplication18.Controllers
                 SystemLogger.getEventLog().Error("Error in signing a contract : " + e.Message.ToString());
                 return e.Message.ToString();
             }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
+            }
             catch (Exception e)
             {
                 SystemLogger.getErrorLog().Error("An Error has occured. Function: signContract; Stack Trace: " + e.StackTrace);
@@ -202,6 +243,11 @@ namespace WebApplication18.Controllers
             {
                 SystemLogger.getEventLog().Error("Error in declining a contract : " + e.Message.ToString());
                 return e.Message.ToString();
+            }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
             }
             catch (Exception e)
             {
@@ -230,6 +276,11 @@ namespace WebApplication18.Controllers
                 SystemLogger.getEventLog().Error("Add Visible Discount : " + e.Message.ToString());
                 return e.Message.ToString();
             }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
+            }
             catch (Exception e)
             {
                 SystemLogger.getErrorLog().Error("An Error has occured. Function: Add Discount; Stack Trace: " + e.StackTrace);
@@ -254,6 +305,11 @@ namespace WebApplication18.Controllers
                 SystemLogger.getEventLog().Error("Add Reliant Discount : " + e.Message.ToString());
                 return e.Message.ToString();
             }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
+            }
             catch (Exception e)
             {
                 SystemLogger.getErrorLog().Error("An Error has occured. Function: Add Discount; Stack Trace: " + e.StackTrace);
@@ -277,6 +333,11 @@ namespace WebApplication18.Controllers
                 SystemLogger.getEventLog().Error("Add Reliant Discount : " + e.Message.ToString());
                 return e.Message.ToString();
             }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
+            }
             catch (Exception e)
             {
                 SystemLogger.getErrorLog().Error("An Error has occured. Function: Add Discount; Stack Trace: " + e.StackTrace);
@@ -299,6 +360,11 @@ namespace WebApplication18.Controllers
             {
                 SystemLogger.getEventLog().Error("Remove Role Error: " + e.Message.ToString());
                 return e.Message.ToString();
+            }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
             }
             catch (Exception e)
             {
@@ -332,6 +398,11 @@ namespace WebApplication18.Controllers
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
                 StoreService.getInstance().addManager(storeId, username, prod, disc, poli, session);
                 return "ok";
+            }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
             }
             catch (ClientException e)
             {
@@ -417,8 +488,18 @@ namespace WebApplication18.Controllers
             }
             catch (ClientException e)
             {
-                SystemLogger.getEventLog().Error("Add Product : " + e.Message.ToString());
+                SystemLogger.getEventLog().Error("Add Product Error : " + e.Message.ToString());
                 return e.Message;
+            }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
+            }
+            catch (Exception e)
+            {
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: Add Product; Stack Trace: " + e.StackTrace);
+                throw e;
             }
         }
 
@@ -435,6 +516,16 @@ namespace WebApplication18.Controllers
             {
                 SystemLogger.getEventLog().Error("Delete Product : " + e.Message.ToString());
                 return e.Message;
+            }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
+            }
+            catch (Exception e)
+            {
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: Delete Product; Stack Trace: " + e.StackTrace);
+                throw e;
             }
         }
 
@@ -454,6 +545,16 @@ namespace WebApplication18.Controllers
                 SystemLogger.getEventLog().Error("Policy edit :" + e.Message.ToString());
                 return e.Message;
             }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
+            }
+            catch (Exception e)
+            {
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: Set max policy; Stack Trace: " + e.StackTrace);
+                throw e;
+            }
         }
 
         [Route("api/store/SetMinPolicy")]
@@ -470,6 +571,16 @@ namespace WebApplication18.Controllers
             {
                 SystemLogger.getEventLog().Error("Policy edit :" + e.Message.ToString());
                 return e.Message;
+            }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
+            }
+            catch (Exception e)
+            {
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: Set Min Policy; Stack Trace: " + e.StackTrace);
+                throw e;
             }
         }
        /* [Route("api/store/GetMaxPolicy")]
@@ -551,10 +662,17 @@ namespace WebApplication18.Controllers
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
                 return StoreService.getInstance().getStoreDiscounts(storeID, session);
             }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
+            }
             catch (Exception e)
             {
-                return e.Message;
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: Get Store Discounts; Stack Trace: " + e.StackTrace);
+                throw e;
             }
+           
         }
         [Route("api/store/StorePolicies")]
         [HttpGet]
@@ -565,9 +683,15 @@ namespace WebApplication18.Controllers
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
                 return StoreService.getInstance().getStorePolicies(storeID, session);
             }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
+            }
             catch (Exception e)
             {
-                return e.Message;
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: Get Store Policies; Stack Trace: " + e.StackTrace);
+                throw e;
             }
         }
 
@@ -583,9 +707,20 @@ namespace WebApplication18.Controllers
                 StoreService.getInstance().setDiscountPercentage(discountID, p);
                 return "ok";
             }
+            catch (ClientException e)
+            {
+                SystemLogger.getEventLog().Error("discount percentage :" + e.Message.ToString());
+                return e.Message;
+            }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
+            }
             catch (Exception e)
             {
-                return e.Message;
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: Set Discount Percentage; Stack Trace: " + e.StackTrace);
+                throw e;
             }
         }
 
@@ -599,9 +734,20 @@ namespace WebApplication18.Controllers
                 StoreService.getInstance().setPolicyAmount(policyID, amount, session, storeID);
                 return "ok";
             }
+            catch (ClientException e)
+            {
+                SystemLogger.getEventLog().Error("Policy amount :" + e.Message.ToString());
+                return e.Message;
+            }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
+            }
             catch (Exception e)
             {
-                return e.Message;
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: Set Policy Amount; Stack Trace: " + e.StackTrace);
+                throw e;
             }
         }
 
@@ -615,9 +761,20 @@ namespace WebApplication18.Controllers
                 StoreService.getInstance().removeStoreDiscount(discountID,storeID, session);
                 return "ok";
             }
+            catch (ClientException e)
+            {
+                SystemLogger.getEventLog().Error("remove discount :" + e.Message.ToString());
+                return e.Message;
+            }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
+            }
             catch (Exception e)
             {
-                return e.Message;
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: Remove Discount; Stack Trace: " + e.StackTrace);
+                throw e;
             }
         }
         [Route("api/store/removePolicy")]
@@ -630,9 +787,20 @@ namespace WebApplication18.Controllers
                 StoreService.getInstance().removeStorePolicy(policyID, storeID, session);
                 return "ok";
             }
+            catch (ClientException e)
+            {
+                SystemLogger.getEventLog().Error("remove policy :" + e.Message.ToString());
+                return e.Message;
+            }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
+            }
             catch (Exception e)
             {
-                return e.Message;
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: Remove policy; Stack Trace: " + e.StackTrace);
+                throw e;
             }
         }
 
@@ -646,9 +814,20 @@ namespace WebApplication18.Controllers
                 StoreService.getInstance().complexDiscount(discounts,storeID,type,percentage,duration,session);
                 return "ok";
             }
+            catch (ClientException e)
+            {
+                SystemLogger.getEventLog().Error("complex discount :" + e.Message.ToString());
+                return e.Message;
+            }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
+            }
             catch (Exception e)
             {
-                return e.Message;
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: complex discount; Stack Trace: " + e.StackTrace);
+                throw e;
             }
         }
         //url: baseUrl+"/api/store/payAndSend?address=" + address + "&creditcard=" + creditcard + "&month=" + month + "&year=" + year + "&holder=" + holder + "&cvv=" + cvv + "&creditcard=" + creditcard,
@@ -662,9 +841,20 @@ namespace WebApplication18.Controllers
                 StoreService.getInstance().complexPolicy(policies, storeID, type, session);
                 return "ok";
             }
+            catch (ClientException e)
+            {
+                SystemLogger.getEventLog().Error("complex policy :" + e.Message.ToString());
+                return e.Message;
+            }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
+            }
             catch (Exception e)
             {
-                return e.Message;
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: complex policy; Stack Trace: " + e.StackTrace);
+                throw e;
             }
         }
         [Route("api/store/AddTotalPolicy")]
@@ -677,9 +867,20 @@ namespace WebApplication18.Controllers
                 StoreService.getInstance().addTotalPolicy(storeID,totalVal,session);
                 return "ok";
             }
+            catch (ClientException e)
+            {
+                SystemLogger.getEventLog().Error("Add to total policy:" + e.Message.ToString());
+                return e.Message;
+            }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
+            }
             catch (Exception e)
             {
-                return e.Message;
+                SystemLogger.getErrorLog().Error("An Error has occured. Function: Add Total Policy; Stack Trace: " + e.StackTrace);
+                throw e;
             }
         }
 
