@@ -477,7 +477,7 @@ namespace workshop192.Domain
 
         }
 
-        private LinkedList<PurchasePolicy> parseTwoComplex(IEnumerable<PolicyEntry> policyEntries)
+        private LinkedList<PurchasePolicy> parseOneComplex(IEnumerable<PolicyEntry> policyEntries)
         {
             LinkedList<PurchasePolicy> policyList = new LinkedList<PurchasePolicy>();
             ComplexPurchasePolicy comp = null;
@@ -510,7 +510,9 @@ namespace workshop192.Domain
                     policyList.AddLast(parseRegular(policyEntries.ElementAt(i)));
                 }
             }
-            comp= new ComplexPurchasePolicy(policyEntries.ElementAt(compPos).getCompType(),child1,child2, )
+            comp = new ComplexPurchasePolicy(policyEntries.ElementAt(compPos).getCompType(), child1, child2);
+            policyList.AddLast(comp);
+            return policyList;
 
 
         }
@@ -533,8 +535,55 @@ namespace workshop192.Domain
                 return policy;
             }
         }
-        private LinkedList<PurchasePolicy> parseOneComplex(IEnumerable<PolicyEntry> policyEntries)
+        private LinkedList<PurchasePolicy> parseTwoComplex(IEnumerable<PolicyEntry> policyEntries)
         {
+            LinkedList<PurchasePolicy> policyList = new LinkedList<PurchasePolicy>();
+            ComplexPurchasePolicy compParent = null;
+            ComplexPurchasePolicy compChild = null;
+            int compParentPos = -1;
+            int compChildPos = -1;
+            int idRegularChild = -1;
+            int id1Child = -1;
+            int id2Child = -1;
+
+            for (int i = 0; i < policyEntries.Count(); i++)
+            {
+                if (policyEntries.ElementAt(i).getType() == "complex" && policyEntries.ElementAt(i).getIsPartOfComp())
+                {
+                    compChildPos = i;
+                    id1Child = policyEntries.ElementAt(i).getSubID1();
+                    id2Child = policyEntries.ElementAt(i).getSubID2();
+                }
+                else if (policyEntries.ElementAt(i).getType() == "complex" && !policyEntries.ElementAt(i).getIsPartOfComp())
+                {
+                    compParentPos = i;  
+                }
+            }
+            PurchasePolicy child1 = null;
+            PurchasePolicy child2 = null;
+            for (int i = 0; i < policyEntries.Count(); i++)
+            {
+                PolicyEntry p = policyEntries.ElementAt(i);
+                if (p.getPolicyID() == id1Child)
+                {
+                    child1 = parseRegular(p);
+                }
+                else if (p.getPolicyID() == id2Child)
+                {
+                    child2 = parseRegular(p);
+                }
+                else if (p.getPolicyID() != id1Child & p.getPolicyID() != id2Child && p.getPolicyID() != compChildPos)
+                    idRegularChild = i;
+            }
+
+            compChild = new ComplexPurchasePolicy(policyEntries.ElementAt(compChildPos).getCompType(), child1, child2);
+            PurchasePolicy regularChild = parseRegular(policyEntries.ElementAt(idRegularChild));
+            compParent = new ComplexPurchasePolicy(policyEntries.ElementAt(compParentPos).getCompType(), compChild, regularChild);
+
+            policyList.AddLast(compParent);
+            return policyList;
+
+
         }
 
         private int howManyComplex(IEnumerable<PolicyEntry> policyEntries)
