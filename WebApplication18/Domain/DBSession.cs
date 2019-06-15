@@ -61,9 +61,12 @@ namespace workshop192.Domain
         {
             foreach (KeyValuePair<int, Session> s in sessions)
             {
-                if (s.Value.getSubscribedUser().Equals(sub))
+                if (s.Value != null)
                 {
-                    return s.Value;
+                    if (s.Value.getSubscribedUser()!=null && s.Value.getSubscribedUser().Equals(sub))
+                    {
+                        return s.Value;
+                    }
                 }
             }
             throw new DoesntExistException("session doesnt exist");

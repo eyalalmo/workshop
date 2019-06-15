@@ -12,20 +12,15 @@ namespace workshop192.Domain.Tests
     public class StoreOwnerTests
     {
         Session session1, session2, session3;
-        DBStore storeDB = DBStore.getInstance();
-        DBProduct productDB = DBProduct.getInstance();
-        Product p, p1;
+       
         Store store;
         StoreRole sr;
         Permissions per;
-
+        Product p, p1;
         [TestInitialize()]
         public void TestInitialize()
         {
             MarketSystem.initTestWitOutRead();
-            //storeDB.initTests();
-            //productDB.initTests();
-            //DBSubscribedUser.getInstance().initTests();
             session1 = new Session();
             string pass = DomainBridge.getInstance().encryptPassword("123");
             session1.register("eyal", pass);
@@ -222,10 +217,10 @@ namespace workshop192.Domain.Tests
                 sr.remove(session1.getSubscribedUser());
                 sr.addManager(session2.getSubscribedUser(), per);
                 sr.remove(session3.getSubscribedUser());
+                Assert.Fail();
             }
             catch (RoleException)
             {
-                Assert.IsTrue(true);
             }
         }
 
@@ -265,35 +260,8 @@ namespace workshop192.Domain.Tests
             }
             catch (RoleException)
             {
-                Assert.IsTrue(true);
             }
         }
 
-
-        [TestMethod()]
-        public void removeOwnerFailTest()
-        {
-            try
-            {
-                sr.addOwner(session2.getSubscribedUser());
-                sr.remove(session3.getSubscribedUser());
-                sr.remove(session1.getSubscribedUser());
-                Assert.Fail();
-            }
-            catch (RoleException)
-            {
-                Assert.IsTrue(true);
-            }
-            catch (Exception)
-            {
-                Assert.Fail();
-            }
-        }
-
-        [TestMethod()]
-        public void closeStoreSuccTest()
-        {
-            Assert.IsTrue(true);
-        }
     }
 }

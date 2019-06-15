@@ -215,7 +215,7 @@ namespace workshop192.ServiceLayer.Tests
 
             try
             {
-                storeService.addOwner(storeid, "u16", session4);
+                storeService.addOwner(storeid, "u16", session4); // checking that the owner was added successfuly
 
             }
             catch (RoleException)
@@ -223,6 +223,64 @@ namespace workshop192.ServiceLayer.Tests
                 Assert.Fail();
             }
         }
+
+        //4.3
+        [TestMethod()]
+        public void declineContractTest1()
+        {
+            try
+            {
+                addOwnerByAnOwnerSuccTest();
+                storeService.addOwner(storeid, "u15", session2);
+                storeService.declineContract(storeid, "u15", session1);
+
+            }
+            catch (RoleException)
+            {
+                Assert.Fail();
+            }
+
+            try
+            {
+                storeService.addOwner(storeid, "u16", session4); // checking that the owner was added successfuly
+                Assert.Fail();
+
+            }
+            catch (RoleException)
+            {
+                
+            }
+        }
+
+        //4.3
+        [TestMethod()]
+        public void declineContractTest2()
+        {
+            try
+            {
+                addTwoOwnersTest();
+                storeService.signContract(storeid, "u16", session1);
+                storeService.declineContract(storeid, "u16", session4);
+
+            }
+            catch (RoleException)
+            {
+                Assert.Fail();
+            }
+
+            try
+            {
+                storeService.addOwner(storeid, "eva2", session5); // checking that the owner was added successfuly
+                Assert.Fail();
+
+            }
+            catch (RoleException)
+            {
+
+            }
+        }
+
+
 
 
         //4.5

@@ -210,6 +210,7 @@ namespace workshop192.Domain
             DeliveryService.getInstance().connectToSystem();
             ConsistencySystem.getInstance().connectToSystem();
             NotificationsBridge.getInstance().setObserver(DomainBridge.getInstance());
+            DomainBridge.getInstance().addAdmin("u1", "123");
         }
 
         //  int sessionid = DBSession.getInstance().generate();

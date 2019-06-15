@@ -365,9 +365,9 @@ namespace workshop192.Domain
             if (loggedInUser.ContainsKey(username))
                 loggedInUser.Remove(username);
             users.Remove(username);
-            string sql1 = "DELETE * FROM Register WHERE username =@username";
-            string sql2 = "DELETE * FROM BasketCart WHERE username=@username";
-            string sql3 = "DELETE * FROM CartProduct WHERE username=@username";
+            string sql1 = "DELETE FROM Register WHERE username=@username";
+            string sql2 = "DELETE FROM BasketCart WHERE username=@username";
+            string sql3 = "DELETE FROM CartProduct WHERE username=@username";
             
             try
             {
@@ -384,6 +384,7 @@ namespace workshop192.Domain
             }
             catch (Exception)
             {
+                throw new ConnectionException("An error has occured with removing a user");
                 connection.Close();
             }
 
