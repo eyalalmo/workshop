@@ -17,15 +17,16 @@ namespace workshop192.Domain
     {
         public static bool testsMode = false;
         public static void init()
-        {       
-            
+        {
+
             int addNewDataToDB = 0;
             int createTables = 0;
             string[] linesConfig = null;
             string filePathConfig = null;
             string fileName = "";
 
-           try  {
+            try
+            {
                 filePathConfig = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
                 linesConfig = File.ReadAllLines(filePathConfig + "/config.txt");
                 foreach (string line in linesConfig)
@@ -37,7 +38,7 @@ namespace workshop192.Domain
                     }
                     if (input[0] == "isTestMode")
                     {
-                        if(input[1]=="true")
+                        if (input[1] == "true")
                         {
                             testsMode = true;
                         }
@@ -70,7 +71,7 @@ namespace workshop192.Domain
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 initWitOutRead();
                 SystemLogger.getErrorLog().Error("Cant open config file " + e.StackTrace);
@@ -102,15 +103,15 @@ namespace workshop192.Domain
                 try
                 {
                     filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
-                     lines = File.ReadAllLines(filePath + "/" + fileName);
+                    lines = File.ReadAllLines(filePath + "/" + fileName);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     initWitOutRead();
                     SystemLogger.getErrorLog().Error("Cant open input file " + e.StackTrace);
                     return;
                 }
-        
+
                 foreach (string line in lines)
                 {
                     string[] input = line.Split(' ');
@@ -131,7 +132,7 @@ namespace workshop192.Domain
                         Connector c = new Connector();
                         c.deleteAllTable();
                         //DBStore.getInstance().deleteAllTable();
-                       
+
                     }
                     else if (input[0] == "init")
                     {
@@ -188,10 +189,131 @@ namespace workshop192.Domain
                     {
                         DomainBridge.getInstance().addAdmin(input[1], input[2]);
                     }
+                    else if (input[0] == "removeUser")
+                    {
+                        Session s = DBSession.getInstance().getSession(Int32.Parse(input[1]));
+                        //session id, username
+                        DomainBridge.getInstance().removeUser(Int32.Parse(input[1]), input[2]);
+                    }
+                    else if (input[0] == "addSession")
+                    {
+                        DomainBridge.getInstance().addSession(input[1], Int32.Parse(input[2]));
+                    }
+                    else if (input[0] == "addToShoppingBasket")
+                    {
+                        DomainBridge.getInstance().addToShoppingBasket(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+                    }
+                    else if (input[0] == "setProductRank")
+                    {
+                        DomainBridge.getInstance().setProductRank(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+                    }
+                    else if (input[0] == "removeProduct")
+                    {
+                        DomainBridge.getInstance().removeProduct(Int32.Parse(input[1]), Int32.Parse(input[2]));
+                    }
+                    else if (input[0] == "setProductPrice")
+                    {
+                        DomainBridge.getInstance().setProductPrice(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+                    }
+                    else if (input[0] == "setProductName")
+                    {
+                        DomainBridge.getInstance().setProductName(Int32.Parse(input[1]), input[2], Int32.Parse(input[3]));
+
+                    }
+                    else if (input[0] == "addToProductQuantity")
+                    {
+                        DomainBridge.getInstance().addToProductQuantity(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+
+                    }
+                    else if (input[0] == "decFromProductQuantity")
+                    {
+                        DomainBridge.getInstance().decFromProductQuantity(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+                    }
+                    else if (input[0] == "closeStore")
+                    {
+                        DomainBridge.getInstance().closeStore(Int32.Parse(input[1]), Int32.Parse(input[2]));
+
+                    }
+                    else if (input[0] == "addManager")
+                    {
+                        DomainBridge.getInstance().addManager(Int32.Parse(input[1]), input[2], Convert.ToBoolean(input[3]), Convert.ToBoolean(input[4]), Convert.ToBoolean(input[5]), Int32.Parse(input[6]));
+                    }
+                    else if (input[0] == "removeRole")
+                    {
+                        DomainBridge.getInstance().removeRole(Int32.Parse(input[1]), input[2], Int32.Parse(input[3]));
+                    }
+                    else if (input[0] == "addToCart")
+                    {
+                        DomainBridge.getInstance().addToCart(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+                    }
+                    else if (input[0] == "removeFromCart")
+                    {
+                        DomainBridge.getInstance().removeFromCart(Int32.Parse(input[1]), Int32.Parse(input[2]));
+                    }
+                    else if (input[0] == "changeQuantity")
+                    {
+                        DomainBridge.getInstance().changeQuantity(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+                    }
+                    else if (input[0] == "removeProductDiscount")
+                    {
+                        DomainBridge.getInstance().removeProductDiscount(Int32.Parse(input[1]), Int32.Parse(input[2]));
+                    }
+                    else if (input[0] == "addStoreVisibleDiscount")
+                    {
+                        DomainBridge.getInstance().addStoreVisibleDiscount(Int32.Parse(input[1]), Double.Parse(input[2]), input[3], Int32.Parse(input[4]));
+                    }
+                    else if (input[0] == "addProductVisibleDiscount")
+                    {
+                        DomainBridge.getInstance().addProductVisibleDiscount(Int32.Parse(input[1]), Double.Parse(input[2]), input[3], Int32.Parse(input[4]));
+                    }
+                    else if (input[0] == "addReliantdiscountSameProduct")
+                    {
+                        DomainBridge.getInstance().addReliantdiscountSameProduct(Int32.Parse(input[1]), Int32.Parse(input[2]), Double.Parse(input[3]), Int32.Parse(input[4]), input[5], Int32.Parse(input[6]));
+                    }
+                    else if (input[0] == "addReliantdiscountTotalAmount")
+                    {
+                        DomainBridge.getInstance().addReliantdiscountTotalAmount(Int32.Parse(input[1]), Double.Parse(input[2]), Int32.Parse(input[3]), input[4], Int32.Parse(input[5]));
+                    }
+                    else if (input[0] == "removeStoreDiscount")
+                    {
+                        DomainBridge.getInstance().removeStoreDiscount(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+                    }
+                    else if (input[0] == "setProductDiscount")
+                    {
+                        DomainBridge.getInstance().setProductDiscount(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+                    }
+                    else if (input[0] == "complexDiscount")
+                    {
+                        DomainBridge.getInstance().complexDiscount(input[1], Int32.Parse(input[2]), input[3], Double.Parse(input[4]), input[5], Int32.Parse(input[6]));
+                    }
+                    else if (input[0] == "removePolicy")
+                    {//(string) policyID, storeID, session
+                        DomainBridge.getInstance().removePolicy(input[1], Int32.Parse(input[2]), Int32.Parse(input[3]));
+                    }
+                    else if (input[0] == "setPolicyAmount")
+                    {
+                        DomainBridge.getInstance().setPolicyAmount(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]), Int32.Parse(input[4]));
+                    }
+                    else if (input[0] == "addMinPurchasePolicy")
+                    {
+                        DomainBridge.getInstance().addMinPurchasePolicy(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+                    }
+                    else if (input[0] == "addMaxAmountPolicy")
+                    {
+                        DomainBridge.getInstance().addMaxPurchasePolicy(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+                    }
+                    else if (input[0] == "addTotalPricePolicy")
+                    {
+                        DomainBridge.getInstance().addTotalPricePolicy(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+                    }
+                    else if (input[0] == "addPendingOwner")
+                    {
+                        DomainBridge.getInstance().addPendingOwner(Int32.Parse(input[1]), input[2], Int32.Parse(input[3]));
+                    }
 
                 }
             }
-            
+
         }
         public static void initWitOutRead()
         {
