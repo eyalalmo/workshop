@@ -293,7 +293,17 @@ namespace workshop192.Domain
         {
             discountList.AddLast(d);
         }
-
+        public void removeDiscoutFromList(int discountID)
+        {
+            foreach (DiscountComponent d in discountList)
+            {
+                if (d.getId() == discountID)
+                {
+                    discountList.Remove(d);
+                    break;
+                }
+            }
+        }
         public void removeDiscount(int discountID)
         {
             foreach (DiscountComponent d in discountList)
