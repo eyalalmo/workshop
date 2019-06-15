@@ -43,9 +43,13 @@ namespace workshop192.Domain
 
         public void addDiscount(DiscountComponent d)
         {
+            if (getDiscountByID(d.getId()) != null)
+            {
+                return;
+            }
             try
             {
-
+                
                 SqlConnection connection = Connector.getInstance().getSQLConnection();
                 string sql = "INSERT INTO [dbo].[DiscountComponent] (id, percentage, duration, type, storeId, isPartOfComplex)" +
                                 " VALUES (@id,@percentage, @duration, @type, @storeId, @isPartOfComplex)";
