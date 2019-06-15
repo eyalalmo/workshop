@@ -13,6 +13,7 @@ namespace WebApplication18.Domain
         private PurchasePolicy p2;
 //        private int storeID;
         private Type type;
+        private int policyID;
 
         public ComplexPurchasePolicy(string type, PurchasePolicy p1, PurchasePolicy p2)
         {
@@ -24,7 +25,7 @@ namespace WebApplication18.Domain
                 this.type = Type.AND;
             this.p1 = p1;
             this.p2 = p2;
-
+            this.policyID = DBStore.getInstance().getNextPolicyID();
 
         }
         public override string description()
@@ -87,6 +88,24 @@ namespace WebApplication18.Domain
         {
             throw new NotImplementedException();
         }
+
+        public override int getPolicyID() { return policyID;}
+
+        public int getFirstChildID() { return p1.getPolicyID(); }
+
+        public int getSecondChildID() { return p2.getPolicyID(); }
+        public string getCompType()
+        {
+            if (type == Type.OR)
+                return "or";
+            else if (type == Type.XOR)
+                return "xor";
+            else
+                return "and";
+        }
+
+        public PurchasePolicy getFirstPolicyChild() { return p1; }
+        public PurchasePolicy getSecondPolicyChild() { return p2; }
     }
 
 }

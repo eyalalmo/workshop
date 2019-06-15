@@ -341,7 +341,7 @@ namespace workshop192.Domain
                 LinkedList<PurchasePolicy> policies = store.getStorePolicyList();
                 foreach(PurchasePolicy p in policies)
                 {
-                    addPolicyToDB(p);
+                    addPolicyToDB(p, storeId);
                 }
                 
                 connection.Execute(sql, new { storeId, name, description, numOfOwners, active });
@@ -360,7 +360,17 @@ namespace workshop192.Domain
             }
         }
 
-       
+        public void addPolicyToDB(PurchasePolicy p, int storeID)
+        {
+            if (p is MinAmountPurchase)
+                addMinPolicy(((MinAmountPurchase)p), storeID);
+            else if (p is MaxAmountPurchase)
+                addMaxPolicy(((MaxAmountPurchase)p), storeID);
+            else if (p is TotalPricePolicy)
+                addTotalPrice(((TotalPricePolicy)p), storeID);
+            else if (p is ComplexPurchasePolicy)
+                addComplexPolicy(((ComplexPurchasePolicy)p), storeID);
+        }
 
         public Store getStore(int storeId)
         {
@@ -922,19 +932,85 @@ namespace workshop192.Domain
         //}
 
 
-        public void addPolicy()
+        public void addMinPolicy(MinAmountPurchase p, int storeID)
         {
+            SqlConnection connection = Connector.getInstance().getSQLConnection();
+
+            int policyID = p.getPolicyID();
+            int amount = p.getAmount();
+            bool isPartOfComplex = false;
+            string type = "min";
+
+            string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex)" +
+                                                    " VALUES (storeID, policyID,type, amount,isPartOfComplex)";
+            connection.Execute(sql, new { storeID, policyID, type, amount, isPartOfComplex  });
+        }
+        public void addMaxPolicy(MaxAmountPurchase p, int storeID)
+        {
+            SqlConnection connection = Connector.getInstance().getSQLConnection();
+
+            int policyID = p.getPolicyID();
+            int amount = p.getAmount();
+            bool isPartOfComplex = false;
+            string type = "max";
+
+            string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex)" +
+                                                    " VALUES (storeID, policyID,type, amount,isPartOfComplex )";
+            connection.Execute(sql, new { storeID, policyID, type, amount, isPartOfComplex });
+        }
+        public void addTotalPrice(TotalPricePolicy p, int storeID)
+        {
+            SqlConnection connection = Connector.getInstance().getSQLConnection();
+
+            int policyID = p.getPolicyID();
+            int amount = p.getAmount();
+            bool isPartOfComplex = false;
+            string type = "total";
+
+            string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex)" +
+                                                    " VALUES (storeID, policyID,type, amount,isPartOfComplex )";
+            connection.Execute(sql, new { storeID, policyID, type, amount, isPartOfComplex });
+        }
+        public void addComplexPolicy(ComplexPurchasePolicy p, int storeID)
+        {
+            SqlConnection connection = Connector.getInstance().getSQLConnection();
+            int policyID = p.getPolicyID();
+            bool isPartOfComplex = false;
+            string type = "complex";
+            int subtype1 = p.getFirstChildID();
+            int subtype2 = p.getSecondChildID();
+            string compType = p.getCompType();
+            string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex, subtypeID1, subtypeID2, compType )" +
+                                                    " VALUES (storeID, policyID,type,isPartOfComplex, subtype1, subtype2, compType )";
+            connection.Execute(sql, new { storeID, policyID, type, isPartOfComplex, subtype1, subtype2,compType });
+            string sql1 = "UPDATE [dbo].[PurchasePolicy] SET isPartOfComplex = true WHERE storeID =@storeID AND policyID=@subtype1";
+            connection.Execute(sql1, new { storeID, subtype1 });
+            string sql2 = "UPDATE [dbo].[PurchasePolicy] SET isPartOfComplex = true WHERE storeID =@storeID AND policyID=@subtype1";
+            connection.Execute(sql2, new { storeID, subtype2 });
+        }
+
+        public void setPolicy(PurchasePolicy p, int storeID, int newAmount)
+        {
+            SqlConnection connection = Connector.getInstance().getSQLConnection();
+            int policyID = p.getPolicyID();
+            string sql = "UPDATE[dbo].[PurchasePolicy] SET amount=@newAmount WHERE storeID = @storeID AND policyID=@policyID";
+            connection.Execute(sql, new { newAmount, storeID, policyID });
 
         }
 
-        public void setPolicy()
+        public void removePolicy(PurchasePolicy p, int storeID)
         {
-
-        }
-
-        public void removePolicy()
-        {
-
+            SqlConnection connection = Connector.getInstance().getSQLConnection();
+            int policyID = p.getPolicyID();
+            string sql = "DELETE FROM PurchasePolicy WHERE storeID=@storeID AND policyID=@policyID";
+            connection.Execute(sql, new { storeID, policyID });
+            if (p is ComplexPurchasePolicy)
+            {
+                PurchasePolicy p1 = ((ComplexPurchasePolicy)p).getFirstPolicyChild();
+                PurchasePolicy p2 = ((ComplexPurchasePolicy)p).getSecondPolicyChild();
+                removePolicy(p1, storeID);
+                removePolicy(p2, storeID);
+            }
         }
     }
 }

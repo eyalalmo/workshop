@@ -13,6 +13,7 @@ namespace workshop192.Domain
         public abstract int getAmount();
 
         public abstract string description();
+        public abstract int getPolicyID();
 
     }
 }

@@ -39,5 +39,10 @@ namespace workshop192.Domain
         {
             return "Maximum amount of product is: " + maxAmount + " ";
         }
+
+        public override int getPolicyID()
+        {
+            return policyID;
+        }
     }
 }

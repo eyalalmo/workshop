@@ -50,5 +50,10 @@ namespace WebApplication18.Domain
             this.totalPrice = newAmount;
 
         }
+
+        public override int getPolicyID()
+        {
+            return policyID;
+        }
     }
 }

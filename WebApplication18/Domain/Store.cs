@@ -333,6 +333,7 @@ namespace workshop192.Domain
             if (max == null)
             {
                 p.setAmount(minAmount);
+                DBStore.getInstance().setPolicy(p, storeId, minAmount);
             }
             else
             {
@@ -343,6 +344,7 @@ namespace workshop192.Domain
                 else
                 {
                     p.setAmount(minAmount);
+                    DBStore.getInstance().setPolicy(p, storeId, minAmount);
                 }
             }
 
@@ -367,6 +369,7 @@ namespace workshop192.Domain
             if (newAmount < 0)
                 throw new ArgumentException("Total cart price can not be a negative number.");
             p.setAmount(newAmount);
+            DBStore.getInstance().setPolicy(p, storeId, newAmount);
 
         }
 
@@ -397,6 +400,7 @@ namespace workshop192.Domain
             if (min == null)
             {
                 p.setAmount(maxAmount);
+                DBStore.getInstance().setPolicy(p, storeId, maxAmount);
             }
             else
             {
@@ -407,6 +411,7 @@ namespace workshop192.Domain
                 else
                 {
                     p.setAmount(maxAmount);
+                    DBStore.getInstance().setPolicy(p, storeId, maxAmount);
                 }
 
             }
@@ -425,6 +430,7 @@ namespace workshop192.Domain
         {
             PurchasePolicy p = policies.ElementAt(index);
             policies.Remove(p);
+            DBStore.getInstance().removePolicy(p, storeId);
         }
         public bool hasMinPurchasePolicy()
         {
@@ -465,6 +471,7 @@ namespace workshop192.Domain
             }
             MinAmountPurchase p = new MinAmountPurchase(minAmount);
             policies.AddLast(p);
+            DBStore.getInstance().addMinPolicy(p, storeId);
         }
         public void addMaxAmountPolicy(int minAmount)
         {
@@ -474,6 +481,7 @@ namespace workshop192.Domain
             }
             MaxAmountPurchase p = new MaxAmountPurchase(minAmount);
             policies.AddLast(p);
+            DBStore.getInstance().addMaxPolicy(p, storeId);
         }
 
         public void addTotalAmountPolicy(int minPrice)
@@ -484,6 +492,7 @@ namespace workshop192.Domain
             }
             MaxAmountPurchase p = new MaxAmountPurchase(minPrice);
             policies.AddLast(p);
+            DBStore.getInstance().addTotalPrice(p, storeId);
         }
 
         public void addComplexPurchasePolicy(int index1, int index2, string type)
@@ -495,6 +504,7 @@ namespace workshop192.Domain
             policies.Remove(p1);
             policies.Remove(p2);
             policies.AddLast(complexPurchase);
+            DBStore.getInstance().addComplexPolicy(p, storeId);
         }
 
         public LinkedList<PurchasePolicy> getStorePolicyList()

@@ -22,7 +22,7 @@ namespace workshop192.Domain
                 return false;
             return true;
         }
-
+        public override int getPolicyID() { return policyID; }
         public override string description()
         {
             return "Minimum amount of products is : " + minAmount + " ";
