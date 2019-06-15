@@ -13,6 +13,7 @@ using workshop192.Domain;
 
 namespace workshop192.ServiceLayer.Tests
 {
+   
 
     [TestClass()]
     public class UserServiceTests
@@ -20,7 +21,8 @@ namespace workshop192.ServiceLayer.Tests
         private UserService userService = UserService.getInstance();
         private StoreService storeService = StoreService.getInstance();
         private BasketService basketService = BasketService.getInstance();
-        private int session1, session2; // session3;
+        private int session1, session2,storeId; // session3;
+
 
 
         [TestInitialize()]
@@ -291,7 +293,7 @@ namespace workshop192.ServiceLayer.Tests
             try
             {
                 loginSuccessTest();
-                int store = userService.createStore(session2, "Apple", "apples");
+                storeId = userService.createStore(session2, "Apple", "apples");
                 Assert.IsTrue(true);
 
             }
@@ -314,7 +316,6 @@ namespace workshop192.ServiceLayer.Tests
             }
             catch (IllegalNameException)
             {
-                Assert.IsTrue(true);
             }
             catch (Exception)
             {
@@ -327,38 +328,31 @@ namespace workshop192.ServiceLayer.Tests
         [TestMethod]
         public void removeSubscribedUserTest()
         {
+            int sessionManager = userService.startSession();
+            try
+            {
+                createStoreBySubscribedUserSuccessTest();// owner = user,user session2
+                userService.register(sessionManager, "rob", "theManager");
+                int store2 = userService.createStore(session2, "Urban", "clothes");
+                storeService.addManager(storeId, "rob", true, true, true, session2);
+                storeService.addOwner(store2, "rob", session2);
+                int sessionAdmin = userService.startSession();
+                userService.login(sessionAdmin, "u1", "123");
+                userService.removeUser(sessionAdmin, "rob");
+            }
+            catch(Exception e)
+            {
+                Assert.Fail(e.Message);
+            }
+            try
+            {
+                userService.login(sessionManager, "rob", "theManager");
+                Assert.Fail();
+            }
+            catch (LoginException)
+            {
 
-            //Session sessionOwner = userService.startSession();
-            //Session sessionManager = userService.startSession();
-            //SubscribedUser subscribedToDelete = sessionManager.getSubscribedUser();
-            //userService.register(sessionOwner, "bob", "theOwner");
-            //userService.register(sessionManager, "rob", "theManager");
-            //userService.login(sessionOwner, "bob", "theOwner");
-            //Store store1 = userService.createStore(sessionOwner, "Zara", "clothes");
-            //Store store2 = userService.createStore(sessionOwner, "Urban", "clothes");
-            //StoreRole owner1 = sessionOwner.getSubscribedUser().getStoreRole(store1);
-            //owner1.addManager(sessionManager.getSubscribedUser(), new Permissions(true, true, true));
-            //StoreRole owner2 = sessionOwner.getSubscribedUser().getStoreRole(store2);
-            //owner2.addOwner(sessionManager.getSubscribedUser());
-
-            //Session sessionAdmin = userService.startSession();
-            //Assert.AreEqual(userService.login(sessionAdmin, "admin", "1234"), "");
-            //Assert.IsTrue(Equals(userService.removeUser(sessionAdmin, "rob"),""));
-
-            //Assert.IsTrue(sessionManager.getState() is Guest);
-            //Assert.IsTrue(store1.getStoreRole(subscribedToDelete) == null);
-            //Assert.IsTrue(store2.getStoreRole(subscribedToDelete) == null);
-            //Assert.IsTrue(sessionManager.getSubscribedUser() == null);
-
-            ////user does not exist anymore, login fails
-            //Assert.AreNotEqual(userService.login(sessionAdmin, "rob", "theManager"), "");
-
-            ////alternatives
-            //Assert.IsFalse(Equals(userService.removeUser(sessionAdmin, "haim"),""));
-            //Assert.IsFalse(Equals(userService.removeUser(sessionAdmin, "admin"), ""));
-            //Assert.IsFalse(Equals(userService.removeUser(sessionManager, "rob"), ""));
-            //Assert.IsFalse(Equals(userService.removeUser(sessionOwner, "rob"), ""));
-
+            }
         }
     }
 
