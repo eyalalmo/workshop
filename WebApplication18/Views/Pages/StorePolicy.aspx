@@ -66,7 +66,7 @@
 
                         }
                         else {
-                                mainDiv.innerHTML = "<div align=\"center\"> <img src=\"../Images/Policy.png\"" + "height=\"400\" /></div>";
+                                mainDiv.innerHTML = "<div align=\"center\"> <img src=\"../WebApplication18/Images/Policy.png\"" + "height=\"400\" /></div>";
                                 addPolicyDiv.innerHTML = "<div class=\"pull-right\" style = \"margin: 10px\" > <h5><strong>Store does not have Policies</strong></h5> <input type=\"button\" class=\"btn btn-secondary\" value=\"Add Policy\" onclick=\" addPolicy("+storeID+")\"></div>";
 
                         }

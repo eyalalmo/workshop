@@ -209,7 +209,7 @@
                                 var id = productfields[2];
                                 var quantity = +productfields[3];
                                     str += "<tr>" +
-                                    "<td ><img src=\"../Images/NoImageAvailabe.jpg\"" + "height=\"60\" /></td><td style=\"vertical-align :middle\">" + productName + "</td><td style=\"vertical-align:middle\">" + price + "</td><td style=\"vertical-align:middle\">" + id + "</td><td><div class=\"quantity\"><input type=\"button\" value=\"+\" class=\"plus\"><input type=\"number\" step=\"1\" max=\"99\" min=\"1\" value=\"1\" title=\"Qty\" class=\"qty\"><input type=\"button\" value=\"-\" class=\"minus\"></div></td><td><button type=\"button\" class=\"btn btn-danger\"onclick=\"deleteRow("+id+");\" ><i class=\"fa fa-trash\" aria-hidden=\"true\"></i> </button></td></tr>";
+                                    "<td ><img src=\"../WebApplication18/Images/NoImageAvailabe.jpg\"" + "height=\"60\" /></td><td style=\"vertical-align :middle\">" + productName + "</td><td style=\"vertical-align:middle\">" + price + "</td><td style=\"vertical-align:middle\">" + id + "</td><td><div class=\"quantity\"><input type=\"button\" value=\"+\" class=\"plus\"><input type=\"number\" step=\"1\" max=\"99\" min=\"1\" value=\"1\" title=\"Qty\" class=\"qty\"><input type=\"button\" value=\"-\" class=\"minus\"></div></td><td><button type=\"button\" class=\"btn btn-danger\"onclick=\"deleteRow("+id+");\" ><i class=\"fa fa-trash\" aria-hidden=\"true\"></i> </button></td></tr>";
                             }
                             str += " </tbody>" + "</table>";
                             mainDiv.innerHTML = str;
@@ -219,9 +219,9 @@
                         }
                         else {
                               mainDiv.innerHTML = " <h3 style =\"margin-bottom: 30px\">Basket is EMPTY</h3>";
-                            //<form><input type=\"image\" src=\"../Images/trash.png\" name=\"Delete\" width=\"25\" height=\"25\" align=\"top\" alt=\"Stop sign\ onclick=\"deleteRow(this);\"></form>
-                            //<img src=\"../Images/trash.png\"" + "height=\"27\" />
-                            //                                    "<td ><img src=\"../Images/NoImageAvailabe.jpg\"" + "height=\"60\" /></td><td style=\"vertical-align :middle\">" + productName + "</td><td style=\"vertical-align:middle\">" + price + "</td><td style=\"vertical-align:middle\">" + id + "</td><td style=\"vertical-align:middle\">" + quantity + "</td><td style=\"vertical-align :middle\"><form><input type=\"image\" src=\"../Images/trash.png\" name=\"Delete\" width=\"25\" height=\"25\" align=\"top\" alt=\"Stop sign\ onclick=\"deleteRow();\"></form></td></tr>";
+                            //<form><input type=\"image\" src=\"../WebApplication18/Images/trash.png\" name=\"Delete\" width=\"25\" height=\"25\" align=\"top\" alt=\"Stop sign\ onclick=\"deleteRow(this);\"></form>
+                            //<img src=\"../WebApplication18/Images/trash.png\"" + "height=\"27\" />
+                            //                                    "<td ><img src=\"../WebApplication18/Images/NoImageAvailabe.jpg\"" + "height=\"60\" /></td><td style=\"vertical-align :middle\">" + productName + "</td><td style=\"vertical-align:middle\">" + price + "</td><td style=\"vertical-align:middle\">" + id + "</td><td style=\"vertical-align:middle\">" + quantity + "</td><td style=\"vertical-align :middle\"><form><input type=\"image\" src=\"../WebApplication18/Images/trash.png\" name=\"Delete\" width=\"25\" height=\"25\" align=\"top\" alt=\"Stop sign\ onclick=\"deleteRow();\"></form></td></tr>";
 
                         }
                     },

@@ -61,7 +61,7 @@
                                 
                         }
                         else {
-                                mainDiv.innerHTML = "<div align=\"center\"> <img src=\"../Images/nodiscount_2.png\"" + "height=\"400\" /></div>";
+                                mainDiv.innerHTML = "<div align=\"center\"> <img src=\"../WebApplication18/Images/nodiscount_2.png\"" + "height=\"400\" /></div>";
 
                         }
                     },

@@ -61,7 +61,7 @@
 
                         }
                         else {
-                                mainDiv.innerHTML = "<div align=\"center\"> <img src=\"../Images/nodiscount_2.png\"" + "height=\"400\" /></div>";
+                                mainDiv.innerHTML = "<div align=\"center\"> <img src=\"../WebApplication18/Images/nodiscount_2.png\"" + "height=\"400\" /></div>";
                                 addDiscountDiv.innerHTML = "<div class=\"pull-right\" style = \"margin: 10px\" > <h5><strong>Store does not have Discounts</strong></h5> <input type=\"button\" class=\"btn btn-secondary\" value=\"Add Discount\" onclick=\" addDiscount("+storeID+")\"></div>";
 
                         }

@@ -3,7 +3,76 @@
     <h3><i class="fa fa-shopping-cart" aria-hidden="true"> </i>  <%: Title %> 
     </h3>
     
+    <style>
+        .quantity {
+            float: left;
+            margin-right: 15px;
+            background-color: #eee;
+            position: relative;
+            width: 80px;
+            overflow: hidden
+        }
 
+    .quantity input {
+            margin: 0;
+            text-align: center;
+            width: 20px;
+            height: 20px;
+            padding: 0;
+            float: right;
+            color: #000;
+            font-size: 20px;
+            border: 0;
+            outline: 0;
+            background-color: #F6F6F6
+        }
+
+        .quantity input.qty {
+            position: relative;
+            border: 0;
+            width: 100%;
+            height: 40px;
+            padding: 10px 25px 10px 10px;
+            text-align: center;
+            font-weight: 400;
+            font-size: 15px;
+            border-radius: 0;
+            background-clip: padding-box
+        }
+
+    .quantity.minus, .quantity.plus {
+            line-height: 0;
+            background-clip: padding-box;
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
+            border-radius: 0;
+
+            color: #bbb;
+            font-size: 20px;
+            position: absolute;
+            height: 50%;
+            border: 0;
+            right: 0;
+            padding: 0;
+            width: 25px;
+            z-index: 3
+        }
+
+        .quantity.minus :hover, .quantity.plus :hover {
+            background-color: #dad8da
+        }
+
+    .quantity.minus {
+            bottom: 0
+        }
+
+.shopping-cart {
+            margin-top: 20px;
+        }
+.social-part.fa {
+            padding-right: 20px;
+        }
+</style>
     <!--
     <table class="table">
   <thead>
@@ -36,7 +105,6 @@
   </tbody>
 </table>
         -->
-    <script src="https://use.fontawesome.com/c560c025cf.js"></script>
     <div class="container">
           <div class="card shopping-cart">
             <div id="AllProductsInBasket" class ="col-md-12">
@@ -99,13 +167,13 @@
                                     if (actualPrice == price) {
                                         str +=
                                             "<hr><div class=\"card-body\">" +
-                                            "<div class=\"row\"> <div class=\"col-12 col-sm-12 col-md-2 text-center\"><img src=\"../Images/NoImageAvailabe.jpg\"" + "height=\"80\" /></div><div class=\"col-12 text-sm-center col-sm-12 text-md-left col-md-6\"><h4 class=\"product-name\"><strong>" + productName + "</strong></h4></div> <div class=\"col-12 col-sm-12 text-sm-center col-md-4 text-md-right row\"> <div class=\"col-2 col-sm-2 col-md-4 text-md-right\" style=\"padding-top: 5px\">  <h5><strong>$" + price + "<span class=\"text-muted\"> x</span></strong></h5></div><div class=\"quantity\"><input type=\"button\" value=\"+\" onclick=\"plusQuantity(" + id + "," + quantity + ");\" class=\"plus\"><input type=\"text\" value=\"" + quantity + "\" title=\"Qty\" class=\"qty\"><input type=\"button\" value=\"-\" onclick=\"minusQuantity(" + id + "," + quantity + ");\" class=\"minus\"></div><div class=\"col-2 col-sm-2 col-md-2 text-right\"><button type=\"button\" class=\"btn btn-danger\" onclick=\"deleteRow(" + id + ");\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></div></div></div></div>";
+                                            "<div class=\"row\"> <div class=\"col-12 col-sm-12 col-md-2 text-center\"><img src=\"../WebApplication18/Images/NoImageAvailabe.jpg\"" + "height=\"80\" /></div><div class=\"col-12 text-sm-center col-sm-12 text-md-left col-md-6\"><h4 class=\"product-name\"><strong>" + productName + "</strong></h4></div> <div class=\"col-12 col-sm-12 text-sm-center col-md-4 text-md-right row\"> <div class=\"col-2 col-sm-2 col-md-4 text-md-right\" style=\"padding-top: 5px\">  <h5><strong>$" + price + "<span class=\"text-muted\"> x</span></strong></h5></div><div class=\"quantity\"><input type=\"button\" value=\"+\" onclick=\"plusQuantity(" + id + "," + quantity + ");\" class=\"plus\"><input type=\"text\" value=\"" + quantity + "\" title=\"Qty\" class=\"qty\"><input type=\"button\" value=\"-\" onclick=\"minusQuantity(" + id + "," + quantity + ");\" class=\"minus\"></div><div class=\"col-2 col-sm-2 col-md-2 text-right\"><button type=\"button\" class=\"btn btn-danger\" onclick=\"deleteRow(" + id + ");\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></div></div></div></div>";
                                     }
 
                                     else {
                                         str +=
                                             "<hr><div class=\"card-body\">" +
-                                            "<div class=\"row\"> <div class=\"col-12 col-sm-12 col-md-2 text-center\"><img src=\"../Images/NoImageAvailabe.jpg\"" + "height=\"80\" /></div><div class=\"col-12 text-sm-center col-sm-12 text-md-left col-md-6\"><h4 class=\"product-name\"><strong>" + productName + "</strong></h4></div> <div class=\"col-12 col-sm-12 text-sm-center col-md-4 text-md-right row\"> <div class=\"col-2 col-sm-2 col-md-4 text-md-right\" style=\"padding-top: 5px\">  <h4><small>$" + price + "<span class=\"text-muted\"> x</span></small></h4><h5 style =\"color:red\"><strong>$" + actualPrice + "</strong></h5></div><div class=\"quantity\"><input type=\"button\" value=\"+\" onclick=\"plusQuantity(" + id + "," + quantity + ");\" class=\"plus\"><input type=\"text\" value=\"" + quantity + "\" title=\"Qty\" class=\"qty\"><input type=\"button\" value=\"-\" onclick=\"minusQuantity(" + id + "," + quantity + ");\" class=\"minus\"></div><div class=\"col-2 col-sm-2 col-md-2 text-right\"><button type=\"button\" class=\"btn btn-danger\" onclick=\"deleteRow(" + id + ");\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></div></div></div></div>";
+                                            "<div class=\"row\"> <div class=\"col-12 col-sm-12 col-md-2 text-center\"><img src=\"../WebApplication18/Images/NoImageAvailabe.jpg\"" + "height=\"80\" /></div><div class=\"col-12 text-sm-center col-sm-12 text-md-left col-md-6\"><h4 class=\"product-name\"><strong>" + productName + "</strong></h4></div> <div class=\"col-12 col-sm-12 text-sm-center col-md-4 text-md-right row\"> <div class=\"col-2 col-sm-2 col-md-4 text-md-right\" style=\"padding-top: 5px\">  <h4><small>$" + price + "<span class=\"text-muted\"> x</span></small></h4><h5 style =\"color:red\"><strong>$" + actualPrice + "</strong></h5></div><div class=\"quantity\"><input type=\"button\" value=\"+\" onclick=\"plusQuantity(" + id + "," + quantity + ");\" class=\"plus\"><input type=\"text\" value=\"" + quantity + "\" title=\"Qty\" class=\"qty\"><input type=\"button\" value=\"-\" onclick=\"minusQuantity(" + id + "," + quantity + ");\" class=\"minus\"></div><div class=\"col-2 col-sm-2 col-md-2 text-right\"><button type=\"button\" class=\"btn btn-danger\" onclick=\"deleteRow(" + id + ");\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></div></div></div></div>";
                                     }
                                 }
                             //str += " </tbody>" + "</table>";
@@ -119,10 +187,10 @@
 
                         }
                         else {
-                              mainDiv.innerHTML = "<div align=\"center\"> <img src=\"../Images/emptyCart2.png\"" + "height=\"400\" /></div>";
-                            //<form><input type=\"image\" src=\"../Images/trash.png\" name=\"Delete\" width=\"25\" height=\"25\" align=\"top\" alt=\"Stop sign\ onclick=\"deleteRow(this);\"></form>
-                            //<img src=\"../Images/trash.png\"" + "height=\"27\" />
-                            //                                    "<td ><img src=\"../Images/NoImageAvailabe.jpg\"" + "height=\"60\" /></td><td style=\"vertical-align :middle\">" + productName + "</td><td style=\"vertical-align:middle\">" + price + "</td><td style=\"vertical-align:middle\">" + id + "</td><td style=\"vertical-align:middle\">" + quantity + "</td><td style=\"vertical-align :middle\"><form><input type=\"image\" src=\"../Images/trash.png\" name=\"Delete\" width=\"25\" height=\"25\" align=\"top\" alt=\"Stop sign\ onclick=\"deleteRow();\"></form></td></tr>";
+                              mainDiv.innerHTML = "<div align=\"center\"> <img src=\"../WebApplication18/Images/emptyCart2.png\"" + "height=\"400\" /></div>";
+                            //<form><input type=\"image\" src=\"../WebApplication18/Images/trash.png\" name=\"Delete\" width=\"25\" height=\"25\" align=\"top\" alt=\"Stop sign\ onclick=\"deleteRow(this);\"></form>
+                            //<img src=\"../WebApplication18/Images/trash.png\"" + "height=\"27\" />
+                            //                                    "<td ><img src=\"../WebApplication18/Images/NoImageAvailabe.jpg\"" + "height=\"60\" /></td><td style=\"vertical-align :middle\">" + productName + "</td><td style=\"vertical-align:middle\">" + price + "</td><td style=\"vertical-align:middle\">" + id + "</td><td style=\"vertical-align:middle\">" + quantity + "</td><td style=\"vertical-align :middle\"><form><input type=\"image\" src=\"../WebApplication18/Images/trash.png\" name=\"Delete\" width=\"25\" height=\"25\" align=\"top\" alt=\"Stop sign\ onclick=\"deleteRow();\"></form></td></tr>";
 
                         }
                     },

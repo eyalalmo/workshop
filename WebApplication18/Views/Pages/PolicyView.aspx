@@ -63,7 +63,7 @@
                                
                         }
                         else {
-                                mainDiv.innerHTML = "<div align=\"center\"> <img src=\"../Images/Policy.png\"" + "height=\"400\" /></div>";
+                                mainDiv.innerHTML = "<div align=\"center\"> <img src=\"../WebApplication18/Images/Policy.png\"" + "height=\"400\" /></div>";
                         }
                     },
                     error: function (response) {

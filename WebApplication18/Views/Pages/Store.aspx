@@ -46,7 +46,7 @@
                                 <div class="my-list">
                                     <div class="row"> 
                                         <div class="col-12 col-sm-12 col-md-6 text-md-left">
-			                                <img src=\"../Images/NoImageAvailabe.jpg\" height=\"120\" />         
+			                                <img src=\"../WebApplication18/Images/NoImageAvailabe.jpg\" height=\"120\" />         
                                         </div>
                                         <div class="col-12 text-sm-center col-sm-12 col-md-6">
                                             </br><div class="row">
@@ -129,7 +129,7 @@
                                             The product will get an automatically unique ID number.                
                                         </div>
                                         <div>
-                                            <img src=\"../Images/new-corner.png\" height=\"120\" />
+                                            <img src=\"../WebApplication18/Images/new-corner.png\" height=\"120\" />
                                         </div>
                                     </div><br/>
                                     <div class="detail">

@@ -127,7 +127,7 @@
                                             The store will get an automatically unique ID number.         
                                         </div>
                                         <div>
-			                                <img src=\"../Images/new-corner.png\" height=\"60\" />      
+			                                <img src=\"../WebApplication18/Images/new-corner.png\" height=\"60\" />      
                                         </div>
                                     </div><br/>
                                     <div class="detail">
