@@ -159,11 +159,10 @@ namespace workshop192.Domain
         {
             Store store = product.getStore();
             VisibleDiscount discount = new VisibleDiscount(percentage, duration, "ProductVisibleDiscount", store.getStoreID());
-            DBDiscount.getInstance().addDiscount(discount);
+            store.addDiscount(discount);
             discount.setProduct(product);
             product.setDiscount(discount);
-            //store.addDiscount(discount);
-
+            DBDiscount.getInstance().addDiscount(discount);
         }
         public void removeProductDiscount(Product product)
         {

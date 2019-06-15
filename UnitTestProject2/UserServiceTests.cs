@@ -189,9 +189,9 @@ namespace workshop192.ServiceLayer.Tests
             return false;
         }
 
-        //2.8
+        //2.8.1 
         [TestMethod]
-        public void purchaseTestSuccess()
+        public void purchaseTestWithPolicySuccess()
         {
             try
             {
@@ -201,25 +201,17 @@ namespace workshop192.ServiceLayer.Tests
                 int product1 = storeService.addProduct("dogs", "big dogs", 80, 2, 4, store1, session2);
                 int product2 = storeService.addProduct("cats", "grey cats", 110, 5, 10, store1, session2);
 
-                int store2 = userService.createStore(session2, "Shufersal", "food");
-                int product3 = storeService.addProduct("milk", "3%", 65, 2, 1, store2, session2);
-                int product4 = storeService.addProduct("water", "blue water", 70, 4, 4, store2, session2);
-
                 basketService.addToCart(session2, product1, 2);
                 basketService.addToCart(session2, product2, 3);
-                basketService.addToCart(session2, product3, 1);
-                basketService.addToCart(session2, product4, 3);
 
+                storeService.addMinAmountPolicy(store1, session2, 2);
+                userService.checkBasket(session2);
                 userService.purchaseBasket(session2, "HaJelmonit 14", "234", "", "", "", "");
                 Assert.IsTrue(true);
-
-                //???????????????do we need to check state
-                // Assert.IsTrue(product1.getQuantityLeft() == 2);
-                // Assert.IsTrue(product2.getQuantityLeft() == 7);
-                // Assert.IsTrue(product3.getQuantityLeft() == 0);
-                // Assert.IsTrue(product4.getQuantityLeft() == 1);
+                Assert.IsTrue(storeService.getProductQuantityLeft(product1) == 2);
+                Assert.IsTrue(storeService.getProductQuantityLeft(product2) == 7);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Assert.Fail();
             }
@@ -227,7 +219,7 @@ namespace workshop192.ServiceLayer.Tests
         }
 
         [TestMethod]
-        public void purchaseTestFail()
+        public void purchaseTestWithPolicyFail()
         {
             try
             {
@@ -237,7 +229,8 @@ namespace workshop192.ServiceLayer.Tests
                 int store1 = userService.createStore(session2, "Zoo Land", "pets");
                 int product1 = storeService.addProduct("dogs", "big dogs", 80, 2, 4, store1, session2);
 
-                basketService.addToCart(session2, product1, 6);
+                basketService.addToCart(session2, product1, 3);
+                basketService.changeQuantity(session2, product1, 7);
                 userService.purchaseBasket(session2, "Neviot 22", "123", "", "", "", "");
                 Assert.Fail();
             }
@@ -246,7 +239,58 @@ namespace workshop192.ServiceLayer.Tests
                 Assert.IsTrue(true);
             }
         }
+        //2.8.2
+        [TestMethod]
+        public void purchaseTestWithDiscountSuccess()
+        {
+            try
+            {
+                loginSuccessTest();
+                int store1 = userService.createStore(session2, "Zoo Land", "pets");
+                int product1 = storeService.addProduct("dogs", "big dogs", 80, 2, 4, store1, session2);
 
+                basketService.addToCart(session2, product1, 2);
+
+                storeService.addReliantDiscountSameProduct(store1, session2, 0.3, "12/12/2020", 1, product1);
+                double price = basketService.getActualTotalPrice(session2);
+                Assert.IsTrue(160 * 0.7 == price);
+                userService.checkBasket(session2);
+                userService.purchaseBasket(session2, "HaJelmonit 14", "234", "", "", "", "");
+                Assert.IsTrue(true);
+
+            }
+            catch (Exception)
+            {
+                Assert.Fail();
+            }
+
+        }
+        //2.8.2
+        [TestMethod]
+        public void purchaseTestWithDiscountFail()
+        {
+            try
+            {
+                loginSuccessTest();
+                int store1 = userService.createStore(session2, "Zoo Land", "pets");
+                int product1 = storeService.addProduct("dogs", "big dogs", 80, 2, 4, store1, session2);
+
+                basketService.addToCart(session2, product1, 2);
+
+                storeService.addReliantDiscountSameProduct(store1, session2, 0.3, "12/12/2020", 5, product1);
+                double price = basketService.getActualTotalPrice(session2);
+                Assert.IsTrue(160 == price);
+                userService.checkBasket(session2);
+                userService.purchaseBasket(session2, "HaJelmonit 14", "234", "", "", "", "");
+                Assert.IsTrue(true);
+
+            }
+            catch (Exception)
+            {
+                Assert.Fail();
+            }
+
+        }
         //3.1
         [TestMethod]
         public void logoutTestSuccess()
