@@ -232,10 +232,10 @@ namespace workshop192.Domain
                     {
                         DomainBridge.getInstance().removePolicy(input[1], Int32.Parse(input[2]), Int32.Parse(input[3]));
                     }
-                     else if (input[0] == "setPolicyAmount")
+                    /* else if (input[0] == "setPolicyAmount")
                     {
                         DomainBridge.getInstance().setPolicyAmount(Int32.Parse(input[1]), Int32.Parse(input[2]));
-                    }
+                    }*/
                      else if (input[0] == "getStorePolicies")
                     {
                         DomainBridge.getInstance().getStorePolicies(Int32.Parse(input[1]), Int32.Parse(input[2]));

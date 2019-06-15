@@ -191,3 +191,5 @@
 2019-06-15 18:21:43,425 ERROR EventLog: Register : Error: Username already exists
 2019-06-15 18:21:49,577 INFO EventLog: User ey has successfuly logged in.
 2019-06-15 19:37:24,552 INFO EventLog: User cc has successfuly logged in.
+2019-06-15 19:48:43,413 ERROR EventLog: Register : Error: Username already exists
+2019-06-15 19:48:47,864 INFO EventLog: User ey has successfuly logged in.
