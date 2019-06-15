@@ -285,6 +285,7 @@ namespace workshop192.ServiceLayer
 
         public void addStoreVisibleDiscount(int store, double percentage, string duration, int session)
         {
+            
             if (store < 0)
                 throw new ArgumentException("illegal store number");
             if (percentage <= 0 || percentage >= 1)
