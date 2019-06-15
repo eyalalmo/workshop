@@ -135,20 +135,20 @@ namespace workshop192.Domain
                         {
                             connection.Execute("DELETE FROM DiscountComposite WHERE id=@id ", new { id = d.getId() });
                             DiscountComposite composite = (DiscountComposite)d;
+                            connection.Close();
                             foreach (DiscountComponent component in composite.getChildren())
                             {
                                 removeDiscount(component);
                             }
-                        }
-
-                        discounts.Remove(d);
-
-                    connection.Close();
+                        
+                    }
+                    discounts.Remove(d);
                 }
             }
             catch (Exception e)
             {
-                connection.Close();
+                if(connection.State == ConnectionState.Open)
+                     connection.Close();
                 throw e;
             }
         }

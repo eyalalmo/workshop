@@ -12,7 +12,7 @@ namespace UnitTests.Domain
         [TestClass]
         public class DiscountTests
         {
-            private DBDiscount dbdiscount = DBDiscount.getInstance();
+            private DBDiscount dbdiscount;
             private UserService userService = UserService.getInstance();
 
             Store store1;
@@ -25,7 +25,9 @@ namespace UnitTests.Domain
             [TestInitialize()]
             public void initial()
             {
+
                 userService.testSetup();
+                dbdiscount = DBDiscount.getInstance();
                 //DBProduct.getInstance().initTests();
                 //DBStore.getInstance().initTests();
                 store1 = new Store("Makolet", "groceryStore");
@@ -78,12 +80,12 @@ namespace UnitTests.Domain
                     dbdiscount.addDiscount(v);
                     dbdiscount.removeDiscount(v);
                     DiscountComponent d = dbdiscount.getDiscountByID(v.getId());
-                    Assert.IsTrue(d==null);
+                    Assert.AreEqual(d,null);
 
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    Assert.Fail();
+                    Assert.Fail(e.Message);
                 }
 
             }

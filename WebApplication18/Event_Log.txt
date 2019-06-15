@@ -213,10 +213,6 @@
 2019-06-15 23:11:16,615 INFO EventLog: User u2 has successfuly created a store
 2019-06-15 23:11:16,725 INFO EventLog: New product:  0 has successfuly added to store with id: 0
 2019-06-15 23:11:16,737 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
-2019-06-16 01:45:08,371 INFO EventLog: User u2 has successfuly registered
-2019-06-16 01:45:08,860 INFO EventLog: User u3 has successfuly registered
-2019-06-16 01:45:09,295 INFO EventLog: User u4 has successfuly registered
-2019-06-16 01:45:09,708 INFO EventLog: User u5 has successfuly registered
-2019-06-16 01:45:10,374 INFO EventLog: User u2 has successfuly created a store
-2019-06-16 01:45:10,491 INFO EventLog: New product:  0 has successfuly added to store with id: 0
-2019-06-16 01:45:10,509 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
+2019-06-15 23:59:08,940 INFO EventLog: User aaa has successfuly registered
+2019-06-15 23:59:24,574 INFO EventLog: User aaa has successfuly created a store
+2019-06-16 00:25:42,499 INFO EventLog: User et has successfuly registered

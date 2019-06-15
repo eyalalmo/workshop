@@ -414,7 +414,7 @@ namespace workshop192.Domain
 
         public void removeProductFromCartProductTable(string username, int storeID, int productId)
         {
-            string sql = "DELETE FROM [dbo].[CartProduct] WHERE username =@username producdID =@productID AND storeID =@storeID";
+            string sql = "DELETE FROM [dbo].[CartProduct] WHERE username=@username AND productID=@productId AND storeID=@storeID";
             try
             {
                 //SqlConnection connection = Connector.getInstance().getSQLConnection();
@@ -505,9 +505,10 @@ namespace workshop192.Domain
                 //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
                 {
+                    connection.Open();
                     using (var transaction = connection.BeginTransaction())
                     {
-                        connection.Open();
+                       
                         connection.Execute(sql1, new { username }, transaction);
 
                         //connection.Close();

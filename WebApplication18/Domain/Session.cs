@@ -98,9 +98,9 @@ namespace workshop192.Domain
 
         public void addToShoppingBasket(Product product, int amount)
         {
-            if (amount < 0)
+            if (amount <= 0)
             {
-                throw new AlreadyExistException("ERROR: amount cannot not be a negative number");
+                throw new AlreadyExistException("ERROR: amount has to be greater than zero");
             }
             shoppingBasket.addToCart(product, amount);
         }

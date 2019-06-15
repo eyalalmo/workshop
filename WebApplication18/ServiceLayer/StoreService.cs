@@ -70,7 +70,7 @@ namespace workshop192.ServiceLayer
         {
             if (product < 0)
                 throw new ArgumentException("illegal product number");
-            if (name.Length == 0)
+            if (name ==null || name.Length == 0)
                 throw new ArgumentException("Error: A product's name cannot be empty");
             db.setProductName(product, name, session);
         }
@@ -80,6 +80,10 @@ namespace workshop192.ServiceLayer
         }
         public void SetProductInformation(int storeID, int productID, int price, int rank, int quantityLeft, string productName, int session)
         {
+            if (storeID < 0 || productID < 0 || price == 0 || rank < 0 || quantityLeft < 0 || productName == null || productName == "")
+            {
+                throw new IllegalNameException("Please enter proper values - only non negative integers and non empty names");
+            }
             double oldPrice = db.getProductPrice(productID);
             string oldName = db.getProductName(productID);
             int oldRank = db.getProductRank(productID);
@@ -155,10 +159,11 @@ namespace workshop192.ServiceLayer
 
         public int addStore(string storeName, string storeDescription, int session)
         {
-            if (storeName.Length == 0)
+            if (storeName == null || storeName.Length == 0)
             {
                 throw new ArgumentException("Error: A store name cannot be empty");
             }
+
             return db.createStore(session, storeName, storeDescription);
         }
 

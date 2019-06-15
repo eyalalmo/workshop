@@ -66,6 +66,8 @@ namespace workshop192.Domain
 
         public void initTests()
         {
+            storeRole = new LinkedList<StoreRole>();
+            stores = new LinkedList<Store>();
             try
             {
                 lock (connection)
@@ -755,7 +757,8 @@ namespace workshop192.Domain
             catch (Exception)
             {
                 connection.Close();
-                throw new StoreException("connection to db faild");
+                SystemLogger.getErrorLog().Error("Connection error in function getNextStoreID in DB Store");
+                throw new ConnectionException();
             }
 
         }

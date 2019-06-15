@@ -41,9 +41,9 @@ namespace workshop192.Bridge
         {
             MarketSystem.init();
         }
-        public void addAdmin(string name,string pass)
+        public void addAdmin(string name, string pass)
         {
-            DBSubscribedUser.getInstance().addAdmin(name,encryptPassword(pass));
+            DBSubscribedUser.getInstance().addAdmin(name, encryptPassword(pass));
         }
 
         //use case 2.3
@@ -64,12 +64,12 @@ namespace workshop192.Bridge
 
         public int payToExternal(string card, string month, string year, string holder, string ccv, string id)
         {
-           return PaymentService.getInstance().checkOut(card, month, year, holder, ccv, id);
+            return PaymentService.getInstance().checkOut(card, month, year, holder, ccv, id);
         }
 
         public int cancelPay(int result)
         {
-            return PaymentService.getInstance().cancelPayment(result+""); 
+            return PaymentService.getInstance().cancelPayment(result + "");
         }
 
         public int deliverToExternal(string name, string address, string city, string country, string zip, string cvv)
@@ -93,8 +93,8 @@ namespace workshop192.Bridge
         {
             Session user = DBSession.getInstance().getSession(session);
             Store s = DBStore.getInstance().getStore(storeId);
-            StoreRole role=  s.getStoreRole(user.getSubscribedUser());
-            if(role is StoreOwner)
+            StoreRole role = s.getStoreRole(user.getSubscribedUser());
+            if (role is StoreOwner)
             {
                 return true;
             }
@@ -176,7 +176,7 @@ namespace workshop192.Bridge
 
         public string getProductName(int productID)
         {
-        
+
             Product p = DBProduct.getInstance().getProductByID(productID);
             return p.getProductName();
         }
@@ -202,7 +202,7 @@ namespace workshop192.Bridge
             {
                 return true;
             }
-            if(role is StoreManager && ((StoreManager)role).getPermissions().editProduct() == true)
+            if (role is StoreManager && ((StoreManager)role).getPermissions().editProduct() == true)
             {
                 return true;
             }
@@ -216,7 +216,7 @@ namespace workshop192.Bridge
 
         public bool handShakePay()
         {
-          return PaymentService.getInstance().handShake();
+            return PaymentService.getInstance().handShake();
         }
 
         internal string generate()
@@ -290,12 +290,12 @@ namespace workshop192.Bridge
             Product toAdd = DBProduct.getInstance().getProductByID(product);
             Session session = DBSession.getInstance().getSession(sessionid);
             session.addToShoppingBasket(toAdd, amount);
-            SystemLogger.getEventLog().Info("User " + session.getSubscribedUser().getUsername() + " has successfuly added "+ amount+" of product " +toAdd.productName);
+            SystemLogger.getEventLog().Info("User " + session.getSubscribedUser().getUsername() + " has successfuly added " + amount + " of product " + toAdd.productName);
         }
         public void checkBasket(int session)
         {
             Session user = DBSession.getInstance().getSession(session);
-             user.checkBasket();
+            user.checkBasket();
         }
 
         internal void setquantityLeft(int productID, int setquantityLeft, int session)
@@ -304,11 +304,11 @@ namespace workshop192.Bridge
             p.setQuantityLeft(setquantityLeft);
         }
 
-        public  void purchaseBasket(int sessionid, string address, string creditcard, string month, string year, string holder, string cvv)
+        public void purchaseBasket(int sessionid, string address, string creditcard, string month, string year, string holder, string cvv)
         {
             Session session = DBSession.getInstance().getSession(sessionid);
             LinkedList<Tuple<string, string>> messages = new LinkedList<Tuple<string, string>>();
-            
+
             ShoppingBasket basket = session.getShoppingBasket();
             foreach (KeyValuePair<int, ShoppingCart> cart in basket.getShoppingCarts())
             {
@@ -329,7 +329,7 @@ namespace workshop192.Bridge
                 }
             }
 
-            session.purchaseBasket( address,  creditcard,  month,  year,  holder,  cvv);
+            session.purchaseBasket(address, creditcard, month, year, holder, cvv);
             SystemLogger.getEventLog().Info("User " + session.getSubscribedUser().getUsername() + " has successfuly purchased the products in his basket");
             foreach (Tuple<string, string> t in messages)
                 messager.message(t.Item1, t.Item2);
@@ -340,7 +340,7 @@ namespace workshop192.Bridge
         public void setProductRank(int productID, int rank, int session)
         {
             Product p = DBProduct.getInstance().getProductByID(productID);
-             p.setRank(rank);
+            p.setRank(rank);
         }
 
         //public void addcouponToCart(int sessionID, int storeID, string couponCode)
@@ -369,7 +369,7 @@ namespace workshop192.Bridge
                 foreach (KeyValuePair<Product, int> p in cart.Value.getProductsInCarts())
                 {
 
-                    response += p.Key.getProductName() + "," + p.Key.getPrice()+"," + p.Key.getActualPrice(p.Value) + "," + p.Key.getProductID() + "," + p.Value + ";";
+                    response += p.Key.getProductName() + "," + p.Key.getPrice() + "," + p.Key.getActualPrice(p.Value) + "," + p.Key.getProductID() + "," + p.Value + ";";
                 }
             }
 
@@ -398,7 +398,7 @@ namespace workshop192.Bridge
                 throw new RoleException("Error: You have no permission to add a product");
 
             sr.addProduct(product);
-            SystemLogger.getEventLog().Info("New product:  " + product.getProductID() + " has successfuly added to store with id: "+ storeID);
+            SystemLogger.getEventLog().Info("New product:  " + product.getProductID() + " has successfuly added to store with id: " + storeID);
             return product.getProductID();
         }
 
@@ -436,7 +436,7 @@ namespace workshop192.Bridge
         internal string getUserNameBySession(int session)
         {
             Session s = DBSession.getInstance().getSession(session);
-            if(s.getSubscribedUser() != null)
+            if (s.getSubscribedUser() != null)
                 return s.getSubscribedUser().getUsername();
             return "";
         }
@@ -450,7 +450,7 @@ namespace workshop192.Bridge
 
             return product.getPrice();
         }
-        public void setProductInformation(int storeId,int productid,int price,String name,int rank,int quantityLeft,int sessionid)
+        public void setProductInformation(int storeId, int productid, int price, String name, int rank, int quantityLeft, int sessionid)
         {
             Product product = DBProduct.getInstance().getProductByID(productid);
             if (product == null)
@@ -543,7 +543,7 @@ namespace workshop192.Bridge
             sr.decFromProductQuantity(product, amount);
         }
 
-        
+
 
         public void closeStore(int storeid, int sessionid)
         {
@@ -552,7 +552,7 @@ namespace workshop192.Bridge
                 throw new DoesntExistException("no such store");
 
             Session session = DBSession.getInstance().getSession(sessionid);
-            SystemLogger.getEventLog().Info("Store "+store.getStoreName()+" has been closed by Admin");
+            SystemLogger.getEventLog().Info("Store " + store.getStoreName() + " has been closed by Admin");
             session.closeStore(store);
         }
 
@@ -580,7 +580,7 @@ namespace workshop192.Bridge
             if (sr.getStore() != store)
                 throw new RoleException("this user can't appoint to this store");
             Permissions permissions = new Permissions(editProduct, editDiscount, editPolicy);
-            SystemLogger.getEventLog().Info( username + " has been successfuly added as a manager to store with id: " + storeid);
+            SystemLogger.getEventLog().Info(username + " has been successfuly added as a manager to store with id: " + storeid);
             sr.addManager(toAdd, permissions);
         }
 
@@ -600,7 +600,7 @@ namespace workshop192.Bridge
             sr.addTotalPricePurchasePolicy(minPrice);
         }
 
-            public void addOwner(int storeid, string username, int sessionid)
+        public void addOwner(int storeid, string username, int sessionid)
         {
             SubscribedUser toAdd = DBSubscribedUser.getInstance().getSubscribedUser(username);
             if (toAdd == null)
@@ -709,7 +709,7 @@ namespace workshop192.Bridge
             Product p = DBProduct.getInstance().getProductByID(product);
 
             Session s = DBSession.getInstance().getSession(sessionid);
-            
+
             s.getShoppingBasket().addToCart(p, amount);
         }
 
@@ -734,11 +734,11 @@ namespace workshop192.Bridge
             user.getShoppingBasket().changeQuantityOfProduct(store.getStoreID(), p, newAmount);
         }
 
-        public  void checkoutBasket(int sessionid, string address, string creditcard, string month, string year, string holder, string cvv)
+        public void checkoutBasket(int sessionid, string address, string creditcard, string month, string year, string holder, string cvv)
         {
             Session user = DBSession.getInstance().getSession(sessionid);
 
-             user.getShoppingBasket().purchaseBasket(address, creditcard, month, year, holder, cvv);
+            user.getShoppingBasket().purchaseBasket(address, creditcard, month, year, holder, cvv);
         }
 
         public string getAllStores(int session1)
@@ -750,7 +750,7 @@ namespace workshop192.Bridge
             LinkedList<Store> stores = new LinkedList<Store>();
             foreach (StoreRole element in lst)
             {
-                if(!stores.Contains(element.getStore()))
+                if (!stores.Contains(element.getStore()))
                     stores.AddLast(element.getStore());
             }
             string a = JsonConvert.SerializeObject(stores);
@@ -766,18 +766,18 @@ namespace workshop192.Bridge
             Store store = DBStore.getInstance().getStore(storeID);
             LinkedList<DiscountComponent> discounts = store.getDiscounts();
             string str = "";
-            foreach(DiscountComponent dis in discounts)
+            foreach (DiscountComponent dis in discounts)
             {
-               
- 
-                    str += dis.getDiscountType() + "," + dis.description() + "," + dis.getPercentage()*100 + "," + dis.getDuration().ToString("dd/MM/yyyy") + "," + dis.getId() + ";";
-        
-               /* if(dis is DiscountComposite)
-                {
-                    DiscountComposite d = (DiscountComposite)dis;
-                    str += dis.getDiscountType() + "," + dis.description() + "," + 100 + "," + 12 + "," + d.getId() + ";";
-                }*/
-            
+
+
+                str += dis.getDiscountType() + "," + dis.description() + "," + dis.getPercentage() * 100 + "," + dis.getDuration().ToString("dd/MM/yyyy") + "," + dis.getId() + ";";
+
+                /* if(dis is DiscountComposite)
+                 {
+                     DiscountComposite d = (DiscountComposite)dis;
+                     str += dis.getDiscountType() + "," + dis.description() + "," + 100 + "," + 12 + "," + d.getId() + ";";
+                 }*/
+
             }
             return str;
         }
@@ -797,7 +797,7 @@ namespace workshop192.Bridge
                 }
                 else
                 {
-                    str += p.getTypeString() + "," + p.description()  + ",2," + p.getPolicyID() + ";";
+                    str += p.getTypeString() + "," + p.description() + ",2," + p.getPolicyID() + ";";
                 }
             }
             return str;
@@ -808,7 +808,7 @@ namespace workshop192.Bridge
             if (user == null)
                 throw new DoesntExistException("user is not logged in");
             Product p = DBProduct.getInstance().getProductByID(product);
-            Store store =p.getStore();
+            Store store = p.getStore();
             SubscribedUser subscribedUser = user.getSubscribedUser();
             if (subscribedUser == null)
                 throw new DoesntExistException("not a subscribed user");
@@ -843,31 +843,37 @@ namespace workshop192.Bridge
             if (duration.Length != 10)
                 throw new ArgumentException("Discount duration is not in the required foramt DD/MM/YYYY");
             char[] arr = duration.ToCharArray();
-            if(arr[2] != '/' || arr[5] != '/')
+            if (arr[2] != '/' || arr[5] != '/')
                 throw new ArgumentException("Discount duration is not in the required foramt DD/MM/YYYY");
-            for(int i=0; i<arr.Length; i++)
+            for (int i = 0; i < arr.Length; i++)
             {
-                if(i!= 2 && i != 5)
+                if (i != 2 && i != 5)
                 {
-                    if(arr[i]<'0' ||arr[i] >'9')
+                    if (arr[i] < '0' || arr[i] > '9')
                         throw new ArgumentException("Discount duration is not in the required foramt DD/MM/YYYY");
 
                 }
             }
 
-            int day = Int32.Parse(duration.Substring(0, 2));
-            int month = Int32.Parse(duration.Substring(3, 2));
-            int year = Int32.Parse(duration.Substring(6, 4));
-            if(day==0 || day >31)
+            try
+            {
+                int day = Int32.Parse(duration.Substring(0, 2));
+                int month = Int32.Parse(duration.Substring(3, 2));
+                int year = Int32.Parse(duration.Substring(6, 4));
+                if (day == 0 || day > 31)
+                    throw new ArgumentException("Date is not valid");
+                if (month == 0 || month > 12)
+                    throw new ArgumentException("Date is not valid");
+                if (year < 2019)
+                    throw new ArgumentException("Date is not valid");
+                DateTime d = new DateTime(year, month, day);
+                DateTime now = DateTime.Now;
+                if (DateTime.Compare(d, now) < 0)
+                    throw new ArgumentException("Discount duration must be future dateד");
+            }
+            catch (Exception) {
                 throw new ArgumentException("Date is not valid");
-            if(month==0 || month >12)
-                throw new ArgumentException("Date is not valid");
-            if(year < 2019)
-                throw new ArgumentException("Date is not valid");
-            DateTime d = new DateTime(year, month, day);
-            DateTime now = DateTime.Now;
-            if(DateTime.Compare(d, now) <0)
-                throw new ArgumentException("Discount duration must be future dateד");
+            }
         }
 
         internal void addProductVisibleDiscount(int product, double percentage, string duration, int session)
