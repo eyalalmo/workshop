@@ -14,9 +14,9 @@ namespace WebApplication18.Domain
         private string compType;
         private int subID1;
         private int subID2;
-        private bool isPartOfComplex;
+        private int isPartOfComplex;
 
-       public PolicyEntry(int storeID, int policyID, string type, int amount, int subID1, int subID2,bool isPartOfComplex)
+       public PolicyEntry(int storeID, int policyID, string type, int amount, int subID1, int subID2,int isPartOfComplex)
         {
             this.storeID = storeID;
             this.type = type;
@@ -31,7 +31,7 @@ namespace WebApplication18.Domain
         public string getType() { return type; }
         public int getAmount() { return this.amount; }
         public int getPolicyID() { return this.policyID; }
-        public bool getIsPartOfComp() { return this.isPartOfComplex; }
+        public bool getIsPartOfComp() { return isPartOfComplex==1; }
         public string getCompType() { return compType; }
         public int getSubID1() { return subID1; }
         public int getSubID2() { return subID2; }

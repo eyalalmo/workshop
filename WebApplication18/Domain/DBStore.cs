@@ -602,7 +602,7 @@ namespace workshop192.Domain
            for(int i=0; i<policyEntries.Count(); i++)
             {
                 PolicyEntry p = policyEntries.ElementAt(i);
-                if (p.getIsPartOfComp())
+                if (p.getType()=="complex")
                     count++;
             }
             return count;
@@ -938,7 +938,8 @@ namespace workshop192.Domain
 
             int policyID = p.getPolicyID();
             int amount = p.getAmount();
-            bool isPartOfComplex = false;
+            //  bool isPartOfComplex = false;
+            int isPartOfComplex = 0;
             string type = "min";
 
             string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex)" +
@@ -951,7 +952,8 @@ namespace workshop192.Domain
 
             int policyID = p.getPolicyID();
             int amount = p.getAmount();
-            bool isPartOfComplex = false;
+            //bool isPartOfComplex = false;
+            int isPartOfComplex = 0;
             string type = "max";
 
             string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex)" +
@@ -964,7 +966,7 @@ namespace workshop192.Domain
 
             int policyID = p.getPolicyID();
             int amount = p.getAmount();
-            bool isPartOfComplex = false;
+            int isPartOfComplex = 0;
             string type = "total";
 
             string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex)" +
@@ -975,7 +977,7 @@ namespace workshop192.Domain
         {
             SqlConnection connection = Connector.getInstance().getSQLConnection();
             int policyID = p.getPolicyID();
-            bool isPartOfComplex = false;
+            int isPartOfComplex = 0;
             string type = "complex";
             int subtype1 = p.getFirstChildID();
             int subtype2 = p.getSecondChildID();
@@ -983,9 +985,9 @@ namespace workshop192.Domain
             string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex, subtypeID1, subtypeID2, compType )" +
                                                     " VALUES (storeID, policyID,type,isPartOfComplex, subtype1, subtype2, compType )";
             connection.Execute(sql, new { storeID, policyID, type, isPartOfComplex, subtype1, subtype2,compType });
-            string sql1 = "UPDATE [dbo].[PurchasePolicy] SET isPartOfComplex = true WHERE storeID =@storeID AND policyID=@subtype1";
+            string sql1 = "UPDATE [dbo].[PurchasePolicy] SET isPartOfComplex = 1 WHERE storeID =@storeID AND policyID=@subtype1";
             connection.Execute(sql1, new { storeID, subtype1 });
-            string sql2 = "UPDATE [dbo].[PurchasePolicy] SET isPartOfComplex = true WHERE storeID =@storeID AND policyID=@subtype1";
+            string sql2 = "UPDATE [dbo].[PurchasePolicy] SET isPartOfComplex = 1 WHERE storeID =@storeID AND policyID=@subtype1";
             connection.Execute(sql2, new { storeID, subtype2 });
         }
 
