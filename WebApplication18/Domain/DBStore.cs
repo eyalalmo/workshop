@@ -17,7 +17,10 @@ namespace workshop192.Domain
         public LinkedList<Store> stores;
         public LinkedList<StoreRole> storeRole;
 
+        
+
         public static int nextStoreID = 0;
+        public static int nextPolicyID = 0;
 
         private DBStore()
         {
@@ -25,7 +28,8 @@ namespace workshop192.Domain
             {
                 storeRole = new LinkedList<StoreRole>();
                 stores = new LinkedList<Store>();
-                //nextStoreID = getUpdatedId();
+                nextStoreID = getUpdatedId();
+                nextPolicyID = getUpdatedPolicyID();
             }
             else
             {
@@ -72,6 +76,7 @@ namespace workshop192.Domain
                     connection.Execute("DELETE FROM Contracts");
                     connection.Execute("DELETE FROM PendingOwners");
                     connection.Execute("UPDATE [dbo].[IDS] SET id = 0 WHERE type = 'store'");
+                    connection.Execute("UPDATE [dbo].[IDS] SET id = 0 WHERE type = 'policy'");
                     connection.Close();
                 }
                 //connection.Close();
@@ -160,6 +165,7 @@ namespace workshop192.Domain
             stores = new LinkedList<Store>();
             storeRole = new LinkedList<StoreRole>();
             nextStoreID = 0;
+            nextPolicyID = 0;
         }
 
         public LinkedList<StoreRole> getRolesByUserName(string username)
@@ -341,25 +347,7 @@ namespace workshop192.Domain
             }
         }
 
-        public void setMinPurchasePolicy(int storeId, int minPurchasePolicy)
-        {
-            try
-            {
-                lock (connection)
-                {
-
-                    connection.Open();
-                    //SqlConnection connection = Connector.getInstance().getSQLConnection();
-                    connection.Execute("UPDATE [dbo].[Stores] SET minPurchasePolicy = @minPurchasePolicy WHERE storeId = @storeId", new { storeId = storeId, minPurchasePolicy = minPurchasePolicy });
-                    connection.Close();
-
-                }
-            }
-            catch (Exception e)
-            {
-                connection.Close();
-            }
-        }
+       
 
         public int addStore(Store store)
         {
@@ -388,19 +376,11 @@ namespace workshop192.Domain
                             int active = 0;
                             if (store.isActive() == true)
                                 active = 1;
-                            //int minPurchasePolicy = -1;
-                            /*try
+                            LinkedList<PurchasePolicy> policies = store.getStorePolicyList();
+                            foreach (PurchasePolicy p in policies)
                             {
-                                minPurchasePolicy = store.getMinAmountPolicy().getAmount();
+                                addPolicyToDB(p, storeId);
                             }
-                            catch (Exception) { }
-                            int maxPurchasePolicy = -1;
-                            try
-                            {
-                                maxPurchasePolicy = store.getMaxAmountPolicy().getAmount();
-                            }
-                            catch (Exception) { }
-                            */
                             connection.Execute(sql, new { storeId, name, description, numOfOwners, active}, transaction);
 
 
@@ -427,24 +407,16 @@ namespace workshop192.Domain
             }
         }
 
-        public void setMaxPurchasePolicy(int storeId, int maxPurchasePolicy)
+        public void addPolicyToDB(PurchasePolicy p, int storeID)
         {
-            try
-            {
-                // SqlConnection connection = Connector.getInstance().getSQLConnection();
-                lock (connection)
-                {
-
-                    connection.Open();
-                    connection.Execute("UPDATE [dbo].[Stores] SET maxPurchasePolicy = @maxPurchasePolicy WHERE storeId = @storeId", new { storeId = storeId, maxPurchasePolicy = maxPurchasePolicy });
-                    connection.Close();
-
-                }
-            }
-            catch (Exception e)
-            {
-                connection.Close();
-            }
+            if (p is MinAmountPurchase)
+                addMinPolicy(((MinAmountPurchase)p), storeID);
+            else if (p is MaxAmountPurchase)
+                addMaxPolicy(((MaxAmountPurchase)p), storeID);
+            else if (p is TotalPricePolicy)
+                addTotalPrice(((TotalPricePolicy)p), storeID);
+            else if (p is ComplexPurchasePolicy)
+                addComplexPolicy(((ComplexPurchasePolicy)p), storeID);
         }
 
         public Store getStore(int storeId)
@@ -468,6 +440,7 @@ namespace workshop192.Domain
                     var StoreRoleResult = connection.Query<StoreRoleEntry>("SELECT * FROM [dbo].[StoreRoles] WHERE storeId=@storeId ", new { storeId = storeId });
                     var ContractResult = connection.Query<Contract>("SELECT * FROM [dbo].[Contracts] WHERE storeId = @storeId", new { storeId = storeId });
                     var pendingResult = connection.Query<string>("SELECT userName FROM [dbo].[PendingOwners] WHERE storeId = @storeId", new { storeId = storeId }).AsList();
+                    var policyEntries = connection.Query<PolicyEntry>("SELECT * FROM [dbo].[PurchasePolicy] WHERE storeID=@storeId", new { storeID = storeId });
                     connection.Close();
 
                     StoreEntry se = StoreResult.ElementAt(0);
@@ -487,11 +460,7 @@ namespace workshop192.Domain
                         if (p.getStoreID() == s.getStoreID())
                             s.addProduct(p);
                     }
-                    /*   if (se.getMaxPurchasePolicy() != -1)
-                           s.setMaxPurchasePolicy(se.getMaxPurchasePolicy());
-                       if (se.getMinPurchasePolicy() != -1)
-                           s.setMinPurchasePolicy(se.getMinPurchasePolicy());
-                      */
+                    s.setPolicyList(parsePolicy(policyEntries));
                     foreach (StoreRoleEntry element in StoreRoleResult)
                     {
                         if (element.getStoreId() == s.getStoreID() && element.getIsOwner() == 1)
@@ -543,6 +512,154 @@ namespace workshop192.Domain
             ///////////////////////////////////////////////////
 
         }
+
+        private LinkedList<PurchasePolicy> parsePolicy(IEnumerable<PolicyEntry> policyEntries)
+        {
+            int count = howManyComplex(policyEntries);
+            if (count == 1)
+            {
+                return parseOneComplex(policyEntries);
+            }
+            else if (count == 2)
+                return parseTwoComplex(policyEntries);
+            else
+                return parseNoComplex(policyEntries);
+
+        }
+
+        private LinkedList<PurchasePolicy> parseNoComplex(IEnumerable<PolicyEntry> policyEntries)
+        {
+            LinkedList<PurchasePolicy> policyList = new LinkedList<PurchasePolicy>();
+            foreach (PolicyEntry p in policyEntries)
+            {
+                policyList.AddLast(parseRegular(p));
+            }
+
+                return policyList;
+
+        }
+
+        private LinkedList<PurchasePolicy> parseOneComplex(IEnumerable<PolicyEntry> policyEntries)
+        {
+            LinkedList<PurchasePolicy> policyList = new LinkedList<PurchasePolicy>();
+            ComplexPurchasePolicy comp = null;
+            int compPos = -1;
+            int id1 = -1;
+            int id2 = -1;
+            for(int i =0; i<policyEntries.Count(); i++)
+            {
+                if (policyEntries.ElementAt(i).getType() == "complex")
+                {
+                    compPos = i;
+                    id1 = policyEntries.ElementAt(i).getSubID1();
+                    id2 = policyEntries.ElementAt(i).getSubID2();
+                }
+            }
+            PurchasePolicy child1 = null;
+            PurchasePolicy child2 = null;
+            for (int i = 0; i < policyEntries.Count(); i++)
+            {
+                if (policyEntries.ElementAt(i).getPolicyID() == id1)
+                {
+                    child1 = parseRegular(policyEntries.ElementAt(i));   
+                }
+                else if (policyEntries.ElementAt(i).getPolicyID() == id2)
+                {
+                    child2 = parseRegular(policyEntries.ElementAt(i));
+                }
+                else
+                {
+                    policyList.AddLast(parseRegular(policyEntries.ElementAt(i)));
+                }
+            }
+            comp = new ComplexPurchasePolicy(policyEntries.ElementAt(compPos).getCompType(), child1, child2);
+            policyList.AddLast(comp);
+            return policyList;
+
+
+        }
+
+        public PurchasePolicy parseRegular(PolicyEntry p)
+        {
+            if (p.getType() == "min")
+            {
+                MinAmountPurchase policy = new MinAmountPurchase(p.getAmount(), p.getPolicyID());
+                return policy;
+            }
+            else if (p.getType() == "max")
+            {
+                MaxAmountPurchase policy = new MaxAmountPurchase(p.getAmount(), p.getPolicyID());
+                return policy;
+            }
+            else
+            {
+                TotalPricePolicy policy = new TotalPricePolicy(p.getAmount(), p.getPolicyID());
+                return policy;
+            }
+        }
+        private LinkedList<PurchasePolicy> parseTwoComplex(IEnumerable<PolicyEntry> policyEntries)
+        {
+            LinkedList<PurchasePolicy> policyList = new LinkedList<PurchasePolicy>();
+            ComplexPurchasePolicy compParent = null;
+            ComplexPurchasePolicy compChild = null;
+            int compParentPos = -1;
+            int compChildPos = -1;
+            int idRegularChild = -1;
+            int id1Child = -1;
+            int id2Child = -1;
+
+            for (int i = 0; i < policyEntries.Count(); i++)
+            {
+                if (policyEntries.ElementAt(i).getType() == "complex" && policyEntries.ElementAt(i).getIsPartOfComp())
+                {
+                    compChildPos = i;
+                    id1Child = policyEntries.ElementAt(i).getSubID1();
+                    id2Child = policyEntries.ElementAt(i).getSubID2();
+                }
+                else if (policyEntries.ElementAt(i).getType() == "complex" && !policyEntries.ElementAt(i).getIsPartOfComp())
+                {
+                    compParentPos = i;  
+                }
+            }
+            PurchasePolicy child1 = null;
+            PurchasePolicy child2 = null;
+            for (int i = 0; i < policyEntries.Count(); i++)
+            {
+                PolicyEntry p = policyEntries.ElementAt(i);
+                if (p.getPolicyID() == id1Child)
+                {
+                    child1 = parseRegular(p);
+                }
+                else if (p.getPolicyID() == id2Child)
+                {
+                    child2 = parseRegular(p);
+                }
+                else if (p.getPolicyID() != id1Child & p.getPolicyID() != id2Child && p.getPolicyID() != compChildPos)
+                    idRegularChild = i;
+            }
+
+            compChild = new ComplexPurchasePolicy(policyEntries.ElementAt(compChildPos).getCompType(), child1, child2, policyEntries.ElementAt(compChildPos).getPolicyID());
+            PurchasePolicy regularChild = parseRegular(policyEntries.ElementAt(idRegularChild));
+            compParent = new ComplexPurchasePolicy(policyEntries.ElementAt(compParentPos).getCompType(), compChild, regularChild, policyEntries.ElementAt(compParentPos).getPolicyID());
+
+            policyList.AddLast(compParent);
+            return policyList;
+
+
+        }
+
+        private int howManyComplex(IEnumerable<PolicyEntry> policyEntries)
+        {
+            int count = 0;
+           for(int i=0; i<policyEntries.Count(); i++)
+            {
+                PolicyEntry p = policyEntries.ElementAt(i);
+                if (p.getType()=="complex")
+                    count++;
+            }
+            return count;
+        }
+
         public void removeStore(Store store)
         {
             try
@@ -560,6 +677,7 @@ namespace workshop192.Domain
 
                     connection.Open();
                     var affectedRows = connection.Execute("DELETE FROM Stores WHERE  storeId=@storeId ", new { hash = storeId });
+                    var affectedRowsPolicy = connection.Execute("DELETE FROM PurchasePolicy WHERE storeID=@storeId", new { hash = storeId });
                     connection.Close();
                 }
 
@@ -619,7 +737,25 @@ namespace workshop192.Domain
                 throw new ConnectionException("Database error");
             }
         }
+        internal int getNextPolicyID()
+        {
+            try
+            {
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
+                int idNum = connection.Query<int>("SELECT id FROM [dbo].[IDS] WHERE type=@type ", new { type = "policy" }).First();
+                int next = idNum + 1;
+                connection.Execute("UPDATE [dbo].[IDS] SET id = @id WHERE type = @type", new { id = next, type = "policy" });
+                nextStoreID = idNum;
+                //connection.Close();
+                return idNum;
+            }
+            catch (Exception)
+            {
+                //connection.Close();
+                throw new StoreException("connection to db faild");
+            }
 
+        }
         //if owner -> close store and remove store role, if manager only removes store role
         public void removeStoreByUser(SubscribedUser user)
         {
@@ -672,6 +808,21 @@ namespace workshop192.Domain
                 throw new ConnectionException("Database error");
             }
         }
+        public int getUpdatedPolicyID()
+        {
+            try
+            {
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
+                int idNum = connection.Query<int>("SELECT id FROM [dbo].[IDS] WHERE type=@type ", new { type = "policy" }).First();
+                //connection.Close();
+                return idNum;
+            }
+            catch (Exception e)
+            {
+                //connection.Close();
+                throw new StoreException("cant connect");
+            }
+        }
 
         public void initStoresAndRolesForUserName(string userName)
         {
@@ -711,6 +862,8 @@ namespace workshop192.Domain
                 throw new ConnectionException("Database error - Getting store roles of user " + userName);
             }
         }
+
+        
 
         public void addPendingOwner(int storeId, string appointer, string pending)
         {
@@ -890,6 +1043,91 @@ namespace workshop192.Domain
         //    }
         //    throw new DoesntExistException("User is not a pending owner");
         //}
+
+
+        public void addMinPolicy(MinAmountPurchase p, int storeID)
+        {
+            SqlConnection connection = Connector.getInstance().getSQLConnection();
+
+            int policyID = p.getPolicyID();
+            int amount = p.getAmount();
+            //  bool isPartOfComplex = false;
+            int isPartOfComplex = 0;
+            string type = "min";
+
+            string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex)" +
+                                                    " VALUES (@storeID, @policyID,@type, @amount,@isPartOfComplex )";
+            connection.Execute(sql, new { storeID, policyID, type, amount, isPartOfComplex  });
+        }
+        public void addMaxPolicy(MaxAmountPurchase p, int storeID)
+        {
+            SqlConnection connection = Connector.getInstance().getSQLConnection();
+
+            int policyID = p.getPolicyID();
+            int amount = p.getAmount();
+            //bool isPartOfComplex = false;
+            int isPartOfComplex = 0;
+            string type = "max";
+
+            string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex)" +
+                                                    " VALUES (@storeID, @policyID,@type, @amount,@isPartOfComplex )";
+            connection.Execute(sql, new { storeID, policyID, type, amount, isPartOfComplex });
+        }
+        public void addTotalPrice(TotalPricePolicy p, int storeID)
+        {
+            SqlConnection connection = Connector.getInstance().getSQLConnection();
+
+            int policyID = p.getPolicyID();
+            int amount = p.getAmount();
+            int isPartOfComplex = 0;
+            string type = "total";
+
+            string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex)" +
+                                                   " VALUES (@storeID, @policyID,@type, @amount,@isPartOfComplex )";
+            connection.Execute(sql, new { storeID, policyID, type, amount, isPartOfComplex });
+        }
+        public void addComplexPolicy(ComplexPurchasePolicy p, int storeID)
+        {
+            SqlConnection connection = Connector.getInstance().getSQLConnection();
+            int policyID = p.getPolicyID();
+            int isPartOfComplex = 0;
+            string type = "complex";
+            int subtype1 = p.getFirstChildID();
+            int subtype2 = p.getSecondChildID();
+            string compType = p.getCompType();
+            int isPartOfComplexChild = 1;
+            string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type,isPartOfComplex, subtypeID1, subtypeID2, compType )" +
+                                                    " VALUES (@storeID,@policyID,@type,@isPartOfComplex,@subtype1,@subtype2,@compType )";
+            connection.Execute(sql, new { storeID, policyID, type, isPartOfComplex, subtype1, subtype2,compType });
+            string sql1 = "UPDATE [dbo].[PurchasePolicy] SET isPartOfComplex = @isPartOfComplexChild WHERE storeID =@storeID AND policyID=@subtype1";
+            connection.Execute(sql1, new { storeID, subtype1, isPartOfComplexChild });
+            string sql2 = "UPDATE [dbo].[PurchasePolicy] SET isPartOfComplex= @isPartOfComplexChild WHERE storeID =@storeID AND policyID=@subtype2";
+            connection.Execute(sql2, new { storeID, subtype2, isPartOfComplexChild });
+        }
+
+        public void setPolicy(PurchasePolicy p, int storeID, int newAmount)
+        {
+            SqlConnection connection = Connector.getInstance().getSQLConnection();
+            int policyID = p.getPolicyID();
+            string sql = "UPDATE[dbo].[PurchasePolicy] SET amount=@newAmount WHERE storeID=@storeID AND policyID=@policyID";
+            connection.Execute(sql, new { newAmount, storeID, policyID });
+
+        }
+
+        public void removePolicy(PurchasePolicy p, int storeID)
+        {
+            SqlConnection connection = Connector.getInstance().getSQLConnection();
+            int policyID = p.getPolicyID();
+            string sql = "DELETE FROM PurchasePolicy WHERE storeID=@storeID AND policyID=@policyID";
+            connection.Execute(sql, new { storeID, policyID });
+            if (p is ComplexPurchasePolicy)
+            {
+                PurchasePolicy p1 = ((ComplexPurchasePolicy)p).getFirstPolicyChild();
+                PurchasePolicy p2 = ((ComplexPurchasePolicy)p).getSecondPolicyChild();
+                removePolicy(p1, storeID);
+                removePolicy(p2, storeID);
+            }
+        }
 
         public void signAndAddOwner(int storeId, string owner, string pending, StoreRole toAdd)
         {

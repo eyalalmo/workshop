@@ -12,7 +12,6 @@
 		</div>
 </div>
  <button type="submit" name="btnAdd" class="btn btn-primary"  id="maxBtn" >Set</button>
-    <button type="submit" name="btnAdd" class="btn btn-danger"  id="maxDelete" >Delete</button>
   <div class="form-group">
       <br />
    <label for="usr">Set Min Quantity:</label>
@@ -23,7 +22,17 @@
 		</div>
   </div>
   <button type="submit" name="btnAdd" class="btn btn-primary" id="minBtn" >Set</button>
-  <button type="submit" name="btnAdd" class="btn btn-danger"  id="minDelete" >Delete</button>
+
+      <div class="form-group">
+      <br />
+   <label for="usr">Set Min Total Price:</label>
+  <input type="number" class="form-control"  id="total" name="name">
+ <div class="container">
+	<div id="oldTotal" class="row">
+        </div>
+		</div>
+  </div>
+  <button type="submit" name="btnAdd" class="btn btn-primary" id="totalBtn" >Set</button>
   <script type="text/javascript">
 
        $(document).ready(function () {
@@ -89,7 +98,7 @@
 
                         if (response === "ok") {
                             alert("store policy changed success")
-                            window.location.href = baseUrl + "/EditStorePolicy?storeId="+ storeID;
+                            window.location.href = baseUrl + "/StorePolicy?storeID="+ storeID;
                         }
                         else {
                             alert(response)    
@@ -119,7 +128,7 @@
 
                         if (response === "ok") {
                             alert("store policy changed success")
-                             window.location.href = baseUrl + "/EditStorePolicy?storeId="+ storeID;     
+                             window.location.href = baseUrl + "/StorePolicy?storeID="+ storeID;     
                         }
                         else {
                            alert(response)     
@@ -129,59 +138,35 @@
                         console.log(response);
                     }
                 });
-           });
-            $("#maxDelete").click(function () {
-               event.preventDefault();
-             var storeID  =<%=ViewData["storeId"]%>;
+            });
+            $("#totalBtn").click(function () {
+                event.preventDefault();
+                var storeID =<%=ViewData["storeId"]%>;
              var getUrl = window.location;
              var baseUrl = getUrl.protocol + "//" + getUrl.host
-             
-                jQuery.ajax({
-                    type: "GET",
-                    url: baseUrl+"/api/store/DeleteMaxPolicy?storeID=" + storeID,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
 
-                        if (response === "ok") {
-                            alert("store policy deleted success")
-                            window.location.href = baseUrl + "/EditStorePolicy?storeId="+ storeID;
-                        }
-                        else {
-                            alert(response)    
-                        }
-                    },
-                    error: function (response) {
-                        console.log(response);
-                    }
-                });
-            });
+             totalVal = $("#total").val();
 
-           $("#minDelete").click(function () {
-               event.preventDefault();
-             var storeID  =<%=ViewData["storeId"]%>;
-             var getUrl = window.location;
-             var baseUrl = getUrl.protocol + "//" + getUrl.host
-             
-                jQuery.ajax({
-                    type: "GET",
-                    url: baseUrl+"/api/store/DeleteMinPolicy?storeID=" + storeID,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        if (response === "ok") {
-                            alert("store policy deleted success")
-                            window.location.href = baseUrl + "/EditStorePolicy?storeId="+ storeID;
-                        }
-                        else {
-                            alert(response)    
-                        }
-                    },
-                    error: function (response) {
-                        console.log(response);
-                    }
-                });
-            });
+             jQuery.ajax({
+                 type: "GET",
+                 url: baseUrl + "/api/store/AddTotalPolicy?storeID=" + storeID + "&totalVal=" + totalVal,
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 success: function (response) {
+
+                     if (response === "ok") {
+                         alert("store policy changed success")
+                         window.location.href = baseUrl + "/StorePolicy?storeID=" + storeID;
+                     }
+                     else {
+                         alert(response)
+                     }
+                 },
+                 error: function (response) {
+                     console.log(response);
+                 }
+             });
+               });
 
         });
 

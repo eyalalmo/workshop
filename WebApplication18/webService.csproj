@@ -403,6 +403,7 @@
     <Compile Include="Domain\CartProductEntry.cs" />
     <Compile Include="Domain\Contract.cs" />
     <Compile Include="Domain\Cookie.cs" />
+    <Compile Include="Domain\ComplexPurchasePolicy.cs" />
     <Compile Include="Domain\DBNotifications.cs" />
     <Compile Include="Domain\DiscountComponentEntry.cs" />
     <Compile Include="Domain\DiscountCompositeEntry.cs" />
@@ -437,6 +438,7 @@
     <Compile Include="Domain\Notification.cs" />
     <Compile Include="Domain\PaymentService.cs" />
     <Compile Include="Domain\Permissions.cs" />
+    <Compile Include="Domain\PolicyEntry.cs" />
     <Compile Include="Domain\Product.cs" />
     <Compile Include="Domain\PublicPurchase.cs" />
     <Compile Include="Domain\PurchasePolicy.cs" />
@@ -453,6 +455,7 @@
     <Compile Include="Domain\StoreRole.cs" />
     <Compile Include="Domain\StoreRoleEntry.cs" />
     <Compile Include="Domain\SubscribedUser.cs" />
+    <Compile Include="Domain\TotalPricePurchase.cs" />
     <Compile Include="Domain\UserState.cs" />
     <Compile Include="Domain\VisibleDiscount.cs" />
     <Compile Include="Exceptions\AlreadyExistException.cs" />

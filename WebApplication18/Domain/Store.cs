@@ -21,13 +21,20 @@ namespace workshop192.Domain
         public List<StoreRole> roles;
         public int numOfOwners;
         public bool active;
-        public MinAmountPurchase minPurchasePolicy;
-        public MaxAmountPurchase maxPurchasePolicy;
-        private LinkedList<InvisibleDiscount> invisibleDiscountList;
+        /* private MinAmountPurchase minPurchasePolicy;
+         private MaxAmountPurchase maxPurchasePolicy;
+         private TotalPricePolicy minTotalprice;
+        private ComplexPurchasePolicy complexPurchase;
+             * */
+        public LinkedList<InvisibleDiscount> invisibleDiscountList;
         [JsonIgnore]
         public LinkedList<DiscountComponent> discountList;
-       // public LinkedList<InvisibleDiscount> invisibleDiscountList;
+        // public LinkedList<InvisibleDiscount> invisibleDiscountList;
+        [JsonIgnore]
+        public LinkedList<PurchasePolicy> policies;
+        [JsonIgnore]
         public LinkedList<Contract> contracts;
+        [JsonIgnore]
         public LinkedList<string> pendingOwners;
 
         public Store(string storeName, string description)
@@ -40,9 +47,8 @@ namespace workshop192.Domain
             numOfOwners = 0;
             active = true;
             discountList = new LinkedList<DiscountComponent>();
-           // invisibleDiscountList = new LinkedList<InvisibleDiscount>();
-            maxPurchasePolicy = null;
-            minPurchasePolicy = null;
+            // invisibleDiscountList = new LinkedList<InvisibleDiscount>();
+            policies = new LinkedList<PurchasePolicy>();
             contracts = new LinkedList<Contract>();
             pendingOwners = new LinkedList<string>();
         }
@@ -59,8 +65,7 @@ namespace workshop192.Domain
             pendingOwners = new LinkedList<string>();
             discountList = new LinkedList<DiscountComponent>();
             invisibleDiscountList = new LinkedList<InvisibleDiscount>();
-            maxPurchasePolicy = null;
-            minPurchasePolicy = null;
+            policies = new LinkedList<PurchasePolicy>();
         }
 
         public void addProduct(Product p)
@@ -302,119 +307,6 @@ namespace workshop192.Domain
         }
 
 
-      //  public void removeDiscount(DiscountComponent discount)
-      //  {
-           /* DiscountComponent discount = DBDiscount.getInstance().getDiscountByID(discountID);
-            if (discount==null)
-            {
-                throw new DoesntExistException("Error: Discount does not exist so it cannot be removed");
-            }*/
-         //   discountList.Remove(discount);
-       // }
-        /*
-         private void checkValidityofPurchases(PurchasePolicy p1, PurchasePolicy p2)
-         {
-             if (p1!= null && p1.GetType() == typeof(MaxAmountPurchase))
-             {
-                 if (p1.getAmount() < p2.getAmount())
-                     throw new ArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
-             }
-             else if (p1.GetType() == typeof(MinAmountPurchase))
-             {
-                 if (p1.getAmount() > p2.getAmount())
-                     throw new ArgumentException("contradiction! minimum amount can not be larger than maximum amount Purchase Policy");
-             }
-
-        }
-       */ 
-        public void setMinPurchasePolicy(int MinAmount)
-        {
-            if (maxPurchasePolicy == null)
-            {
-                DBStore.getInstance().setMinPurchasePolicy(this.storeId, MinAmount);
-                minPurchasePolicy = new MinAmountPurchase(MinAmount);
-            }
-            else
-            {
-                if (maxPurchasePolicy.getAmount() < MinAmount)
-                {
-                    throw new ArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
-                }
-                else
-                {
-                    DBStore.getInstance().setMinPurchasePolicy(this.storeId, MinAmount);
-                    minPurchasePolicy = new MinAmountPurchase(MinAmount);
-                }
-            }
-
-        }
-
-        public void setMaxPurchasePolicy(int maxAmount)
-        {
-            if (minPurchasePolicy == null)
-            {
-                maxPurchasePolicy = new MaxAmountPurchase(maxAmount);
-                DBStore.getInstance().setMaxPurchasePolicy(this.storeId, maxAmount);
-            }
-            else
-            {
-                if (minPurchasePolicy.getAmount() > maxAmount)
-                {
-                    throw new ArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
-                }
-                else
-                {
-                    DBStore.getInstance().setMaxPurchasePolicy(this.storeId, maxAmount);
-                    maxPurchasePolicy = new MaxAmountPurchase(maxAmount);
-                }
-
-            }
-        }
-
-        public void checkPolicy(Product p, int amount)
-        {
-            if (maxPurchasePolicy != null)
-                maxPurchasePolicy.checkPolicy(p, amount);
-            if (minPurchasePolicy != null)
-                minPurchasePolicy.checkPolicy(p, amount);
-        }
-
-        public void removeMaxAMountPolicy()
-        {
-            maxPurchasePolicy = null;
-
-        }
-
-        public void removeMinAmountPolicy()
-        {
-            minPurchasePolicy = null;
-        }
-
-        public bool hasMinPurchasePolicy()
-        {
-            return (minPurchasePolicy != null);
-        }
-        public bool hasMaxPurchasePolicy()
-        {
-            return (maxPurchasePolicy != null);
-        }
-      
-
-        public MinAmountPurchase getMinAmountPolicy()
-        {
-            if (minPurchasePolicy != null)
-                return minPurchasePolicy;
-            else
-                throw new DoesntExistException();
-        }
-        public MaxAmountPurchase getMaxAmountPolicy()
-        {
-            if (maxPurchasePolicy != null)
-                return maxPurchasePolicy;
-            else
-                throw new DoesntExistException();
-        }
-
         public VisibleDiscount getVisibleDiscount()
         {
             foreach(Discount d in discountList)
@@ -437,6 +329,273 @@ namespace workshop192.Domain
         }
 
 
+        public void setMinPurchasePolicy(int minAmount, PurchasePolicy p)
+        {
+            PurchasePolicy max = getMaxPolicy();
+            if (max == null)
+            {
+                p.setAmount(minAmount);
+                DBStore.getInstance().setPolicy(p, storeId, minAmount);
+            }
+            else
+            {
+                if (max.getAmount() < minAmount)
+                {
+                    throw new ArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
+                }
+                else
+                {
+                    p.setAmount(minAmount);
+                    DBStore.getInstance().setPolicy(p, storeId, minAmount);
+                }
+            }
+
+        }
+
+        internal void setPolicyByID(int newAmount, int policyID)
+        {
+            PurchasePolicy p = findPolicyByID(policyID);
+            if (p is ComplexPurchasePolicy)
+                throw new ArgumentException("Can not set complex policy.");
+            if (p is MaxAmountPurchase)
+                setMaxPurchasePolicy(newAmount, p);
+            if (p is MinAmountPurchase)
+                setMinPurchasePolicy(newAmount, p);
+            if (p is TotalPricePolicy)
+                setTotalPolicy(newAmount, p);
+        }
+
+        private void setTotalPolicy(int newAmount, PurchasePolicy p)
+        {
+            if (newAmount < 0)
+                throw new ArgumentException("Total cart price can not be a negative number.");
+            p.setAmount(newAmount);
+            DBStore.getInstance().setPolicy(p, storeId, newAmount);
+
+        }
+
+        private PurchasePolicy getMaxPolicy()
+        {
+            foreach (PurchasePolicy p in policies)
+            {
+                if (p is MaxAmountPurchase)
+                    return p;
+            }
+            return null;
+
+        }
+        private PurchasePolicy getMinPolicy()
+        {
+            foreach (PurchasePolicy p in policies)
+            {
+                if (p is MinAmountPurchase)
+                    return p;
+            }
+            return null;
+
+        }
+        public void setMaxPurchasePolicy(int maxAmount,PurchasePolicy p)
+        {
+            
+            PurchasePolicy min = getMinPolicy();
+            if (min == null)
+            {
+                p.setAmount(maxAmount);
+                DBStore.getInstance().setPolicy(p, storeId, maxAmount);
+            }
+            else
+            {
+                if (min.getAmount() > maxAmount)
+                {
+                    throw new ArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
+                }
+                else
+                {
+                    p.setAmount(maxAmount);
+                    DBStore.getInstance().setPolicy(p, storeId, maxAmount);
+                }
+
+            }
+        }
+
+        public bool checkStorePolicy(int amount, double cartTotalPrice)
+        {
+            bool ans = true;
+            foreach (PurchasePolicy p in policies)
+            {
+                ans = ans & p.checkPolicy(cartTotalPrice, amount);
+            }
+            return ans;
+        }
+        public void removePolicyByID(int policyID)
+        {
+
+            PurchasePolicy p = findPolicyByID(policyID);
+            policies.Remove(p);
+            DBStore.getInstance().removePolicy(p, storeId);
+        }
+
+        private PurchasePolicy findPolicyByID(int policyID)
+        {
+            foreach (PurchasePolicy p in policies)
+            {
+                if (p.getPolicyID() == policyID)
+                    return p;
+            }
+            return null;
+        }
+
+        
+        public bool hasMinPurchasePolicy()
+        {
+            foreach (PurchasePolicy p in policies)
+            {
+                if (p is MinAmountPurchase)
+                    return true;
+                if (p is ComplexPurchasePolicy)
+                {
+                    if ((((ComplexPurchasePolicy)p).getFirstPolicyChild() is MinAmountPurchase) || ((ComplexPurchasePolicy)p).getSecondPolicyChild() is MinAmountPurchase)
+                        return true;
+                    if (((ComplexPurchasePolicy)p).getFirstPolicyChild() is ComplexPurchasePolicy)
+                    {
+                        ComplexPurchasePolicy c = (ComplexPurchasePolicy)(((ComplexPurchasePolicy)p).getFirstPolicyChild());
+                        if (c.getFirstPolicyChild() is MinAmountPurchase || c.getSecondPolicyChild() is MinAmountPurchase)
+                        {
+                            return true;
+                        }
+                    }
+                    else if(((ComplexPurchasePolicy)p).getSecondPolicyChild() is ComplexPurchasePolicy)
+                    {
+                        ComplexPurchasePolicy c = (ComplexPurchasePolicy)(((ComplexPurchasePolicy)p).getSecondPolicyChild());
+                        if (c.getFirstPolicyChild() is MinAmountPurchase || c.getSecondPolicyChild() is MinAmountPurchase)
+                        {
+                            return true;
+                        }
+                    }
+                }
+
+            }
+            return false;
+        }
+        public bool hasMaxPurchasePolicy()
+        {
+            foreach (PurchasePolicy p in policies)
+            {
+                if (p is MaxAmountPurchase)
+                    return true;
+                if (p is ComplexPurchasePolicy)
+                {
+                    if ((((ComplexPurchasePolicy)p).getFirstPolicyChild() is MaxAmountPurchase) || ((ComplexPurchasePolicy)p).getSecondPolicyChild() is MaxAmountPurchase)
+                        return true;
+                    if (((ComplexPurchasePolicy)p).getFirstPolicyChild() is ComplexPurchasePolicy)
+                    {
+                        ComplexPurchasePolicy c = (ComplexPurchasePolicy)(((ComplexPurchasePolicy)p).getFirstPolicyChild());
+                        if (c.getFirstPolicyChild() is MaxAmountPurchase || c.getSecondPolicyChild() is MaxAmountPurchase)
+                        {
+                            return true;
+                        }
+                    }
+                    else if (((ComplexPurchasePolicy)p).getSecondPolicyChild() is ComplexPurchasePolicy)
+                    {
+                        ComplexPurchasePolicy c = (ComplexPurchasePolicy)(((ComplexPurchasePolicy)p).getSecondPolicyChild());
+                        if (c.getFirstPolicyChild() is MaxAmountPurchase || c.getSecondPolicyChild() is MaxAmountPurchase)
+                        {
+                            return true;
+                        }
+                    }
+                }
+
+            }
+            return false;
+
+        }
+
+        public bool hasTotalPricePolicy()
+        {
+            foreach (PurchasePolicy p in policies)
+            {
+                if (p is TotalPricePolicy)
+                    return true;
+                if (p is ComplexPurchasePolicy)
+                {
+                    if ((((ComplexPurchasePolicy)p).getFirstPolicyChild() is TotalPricePolicy) || ((ComplexPurchasePolicy)p).getSecondPolicyChild() is TotalPricePolicy)
+                        return true;
+                    if (((ComplexPurchasePolicy)p).getFirstPolicyChild() is ComplexPurchasePolicy)
+                    {
+                        ComplexPurchasePolicy c = (ComplexPurchasePolicy)(((ComplexPurchasePolicy)p).getFirstPolicyChild());
+                        if (c.getFirstPolicyChild() is TotalPricePolicy || c.getSecondPolicyChild() is TotalPricePolicy)
+                        {
+                            return true;
+                        }
+                    }
+                    else if (((ComplexPurchasePolicy)p).getSecondPolicyChild() is ComplexPurchasePolicy)
+                    {
+                        ComplexPurchasePolicy c = (ComplexPurchasePolicy)(((ComplexPurchasePolicy)p).getSecondPolicyChild());
+                        if (c.getFirstPolicyChild() is TotalPricePolicy || c.getSecondPolicyChild() is TotalPricePolicy)
+                        {
+                            return true;
+                        }
+                    }
+                }
+
+            }
+            return false;
+
+        }
+
+        public void addMinAmountPolicy(int minAmount)
+        {
+            if (hasMinPurchasePolicy())
+            {
+                throw new AlreadyExistException("Store can not have 2 minimum amount purchase policy.");
+            }
+            MinAmountPurchase p = new MinAmountPurchase(minAmount);
+            policies.AddLast(p);
+            DBStore.getInstance().addMinPolicy(p, storeId);
+        }
+        public void addMaxAmountPolicy(int minAmount)
+        {
+            if (hasMaxPurchasePolicy())
+            {
+                throw new AlreadyExistException("Store can not have 2 maximum amount purchase policy.");
+            }
+            MaxAmountPurchase p = new MaxAmountPurchase(minAmount);
+            policies.AddLast(p);
+            DBStore.getInstance().addMaxPolicy(p, storeId);
+        }
+
+        public void addTotalAmountPolicy(int minPrice)
+        {
+            if (hasTotalPricePolicy())
+            {
+                throw new AlreadyExistException("Store can not have 2 total cart price - purchase policy.");
+            }
+            TotalPricePolicy p = new TotalPricePolicy(minPrice);
+            policies.AddLast(p);
+            DBStore.getInstance().addTotalPrice(p, storeId);
+        }
+
+        public void addComplexPurchasePolicy(int index1, int index2, string type)
+        {
+            PurchasePolicy p1 = policies.ElementAt(index1);
+            PurchasePolicy p2 = policies.ElementAt(index2);
+
+            ComplexPurchasePolicy complexPurchase = new ComplexPurchasePolicy(type, p1, p2);
+            policies.Remove(p1);
+            policies.Remove(p2);
+            policies.AddLast(complexPurchase);
+            DBStore.getInstance().addComplexPolicy(complexPurchase, storeId);
+        }
+
+        public LinkedList<PurchasePolicy> getStorePolicyList()
+        {
+            return policies;
+        }
+
+        public void setPolicyList(LinkedList<PurchasePolicy> policyList)
+        {
+            this.policies = policyList;
+        }
     }
 
 }

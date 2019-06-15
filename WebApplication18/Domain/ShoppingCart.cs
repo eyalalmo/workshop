@@ -55,7 +55,7 @@ namespace workshop192.Domain
 
         public void addToCart(Product product, int amount)
         {
-            store.checkPolicy(product, amount);
+         //   store.checkPolicy(product, amount);
 
             int quantityLeft = product.getQuantityLeft();
             if (quantityLeft - amount >= 0)
@@ -71,20 +71,7 @@ namespace workshop192.Domain
             }
         }
 
-        //public void addStoreCoupon(string couponCode)
-        //{
-        //    if (coupon != "")
-        //        throw new AlreadyExistException("Error: Can not have more than one coupon in shopping cart");
-        //    store.checkCouponCode(couponCode);
-        //    coupon = couponCode;
-        //}
-
-
-        //public void removeCoupon()
-        //{
-        //    coupon = "";
-        //}
-
+       
 
         public void removeFromCart(Product p)
         {
@@ -101,7 +88,7 @@ namespace workshop192.Domain
         {
             if (!productList.ContainsKey(p))
                 throw new CartException("error - cart does not contains product");
-            store.checkPolicy(p, newAmount);
+          //  store.checkPolicy(p, newAmount);
 
             int oldAmount = productList[p];
             int quantity = p.getQuantityLeft();
@@ -226,38 +213,20 @@ namespace workshop192.Domain
                 }
             }
         }
-
-       /* public void checkout(String address,String creditCard) {
-           // String res = "";
-            int sum = 0;
+        public int getNumOfProductsInCart()
+        {
+            int amount = 0;
             foreach (KeyValuePair<Product, int> entry in productList)
             {
-                if (entry.Key.getQuantityLeft() > entry.Value)
-                {
-                    
-                    sum = entry.Key.getPrice() * entry.Value;
-                    Boolean isOk = PaymentService.getInstance().checkOut(creditCard,sum);
-                    if (isOk)
-                    {
-                        entry.Key.setQuantityLeft(entry.Key.getQuantityLeft() - entry.Value);
-
-                        if (DeliveryService.getInstance().sendToUser(address, entry.Key) == false)
-                        {
-                            entry.Key.setQuantityLeft(entry.Key.getQuantityLeft() + entry.Value);
-                            throw new CartException("Cannot deliver " + entry.Key.getProductName());
-                        }
-                    }
-                    else
-                    {
-                        throw new CartException("Payment for " + entry.Key.getProductName());
-                    }
-                }
-                else
-                {
-                    throw new CartException("Not enough quantity of " + entry.Key.getProductName() );
-                }
-
+                int a = entry.Value;
+                amount += a;
             }
-        } */
+            return amount;
+        }
+
+        internal bool checkStorePolicy()
+        {
+           return store.checkStorePolicy(getNumOfProductsInCart(), getActualTotalPrice());
+        }
     }
 }
