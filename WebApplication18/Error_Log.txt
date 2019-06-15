@@ -99,3 +99,10 @@
    ?-  WebApplication18.Controllers.UesrController.Checkout(String address, String creditcard, String month, String year, String holder, String cvv) ?- C:\Users\etay2\Desktop\C#WorksVS\workshop192\WebApplication18\Controllers\UesrController.cs:???? 225
 2019-06-15 14:30:03,724 ERROR ErrorLog: An Error has occured. Function: getStore; Stack Trace:    at workshop192.ServiceLayer.StoreService.addStore(String storeName, String storeDescription, Int32 session) in C:\Users\eyalb\Source\Repos\eyalalmo\workshop\WebApplication18\ServiceLayer\StoreService.cs:line 155
    at WebApplication18.Controllers.StoreController.addStore(String name, String description) in C:\Users\eyalb\Source\Repos\eyalalmo\workshop\WebApplication18\Controllers\StoreController.cs:line 85
+2019-06-15 20:04:00,871 ERROR ErrorLog: An Error has occured. Function: login; Stack Trace:    ?-  System.Text.Encoding.GetBytes(String s)
+   ?-  workshop192.Domain.DBSubscribedUser.encryptPassword(String password) ?- C:\Users\User\Documents\workshop\WebApplication18\Domain\DBSubscribedUser.cs:???? 424
+   ?-  workshop192.Domain.Guest.login(String username, String password, Session session) ?- C:\Users\User\Documents\workshop\WebApplication18\Domain\Guest.cs:???? 53
+   ?-  workshop192.Domain.Session.login(String username, String password) ?- C:\Users\User\Documents\workshop\WebApplication18\Domain\Session.cs:???? 56
+   ?-  workshop192.Bridge.DomainBridge.login(Int32 sessionid, String username, String password) ?- C:\Users\User\Documents\workshop\WebApplication18\Bridge\DomainBridge.cs:???? 53
+   ?-  workshop192.ServiceLayer.UserService.login(Int32 session, String username, String password) ?- C:\Users\User\Documents\workshop\WebApplication18\ServiceLayer\UserService.cs:???? 49
+   ?-  WebApplication18.Controllers.UesrController.login(String Username, String Password) ?- C:\Users\User\Documents\workshop\WebApplication18\Controllers\UesrController.cs:???? 47
