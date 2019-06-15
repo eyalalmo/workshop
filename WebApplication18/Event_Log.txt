@@ -4252,3 +4252,22 @@ The statement has been terminated.
 2019-06-14 14:10:20,223 INFO EventLog: User tomer has successfuly registered
 2019-06-14 14:10:34,020 INFO EventLog: User tomer has successfuly logged in.
 2019-06-14 14:10:47,094 INFO EventLog: User tomer has successfuly created a store
+2019-06-15 11:50:46,703 INFO EventLog: User tomer has successfuly registered
+2019-06-15 11:50:53,832 INFO EventLog: User tomer has successfuly logged in.
+2019-06-15 11:52:28,809 INFO EventLog: User tomer has successfuly created a store
+2019-06-15 11:59:45,624 INFO EventLog: User tomer has successfuly registered
+2019-06-15 11:59:50,698 INFO EventLog: User tomer has successfuly logged in.
+2019-06-15 12:01:23,835 INFO EventLog: A purchase has been made
+2019-06-15 12:01:25,262 INFO EventLog: A purchase has been made
+2019-06-15 12:01:26,660 INFO EventLog: A purchase has been made
+2019-06-15 12:01:28,294 INFO EventLog: A purchase has been made
+2019-06-15 12:01:29,746 INFO EventLog: A purchase has been made
+2019-06-15 12:02:06,111 INFO EventLog: A purchase has been made
+2019-06-15 12:03:20,117 INFO EventLog: A purchase has been made
+2019-06-15 12:16:38,613 INFO EventLog: User tomer has successfuly logged in.
+2019-06-15 12:17:13,445 INFO EventLog: A purchase has been made
+2019-06-15 12:18:02,748 INFO EventLog: User tomer has successfuly created a store
+2019-06-15 12:19:32,930 INFO EventLog: A purchase has been made
+2019-06-15 12:20:13,227 INFO EventLog: A purchase has been made
+2019-06-15 12:20:45,395 INFO EventLog: A purchase has been made
+2019-06-15 12:21:22,226 INFO EventLog: A purchase has been made
