@@ -4310,3 +4310,11 @@ The statement has been terminated.
 2019-06-15 16:53:57,667 INFO EventLog: User p has successfuly created a store
 2019-06-15 17:01:44,724 INFO EventLog: User x has successfuly logged in.
 2019-06-15 17:19:15,066 INFO EventLog: User x has successfuly logged in.
+2019-06-15 17:30:36,379 ERROR EventLog: Login : Error: Username does not exist
+2019-06-15 17:30:43,515 INFO EventLog: User x has successfuly logged in.
+2019-06-15 17:36:44,250 INFO EventLog: User x has successfuly logged in.
+2019-06-15 17:39:14,249 INFO EventLog: User x has successfuly created a store
+2019-06-15 17:45:30,706 ERROR EventLog: Login : Error: Username does not exist
+2019-06-15 17:45:36,508 ERROR EventLog: Login : Error: Username does not exist
+2019-06-15 17:45:42,648 INFO EventLog: User x has successfuly registered
+2019-06-15 17:45:49,197 INFO EventLog: User x has successfuly logged in.

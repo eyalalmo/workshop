@@ -25,7 +25,7 @@
 
       <div class="form-group">
       <br />
-   <label for="usr">Set Min Quantity:</label>
+   <label for="usr">Set Min Total Price:</label>
   <input type="number" class="form-control"  id="total" name="name">
  <div class="container">
 	<div id="oldTotal" class="row">
@@ -145,7 +145,7 @@
              var getUrl = window.location;
              var baseUrl = getUrl.protocol + "//" + getUrl.host
 
-             minVal = $("#min").val();
+             totalVal = $("#total").val();
 
              jQuery.ajax({
                  type: "GET",
