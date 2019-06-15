@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -48,8 +49,6 @@ namespace workshop192.Domain
                 lock (connection)
                 {
                     connection.Open();
-                    using (var transaction = connection.BeginTransaction())
-                    {
                         string sql = "INSERT INTO [dbo].[DiscountComponent] (id, percentage, duration, type, storeId, isPartOfComplex)" +
                                         " VALUES (@id,@percentage, @duration, @type, @storeId, @isPartOfComplex)";
                         int isPartOfComplex;
@@ -69,7 +68,7 @@ namespace workshop192.Domain
                                 storeId = d.getStoreId(),
                                 isPartOfComplex
 
-                            }, transaction);
+                            });
                             if (d is VisibleDiscount)
                             {
                                 VisibleDiscount v = (VisibleDiscount)d;
@@ -93,7 +92,7 @@ namespace workshop192.Domain
                                 storeId = d.getStoreId(),
                                 isPartOfComplex
 
-                            }, transaction);
+                            });
                             foreach (DiscountComponent child in composite.getChildren())
                             {
                                 string sql2 = "INSERT INTO [dbo].[DiscountComposite] (id, childid, type)" +
@@ -104,13 +103,11 @@ namespace workshop192.Domain
                                     id = d.getId(),
                                     childid = child.getId(),
                                     type = composite.getType()
-                                }, transaction);
+                                });
                             }
                         }
-                        transaction.Commit();
                         connection.Close();
                         discounts.AddFirst(d);
-                    }
                 }
             }
 
@@ -201,9 +198,6 @@ namespace workshop192.Domain
             //not reliantdiscount
             int numOfProducts = -1;
             int totalAmount = -1;
-            lock (connection)
-            {
-                connection.Open();
                 string sql = "INSERT INTO [dbo].[Discount] (id, type, reliantType, visibleType, productId, storeId, numOfProducts, totalAmount)" +
                             " VALUES (@id, @type, @reliantType, @visibleType, @productId, @storeId, @numOfProducts, @totalAmount)";
                 connection.Execute(sql, new
@@ -217,8 +211,6 @@ namespace workshop192.Domain
                     numOfProducts,
                     totalAmount
                 });
-                connection.Close();
-            }
         }
         private void addReliantDiscount(ReliantDiscount r)
         {
@@ -247,9 +239,6 @@ namespace workshop192.Domain
                 totalAmount = -1;
                 numOfProducts = r.getMinNumOfProducts();
             }
-            lock (connection)
-            {
-                connection.Open();
                 string sql = "INSERT INTO [dbo].[Discount] (id, type, reliantType, visibleType, productId, storeId, numOfProducts, totalAmount)" +
                             " VALUES (@id, @type, @reliantType, @visibleType, @productId, @storeId, @numOfProducts, @totalAmount)";
                 connection.Execute(sql, new
@@ -263,8 +252,6 @@ namespace workshop192.Domain
                     numOfProducts,
                     totalAmount
                 });
-                connection.Close();
-            }
         }
 
         public void setPercentage(int id, double percentage)
@@ -331,9 +318,6 @@ namespace workshop192.Domain
         public Discount getStoreDiscount(int id, int storeId)
         {
             //SqlConnection connection = Connector.getInstance().getSQLConnection();
-            lock (connection)
-            {
-                connection.Open();
                 var discountEntry = connection.Query<DiscountEntry>("SELECT * FROM [dbo].[Discount] WHERE id=@id AND storeId=@storeId", new { id, storeId = storeId }).First();
 
                 DiscountEntry d = (DiscountEntry)discountEntry;
@@ -361,7 +345,6 @@ namespace workshop192.Domain
                     }
                     return r;
                 }
-            }
         }
 
 
@@ -369,17 +352,24 @@ namespace workshop192.Domain
         {
             try
             {
+               
+                    //SqlConnection connection = Connector.getInstance().getSQLConnection();
+                    LinkedList<DiscountComponent> storeDiscounts = new LinkedList<DiscountComponent>();
                 lock (connection)
                 {
                     connection.Open();
-                    //SqlConnection connection = Connector.getInstance().getSQLConnection();
-                    LinkedList<DiscountComponent> storeDiscounts = new LinkedList<DiscountComponent>();
                     var c = connection.Query<DiscountComponentEntry>("SELECT * FROM [dbo].[DiscountComponent] WHERE storeId=@storeId AND type=@type", new { storeId = storeId, type = "Discount" }).ToList<DiscountComponentEntry>();
+                    connection.Close();
                     List<DiscountComponentEntry> discountList = (List<DiscountComponentEntry>)c;
                     foreach (DiscountComponentEntry d in discountList)
                     {
+
+                        connection.Open();
                         var discountEntry = connection.Query<DiscountEntry>("SELECT * FROM [dbo].[Discount] WHERE id=@id", new { id = d.getId() }).First();
+                        connection.Close();
+
                         DiscountEntry de = (DiscountEntry)discountEntry;
+
 
                         if (de.getProductId() != -1)//productDiscount
                         {
@@ -395,7 +385,10 @@ namespace workshop192.Domain
                                 storeDiscounts.AddFirst(dis);
                             discounts.AddFirst(dis);
                         }
+
+
                     }
+                    connection.Open();
                     var compositeEntryList = connection.Query<DiscountComponentEntry>("SELECT * FROM [dbo].[DiscountComponent] WHERE storeId=@storeId AND type=@type", new { storeId = storeId, type = "Composite" }).ToList<DiscountComponentEntry>();
                     List<DiscountComponentEntry> compositeEntryL = (List<DiscountComponentEntry>)compositeEntryList;
                     int i = 0;
@@ -404,6 +397,7 @@ namespace workshop192.Domain
                         DiscountComponentEntry di = compositeEntryL.ElementAt(i);
                         List<DiscountComponent> children = new List<DiscountComponent>();
                         var discountChildList = connection.Query<DiscountCompositeEntry>("SELECT * FROM [dbo].[DiscountComposite] WHERE id=@id", new { id = di.getId() }).ToList<DiscountCompositeEntry>();
+                        connection.Close();
                         List<DiscountCompositeEntry> de = (List<DiscountCompositeEntry>)discountChildList;
                         string type = de.ElementAt(0).getType();
                         bool childrenPulledFromDB = true;
@@ -440,9 +434,9 @@ namespace workshop192.Domain
             }
             catch (Exception)
             {
-                connection.Close();
+                if(connection.State != ConnectionState.Closed)
+                    connection.Close();
                 return new LinkedList<DiscountComponent>();
-
             }
         }
         public Discount getProductDiscount(int storeId, int productId)
@@ -454,6 +448,7 @@ namespace workshop192.Domain
                 {
                     connection.Open();
                     var discountEntry = connection.Query<DiscountEntry>("SELECT * FROM [dbo].[Discount] WHERE storeId=@storeId AND productId=@productId", new { storeId = storeId, productId = productId }).First();
+                    connection.Close();
                     DiscountEntry d = (DiscountEntry)discountEntry;
                     DiscountComponent dis = getDiscountByID(d.getId());
                     if (dis != null)
@@ -483,14 +478,14 @@ namespace workshop192.Domain
                             r = new ReliantDiscount(component.getId(), isPartOfComplex, component.getPercentage(), component.getDuration(), d.getNumOfProducts(), p, component.getStoreId());
                             discounts.AddFirst(r);
                         }
-                        connection.Close();
                         return r;
                     }
                 }
             }
             catch (Exception)
             {
-                connection.Close();
+                if (connection.State != ConnectionState.Closed)
+                    connection.Close();
                 return null;
             }
         }

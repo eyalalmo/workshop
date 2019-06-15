@@ -366,8 +366,6 @@ namespace workshop192.Domain
 
                     using (var transaction = connection.BeginTransaction())
                     {
-
-
                         ////////////////////////////////////////////////
                         string sql = "INSERT INTO [dbo].[Stores] (storeId, name,description,numOfOwners,active)" +
                                          " VALUES (@storeId, @name, @description,@numOfOwners,@active)";
@@ -911,7 +909,7 @@ namespace workshop192.Domain
             }
         }
 
-
+        ////////////////////////////////////////////////TODO eilonnnnn
         public void removePendingOwner(int storeId, string pending)
         {
             try
@@ -1056,17 +1054,20 @@ namespace workshop192.Domain
         {
             try
             {
-                connection.Open();
-                int policyID = p.getPolicyID();
-                int amount = p.getAmount();
-                //  bool isPartOfComplex = false;
-                int isPartOfComplex = 0;
-                string type = "min";
+                lock (connection)
+                {
+                    connection.Open();
+                    int policyID = p.getPolicyID();
+                    int amount = p.getAmount();
+                    //  bool isPartOfComplex = false;
+                    int isPartOfComplex = 0;
+                    string type = "min";
 
-                string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex)" +
-                                                        " VALUES (@storeID, @policyID,@type, @amount,@isPartOfComplex )";
-                connection.Execute(sql, new { storeID, policyID, type, amount, isPartOfComplex });
-                connection.Close();
+                    string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex)" +
+                                                            " VALUES (@storeID, @policyID,@type, @amount,@isPartOfComplex )";
+                    connection.Execute(sql, new { storeID, policyID, type, amount, isPartOfComplex });
+                    connection.Close();
+                }
             }
             catch (Exception) {
                 connection.Close();
@@ -1077,17 +1078,20 @@ namespace workshop192.Domain
         {
             try
             {
-                connection.Open();
-                int policyID = p.getPolicyID();
-                int amount = p.getAmount();
-                //bool isPartOfComplex = false;
-                int isPartOfComplex = 0;
-                string type = "max";
+                lock (connection)
+                {
+                    connection.Open();
+                    int policyID = p.getPolicyID();
+                    int amount = p.getAmount();
+                    //bool isPartOfComplex = false;
+                    int isPartOfComplex = 0;
+                    string type = "max";
 
-                string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex)" +
-                                                        " VALUES (@storeID, @policyID,@type, @amount,@isPartOfComplex )";
-                connection.Execute(sql, new { storeID, policyID, type, amount, isPartOfComplex });
-                connection.Close();
+                    string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex)" +
+                                                            " VALUES (@storeID, @policyID,@type, @amount,@isPartOfComplex )";
+                    connection.Execute(sql, new { storeID, policyID, type, amount, isPartOfComplex });
+                    connection.Close();
+                }
             }
             catch (Exception)
             {
@@ -1099,16 +1103,19 @@ namespace workshop192.Domain
         {
             try
             {
-                connection.Open();
-                int policyID = p.getPolicyID();
-                int amount = p.getAmount();
-                int isPartOfComplex = 0;
-                string type = "total";
+                lock (connection)
+                {
+                    connection.Open();
+                    int policyID = p.getPolicyID();
+                    int amount = p.getAmount();
+                    int isPartOfComplex = 0;
+                    string type = "total";
 
-                string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex)" +
-                                                       " VALUES (@storeID, @policyID,@type, @amount,@isPartOfComplex )";
-                connection.Execute(sql, new { storeID, policyID, type, amount, isPartOfComplex });
-                connection.Close();
+                    string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex)" +
+                                                           " VALUES (@storeID, @policyID,@type, @amount,@isPartOfComplex )";
+                    connection.Execute(sql, new { storeID, policyID, type, amount, isPartOfComplex });
+                    connection.Close();
+                }
             }
             catch (Exception)
             {
@@ -1120,22 +1127,25 @@ namespace workshop192.Domain
         {
             try
             {
-                connection.Open();
-                int policyID = p.getPolicyID();
-                int isPartOfComplex = 0;
-                string type = "complex";
-                int subtype1 = p.getFirstChildID();
-                int subtype2 = p.getSecondChildID();
-                string compType = p.getCompType();
-                int isPartOfComplexChild = 1;
-                string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type,isPartOfComplex, subtypeID1, subtypeID2, compType )" +
-                                                        " VALUES (@storeID,@policyID,@type,@isPartOfComplex,@subtype1,@subtype2,@compType )";
-                connection.Execute(sql, new { storeID, policyID, type, isPartOfComplex, subtype1, subtype2, compType });
-                string sql1 = "UPDATE [dbo].[PurchasePolicy] SET isPartOfComplex = @isPartOfComplexChild WHERE storeID =@storeID AND policyID=@subtype1";
-                connection.Execute(sql1, new { storeID, subtype1, isPartOfComplexChild });
-                string sql2 = "UPDATE [dbo].[PurchasePolicy] SET isPartOfComplex= @isPartOfComplexChild WHERE storeID =@storeID AND policyID=@subtype2";
-                connection.Execute(sql2, new { storeID, subtype2, isPartOfComplexChild });
-                connection.Close();
+                lock (connection)
+                {
+                    connection.Open();
+                    int policyID = p.getPolicyID();
+                    int isPartOfComplex = 0;
+                    string type = "complex";
+                    int subtype1 = p.getFirstChildID();
+                    int subtype2 = p.getSecondChildID();
+                    string compType = p.getCompType();
+                    int isPartOfComplexChild = 1;
+                    string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type,isPartOfComplex, subtypeID1, subtypeID2, compType )" +
+                                                            " VALUES (@storeID,@policyID,@type,@isPartOfComplex,@subtype1,@subtype2,@compType )";
+                    connection.Execute(sql, new { storeID, policyID, type, isPartOfComplex, subtype1, subtype2, compType });
+                    string sql1 = "UPDATE [dbo].[PurchasePolicy] SET isPartOfComplex = @isPartOfComplexChild WHERE storeID =@storeID AND policyID=@subtype1";
+                    connection.Execute(sql1, new { storeID, subtype1, isPartOfComplexChild });
+                    string sql2 = "UPDATE [dbo].[PurchasePolicy] SET isPartOfComplex= @isPartOfComplexChild WHERE storeID =@storeID AND policyID=@subtype2";
+                    connection.Execute(sql2, new { storeID, subtype2, isPartOfComplexChild });
+                    connection.Close();
+                }
             }
             catch (Exception)
             {
@@ -1148,11 +1158,14 @@ namespace workshop192.Domain
         {
             try
             {
-                connection.Open();
-                int policyID = p.getPolicyID();
-                string sql = "UPDATE[dbo].[PurchasePolicy] SET amount=@newAmount WHERE storeID=@storeID AND policyID=@policyID";
-                connection.Execute(sql, new { newAmount, storeID, policyID });
-                connection.Close();
+                lock (connection)
+                {
+                    connection.Open();
+                    int policyID = p.getPolicyID();
+                    string sql = "UPDATE[dbo].[PurchasePolicy] SET amount=@newAmount WHERE storeID=@storeID AND policyID=@policyID";
+                    connection.Execute(sql, new { newAmount, storeID, policyID });
+                    connection.Close();
+                }
             }
             catch (Exception)
             {
@@ -1165,11 +1178,14 @@ namespace workshop192.Domain
         {
             try
             {
-                connection.Open();
-                int policyID = p.getPolicyID();
-                string sql = "DELETE FROM PurchasePolicy WHERE storeID=@storeID AND policyID=@policyID";
-                connection.Execute(sql, new { storeID, policyID });
-                connection.Close();
+                lock (connection)
+                {
+                    connection.Open();
+                    int policyID = p.getPolicyID();
+                    string sql = "DELETE FROM PurchasePolicy WHERE storeID=@storeID AND policyID=@policyID";
+                    connection.Execute(sql, new { storeID, policyID });
+                    connection.Close();
+                }
             }
             catch (Exception)
             {
