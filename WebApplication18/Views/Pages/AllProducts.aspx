@@ -63,12 +63,37 @@
             doc.innerHTML = "";
             var i;
             var jsonList = JSON.parse(response);
-            var HTML = "";
+            var HTML = "<div class=\"card-body\"><div class=\"row\style=\"background-color:black\"> </div></div>";
             var minPrice = document.getElementById("minPrice").value;
             var maxPrice = document.getElementById("maxPrice").value;
             var rank = document.getElementById("minRank").value;
             for (i = 0; i < jsonList.length; i++) {
-                if (jsonList[i].price >= minPrice && jsonList[i].price <= maxPrice && jsonList[i].rank >= rank){
+
+                            HTML +=
+                                `<hr><div class=\"card-body\">
+                                    <div class=\"row\"> 
+                                        <div class=\"col-12 col-sm-12 col-md-2 text-center\">
+                                            <img src=\"../Images/NoImageAvailabe.jpg\"" + "height=\"80\" />
+                                        </div>
+                                        <div class=\"col-12 text-sm-center col-sm-12 text-md-left col-md-6\">
+                                            <h4 class=\"product-name\">
+                                                <strong>" + productName + "</strong>
+                                            </h4>
+                                        </div> 
+                                        <div class=\"col-12 col-sm-12 text-sm-center col-md-4 text-md-right row\"> 
+                                            <div class=\"col-2 col-sm-2 col-md-4 text-md-right\" style=\"padding-top: 5px\">  
+                                                <h5>
+                                                    <strong>$" + price + "<span class=\"text-muted\"> x</span></strong>
+                                                </h5>
+                                            </div>
+                                            <div class=\"quantity\"><input type=\"button\" value=\"+\" onclick=\"plusQuantity(" + id + "," + quantity + ");\" class=\"plus\">
+                                                <input type=\"text\" value=\"" + quantity + "\" title=\"Qty\" class=\"qty\">
+                                                <input type=\"button\" value=\"-\" onclick=\"minusQuantity(" + id + "," + quantity + ");\" class=\"minus\">
+                                            </div>
+                                            <div class=\"col-2 col-sm-2 col-md-2 text-right\"><button type=\"button\" class=\"btn btn-danger\" onclick=\"deleteRow(" + id + ");\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></div></div></div></div>";
+            
+
+                /*if (jsonList[i].price >= minPrice && jsonList[i].price <= maxPrice && jsonList[i].rank >= rank){
                 HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" id="` + jsonList[i].productID + `">
 		                   <div class="my-list">
             			<p><b>`+ jsonList[i].productName + `</b></p>
@@ -83,7 +108,7 @@
            + "<a href=\"" + baseUrl + "/ViewStore?storeId=" + jsonList[i].storeID + "\" class=\"btn btn-info\">Go To Store</a>" +
 			`</div>
 		</div>
-		</div>`
+		</div>`*/
                 //`+jsonList[i].ProductID+`
                 }
             }
