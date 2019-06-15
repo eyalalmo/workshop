@@ -114,6 +114,11 @@ namespace workshop192.ServiceLayer
             db.removeUser(admin, username);
         }
 
+        public int cancelDelivery(int result)
+        {
+           return  db.cancelDelivery(result);
+        }
+
         public void logout(int user)
         {
             if (user < 0)

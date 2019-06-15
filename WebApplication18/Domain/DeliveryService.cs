@@ -62,6 +62,7 @@ namespace workshop192.Domain
 
         public bool connectToSystem()
         {
+            handShake();
             return true;
         }
         public bool handShake()
@@ -91,6 +92,34 @@ namespace workshop192.Domain
                     }
                 }
                 return false;
+            }
+        }
+
+        public int cancelDelivery(string id)
+        {
+            lock (client)
+            {
+                var massage = new Dictionary<string, string>
+            {
+             { "action_type", "cancel_supply" },
+             { "transaction_id", id}
+
+            };
+
+                using (var client1 = new HttpClient())
+                {
+                    var massageToSent = new FormUrlEncodedContent(massage);
+                    var response = client1.PostAsync("https://cs-bgu-wsep.herokuapp.com/", massageToSent).Result;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseContent = response.Content;
+
+                        string responseString = responseContent.ReadAsStringAsync().Result;
+                        return int.Parse(responseString);
+                    }
+                }
+                return -1;
             }
         }
     }

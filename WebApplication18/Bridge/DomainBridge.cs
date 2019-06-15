@@ -112,7 +112,12 @@ namespace workshop192.Bridge
 
         }
 
-            public LinkedList<Product> getProducts(int id)
+        public int cancelDelivery(int result)
+        {
+            return DeliveryService.getInstance().cancelDelivery(result + "");
+        }
+
+        public LinkedList<Product> getProducts(int id)
         {
             return DBStore.getInstance().getStore(id).getProductList();
         }
@@ -391,6 +396,7 @@ namespace workshop192.Bridge
                 throw new RoleException("Error: You have no permission to add a product");
 
             sr.addProduct(product);
+            SystemLogger.getEventLog().Info("New product:  " + product.getProductID() + " has successfuly added");
             return product.getProductID();
         }
 

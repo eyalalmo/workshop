@@ -115,6 +115,27 @@ namespace workshop192.ServiceLayer.Tests
 
 
         }
+        [TestMethod]
+        public void cancelDeliveryTest()
+        {
+            try
+            {
+                int result = userService.deliverToExternal("etay", "hamarganit", "ramt gan", "il", "111", "132");
+                int resultOfCancel = userService.cancelDelivery(result);
+
+                if (resultOfCancel == 1)
+                    Assert.AreEqual(true, true);
+                else
+                    Assert.Fail();
+            }
+            catch (Exception)
+            {
+                Assert.Fail();
+            }
+            Assert.IsTrue(true);
+
+
+        }
 
     }
 }
