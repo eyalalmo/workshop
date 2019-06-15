@@ -26,6 +26,11 @@ namespace WebApplication18.Controllers
                 SystemLogger.getEventLog().Error("Catalog Error : " + e.Message.ToString());
                 return e.Message.ToString();
             }
+            catch(ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
+            }
             catch (Exception e)
             {
                 SystemLogger.getEventLog().Error("An Error has occured. Stack Trace: " + e.StackTrace +" Function: getAllProducts");
@@ -49,6 +54,11 @@ namespace WebApplication18.Controllers
                 SystemLogger.getEventLog().Error("Search error : " + e.Message.ToString());
                 return e.Message.ToString();
             }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
+            }
             catch (Exception e)
             {
                 SystemLogger.getEventLog().Error("An Error has occured. Stack Trace: " + e.StackTrace + " Function: SearchByName , Params: " +param);
@@ -71,6 +81,11 @@ namespace WebApplication18.Controllers
                 SystemLogger.getEventLog().Error("Search error : " + e.Message.ToString());
                 return e.Message.ToString();
             }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
+            }
             catch (Exception e)
             {
                 SystemLogger.getEventLog().Error("An Error has occured. Stack Trace: " + e.StackTrace + " Function: SearchByCat , Params: " + param);
@@ -91,6 +106,11 @@ namespace WebApplication18.Controllers
             {
                 SystemLogger.getEventLog().Error("Search error : " + e.Message.ToString());
                 return e.Message.ToString();
+            }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
             }
             catch (Exception e)
             {
@@ -121,6 +141,11 @@ namespace WebApplication18.Controllers
                 SystemLogger.getEventLog().Error("Error in adding to shopping cart : " + e.Message.ToString());
                 return e.Message.ToString();
             }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
+            }
             catch (Exception e)
             {
                 SystemLogger.getEventLog().Error("An Error has occured. Stack Trace: " + e.StackTrace + " Function: addToBasket");
@@ -144,6 +169,11 @@ namespace WebApplication18.Controllers
                 SystemLogger.getEventLog().Error("Error in adding a visible discount : "+e.Message.ToString());
                 return e.Message.ToString();
                 
+            }
+            catch (ConnectionException e)
+            {
+                SystemLogger.getEventLog().Error("Database Error : " + e.Message.ToString());
+                return "There has been a problem with the connection to the database. Please try again.";
             }
             catch (Exception e)
             {
