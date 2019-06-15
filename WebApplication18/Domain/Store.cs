@@ -429,12 +429,25 @@ namespace workshop192.Domain
             }
             return ans;
         }
-        public void removePolicyByindex(int index)
+        public void removePolicyByID(int policyID)
         {
-            PurchasePolicy p = policies.ElementAt(index);
+
+            PurchasePolicy p = findPolicyByID(policyID);
             policies.Remove(p);
             DBStore.getInstance().removePolicy(p, storeId);
         }
+
+        private PurchasePolicy findPolicyByID(int policyID)
+        {
+            foreach (PurchasePolicy p in policies)
+            {
+                if (p.getPolicyID() == policyID)
+                    return p;
+            }
+            return null;
+        }
+
+        
         public bool hasMinPurchasePolicy()
         {
             foreach (PurchasePolicy p in policies)

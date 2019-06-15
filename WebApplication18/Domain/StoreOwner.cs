@@ -268,7 +268,7 @@ namespace workshop192.Domain
 
         public void removePolicy(int index)
         {
-            store.removePolicyByindex(index);
+            store.removePolicyByID(index);
         }
 
         public void setPolicyByIndex(int newAmount, int index)

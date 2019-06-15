@@ -982,13 +982,14 @@ namespace workshop192.Domain
             int subtype1 = p.getFirstChildID();
             int subtype2 = p.getSecondChildID();
             string compType = p.getCompType();
-            string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex, subtypeID1, subtypeID2, compType )" +
+            int isPartOfComplexChild = 1;
+            string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type,isPartOfComplex, subtypeID1, subtypeID2, compType )" +
                                                     " VALUES (@storeID,@policyID,@type,@isPartOfComplex,@subtype1,@subtype2,@compType )";
             connection.Execute(sql, new { storeID, policyID, type, isPartOfComplex, subtype1, subtype2,compType });
-            string sql1 = "UPDATE [dbo].[PurchasePolicy] SET isPartOfComplex = 1 WHERE storeID =@storeID AND policyID=@subtype1";
-            connection.Execute(sql1, new { storeID, subtype1 });
-            string sql2 = "UPDATE [dbo].[PurchasePolicy] SET isPartOfComplex = 1 WHERE storeID =@storeID AND policyID=@subtype1";
-            connection.Execute(sql2, new { storeID, subtype2 });
+            string sql1 = "UPDATE [dbo].[PurchasePolicy] SET isPartOfComplex = @isPartOfComplexChild WHERE storeID =@storeID AND policyID=@subtype1";
+            connection.Execute(sql1, new { storeID, subtype1, isPartOfComplexChild });
+            string sql2 = "UPDATE [dbo].[PurchasePolicy] SET isPartOfComplex= @isPartOfComplexChild WHERE storeID =@storeID AND policyID=@subtype2";
+            connection.Execute(sql2, new { storeID, subtype2, isPartOfComplexChild });
         }
 
         public void setPolicy(PurchasePolicy p, int storeID, int newAmount)

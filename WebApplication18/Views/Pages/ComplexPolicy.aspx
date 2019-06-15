@@ -181,7 +181,7 @@
                             event.preventDefault();
                             var getUrl = window.location;
                             var baseUrl = getUrl.protocol + "//" + getUrl.host
-                            window.location.href = baseUrl+"/Store?storeId=" + storeID;
+                            window.location.href = baseUrl+"/StorePolicy?storeID=" + storeID;
                         }
                         else {
                             console.log("ERROR:" + response);   
