@@ -208,12 +208,12 @@ namespace workshop192.ServiceLayer.Tests
                 userService.checkBasket(session2);
                 userService.purchaseBasket(session2, "HaJelmonit 14", "234", "", "", "", "");
                 Assert.IsTrue(true);
-                Assert.IsTrue(storeService.getProductQuantityLeft(product1) == 2);
-                Assert.IsTrue(storeService.getProductQuantityLeft(product2) == 7);
+                Assert.AreEqual(storeService.getProductQuantityLeft(product1),2);
+                Assert.AreEqual(storeService.getProductQuantityLeft(product2),7);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Assert.Fail();
+                Assert.Fail(e.Message);
             }
 
         }
@@ -279,7 +279,7 @@ namespace workshop192.ServiceLayer.Tests
 
                 storeService.addReliantDiscountSameProduct(store1, session2, 0.3, "12/12/2020", 5, product1);
                 double price = basketService.getActualTotalPrice(session2);
-                Assert.IsTrue(160 == price);
+                Assert.AreEqual(160,price);
                 userService.checkBasket(session2);
                 userService.purchaseBasket(session2, "HaJelmonit 14", "234", "", "", "", "");
                 Assert.IsTrue(true);
