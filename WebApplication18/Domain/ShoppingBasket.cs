@@ -260,7 +260,7 @@ namespace workshop192.Domain
                         cart.changeQuantityOfProduct(product, product.getQuantityLeft());
                         throw new IllegalAmountException("Total quantity of product: "+product.getProductName()+" ID: "+product.getProductID()+"\n is larger than the quantity left in the store\nquantity has been set to maximum quantity left in store\nPlease checkout again");
                     }
-                    product.decQuantityLeft(amount);
+                    //product.decQuantityLeft(amount);
                 }
                 if (productToRemove != null)
                 {
