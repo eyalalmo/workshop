@@ -165,7 +165,58 @@ namespace workshop192.Domain
                     {
                         DomainBridge.getInstance().addAdmin(input[1], input[2]);
                     }
-
+                    else if(input[0] == "ReliantdiscountSameProduct")
+                    {
+                        DomainBridge.getInstance().addReliantdiscountSameProduct(Int32.Parse(input[1]), Int32.Parse(input[2]), Double.Parse(input[3]), Int32.Parse(input[4]), input[5], Int32.Parse(input[6]));
+                    }
+                    else if (input[0] == "ReliantdiscountTotalAmount")
+                    {
+                        DomainBridge.getInstance().addReliantdiscountTotalAmount(Int32.Parse(input[1]), Double.Parse(input[2]), Int32.Parse(input[3]), input[4], Int32.Parse(input[5]));
+                    }
+                    else if (input[0] == "complexDiscount")
+                    {
+                        DomainBridge.getInstance().complexDiscount(input[1], Int32.Parse(input[2]), input[3], Double.Parse(input[4]), input[5], Int32.Parse(input[6]));
+                    }
+                     else if (input[0] == "getStoreDiscounts")
+                    {
+                        DomainBridge.getInstance().getStoreDiscounts(Int32.Parse(input[1]), Int32.Parse(input[2]));
+                    }
+                    else if (input[0] == "removeProductDiscount")
+                    {
+                        DomainBridge.getInstance().removeProductDiscount(Int32.Parse(input[1]), Int32.Parse(input[2]));
+                    }
+                    else if (input[0] == "removeStoreDiscount")
+                    {
+                        DomainBridge.getInstance().removeStoreDiscount(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+                    }
+                    else if (input[0] == "removeStorePolicy")
+                    {
+                        DomainBridge.getInstance().removeStorePolicy(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+                    }
+                    else if (input[0] == "complexPolicy")
+                    {
+                        DomainBridge.getInstance().complexPolicy(input[1], Int32.Parse(input[2]), input[3], Int32.Parse(input[2]));
+                    }
+                    else if (input[0] == "addMaxPurchasePolicy")
+                    {
+                        DomainBridge.getInstance().addMinPurchasePolicy(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+                    }
+                    else if (input[0] == "addMaxPurchasePolicy")
+                    {
+                        DomainBridge.getInstance().addMinPurchasePolicy(Int32.Parse(input[1]), Int32.Parse(input[2]), Int32.Parse(input[3]));
+                    }
+                    else if (input[0] == "removePolicy")
+                    {
+                        DomainBridge.getInstance().removePolicy(input[1], Int32.Parse(input[2]), Int32.Parse(input[3]));
+                    }
+                     else if (input[0] == "setPolicyAmount")
+                    {
+                        DomainBridge.getInstance().setPolicyAmount(Int32.Parse(input[1]), Int32.Parse(input[2]));
+                    }
+                     else if (input[0] == "getStorePolicies")
+                    {
+                        DomainBridge.getInstance().getStorePolicies(Int32.Parse(input[1]), Int32.Parse(input[2]));
+                    }
                 }
             }
             

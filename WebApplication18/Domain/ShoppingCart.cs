@@ -189,11 +189,7 @@ namespace workshop192.Domain
             }
         }
 
-        private void updatePriceAfterCoupon()
-        {
-            if (coupon != "")
-                productsActualPrice = store.updatePriceAfterCoupon(coupon, productList, productsActualPrice);
-        }
+  
 
         private void updateStoreDiscount()
         {

@@ -74,7 +74,10 @@ namespace workshop192.ServiceLayer
                 throw new ArgumentException("Error: A product's name cannot be empty");
             db.setProductName(product, name, session);
         }
-
+        public int getProductQuantityLeft(int productId)
+        {
+            return db.getProductQuantityLeft(productId);
+        }
         public void SetProductInformation(int storeID, int productID, int price, int rank, int quantityLeft, string productName, int session)
         {
             double oldPrice = db.getProductPrice(productID);

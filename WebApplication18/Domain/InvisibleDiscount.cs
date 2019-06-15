@@ -49,5 +49,13 @@ namespace workshop192.Domain
         {
             return this.coupon;
         }
+        public override Product getProduct()
+        {
+            return null;
+        }
+        public override void removeProduct()
+        {
+            
+        }
     }
 }

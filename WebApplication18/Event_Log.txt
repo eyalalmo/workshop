@@ -4283,3 +4283,28 @@ The statement has been terminated.
 2019-06-15 15:16:30,335 INFO EventLog: User z has successfuly logged in.
 2019-06-15 15:16:38,931 INFO EventLog: User z has successfuly created a store
 2019-06-15 15:19:43,966 INFO EventLog: User z has successfuly logged in.
+2019-06-15 15:45:00,034 INFO EventLog: User ta has successfuly registered
+2019-06-15 15:45:06,230 INFO EventLog: User ta has successfuly logged in.
+2019-06-15 15:45:27,634 INFO EventLog: User ta has successfuly created a store
+2019-06-15 16:15:05,062 INFO EventLog: User ta has successfuly registered
+2019-06-15 16:15:11,602 INFO EventLog: User ta has successfuly logged in.
+2019-06-15 16:35:32,625 INFO EventLog: User ta has successfuly logged in.
+2019-06-15 16:35:40,929 INFO EventLog: User ta has successfuly created a store
+2019-06-15 16:48:44,261 ERROR EventLog: Register : Error: Username already exists
+2019-06-15 16:48:48,644 INFO EventLog: User ta has successfuly logged in.
+2019-06-15 17:14:58,684 INFO EventLog: User ta has successfuly logged in.
+2019-06-15 17:20:59,428 INFO EventLog: User ta has successfuly logged in.
+2019-06-15 17:26:07,085 ERROR EventLog: setQuantity : ERROR: quantity should be a positive number
+2019-06-15 17:26:35,396 ERROR EventLog: setQuantity : ERROR: quantity should be a positive number
+2019-06-15 17:26:40,824 ERROR EventLog: setQuantity : ERROR: quantity should be a positive number
+2019-06-15 17:27:09,978 ERROR EventLog: setQuantity : ERROR: quantity should be a positive number
+2019-06-15 17:53:55,244 ERROR EventLog: Login : Error: Username does not exist
+2019-06-15 17:54:03,726 INFO EventLog: User bb has successfuly registered
+2019-06-15 17:54:11,101 INFO EventLog: User bb has successfuly logged in.
+2019-06-15 17:54:21,701 INFO EventLog: User bb has successfuly created a store
+2019-06-15 18:12:46,619 INFO EventLog: User bb has successfuly logged in.
+2019-06-15 18:15:15,342 ERROR EventLog: Error in store display : cant return store
+2019-06-15 18:18:16,077 INFO EventLog: User bb has successfuly logged in.
+2019-06-15 18:35:33,354 INFO EventLog: User dd has successfuly registered
+2019-06-15 18:35:42,563 INFO EventLog: User dd has successfuly logged in.
+2019-06-15 18:35:52,149 INFO EventLog: User dd has successfuly created a store

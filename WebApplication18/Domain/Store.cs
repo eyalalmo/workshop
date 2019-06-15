@@ -301,6 +301,23 @@ namespace workshop192.Domain
                 if (d.getId() == discountID)
                 {
                     discountList.Remove(d);
+                    if(d is ReliantDiscount)
+                    {
+                        ReliantDiscount r = (ReliantDiscount)d;
+                        
+                        if (r.getProduct() != null) {
+                            r.getProduct().removeReliantDiscount();
+                        }
+                    }
+                    if(d is VisibleDiscount)
+                    {
+                        VisibleDiscount v = (VisibleDiscount)d;
+
+                        if (v.getProduct() != null)
+                        {
+                            v.getProduct().removeDiscount();
+                        }
+                    }
                     break;
                 }
             }

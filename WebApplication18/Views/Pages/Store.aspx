@@ -276,11 +276,12 @@
             }
         }
         function discount(productID) {
+            var storeID =<%=ViewData["storeId"]%>;
             console.log("productID " + productID);
             event.preventDefault();
             var getUrl = window.location;
              var baseUrl = getUrl.protocol + "//" + getUrl.host;
-             window.location.href = baseUrl + "/Discounts?productID="+productID;
+             window.location.href = baseUrl + "/Discounts?productID="+productID+ "&storeID=" + storeID;
         }  
 
         function add() {

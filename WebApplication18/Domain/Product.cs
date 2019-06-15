@@ -168,7 +168,14 @@ namespace workshop192.Domain
             else
                 discount = null;
         }
-        
+        public void removeReliantDiscount()
+        {
+            if (sameProductDiscount == null)
+                throw new DoesntExistException("Error: Discount does not exist so it cannot be removed");
+            else
+                sameProductDiscount = null;
+        }
+
         public void setProductName(String productName)
         {
             this.productName = productName;
