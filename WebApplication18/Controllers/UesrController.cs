@@ -226,11 +226,6 @@ namespace WebApplication18.Controllers
                 return "OK";
 
             }
-            catch (SuccessPaymentExeption e)
-            {
-                return "OK";
-            }
-
             catch (ClientException e)
             {
                 SystemLogger.getEventLog().Error("Checkout : " + e.Message.ToString());

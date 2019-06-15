@@ -7,23 +7,24 @@ using System.Text;
 using Dapper;
 using WebApplication18.DAL;
 using WebApplication18.Domain;
+using WebApplication18.Logs;
 
 namespace workshop192.Domain
 {
-    public class DBSubscribedUser :Connector
+    public class DBSubscribedUser : Connector
     {
         Dictionary<string, SubscribedUser> users;
         Dictionary<string, SubscribedUser> loggedInUser;
         private static DBSubscribedUser instance = null;
         private int id;
-        
+
         private DBSubscribedUser()
         {
             users = new Dictionary<string, SubscribedUser>();
             loggedInUser = new Dictionary<string, SubscribedUser>();
             //SubscribedUser admin = new SubscribedUser("admin", encryptPassword("1234"), new ShoppingBasket("admin"));
             //register(admin);
-        } 
+        }
 
         public void init()
         {
@@ -86,13 +87,13 @@ namespace workshop192.Domain
             {
                 connection.Close();
             }
-       }
+        }
 
-       public void addAdmin(string name, string pass)
-       {
-           SubscribedUser admin = new SubscribedUser(name, pass, new ShoppingBasket());
-           register(admin);
-       }
+        public void addAdmin(string name, string pass)
+        {
+            SubscribedUser admin = new SubscribedUser(name, pass, new ShoppingBasket());
+            register(admin);
+        }
 
         public void initTests()
         {
@@ -102,12 +103,15 @@ namespace workshop192.Domain
                 lock (connection)
                 {
                     connection.Open();
-                    connection.Execute("DELETE FROM Register");
-                    connection.Execute("DELETE FROM BasketCart");
-                    connection.Execute("DELETE FROM CartProduct");
-
-                    instance = new DBSubscribedUser();
-                    connection.Close();
+                    using (var transaction = connection.BeginTransaction())
+                    {
+                        connection.Execute("DELETE FROM Register", transaction);
+                        connection.Execute("DELETE FROM BasketCart", transaction);
+                        connection.Execute("DELETE FROM CartProduct", transaction);
+                        transaction.Commit();
+                        instance = new DBSubscribedUser();
+                        connection.Close();
+                    }
                 }
 
             }
@@ -117,30 +121,30 @@ namespace workshop192.Domain
             }
         }
 
-        
 
 
-       public static DBSubscribedUser getInstance()
-       {
-           if (instance == null)
-           {
-               instance = new DBSubscribedUser();
-           }
-           return instance;
-       }
 
-       public void logout(SubscribedUser sub)
-       {
-           loggedInUser.Remove(sub.getUsername());
-       }
+        public static DBSubscribedUser getInstance()
+        {
+            if (instance == null)
+            {
+                instance = new DBSubscribedUser();
+            }
+            return instance;
+        }
 
-       public void register(SubscribedUser user)
-       {
-           users.Add(user.getUsername(), user);
-           string username = user.getUsername();
-           string password = user.getPassword();
-           try
-           {
+        public void logout(SubscribedUser sub)
+        {
+            loggedInUser.Remove(sub.getUsername());
+        }
+
+        public void register(SubscribedUser user)
+        {
+            users.Add(user.getUsername(), user);
+            string username = user.getUsername();
+            string password = user.getPassword();
+            try
+            {
                 lock (connection)
                 {
                     connection.Open();
@@ -155,20 +159,22 @@ namespace workshop192.Domain
                     }
                     connection.Close();
                 }
-              
-           }
-           catch (Exception e)
-           {
-               connection.Close();
-           }
-       }
 
-       public SubscribedUser getSubscribedUserForInitStore(string username)
-       {
-           if (users.ContainsKey(username))
-           {
-               return users[username];
-           }
+            }
+            catch (Exception e)
+            {
+                connection.Close();
+                SystemLogger.getErrorLog().Error("Connection error in function register in db subscribed user, user name: " + user.getUsername());
+                throw new ConnectionException();
+            }
+        }
+
+        public SubscribedUser getSubscribedUserForInitStore(string username)
+        {
+            if (users.ContainsKey(username))
+            {
+                return users[username];
+            }
             try
             {
                 lock (connection)
@@ -218,7 +224,7 @@ namespace workshop192.Domain
                 {
                     connection.Open();
                     var c1 = connection.Query<RegisterEntry>("SELECT username, password FROM [dbo].[Register] WHERE username=@username ", new { username = username });
-                    
+
                     if (Enumerable.Count(c1) == 1)
                     {
                         RegisterEntry re = c1.ElementAt(0);
@@ -289,7 +295,7 @@ namespace workshop192.Domain
 
         public void login(SubscribedUser user)
         {
-            loggedInUser[user.getUsername()]= user;
+            loggedInUser[user.getUsername()] = user;
             string username = user.getUsername();
             string password = user.getPassword();
             try
@@ -302,17 +308,21 @@ namespace workshop192.Domain
                     //connection.Close();
                     if (Enumerable.Count(c) == 0)
                     {
-                        string sql = "INSERT INTO [dbo].[Register] (username, password)" +
-                                                         " VALUES (@username, @password)";
-                        connection.Execute(sql, new { username, password });
-                        //connection.Close();
+                        throw new LoginException("Username " + user.getUsername() + "does not exist");
                     }
                     connection.Close();
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                connection.Close();
+                if (e is ClientException)
+                    throw e;
+                else
+                {
+                    connection.Close();
+                    SystemLogger.getErrorLog().Error("Connection error in function login in db subscribed user, user name: " + user.getUsername());
+                    throw new ConnectionException();
+                }
             }
 
         }
@@ -331,9 +341,11 @@ namespace workshop192.Domain
                     connection.Close();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 connection.Close();
+                SystemLogger.getErrorLog().Error("Connection error in function add cart to basket cart table in db subscribed user");
+                throw new ConnectionException();
             }
         }
 
@@ -356,6 +368,8 @@ namespace workshop192.Domain
             catch (Exception)
             {
                 connection.Close();
+                SystemLogger.getErrorLog().Error("Connection error in function add product to cart product table in db subscribed user");
+                throw new ConnectionException();
             }
         }
 
@@ -368,26 +382,30 @@ namespace workshop192.Domain
             string sql1 = "DELETE FROM Register WHERE username=@username";
             string sql2 = "DELETE FROM BasketCart WHERE username=@username";
             string sql3 = "DELETE FROM CartProduct WHERE username=@username";
-            
+
             try
             {
                 //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
                 {
                     connection.Open();
-                    connection.Execute(sql1, new { username });
-                    connection.Execute(sql2, new { username });
-                    connection.Execute(sql3, new { username });
+                    using (var transaction = connection.BeginTransaction())
+                    {
+                        connection.Execute(sql1, new { username }, transaction);
+                        connection.Execute(sql2, new { username }, transaction);
+                        connection.Execute(sql3, new { username }, transaction);
+                        transaction.Commit();
+                    }
                     connection.Close();
                 }
                 //connection.Close();
             }
             catch (Exception)
             {
-                throw new ConnectionException("An error has occured with removing a user");
                 connection.Close();
+                SystemLogger.getErrorLog().Error("Connection error in function remove in db subscribed user while removing " + user.getUsername());
+                throw new ConnectionException();
             }
-
         }
         public SubscribedUser getloggedInUser(string name)
         {
@@ -415,6 +433,8 @@ namespace workshop192.Domain
             catch (Exception)
             {
                 connection.Close();
+                SystemLogger.getErrorLog().Error("Connection error in function remove product from cart product table in dbsubscribed user ");
+                throw new ConnectionException();
             }
         }
 
@@ -450,10 +470,12 @@ namespace workshop192.Domain
             catch (Exception)
             {
                 connection.Close();
+                SystemLogger.getErrorLog().Error("Connection error in function deleteCartFromBasket in dbsubscribed user ");
+                throw new ConnectionException();
             }
         }
 
-        public void updateAmountOnCartProductTable(string username,  int storeID, int productID, int newAmount)
+        public void updateAmountOnCartProductTable(string username, int storeID, int productID, int newAmount)
         {
             string sql = "UPDATE CartProduct SET amount =@newAmount WHERE username = @username AND productID =@productID AND storeID =@storeID;";
             try
@@ -466,11 +488,13 @@ namespace workshop192.Domain
                     connection.Close();
                 }
                 //connection.Close();
-
             }
+
             catch (Exception)
             {
-                //connection.Close();
+                connection.Close();
+                SystemLogger.getErrorLog().Error("Connection error in function updateAmountOnCartProductTable in dbsubscribed user ");
+                throw new ConnectionException();
             }
 
         }
@@ -484,24 +508,30 @@ namespace workshop192.Domain
                 //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
                 {
-                    connection.Open();
-                    connection.Execute(sql1, new { username });
-
-                    //connection.Close();
-                    foreach (KeyValuePair<int, ShoppingCart> pair in shoppingCarts)
+                    using (var transaction = connection.BeginTransaction())
                     {
-                        int storeID = pair.Key;
-                        connection.Execute(sql2, new { username, storeID });
-                    }
+                        connection.Open();
+                        connection.Execute(sql1, new { username }, transaction);
 
+                        //connection.Close();
+                        foreach (KeyValuePair<int, ShoppingCart> pair in shoppingCarts)
+                        {
+                            int storeID = pair.Key;
+                            connection.Execute(sql2, new { username, storeID }, transaction);
+                        }
+                        transaction.Commit();
+                    }
                     connection.Close();
                 }
             }
             catch (Exception)
             {
                 connection.Close();
+                SystemLogger.getErrorLog().Error("Connection error in function updateTablesAfterPurchase in DBSubscribed user ");
+                throw new ConnectionException();
+
             }
-            
+
         }
     }
 }

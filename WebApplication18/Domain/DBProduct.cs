@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using WebApplication18.DAL;
 using Dapper;
 using System.Data.SqlClient;
+using WebApplication18.Logs;
 
 namespace workshop192.Domain
 {
@@ -38,44 +39,44 @@ namespace workshop192.Domain
                 //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
                 {
-                    
-                        connection.Open();
-                        var products = connection.Query<Product>("SELECT * FROM [dbo].[Product]");
+
+                    connection.Open();
+                    var products = connection.Query<Product>("SELECT * FROM [dbo].[Product]");
 
 
-                        if (products.Count() == 0)
-                        {
-                            connection.Close();
-                            return;
-                        }
-
-                        foreach (Product product in products)
-                        {
-                            // if(product.discountID != -1)
-                            //    product.discount = DBDiscount.getInstance().getDiscount(product.discountID);
-                            productList.AddFirst(product);
-                            Discount d = DBDiscount.getInstance().getProductDiscount(product.getStore().getStoreID(), product.getProductID());
-                            if (d != null)
-                            {
-                                if (d is VisibleDiscount)
-                                {
-                                    VisibleDiscount v = (VisibleDiscount)d;
-                                    product.setDiscount(v);
-                                }
-                                if (d is ReliantDiscount)
-                                {
-                                    ReliantDiscount r = (ReliantDiscount)d;
-                                    product.setReliantDiscountSameProduct(r);
-                                }
-                            }
-                            if (product.getProductID() > nextProductID)
-                                nextProductID = product.getProductID();
-                        }
-
+                    if (products.Count() == 0)
+                    {
                         connection.Close();
+                        return;
                     }
-                   
-                
+
+                    foreach (Product product in products)
+                    {
+                        // if(product.discountID != -1)
+                        //    product.discount = DBDiscount.getInstance().getDiscount(product.discountID);
+                        productList.AddFirst(product);
+                        Discount d = DBDiscount.getInstance().getProductDiscount(product.getStore().getStoreID(), product.getProductID());
+                        if (d != null)
+                        {
+                            if (d is VisibleDiscount)
+                            {
+                                VisibleDiscount v = (VisibleDiscount)d;
+                                product.setDiscount(v);
+                            }
+                            if (d is ReliantDiscount)
+                            {
+                                ReliantDiscount r = (ReliantDiscount)d;
+                                product.setReliantDiscountSameProduct(r);
+                            }
+                        }
+                        if (product.getProductID() > nextProductID)
+                            nextProductID = product.getProductID();
+                    }
+
+                    connection.Close();
+                }
+
+
             }
             catch (Exception e)
             {
@@ -95,16 +96,17 @@ namespace workshop192.Domain
                 //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
                 {
-                    
-                        connection.Open();
-                        connection.Execute("DELETE FROM Product");
-                         connection.Close();
+
+                    connection.Open();
+                    connection.Execute("DELETE FROM Product");
+                    connection.Close();
                 }
-              
+
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 connection.Close();
+                throw e;
             }
         }
 
@@ -112,7 +114,7 @@ namespace workshop192.Domain
         {
             try
             {
-               // SqlConnection connection = Connector.getInstance().getSQLConnection();
+                // SqlConnection connection = Connector.getInstance().getSQLConnection();
 
                 string sql = "INSERT INTO [dbo].[Product] (productID, productName, " +
                                                           "productCategory, price, rank, " +
@@ -121,23 +123,23 @@ namespace workshop192.Domain
                                  " @price, @rank, @quantityLeft, @storeID)";
                 lock (connection)
                 {
-                    
-                        connection.Open();
-                        connection.Execute(sql, new
-                        {
-                            productID = p.getProductID(),
-                            productName = p.getProductName(),
-                            productCategory = p.getProductCategory(),
-                            price = p.getPrice(),
-                            rank = p.getRank(),
-                            quantityLeft = p.getQuantityLeft(),
-                            storeID = p.getStoreID(),
-                        });
+
+                    connection.Open();
+                    connection.Execute(sql, new
+                    {
+                        productID = p.getProductID(),
+                        productName = p.getProductName(),
+                        productCategory = p.getProductCategory(),
+                        price = p.getPrice(),
+                        rank = p.getRank(),
+                        quantityLeft = p.getQuantityLeft(),
+                        storeID = p.getStoreID(),
+                    });
                     connection.Close();
                 }
-                
+
                 //if(p.discount != null)
-                  //  DBDiscount.getInstance().addDiscount(p.discount);
+                //  DBDiscount.getInstance().addDiscount(p.discount);
                 /*sql = "INSERT INTO [dbo].[Discount] (discountID, percentage, duration) " +
                                  " VALUES (@discountID, @percentage, @duration) ";
                 connection.Execute(sql, new
@@ -155,7 +157,8 @@ namespace workshop192.Domain
             catch (Exception e)
             {
                 connection.Close();
-                throw e;
+                SystemLogger.getErrorLog().Error("Connection error in function AddProduct in DB Product, store ID =  " + p.storeID);
+                throw new ConnectionException();
             }
         }
 
@@ -216,21 +219,22 @@ namespace workshop192.Domain
                 // SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
                 {
-                    
-                        connection.Open();
-                        connection.Execute("DELETE FROM Product WHERE productID=@productID ", new { productID = p.getProductID() });
-                        //if(p.discount != null)
-                        //  DBDiscount.getInstance().removeDiscount(p.discount);
-                        productList.Remove(p);
-                        connection.Close();
-                    
+
+                    connection.Open();
+                    connection.Execute("DELETE FROM Product WHERE productID=@productID ", new { productID = p.getProductID() });
+                    //if(p.discount != null)
+                    //  DBDiscount.getInstance().removeDiscount(p.discount);
+                    productList.Remove(p);
+                    connection.Close();
+
                 }
             }
 
             catch (Exception e)
             {
                 connection.Close();
-                throw e;
+                SystemLogger.getErrorLog().Error("Connection error in function removeProduct in DB Product, store ID =  " + p.storeID);
+                throw new ConnectionException();
             }
         }
 
@@ -245,30 +249,31 @@ namespace workshop192.Domain
                 // SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
                 {
-                   
-                        connection.Open();
-                        var c = connection.Query<Product>("SELECT * FROM [dbo].[Product] WHERE productID=" +
-                                                  "@product ", new { product = id });
-                        if (c.Count() == 0)
-                        {
-                            connection.Close();
-                            return null;
-                        }
 
+                    connection.Open();
+                    var c = connection.Query<Product>("SELECT * FROM [dbo].[Product] WHERE productID=" +
+                                              "@product ", new { product = id });
+                    if (c.Count() == 0)
+                    {
                         connection.Close();
-
-                        Product product = c.First();
-                        //  if(product.discountID != -1)
-                        //   product.discount = DBDiscount.getInstance().getDiscount(product.discountID);
-                        productList.AddFirst(product);
-                        return product;
+                        return null;
                     }
-                
+
+                    connection.Close();
+
+                    Product product = c.First();
+                    //  if(product.discountID != -1)
+                    //   product.discount = DBDiscount.getInstance().getDiscount(product.discountID);
+                    productList.AddFirst(product);
+                    return product;
+                }
+
             }
             catch (Exception e)
             {
                 connection.Close();
-                throw e;
+                SystemLogger.getErrorLog().Error("Connection error in function getProduct in DB Product, ID =  " + id);
+                throw new ConnectionException();
             }
         }
 
@@ -380,38 +385,39 @@ namespace workshop192.Domain
             {
                 //SqlConnection connection = Connector.getInstance().getSQLConnection();
                 lock (connection)
-                {  
-                        connection.Open();
-                        connection.Execute("UPDATE Product SET " +
-                                          "productID=@productID, " +
-                                          "productName=@productName, " +
-                                          "productCategory=@productCategory, " +
-                                          "price=@price, " +
-                                          "rank=@rank, " +
-                                          "quantityLeft=@quantityLeft, " +
-                                          "storeID=@storeID " +
-                                          "WHERE productID=@productID",
-                      new
-                      {
-                          productID = p.getProductID(),
-                          productName = p.getProductName(),
-                          productCategory = p.getProductCategory(),
-                          price = p.getPrice(),
-                          rank = p.getRank(),
-                          quantityLeft = p.getQuantityLeft(),
-                          storeID = p.getStoreID()
-                      });
-                    }
-                
-                
+                {
+                    connection.Open();
+                    connection.Execute("UPDATE Product SET " +
+                                      "productID=@productID, " +
+                                      "productName=@productName, " +
+                                      "productCategory=@productCategory, " +
+                                      "price=@price, " +
+                                      "rank=@rank, " +
+                                      "quantityLeft=@quantityLeft, " +
+                                      "storeID=@storeID " +
+                                      "WHERE productID=@productID",
+                  new
+                  {
+                      productID = p.getProductID(),
+                      productName = p.getProductName(),
+                      productCategory = p.getProductCategory(),
+                      price = p.getPrice(),
+                      rank = p.getRank(),
+                      quantityLeft = p.getQuantityLeft(),
+                      storeID = p.getStoreID()
+                  });
+                }
+
+
                 //if(p.discount != null)
-                  //  DBDiscount.getInstance().update(p.discount);
+                //  DBDiscount.getInstance().update(p.discount);
                 connection.Close();
             }
             catch (Exception e)
             {
                 connection.Close();
-                throw e;
+                SystemLogger.getErrorLog().Error("Connection error in function updateProduct in DB Product, store ID =  " + p.storeID);
+                throw new ConnectionException();
             }
         }
     }
