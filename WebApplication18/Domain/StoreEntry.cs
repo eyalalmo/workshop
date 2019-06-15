@@ -12,7 +12,8 @@ namespace workshop192.Domain
         public string description;
         public int numOfOwners;
         public int active;
-
+      //  public int minPurchasePolicy;
+        //public int maxPurchasePolicy;
         public StoreEntry(int storeId,string name, string description, int numOfOwners, int active)
         {
             this.storeId = storeId;
@@ -20,8 +21,7 @@ namespace workshop192.Domain
             this.description = description;
             this.numOfOwners = numOfOwners;
             this.active= active;
-            
-
+           
     }
         public int getStoreId()
         {
@@ -43,7 +43,15 @@ namespace workshop192.Domain
         {
             return active;
         }
-  
+      /*  public int getMinPurchasePolicy()
+        {
+            return minPurchasePolicy;
+        }
+        public int getMaxPurchasePolicy()
+        {
+            return maxPurchasePolicy;
+        }
+        */
 
 
 

@@ -31,7 +31,7 @@ namespace WebApplication18.DAL
         {
             try
             {
-                if (IsTestsMode.isTest == true)
+                if (MarketSystem.testsMode == true)
                     connection = new SqlConnection(stringDBTest);
 
                 else

@@ -338,11 +338,11 @@ namespace workshop192.Domain
                 int active = 0;
                 if (store.isActive() == true)
                     active = 1;
-              /*  LinkedList<PurchasePolicy> policies = store.getStorePolicyList();
+                LinkedList<PurchasePolicy> policies = store.getStorePolicyList();
                 foreach(PurchasePolicy p in policies)
                 {
                     addPolicyToDB(p, storeId);
-                }*/
+                }
                 
                 connection.Execute(sql, new { storeId, name, description, numOfOwners, active });
 
@@ -389,7 +389,7 @@ namespace workshop192.Domain
                 var StoreRoleResult = connection.Query<StoreRoleEntry>("SELECT * FROM [dbo].[StoreRoles] WHERE storeId=@storeId ", new { storeId = storeId });
                 var ContractResult = connection.Query<Contract>("SELECT * FROM [dbo].[Contracts] WHERE storeId = @storeId", new { storeId = storeId });
                 var pendingResult = connection.Query<string>("SELECT userName FROM [dbo].[PendingOwners] WHERE storeId = @storeId", new { storeId = storeId }).AsList();
-               // var policyEntries = connection.Query<PolicyEntry>("SELECT * FROM PurchasePolicy WHERE storeID=@storeID;", new { storeId });
+                var policyEntries = connection.Query<PolicyEntry>("SELECT * FROM [dbo].[PurchasePolicy] WHERE storeID=@storeId", new { storeID =storeId });
 
                 //connection.Close();
 
@@ -410,7 +410,7 @@ namespace workshop192.Domain
                     if (p.getStoreID() == s.getStoreID())
                         s.addProduct(p);
                 }
-               // s.setPolicyList(parsePolicy(policyEntries));
+                s.setPolicyList(parsePolicy(policyEntries));
                 foreach (StoreRoleEntry element in StoreRoleResult)
                 {
                     if (element.getStoreId() == s.getStoreID() && element.getIsOwner() == 1)
@@ -602,7 +602,7 @@ namespace workshop192.Domain
            for(int i=0; i<policyEntries.Count(); i++)
             {
                 PolicyEntry p = policyEntries.ElementAt(i);
-                if (p.getIsPartOfComp())
+                if (p.getType()=="complex")
                     count++;
             }
             return count;
@@ -938,11 +938,12 @@ namespace workshop192.Domain
 
             int policyID = p.getPolicyID();
             int amount = p.getAmount();
-            bool isPartOfComplex = false;
+            //  bool isPartOfComplex = false;
+            int isPartOfComplex = 0;
             string type = "min";
 
             string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex)" +
-                                                    " VALUES (storeID, policyID,type, amount,isPartOfComplex)";
+                                                    " VALUES (@storeID, @policyID,@type, @amount,@isPartOfComplex )";
             connection.Execute(sql, new { storeID, policyID, type, amount, isPartOfComplex  });
         }
         public void addMaxPolicy(MaxAmountPurchase p, int storeID)
@@ -951,11 +952,12 @@ namespace workshop192.Domain
 
             int policyID = p.getPolicyID();
             int amount = p.getAmount();
-            bool isPartOfComplex = false;
+            //bool isPartOfComplex = false;
+            int isPartOfComplex = 0;
             string type = "max";
 
             string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex)" +
-                                                    " VALUES (storeID, policyID,type, amount,isPartOfComplex )";
+                                                    " VALUES (@storeID, @policyID,@type, @amount,@isPartOfComplex )";
             connection.Execute(sql, new { storeID, policyID, type, amount, isPartOfComplex });
         }
         public void addTotalPrice(TotalPricePolicy p, int storeID)
@@ -964,28 +966,28 @@ namespace workshop192.Domain
 
             int policyID = p.getPolicyID();
             int amount = p.getAmount();
-            bool isPartOfComplex = false;
+            int isPartOfComplex = 0;
             string type = "total";
 
             string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex)" +
-                                                    " VALUES (storeID, policyID,type, amount,isPartOfComplex )";
+                                                   " VALUES (@storeID, @policyID,@type, @amount,@isPartOfComplex )";
             connection.Execute(sql, new { storeID, policyID, type, amount, isPartOfComplex });
         }
         public void addComplexPolicy(ComplexPurchasePolicy p, int storeID)
         {
             SqlConnection connection = Connector.getInstance().getSQLConnection();
             int policyID = p.getPolicyID();
-            bool isPartOfComplex = false;
+            int isPartOfComplex = 0;
             string type = "complex";
             int subtype1 = p.getFirstChildID();
             int subtype2 = p.getSecondChildID();
             string compType = p.getCompType();
             string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex, subtypeID1, subtypeID2, compType )" +
-                                                    " VALUES (storeID, policyID,type,isPartOfComplex, subtype1, subtype2, compType )";
+                                                    " VALUES (@storeID,@policyID,@type,@isPartOfComplex,@subtype1,@subtype2,@compType )";
             connection.Execute(sql, new { storeID, policyID, type, isPartOfComplex, subtype1, subtype2,compType });
-            string sql1 = "UPDATE [dbo].[PurchasePolicy] SET isPartOfComplex = true WHERE storeID =@storeID AND policyID=@subtype1";
+            string sql1 = "UPDATE [dbo].[PurchasePolicy] SET isPartOfComplex = 1 WHERE storeID =@storeID AND policyID=@subtype1";
             connection.Execute(sql1, new { storeID, subtype1 });
-            string sql2 = "UPDATE [dbo].[PurchasePolicy] SET isPartOfComplex = true WHERE storeID =@storeID AND policyID=@subtype1";
+            string sql2 = "UPDATE [dbo].[PurchasePolicy] SET isPartOfComplex = 1 WHERE storeID =@storeID AND policyID=@subtype1";
             connection.Execute(sql2, new { storeID, subtype2 });
         }
 

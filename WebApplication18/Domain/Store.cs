@@ -14,24 +14,27 @@ namespace workshop192.Domain
 {
     public class Store
     {
-        private int storeId;
-        private string name;
-        private string description;
-        private LinkedList<Product> productList;
-        private List<StoreRole> roles;
-        private int numOfOwners;
-        private bool active;
+        public int storeId;
+        public string name;
+        public string description;
+        public LinkedList<Product> productList;
+        public List<StoreRole> roles;
+        public int numOfOwners;
+        public bool active;
         /* private MinAmountPurchase minPurchasePolicy;
          private MaxAmountPurchase maxPurchasePolicy;
          private TotalPricePolicy minTotalprice;
         private ComplexPurchasePolicy complexPurchase;
              * */
-        [JsonIgnore]
-        private LinkedList<PurchasePolicy> policies;
+        public LinkedList<InvisibleDiscount> invisibleDiscountList;
         [JsonIgnore]
         public LinkedList<DiscountComponent> discountList;
-       // public LinkedList<InvisibleDiscount> invisibleDiscountList;
+        // public LinkedList<InvisibleDiscount> invisibleDiscountList;
+        [JsonIgnore]
+        public LinkedList<PurchasePolicy> policies;
+        [JsonIgnore]
         public LinkedList<Contract> contracts;
+        [JsonIgnore]
         public LinkedList<string> pendingOwners;
 
         public Store(string storeName, string description)
@@ -61,6 +64,7 @@ namespace workshop192.Domain
             contracts = new LinkedList<Contract>();
             pendingOwners = new LinkedList<string>();
             discountList = new LinkedList<DiscountComponent>();
+            invisibleDiscountList = new LinkedList<InvisibleDiscount>();
             policies = new LinkedList<PurchasePolicy>();
         }
 
@@ -227,6 +231,21 @@ namespace workshop192.Domain
                 if (d.checkCondition(productList, productsActualPrice))
                 {
                     productsActualPrice = d.updatePrice(productList, productsActualPrice);
+                }
+            }
+            return productsActualPrice;
+
+        }
+
+
+        public Dictionary<Product, double> updatePriceAfterCoupon(string coupon, Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
+        {
+            foreach (InvisibleDiscount d in invisibleDiscountList)
+            {
+                if (coupon == d.getCoupon())
+                {
+                    productsActualPrice = d.updatePrice(productList, productsActualPrice);
+                    break;
                 }
             }
             return productsActualPrice;
@@ -455,7 +474,7 @@ namespace workshop192.Domain
             }
             MinAmountPurchase p = new MinAmountPurchase(minAmount);
             policies.AddLast(p);
-        //    DBStore.getInstance().addMinPolicy(p, storeId);
+            DBStore.getInstance().addMinPolicy(p, storeId);
         }
         public void addMaxAmountPolicy(int minAmount)
         {
@@ -465,7 +484,7 @@ namespace workshop192.Domain
             }
             MaxAmountPurchase p = new MaxAmountPurchase(minAmount);
             policies.AddLast(p);
-         //   DBStore.getInstance().addMaxPolicy(p, storeId);
+            DBStore.getInstance().addMaxPolicy(p, storeId);
         }
 
         public void addTotalAmountPolicy(int minPrice)
@@ -476,7 +495,7 @@ namespace workshop192.Domain
             }
             TotalPricePolicy p = new TotalPricePolicy(minPrice);
             policies.AddLast(p);
-          //  DBStore.getInstance().addTotalPrice(p, storeId);
+            DBStore.getInstance().addTotalPrice(p, storeId);
         }
 
         public void addComplexPurchasePolicy(int index1, int index2, string type)
@@ -488,7 +507,7 @@ namespace workshop192.Domain
             policies.Remove(p1);
             policies.Remove(p2);
             policies.AddLast(complexPurchase);
-           // DBStore.getInstance().addComplexPolicy(complexPurchase, storeId);
+            DBStore.getInstance().addComplexPolicy(complexPurchase, storeId);
         }
 
         public LinkedList<PurchasePolicy> getStorePolicyList()

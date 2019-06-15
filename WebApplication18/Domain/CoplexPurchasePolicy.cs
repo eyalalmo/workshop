@@ -106,6 +106,10 @@ namespace WebApplication18.Domain
 
         public PurchasePolicy getFirstPolicyChild() { return p1; }
         public PurchasePolicy getSecondPolicyChild() { return p2; }
+        public override string getTypeString()
+        {
+            return "Complex Policy";
+        }
     }
 
 }

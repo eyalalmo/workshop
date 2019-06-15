@@ -41,5 +41,10 @@ namespace workshop192.Domain
             }
             minAmount = newAmount;
         }
+
+        public override string getTypeString()
+        {
+            return "Min Amount";
+        }
     }
 }
