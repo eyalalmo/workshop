@@ -103,11 +103,11 @@ namespace workshop192.Domain
                 lock (connection)
                 {
                     connection.Open();
-                        connection.Execute("DELETE FROM Register");
-                        connection.Execute("DELETE FROM BasketCart");
-                        connection.Execute("DELETE FROM CartProduct");
-                        instance = new DBSubscribedUser();
-                        connection.Close();
+                    connection.Execute("DELETE FROM Register");
+                    connection.Execute("DELETE FROM BasketCart");
+                    connection.Execute("DELETE FROM CartProduct");
+                    instance = new DBSubscribedUser();
+                    connection.Close();
                 }
 
             }
