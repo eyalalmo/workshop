@@ -434,24 +434,50 @@ namespace workshop192.ServiceLayer
         {
             return db.hasMaxPurchasePolicy(storeID, sessionID);
         }
+        public void addMinAmountPolicy(int storeId, int session, int amount)
+        {
+            if (storeId < 0)
+                throw new ArgumentException("illegal store number");
 
-    /*    public string getMinAmountPolicy(int storeID, int sessionID)
-        {
-            return db.getMinAmountPolicyString(storeID, sessionID);
+            if (session< 0)
+                throw new NullReferenceException("session is a null reference");
+            if(amount < 0)
+            {
+                throw new ArgumentException("illegal amount");
+            }
+            db.addMinPurchasePolicy(amount, storeId, session);
         }
-        public string getMaxAmountPolicy(int storeID, int sessionID)
+        public void addMaxAmountPolicy(int storeId, int session, int amount)
         {
-            return db.getMaxAmountPolicyString(storeID, sessionID);
+            if (storeId < 0)
+                throw new ArgumentException("illegal store number");
+
+            if (session < 0)
+                throw new NullReferenceException("session is a null reference");
+            if (amount < 0)
+            {
+                throw new ArgumentException("illegal amount");
+            }
+            db.addMaxPurchasePolicy(amount, storeId, session);
         }
-        public string getMinAmountPolicyString(int storeID, int sessionID)
-        {
-            return db.getMinAmountPolicyString(storeID, sessionID);
-        }
-        public string getMaxAmountPolicyString(int storeID, int sessionID)
-        {
-            return db.getMaxAmountPolicyString(storeID, sessionID);
-        }
-        */
+
+        /*    public string getMinAmountPolicy(int storeID, int sessionID)
+            {
+                return db.getMinAmountPolicyString(storeID, sessionID);
+            }
+            public string getMaxAmountPolicy(int storeID, int sessionID)
+            {
+                return db.getMaxAmountPolicyString(storeID, sessionID);
+            }
+            public string getMinAmountPolicyString(int storeID, int sessionID)
+            {
+                return db.getMinAmountPolicyString(storeID, sessionID);
+            }
+            public string getMaxAmountPolicyString(int storeID, int sessionID)
+            {
+                return db.getMaxAmountPolicyString(storeID, sessionID);
+            }
+            */
         public void signContract(int store, string username,int sessionID)
         {
            

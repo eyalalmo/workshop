@@ -4262,3 +4262,24 @@ The statement has been terminated.
 2019-06-15 14:22:27,626 INFO EventLog: User b has successfuly logged in.
 2019-06-15 14:26:58,223 INFO EventLog: User b has successfuly logged in.
 2019-06-15 14:27:22,130 INFO EventLog: User b has successfuly created a store
+2019-06-15 14:43:25,676 INFO EventLog: User b has successfuly logged in.
+2019-06-15 14:43:39,738 INFO EventLog: User b has successfuly created a store
+2019-06-15 14:46:29,678 INFO EventLog: User b has successfuly logged in.
+2019-06-15 14:53:27,294 ERROR EventLog: Login : Error: Username does not exist
+2019-06-15 14:53:36,294 INFO EventLog: User b has successfuly registered
+2019-06-15 14:53:44,616 INFO EventLog: User b has successfuly logged in.
+2019-06-15 15:02:29,655 INFO EventLog: User b has successfuly logged in.
+2019-06-15 15:05:50,923 INFO EventLog: User b has successfuly logged in.
+2019-06-15 15:06:35,374 INFO EventLog: User b has successfuly created a store
+2019-06-15 15:09:00,401 ERROR EventLog: Login : Error: Username does not exist
+2019-06-15 15:09:04,222 ERROR EventLog: Login : Error: Username does not exist
+2019-06-15 15:09:08,324 ERROR EventLog: Login : Error: Username does not exist
+2019-06-15 15:09:16,513 INFO EventLog: User z has successfuly registered
+2019-06-15 15:09:21,702 INFO EventLog: User z has successfuly logged in.
+2019-06-15 15:09:30,950 INFO EventLog: User z has successfuly created a store
+2019-06-15 15:11:27,850 ERROR EventLog: Login : Error: Username does not exist
+2019-06-15 15:11:33,484 INFO EventLog: User z has successfuly logged in.
+2019-06-15 15:11:46,398 INFO EventLog: User z has successfuly created a store
+2019-06-15 15:16:30,335 INFO EventLog: User z has successfuly logged in.
+2019-06-15 15:16:38,931 INFO EventLog: User z has successfuly created a store
+2019-06-15 15:19:43,966 INFO EventLog: User z has successfuly logged in.

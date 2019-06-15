@@ -55,5 +55,10 @@ namespace WebApplication18.Domain
         {
             return policyID;
         }
+
+        public override string getTypeString()
+        {
+            return "Min Total Price";
+        }
     }
 }

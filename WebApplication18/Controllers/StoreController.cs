@@ -446,7 +446,7 @@ namespace WebApplication18.Controllers
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-              //  StoreService.getInstance().setMaxAmountPolicy(storeID, session, maxVal);
+                StoreService.getInstance().addMaxAmountPolicy(storeID, session, maxVal);
                  return "ok";
             }
             catch (ClientException e)
@@ -463,7 +463,7 @@ namespace WebApplication18.Controllers
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-              //  StoreService.getInstance().setMinAmountPolicy(storeID, session, minVal);
+                StoreService.getInstance().addMinAmountPolicy(storeID, session, minVal);
                 return "ok";
             }
             catch (ClientException e)

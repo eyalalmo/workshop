@@ -44,5 +44,10 @@ namespace workshop192.Domain
         {
             return policyID;
         }
+
+        public override string getTypeString()
+        {
+            return "Max Amount";
+        }
     }
 }
