@@ -27,7 +27,8 @@ namespace workshop192.Domain
 
         public void init()
         {
-            sessions = new Dictionary<int, Session>();
+            DBSession.instance = new DBSession();
+            DBSession.sessionNum = 1;
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
