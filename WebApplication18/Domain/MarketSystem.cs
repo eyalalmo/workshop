@@ -73,6 +73,7 @@ namespace workshop192.Domain
             catch(Exception e)
             {
                 initWitOutRead();
+                SystemLogger.getErrorLog().Error("Cant open config file " + e.StackTrace);
                 return;
             }
 
@@ -106,6 +107,7 @@ namespace workshop192.Domain
                 catch(Exception e)
                 {
                     initWitOutRead();
+                    SystemLogger.getErrorLog().Error("Cant open input file " + e.StackTrace);
                     return;
                 }
         

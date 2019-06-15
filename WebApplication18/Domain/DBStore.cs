@@ -7,6 +7,7 @@ using WebApplication18.DAL;
 using Dapper;
 using WebApplication18.Domain;
 using System.Data.SqlClient;
+using WebApplication18.Logs;
 
 namespace workshop192.Domain
 {
@@ -84,6 +85,7 @@ namespace workshop192.Domain
             catch (Exception e)
             {
                 connection.Close();
+                throw e;
             }
         }
 
@@ -200,7 +202,8 @@ namespace workshop192.Domain
             catch (Exception)
             {
                 connection.Close();
-                throw new StoreException("cant remove role");
+                SystemLogger.getErrorLog().Error("Connection error in function remove role in DB Store while removing " + sr.getUser().getUsername());
+                throw new ConnectionException();
             }
 
         }
@@ -283,14 +286,12 @@ namespace workshop192.Domain
                         transaction.Dispose();
                         connection.Close();
                     }
-                    throw new StoreException("cant add store roll");
+                    SystemLogger.getErrorLog().Error("Connection error in function add role in DB Store while adding " + sr.getUser().getUsername());
+                    throw new ConnectionException();
                 }
             }
         }
-
-
-
-
+        
         public LinkedList<StoreRole> getAllStoreRoles(string username)
         {
             LinkedList<StoreRole> result = new LinkedList<StoreRole>();
@@ -322,9 +323,11 @@ namespace workshop192.Domain
                 }
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 connection.Close();
+                SystemLogger.getErrorLog().Error("Connection error in function removeOwnerNumerByOne in DB Store store id " + storeId);
+                throw new ConnectionException();
             }
         }
 
@@ -341,16 +344,17 @@ namespace workshop192.Domain
 
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 connection.Close();
+                SystemLogger.getErrorLog().Error("Connection error in function addOwnerNumerByOne in DB Store store id " + storeId);
+                throw new ConnectionException();
             }
         }
 
-       
-
         public int addStore(Store store)
         {
+            int storeId = -1;
             try
             {
                 //SqlConnection connection = Connector.getInstance().getSQLConnection();
@@ -362,48 +366,43 @@ namespace workshop192.Domain
 
                     using (var transaction = connection.BeginTransaction())
                     {
-                        try
+
+
+                        ////////////////////////////////////////////////
+                        string sql = "INSERT INTO [dbo].[Stores] (storeId, name,description,numOfOwners,active)" +
+                                         " VALUES (@storeId, @name, @description,@numOfOwners,@active)";
+                        storeId = store.getStoreID();
+                        string name = store.getStoreName();
+                        string description = store.getDescription();
+                        int numOfOwners = store.getNumberOfOwners();
+                        int active = 0;
+                        if (store.isActive() == true)
+                            active = 1;
+                        LinkedList<PurchasePolicy> policies = store.getStorePolicyList();
+                        foreach (PurchasePolicy p in policies)
                         {
-
-
-                            ////////////////////////////////////////////////
-                            string sql = "INSERT INTO [dbo].[Stores] (storeId, name,description,numOfOwners,active)" +
-                                             " VALUES (@storeId, @name, @description,@numOfOwners,@active)";
-                            int storeId = store.getStoreID();
-                            string name = store.getStoreName();
-                            string description = store.getDescription();
-                            int numOfOwners = store.getNumberOfOwners();
-                            int active = 0;
-                            if (store.isActive() == true)
-                                active = 1;
-                            LinkedList<PurchasePolicy> policies = store.getStorePolicyList();
-                            foreach (PurchasePolicy p in policies)
-                            {
-                                addPolicyToDB(p, storeId);
-                            }
-                            connection.Execute(sql, new { storeId, name, description, numOfOwners, active}, transaction);
-
-
-                            stores.AddFirst(store);
-
-                            transaction.Commit();
-                            connection.Close();
-                            /////////////////////////
-                            return store.getStoreID();
+                            addPolicyToDB(p, storeId);
                         }
-                        catch (Exception)
-                        {
-                            connection.Close();
-                            //transaction.Rollback();
-                            throw new StoreException("faild to add store");
-                        }
+                        connection.Execute(sql, new { storeId, name, description, numOfOwners, active }, transaction);
+
+
+                        stores.AddFirst(store);
+
+                        transaction.Commit();
+                        connection.Close();
+                        /////////////////////////
+                        return store.getStoreID();
+
+
                     }
                 }
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw new ConnectionException("Bad connection to database");
+                connection.Close();
+                SystemLogger.getErrorLog().Error("Connection error in function Addstore in DB Store store id " + storeId);
+                throw new ConnectionException();
             }
         }
 
@@ -505,7 +504,8 @@ namespace workshop192.Domain
             catch (Exception e)
             {
                 connection.Close();
-                throw new StoreException("cant return store");
+                SystemLogger.getErrorLog().Error("Connection error in function getStore in DB Store store id " + storeId);
+                throw new ConnectionException();
             }
 
 
@@ -694,7 +694,8 @@ namespace workshop192.Domain
             catch (Exception)
             {
                 connection.Close();
-                throw new StoreException("cant delete store");
+                SystemLogger.getErrorLog().Error("Connection error in function removeStore in DB Store store id " + store.getStoreID());
+                throw new ConnectionException();
             }
         }
 
@@ -734,24 +735,28 @@ namespace workshop192.Domain
             catch (Exception)
             {
                 connection.Close();
-                throw new ConnectionException("Database error");
+                SystemLogger.getErrorLog().Error("Connection error in function getNextStoreID in DB Store");
+                throw new ConnectionException();
             }
         }
         internal int getNextPolicyID()
         {
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                int idNum = connection.Query<int>("SELECT id FROM [dbo].[IDS] WHERE type=@type ", new { type = "policy" }).First();
-                int next = idNum + 1;
-                connection.Execute("UPDATE [dbo].[IDS] SET id = @id WHERE type = @type", new { id = next, type = "policy" });
-                nextStoreID = idNum;
-                //connection.Close();
-                return idNum;
+                lock (connection)
+                {
+                    connection.Open();
+                    int idNum = connection.Query<int>("SELECT id FROM [dbo].[IDS] WHERE type=@type ", new { type = "policy" }).First();
+                    int next = idNum + 1;
+                    connection.Execute("UPDATE [dbo].[IDS] SET id = @id WHERE type = @type", new { id = next, type = "policy" });
+                    nextStoreID = idNum;
+                    connection.Close();
+                    return idNum;
+                }
             }
             catch (Exception)
             {
-                //connection.Close();
+                connection.Close();
                 throw new StoreException("connection to db faild");
             }
 
@@ -805,21 +810,25 @@ namespace workshop192.Domain
             catch (Exception e)
             {
                 connection.Close();
-                throw new ConnectionException("Database error");
+                SystemLogger.getErrorLog().Error("Connection error in function getUpdatedId in DB Store store id ");
+                throw new ConnectionException();
             }
         }
         public int getUpdatedPolicyID()
         {
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                int idNum = connection.Query<int>("SELECT id FROM [dbo].[IDS] WHERE type=@type ", new { type = "policy" }).First();
-                //connection.Close();
-                return idNum;
+                lock (connection)
+                {
+                    connection.Open();
+                    int idNum = connection.Query<int>("SELECT id FROM [dbo].[IDS] WHERE type=@type ", new { type = "policy" }).First();
+                    connection.Close();
+                    return idNum;
+                }
             }
             catch (Exception e)
             {
-                //connection.Close();
+                connection.Close();
                 throw new StoreException("cant connect");
             }
         }
@@ -859,7 +868,8 @@ namespace workshop192.Domain
             catch (Exception e)
             {
                 connection.Close();
-                throw new ConnectionException("Database error - Getting store roles of user " + userName);
+                SystemLogger.getErrorLog().Error("Connection error in function getRolesEntryByUserName in DB Store username" + userName);
+                throw new ConnectionException();
             }
         }
 
@@ -896,7 +906,8 @@ namespace workshop192.Domain
             catch (Exception e)
             {
                 connection.Close();
-                throw new ConnectionException("Bad connection to database while adding a pending owner");
+                SystemLogger.getErrorLog().Error("Connection error in function addPendingOwner(" + storeId + "," + appointer + "," + pending + ") in DB Store ");
+                throw new ConnectionException();
             }
         }
 
@@ -905,21 +916,17 @@ namespace workshop192.Domain
         {
             try
             {
-                lock (connection)
-                {
-                    //SqlConnection connection = Connector.getInstance().getSQLConnection();
-                    string sql = "DELETE FROM [dbo].[PendingOwners]" +
-                               "WHERE storeId=@storeId AND userName = @pending";
+                string sql = "DELETE FROM [dbo].[PendingOwners]" +
+                           "WHERE storeId=@storeId AND userName = @pending";
 
-                    connection.Execute(sql, new { storeId = storeId, pending = pending }, ownerTrans);
-                    Store s = getStore(storeId);
-                    s.getPending().Remove(pending);
-                }
-
+                connection.Execute(sql, new { storeId = storeId, pending = pending }, ownerTrans);
+                Store s = getStore(storeId);
+                s.getPending().Remove(pending);
             }
             catch (Exception)
             {
-                throw new StoreException("cant remove pending owner");
+                SystemLogger.getErrorLog().Error("Connection error in function removePendingOwner(" + storeId + "," + pending + ") in DB Store ");
+                throw new ConnectionException();
             }
         }
 
@@ -964,7 +971,8 @@ namespace workshop192.Domain
             {
                 if (ownerTrans == null)
                     connection.Close();
-                throw new StoreException("Error in signing a contract: " + e.Message.ToString());
+                SystemLogger.getErrorLog().Error("Connection error in function signContract(" + storeId + "," + owner + "," + pending + ") in DB Store ");
+                throw new ConnectionException();
             }
         }
 
@@ -982,20 +990,18 @@ namespace workshop192.Domain
                     }
                 }
                 //SqlConnection connection = Connector.getInstance().getSQLConnection();
-                lock (connection)
-                {
 
-                    string sql = "DELETE FROM [dbo].[Contracts]" +
-                               "WHERE storeId=@storeId AND userName = @userName";
-                    connection.Execute(sql, new { storeId = storeId, userName = userName }, ownerTrans);
+                string sql = "DELETE FROM [dbo].[Contracts]" +
+                           "WHERE storeId=@storeId AND userName = @userName";
+                connection.Execute(sql, new { storeId = storeId, userName = userName }, ownerTrans);
 
-                }
+
             }
             catch (Exception e)
             {
-                throw new StoreException("Error in declining a contract: " + e.Message.ToString());
+                SystemLogger.getErrorLog().Error("Connection error in function removeAllUserContract(" + storeId + "," + userName + ") in DB Store ");
+                throw new ConnectionException();
             }
-
         }
 
         public int getContractNum(int storeId, string userName)
@@ -1016,7 +1022,8 @@ namespace workshop192.Domain
             catch (Exception e)
             {
                 connection.Close();
-                throw new StoreException("cant get contact");
+                SystemLogger.getErrorLog().Error("Connection error in function getContractNum(" + storeId + "," + userName + ") in DB Store ");
+                throw new ConnectionException();
             }
 
 
@@ -1047,79 +1054,128 @@ namespace workshop192.Domain
 
         public void addMinPolicy(MinAmountPurchase p, int storeID)
         {
-            SqlConnection connection = Connector.getInstance().getSQLConnection();
+            try
+            {
+                connection.Open();
+                int policyID = p.getPolicyID();
+                int amount = p.getAmount();
+                //  bool isPartOfComplex = false;
+                int isPartOfComplex = 0;
+                string type = "min";
 
-            int policyID = p.getPolicyID();
-            int amount = p.getAmount();
-            //  bool isPartOfComplex = false;
-            int isPartOfComplex = 0;
-            string type = "min";
-
-            string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex)" +
-                                                    " VALUES (@storeID, @policyID,@type, @amount,@isPartOfComplex )";
-            connection.Execute(sql, new { storeID, policyID, type, amount, isPartOfComplex  });
+                string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex)" +
+                                                        " VALUES (@storeID, @policyID,@type, @amount,@isPartOfComplex )";
+                connection.Execute(sql, new { storeID, policyID, type, amount, isPartOfComplex });
+                connection.Close();
+            }
+            catch (Exception) {
+                connection.Close();
+                throw new StoreException("cant add min policy");
+            }
         }
         public void addMaxPolicy(MaxAmountPurchase p, int storeID)
         {
-            SqlConnection connection = Connector.getInstance().getSQLConnection();
+            try
+            {
+                connection.Open();
+                int policyID = p.getPolicyID();
+                int amount = p.getAmount();
+                //bool isPartOfComplex = false;
+                int isPartOfComplex = 0;
+                string type = "max";
 
-            int policyID = p.getPolicyID();
-            int amount = p.getAmount();
-            //bool isPartOfComplex = false;
-            int isPartOfComplex = 0;
-            string type = "max";
-
-            string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex)" +
-                                                    " VALUES (@storeID, @policyID,@type, @amount,@isPartOfComplex )";
-            connection.Execute(sql, new { storeID, policyID, type, amount, isPartOfComplex });
+                string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex)" +
+                                                        " VALUES (@storeID, @policyID,@type, @amount,@isPartOfComplex )";
+                connection.Execute(sql, new { storeID, policyID, type, amount, isPartOfComplex });
+                connection.Close();
+            }
+            catch (Exception)
+            {
+                connection.Close();
+                throw new StoreException("cant add min policy");
+            }
         }
         public void addTotalPrice(TotalPricePolicy p, int storeID)
         {
-            SqlConnection connection = Connector.getInstance().getSQLConnection();
+            try
+            {
+                connection.Open();
+                int policyID = p.getPolicyID();
+                int amount = p.getAmount();
+                int isPartOfComplex = 0;
+                string type = "total";
 
-            int policyID = p.getPolicyID();
-            int amount = p.getAmount();
-            int isPartOfComplex = 0;
-            string type = "total";
-
-            string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex)" +
-                                                   " VALUES (@storeID, @policyID,@type, @amount,@isPartOfComplex )";
-            connection.Execute(sql, new { storeID, policyID, type, amount, isPartOfComplex });
+                string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type, amount,isPartOfComplex)" +
+                                                       " VALUES (@storeID, @policyID,@type, @amount,@isPartOfComplex )";
+                connection.Execute(sql, new { storeID, policyID, type, amount, isPartOfComplex });
+                connection.Close();
+            }
+            catch (Exception)
+            {
+                connection.Close();
+                throw new StoreException("cant add min policy");
+            }
         }
         public void addComplexPolicy(ComplexPurchasePolicy p, int storeID)
         {
-            SqlConnection connection = Connector.getInstance().getSQLConnection();
-            int policyID = p.getPolicyID();
-            int isPartOfComplex = 0;
-            string type = "complex";
-            int subtype1 = p.getFirstChildID();
-            int subtype2 = p.getSecondChildID();
-            string compType = p.getCompType();
-            int isPartOfComplexChild = 1;
-            string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type,isPartOfComplex, subtypeID1, subtypeID2, compType )" +
-                                                    " VALUES (@storeID,@policyID,@type,@isPartOfComplex,@subtype1,@subtype2,@compType )";
-            connection.Execute(sql, new { storeID, policyID, type, isPartOfComplex, subtype1, subtype2,compType });
-            string sql1 = "UPDATE [dbo].[PurchasePolicy] SET isPartOfComplex = @isPartOfComplexChild WHERE storeID =@storeID AND policyID=@subtype1";
-            connection.Execute(sql1, new { storeID, subtype1, isPartOfComplexChild });
-            string sql2 = "UPDATE [dbo].[PurchasePolicy] SET isPartOfComplex= @isPartOfComplexChild WHERE storeID =@storeID AND policyID=@subtype2";
-            connection.Execute(sql2, new { storeID, subtype2, isPartOfComplexChild });
+            try
+            {
+                connection.Open();
+                int policyID = p.getPolicyID();
+                int isPartOfComplex = 0;
+                string type = "complex";
+                int subtype1 = p.getFirstChildID();
+                int subtype2 = p.getSecondChildID();
+                string compType = p.getCompType();
+                int isPartOfComplexChild = 1;
+                string sql = "INSERT INTO [dbo].[PurchasePolicy] (storeID, policyID,type,isPartOfComplex, subtypeID1, subtypeID2, compType )" +
+                                                        " VALUES (@storeID,@policyID,@type,@isPartOfComplex,@subtype1,@subtype2,@compType )";
+                connection.Execute(sql, new { storeID, policyID, type, isPartOfComplex, subtype1, subtype2, compType });
+                string sql1 = "UPDATE [dbo].[PurchasePolicy] SET isPartOfComplex = @isPartOfComplexChild WHERE storeID =@storeID AND policyID=@subtype1";
+                connection.Execute(sql1, new { storeID, subtype1, isPartOfComplexChild });
+                string sql2 = "UPDATE [dbo].[PurchasePolicy] SET isPartOfComplex= @isPartOfComplexChild WHERE storeID =@storeID AND policyID=@subtype2";
+                connection.Execute(sql2, new { storeID, subtype2, isPartOfComplexChild });
+                connection.Close();
+            }
+            catch (Exception)
+            {
+                connection.Close();
+                throw new StoreException("cant add min policy");
+            }
         }
 
         public void setPolicy(PurchasePolicy p, int storeID, int newAmount)
         {
-            SqlConnection connection = Connector.getInstance().getSQLConnection();
-            int policyID = p.getPolicyID();
-            string sql = "UPDATE[dbo].[PurchasePolicy] SET amount=@newAmount WHERE storeID=@storeID AND policyID=@policyID";
-            connection.Execute(sql, new { newAmount, storeID, policyID });
-
+            try
+            {
+                connection.Open();
+                int policyID = p.getPolicyID();
+                string sql = "UPDATE[dbo].[PurchasePolicy] SET amount=@newAmount WHERE storeID=@storeID AND policyID=@policyID";
+                connection.Execute(sql, new { newAmount, storeID, policyID });
+                connection.Close();
+            }
+            catch (Exception)
+            {
+                connection.Close();
+                throw new StoreException("cant add min policy");
+            }
         }
 
         public void removePolicy(PurchasePolicy p, int storeID)
         {
-            SqlConnection connection = Connector.getInstance().getSQLConnection();
-            int policyID = p.getPolicyID();
-            string sql = "DELETE FROM PurchasePolicy WHERE storeID=@storeID AND policyID=@policyID";
-            connection.Execute(sql, new { storeID, policyID });
+            try
+            {
+                connection.Open();
+                int policyID = p.getPolicyID();
+                string sql = "DELETE FROM PurchasePolicy WHERE storeID=@storeID AND policyID=@policyID";
+                connection.Execute(sql, new { storeID, policyID });
+                connection.Close();
+            }
+            catch (Exception)
+            {
+                connection.Close();
+                throw new StoreException("cant add min policy");
+            }
             if (p is ComplexPurchasePolicy)
             {
                 PurchasePolicy p1 = ((ComplexPurchasePolicy)p).getFirstPolicyChild();
