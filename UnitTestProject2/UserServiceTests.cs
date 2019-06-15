@@ -297,12 +297,11 @@ namespace workshop192.ServiceLayer.Tests
         {
             try
             {
-                // registerSuccessTest();
+                
                 loginSuccessTest();
 
                 userService.logout(session2);
-                //???do we need to check
-                // Assert.IsTrue(session.getState() is Guest);
+             
                 Assert.IsTrue(true);
             }
             catch (Exception)

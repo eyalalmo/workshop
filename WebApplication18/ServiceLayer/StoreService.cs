@@ -24,7 +24,7 @@ namespace workshop192.ServiceLayer
             }
             return instance;
         }
-
+        //4.1.1
         public int addProduct(string productName, string productCategory, int price, int rank, int quantityLeft, int store, int session)
         {
             checkProduct(productName, productCategory, price, rank, quantityLeft);
@@ -46,7 +46,7 @@ namespace workshop192.ServiceLayer
         {
           return  db.getProductsString(id);
         }
-
+        //4.1.2
         public void removeProduct(int product, int session)
         {
             if (product < 0)
@@ -56,7 +56,7 @@ namespace workshop192.ServiceLayer
 
             db.removeProduct(product, session);
         }
-
+        //4.1.3
         public void setProductPrice(int product, int price, int session)
         {
             if (product < 0)

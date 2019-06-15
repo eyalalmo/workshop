@@ -48,7 +48,7 @@ namespace workshop192.ServiceLayer
         {
             db.login(session, username, password);
         }
-
+        //7
         public int payToExternal(string card, string month, string year, string holder, string ccv, string id)
         {
             return db.payToExternal( card,  month,  year,  holder,  ccv,  id);
@@ -73,7 +73,7 @@ namespace workshop192.ServiceLayer
         {
             return db.cancelPay(result);
         }
-
+        //8
         public int deliverToExternal(string name, string address, string city, string country, string zip, string cvv)
         {
             return db.deliverToExternal(name, address, city, country, zip, cvv);
@@ -118,7 +118,7 @@ namespace workshop192.ServiceLayer
         {
            return  db.cancelDelivery(result);
         }
-
+        //3.1
         public void logout(int user)
         {
             if (user < 0)
@@ -127,7 +127,7 @@ namespace workshop192.ServiceLayer
             }
             db.logout(user);
         }
-
+        //3.2
         public int createStore(int session, String storeName, String description)
         {
             if (session < 0)
@@ -195,6 +195,7 @@ namespace workshop192.ServiceLayer
             }
              db.checkBasket(session);
         }
+        //2.7
         public void addToShoppingBasket(int product, int amount, int session)
         {
             if (product < 0)
@@ -230,14 +231,14 @@ namespace workshop192.ServiceLayer
         {
             db.purchaseBasket(session, address, creditcard, month, year, holder, cvv);
         }
-        public bool handShakePay()
+        public bool handShake()
         {
-           return db.handShakePay();
+           bool res= db.handShakePay();
+            if (res == false)
+                return false;
+           return db.handShakeDeliver();
         }
-        public bool handShakeDeliver()
-        {
-            return db.handShakeDeliver();
-        }
+       
 
 
         /////////////////////////////////////////////////////////////////////////////////////

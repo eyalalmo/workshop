@@ -128,7 +128,7 @@ namespace workshop192.Domain
                 if (appointedBySubscribedUser != null)
                 {
                     StoreRole appointedByStoreRole = store.getStoreRole(role.getAppointedBy());
-                    store.removeStoreRole(appointedByStoreRole);
+                    store.removeStoreRole(role);
                     appointedByStoreRole.removeRoleAppointedByMe(role);
                 }
                 if (role is StoreOwner && role.getStore().getNumberOfOwners() == 0)
