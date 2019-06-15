@@ -611,7 +611,7 @@ namespace workshop192.Domain
                 SqlConnection connection = Connector.getInstance().getSQLConnection();
                 int storeId = store.getStoreID();
                 var affectedRows = connection.Execute("DELETE FROM Stores WHERE  storeId=@storeId ", new { hash = storeId });
-
+                var affectedRowsPolicy = connection.Execute("DELETE FROM PurchasePolicy WHERE storeID=@storeId", new { hash = storeId });
                 //connection.Close();
 
 
@@ -789,6 +789,7 @@ namespace workshop192.Domain
                                    + " DELETE FROM CartProduct \n"
                                    + " DELETE FROM Cookie \n"
                                    + " DELETE FROM Notification \n"
+                                   + "DELETE FROM PurchasePolicy \n "
                                    + "UPDATE [dbo].[IDS] SET id = 0 WHERE type = 'store'" 
                                    + "UPDATE [dbo].[IDS] SET id = 0 WHERE type = 'policy'"
                                    );
@@ -919,5 +920,21 @@ namespace workshop192.Domain
         //    }
         //    throw new DoesntExistException("User is not a pending owner");
         //}
+
+
+        public void addPolicy()
+        {
+
+        }
+
+        public void setPolicy()
+        {
+
+        }
+
+        public void removePolicy()
+        {
+
+        }
     }
 }
