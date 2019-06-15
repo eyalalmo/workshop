@@ -4249,3 +4249,11 @@ The statement has been terminated.
 2019-06-13 19:59:13,322 ERROR EventLog: Register : Error: Username already exists
 2019-06-13 19:59:13,434 ERROR EventLog: Register : Error: Username already exists
 2019-06-13 19:59:13,435 ERROR EventLog: Register : Error: Username already exists
+2019-06-15 12:06:08,852 ERROR EventLog: Register : Error: Username already exists
+2019-06-15 12:06:13,070 INFO EventLog: User ep has successfuly registered
+2019-06-15 12:06:29,574 INFO EventLog: User ep has successfuly logged in.
+2019-06-15 12:07:05,492 INFO EventLog: User ep has successfuly created a store
+2019-06-15 12:07:22,937 ERROR EventLog: Add Product : error - rank must be a number between 1 to 5
+2019-06-15 12:08:09,092 INFO EventLog: A purchase has been made
+2019-06-15 12:09:30,592 ERROR EventLog: Login : Error: Username does not exist
+2019-06-15 12:09:40,436 INFO EventLog: User ep has successfuly registered
