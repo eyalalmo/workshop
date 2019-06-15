@@ -70,7 +70,7 @@ namespace workshop192.Domain
                                 storeId = d.getStoreId(),
                                 isPartOfComplex
 
-                            });
+                            }, transaction);
                             if (d is VisibleDiscount)
                             {
                                 VisibleDiscount v = (VisibleDiscount)d;
@@ -94,7 +94,7 @@ namespace workshop192.Domain
                                 storeId = d.getStoreId(),
                                 isPartOfComplex
 
-                            });
+                            }, transaction);
                             foreach (DiscountComponent child in composite.getChildren())
                             {
                                 string sql2 = "INSERT INTO [dbo].[DiscountComposite] (id, childid, type)" +
@@ -105,10 +105,10 @@ namespace workshop192.Domain
                                     id = d.getId(),
                                     childid = child.getId(),
                                     type = composite.getType()
-                                });
+                                }, transaction);
                             }
                         }
-
+                        transaction.Commit();
                         connection.Close();
                         discounts.AddFirst(d);
                     }
