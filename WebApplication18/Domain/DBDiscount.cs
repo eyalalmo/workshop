@@ -43,75 +43,72 @@ namespace workshop192.Domain
 
         public void addDiscount(DiscountComponent d)
         {
-            if (getDiscountByID(d.getId()) != null)
-            {
-                return;
-            }
             try
             {
-                
                 SqlConnection connection = Connector.getInstance().getSQLConnection();
-                string sql = "INSERT INTO [dbo].[DiscountComponent] (id, percentage, duration, type, storeId, isPartOfComplex)" +
-                                " VALUES (@id,@percentage, @duration, @type, @storeId, @isPartOfComplex)";
-                int complex;
-                if (d.getIsPartOfComplex())
-                    complex = 1;
-                else
-                    complex = 0;
-                if (d is Discount)
+                using (var transaction = connection.BeginTransaction())
                 {
-                    
-                    connection.Execute(sql, new
+                    string sql = "INSERT INTO [dbo].[DiscountComponent] (id, percentage, duration, type, storeId, isPartOfComplex)" +
+                                    " VALUES (@id,@percentage, @duration, @type, @storeId, @isPartOfComplex)";
+                    int isPartOfComplex;
+                    if (d.getIsPartOfComplex())
+                        isPartOfComplex = 1;
+                    else
+                        isPartOfComplex = 0;
+                    if (d is Discount)
                     {
-                        id = d.getId(),
-                        percentage = d.getPercentage(),
-                        duration = d.getDuration(),
-                        type = "Discount",
-                        storeId = d.getStoreId(),
-                        isPartOfComplex = complex,
 
-                    });
-                    if (d is VisibleDiscount)
-                    {
-                        VisibleDiscount v = (VisibleDiscount)d;
-                        addVisibleDiscount(v);
-                    }
-                    if (d is ReliantDiscount)
-                    {
-                        ReliantDiscount r = (ReliantDiscount)d;
-                        addReliantDiscount(r);
-                    }
-                }
-                if (d is DiscountComposite)
-                {
-                    DiscountComposite composite = (DiscountComposite)d;
-                    connection.Execute(sql, new
-                    {
-                        id = d.getId(),
-                        percentage = d.getPercentage(),
-                        duration = d.getDuration(),
-                        type = "Composite",
-                        storeId = d.getStoreId(),
-                        isPartOfComplex = complex
-
-                    });
-                    foreach (DiscountComponent child in composite.getChildren())
-                    {
-                        string sql2 = "INSERT INTO [dbo].[DiscountComposite] (id, childid, type)" +
-                                " VALUES (@id, @childid, @type)";
-
-                        connection.Execute(sql2, new
+                        connection.Execute(sql, new
                         {
                             id = d.getId(),
-                            childid = child.getId(),
-                            type = composite.getType()
+                            percentage = d.getPercentage(),
+                            duration = d.getDuration(),
+                            type = "Discount",
+                            storeId = d.getStoreId(),
+                            isPartOfComplex
+
                         });
+                        if (d is VisibleDiscount)
+                        {
+                            VisibleDiscount v = (VisibleDiscount)d;
+                            addVisibleDiscount(v);
+                        }
+                        if (d is ReliantDiscount)
+                        {
+                            ReliantDiscount r = (ReliantDiscount)d;
+                            addReliantDiscount(r);
+                        }
                     }
+                    if (d is DiscountComposite)
+                    {
+                        DiscountComposite composite = (DiscountComposite)d;
+                        connection.Execute(sql, new
+                        {
+                            id = d.getId(),
+                            percentage = d.getPercentage(),
+                            duration = d.getDuration(),
+                            type = "Composite",
+                            storeId = d.getStoreId(),
+                            isPartOfComplex
+
+                        });
+                        foreach (DiscountComponent child in composite.getChildren())
+                        {
+                            string sql2 = "INSERT INTO [dbo].[DiscountComposite] (id, childid, type)" +
+                                    " VALUES (@id, @childid, @type)";
+
+                            connection.Execute(sql2, new
+                            {
+                                id = d.getId(),
+                                childid = child.getId(),
+                                type = composite.getType()
+                            });
+                        }
+                    }
+
+                    //connection.Close();
+                    discounts.AddFirst(d);
                 }
-
-                //connection.Close();
-                discounts.AddFirst(d);
-
             }
 
             catch (Exception e)
@@ -122,28 +119,31 @@ namespace workshop192.Domain
         }
         public void removeDiscount(DiscountComponent d)
         {
-            //if (!discounts.ContainsKey(d))
-            //  throw new DoesntExistException("Error: Discount does not exist");
-
+            
             try
             {
-                SqlConnection connection = Connector.getInstance().getSQLConnection();
-                connection.Execute("DELETE FROM DiscountComponent WHERE id=@id ", new { id = d.getId() });
-                if (d is Discount)
-                {
-                    connection.Execute("DELETE FROM Discount WHERE id=@id ", new { id = d.getId() });
-                }
-                else
-                {
-                    connection.Execute("DELETE FROM DiscountComposite WHERE id=@id ", new { id = d.getId() });
-                    DiscountComposite composite = (DiscountComposite)d;
-                    foreach(DiscountComponent component in composite.getChildren())
-                    {
-                        removeDiscount(component);
-                    }
-                }
 
-                discounts.Remove(d);
+                SqlConnection connection = Connector.getInstance().getSQLConnection();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    connection.Execute("DELETE FROM DiscountComponent WHERE id=@id ", new { id = d.getId() });
+                    if (d is Discount)
+                    {
+                        connection.Execute("DELETE FROM Discount WHERE id=@id ", new { id = d.getId() });
+                    }
+                    else
+                    {
+                        connection.Execute("DELETE FROM DiscountComposite WHERE id=@id ", new { id = d.getId() });
+                        DiscountComposite composite = (DiscountComposite)d;
+                        foreach (DiscountComponent component in composite.getChildren())
+                        {
+                            removeDiscount(component);
+                        }
+                    }
+
+                    discounts.Remove(d);
+                    transaction.Commit();
+                }
                 //connection.Close();
             }
 

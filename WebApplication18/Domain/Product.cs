@@ -172,24 +172,24 @@ namespace workshop192.Domain
         public void setProductName(String productName)
         {
             this.productName = productName;
-            DBProduct.getInstance().update(this);
+            //DBProduct.getInstance().update(this);
         }
 
         public void setProductCategory(String category)
         {
             this.productCategory = category;
-            DBProduct.getInstance().update(this);
+            //DBProduct.getInstance().update(this);
         }
         public void setPrice(int price)
         {
             this.price = price;
-            DBProduct.getInstance().update(this);
+            //DBProduct.getInstance().update(this);
         }
 
         public void setRank(int rank)
         {
             this.rank = rank;
-            DBProduct.getInstance().update(this);
+            //DBProduct.getInstance().update(this);
         }
 
         internal Store getStore()
