@@ -11,10 +11,10 @@ namespace WebApplication18.Domain
         enum Type { OR, XOR, AND };
         private PurchasePolicy p1;
         private PurchasePolicy p2;
-        private int storeID;
+//        private int storeID;
         private Type type;
 
-        public ComplexPurchasePolicy(string type, PurchasePolicy p1, PurchasePolicy p2, int storeID)
+        public ComplexPurchasePolicy(string type, PurchasePolicy p1, PurchasePolicy p2)
         {
             if (type == "XOR")
                 this.type = Type.XOR;
@@ -25,7 +25,6 @@ namespace WebApplication18.Domain
             this.p1 = p1;
             this.p2 = p2;
 
-            this.storeID = storeID;
 
         }
         public override string description()

@@ -491,7 +491,7 @@ namespace workshop192.Domain
             PurchasePolicy p1 = policies.ElementAt(index1);
             PurchasePolicy p2 = policies.ElementAt(index2);
 
-            ComplexPurchasePolicy complexPurchase = new ComplexPurchasePolicy(type, p1, p2, storeId);
+            ComplexPurchasePolicy complexPurchase = new ComplexPurchasePolicy(type, p1, p2);
             policies.Remove(p1);
             policies.Remove(p2);
             policies.AddLast(complexPurchase);
