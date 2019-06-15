@@ -54,6 +54,11 @@ namespace workshop192.Domain
             userState.login(username, password, this);
         }
 
+        public void loginAfterRegister(String username, String password)
+        {
+            userState.loginAfterRegister(username, password, this);
+        }
+
         public void register(String username, String password)
         {
             userState.register(username, password, this);

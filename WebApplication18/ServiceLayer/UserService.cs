@@ -49,6 +49,11 @@ namespace workshop192.ServiceLayer
             db.login(session, username, password);
         }
 
+        public int payToExternal(string card, string month, string year, string holder, string ccv, string id)
+        {
+            return db.payToExternal( card,  month,  year,  holder,  ccv,  id);
+        }
+
         //use case 2.2
         public void register(int user, String username, String password)
         {
@@ -62,6 +67,16 @@ namespace workshop192.ServiceLayer
             }
             String encrypted = encryptPassword(password);
             db.register(user, username, encrypted);
+        }
+
+        public int cancelPay(int result)
+        {
+            return db.cancelPay(result);
+        }
+
+        public int deliverToExternal(string name, string address, string city, string country, string zip, string cvv)
+        {
+            return db.deliverToExternal(name, address, city, country, zip, cvv);
         }
 
         public string encryptPassword(string password)
@@ -99,6 +114,11 @@ namespace workshop192.ServiceLayer
             db.removeUser(admin, username);
         }
 
+        public int cancelDelivery(int result)
+        {
+           return  db.cancelDelivery(result);
+        }
+
         public void logout(int user)
         {
             if (user < 0)
@@ -124,7 +144,8 @@ namespace workshop192.ServiceLayer
         }
         public string getAllStores(int session)
         {
-           return db.getAllStores(session);
+
+            return db.getAllStores(session);
         }
 
         //use case 2.5

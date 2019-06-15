@@ -18,6 +18,7 @@
 
        $(document).ready(function () {
            var productID =<%=ViewData["productID"]%>;
+           var storeID =<%=ViewData["storeID"]%>;
             $("#btnVisibleDiscount").click(function () {
                 event.preventDefault();
                 percentage = $("#percentage").val();
@@ -32,8 +33,8 @@
                     success: function (response) {
 
                         if (response == "") {
-                            location.reload();
-                            alert("Visible Discount added Successfully")                     
+                            alert("Visible Discount added Successfully")    
+                            window.location.href =  baseUrl + "/Store?storeId=" + storeID
                         }
                         else {
                             alert(response);

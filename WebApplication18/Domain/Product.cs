@@ -168,28 +168,35 @@ namespace workshop192.Domain
             else
                 discount = null;
         }
-        
+        public void removeReliantDiscount()
+        {
+            if (sameProductDiscount == null)
+                throw new DoesntExistException("Error: Discount does not exist so it cannot be removed");
+            else
+                sameProductDiscount = null;
+        }
+
         public void setProductName(String productName)
         {
             this.productName = productName;
-            DBProduct.getInstance().update(this);
+            //DBProduct.getInstance().update(this);
         }
 
         public void setProductCategory(String category)
         {
             this.productCategory = category;
-            DBProduct.getInstance().update(this);
+            //DBProduct.getInstance().update(this);
         }
         public void setPrice(int price)
         {
             this.price = price;
-            DBProduct.getInstance().update(this);
+            //DBProduct.getInstance().update(this);
         }
 
         public void setRank(int rank)
         {
             this.rank = rank;
-            DBProduct.getInstance().update(this);
+            //DBProduct.getInstance().update(this);
         }
 
         internal Store getStore()

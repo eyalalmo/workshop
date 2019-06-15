@@ -84,6 +84,11 @@ namespace workshop192.Domain
             throw new LoginException("Admin already logged in");
         }
 
+        public void loginAfterRegister(string username, string password, Session session)
+        {
+            throw new LoginException("Admin already logged in");
+        }
+
         public void logout(SubscribedUser sub, Session session)
         {
             dbSubscribedUser.logout(sub);
@@ -97,19 +102,24 @@ namespace workshop192.Domain
 
         public void removeUser(String user)
         {
-            if (Equals(user, "admin"))
+            if (Equals(user, "u1"))
                 throw new UserException("admin cannot be removed");
             SubscribedUser subscribedUser = DBSubscribedUser.getInstance().getSubscribedUser(user);
             if (subscribedUser == null)
                 throw new UserException("user to be removed does not exist");
-            Session session = dbSession.getSessionOfSubscribedUser(subscribedUser);
-            if (session != null)
+            try
             {
-                if (session.getState() is LoggedIn)
+                Session session = dbSession.getSessionOfSubscribedUser(subscribedUser);
+                if (session != null)
                 {
-                    session.logout();
+                    if (session.getState() is LoggedIn)
+                    {
+                        session.logout();
+                        session.setSubscribedUser(null);
+                    }
                 }
             }
+            catch (DoesntExistException) { }
             foreach (StoreRole role in subscribedUser.getStoreRoles())
             {
                 role.removeAllAppointedBy();
@@ -128,7 +138,6 @@ namespace workshop192.Domain
                 DBStore.getInstance().removeStoreRole(role);
 
             }
-            session.setSubscribedUser(null);
             dbSubscribedUser.remove(subscribedUser);
 
         }

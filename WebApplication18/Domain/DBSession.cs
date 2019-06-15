@@ -27,7 +27,8 @@ namespace workshop192.Domain
 
         public void init()
         {
-            sessions = new Dictionary<int, Session>();
+            DBSession.instance = new DBSession();
+            DBSession.sessionNum = 1;
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -61,9 +62,12 @@ namespace workshop192.Domain
         {
             foreach (KeyValuePair<int, Session> s in sessions)
             {
-                if (s.Value.getSubscribedUser().Equals(sub))
+                if (s.Value != null)
                 {
-                    return s.Value;
+                    if (s.Value.getSubscribedUser()!=null && s.Value.getSubscribedUser().Equals(sub))
+                    {
+                        return s.Value;
+                    }
                 }
             }
             throw new DoesntExistException("session doesnt exist");

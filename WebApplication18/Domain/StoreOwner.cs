@@ -85,11 +85,11 @@ namespace workshop192.Domain
         public void addManager(SubscribedUser manager, Permissions permissions)
         {
             StoreRole newManager = new StoreManager(this.userName, store, manager, permissions);
-            DBStore.getInstance().addStoreRole(newManager);
             if (store.getStoreRole(manager) != null)
                 throw new RoleException("Error: Username "  + manager.getUsername() + 
                     " already has a role in store " + 
                     store.getStoreName());
+            DBStore.getInstance().addStoreRole(newManager);
             store.addStoreRoleFromInitOwner(newManager);
             manager.addStoreRole(newManager);
             appointedByMe.Add(newManager);
@@ -121,9 +121,9 @@ namespace workshop192.Domain
                     " didn't appoint " + 
                     role.getUsername());
             DBStore.getInstance().removeStoreRole(sr);
-            sr.removeAllAppointedBy();
             role.removeStoreRole(sr);
             store.removeStoreRole(sr);
+            role.removeStoreRole(sr);
         }
 
         public void closeStore()
@@ -159,11 +159,10 @@ namespace workshop192.Domain
         {
             Store store = product.getStore();
             VisibleDiscount discount = new VisibleDiscount(percentage, duration, "ProductVisibleDiscount", store.getStoreID());
-            DBDiscount.getInstance().addDiscount(discount);
+            store.addDiscount(discount);
             discount.setProduct(product);
             product.setDiscount(discount);
-            //store.addDiscount(discount);
-
+            DBDiscount.getInstance().addDiscount(discount);
         }
         public void removeProductDiscount(Product product)
         {
@@ -209,7 +208,7 @@ namespace workshop192.Domain
             DiscountComposite composite = new DiscountComposite(list, type, percentage, duration, store.getStoreID());
             foreach (DiscountComponent d in list)
             {
-                store.removeDiscount(d.getId());   
+                store.removeDiscoutFromList(d.getId());   
                 DBDiscount.getInstance().setIsPartOfComplex(d.getId(), true);
                 d.setIsPartOfComplex(true);
 
@@ -221,29 +220,7 @@ namespace workshop192.Domain
 
         }
 
-
-        public void removeMaxAmountPolicy()
-        {
-            store.removeMaxAMountPolicy();
-        }
-        public void removeMinAmountPolicy()
-        {
-            store.removeMinAmountPolicy();
-        }
-
-        public void setMinAmountPolicy( int newMinAmount)
-        {
-            store.setMinPurchasePolicy(newMinAmount);
-        }
-
-       
-
-        public void setMaxAmountPolicy(int newMaxAmount)
-        {
-            store.setMaxPurchasePolicy(newMaxAmount);
-
-        }
-
+        
         //public void removeCouponFromStore(string couponCode)
         //{
         //    store.removeCoupon(couponCode);
@@ -260,31 +237,75 @@ namespace workshop192.Domain
         //}
 
         public void addPendingOwner(SubscribedUser pending)
-        {
+        { 
             DBStore.getInstance().addPendingOwner(store.getStoreID(),userName.getUsername(), pending.getUsername());
-            DBStore.getInstance().signContract(store.getStoreID(), userName.getUsername(), pending.getUsername());
+
         }
         public void signContract(SubscribedUser pending)
         {
             if (DBStore.getInstance().hasContract(store.getStoreID(), pending.getUsername(), userName.getUsername()))
                 throw new AlreadyExistException("You have already signed a contract with " + pending.getUsername());
-            DBStore.getInstance().signContract(store.getStoreID(),userName.getUsername(), pending.getUsername());
             int approvedOwners = DBStore.getInstance().getContractNum(store.getStoreID(),pending.getUsername());
-            if (approvedOwners == store.getNumberOfOwners())
+            if (approvedOwners == store.getNumberOfOwners()-1)
             {
-                DBStore.getInstance().removePendingOwner(store.getStoreID(),pending.getUsername());
-                addOwner(pending);
+                StoreRole newOwner = new StoreOwner(this.userName, pending, store);
+                //DBStore.getInstance().signContract(store.getStoreID(), userName.getUsername(), pending.getUsername(),true);
+                //DBStore.getInstance().removePendingOwner(store.getStoreID(),pending.getUsername());
+                //DBStore.getInstance().addStoreRole(newOwner);
+                store.addStoreRoleFromInitOwner(newOwner);
+                pending.addStoreRole(newOwner);
+                appointedByMe.Add(newOwner);
+                DBStore.getInstance().signAndAddOwner(store.getStoreID(), userName.getUsername(), pending.getUsername(), newOwner);
+
+            }
+            else
+            {
+                DBStore.getInstance().signContract(store.getStoreID(), userName.getUsername(), pending.getUsername(), false);
             }
         }
         public void declineContract(SubscribedUser pending)
         {
-            DBStore.getInstance().removeAllUserContracts(store.getStoreID(), pending.getUsername());
-            DBStore.getInstance().removePendingOwner(store.getStoreID(), pending.getUsername());
+            DBStore.getInstance().declineContract(store.getStoreID(), pending.getUsername());
+            //DBStore.getInstance().removeAllUserContracts(store.getStoreID(), pending.getUsername());
+            //DBStore.getInstance().removePendingOwner(store.getStoreID(), pending.getUsername());
         }
         public Permissions GetPermissions()
         {
             return new Permissions(true, true, true);
         }
+
+
+
+        public void removePolicy(int index)
+        {
+            store.removePolicyByID(index);
+        }
+
+        public void setPolicyByID(int newAmount, int policyID)
+        {
+            store.setPolicyByID(newAmount, policyID);
+        }
+        public void addMinPurchasePolicy(int amount)
+        {
+            store.addMinAmountPolicy(amount);
+        }
+
+        public void addMaxPurchasePolicy(int amount)
+        {
+            store.addMaxAmountPolicy(amount);
+        }
+
+        public void addTotalPricePurchasePolicy(int amount)
+        {
+            store.addTotalAmountPolicy(amount);
+        }
+
+        public void addComplexPolicy(int index1, int index2, string type)
+        {
+
+            store.addComplexPurchasePolicy(index1, index2, type);
+        }
+
     }
 }
 

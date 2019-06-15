@@ -192,7 +192,7 @@ namespace workshop192.Domain
             DiscountComposite composite = new DiscountComposite(list, type, percentage, duration, store.getStoreID());
             foreach (DiscountComponent d in list)
             {
-                store.removeDiscount(d.getId());
+                store.removeDiscoutFromList(d.getId());
                 DBDiscount.getInstance().setIsPartOfComplex(d.getId(), true);
                 d.setIsPartOfComplex(true);
             }
@@ -217,32 +217,6 @@ namespace workshop192.Domain
         public void removeProductDiscount(Product product)
         {
             product.removeDiscount();
-        }
-
-        //////
-
-        
-
-        public void removeMaxAmountPolicy()
-        {
-            store.removeMaxAMountPolicy();
-        }
-        public void removeMinAmountPolicy()
-        {
-            store.removeMinAmountPolicy();
-        }
-
-        public void setMinAmountPolicy( int newMinAmount)
-        {
-            store.setMinPurchasePolicy(newMinAmount);
-        }
-
-       
-
-        public void setMaxAmountPolicy( int newMaxAmount)
-        {
-            store.setMaxPurchasePolicy(newMaxAmount);
-
         }
 
         //public void removeCouponFromStore(string couponCode)
@@ -272,5 +246,36 @@ namespace workshop192.Domain
         {
             return permissions;
         }
+
+        public void removePolicy(int index)
+        {
+            store.removePolicyByID(index);
+        }
+
+        public void setPolicyByID(int newAmount, int policyID)
+        {
+            store.setPolicyByID(newAmount, policyID);
+        }
+        public void addMinPurchasePolicy(int amount)
+        {
+            store.addMinAmountPolicy(amount);
+        }
+
+        public void addMaxPurchasePolicy(int amount)
+        {
+            store.addMaxAmountPolicy(amount);
+        }
+
+        public void addTotalPricePurchasePolicy(int amount)
+        {
+            store.addTotalAmountPolicy(amount);
+        }
+
+        public void addComplexPolicy(int index1, int index2, string type)
+        {
+
+            store.addComplexPurchasePolicy(index1, index2, type);
+        }
+
     }
 }

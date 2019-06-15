@@ -17,7 +17,8 @@ namespace workshop192.Domain
         {
         }
 
-      
+        public abstract Product getProduct();
+        public abstract void removeProduct();
         public override void setComplexCondition(bool complexCondition, Dictionary<Product, int> productList, Dictionary<Product, double> productsActualPrice)
         {
             if (complexCondition)

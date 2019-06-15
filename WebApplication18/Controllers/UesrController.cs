@@ -7,7 +7,7 @@ using System.Web.Http;
 using WebApplication18.Logs;
 using workshop192.ServiceLayer;
 using workshop192.Domain;
-using Newtonsoft.Json;
+
 
 namespace WebApplication18.Controllers
 {
@@ -226,11 +226,6 @@ namespace WebApplication18.Controllers
                 return "OK";
 
             }
-            catch (SuccessPaymentExeption)
-            {
-                return "OK";
-            }
-
             catch (ClientException e)
             {
                 SystemLogger.getEventLog().Error("Checkout : " + e.Message.ToString());
@@ -280,22 +275,7 @@ namespace WebApplication18.Controllers
             }
         }
 
-        [Route("api/user/ggg")]
-        [HttpGet]
-        public Object ggg()
-        {
-            try
-            {
-                return JsonConvert.SerializeObject(WebSocketController.sessionToSocket);
-                
-                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-               
-            }
-            catch (Exception e)
-            {
-                return e.Message;
-            }
-        }
+
     }
 }
  

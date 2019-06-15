@@ -13,8 +13,6 @@ namespace workshop192.Domain.Tests
     public class StoreManagerTests
     {
         Session session1, session2, session3;
-        DBStore storeDB = DBStore.getInstance();
-        DBProduct productDB = DBProduct.getInstance();
         Product p, p1;
         Store store;
         StoreRole sr, sr1, sr2;

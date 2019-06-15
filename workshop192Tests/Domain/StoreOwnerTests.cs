@@ -12,20 +12,15 @@ namespace workshop192.Domain.Tests
     public class StoreOwnerTests
     {
         Session session1, session2, session3;
-        DBStore storeDB = DBStore.getInstance();
-        DBProduct productDB = DBProduct.getInstance();
-        Product p, p1;
+       
         Store store;
         StoreRole sr;
         Permissions per;
-
+        Product p, p1;
         [TestInitialize()]
         public void TestInitialize()
         {
             MarketSystem.initTestWitOutRead();
-            //storeDB.initTests();
-            //productDB.initTests();
-            //DBSubscribedUser.getInstance().initTests();
             session1 = new Session();
             string pass = DomainBridge.getInstance().encryptPassword("123");
             session1.register("eyal", pass);
@@ -203,14 +198,14 @@ namespace workshop192.Domain.Tests
         {
             try
             {
-                sr.addManager(session2.getSubscribedUser(), per);
-                sr.remove(session2.getSubscribedUser());
-                Assert.AreEqual(store.getStoreRole(session2.getSubscribedUser()), null);
-                Assert.AreEqual(session2.getSubscribedUser().getStoreRoles().Count, 0);
+                sr.addManager(session3.getSubscribedUser(), per);
+                sr.remove(session3.getSubscribedUser());
+                Assert.AreEqual(store.getStoreRole(session3.getSubscribedUser()), null);
+                Assert.AreEqual(session3.getSubscribedUser().getStoreRoles().Count, 0);
             }
             catch (RoleException)
             {
-                Assert.IsTrue(true);
+                Assert.Fail();
             }
         }
 
@@ -222,10 +217,10 @@ namespace workshop192.Domain.Tests
                 sr.remove(session1.getSubscribedUser());
                 sr.addManager(session2.getSubscribedUser(), per);
                 sr.remove(session3.getSubscribedUser());
+                Assert.Fail();
             }
             catch (RoleException)
             {
-                Assert.IsTrue(true);
             }
         }
 
@@ -265,50 +260,8 @@ namespace workshop192.Domain.Tests
             }
             catch (RoleException)
             {
-                Assert.IsTrue(true);
             }
         }
 
-        [TestMethod()]
-        public void removeOwnerSuccTest()
-        {
-            try
-            {
-                sr.addOwner(session2.getSubscribedUser());
-                sr.remove(session2.getSubscribedUser());
-                Assert.AreEqual(session2.getSubscribedUser().getStoreRoles().Count, 0);
-                Assert.AreEqual(store.getNumberOfOwners(), 1);
-            }
-            catch (Exception)
-            {
-                Assert.Fail();
-            }
-        }
-
-        [TestMethod()]
-        public void removeOwnerFailTest()
-        {
-            try
-            {
-                sr.addOwner(session2.getSubscribedUser());
-                sr.remove(session3.getSubscribedUser());
-                sr.remove(session1.getSubscribedUser());
-                Assert.Fail();
-            }
-            catch (RoleException)
-            {
-                Assert.IsTrue(true);
-            }
-            catch (Exception)
-            {
-                Assert.Fail();
-            }
-        }
-
-        [TestMethod()]
-        public void closeStoreSuccTest()
-        {
-            Assert.IsTrue(true);
-        }
     }
 }

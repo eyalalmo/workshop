@@ -1,0 +1,5 @@
+Label,# Samples,Average,Median,90% Line,95% Line,99% Line,Min,Max,Error %,Throughput,Received KB/sec,Std. Dev.
+001_Home Page - My ASP.NET Application,100,10,6,26,34,51,3,54,0.00%,.5,4.2,11.11
+002_Register - My ASP.NET Application,100,260,253,290,308,331,233,338,0.00%,.5,5.4,22.74
+003_Home Page - My ASP.NET Application,100,8,5,20,31,43,3,46,0.00%,.5,4.3,8.83
+TOTAL,300,93,9,267,282,327,3,338,0.00%,1.5,13.4,119.36

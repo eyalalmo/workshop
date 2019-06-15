@@ -1,0 +1,429 @@
+{
+  "version" : "v2",
+  "resultSummary" : {
+    "testStarted" : 1560607898861,
+    "testEnded" : 1560608063708,
+    "totalHits" : 2800,
+    "totalErrors" : 0,
+    "maxVUsers" : 400,
+    "durationInSeconds" : 164
+  },
+  "scriptName" : "test1.1",
+  "properties" : { },
+  "samplerSummaries" : {
+    "Failed_Requests_Summary.csv" : {
+      "name" : "Failed_Requests_Summary.csv",
+      "header" : [ {
+        "key" : "sampler_label",
+        "name" : "Label",
+        "index" : 0
+      }, {
+        "key" : "aggregate_report_count",
+        "name" : "#Samples",
+        "index" : 1
+      }, {
+        "key" : "average",
+        "name" : "Average [ms]",
+        "index" : 2
+      }, {
+        "key" : "aggregate_report_median",
+        "name" : "Median [ms]",
+        "index" : 3
+      }, {
+        "key" : "aggregate_report_90%_line",
+        "name" : "90% line [ms]",
+        "index" : 4
+      }, {
+        "key" : "aggregate_report_95%_line",
+        "name" : "95% line [ms]",
+        "index" : 5
+      }, {
+        "key" : "aggregate_report_99%_line",
+        "name" : "99% line [ms]",
+        "index" : 6
+      }, {
+        "key" : "aggregate_report_min",
+        "name" : "Minimum [ms]",
+        "index" : 7
+      }, {
+        "key" : "aggregate_report_max",
+        "name" : "Maximum [ms]",
+        "index" : 8
+      }, {
+        "key" : "aggregate_report_error%",
+        "name" : "Error Rate",
+        "index" : 9
+      }, {
+        "key" : "aggregate_report_rate",
+        "name" : "Rate / sec",
+        "index" : 10
+      }, {
+        "key" : "aggregate_report_bandwidth",
+        "name" : "Avg. Bandwidth [KB/s]",
+        "index" : 11
+      }, {
+        "key" : "aggregate_report_stddev",
+        "name" : "Std. Deviation",
+        "index" : 12
+      } ],
+      "data" : [ ],
+      "total" : {
+        "label" : "TOTAL",
+        "metrics" : {
+          "average" : 0.0,
+          "aggregate_report_max" : -9.223372036854776E18,
+          "aggregate_report_rate" : 0.0,
+          "aggregate_report_95%_line" : 0.0,
+          "aggregate_report_99%_line" : 0.0,
+          "aggregate_report_stddev" : 0.0,
+          "aggregate_report_90%_line" : 0.0,
+          "aggregate_report_error%" : 0.0,
+          "aggregate_report_min" : 9.223372036854776E18,
+          "aggregate_report_bandwidth" : 0.0,
+          "aggregate_report_median" : 0.0,
+          "aggregate_report_count" : 0.0
+        }
+      }
+    },
+    "Successful_Requests_Summary.csv" : {
+      "name" : "Successful_Requests_Summary.csv",
+      "header" : [ {
+        "key" : "sampler_label",
+        "name" : "Label",
+        "index" : 0
+      }, {
+        "key" : "aggregate_report_count",
+        "name" : "#Samples",
+        "index" : 1
+      }, {
+        "key" : "average",
+        "name" : "Average [ms]",
+        "index" : 2
+      }, {
+        "key" : "aggregate_report_median",
+        "name" : "Median [ms]",
+        "index" : 3
+      }, {
+        "key" : "aggregate_report_90%_line",
+        "name" : "90% line [ms]",
+        "index" : 4
+      }, {
+        "key" : "aggregate_report_95%_line",
+        "name" : "95% line [ms]",
+        "index" : 5
+      }, {
+        "key" : "aggregate_report_99%_line",
+        "name" : "99% line [ms]",
+        "index" : 6
+      }, {
+        "key" : "aggregate_report_min",
+        "name" : "Minimum [ms]",
+        "index" : 7
+      }, {
+        "key" : "aggregate_report_max",
+        "name" : "Maximum [ms]",
+        "index" : 8
+      }, {
+        "key" : "aggregate_report_error%",
+        "name" : "Error Rate",
+        "index" : 9
+      }, {
+        "key" : "aggregate_report_rate",
+        "name" : "Rate / sec",
+        "index" : 10
+      }, {
+        "key" : "aggregate_report_bandwidth",
+        "name" : "Avg. Bandwidth [KB/s]",
+        "index" : 11
+      }, {
+        "key" : "aggregate_report_stddev",
+        "name" : "Std. Deviation",
+        "index" : 12
+      } ],
+      "data" : [ {
+        "label" : "001_Home Page - My ASP.NET Application",
+        "metrics" : {
+          "average" : 5688.0,
+          "aggregate_report_max" : 10198.0,
+          "aggregate_report_rate" : 27.6,
+          "aggregate_report_95%_line" : 9849.0,
+          "aggregate_report_99%_line" : 10136.0,
+          "aggregate_report_stddev" : 3142.94,
+          "aggregate_report_90%_line" : 9520.0,
+          "aggregate_report_error%" : 0.0,
+          "aggregate_report_min" : 3.0,
+          "aggregate_report_bandwidth" : 230.0,
+          "aggregate_report_median" : 5959.0,
+          "aggregate_report_count" : 400.0
+        }
+      }, {
+        "label" : "002_Register - My ASP.NET Application",
+        "metrics" : {
+          "average" : 41064.0,
+          "aggregate_report_max" : 87538.0,
+          "aggregate_report_rate" : 3.9,
+          "aggregate_report_95%_line" : 83023.0,
+          "aggregate_report_99%_line" : 86346.0,
+          "aggregate_report_stddev" : 25866.7,
+          "aggregate_report_90%_line" : 78686.0,
+          "aggregate_report_error%" : 0.0,
+          "aggregate_report_min" : 948.0,
+          "aggregate_report_bandwidth" : 41.8,
+          "aggregate_report_median" : 38917.0,
+          "aggregate_report_count" : 400.0
+        }
+      }, {
+        "label" : "003_Login - My ASP.NET Application",
+        "metrics" : {
+          "average" : 35156.0,
+          "aggregate_report_max" : 79614.0,
+          "aggregate_report_rate" : 3.7,
+          "aggregate_report_95%_line" : 75754.0,
+          "aggregate_report_99%_line" : 78613.0,
+          "aggregate_report_stddev" : 24909.56,
+          "aggregate_report_90%_line" : 70376.0,
+          "aggregate_report_error%" : 0.0,
+          "aggregate_report_min" : 417.0,
+          "aggregate_report_bandwidth" : 36.5,
+          "aggregate_report_median" : 35011.0,
+          "aggregate_report_count" : 400.0
+        }
+      }, {
+        "label" : "004_Login - My ASP.NET Application",
+        "metrics" : {
+          "average" : 39853.0,
+          "aggregate_report_max" : 90677.0,
+          "aggregate_report_rate" : 2.7,
+          "aggregate_report_95%_line" : 86906.0,
+          "aggregate_report_99%_line" : 89257.0,
+          "aggregate_report_stddev" : 22038.76,
+          "aggregate_report_90%_line" : 84522.0,
+          "aggregate_report_error%" : 0.0,
+          "aggregate_report_min" : 7823.0,
+          "aggregate_report_bandwidth" : 27.7,
+          "aggregate_report_median" : 36877.0,
+          "aggregate_report_count" : 400.0
+        }
+      }, {
+        "label" : "005_Home Page - My ASP.NET Application",
+        "metrics" : {
+          "average" : 18181.0,
+          "aggregate_report_max" : 43226.0,
+          "aggregate_report_rate" : 6.0,
+          "aggregate_report_95%_line" : 41844.0,
+          "aggregate_report_99%_line" : 42687.0,
+          "aggregate_report_stddev" : 14804.83,
+          "aggregate_report_90%_line" : 40605.0,
+          "aggregate_report_error%" : 0.0,
+          "aggregate_report_min" : 3.0,
+          "aggregate_report_bandwidth" : 51.5,
+          "aggregate_report_median" : 16605.0,
+          "aggregate_report_count" : 400.0
+        }
+      } ],
+      "total" : {
+        "label" : "TOTAL",
+        "metrics" : {
+          "average" : 27988.0,
+          "aggregate_report_max" : 90677.0,
+          "aggregate_report_rate" : 12.1,
+          "aggregate_report_95%_line" : 77817.0,
+          "aggregate_report_99%_line" : 87031.0,
+          "aggregate_report_stddev" : 24334.9,
+          "aggregate_report_90%_line" : 66534.0,
+          "aggregate_report_error%" : 0.0,
+          "aggregate_report_min" : 3.0,
+          "aggregate_report_bandwidth" : 115.4,
+          "aggregate_report_median" : 21001.0,
+          "aggregate_report_count" : 2000.0
+        }
+      }
+    },
+    "Requests_Summary.csv" : {
+      "name" : "Requests_Summary.csv",
+      "header" : [ {
+        "key" : "sampler_label",
+        "name" : "Label",
+        "index" : 0
+      }, {
+        "key" : "aggregate_report_count",
+        "name" : "#Samples",
+        "index" : 1
+      }, {
+        "key" : "average",
+        "name" : "Average [ms]",
+        "index" : 2
+      }, {
+        "key" : "aggregate_report_median",
+        "name" : "Median [ms]",
+        "index" : 3
+      }, {
+        "key" : "aggregate_report_90%_line",
+        "name" : "90% line [ms]",
+        "index" : 4
+      }, {
+        "key" : "aggregate_report_95%_line",
+        "name" : "95% line [ms]",
+        "index" : 5
+      }, {
+        "key" : "aggregate_report_99%_line",
+        "name" : "99% line [ms]",
+        "index" : 6
+      }, {
+        "key" : "aggregate_report_min",
+        "name" : "Minimum [ms]",
+        "index" : 7
+      }, {
+        "key" : "aggregate_report_max",
+        "name" : "Maximum [ms]",
+        "index" : 8
+      }, {
+        "key" : "aggregate_report_error%",
+        "name" : "Error Rate",
+        "index" : 9
+      }, {
+        "key" : "aggregate_report_rate",
+        "name" : "Rate / sec",
+        "index" : 10
+      }, {
+        "key" : "aggregate_report_bandwidth",
+        "name" : "Avg. Bandwidth [KB/s]",
+        "index" : 11
+      }, {
+        "key" : "aggregate_report_stddev",
+        "name" : "Std. Deviation",
+        "index" : 12
+      } ],
+      "data" : [ {
+        "label" : "001_Home Page - My ASP.NET Application",
+        "metrics" : {
+          "average" : 5688.0,
+          "aggregate_report_max" : 10198.0,
+          "aggregate_report_rate" : 27.6,
+          "aggregate_report_95%_line" : 9849.0,
+          "aggregate_report_99%_line" : 10136.0,
+          "aggregate_report_stddev" : 3142.94,
+          "aggregate_report_90%_line" : 9520.0,
+          "aggregate_report_error%" : 0.0,
+          "aggregate_report_min" : 3.0,
+          "aggregate_report_bandwidth" : 230.0,
+          "aggregate_report_median" : 5959.0,
+          "aggregate_report_count" : 400.0
+        }
+      }, {
+        "label" : "002_Register - My ASP.NET Application",
+        "metrics" : {
+          "average" : 41064.0,
+          "aggregate_report_max" : 87538.0,
+          "aggregate_report_rate" : 3.9,
+          "aggregate_report_95%_line" : 83023.0,
+          "aggregate_report_99%_line" : 86346.0,
+          "aggregate_report_stddev" : 25866.7,
+          "aggregate_report_90%_line" : 78686.0,
+          "aggregate_report_error%" : 0.0,
+          "aggregate_report_min" : 948.0,
+          "aggregate_report_bandwidth" : 41.8,
+          "aggregate_report_median" : 38917.0,
+          "aggregate_report_count" : 400.0
+        }
+      }, {
+        "label" : "003_Login - My ASP.NET Application",
+        "metrics" : {
+          "average" : 35156.0,
+          "aggregate_report_max" : 79614.0,
+          "aggregate_report_rate" : 3.7,
+          "aggregate_report_95%_line" : 75754.0,
+          "aggregate_report_99%_line" : 78613.0,
+          "aggregate_report_stddev" : 24909.56,
+          "aggregate_report_90%_line" : 70376.0,
+          "aggregate_report_error%" : 0.0,
+          "aggregate_report_min" : 417.0,
+          "aggregate_report_bandwidth" : 36.5,
+          "aggregate_report_median" : 35011.0,
+          "aggregate_report_count" : 400.0
+        }
+      }, {
+        "label" : "004_Login - My ASP.NET Application",
+        "metrics" : {
+          "average" : 39853.0,
+          "aggregate_report_max" : 90677.0,
+          "aggregate_report_rate" : 2.7,
+          "aggregate_report_95%_line" : 86906.0,
+          "aggregate_report_99%_line" : 89257.0,
+          "aggregate_report_stddev" : 22038.76,
+          "aggregate_report_90%_line" : 84522.0,
+          "aggregate_report_error%" : 0.0,
+          "aggregate_report_min" : 7823.0,
+          "aggregate_report_bandwidth" : 27.7,
+          "aggregate_report_median" : 36877.0,
+          "aggregate_report_count" : 400.0
+        }
+      }, {
+        "label" : "005_Home Page - My ASP.NET Application",
+        "metrics" : {
+          "average" : 18181.0,
+          "aggregate_report_max" : 43226.0,
+          "aggregate_report_rate" : 6.0,
+          "aggregate_report_95%_line" : 41844.0,
+          "aggregate_report_99%_line" : 42687.0,
+          "aggregate_report_stddev" : 14804.83,
+          "aggregate_report_90%_line" : 40605.0,
+          "aggregate_report_error%" : 0.0,
+          "aggregate_report_min" : 3.0,
+          "aggregate_report_bandwidth" : 51.5,
+          "aggregate_report_median" : 16605.0,
+          "aggregate_report_count" : 400.0
+        }
+      } ],
+      "total" : {
+        "label" : "TOTAL",
+        "metrics" : {
+          "average" : 27988.0,
+          "aggregate_report_max" : 90677.0,
+          "aggregate_report_rate" : 12.1,
+          "aggregate_report_95%_line" : 77817.0,
+          "aggregate_report_99%_line" : 87031.0,
+          "aggregate_report_stddev" : 24334.9,
+          "aggregate_report_90%_line" : 66534.0,
+          "aggregate_report_error%" : 0.0,
+          "aggregate_report_min" : 3.0,
+          "aggregate_report_bandwidth" : 115.4,
+          "aggregate_report_median" : 21001.0,
+          "aggregate_report_count" : 2000.0
+        }
+      }
+    }
+  },
+  "responseCodes" : {
+    "001_Home Page - My ASP.NET Application-rc-200" : 400,
+    "002_Register - My ASP.NET Application-rc-200" : 400,
+    "003_Login - My ASP.NET Application-rc-200" : 400,
+    "004_Login - My ASP.NET Application-rc-200" : 400,
+    "005_Home Page - My ASP.NET Application-rc-200" : 400
+  },
+  "criteria" : {
+    "status" : "FAIL",
+    "criteria" : [ {
+      "name" : "EXAMPLE Criterion No Errors",
+      "status" : "PASS"
+    }, {
+      "name" : "EXAMPLE Criterion Response < 2 sec",
+      "status" : "FAIL"
+    }, {
+      "name" : "EXAMPLE Criterion CPU < 75",
+      "status" : "FAIL"
+    } ]
+  },
+  "testConfiguration" : {
+    "testPlanComment" : "",
+    "threadGroups" : [ {
+      "name" : "Thread Group",
+      "implementation" : "ThreadGroup",
+      "maxVirtualUsers" : 400,
+      "rampUp" : "10",
+      "duration" : null,
+      "timeUnit" : "SECONDS"
+    } ]
+  },
+  "samplerSummaryPath" : "csv/Requests_Summary.csv"
+}

@@ -446,7 +446,7 @@ namespace WebApplication18.Controllers
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-                StoreService.getInstance().setMaxAmountPolicy(storeID, session, maxVal);
+                StoreService.getInstance().addMaxAmountPolicy(storeID, session, maxVal);
                  return "ok";
             }
             catch (ClientException e)
@@ -463,7 +463,7 @@ namespace WebApplication18.Controllers
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-                StoreService.getInstance().setMinAmountPolicy(storeID, session, minVal);
+                StoreService.getInstance().addMinAmountPolicy(storeID, session, minVal);
                 return "ok";
             }
             catch (ClientException e)
@@ -472,14 +472,14 @@ namespace WebApplication18.Controllers
                 return e.Message;
             }
         }
-        [Route("api/store/GetMaxPolicy")]
+       /* [Route("api/store/GetMaxPolicy")]
         [HttpGet]
         public string GetMaxPolicy(int storeID)
         {
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-               return StoreService.getInstance().getMaxAmountPolicy(storeID,session);
+           //    return StoreService.getInstance().getMaxAmountPolicy(storeID,session);
                
             }
             catch (ClientException e)
@@ -513,7 +513,7 @@ namespace WebApplication18.Controllers
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-                 StoreService.getInstance().removeMaxAmountPolicy(storeID, session);
+          //       StoreService.getInstance().removeMaxAmountPolicy(storeID, session);
                  return "ok";
 
             }
@@ -531,7 +531,7 @@ namespace WebApplication18.Controllers
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-                StoreService.getInstance().removeMinAmountPolicy(storeID, session);
+         //       StoreService.getInstance().removeMinAmountPolicy(storeID, session);
                 return "ok";
 
             }
@@ -541,7 +541,7 @@ namespace WebApplication18.Controllers
                 return e.Message;
             }
         }
-
+        */
         [Route("api/store/StoreDiscounts")]
         [HttpGet]
         public string StoreDiscounts(int storeID)
@@ -591,12 +591,12 @@ namespace WebApplication18.Controllers
 
         [Route("api/store/setPolicyAmount")]
         [HttpGet]
-        public Object setPolicyAmount(int policyID, int amount)
+        public Object setPolicyAmount(int policyID, int amount, int storeID)
         {
             try
             {
                 int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
-                StoreService.getInstance().setPolicyAmount(policyID, amount);
+                StoreService.getInstance().setPolicyAmount(policyID, amount, session, storeID);
                 return "ok";
             }
             catch (Exception e)
@@ -667,7 +667,21 @@ namespace WebApplication18.Controllers
                 return e.Message;
             }
         }
-
+        [Route("api/store/AddTotalPolicy")]
+        [HttpGet]
+        public Object AddTotalPolicy(int storeID, int totalVal)
+        {
+            try
+            {
+                int session = UserService.getInstance().getUserByHash(System.Web.HttpContext.Current.Request.Cookies["HashCode"].Value);
+                StoreService.getInstance().addTotalPolicy(storeID,totalVal,session);
+                return "ok";
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
 
 
     }

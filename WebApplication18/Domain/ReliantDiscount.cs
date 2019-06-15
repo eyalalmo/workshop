@@ -108,7 +108,7 @@ namespace workshop192.Domain
         {
             return "Reliant Discount";
         }
-        public Product getProduct()
+        public override Product getProduct()
         {
             return this.product;
         }
@@ -132,6 +132,11 @@ namespace workshop192.Domain
             if (type == reliantType.sameProduct)
                 return true;
             return false;
+        }
+
+        public override void removeProduct()
+        {
+            this.product = null;
         }
 
     }

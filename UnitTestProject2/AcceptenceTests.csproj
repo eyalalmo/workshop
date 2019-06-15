@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasketServiceTests.cs" />
+    <Compile Include="ExternalServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StoreServiceTests.cs" />
     <Compile Include="PurchasePolicyTest.cs" />

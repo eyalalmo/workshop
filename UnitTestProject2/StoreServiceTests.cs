@@ -14,7 +14,7 @@ namespace workshop192.ServiceLayer.Tests
     {
         private StoreService storeService = StoreService.getInstance();
         private UserService userService = UserService.getInstance();
-        int session1, session2 ,session3;
+        int session1, session2, session3, session4, session5;
         int storeid;
         int productid;
 
@@ -34,6 +34,14 @@ namespace workshop192.ServiceLayer.Tests
             session3 = userService.startSession();
             userService.register(session3, "eva2", "123");
             userService.login(session3, "eva2", "123");
+
+            session4 = userService.startSession();
+            userService.register(session4, "u15", "123");
+            userService.login(session4, "u15", "123");
+
+            session5 = userService.startSession();
+            userService.register(session5, "u16", "123");
+            userService.login(session5, "u16", "123");
 
             storeid = storeService.addStore("myStore", "the best store ever", session1);
 
@@ -75,7 +83,7 @@ namespace workshop192.ServiceLayer.Tests
             Assert.IsTrue(true);
 
         }
-        
+
         //4.1.2
         [TestMethod()]
         public void RemoveProductTest1()
@@ -90,25 +98,189 @@ namespace workshop192.ServiceLayer.Tests
             {
                 Assert.Fail();
             }
-            Assert.IsTrue(true);
         }
-        //4.1.3
+        //4.3
         [TestMethod()]
-        public void EditProduct()
+        public void addOwnerByAnOwnerSuccTest()
         {
-            addProductTest();
-
             try
             {
-                storeService.setProductName(productid, "the best", session1);
-                storeService.setProductPrice(productid, 4, session1);
+                storeService.addOwner(storeid, "dani1", session1);
             }
             catch (Exception)
             {
                 Assert.Fail();
             }
-            Assert.IsTrue(true);
         }
+
+        //4.3
+        [TestMethod()]
+        public void addOwnerByAnOwnerFailTest()
+        {
+            try
+            {
+                storeService.addOwner(storeid, "nouser", session1);
+                Assert.Fail();
+            }
+            catch (DoesntExistException)
+            {
+                Assert.IsTrue(true);
+            }
+            catch (Exception)
+            {
+                Assert.Fail();
+            }
+        }
+
+        //4.3
+        [TestMethod()]
+        public void addOwnerByAnOwnerFailTest2()
+        {
+            try
+            {
+                addOwnerByAnOwnerSuccTest();
+                storeService.addOwner(storeid, "dani1", session1);
+                Assert.Fail();
+            }
+            catch (RoleException)
+            {
+                Assert.IsTrue(true);
+            }
+        }
+
+        //4.3
+        [TestMethod()]
+        public void addPendingOwnerTest1()
+        {
+            try
+            {
+                addOwnerByAnOwnerSuccTest();
+                storeService.addOwner(storeid, "u15", session2);
+
+            }
+            catch (Exception)
+            {
+                Assert.Fail();
+            }
+        }
+
+        //4.3
+        [TestMethod()]
+        public void addPendingOwnerTestFail1()
+        {
+            try
+            {
+                addOwnerByAnOwnerSuccTest();
+                storeService.addManager(storeid, "u15", true, true, true, session2);
+                storeService.addOwner(storeid, "u15", session2);
+                Assert.Fail();
+            }
+            catch (RoleException)
+            {
+            }
+        }
+
+        //4.3
+        [TestMethod()]
+        public void addPendingOwnerTestFail2()
+        {
+            try
+            {
+                addOwnerByAnOwnerSuccTest();
+                storeService.addOwner(storeid, "u15", session2);
+                storeService.addOwner(storeid, "u15", session2);
+                Assert.Fail();
+            }
+            catch (RoleException)
+            {
+            }
+        }
+
+
+        //4.3
+        [TestMethod()]
+        public void addTwoOwnersTest()
+        {
+            try
+            {
+                addOwnerByAnOwnerSuccTest();
+                storeService.addOwner(storeid, "u15", session2);
+                storeService.signContract(storeid, "u15", session1);
+
+            }
+            catch (RoleException)
+            {
+                Assert.Fail();
+            }
+
+            try
+            {
+                storeService.addOwner(storeid, "u16", session4); // checking that the owner was added successfuly
+
+            }
+            catch (RoleException)
+            {
+                Assert.Fail();
+            }
+        }
+
+        //4.3
+        [TestMethod()]
+        public void declineContractTest1()
+        {
+            try
+            {
+                addOwnerByAnOwnerSuccTest();
+                storeService.addOwner(storeid, "u15", session2);
+                storeService.declineContract(storeid, "u15", session1);
+
+            }
+            catch (RoleException)
+            {
+                Assert.Fail();
+            }
+
+            try
+            {
+                storeService.addOwner(storeid, "u16", session4); // checking that the owner was added successfuly
+                Assert.Fail();
+
+            }
+            catch (RoleException)
+            {
+                
+            }
+        }
+
+        //4.3
+        [TestMethod()]
+        public void declineContractTest2()
+        {
+            try
+            {
+                addTwoOwnersTest();
+                storeService.signContract(storeid, "u16", session1);
+                storeService.declineContract(storeid, "u16", session4);
+
+            }
+            catch (RoleException)
+            {
+                Assert.Fail();
+            }
+
+            try
+            {
+                storeService.addOwner(storeid, "eva2", session5); // checking that the owner was added successfuly
+                Assert.Fail();
+
+            }
+            catch (RoleException)
+            {
+
+            }
+        }
+
+
 
 
         //4.5
@@ -156,7 +328,7 @@ namespace workshop192.ServiceLayer.Tests
                 Assert.Fail();
             }
         }
-        
+
         //4.5
         [TestMethod()]
         public void addMannagerByAnOwner2()
@@ -248,56 +420,7 @@ namespace workshop192.ServiceLayer.Tests
                 Assert.IsTrue(true);
             }
         }
-        
-        //4.3
-        [TestMethod()]
-        public void addOwnerByAnOwnerSuccTest()
-        {
-            try
-            {
-                storeService.addOwner(storeid, "dani1", session1);
-                Assert.IsTrue(true);
-            }
-            catch (Exception)
-            {
-                Assert.Fail();
-            }
-        }
 
-        //4.3
-        [TestMethod()]
-        public void addOwnerByAnOwnerFailTest()
-        {
-            try
-            {
-                storeService.addOwner(storeid, "nouser", session1);
-                Assert.Fail();
-            }
-            catch (DoesntExistException)
-            {
-                Assert.IsTrue(true);
-            }
-            catch (Exception)
-            {
-                Assert.Fail();
-            }
-        }
-
-        //4.3
-        [TestMethod()]
-        public void addOwnerByAnOwnerFailTest2()
-        {
-            try
-            {
-                addOwnerByAnOwnerSuccTest();
-                addOwnerByAnOwnerSuccTest();
-                Assert.Fail();
-            }
-            catch (Exception)
-            {
-                Assert.IsTrue(true);
-            }
-        }
-
+      
     }
 }
