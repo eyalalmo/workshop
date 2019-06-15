@@ -374,27 +374,88 @@ namespace workshop192.Domain
 
         }
 
-        private PurchasePolicy getMaxPolicy()
+        private MaxAmountPurchase getMaxPolicy()
         {
             foreach (PurchasePolicy p in policies)
             {
                 if (p is MaxAmountPurchase)
-                    return p;
+                    return (MaxAmountPurchase)p;
+
+                if (p is ComplexPurchasePolicy)
+                {
+                    if ((((ComplexPurchasePolicy)p).getFirstPolicyChild() is MaxAmountPurchase))
+                        return (MaxAmountPurchase)((ComplexPurchasePolicy)p).getFirstPolicyChild();
+                    if (((ComplexPurchasePolicy)p).getSecondPolicyChild() is MaxAmountPurchase)
+                        return (MaxAmountPurchase)((ComplexPurchasePolicy)p).getSecondPolicyChild();
+
+                    if (((ComplexPurchasePolicy)p).getFirstPolicyChild() is ComplexPurchasePolicy)
+                    {
+                        ComplexPurchasePolicy c = (ComplexPurchasePolicy)(((ComplexPurchasePolicy)p).getFirstPolicyChild());
+                        if (c.getFirstPolicyChild() is MaxAmountPurchase)
+                            return ((MaxAmountPurchase)(c.getFirstPolicyChild()));
+
+                        else if (c.getSecondPolicyChild() is MaxAmountPurchase)
+                        {
+                            return ((MaxAmountPurchase)c.getSecondPolicyChild());
+                        }
+                    }
+                    else if (((ComplexPurchasePolicy)p).getSecondPolicyChild() is ComplexPurchasePolicy)
+                    {
+                        ComplexPurchasePolicy c = (ComplexPurchasePolicy)(((ComplexPurchasePolicy)p).getFirstPolicyChild());
+                        if (c.getFirstPolicyChild() is MaxAmountPurchase)
+                            return ((MaxAmountPurchase)(c.getFirstPolicyChild()));
+
+                        else if (c.getSecondPolicyChild() is MaxAmountPurchase)
+                        {
+                            return ((MaxAmountPurchase)c.getSecondPolicyChild());
+                        }
+                    }
+                }
             }
             return null;
-
         }
-        private PurchasePolicy getMinPolicy()
+        private MinAmountPurchase getMinPolicy()
         {
             foreach (PurchasePolicy p in policies)
             {
                 if (p is MinAmountPurchase)
-                    return p;
+                    return (MinAmountPurchase)p;
+
+                if (p is ComplexPurchasePolicy)
+                {
+                    if ((((ComplexPurchasePolicy)p).getFirstPolicyChild() is MinAmountPurchase))
+                        return (MinAmountPurchase)((ComplexPurchasePolicy)p).getFirstPolicyChild();
+                    if (((ComplexPurchasePolicy)p).getSecondPolicyChild() is MinAmountPurchase)
+                        return (MinAmountPurchase)((ComplexPurchasePolicy)p).getSecondPolicyChild();
+
+                    if (((ComplexPurchasePolicy)p).getFirstPolicyChild() is ComplexPurchasePolicy)
+                    {
+                        ComplexPurchasePolicy c = (ComplexPurchasePolicy)(((ComplexPurchasePolicy)p).getFirstPolicyChild());
+                        if (c.getFirstPolicyChild() is MinAmountPurchase)
+                            return ((MinAmountPurchase)(c.getFirstPolicyChild()));
+
+                        else if (c.getSecondPolicyChild() is MinAmountPurchase)
+                        {
+                            return ((MinAmountPurchase)c.getSecondPolicyChild());
+                        }
+                    }
+                    else if (((ComplexPurchasePolicy)p).getSecondPolicyChild() is ComplexPurchasePolicy)
+                    {
+                        ComplexPurchasePolicy c = (ComplexPurchasePolicy)(((ComplexPurchasePolicy)p).getFirstPolicyChild());
+                        if (c.getFirstPolicyChild() is MinAmountPurchase)
+                            return ((MinAmountPurchase)(c.getFirstPolicyChild()));
+
+                        else if (c.getSecondPolicyChild() is MinAmountPurchase)
+                        {
+                            return ((MinAmountPurchase)c.getSecondPolicyChild());
+                        }
+                    }
+                }
             }
             return null;
 
-        }
-        public void setMaxPurchasePolicy(int maxAmount,PurchasePolicy p)
+    }
+    public void setMaxPurchasePolicy(int maxAmount,PurchasePolicy p)
         {
             
             PurchasePolicy min = getMinPolicy();
@@ -549,6 +610,13 @@ namespace workshop192.Domain
             {
                 throw new AlreadyExistException("Store can not have 2 minimum amount purchase policy.");
             }
+            MaxAmountPurchase maxPolicy = getMaxPolicy();
+            if (maxPolicy != null)
+            {
+                if (maxPolicy.getAmount() < minAmount)
+                    throw new AlreadyExistException("Min purchase policy can not be bigger than Max purchase policy.");
+            }
+
             MinAmountPurchase p = new MinAmountPurchase(minAmount);
             policies.AddLast(p);
             DBStore.getInstance().addMinPolicy(p, storeId);
@@ -558,6 +626,12 @@ namespace workshop192.Domain
             if (hasMaxPurchasePolicy())
             {
                 throw new AlreadyExistException("Store can not have 2 maximum amount purchase policy.");
+            }
+            MinAmountPurchase minPolicy = getMinPolicy();
+            if (minPolicy != null)
+            {
+                if (minPolicy.getAmount() < minAmount)
+                    throw new AlreadyExistException("Max purchase policy can not be smaller than Min purchase policy.");
             }
             MaxAmountPurchase p = new MaxAmountPurchase(minAmount);
             policies.AddLast(p);
@@ -570,6 +644,7 @@ namespace workshop192.Domain
             {
                 throw new AlreadyExistException("Store can not have 2 total cart price - purchase policy.");
             }
+
             TotalPricePolicy p = new TotalPricePolicy(minPrice);
             policies.AddLast(p);
             DBStore.getInstance().addTotalPrice(p, storeId);
