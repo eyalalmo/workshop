@@ -70,27 +70,33 @@
             for (i = 0; i < jsonList.length; i++) {
 
                             HTML +=
-                                `<hr><div class=\"card-body\">
-                                    <div class=\"row\"> 
-                                        <div class=\"col-12 col-sm-12 col-md-2 text-center\">
-                                            <img src=\"../Images/NoImageAvailabe.jpg\"" + "height=\"80\" />
+                                `<hr><div class="card-body">
+                                    <div class="row"> 
+                                        <div class="col-12 col-sm-12 col-md-2 text-center">
+                                            <img src="../Images/NoImageAvailabe.jpg" height="80" />
                                         </div>
-                                        <div class=\"col-12 text-sm-center col-sm-12 text-md-left col-md-6\">
-                                            <h4 class=\"product-name\">
-                                                <strong>" + productName + "</strong>
+                                        <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+                                            <h4 class="product-name">
+                                                <strong>` + productName + `</strong>
                                             </h4>
                                         </div> 
-                                        <div class=\"col-12 col-sm-12 text-sm-center col-md-4 text-md-right row\"> 
-                                            <div class=\"col-2 col-sm-2 col-md-4 text-md-right\" style=\"padding-top: 5px\">  
+                                        <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row"> 
+                                            <div class="col-2 col-sm-2 col-md-4 text-md-right" style="padding-top: 5px">  
                                                 <h5>
-                                                    <strong>$" + price + "<span class=\"text-muted\"> x</span></strong>
+                                                    <strong>$" + price + "<span class="text-muted"> x</span></strong>
                                                 </h5>
                                             </div>
-                                            <div class=\"quantity\"><input type=\"button\" value=\"+\" onclick=\"plusQuantity(" + id + "," + quantity + ");\" class=\"plus\">
-                                                <input type=\"text\" value=\"" + quantity + "\" title=\"Qty\" class=\"qty\">
-                                                <input type=\"button\" value=\"-\" onclick=\"minusQuantity(" + id + "," + quantity + ");\" class=\"minus\">
+                                            <div class="quantity"><input type="button" value="+" onclick="plusQuantity(` + id + `,` + quantity + `);" class="plus">
+                                                <input type="text" value="` + quantity + `" title="Qty" class="qty">
+                                                <input type="button" value="-" onclick="minusQuantity(` + id + `,` + quantity + `);" class="minus">
                                             </div>
-                                            <div class=\"col-2 col-sm-2 col-md-2 text-right\"><button type=\"button\" class=\"btn btn-danger\" onclick=\"deleteRow(" + id + ");\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></button></div></div></div></div>";
+                                            <div class="col-2 col-sm-2 col-md-2 text-right">
+                                                <button type="button" class="btn btn-danger" onclick="deleteRow(` + id + `);">
+                                                <i class="fa fa-trash" aria-hidden="true"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
             
 
                 /*if (jsonList[i].price >= minPrice && jsonList[i].price <= maxPrice && jsonList[i].rank >= rank){
