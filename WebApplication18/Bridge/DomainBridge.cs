@@ -82,9 +82,10 @@ namespace workshop192.Bridge
         {
             Session user = DBSession.getInstance().getSession(sessionid);
             user.register(username, password);
-            //////
-            user.loginAfterRegister(username,password);
-            //////
+            if (!MarketSystem.testsMode)
+            {
+                user.loginAfterRegister(username, password);
+            }
             SystemLogger.getEventLog().Info("User " + username + " has successfuly registered");
         }
 
@@ -289,6 +290,7 @@ namespace workshop192.Bridge
             Product toAdd = DBProduct.getInstance().getProductByID(product);
             Session session = DBSession.getInstance().getSession(sessionid);
             session.addToShoppingBasket(toAdd, amount);
+            SystemLogger.getEventLog().Info("User " + session.getSubscribedUser().getUsername() + " has successfuly added "+ amount+" of product " +toAdd.productName);
         }
         public void checkBasket(int session)
         {
@@ -328,7 +330,7 @@ namespace workshop192.Bridge
             }
 
             session.purchaseBasket( address,  creditcard,  month,  year,  holder,  cvv);
-
+            SystemLogger.getEventLog().Info("User " + session.getSubscribedUser().getUsername() + " has successfuly purchased the products in his basket");
             foreach (Tuple<string, string> t in messages)
                 messager.message(t.Item1, t.Item2);
 
@@ -396,7 +398,7 @@ namespace workshop192.Bridge
                 throw new RoleException("Error: You have no permission to add a product");
 
             sr.addProduct(product);
-            SystemLogger.getEventLog().Info("New product:  " + product.getProductID() + " has successfuly added");
+            SystemLogger.getEventLog().Info("New product:  " + product.getProductID() + " has successfuly added to store with id: "+ storeID);
             return product.getProductID();
         }
 
@@ -421,8 +423,9 @@ namespace workshop192.Bridge
 
             if (sr == null)
                 throw new RoleException("Error: You have no permission to remove a product");
-
+            SystemLogger.getEventLog().Info("New product:  " + product.getProductID() + " has been successfuly removed from store with id: " + sr.getStore().getStoreID());
             sr.removeProduct(product);
+
         }
 
         internal LinkedList<Tuple<string, string>> getWaitingNotifications()
@@ -577,6 +580,7 @@ namespace workshop192.Bridge
             if (sr.getStore() != store)
                 throw new RoleException("this user can't appoint to this store");
             Permissions permissions = new Permissions(editProduct, editDiscount, editPolicy);
+            SystemLogger.getEventLog().Info( username + " has been successfuly added as a manager to store with id: " + storeid);
             sr.addManager(toAdd, permissions);
         }
 
@@ -616,6 +620,7 @@ namespace workshop192.Bridge
 
             if (sr.getStore() != store)
                 throw new RoleException("this user can't appoint to this store");
+            SystemLogger.getEventLog().Info(username + " has been successfuly added as an owner to store with id: " + storeid);
             sr.addOwner(toAdd);
         }
 
@@ -640,7 +645,7 @@ namespace workshop192.Bridge
             if (sr.getStore() != store)
                 throw new RoleException("this user can't remove roles from this store");
             sr.remove(toRemove);
-            ////
+            SystemLogger.getEventLog().Info(username + " has been successfuly added as an owner to store with id: " + storeid);
             messager.message(username, "Your role in store " + storeid + " has been removed");
         }
 
