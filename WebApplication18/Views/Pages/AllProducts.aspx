@@ -70,11 +70,11 @@
                                     <input type="number" id="minRank" min="0" max="5" value="0" step="0.1">
                                   </div>
                                     <button class="btn btn-primary" id="clearFilters">clear</button>
-                                  <button id="search1" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                  <button class="btn btn-primary" onclick="update();"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                                 </form>
                             </div>
                         </div>
-                        <button id="search2" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        <button class="btn btn-primary" onclick="update();"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                     </div>
                 </div>
             </div>
@@ -251,6 +251,24 @@
                     }
                 });
 
+        function update(){
+            var getUrl = window.location;
+            var baseUrl = getUrl.protocol + "//" + getUrl.host
+            console.log(baseUrl);
+            jQuery.ajax({
+                type: "GET",
+                url: baseUrl + "/api/products/getAllProducts",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    getProducts(response, baseUrl);
+
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+        }
             $("#clearFilters").click(function clearFilters() {
                 document.getElementById('minPrice').value = 0; 
                 document.getElementById('maxPrice').value = 1000000;

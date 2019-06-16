@@ -215,3 +215,6 @@
 2019-06-15 23:11:16,737 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
 2019-06-15 23:59:08,940 INFO EventLog: User aaa has successfuly registered
 2019-06-15 23:59:24,574 INFO EventLog: User aaa has successfuly created a store
+2019-06-16 03:41:07,055 ERROR EventLog: An Error has occured. Stack Trace:    at workshop192.Bridge.DomainBridge.addToShoppingBasket(Int32 product, Int32 amount, Int32 sessionid) in C:\Users\eyalb\Source\Repos\eyalalmo\workshop\WebApplication18\Bridge\DomainBridge.cs:line 293
+   at workshop192.ServiceLayer.UserService.addToShoppingBasket(Int32 product, Int32 amount, Int32 session) in C:\Users\eyalb\Source\Repos\eyalalmo\workshop\WebApplication18\ServiceLayer\UserService.cs:line 210
+   at WebApplication18.Controllers.ProductsController.addToBasket(Int32 productID, String amount) in C:\Users\eyalb\Source\Repos\eyalalmo\workshop\WebApplication18\Controllers\ProductsController.cs:line 131 Function: addToBasket
