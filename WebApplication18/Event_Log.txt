@@ -242,3 +242,12 @@
 2019-06-16 02:15:28,567 INFO EventLog: User eilon has successfuly added 2 of product e55
 2019-06-16 02:16:13,026 ERROR EventLog: setQuantity : ERROR: quantity should be a positive number
 2019-06-16 02:16:22,726 ERROR EventLog: setQuantity : ERROR: quantity should be a positive number
+2019-06-16 04:26:37,954 INFO EventLog: User u2 has successfuly logged in.
+2019-06-16 04:30:57,017 INFO EventLog: User ey has successfuly registered
+2019-06-16 04:31:06,450 INFO EventLog: User ey has logged out
+2019-06-16 04:31:10,445 ERROR EventLog: Login : Error: Incorrect password
+2019-06-16 04:31:13,964 INFO EventLog: User u2 has successfuly logged in.
+2019-06-16 04:32:33,339 INFO EventLog: User u2 has successfuly added 2 of product diapers
+2019-06-16 04:32:40,993 INFO EventLog: User u2 has successfuly added 2 of product gg
+2019-06-16 04:37:27,490 INFO EventLog: User u2 has successfuly logged in.
+2019-06-16 04:51:15,192 INFO EventLog: User u2 has successfuly logged in.
