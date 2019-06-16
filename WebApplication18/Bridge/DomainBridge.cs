@@ -704,7 +704,7 @@ namespace workshop192.Bridge
         {
             if (amount <= 0)
             {
-                throw new ArgumentException("Error : Quantity should be a positive number");
+                throw new ILLArgumentException("Error : Quantity should be a positive number");
             }
             Product p = DBProduct.getInstance().getProductByID(product);
 
@@ -725,7 +725,7 @@ namespace workshop192.Bridge
         {
             if (newAmount <= 0)
             {
-                throw new ArgumentException("Error: Quantity should be a positive number");
+                throw new ILLArgumentException("Error: Quantity should be a positive number");
             }
             Product p = DBProduct.getInstance().getProductByID(product);
             Store store = p.getStore();
@@ -841,16 +841,16 @@ namespace workshop192.Bridge
         private void checkDiscoutDuration(string duration)
         {
             if (duration.Length != 10)
-                throw new ArgumentException("Discount duration is not in the required foramt DD/MM/YYYY");
+                throw new ILLArgumentException("Discount duration is not in the required foramt DD/MM/YYYY");
             char[] arr = duration.ToCharArray();
             if(arr[2] != '/' || arr[5] != '/')
-                throw new ArgumentException("Discount duration is not in the required foramt DD/MM/YYYY");
+                throw new ILLArgumentException("Discount duration is not in the required foramt DD/MM/YYYY");
             for(int i=0; i<arr.Length; i++)
             {
                 if(i!= 2 && i != 5)
                 {
                     if(arr[i]<'0' ||arr[i] >'9')
-                        throw new ArgumentException("Discount duration is not in the required foramt DD/MM/YYYY");
+                        throw new ILLArgumentException("Discount duration is not in the required foramt DD/MM/YYYY");
 
                 }
             }
@@ -859,15 +859,15 @@ namespace workshop192.Bridge
             int month = Int32.Parse(duration.Substring(3, 2));
             int year = Int32.Parse(duration.Substring(6, 4));
             if(day==0 || day >31)
-                throw new ArgumentException("Date is not valid");
+                throw new ILLArgumentException("Date is not valid");
             if(month==0 || month >12)
-                throw new ArgumentException("Date is not valid");
+                throw new ILLArgumentException("Date is not valid");
             if(year < 2019)
-                throw new ArgumentException("Date is not valid");
+                throw new ILLArgumentException("Date is not valid");
             DateTime d = new DateTime(year, month, day);
             DateTime now = DateTime.Now;
             if(DateTime.Compare(d, now) <0)
-                throw new ArgumentException("Discount duration must be future dateד");
+                throw new ILLArgumentException("Discount duration must be future dateד");
         }
 
         internal void addProductVisibleDiscount(int product, double percentage, string duration, int session)
@@ -1141,7 +1141,7 @@ namespace workshop192.Bridge
         {
             if (amount<=0)
             {
-                throw new ArgumentException("Store Policy can not be a negative number");
+                throw new ILLArgumentException("Store Policy can not be a negative number");
             }
             else
             {

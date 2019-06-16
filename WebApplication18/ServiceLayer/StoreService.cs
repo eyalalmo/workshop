@@ -50,9 +50,9 @@ namespace workshop192.ServiceLayer
         public void removeProduct(int product, int session)
         {
             if (product < 0)
-                throw new ArgumentException("illegal product number");
+                throw new ILLArgumentException("illegal product number");
             if (session < 0)
-                throw new ArgumentException("illegal session number");
+                throw new ILLArgumentException("illegal session number");
 
             db.removeProduct(product, session);
         }
@@ -60,7 +60,7 @@ namespace workshop192.ServiceLayer
         public void setProductPrice(int product, int price, int session)
         {
             if (product < 0)
-                throw new ArgumentException("illegal product number");
+                throw new ILLArgumentException("illegal product number");
             if (price <= 0)
                 throw new AlreadyExistException("Error: Price must be a positive number");
             db.setProductPrice(product, price, session);
@@ -69,9 +69,9 @@ namespace workshop192.ServiceLayer
         public void setProductName(int product, String name, int session)
         {
             if (product < 0)
-                throw new ArgumentException("illegal product number");
+                throw new ILLArgumentException("illegal product number");
             if (name.Length == 0)
-                throw new ArgumentException("Error: A product's name cannot be empty");
+                throw new ILLArgumentException("Error: A product's name cannot be empty");
             db.setProductName(product, name, session);
         }
         public int getProductQuantityLeft(int productId)
@@ -121,7 +121,7 @@ namespace workshop192.ServiceLayer
         public void setquantityLeft(int productID, int setquantityLeft, int session)
         {
             if (productID < 0)
-                throw new ArgumentException("illegal product number");
+                throw new ILLArgumentException("illegal product number");
             if (setquantityLeft < 0)
                 throw new IllegalAmountException("Error: Quantity must be a positive number");
             db.setquantityLeft(productID, setquantityLeft, session);
@@ -129,7 +129,7 @@ namespace workshop192.ServiceLayer
         private void setProductRank(int productID, int rank, int session)
         {
             if (productID < 0)
-                throw new ArgumentException("illegal product number");
+                throw new ILLArgumentException("illegal product number");
             if (rank < 0)
                 throw new IllegalAmountException("Error: Rank must be a positive number");
             db.setProductRank(productID, rank, session);
@@ -138,7 +138,7 @@ namespace workshop192.ServiceLayer
         public void addToProductQuantity(int product, int amount, int session)
         {
             if (product < 0)
-                throw new ArgumentException("illegal product number");
+                throw new ILLArgumentException("illegal product number");
             if (amount <= 0)
                 throw new AlreadyExistException("Error: Quantity must be a positive number");
             db.addToProductQuantity(product, amount, session);
@@ -147,7 +147,7 @@ namespace workshop192.ServiceLayer
         public void decFromProductQuantity(int product, int amount, int session)
         {
             if (product < 0)
-                throw new ArgumentException("illegal product number");
+                throw new ILLArgumentException("illegal product number");
             if (amount <= 0)
                 throw new AlreadyExistException("Error: Quantity must be a positive number");
             db.decFromProductQuantity(product, amount, session);
@@ -159,12 +159,12 @@ namespace workshop192.ServiceLayer
             {
                 if (storeName.Length == 0 || storeName == null)
                 {
-                    throw new ArgumentException("Error: A store name cannot be empty");
+                    throw new ILLArgumentException("Error: A store name cannot be empty");
                 }
             }
             catch (Exception)
             {
-                throw new ArgumentException("Error: A store name cannot be empty");
+                throw new ILLArgumentException("Error: A store name cannot be empty");
 
             }
             return db.createStore(session, storeName, storeDescription);
@@ -174,7 +174,7 @@ namespace workshop192.ServiceLayer
         {
             if (store < 0)
             {
-                throw new ArgumentException("Invalid store id");
+                throw new ILLArgumentException("Invalid store id");
             }
             db.closeStore(store, session);
         }
@@ -184,7 +184,7 @@ namespace workshop192.ServiceLayer
         {
             if (store < 0)
             {
-                throw new ArgumentException("illegal store number");
+                throw new ILLArgumentException("illegal store number");
             }
 
             if (username == null)
@@ -194,7 +194,7 @@ namespace workshop192.ServiceLayer
 
             if (username.Length == 0)
             {
-                throw new ArgumentException("illegal username");
+                throw new ILLArgumentException("illegal username");
             }
 
             db.addManager(store, username, editProduct, editDiscount, editPolicy, session);
@@ -204,7 +204,7 @@ namespace workshop192.ServiceLayer
         {
             if (store < 0)
             {
-                throw new ArgumentException("illegal store number");
+                throw new ILLArgumentException("illegal store number");
             }
 
             if (username == null)
@@ -214,7 +214,7 @@ namespace workshop192.ServiceLayer
 
             if (username.Length == 0)
             {
-                throw new ArgumentException("illegal username");
+                throw new ILLArgumentException("illegal username");
             }
             db.addPendingOwner(store, username, session);
         }
@@ -223,7 +223,7 @@ namespace workshop192.ServiceLayer
         {
             if (store < 0)
             {
-                throw new ArgumentException("illegal store number");
+                throw new ILLArgumentException("illegal store number");
             }
 
             if (username == null)
@@ -233,7 +233,7 @@ namespace workshop192.ServiceLayer
 
             if (username.Length == 0)
             {
-                throw new ArgumentException("illegal username");
+                throw new ILLArgumentException("illegal username");
             }
             db.removeRole(store, username, session);
         }
@@ -241,7 +241,7 @@ namespace workshop192.ServiceLayer
         private void checkProduct(string productName, string productCategory, int price, int rank, int quantityLeft)
         {
             if (productName == "")
-                throw new ArgumentException("illeagal name");
+                throw new ILLArgumentException("illeagal name");
             if (price < 0)
                 throw new AlreadyExistException("error - price must be a positive number");
             if (rank < 0 | rank > 5)
@@ -256,7 +256,7 @@ namespace workshop192.ServiceLayer
                 throw new IllegalAmountException("percentage of discount must be a number between 0 to 1");
             }
             if (product < 0)
-                throw new ArgumentException("illegal product number");
+                throw new ILLArgumentException("illegal product number");
             if (session < 0)
                 throw new NullReferenceException("session is a null reference");
             db.addProductVisibleDiscount(product, percentage, duration, session);
@@ -267,7 +267,7 @@ namespace workshop192.ServiceLayer
         public void removeProductDiscount(int product, int session)
         {
             if (product < 0)
-                throw new ArgumentException("illegal product number");
+                throw new ILLArgumentException("illegal product number");
             if (session < 0)
                 throw new NullReferenceException("session is a null reference");
             db.removeProductDiscount(product, session);
@@ -278,7 +278,7 @@ namespace workshop192.ServiceLayer
         public void setProductDiscount(int product, int discount, int session)
         {
             if (product < 0)
-                throw new ArgumentException("illegal product number");
+                throw new ILLArgumentException("illegal product number");
             //if (product < 0)
             //    throw new ArgumentException("illegal discount number");
             if (session < 0)
@@ -289,7 +289,7 @@ namespace workshop192.ServiceLayer
         public void addStoreVisibleDiscount(int store, double percentage, string duration, int session)
         {
             if (store < 0)
-                throw new ArgumentException("illegal store number");
+                throw new ILLArgumentException("illegal store number");
             if (percentage <= 0 || percentage >= 1)
             {
                 throw new IllegalAmountException("percentage of discount must be a number between 0 to 1");
@@ -302,10 +302,10 @@ namespace workshop192.ServiceLayer
         public void addReliantDiscountSameProduct(int store, int session, double percentage, String duration, int numOfProducts, int product)
         {
             if (product < 0)
-                throw new ArgumentException("illegal product number");
+                throw new ILLArgumentException("illegal product number");
 
             if (store < 0)
-                throw new ArgumentException("illegal store number");
+                throw new ILLArgumentException("illegal store number");
             if (percentage <= 0 || percentage >= 1)
             {
                 throw new IllegalAmountException("percentage of discount must be a number between 0 to 1");
@@ -317,7 +317,7 @@ namespace workshop192.ServiceLayer
         public void addReliantDiscountTotalAmount(int store, int session, double percentage, String duration, int amount)
         {
             if (store < 0)
-                throw new ArgumentException("illegal store number");
+                throw new ILLArgumentException("illegal store number");
             if (percentage <= 0 || percentage >= 1)
             {
                 throw new IllegalAmountException("percentage of discount must be a number between 0 to 1");
@@ -330,13 +330,13 @@ namespace workshop192.ServiceLayer
         public void removeStoreDiscount(int discountID, int store, int sessionID)
         {
             if (store < 0)
-                throw new ArgumentException("illegal store number");
+                throw new ILLArgumentException("illegal store number");
             db.removeStoreDiscount(discountID, store, sessionID);
         }
         public void removeStorePolicy(int policyID, int store, int sessionID)
         {
             if (store < 0)
-                throw new ArgumentException("illegal store number");
+                throw new ILLArgumentException("illegal store number");
             db.removeStorePolicy(policyID, store, sessionID);
         }
         //public void addComplexDiscount(List<DiscountComponent> list, string type)
@@ -417,7 +417,7 @@ namespace workshop192.ServiceLayer
         public void complexDiscount(string discountArray, int storeID,string type, double percentage, string duration, int sessionID)
         {
             if (storeID < 0)
-                throw new ArgumentException("illegal store number");
+                throw new ILLArgumentException("illegal store number");
 
             if (sessionID < 0)
                 throw new NullReferenceException("session is a null reference");
@@ -426,7 +426,7 @@ namespace workshop192.ServiceLayer
         public void complexPolicy(string policyArray, int storeID, string type, int sessionID)
         {
             if (storeID < 0)
-                throw new ArgumentException("illegal store number");
+                throw new ILLArgumentException("illegal store number");
 
             if (sessionID < 0)
                 throw new NullReferenceException("session is a null reference");
@@ -452,26 +452,26 @@ namespace workshop192.ServiceLayer
         public void addMinAmountPolicy(int storeId, int session, int amount)
         {
             if (storeId < 0)
-                throw new ArgumentException("illegal store number");
+                throw new ILLArgumentException("illegal store number");
 
             if (session< 0)
                 throw new NullReferenceException("session is a null reference");
             if(amount < 0)
             {
-                throw new ArgumentException("illegal amount");
+                throw new ILLArgumentException("illegal amount");
             }
             db.addMinPurchasePolicy(amount, storeId, session);
         }
         public void addMaxAmountPolicy(int storeId, int session, int amount)
         {
             if (storeId < 0)
-                throw new ArgumentException("illegal store number");
+                throw new ILLArgumentException("illegal store number");
 
             if (session < 0)
                 throw new NullReferenceException("session is a null reference");
             if (amount < 0)
             {
-                throw new ArgumentException("illegal amount");
+                throw new ILLArgumentException("illegal amount");
             }
             db.addMaxPurchasePolicy(amount, storeId, session);
         }
@@ -498,7 +498,7 @@ namespace workshop192.ServiceLayer
            
                 if (store < 0)
                 {
-                    throw new ArgumentException("illegal store number");
+                    throw new ILLArgumentException("illegal store number");
                 }
 
                 if (username == null)
@@ -508,7 +508,7 @@ namespace workshop192.ServiceLayer
 
                 if (username.Length == 0)
                 {
-                    throw new ArgumentException("illegal username");
+                    throw new ILLArgumentException("illegal username");
                 }
                 db.signContract(store, username, sessionID);
         }
@@ -518,7 +518,7 @@ namespace workshop192.ServiceLayer
 
             if (store < 0)
             {
-                throw new ArgumentException("illegal store number");
+                throw new ILLArgumentException("illegal store number");
             }
 
             if (username == null)
@@ -528,7 +528,7 @@ namespace workshop192.ServiceLayer
 
             if (username.Length == 0)
             {
-                throw new ArgumentException("illegal username");
+                throw new ILLArgumentException("illegal username");
             }
             db.declineContract(store, username, sessionID);
         }
@@ -538,11 +538,11 @@ namespace workshop192.ServiceLayer
         {
             if (storeID < 0)
             {
-                throw new ArgumentException("illegal store number");
+                throw new ILLArgumentException("illegal store number");
             }
             if (minPrice < 0)
             {
-                throw new ArgumentException("illegal total value");
+                throw new ILLArgumentException("illegal total value");
 
             }
             db.addTotalPricePolicy(minPrice, storeID, session);

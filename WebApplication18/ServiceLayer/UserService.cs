@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using workshop192.Bridge;
 using WebApplication18.Domain;
 using System.Security.Cryptography;
+using workshop192.Domain;
 
 namespace workshop192.ServiceLayer
 {
@@ -63,7 +64,7 @@ namespace workshop192.ServiceLayer
             }
             if (username.Equals("") || password.Equals(""))
             {
-                throw new ArgumentException("Error: Illegal username or password");
+                throw new ILLArgumentException("Error: Illegal username or password");
             }
             String encrypted = encryptPassword(password);
             db.register(user, username, encrypted);
@@ -200,12 +201,12 @@ namespace workshop192.ServiceLayer
         {
             if (product < 0)
             {
-                throw new ArgumentException("invalid product id");
+                throw new Domain.ILLArgumentException("invalid product id");
             }
 
             if (session < 0)
             {
-                throw new ArgumentException("error - bad session");
+                throw new ILLArgumentException("error - bad session");
             }
             db.addToShoppingBasket(product, amount, session);
         }
@@ -214,7 +215,7 @@ namespace workshop192.ServiceLayer
         {
             if (productId < 0)
             {
-                throw new ArgumentException("invalid product id");
+                throw new ILLArgumentException("invalid product id");
             }
 
 

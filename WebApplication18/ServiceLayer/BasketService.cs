@@ -34,7 +34,7 @@ namespace workshop192.ServiceLayer
         {
             if (product < 0)
             {
-                throw new ArgumentException("invalid product id");
+                throw new ILLArgumentException("invalid product id");
             }
 
             if (amount <= 0)
@@ -49,7 +49,7 @@ namespace workshop192.ServiceLayer
         {
             if (product < 0)
             {
-                throw new ArgumentException("invalid product id");
+                throw new ILLArgumentException("invalid product id");
             }
             db.removeFromCart(user, product);
         }
@@ -58,7 +58,7 @@ namespace workshop192.ServiceLayer
         {
             if (product < 0)
             {
-                throw new ArgumentException("invalid product id");
+                throw new ILLArgumentException("invalid product id");
             }
 
             if (newAmount <= 0)
@@ -92,7 +92,7 @@ namespace workshop192.ServiceLayer
         public double getProductPrice(int productid)
         {
             if (productid < 0)
-                throw new ArgumentException("invalid product id");
+                throw new ILLArgumentException("invalid product id");
             return db.getProductPrice(productid);
         }
 

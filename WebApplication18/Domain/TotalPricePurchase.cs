@@ -16,7 +16,7 @@ namespace WebApplication18.Domain
 
             if (totalPrice < 0)
             {
-                throw new ArgumentException("total price can not be a negative number.");
+                throw new ILLArgumentException("total price can not be a negative number.");
             }
 
             this.totalPrice = totalPrice;
@@ -28,7 +28,7 @@ namespace WebApplication18.Domain
 
             if (totalPrice < 0)
             {
-                throw new ArgumentException("total price can not be a negative number.");
+                throw new ILLArgumentException("total price can not be a negative number.");
             }
 
             this.totalPrice = totalPrice;
@@ -57,7 +57,7 @@ namespace WebApplication18.Domain
         {
             if (newAmount < 0)
             {
-                throw new ArgumentException("total price can not be a negative number.");
+                throw new ILLArgumentException("total price can not be a negative number.");
             }
             this.totalPrice = newAmount;
 

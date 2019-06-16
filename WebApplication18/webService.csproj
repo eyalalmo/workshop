@@ -479,6 +479,7 @@
     <Compile Include="Exceptions\ClientException.cs" />
     <Compile Include="Exceptions\ConnectionException.cs" />
     <Compile Include="Exceptions\DoesntExistException.cs" />
+    <Compile Include="Exceptions\ILLArgumentException.cs" />
     <Compile Include="Exceptions\IllegalAmountException.cs" />
     <Compile Include="Exceptions\IllegalNameException.cs" />
     <Compile Include="Exceptions\LoginException.cs" />
