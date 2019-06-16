@@ -368,7 +368,7 @@ namespace workshop192.Domain
             {
                 if (max.getAmount() < minAmount)
                 {
-                    throw new ArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
+                    throw new ILLArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
                 }
                 else
                 {
@@ -383,7 +383,7 @@ namespace workshop192.Domain
         {
             PurchasePolicy p = findPolicyByID(policyID);
             if (p is ComplexPurchasePolicy)
-                throw new ArgumentException("Can not set complex policy.");
+                throw new ILLArgumentException("Can not set complex policy.");
             if (p is MaxAmountPurchase)
                 setMaxPurchasePolicy(newAmount, p);
             if (p is MinAmountPurchase)
@@ -395,7 +395,7 @@ namespace workshop192.Domain
         private void setTotalPolicy(int newAmount, PurchasePolicy p)
         {
             if (newAmount < 0)
-                throw new ArgumentException("Total cart price can not be a negative number.");
+                throw new ILLArgumentException("Total cart price can not be a negative number.");
             p.setAmount(newAmount);
             DBStore.getInstance().setPolicy(p, storeId, newAmount);
 
@@ -495,7 +495,7 @@ namespace workshop192.Domain
             {
                 if (min.getAmount() > maxAmount)
                 {
-                    throw new ArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
+                    throw new ILLArgumentException("contradiction! maximum amount can not be smaller than minimum amount Purchase Policy");
                 }
                 else
                 {

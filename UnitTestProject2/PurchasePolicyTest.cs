@@ -51,7 +51,8 @@ namespace workshop192.ServiceLayer.Tests
                 storeService.setMinAmountPolicy(store1, session1, 6);
                 Assert.Fail();
             }
-            catch (ArgumentException)
+            catch (
+            )
             {
                 Assert.IsTrue(true);
             }
