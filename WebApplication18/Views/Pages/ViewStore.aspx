@@ -51,7 +51,8 @@
                 dataType: "json",
                 success: function (response) {
                     var HTML = `<p> <button type="button" class="btn btn-primary" onClick="storeDiscounts(`+storeId+`)"/>Store Discounts</button></p>
-                              <p><button type="button" class="btn btn-primary" onClick="storePolicies(`+storeId+`)"/>Store Policies</button></p>`;
+                              <p><button type="button" class="btn btn-primary" onClick="storePolicies(`+storeId+`)"/>Store Policies</button></p>` +
+                                "<div class=\"card-body\"><div class=\"row\style=\"background-color:black\"> </div></div>";
                     var doc = document.getElementById('allStores');
                 
       
@@ -59,23 +60,41 @@
                         var responsJ = JSON.parse(response);
                        
                         for (i = 0; i < responsJ.length; i++) {
-
-                           
-                           HTML += `<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" id="` + responsJ[i].productID + `">
-		                   <div class="my-list">
-            			<p><b>`+ responsJ[i].productName + `</b></p>
-                        <span> Category: `+ responsJ[i].productCategory + `</span> <p></p>      
-            			<span > Quantity Left: `+ responsJ[i].quantityLeft + `</span> <p></p>   
-            			<div class="detail">
-	            		<span> Price: `+ responsJ[i].price + `$</span></p> <p></p>
-	            		<span> Rank: `+ responsJ[i].rank + `</span></p> <p></p>
-            		    <button type="button" class="btn btn-primary" onClick="addToCart(` + responsJ[i].productID + `)"/>
-                       Add To Cart
-                          </button>`+
-
-			            `</div>
-		            </div>
-		            </div>`
+                            HTML +=
+                                `<hr><div class="card-body">
+                                    <div class="row"> 
+                                        <div class="col-12 col-sm-12 col-md-2 text-center">
+                                            <img src="../Images/NoImageAvailabe.jpg" height="80" />
+                                        </div>
+                                        <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+                                            <h4 class="product-name">
+                                                <font style="font-color:red"><b>` + responsJ[i].productName + `</b></font>
+                                            </h4>
+                                            Categoty: ` + responsJ[i].productCategory + `<br/>
+                                            Rank: ` + responsJ[i].rank + `<br/>
+                                        </div> 
+                                        <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row"> 
+                                            <div class="col-2 col-sm-2 col-md-4 text-md-right" style="padding-top: 5px">  
+                                                <h5>
+                                                    <font color="red"><b><br/>
+                                                        ` + responsJ[i].price + `$
+                                                    </b></font>
+                                                </h5>
+                                            </div>
+                                            <div class="col-2 col-sm-2 col-md-4 text-md-right" style="padding-top: 5px">
+                                                <h5><br/>
+                                                    `+ responsJ[i].quantityLeft + ` units left
+                                                </h5>
+                                            </div>
+                                            <div class="col-2 col-sm-2 col-md-2 text-right">
+                                                <br/>
+                                                <button type="button" class="btn btn-primary" onClick="addToCart(` + responsJ[i].productID + `)"/>
+                                                    Add To Cart
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
                 
                         }
                         doc.innerHTML += HTML;

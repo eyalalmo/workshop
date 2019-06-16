@@ -49,14 +49,14 @@
     <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-            <div class="input-group" id="adv-search">
+            <div class="input-group" id="adv-search" style="width:300px">
                 <input type="text" class="form-control" placeholder="Search for products" id="searchI" name="searchI"/>
                 <div class="input-group-btn">
-                    <div class="btn-group" role="group">
+                    <div class="btn-group" role="group" >
                         <div class="dropdown dropdown-lg">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                            <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                <form class="form-horizontal" role="form">
+                            <div class="dropdown-menu dropdown-menu-right" role="menu" >
+                                <form class="form-horizontal" role="form" style="width:300px">
                                   <div class="form-group">
                                     <label for="contain">Min price: </label>
                                     <input type="number" aria-label="Minimum Price" id="minPrice" name="minPrice" min="0" max="1000000" value="0">
@@ -70,11 +70,10 @@
                                     <input type="number" id="minRank" min="0" max="5" value="0" step="0.1">
                                   </div>
                                     <button class="btn btn-primary" id="clearFilters">clear</button>
-                                  <button class="btn btn-primary" onclick="update();"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                                 </form>
                             </div>
                         </div>
-                        <button class="btn btn-primary" onclick="update();"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        <button class="btn btn-primary" id="s1"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                     </div>
                 </div>
             </div>
@@ -87,11 +86,6 @@
 
       <div class="container">
      
-          <p></p><p></p>
-          <button  name="searchN" id="searchN" class="btn btn-primary">Search By Name</button> &nbsp &nbsp &nbsp
-          <button  name="searchC" id="searchC" class="btn btn-primary">Search By Category</button>&nbsp &nbsp &nbsp
-          <button  name="searchC" id="searchK" class="btn btn-primary">Search By Keyword</button>
-
       </div>
   </div>
     <div class="container">
@@ -156,9 +150,9 @@
                                         <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row"> 
                                             <div class="col-2 col-sm-2 col-md-4 text-md-right" style="padding-top: 5px">  
                                                 <h5>
-                                                    <button type="button" class="btn btn-danger">
+                                                    <font color="red"><b><br/>
                                                         ` + jsonList[i].price + `$
-                                                    </button>
+                                                    </b></font>
                                                 </h5>
                                             </div>
                                             <div class="col-2 col-sm-2 col-md-4 text-md-right" style="padding-top: 5px">
@@ -251,99 +245,12 @@
                     }
                 });
 
-        function update(){
-            var getUrl = window.location;
-            var baseUrl = getUrl.protocol + "//" + getUrl.host
-            console.log(baseUrl);
-            jQuery.ajax({
-                type: "GET",
-                url: baseUrl + "/api/products/getAllProducts",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                    getProducts(response, baseUrl);
-
-                },
-                error: function (response) {
-                    console.log(response);
-                }
-            });
-        }
             $("#clearFilters").click(function clearFilters() {
                 document.getElementById('minPrice').value = 0; 
                 document.getElementById('maxPrice').value = 1000000;
                 document.getElementById('minRank').value = 0;
             });
-
-        $("#searchN").click(function () {
-                 document.getElementById('quantity').style.visibility = "hidden";
-                 document.getElementById('confirm').style.visibility = "hidden";
-                event.preventDefault();
-                 search = $("#searchI").val();
-                var doc = document.getElementById('allProducts')
-                var getUrl = window.location;
-                var baseUrl = getUrl.protocol + "//" + getUrl.host
-                console.log(baseUrl);
-                jQuery.ajax({
-                    type: "GET",
-                    url: baseUrl +"/api/products/searchByName?param="+ search,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        getProducts(response,baseUrl);
-                    },
-                    error: function (response) {
-                        console.log(response);
-                    }
-                });
-            });
-        $("#searchC").click(function () {
-                 document.getElementById('quantity').style.visibility = "hidden";
-                 document.getElementById('confirm').style.visibility = "hidden";
-                event.preventDefault();
-                 search = $("#searchI").val();
-                var doc = document.getElementById('allProducts')
-                var getUrl = window.location;
-                var baseUrl = getUrl.protocol + "//" + getUrl.host
-                console.log(baseUrl);
-                jQuery.ajax({
-                    type: "GET",
-                    url: baseUrl +"/api/products/searchByCat?param="+ search,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                       getProducts(response);
-                    },
-                    error: function (response) {
-                        console.log(response);
-                    }
-                });
-            });
-
-        $("#search").click(function () {
-                 document.getElementById('quantity').style.visibility = "hidden";
-                 document.getElementById('confirm').style.visibility = "hidden";
-                event.preventDefault();
-                 search = $("#searchI").val();
-                var doc = document.getElementById('allProducts')
-                var getUrl = window.location;
-                var baseUrl = getUrl.protocol + "//" + getUrl.host
-                console.log(baseUrl);
-                jQuery.ajax({
-                    type: "GET",
-                    url: baseUrl +"/api/products/searchByName?param="+ search,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        getProducts(response,baseUrl);
-                    },
-                    error: function (response) {
-                        console.log(response);
-                    }
-                });
-            });
-
-        $("#searchK").click(function () {
+        $("#s1").click(function () {
                  document.getElementById('quantity').style.visibility = "hidden";
                  document.getElementById('confirm').style.visibility = "hidden";
                 event.preventDefault();

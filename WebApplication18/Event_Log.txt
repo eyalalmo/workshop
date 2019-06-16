@@ -218,3 +218,4 @@
 2019-06-16 03:41:07,055 ERROR EventLog: An Error has occured. Stack Trace:    at workshop192.Bridge.DomainBridge.addToShoppingBasket(Int32 product, Int32 amount, Int32 sessionid) in C:\Users\eyalb\Source\Repos\eyalalmo\workshop\WebApplication18\Bridge\DomainBridge.cs:line 293
    at workshop192.ServiceLayer.UserService.addToShoppingBasket(Int32 product, Int32 amount, Int32 session) in C:\Users\eyalb\Source\Repos\eyalalmo\workshop\WebApplication18\ServiceLayer\UserService.cs:line 210
    at WebApplication18.Controllers.ProductsController.addToBasket(Int32 productID, String amount) in C:\Users\eyalb\Source\Repos\eyalalmo\workshop\WebApplication18\Controllers\ProductsController.cs:line 131 Function: addToBasket
+2019-06-16 05:20:49,016 INFO EventLog: User u2 has successfuly logged in.

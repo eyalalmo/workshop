@@ -97,6 +97,8 @@ namespace WebApplication18.Controllers
         [HttpGet]
         public string searchByKey(string param)
         {
+            if (param == null)
+                param = "";
             try
             {
                 string list = UserService.getInstance().searchByKeyword(param);
