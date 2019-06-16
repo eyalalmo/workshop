@@ -232,8 +232,6 @@ namespace workshop192.Domain.Tests
                 sr.addOwner(session2.getSubscribedUser());
                 Assert.AreEqual(store.getStoreRole(session2.getSubscribedUser()) is StoreOwner, true);
                 Assert.AreEqual(store.getNumberOfOwners(), 2);
-                Assert.AreEqual(store.getStoreRole(session2.getSubscribedUser()).getAppointedBy(),
-                    session1.getSubscribedUser());
                 Assert.AreEqual(store.getStoreRole(session2.getSubscribedUser()),
                     session2.getSubscribedUser().getStoreRole(store));
             }

@@ -78,6 +78,7 @@ namespace workshop192.Domain
                     connection.Execute("DELETE FROM StoreRoles");
                     connection.Execute("DELETE FROM Contracts");
                     connection.Execute("DELETE FROM PendingOwners");
+                    connection.Execute("DELETE FROM PurchasePolicy");
                     connection.Execute("UPDATE [dbo].[IDS] SET id = 0 WHERE type = 'store'");
                     connection.Execute("UPDATE [dbo].[IDS] SET id = 0 WHERE type = 'policy'");
                     connection.Close();
@@ -1078,7 +1079,7 @@ namespace workshop192.Domain
                     connection.Close();
                 }
             }
-            catch (Exception) {
+            catch (Exception e) {
                 connection.Close();
                 throw new StoreException("cant add min policy");
             }
