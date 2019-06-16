@@ -1,4 +1,5 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebApplication18.SiteMaster" %>
+﻿
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebApplication18.SiteMaster" %>
 
 <!DOCTYPE html>
 
@@ -114,7 +115,6 @@
                       alert(evt.data);
                   };
                   ws.onerror = function (evt) {
-                      alert("there's a problem with the websocket :(");
                   };
                   ws.onclose = function () {
                       //alert("disconnected");
