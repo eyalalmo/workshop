@@ -8,7 +8,7 @@ namespace workshop192.Domain
 {
  
         [Serializable]
-        public class ILLArgumentException : Exception
+        public class ILLArgumentException : ClientException
         {
             public ILLArgumentException()
             {
