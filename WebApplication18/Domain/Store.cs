@@ -310,6 +310,7 @@ namespace workshop192.Domain
             {
                 if (d.getId() == discountID)
                 {
+                    //
                     discountList.Remove(d);
                     if(d is ReliantDiscount)
                     {
@@ -328,11 +329,43 @@ namespace workshop192.Domain
                             v.getProduct().removeDiscount();
                         }
                     }
+                    if (d is DiscountComposite)
+                    {
+                        removeChildren((DiscountComposite)d);
+                    }
                     break;
                 }
             }
         }
 
+        private void removeChildren(DiscountComposite d) {
+            foreach (DiscountComponent child in d.getChildren())
+            {
+                if (child is DiscountComposite)
+                    removeChildren((DiscountComposite)child);
+                else
+                {
+                    if (child is ReliantDiscount)
+                    {
+                        ReliantDiscount r = (ReliantDiscount)child;
+
+                        if (r.getProduct() != null)
+                        {
+                            r.getProduct().removeReliantDiscount();
+                        }
+                    }
+                    if (child is VisibleDiscount)
+                    {
+                        VisibleDiscount v = (VisibleDiscount)child;
+
+                        if (v.getProduct() != null)
+                        {
+                            v.getProduct().removeDiscount();
+                        }
+                    }
+                }
+            }
+        }
 
         public VisibleDiscount getVisibleDiscount()
         {

@@ -215,30 +215,7 @@
 2019-06-15 23:11:16,737 INFO EventLog: u3 has been successfuly added as a manager to store with id: 0
 2019-06-15 23:59:08,940 INFO EventLog: User aaa has successfuly registered
 2019-06-15 23:59:24,574 INFO EventLog: User aaa has successfuly created a store
-2019-06-16 00:25:42,499 INFO EventLog: User et has successfuly registered
-2019-06-16 01:57:20,990 INFO EventLog: User u2 has successfuly logged in.
-2019-06-16 01:59:27,526 INFO EventLog: User u2 has successfuly logged in.
-2019-06-16 01:59:35,503 ERROR EventLog: An Error has occured. Stack Trace:    at System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
-   at System.Double.Parse(String s)
-   at WebApplication18.Controllers.ProductsController.addVisibleDiscount(Int32 productID, String percentage, String duration) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Controllers\ProductsController.cs:line 162 Function: addDiscount
-2019-06-16 02:02:07,428 INFO EventLog: User u2 has successfuly logged in.
-2019-06-16 02:05:59,164 INFO EventLog: User u2 has logged out
-2019-06-16 02:06:05,974 INFO EventLog: User eilon has successfuly logged in.
-2019-06-16 02:09:02,630 INFO EventLog: User eilon has successfuly logged in.
-2019-06-16 02:10:43,158 ERROR EventLog: An Error has occured. Stack Trace:    at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
-   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
-   at System.Int32.Parse(String s)
-   at WebApplication18.Controllers.ProductsController.addToBasket(Int32 productID, String amount) in C:\Users\user1\Desktop\???????\????? ?'\????\wsep192\WebApplication18\Controllers\ProductsController.cs:line 128 Function: addToBasket
-2019-06-16 02:10:54,749 ERROR EventLog: Database Error : Exception of type 'workshop192.Domain.ConnectionException' was thrown.
-2019-06-16 02:11:06,462 INFO EventLog: User eilon has successfuly added 4 of product e54
-2019-06-16 02:13:53,097 ERROR EventLog: setQuantity : ERROR: quantity should be a positive number
-2019-06-16 02:14:14,192 ERROR EventLog: setQuantity : ERROR: quantity should be a positive number
-2019-06-16 02:14:15,228 ERROR EventLog: setQuantity : ERROR: quantity should be a positive number
-2019-06-16 02:14:15,421 ERROR EventLog: setQuantity : ERROR: quantity should be a positive number
-2019-06-16 02:14:15,662 ERROR EventLog: setQuantity : ERROR: quantity should be a positive number
-2019-06-16 02:14:30,372 ERROR EventLog: setQuantity : ERROR: quantity should be a positive number
-2019-06-16 02:14:33,232 ERROR EventLog: setQuantity : ERROR: quantity should be a positive number
-2019-06-16 02:15:20,658 INFO EventLog: User eilon has successfuly added 2 of product e54
-2019-06-16 02:15:28,567 INFO EventLog: User eilon has successfuly added 2 of product e55
-2019-06-16 02:16:13,026 ERROR EventLog: setQuantity : ERROR: quantity should be a positive number
-2019-06-16 02:16:22,726 ERROR EventLog: setQuantity : ERROR: quantity should be a positive number
+2019-06-16 03:41:07,055 ERROR EventLog: An Error has occured. Stack Trace:    at workshop192.Bridge.DomainBridge.addToShoppingBasket(Int32 product, Int32 amount, Int32 sessionid) in C:\Users\eyalb\Source\Repos\eyalalmo\workshop\WebApplication18\Bridge\DomainBridge.cs:line 293
+   at workshop192.ServiceLayer.UserService.addToShoppingBasket(Int32 product, Int32 amount, Int32 session) in C:\Users\eyalb\Source\Repos\eyalalmo\workshop\WebApplication18\ServiceLayer\UserService.cs:line 210
+   at WebApplication18.Controllers.ProductsController.addToBasket(Int32 productID, String amount) in C:\Users\eyalb\Source\Repos\eyalalmo\workshop\WebApplication18\Controllers\ProductsController.cs:line 131 Function: addToBasket
+2019-06-16 05:20:49,016 INFO EventLog: User u2 has successfuly logged in.
